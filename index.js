@@ -1,6 +1,6 @@
-const surprise = require('./surprise');
-const main = require('./main');
-const downloads = require('./downloads');
+const surprise = require('./src/surprise');
+const main = require('./src/main');
+const downloads = require('./src/downloads');
 
 
 
