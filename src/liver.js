@@ -1,8 +1,9 @@
+const logger = require('pino')();
 const sinusRun = require('./sinus.js');
 module.exports = function(env) {
     const ISF = parseInt(env.ISF) / 18;
     const CR = parseInt(env.CR);
-    console.log('ISF:', ISF, 'CR:', CR);
+    logger.info('ISF:', ISF, 'CR:', CR);
 
     // the sinus and cosinus numbers vary around 1, from 0.5 to 1.5:
     // sin starts at 1.0 at midnight, is max at 6AM, is again 1 at 12 AM, and minimums at 0.5 a 6 PM
@@ -11,8 +12,8 @@ module.exports = function(env) {
     const sinusdata = sinusRun();
     const sinus = sinusdata.sinus;
     const cosinus = sinusdata.cosinus;
-    console.log('sinus: ', sinus);
-    console.log('cosinus: ', cosinus);
+    logger.info('sinus: ', sinus);
+    logger.info('cosinus: ', cosinus);
 
 
     // let's simulate the carb impact of the liver, producing 10g of carbs / hour
@@ -29,14 +30,14 @@ module.exports = function(env) {
     const liver = (ISF / CR) * (10 / 60);
     //const liver = 0.1666;
     const liver_sin = liver * sinus;
-    console.log('liver: ', liver);
-    console.log('liver_sin: ', liver_sin);
+    logger.info('liver: ', liver);
+    logger.info('liver_sin: ', liver_sin);
 
 
 
     // const fs = require('fs');
     // fs.writeFile('./files/latest_liver.json', liverString, function (err) {
-    // 	if (err) console.log('error', err);
+    // 	if (err) logger.info('error', err);
     // });
     return liver_sin;
 };

@@ -1,5 +1,6 @@
+const logger = require('pino')();
 module.exports = function (weight, detemirs) {
-	console.log(detemirs);
+	logger.info(detemirs);
 
 	// activities be expressed as U/min !!!
 	const timeSinceDetemirAct = detemirs.map(entry => {
@@ -22,19 +23,19 @@ module.exports = function (weight, detemirs) {
 			detemirActivity: (insulin * (S / Math.pow(tau, 2)) * time * (1 - time / td) * Math.exp(-time / tau)) / 60
 		};
 	});
-	console.log('these are the detemir activities:', timeSinceDetemirAct);
+	logger.info('these are the detemir activities:', timeSinceDetemirAct);
 
 	// compute the aggregated activity of last detemirs in 30 hours
 
 	const lastDetemirs = timeSinceDetemirAct.filter(function (e) {
 		return e.time <= 30;
 	});
-	console.log('these are the last detemirs and activities:', lastDetemirs);
+	logger.info('these are the last detemirs and activities:', lastDetemirs);
 
 	const resultDetAct = lastDetemirs.reduce(function (tot, arr) {
 		return tot + arr.detemirActivity;
 	}, 0);
 
-	console.log(resultDetAct);
+	logger.info(resultDetAct);
 	return resultDetAct;
 };

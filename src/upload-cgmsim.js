@@ -1,4 +1,5 @@
  const fetch = require('node-fetch');
+ const logger = require('pino')();
 
  //let's build the API_secret for the headers and the API_url for the fetch() function
  //===================================================================================
@@ -15,9 +16,9 @@
              body: body_json,
          })
          .then(() => {
-             console.log('NIGTHSCOUT Updated');
+             logger.info('NIGTHSCOUT Updated');
          })
          .catch(err => {
-             console.log(err);
+             logger.info(err);
          });
  };

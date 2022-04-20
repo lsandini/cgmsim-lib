@@ -1,3 +1,4 @@
+const logger = require('pino')();
 const moment = require('moment');
 module.exports = ({ treatments }, env) => {
 
@@ -8,8 +9,8 @@ module.exports = ({ treatments }, env) => {
             time: e.created_at,
             insulin: e.insulin
         }));
-    console.log('this is the filtered treatments (insulin):', insulin);
-    console.log('length', insulin.length); // returns the number of boluses or lenghth of the array
+    logger.info('this is the filtered treatments (insulin):', insulin);
+    logger.info('length', insulin.length); // returns the number of boluses or lenghth of the array
 
     // dia is the duration of insulin action in hours
     const dia = parseInt(env.DIA);
@@ -28,7 +29,7 @@ module.exports = ({ treatments }, env) => {
         ...entry,
         time: (Date.now() - moment(entry.time).valueOf()) / (1000 * 60)
     }));
-    console.log('this is the trimmed down insulin and time since injection data:', timeSinceBolusMin);
+    logger.info('this is the trimmed down insulin and time since injection data:', timeSinceBolusMin);
 
     const timeSinceBolusAct = insulin.map(entry => {
         const t = (Date.now() - moment(entry.time).valueOf()) / (1000 * 60);
@@ -40,12 +41,12 @@ module.exports = ({ treatments }, env) => {
             iobContrib: insulin * (1 - S * (1 - a) * ((Math.pow(t, 2) / (tau * td * (1 - a)) - t / tau - 1) * Math.exp(-t / tau) + 1))
         };
     });
-    //console.log(timeSinceBolusAct);
+    //logger.info(timeSinceBolusAct);
 
     const lastInsulins = timeSinceBolusAct.filter(function(e) {
         return e.time <= 300;
     });
-    console.log('these are the last insulins and activities:', lastInsulins);
+    logger.info('these are the last insulins and activities:', lastInsulins);
 
     const resultAct = lastInsulins.reduce(function(tot, arr) {
         return tot + arr.activityContrib;

@@ -1,5 +1,6 @@
+const logger = require('pino')();
 module.exports = function (weight, degludecs) {
-	console.log(degludecs);
+	logger.info(degludecs);
 
 	// activities be expressed as U/min !!!
 	const timeSinceDegludecAct = degludecs.map(entry => {
@@ -21,19 +22,19 @@ module.exports = function (weight, degludecs) {
 			degludecActivity: (insulin * (S / Math.pow(tau, 2)) * time * (1 - time / td) * Math.exp(-time / tau)) / 60
 		};
 	});
-	console.log('these are the degludec activities:', timeSinceDegludecAct);
+	logger.info('these are the degludec activities:', timeSinceDegludecAct);
 
 	// compute the aggregated activity of last degludecs in 45 hours
 
 	const lastDegludecs = timeSinceDegludecAct.filter(function (e) {
 		return e.time <= 45;
 	});
-	console.log('these are the last degludecs and activities:', lastDegludecs);
+	logger.info('these are the last degludecs and activities:', lastDegludecs);
 
 	const resultDegAct = lastDegludecs.reduce(function (tot, arr) {
 		return tot + arr.degludecActivity;
 	}, 0);
 
-	console.log(resultDegAct);
+	logger.info(resultDegAct);
 	return resultDegAct;
 };

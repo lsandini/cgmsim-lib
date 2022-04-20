@@ -1,5 +1,5 @@
 const moment = require('moment');
-
+const logger = require('pino')();
 module.exports = function({ treatments }) {
 
   // let's read all the meals gathered by get-all.sh, and compute the total amount of carbs
@@ -9,13 +9,13 @@ module.exports = function({ treatments }) {
     const totalMeals = treatments.filter(entry =>
       moment(entry.mills).format('YYYYMMDD') === moment().format('YYYYMMDD'));
 
-    console.log('totalMeals ', totalMeals);
+    logger.info('totalMeals ', totalMeals);
 
     const totalCarbs = totalMeals.reduce(function(tot, arr) {
       return tot + arr.carbs;
     }, 0);
 
-    console.log(totalCarbs);
+    logger.info(totalCarbs);
     if (totalCarbs < 200) {
       return {
         time: Date.now()

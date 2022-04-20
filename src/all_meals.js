@@ -1,4 +1,5 @@
 const moment = require('moment');
+const logger = require('pino')();
 module.exports = function(treatments = []) {
   const now = moment();
   const meals = treatments
@@ -8,6 +9,6 @@ module.exports = function(treatments = []) {
       time:  (Date.now() - moment(e.mills).valueOf()) / (1000 * 60)
     }));
 
-  console.log('Last 6 hours meal:', meals);
+  logger.info('Last 6 hours meal:', meals);
   return meals;
 };

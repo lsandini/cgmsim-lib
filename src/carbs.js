@@ -1,4 +1,4 @@
-
+const logger = require('pino')();
 module.exports = function(env, lastMeals) {
     const carbs = lastMeals || [];
     const carbAbsTime = parseInt(env.CARBS_ABS_TIME); // meal absorption time in min default 360 or 6 hours
@@ -22,7 +22,7 @@ module.exports = function(env, lastMeals) {
         // the remainder is slow carbs
         const slow_carbs = (1 - FSR) * rest;
 
-        console.log('carbs_g:', carbs_g, 'fast:', fast, 'rest:', rest, 'fast_carbs:', fast_carbs, 'slow_carbs:', slow_carbs);
+        logger.info('carbs_g:', carbs_g, 'fast:', fast, 'rest:', rest, 'fast_carbs:', fast_carbs, 'slow_carbs:', slow_carbs);
 
         let fast_carbrate = 0;
         let slow_carbrate = 0;
@@ -40,7 +40,7 @@ module.exports = function(env, lastMeals) {
         } else {
             fast_carbrate = 0;
             // COB = 0;
-            console.log('fast carb absorption rate:', fast_carbrate);
+            logger.info('fast carb absorption rate:', fast_carbrate);
         }
 
         if (t < (slow_carbAbsTime / 2)) {
@@ -55,7 +55,7 @@ module.exports = function(env, lastMeals) {
         } else {
             slow_carbrate = 0;
             // COB = 0;
-            console.log('slow carb absorption rate:', slow_carbrate);
+            logger.info('slow carb absorption rate:', slow_carbrate);
         }
 
         return {
@@ -66,13 +66,13 @@ module.exports = function(env, lastMeals) {
             all_carbrate: fast_carbrate + slow_carbrate
         };
     });
-    console.log(timeSinceMealAct);
+    logger.info(timeSinceMealAct);
 
 
     const totalCarbRate = timeSinceMealAct.reduce(function(tot, arr) {
         return tot + arr.all_carbrate;
     }, 0);
 
-    console.log(totalCarbRate);
+    logger.info(totalCarbRate);
     return totalCarbRate;
 };

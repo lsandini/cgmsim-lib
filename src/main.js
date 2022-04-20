@@ -1,3 +1,5 @@
+const logger = require('pino')();
+
 const perlinRun = require('./perlin');
 const computeBolusIRun = require('./computeBolusIOB.js');
 const computeBasalIOBRun = require('./computeBasalIOB.js');
@@ -11,7 +13,7 @@ const arrowsRun = require('./arrows.js');
 const liverRun = require('./liver.js');
 const sgvStartRun = require('./sgv_start.js');
 
-console.log('Run Init');
+logger.info('Run Init');
 let perls = perlinRun();
 
 const main = ({
@@ -40,7 +42,7 @@ const main = ({
 
     const cgmsim = sgvStartRun({ entries, det, gla, degludec, tou, liver, carbs, resultAct, perls, profiles, pumpBasals, treatments, }, env);
     
-	console.log('this is the new sgv:', cgmsim);
+	logger.info('this is the new sgv:', cgmsim);
     const arrows = arrowsRun([cgmsim, ...entries]);
     cgmsim.direction = arrows[0].direction;
     return cgmsim;

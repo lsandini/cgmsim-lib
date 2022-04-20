@@ -1,3 +1,4 @@
+const logger = require('pino')();
 const fetch = require('node-fetch');
 const downloads = async (env) => {
     const { getParams } = require('./setupParams')(env);
@@ -8,7 +9,7 @@ const downloads = async (env) => {
 
     const treatments = await fetch(api_url, getParams)
         .then(resTreatments => resTreatments.json())
-        .catch(err => console.log(err));
+        .catch(err => logger.error(err));
 
     const profiles = await fetch(api_profile, getParams)
         .then(resProfile => resProfile.json());

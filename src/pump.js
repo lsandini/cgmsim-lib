@@ -1,3 +1,4 @@
+const logger = require('pino')();
 const moment = require('moment');
 
 module.exports = function({ treatments, profiles, pumpBasals }, env) {
@@ -87,7 +88,7 @@ module.exports = function({ treatments, profiles, pumpBasals }, env) {
         }
     }
     pumpBasals.push(...basalsToUpdate);
-    console.log('\x1b[32m', '------------------pumpBasals', pumpBasals.length, '\x1b[0m');
+    logger.info('\x1b[32m', '------------------pumpBasals', pumpBasals.length, '\x1b[0m');
 
     const td = dia * 60;
     const tp = parseInt(env.TP);
@@ -105,20 +106,20 @@ module.exports = function({ treatments, profiles, pumpBasals }, env) {
         };
     });
 
-    // console.log('basal as boluses with detailed activities:', timeSincePumpAct);
+    // logger.info('basal as boluses with detailed activities:', timeSincePumpAct);
 
     const lastPumpInsulins = timeSincePumpAct.filter(function(e) {
         return e.time <= (dia * 60 * 1000);
     });
-    //  console.log('these are the last pump basal insulins and detailed activities:', lastPumpInsulins);
+    //  logger.info('these are the last pump basal insulins and detailed activities:', lastPumpInsulins);
 
     const resultPumpAct = lastPumpInsulins.reduce(function(tot, arr) {
         return tot + arr.activityContrib;
     }, 0);
-    console.log('this is the aggregated insulin activity from pump basal in the last dia hours:', resultPumpAct);
+    logger.info('this is the aggregated insulin activity from pump basal in the last dia hours:', resultPumpAct);
 
     const pumpBasalAct = JSON.stringify(resultPumpAct, null, 4);
-    console.log('the pump\'s basal activity is:', pumpBasalAct);
+    logger.info('the pump\'s basal activity is:', pumpBasalAct);
 
     return Math.round(resultPumpAct * 100000) / 100000;
 };

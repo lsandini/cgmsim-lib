@@ -1,21 +1,21 @@
 const moment = require('moment');
 const pump = require('./pump.js');
-
+const logger = require('pino')();
 const sgv_start = ({ entries, det, gla, degludec, tou, liver, carbs, resultAct, perls, pumpBasals, profiles, treatments, }, env) => {
 
     const oldSgv = entries && entries[0] ? entries[0].sgv : 90;
     const oldTime = entries && entries[0] ? moment(entries[0].mills) : moment().add(-5, 'minutes');
 
     const deltaMinutes = Math.round(moment().diff(oldTime, 'seconds') / 60);
-    console.log('deltaMinutes', deltaMinutes);
+    logger.info('deltaMinutes', deltaMinutes);
 
     const ISF = parseInt(env.ISF) / 18; //mmol/l/U
-    //console.log('ISF=', ISF);
+    //logger.info('ISF=', ISF);
 
     // ENABLE THIS FOR PUMP SIMULATION
     //=================================
 
-    console.log('profiles', profiles);
+    logger.info('profiles', profiles);
     let pumpBasalAct = 0;
     if (env.pumpEnabled) {
         pumpBasalAct = pump({
@@ -62,27 +62,27 @@ const sgv_start = ({ entries, det, gla, degludec, tou, liver, carbs, resultAct, 
         date: Date.now(),
     };
 
-    console.log('-------------------------------------------');
-    console.log('OLD SGV value (' + deltaMinutes + ' minutes ago):', oldSgv, 'mg/dl');
+    logger.info('-------------------------------------------');
+    logger.info('OLD SGV value (' + deltaMinutes + ' minutes ago):', oldSgv, 'mg/dl');
 
-    console.log('-------------------------------------------');
-    console.log('total BG impact of insulin for ' + deltaMinutes + ' minutes:', BGI_ins * 18, 'mg/dl');
+    logger.info('-------------------------------------------');
+    logger.info('total BG impact of insulin for ' + deltaMinutes + ' minutes:', BGI_ins * 18, 'mg/dl');
     
-    console.log('-------------------------------------------');
-    console.log('total BG impact of liver for ' + deltaMinutes + ' minutes: +', liver_bgi * 18, 'mg/dl');
+    logger.info('-------------------------------------------');
+    logger.info('total BG impact of liver for ' + deltaMinutes + ' minutes: +', liver_bgi * 18, 'mg/dl');
     
-    console.log('-------------------------------------------');
-    console.log('total CARBS impact of carbs for ' + deltaMinutes + ' minutes: +', carbs * 18, 'mg/dl');
+    logger.info('-------------------------------------------');
+    logger.info('total CARBS impact of carbs for ' + deltaMinutes + ' minutes: +', carbs * 18, 'mg/dl');
     
-	console.log('-------------------------------------------');
-    console.log('total NOISE impact: +', noise * 18, 'mg/dl');
+	logger.info('-------------------------------------------');
+    logger.info('total NOISE impact: +', noise * 18, 'mg/dl');
 
-    console.log('-------------------------------------------');
-    console.log('total BG impact of carbs, liver and insulin for 5 minutes: +', (BGI_ins) + (liver_bgi * 18) + (carbs * 18), 'mg/dl');
+    logger.info('-------------------------------------------');
+    logger.info('total BG impact of carbs, liver and insulin for 5 minutes: +', (BGI_ins) + (liver_bgi * 18) + (carbs * 18), 'mg/dl');
     
-    console.log('this is the PUMP BASAL insulin impact for ' + deltaMinutes + ' minutes:', pumpBasalAct * deltaMinutes * 18 * ISF);
-    console.log('this is the BASAL BOLUS  insulin impact for ' + deltaMinutes + ' minutes:', globalBasalAct * deltaMinutes * 18 * ISF);
-    console.log('this is the MEAL BOLUS insulin impact for ' + deltaMinutes + ' minutes:', globalMealtimeAct * deltaMinutes * 18 * ISF);
+    logger.info('this is the PUMP BASAL insulin impact for ' + deltaMinutes + ' minutes:', pumpBasalAct * deltaMinutes * 18 * ISF);
+    logger.info('this is the BASAL BOLUS  insulin impact for ' + deltaMinutes + ' minutes:', globalBasalAct * deltaMinutes * 18 * ISF);
+    logger.info('this is the MEAL BOLUS insulin impact for ' + deltaMinutes + ' minutes:', globalMealtimeAct * deltaMinutes * 18 * ISF);
     
     return dict;
 };

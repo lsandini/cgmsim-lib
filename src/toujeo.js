@@ -1,7 +1,8 @@
 // const fs = s;
+const logger = require('pino')();
 module.exports = function (weight, tou) {
 
-	console.log(tou);
+	logger.info(tou);
 
 	// activities be expressed as U/min !!!
 	const timeSinceToujeoAct = tou.map(entry => {
@@ -23,20 +24,20 @@ module.exports = function (weight, tou) {
 			toujeoActivity: (insulin * (S / Math.pow(tau, 2)) * time * (1 - time / td) * Math.exp(-time / tau)) / 60
 		};
 	});
-	console.log('the is the accumulated toujeo activity:', timeSinceToujeoAct);
+	logger.info('the is the accumulated toujeo activity:', timeSinceToujeoAct);
 
 	// compute the aggregated activity of last toujeos in 27 hours
 
 	const lastToujeos = timeSinceToujeoAct.filter(function (e) {
 		return e.time <= 30;
 	});
-	console.log('these are the last toujeos and activities:', lastToujeos);
+	logger.info('these are the last toujeos and activities:', lastToujeos);
 
 	const resultTouAct = lastToujeos.reduce(function (tot, arr) {
 		return tot + arr.toujeoActivity;
 	}, 0);
 
-	console.log(resultTouAct);
+	logger.info(resultTouAct);
 
 	return resultTouAct;
 };
