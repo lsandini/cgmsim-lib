@@ -1,5 +1,5 @@
 const fetch = require('node-fetch');
-const download = async (env) => {
+const downloads = async (env) => {
     const { getParams } = require('./setupParams')(env);
 
     const api_url = env.NIGHTSCOUT_URL + '/api/v1/treatments';
@@ -10,7 +10,7 @@ const download = async (env) => {
         .then(resTreatments => resTreatments.json())
         .catch(err => console.log(err));
 
-    const profile = await fetch(api_profile, getParams)
+    const profiles = await fetch(api_profile, getParams)
         .then(resProfile => resProfile.json());
 
     const entries = await fetch(api_sgv, getParams)
@@ -18,8 +18,8 @@ const download = async (env) => {
 
     return {
         treatments,
-        profile,
+        profiles,
         entries,
     };
 };
-module.exports = download;
+module.exports = downloads;
