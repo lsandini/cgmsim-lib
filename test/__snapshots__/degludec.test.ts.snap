@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test degludec ins:30 minutesAgo:300 1`] = `0.012545195130933117`;

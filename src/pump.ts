@@ -1,7 +1,10 @@
-const logger = require('pino')();
-const moment = require('moment');
+import logger from './utils';
 
-module.exports = function({ treatments, profiles, pumpBasals }, env) {
+ //const logger = pino();
+import * as moment from 'moment';
+
+
+export default function({ treatments, profiles, pumpBasals }, env) {
     const dia = parseInt(env.DIA);
     const basalAsBoluses = [];
     const endDiaAction = moment();
@@ -29,7 +32,7 @@ module.exports = function({ treatments, profiles, pumpBasals }, env) {
         .sort((f, s) => {
             return moment(f.create_at).diff(s.create_at);
         });
-    //compute fasal from entries
+    //compute basal from entries
     const computedTempBasal = [];
     allTempBasals.forEach((b) => {
         if (b.absolute !== undefined) {
@@ -122,4 +125,4 @@ module.exports = function({ treatments, profiles, pumpBasals }, env) {
     logger.info('the pump\'s basal activity is:', pumpBasalAct);
 
     return Math.round(resultPumpAct * 100000) / 100000;
-};
+}
