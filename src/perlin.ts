@@ -1,5 +1,7 @@
+import { Perlin } from "./Types";
+
 const perlinNoise = require('perlin-noise');
-module.exports = function () {
+export default function (): Perlin[] {
 	const time = Date.now();
 
 	const noise = perlinNoise.generatePerlinNoise(288, 1, {
@@ -8,9 +10,8 @@ module.exports = function () {
 		persistence: 0.3,
 	});
 
-	const myObject = [];
-	let i = 0;
-	for (i = 0; i < noise.length; i++) {
+	const myObject: Perlin[] = [];
+	for (let i = 0; i < noise.length; i++) {
 		myObject.push({
 			noise: noise[i] / 10 - 0.05,
 			order: (i),
@@ -19,4 +20,4 @@ module.exports = function () {
 	}
 
 	return myObject;
-};
+}

@@ -2,14 +2,19 @@
 	"name": "cgmsim-lib",
 	"version": "1.0.0",
 	"description": "cgmsim-lib",
-	"main": "index.js",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"files": [
+		"/dist"
+	],
 	"scripts": {
+		"build": "tsc -p tsconfig-build.json",
 		"lint": "eslint",
-		"test": "t"
+		"test": "jest"
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/nickxbs/cgmsim-lib.git"
+		"url": "git+https://github.com/lsandini/cgmsim-lib.git"
 	},
 	"keywords": [
 		"cgmsim",
@@ -18,18 +23,28 @@
 	"author": "",
 	"license": "ISC",
 	"bugs": {
-		"url": "https://github.com/nickxbs/cgmsim-lib/issues"
+		"url": "https://github.com/lsandini/cgmsim-lib/issues"
 	},
-	"homepage": "https://github.com/nickxbs/cgmsim-lib#readme",
+	"homepage": "https://github.com/lsandini/cgmsim-lib#readme",
 	"devDependencies": {
-		"eslint": "^8.11.0"
+		"@types/jest": "^26.0.24",
+		"eslint": "^8.11.0",
+		"jest": "^26.5.5",
+		"ts-jest": "^26.5.6"
 	},
 	"dependencies": {
+		"@types/node": "~14.14.31",
+		"@typescript-eslint/eslint-plugin": "~4.16.1",
+		"@typescript-eslint/parser": "~4.16.1",
 		"crypto": "^1.0.1",
 		"https": "^1.0.0",
-		"moment": "^2.29.1",
+		"moment": "^2.29.3",
 		"node-fetch": "^2.6.7",
 		"perlin-noise": "0.0.1",
-		"pino": "^7.10.0"
+		"pino": "^7.10.0",
+		"pino-pretty": "^7.6.1",
+		"ts-node": "^9.1.1",
+		"tsutils": "~3.20.0",
+		"typescript": "~4.2.2"
 	}
 }

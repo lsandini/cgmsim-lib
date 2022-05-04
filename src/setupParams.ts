@@ -1,14 +1,14 @@
 const { createHash } = require('crypto');
 const https = require('https');
 
-module.exports = function(env) {
+export default function(apiSecret: string) {
 
     const agent = new https.Agent({ rejectUnauthorized: false, });
     const hash = createHash('sha1');
-    hash.update(env.APISECRET);
-    
+    hash.update(apiSecret);
+
     const hash_secret = hash.digest('hex');
-    
+
 
     const headers = {
         'Content-Type': 'application/json',
