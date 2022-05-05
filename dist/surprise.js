@@ -8,7 +8,7 @@ function default_1({ treatments }) {
     // in the 1410 last minutes (23:30 min)
     if (moment().hours() === 23) {
         const totalMeals = treatments.filter(entry => moment(entry.mills).format('YYYYMMDD') === moment().format('YYYYMMDD'));
-        utils_1.default.info('totalMeals ', totalMeals);
+        utils_1.default.info('totalMeals  %o', totalMeals);
         const totalCarbs = totalMeals.reduce(function (tot, arr) {
             return tot + arr.carbs;
         }, 0);

@@ -22,12 +22,12 @@ export default function (weight, tou: Pick<TreatmentDelta, 'insulin' | 'minutesA
 			toujeoActivity: activity
 		};
 	});
-	logger.info('the is the accumulated toujeo activity:', timeSinceToujeoAct);
+	logger.info('the is the accumulated toujeo activity: %o', timeSinceToujeoAct);
 
 	// compute the aggregated activity of last toujeos in 27 hours
 
 	const lastToujeos = timeSinceToujeoAct.filter((e) => e.hoursAgo <= 30);
-	logger.info('these are the last toujeos and activities:', lastToujeos);
+	logger.info('these are the last toujeos and activities: %o', lastToujeos);
 
 	const resultTouAct = lastToujeos.reduce(function (tot, arr) {
 		return tot + arr.toujeoActivity;

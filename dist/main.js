@@ -36,7 +36,7 @@ const main = ({ env, entries, treatments, profiles, pumpBasals }) => {
     const carbs = carbs_js_1.default(carbsAbs, lastMeals);
     const liver = liver_js_1.default(isf, cr);
     const cgmsim = sgv_start_js_1.default(entries, { det, gla, degludec, tou, liver, carbs, resultAct }, perls, isf);
-    utils_1.default.info('this is the new sgv:', cgmsim);
+    utils_1.default.info('this is the new sgv: %o', cgmsim);
     const arrows = arrows_js_1.default([cgmsim, ...entries]);
     return Object.assign(Object.assign({}, cgmsim), { direction: arrows[0].direction });
 };

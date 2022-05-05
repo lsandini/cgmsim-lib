@@ -10,8 +10,8 @@ exports.default = (treatments, dia, tp) => {
         time: e.created_at,
         insulin: e.insulin
     }));
-    utils_1.default.info('this is the filtered treatments (insulin):', insulin);
-    utils_1.default.info('length', insulin.length); // returns the number of boluses or length of the array
+    utils_1.default.info('this is the filtered treatments (insulin): %o', insulin);
+    utils_1.default.info('length %o', insulin.length); // returns the number of boluses or length of the array
     // dia is the duration of insulin action in hours
     const td = dia * 60;
     // tp is the time to the peak insulin action in minutes
@@ -19,7 +19,7 @@ exports.default = (treatments, dia, tp) => {
     const a = 2 * tau / td;
     const S = 1 / (1 - a + (1 + a) * Math.exp(-td / tau));
     const timeSinceBolusMin = insulin.map(entry => (Object.assign(Object.assign({}, entry), { time: (Date.now() - moment(entry.time).valueOf()) / (1000 * 60) })));
-    utils_1.default.info('this is the trimmed down insulin and time since injection data:', timeSinceBolusMin);
+    utils_1.default.info('this is the trimmed down insulin and time since injection data: %o', timeSinceBolusMin);
     const timeSinceBolusAct = insulin.map(entry => {
         const t = (Date.now() - moment(entry.time).valueOf()) / (1000 * 60);
         const insulin = entry.insulin;
@@ -29,7 +29,7 @@ exports.default = (treatments, dia, tp) => {
     const lastInsulins = timeSinceBolusAct.filter(function (e) {
         return e.time <= 300;
     });
-    utils_1.default.info('these are the last insulins and activities:', lastInsulins);
+    utils_1.default.info('these are the last insulins and activities: %o', lastInsulins);
     const resultAct = lastInsulins.reduce(function (tot, arr) {
         return tot + arr.activityContrib;
     }, 0);

@@ -19,7 +19,7 @@ function carbs(carbsAbs, lastMeals) {
         const fast_carbs = fast + (FSR * rest);
         // the remainder is slow carbs
         const slow_carbs = (1 - FSR) * rest;
-        utils_1.default.info('carbs_g:', carbs_g, 'fast:', fast, 'rest:', rest, 'fast_carbs:', fast_carbs, 'slow_carbs:', slow_carbs);
+        utils_1.default.info('carbs_g:', carbs_g, 'fast:', fast, 'rest:', rest, 'fast_carbs:', fast_carbs, 'slow_carbs: %o', slow_carbs);
         let fast_carbrate = 0;
         let slow_carbrate = 0;
         if (t < (fast_carbAbsTime / 2)) {
@@ -36,7 +36,7 @@ function carbs(carbsAbs, lastMeals) {
         else {
             fast_carbrate = 0;
             // COB = 0;
-            utils_1.default.info('fast carb absorption rate:', fast_carbrate);
+            utils_1.default.info('fast carb absorption rate: %o', fast_carbrate);
         }
         if (t < (slow_carbAbsTime / 2)) {
             const AT2 = Math.pow(slow_carbAbsTime, 2);
@@ -52,7 +52,7 @@ function carbs(carbsAbs, lastMeals) {
         else {
             slow_carbrate = 0;
             // COB = 0;
-            utils_1.default.info('slow carb absorption rate:', slow_carbrate);
+            utils_1.default.info('slow carb absorption rate: %o', slow_carbrate);
         }
         return Object.assign(Object.assign({}, entry), { time: t, fast_carbrate: fast_carbrate, slow_carbrate: slow_carbrate, all_carbrate: fast_carbrate + slow_carbrate });
     });

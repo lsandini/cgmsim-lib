@@ -17,10 +17,10 @@ function default_1(weight, tou) {
             toujeoActivity: activity
         };
     });
-    utils_1.default.info('the is the accumulated toujeo activity:', timeSinceToujeoAct);
+    utils_1.default.info('the is the accumulated toujeo activity: %o', timeSinceToujeoAct);
     // compute the aggregated activity of last toujeos in 27 hours
     const lastToujeos = timeSinceToujeoAct.filter((e) => e.hoursAgo <= 30);
-    utils_1.default.info('these are the last toujeos and activities:', lastToujeos);
+    utils_1.default.info('these are the last toujeos and activities: %o', lastToujeos);
     const resultTouAct = lastToujeos.reduce(function (tot, arr) {
         return tot + arr.toujeoActivity;
     }, 0);

@@ -13,8 +13,8 @@ export default (treatments: Treatment[], dia: number, tp: number) => {
 			time: e.created_at,
 			insulin: e.insulin
 		}));
-	logger.info('this is the filtered treatments (insulin):', insulin);
-	logger.info('length', insulin.length); // returns the number of boluses or length of the array
+	logger.info('this is the filtered treatments (insulin): %o', insulin);
+	logger.info('length %o', insulin.length); // returns the number of boluses or length of the array
 
 	// dia is the duration of insulin action in hours
 	const td = dia * 60;
@@ -29,7 +29,7 @@ export default (treatments: Treatment[], dia: number, tp: number) => {
 		...entry,
 		time: (Date.now() - moment(entry.time).valueOf()) / (1000 * 60)
 	}));
-	logger.info('this is the trimmed down insulin and time since injection data:', timeSinceBolusMin);
+	logger.info('this is the trimmed down insulin and time since injection data: %o', timeSinceBolusMin);
 
 	const timeSinceBolusAct = insulin.map(entry => {
 		const t = (Date.now() - moment(entry.time).valueOf()) / (1000 * 60);
@@ -46,7 +46,7 @@ export default (treatments: Treatment[], dia: number, tp: number) => {
 	const lastInsulins = timeSinceBolusAct.filter(function (e) {
 		return e.time <= 300;
 	});
-	logger.info('these are the last insulins and activities:', lastInsulins);
+	logger.info('these are the last insulins and activities: %o', lastInsulins);
 
 	const resultAct = lastInsulins.reduce(function (tot, arr) {
 		return tot + arr.activityContrib;

@@ -7,7 +7,7 @@ function default_1(treatments) {
     const meals = treatments
         .filter(e => e.carbs && utils_2.getDeltaMinutes(e.mills) > 360)
         .map(e => (Object.assign(Object.assign({}, e), { minutesAgo: utils_2.getDeltaMinutes(e.mills) })));
-    utils_1.default.info('Last 6 hours meal:', meals);
+    utils_1.default.info('Last 6 hours meal: %o', meals);
     return meals;
 }
 exports.default = default_1;

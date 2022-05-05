@@ -50,7 +50,7 @@ const main = ({
 
 	const cgmsim = sgvStartRun(entries, { det, gla, degludec, tou, liver, carbs, resultAct }, perls, isf);
 
-	logger.info('this is the new sgv:', cgmsim);
+	logger.info('this is the new sgv: %o', cgmsim);
 	const arrows = arrowsRun([cgmsim, ...entries]);
 
 	return { ...cgmsim, direction: arrows[0].direction };

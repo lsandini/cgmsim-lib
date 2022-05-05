@@ -26,7 +26,7 @@ export default function carbs(carbsAbs: number, lastMeals: Pick<TreatmentDelta, 
 		// the remainder is slow carbs
 		const slow_carbs = (1 - FSR) * rest;
 
-		logger.info('carbs_g:', carbs_g, 'fast:', fast, 'rest:', rest, 'fast_carbs:', fast_carbs, 'slow_carbs:', slow_carbs);
+		logger.info('carbs_g:', carbs_g, 'fast:', fast, 'rest:', rest, 'fast_carbs:', fast_carbs, 'slow_carbs: %o', slow_carbs);
 
 		let fast_carbrate = 0;
 		let slow_carbrate = 0;
@@ -44,7 +44,7 @@ export default function carbs(carbsAbs: number, lastMeals: Pick<TreatmentDelta, 
 		} else {
 			fast_carbrate = 0;
 			// COB = 0;
-			logger.info('fast carb absorption rate:', fast_carbrate);
+			logger.info('fast carb absorption rate: %o', fast_carbrate);
 		}
 
 		if (t < (slow_carbAbsTime / 2)) {
@@ -59,7 +59,7 @@ export default function carbs(carbsAbs: number, lastMeals: Pick<TreatmentDelta, 
 		} else {
 			slow_carbrate = 0;
 			// COB = 0;
-			logger.info('slow carb absorption rate:', slow_carbrate);
+			logger.info('slow carb absorption rate: %o', slow_carbrate);
 		}
 
 		return {

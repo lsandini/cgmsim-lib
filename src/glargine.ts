@@ -22,12 +22,12 @@ export default function (weight: number, glargines: Pick<TreatmentDelta, 'minute
 			glargineActivity: activity
 		};
 	});
-	logger.info('the is the accumulated glargine activity:', timeSinceGlargineAct);
+	logger.info('the is the accumulated glargine activity: %o', timeSinceGlargineAct);
 
 	// compute the aggregated activity of last glargines in 27 hours
 
 	const lastGlargines = timeSinceGlargineAct.filter((e) => e.hoursAgo <= 30);
-	logger.info('these are the last glargines and activities:', lastGlargines);
+	logger.info('these are the last glargines and activities: %o', lastGlargines);
 
 	const resultGlaAct = lastGlargines.reduce(function (tot, arr) {
 		return tot + arr.glargineActivity;

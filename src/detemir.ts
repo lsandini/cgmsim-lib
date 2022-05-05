@@ -19,12 +19,12 @@ export default function (weight: number, detemirs: Pick<TreatmentDelta, 'minutes
 			detemirActivity: activity
 		};
 	});
-	logger.info('these are the detemir activities:', timeSinceDetemirAct);
+	logger.info('these are the detemir activities: %o', timeSinceDetemirAct);
 
 	// compute the aggregated activity of last detemirs in 30 hours
 
 	const lastDetemirs = timeSinceDetemirAct.filter((e) => e.hoursAgo <= 30);
-	logger.info('these are the last detemirs and activities:', lastDetemirs);
+	logger.info('these are the last detemirs and activities: %o', lastDetemirs);
 
 	const resultDetAct = lastDetemirs.reduce(function (tot, arr) {
 		return tot + arr.detemirActivity;

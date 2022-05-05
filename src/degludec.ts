@@ -20,12 +20,12 @@ export default function (degludecs: Pick<TreatmentDelta, 'insulin' | 'minutesAgo
 		};
 	});
 
-	logger.info('these are the degludec activities:', timeSinceDegludecAct);
+	logger.info('these are the degludec activities: %o', timeSinceDegludecAct);
 
 	// compute the aggregated activity of last degludecs in 45 hours
 
 	const lastDegludecs = timeSinceDegludecAct.filter((e) => e.hours <= 45);
-	logger.info('these are the last degludecs and activities:', lastDegludecs);
+	logger.info('these are the last degludecs and activities: %o', lastDegludecs);
 
 	const resultDegAct = lastDegludecs.reduce((tot, arr) => tot + arr.degludecActivity, 0);
 

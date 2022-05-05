@@ -17,10 +17,10 @@ function default_1(degludecs) {
             degludecActivity: activity,
         };
     });
-    utils_1.default.info('these are the degludec activities:', timeSinceDegludecAct);
+    utils_1.default.info('these are the degludec activities: %o', timeSinceDegludecAct);
     // compute the aggregated activity of last degludecs in 45 hours
     const lastDegludecs = timeSinceDegludecAct.filter((e) => e.hours <= 45);
-    utils_1.default.info('these are the last degludecs and activities:', lastDegludecs);
+    utils_1.default.info('these are the last degludecs and activities: %o', lastDegludecs);
     const resultDegAct = lastDegludecs.reduce((tot, arr) => tot + arr.degludecActivity, 0);
     utils_1.default.info(resultDegAct);
     return resultDegAct;

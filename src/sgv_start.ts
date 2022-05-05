@@ -11,15 +11,15 @@ const sgv_start = (entries: Sgv[], { det, gla, degludec, tou, liver, carbs, resu
 	const oldSgv = entries && entries[0] ? entries[0].sgv : 90;
 	const deltaMinutes = getDeltaMinutes(entries[0].mills);
 
-	logger.info('deltaMinutes', deltaMinutes);
+	logger.info('deltaMinutes %o', deltaMinutes);
 
 	const isfMMol = isf / 18; //mmol/l/U
-	//logger.info('ISF=', ISF);
+	//logger.info('ISF= %o', ISF);
 
 	// ENABLE THIS FOR PUMP SIMULATION
 	//=================================
 
-	// logger.info('profiles', profiles);
+	// logger.info('profiles %o', profiles);
 	const pumpBasalAct = 0;
 	// let pumpBasalAct = 0;
 	// if (env.pumpEnabled) {
@@ -69,26 +69,26 @@ const sgv_start = (entries: Sgv[], { det, gla, degludec, tou, liver, carbs, resu
 	};
 
 	logger.info('-------------------------------------------');
-	logger.info('OLD SGV value (' + deltaMinutes + ' minutes ago):', oldSgv, 'mg/dl');
+	logger.info('OLD SGV value (' + deltaMinutes + ' minutes ago): %o', oldSgv, 'mg/dl');
 
 	logger.info('-------------------------------------------');
-	logger.info('total BG impact of insulin for ' + deltaMinutes + ' minutes:', BGI_ins * 18, 'mg/dl');
+	logger.info('total BG impact of insulin for ' + deltaMinutes + ' minutes: %o', BGI_ins * 18, 'mg/dl');
 
 	logger.info('-------------------------------------------');
-	logger.info('total BG impact of liver for ' + deltaMinutes + ' minutes: +', liver_bgi * 18, 'mg/dl');
+	logger.info('total BG impact of liver for ' + deltaMinutes + ' minutes: + %o', liver_bgi * 18, 'mg/dl');
 
 	logger.info('-------------------------------------------');
-	logger.info('total CARBS impact of carbs for ' + deltaMinutes + ' minutes: +', carbs * 18, 'mg/dl');
+	logger.info('total CARBS impact of carbs for ' + deltaMinutes + ' minutes: + %o', carbs * 18, 'mg/dl');
 
 	logger.info('-------------------------------------------');
-	logger.info('total NOISE impact: +', noise * 18, 'mg/dl');
+	logger.info('total NOISE impact: + %o', noise * 18, 'mg/dl');
 
 	logger.info('-------------------------------------------');
-	logger.info('total BG impact of carbs, liver and insulin for 5 minutes: +', (BGI_ins) + (liver_bgi * 18) + (carbs * 18), 'mg/dl');
+	logger.info('total BG impact of carbs, liver and insulin for 5 minutes: + %o', (BGI_ins) + (liver_bgi * 18) + (carbs * 18), 'mg/dl');
 
-	logger.info('this is the PUMP BASAL insulin impact for ' + deltaMinutes + ' minutes:', pumpBasalAct * deltaMinutes * 18 * isfMMol);
-	logger.info('this is the BASAL BOLUS  insulin impact for ' + deltaMinutes + ' minutes:', globalBasalAct * deltaMinutes * 18 * isfMMol);
-	logger.info('this is the MEAL BOLUS insulin impact for ' + deltaMinutes + ' minutes:', globalMealtimeAct * deltaMinutes * 18 * isfMMol);
+	logger.info('this is the PUMP BASAL insulin impact for ' + deltaMinutes + ' minutes: %o', pumpBasalAct * deltaMinutes * 18 * isfMMol);
+	logger.info('this is the BASAL BOLUS  insulin impact for ' + deltaMinutes + ' minutes: %o', globalBasalAct * deltaMinutes * 18 * isfMMol);
+	logger.info('this is the MEAL BOLUS insulin impact for ' + deltaMinutes + ' minutes: %o', globalMealtimeAct * deltaMinutes * 18 * isfMMol);
 
 	return dict;
 };

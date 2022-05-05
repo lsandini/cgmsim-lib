@@ -17,10 +17,10 @@ function default_1(weight, detemirs) {
             detemirActivity: activity
         };
     });
-    utils_1.default.info('these are the detemir activities:', timeSinceDetemirAct);
+    utils_1.default.info('these are the detemir activities: %o', timeSinceDetemirAct);
     // compute the aggregated activity of last detemirs in 30 hours
     const lastDetemirs = timeSinceDetemirAct.filter((e) => e.hoursAgo <= 30);
-    utils_1.default.info('these are the last detemirs and activities:', lastDetemirs);
+    utils_1.default.info('these are the last detemirs and activities: %o', lastDetemirs);
     const resultDetAct = lastDetemirs.reduce(function (tot, arr) {
         return tot + arr.detemirActivity;
     }, 0);

@@ -13,7 +13,7 @@ export default function (treatments: Treatment[]): TreatmentDelta[] {
 			minutesAgo: getDeltaMinutes(e.mills),
 		}));
 
-	logger.info('Last 6 hours meal:', meals);
+	logger.info('Last 6 hours meal: %o', meals);
 	return meals;
 }
 

@@ -11,7 +11,7 @@ export default function (sgvs: Pick<Sgv, 'sgv'>[]): { sgvdir: number; direction:
 		const sgvdir2 = sgvs[1].sgv - sgvs[2].sgv;
 		const sgvdir3 = sgvs[2].sgv - sgvs[3].sgv;
 		const sgvdir15min = (sgvdir1 + sgvdir2 + sgvdir3) / 3;
-		logger.info('this is the mean SGV 5 min variation in the last 15 minutes:', sgvdir15min, 'mg/dl');
+		logger.info('this is the mean SGV 5 min variation in the last 15 minutes: %o', sgvdir15min, 'mg/dl');
 
 		if (sgvdir15min < -10) {
 			arrows.push({

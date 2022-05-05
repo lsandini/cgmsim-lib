@@ -19,10 +19,10 @@ function default_1(weight, glargines) {
             glargineActivity: activity
         };
     });
-    utils_2.default.info('the is the accumulated glargine activity:', timeSinceGlargineAct);
+    utils_2.default.info('the is the accumulated glargine activity: %o', timeSinceGlargineAct);
     // compute the aggregated activity of last glargines in 27 hours
     const lastGlargines = timeSinceGlargineAct.filter((e) => e.hoursAgo <= 30);
-    utils_2.default.info('these are the last glargines and activities:', lastGlargines);
+    utils_2.default.info('these are the last glargines and activities: %o', lastGlargines);
     const resultGlaAct = lastGlargines.reduce(function (tot, arr) {
         return tot + arr.glargineActivity;
     }, 0);
