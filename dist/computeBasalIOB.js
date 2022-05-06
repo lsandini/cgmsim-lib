@@ -4,7 +4,8 @@ const moment = require("moment");
 function default_1(treatments) {
     //Find basal boluses
     const basals = treatments && treatments.length ?
-        treatments.filter(e => e.notes && e.insulin)
+        //treatments.filter(e => e.notes && e.insulin)
+        treatments.filter(e => e.notes)
             .map(e => (Object.assign(Object.assign({}, e), { minutesAgo: (Date.now() - moment(e.mills).valueOf()) / (1000 * 60), drug: e.notes.slice(0, 3) }))) : [];
     const lastBasals = basals.filter(function (e) {
         return e.minutesAgo <= 45 * 60; // keep only the basals from the last 45 hours
@@ -27,6 +28,7 @@ function default_1(treatments) {
         lastTOU,
         lastDEG,
     };
+    //console.log(result);
     return result;
 }
 exports.default = default_1;
