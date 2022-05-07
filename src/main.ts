@@ -17,7 +17,6 @@ import sgvStartRun from './sgv_start.js';
 import { MainParams } from './Types';
 
 logger.info('Run Init');
-const perls = perlinRun();
 
 const main = ({
 	env,
@@ -32,9 +31,8 @@ const main = ({
 	const carbsAbs = parseInt(env.CARBS_ABS_TIME);
 	const isf = parseInt(env.ISF);
 	const cr = parseInt(env.CR);
-	// if (!perls || perls.length === 0) {
-	//     perls = perlinRun();
-	// }
+	const perls = perlinRun();
+
 
 	const { resultAct } = computeBolusIRun(treatments, dia, tp);
 	const { lastDET, lastGLA, lastTOU, lastDEG } = computeBasalIOBRun(treatments);

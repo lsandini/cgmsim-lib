@@ -7,6 +7,7 @@ function default_1() {
         amplitude: 0.3,
         octaveCount: 3,
         persistence: 0.3,
+        mode: 'daily'
     });
     const myObject = [];
     for (let i = 0; i < noise.length; i++) {

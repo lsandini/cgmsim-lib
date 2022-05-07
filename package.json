@@ -40,7 +40,7 @@
 		"https": "^1.0.0",
 		"moment": "^2.29.3",
 		"node-fetch": "^2.6.7",
-		"perlin-noise": "0.0.1",
+		"perlin-noise": "git+https://github.com/nickxbs/node-perlin-noise.git",
 		"pino": "^7.10.0",
 		"pino-pretty": "^7.6.1",
 		"ts-node": "^9.1.1",

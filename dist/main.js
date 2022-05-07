@@ -15,7 +15,6 @@ const arrows_js_1 = require("./arrows.js");
 const liver_js_1 = require("./liver.js");
 const sgv_start_js_1 = require("./sgv_start.js");
 utils_1.default.info('Run Init');
-const perls = perlin_1.default();
 const main = ({ env, entries, treatments, profiles, pumpBasals }) => {
     const weight = parseInt(env.WEIGHT);
     const dia = parseInt(env.DIA);
@@ -23,9 +22,7 @@ const main = ({ env, entries, treatments, profiles, pumpBasals }) => {
     const carbsAbs = parseInt(env.CARBS_ABS_TIME);
     const isf = parseInt(env.ISF);
     const cr = parseInt(env.CR);
-    // if (!perls || perls.length === 0) {
-    //     perls = perlinRun();
-    // }
+    const perls = perlin_1.default();
     const { resultAct } = computeBolusIOB_js_1.default(treatments, dia, tp);
     const { lastDET, lastGLA, lastTOU, lastDEG } = computeBasalIOB_js_1.default(treatments);
     const lastMeals = all_meals_js_1.default(treatments);

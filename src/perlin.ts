@@ -8,6 +8,7 @@ export default function (): Perlin[] {
 		amplitude: 0.3,
 		octaveCount: 3,
 		persistence: 0.3,
+		mode:'daily'
 	});
 
 	const myObject: Perlin[] = [];
