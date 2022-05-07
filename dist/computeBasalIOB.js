@@ -6,7 +6,7 @@ function default_1(treatments) {
     const basals = treatments && treatments.length ?
         //treatments.filter(e => e.notes && e.insulin)
         treatments.filter(e => e.notes)
-            .map(e => (Object.assign(Object.assign({}, e), { minutesAgo: (Date.now() - moment(e.mills).valueOf()) / (1000 * 60), drug: e.notes.slice(0, 3) }))) : [];
+            .map(e => (Object.assign(Object.assign({}, e), { minutesAgo: (Date.now() - moment(e.created_at).valueOf()) / (1000 * 60), drug: e.notes.slice(0, 3) }))) : [];
     const lastBasals = basals.filter(function (e) {
         return e.minutesAgo <= 45 * 60; // keep only the basals from the last 45 hours
     });
@@ -28,7 +28,7 @@ function default_1(treatments) {
         lastTOU,
         lastDEG,
     };
-    //console.log(result);
+    console.log(`THESE ARE THE LAST LONG ACTINGS:`, result.lastDEG, result.lastDET, result.lastGLA, result.lastTOU);
     return result;
 }
 exports.default = default_1;
