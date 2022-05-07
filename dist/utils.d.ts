@@ -13,4 +13,4 @@ export declare function Activity(peak: number, duration: number, hoursAgo: numbe
     tau: number;
     activity: number;
 };
-export declare const getDeltaMinutes: (mills: any) => number;
+export declare const getDeltaMinutes: (mills: number | string) => number;

@@ -1,10 +1,9 @@
-'use strict';
-Object.defineProperty(exports, '__esModule', { value: true });
-const moment = require('moment');
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const moment = require("moment");
 function default_1(treatments) {
     //Find basal boluses
     const basals = treatments && treatments.length ?
-        //treatments.filter(e => e.notes && e.insulin)
         treatments.filter(e => e.notes)
             .map(e => (Object.assign(Object.assign({}, e), { minutesAgo: (Date.now() - moment(e.created_at).valueOf()) / (1000 * 60), drug: e.notes.slice(0, 3) }))) : [];
     const lastBasals = basals.filter(function (e) {
@@ -28,7 +27,6 @@ function default_1(treatments) {
         lastTOU,
         lastDEG,
     };
-    console.log(`THESE ARE THE LAST LONG ACTINGS:`, result.lastDEG, result.lastDET, result.lastGLA, result.lastTOU);
     return result;
 }
 exports.default = default_1;
