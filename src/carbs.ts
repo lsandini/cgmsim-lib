@@ -3,8 +3,8 @@ import logger from './utils';
 
 //const logger = pino();
 
-export default function carbs(carbsAbs: number, lastMeals: Pick<TreatmentDelta, 'carbs' | 'minutesAgo'>[]): number {
-	const carbs = lastMeals || [];
+export default function carbs(carbsAbs: number, meals: Pick<TreatmentDelta, 'carbs' | 'minutesAgo'>[]): number {
+	const carbs = meals || [];
 	const carbAbsTime = carbsAbs; // meal absorption time in min default 360 or 6 hours
 	const fast_carbAbsTime = carbAbsTime / 6; // = 1 h or 60 min
 	const slow_carbAbsTime = carbAbsTime / 1.5; // = 4 h or 240 min
@@ -77,6 +77,7 @@ export default function carbs(carbsAbs: number, lastMeals: Pick<TreatmentDelta, 
 		return tot + arr.all_carbrate;
 	}, 0);
 
-	logger.info(totalCarbRate);
+	console.log(`TOTAL CARB RATE`, totalCarbRate);
+
 	return totalCarbRate;
 };

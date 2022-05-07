@@ -13,6 +13,7 @@ export type Drug = {
 	insulin: number;
 	empty_space: any;
 }
+
 export type Sgv = {
 	mills: number;
 	sgv: number;
@@ -27,7 +28,6 @@ export type Treatment = {
 	notes: string;
 	created_at: string;
 	carbs: number;
-	mills: number
 };
 
 export type TreatmentDelta = (Treatment & {
