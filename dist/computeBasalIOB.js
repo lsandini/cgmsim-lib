@@ -31,7 +31,10 @@ function default_1(treatments) {
         lastTOU,
         lastDEG,
     };
+<<<<<<< HEAD
     console.log(`LAST BASALS:`, `lastDET:`, lastDET, `lastGLA:`, lastGLA, `lastTOU:`, lastTOU, `lastDEG:`, lastDEG);
+=======
+>>>>>>> d08e246e4ae22d06b600934b6c5536b408e30940
     return result;
 }
 exports.default = default_1;
