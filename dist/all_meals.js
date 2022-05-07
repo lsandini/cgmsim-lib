@@ -5,9 +5,10 @@ const utils_2 = require("./utils");
 //const logger = pino();
 function default_1(treatments) {
     const meals = treatments
-        .filter(e => e.carbs && utils_2.getDeltaMinutes(e.mills) > 360)
-        .map(e => (Object.assign(Object.assign({}, e), { minutesAgo: utils_2.getDeltaMinutes(e.mills) })));
+        .filter(e => e.carbs && utils_2.getDeltaMin(e.created_at) > 360)
+        .map(e => (Object.assign(Object.assign({}, e), { minutesAgo: utils_2.getDeltaMin(e.created_at) })));
     utils_1.default.info('Last 6 hours meal: %o', meals);
+    //console.log(`meals:`, meals);
     return meals;
 }
 exports.default = default_1;

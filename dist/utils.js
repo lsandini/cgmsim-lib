@@ -21,6 +21,10 @@ function Activity(peak, duration, hoursAgo, insulin) {
     return { S, tau, activity };
 }
 exports.Activity = Activity;
+
+const getDeltaMin = (created_at) => Math.round(moment().diff(moment(created_at), 'seconds') / 60);
 const getDeltaMinutes = (mills) => Math.round(moment().diff(moment(mills), 'seconds') / 60);
+exports.getDeltaMin = getDeltaMin;
 exports.getDeltaMinutes = getDeltaMinutes;
+
 //# sourceMappingURL=utils.js.map

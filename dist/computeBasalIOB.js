@@ -1,6 +1,6 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const moment = require("moment");
+'use strict';
+Object.defineProperty(exports, '__esModule', { value: true });
+const moment = require('moment');
 function default_1(treatments) {
     //Find basal boluses
     const basals = treatments && treatments.length ?
