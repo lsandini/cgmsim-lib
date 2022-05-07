@@ -7,7 +7,11 @@ import { getDeltaMinutes } from './utils';
 export default function (treatments: Treatment[]): TreatmentDelta[] {
 
 	const meals = treatments
+
 		.filter(e => e.carbs && getDeltaMinutes(e.created_at) > 360)
+
+		.filter(e => e.carbs && getDeltaMinutes(e.created_at) <= 360)
+
 		.map(e => ({
 			...e,
 			minutesAgo: getDeltaMinutes(e.created_at),

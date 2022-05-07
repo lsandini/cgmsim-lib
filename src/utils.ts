@@ -21,4 +21,4 @@ export function Activity(peak: number, duration: number, hoursAgo: number, insul
 
 	return { S, tau, activity };
 }
-export const getDeltaMinutes = (mills) => Math.round(moment().diff(moment(mills), 'seconds') / 60);
+export const getDeltaMinutes = (mills:number|string) => Math.round(moment().diff(moment(mills), 'seconds') / 60);

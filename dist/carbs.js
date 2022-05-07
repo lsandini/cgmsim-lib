@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const utils_1 = require("./utils");
+const utils_2 = require("./utils");
 //const logger = pino();
-function carbs(carbsAbs, lastMeals) {
-    const carbs = lastMeals || [];
+function carbs(carbsAbs, meals) {
+    const carbs = meals || [];
     const carbAbsTime = carbsAbs; // meal absorption time in min default 360 or 6 hours
     const fast_carbAbsTime = carbAbsTime / 6; // = 1 h or 60 min
     const slow_carbAbsTime = carbAbsTime / 1.5; // = 4 h or 240 min
@@ -19,7 +19,7 @@ function carbs(carbsAbs, lastMeals) {
         const fast_carbs = fast + (FSR * rest);
         // the remainder is slow carbs
         const slow_carbs = (1 - FSR) * rest;
-        utils_1.default.info('carbs_g:', carbs_g, 'fast:', fast, 'rest:', rest, 'fast_carbs:', fast_carbs, 'slow_carbs: %o', slow_carbs);
+        utils_2.default.info('carbs_g:', carbs_g, 'fast:', fast, 'rest:', rest, 'fast_carbs:', fast_carbs, 'slow_carbs: %o', slow_carbs);
         let fast_carbrate = 0;
         let slow_carbrate = 0;
         if (t < (fast_carbAbsTime / 2)) {
@@ -36,7 +36,7 @@ function carbs(carbsAbs, lastMeals) {
         else {
             fast_carbrate = 0;
             // COB = 0;
-            utils_1.default.info('fast carb absorption rate: %o', fast_carbrate);
+            utils_2.default.info('fast carb absorption rate: %o', fast_carbrate);
         }
         if (t < (slow_carbAbsTime / 2)) {
             const AT2 = Math.pow(slow_carbAbsTime, 2);
@@ -52,15 +52,15 @@ function carbs(carbsAbs, lastMeals) {
         else {
             slow_carbrate = 0;
             // COB = 0;
-            utils_1.default.info('slow carb absorption rate: %o', slow_carbrate);
+            utils_2.default.info('slow carb absorption rate: %o', slow_carbrate);
         }
         return Object.assign(Object.assign({}, entry), { time: t, fast_carbrate: fast_carbrate, slow_carbrate: slow_carbrate, all_carbrate: fast_carbrate + slow_carbrate });
     });
-    utils_1.default.info(timeSinceMealAct);
+    utils_2.default.info(timeSinceMealAct);
     const totalCarbRate = timeSinceMealAct.reduce(function (tot, arr) {
         return tot + arr.all_carbrate;
     }, 0);
-    utils_1.default.info(totalCarbRate);
+    console.log(`TOTAL CARB RATE`, totalCarbRate);
     return totalCarbRate;
 }
 exports.default = carbs;

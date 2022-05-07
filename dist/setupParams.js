@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const { createHash } = require('crypto');
 const https = require('https');
-function default_1(apiSecret) {
+function default_2(apiSecret) {
     const agent = new https.Agent({ rejectUnauthorized: false, });
     const hash = createHash('sha1');
     hash.update(apiSecret);
@@ -24,6 +24,6 @@ function default_1(apiSecret) {
         },
     };
 }
-exports.default = default_1;
+exports.default = default_2;
 ;
 //# sourceMappingURL=setupParams.js.map

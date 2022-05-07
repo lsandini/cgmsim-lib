@@ -21,7 +21,6 @@ export declare type Treatment = {
     notes: string;
     created_at: string;
     carbs: number;
-    mills: number;
 };
 export declare type TreatmentDelta = (Treatment & {
     minutesAgo: number;

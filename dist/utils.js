@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getDeltaMinutes = exports.Activity = void 0;
 const moment = require("moment");
 const pino_1 = require("pino");
-const logger = (0, pino_1.default)({
+const logger = pino_1.default({
     level: process.env.LOG_LEVEL,
     transport: {
         target: 'pino-pretty',

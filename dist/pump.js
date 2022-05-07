@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const utils_1 = require("./utils");
+const utils_2 = require("./utils");
 //const logger = pino();
 const moment = require("moment");
-function default_1({ treatments, profiles, pumpBasals }, env) {
+function default_2({ treatments, profiles, pumpBasals }, env) {
     const dia = parseInt(env.DIA);
     const basalAsBoluses = [];
     const endDiaAction = moment();
@@ -81,7 +81,7 @@ function default_1({ treatments, profiles, pumpBasals }, env) {
         }
     }
     pumpBasals.push(...basalsToUpdate);
-    utils_1.default.info('\x1b[32m', '------------------pumpBasals %o', pumpBasals.length, '\x1b[0m');
+    utils_2.default.info('\x1b[32m', '------------------pumpBasals %o', pumpBasals.length, '\x1b[0m');
     const td = dia * 60;
     const tp = parseInt(env.TP);
     const tau = tp * (1 - tp / td) / (1 - 2 * tp / td);
@@ -100,10 +100,10 @@ function default_1({ treatments, profiles, pumpBasals }, env) {
     const resultPumpAct = lastPumpInsulins.reduce(function (tot, arr) {
         return tot + arr.activityContrib;
     }, 0);
-    utils_1.default.info('this is the aggregated insulin activity from pump basal in the last dia hours: %o', resultPumpAct);
+    utils_2.default.info('this is the aggregated insulin activity from pump basal in the last dia hours: %o', resultPumpAct);
     const pumpBasalAct = JSON.stringify(resultPumpAct, null, 4);
-    utils_1.default.info('the pump\'s basal activity is: %o', pumpBasalAct);
+    utils_2.default.info('the pump\'s basal activity is: %o', pumpBasalAct);
     return Math.round(resultPumpAct * 100000) / 100000;
 }
-exports.default = default_1;
+exports.default = default_2;
 //# sourceMappingURL=pump.js.map

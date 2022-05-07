@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const perlinNoise = require('perlin-noise');
-function default_1() {
+function default_2() {
     const time = Date.now();
     const noise = perlinNoise.generatePerlinNoise(288, 1, {
         amplitude: 0.3,
@@ -18,5 +18,5 @@ function default_1() {
     }
     return myObject;
 }
-exports.default = default_1;
+exports.default = default_2;
 //# sourceMappingURL=perlin.js.map
