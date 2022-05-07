@@ -7,7 +7,7 @@ const utils_2 = require("./utils");
 //const logger = pino();
 const sgv_start = (entries, { det, gla, degludec, tou, liver, carbs, resultAct }, perls, isf) => {
     const oldSgv = entries && entries[0] ? entries[0].sgv : 90;
-    const deltaMinutes = utils_2.getDeltaMinutes(entries[0].mills);
+    const deltaMinutes = (0, utils_2.getDeltaMinutes)(entries[0].mills);
     utils_1.default.info('deltaMinutes %o', deltaMinutes);
     const isfMMol = isf / 18; //mmol/l/U
     //logger.info('ISF= %o', ISF);
@@ -31,7 +31,7 @@ const sgv_start = (entries, { det, gla, degludec, tou, liver, carbs, resultAct }
     const liver_bgi = liver * deltaMinutes;
     const timeSincePerlin = perls.map(entry => (Object.assign(Object.assign({}, entry), { time: (Date.now() - moment(entry.time).valueOf()) / (1000 * 60) })));
     const lastPerls = perls.filter(function (e) {
-        const delta = utils_2.getDeltaMinutes(e.time);
+        const delta = (0, utils_2.getDeltaMinutes)(e.time);
         return delta >= 0 && delta <= 5; // keep only the latest noise value
     });
     const noise = lastPerls && lastPerls.length > 0 ? (lastPerls[0].noise * 6) : 0;

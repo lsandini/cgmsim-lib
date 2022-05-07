@@ -11,7 +11,7 @@ function default_1(degludecs) {
         const insulin = entry.insulin;
         const duration = 42;
         const peak = (duration / 3);
-        const { activity } = utils_2.Activity(peak, duration, hoursAgo, insulin);
+        const { activity } = (0, utils_2.Activity)(peak, duration, hoursAgo, insulin);
         return {
             hours: hoursAgo,
             degludecActivity: activity,

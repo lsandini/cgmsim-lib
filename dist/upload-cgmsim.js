@@ -5,10 +5,10 @@ const utils_1 = require("./utils");
 const setupParams_1 = require("./setupParams");
 //const logger = pino();
 function default_1(cgmsim, nsUrl, apiSecret) {
-    const { postParams } = setupParams_1.default(apiSecret);
+    const { postParams } = (0, setupParams_1.default)(apiSecret);
     const api_url = nsUrl + '/api/v1/entries/';
     const body_json = JSON.stringify(cgmsim);
-    return node_fetch_1.default(api_url, Object.assign(Object.assign({}, postParams), { body: body_json }))
+    return (0, node_fetch_1.default)(api_url, Object.assign(Object.assign({}, postParams), { body: body_json }))
         .then(() => {
         utils_1.default.info('NIGTHSCOUT Updated');
     })

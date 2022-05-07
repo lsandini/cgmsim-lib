@@ -11,7 +11,7 @@ function default_1(weight, detemirs) {
         const insulin = entry.insulin;
         const duration = (14 + (24 * insulin / weight));
         const peak = (duration / 3);
-        const { activity } = utils_2.Activity(peak, duration, hoursAgo, insulin);
+        const { activity } = (0, utils_2.Activity)(peak, duration, hoursAgo, insulin);
         return {
             hoursAgo,
             detemirActivity: activity

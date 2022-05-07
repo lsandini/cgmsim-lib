@@ -2,8 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const utils_1 = require("./utils");
 //const logger = pino();
-function carbs(carbsAbs, meals) {
-    const carbs = meals || [];    
+function carbs(carbsAbs, lastMeals) {
+    const carbs = lastMeals || [];
     const carbAbsTime = carbsAbs; // meal absorption time in min default 360 or 6 hours
     const fast_carbAbsTime = carbAbsTime / 6; // = 1 h or 60 min
     const slow_carbAbsTime = carbAbsTime / 1.5; // = 4 h or 240 min
@@ -61,7 +61,6 @@ function carbs(carbsAbs, meals) {
         return tot + arr.all_carbrate;
     }, 0);
     utils_1.default.info(totalCarbRate);
-    console.log(`TOTAL CARB RATE`, totalCarbRate);
     return totalCarbRate;
 }
 exports.default = carbs;

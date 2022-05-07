@@ -5,10 +5,10 @@ export default function (treatments: Treatment[]): ({ lastDET: TreatmentDelta[];
 
 	//Find basal boluses
 	const basals = treatments && treatments.length ?
-		treatments.filter(e => e.notes && e.insulin)
+		treatments.filter(e => e.notes)
 			.map(e => ({
 				...e,
-				minutesAgo: (Date.now() - moment(e.mills).valueOf()) / (1000 * 60),
+				minutesAgo: (Date.now() - moment(e.created_at).valueOf()) / (1000 * 60),
 				drug: e.notes.slice(0, 3),
 			})) : [];
 

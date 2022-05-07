@@ -10,7 +10,7 @@ function default_1(isf, cr) {
     // the sinus and cosinus numbers vary around 1, from 0.5 to 1.5:
     // sin starts at 1.0 at midnight, is max at 6AM, is again 1 at 12 AM, and minimums at 0.5 a 6 PM
     // cosin starts at 1.5 at midnight, is 1 at 6AM, is minimus at 0.5 12 AM, and is 1 again at 6 PM
-    const { sinus, cosinus } = sinus_1.default(Date.now());
+    const { sinus, cosinus } = (0, sinus_1.default)(Date.now());
     utils_1.default.info('sinus:  %o', sinus);
     utils_1.default.info('cosinus:  %o', cosinus);
     // let's simulate the carb impact of the liver, producing 10g of carbs / hour

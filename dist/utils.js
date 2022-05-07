@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getDeltaMinutes = exports.Activity = void 0;
 const moment = require("moment");
 const pino_1 = require("pino");
-const logger = pino_1.default({
+const logger = (0, pino_1.default)({
     level: process.env.LOG_LEVEL,
     transport: {
         target: 'pino-pretty',
@@ -21,10 +21,6 @@ function Activity(peak, duration, hoursAgo, insulin) {
     return { S, tau, activity };
 }
 exports.Activity = Activity;
-
-const getDeltaMin = (created_at) => Math.round(moment().diff(moment(created_at), 'seconds') / 60);
 const getDeltaMinutes = (mills) => Math.round(moment().diff(moment(mills), 'seconds') / 60);
-exports.getDeltaMin = getDeltaMin;
 exports.getDeltaMinutes = getDeltaMinutes;
-
 //# sourceMappingURL=utils.js.map
