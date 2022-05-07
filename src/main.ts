@@ -40,11 +40,13 @@ const main = ({
 	const { lastDET, lastGLA, lastTOU, lastDEG } = computeBasalIOBRun(treatments);
 	const lastMeals = allMealsRun(treatments);
 
+	//activity calc insulin
 	const det = detemirRun(weight, lastDET);
 	const gla = glargineRun(weight, lastGLA);
 	const degludec = degludecRun(lastDEG);
 	const tou = toujeoRun(weight, lastTOU);
 
+	//activity calc carb
 	const carbs = carbsRun(carbsAbs, lastMeals);
 	const liver = liverRun(isf, cr);
 

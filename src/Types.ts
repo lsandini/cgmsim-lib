@@ -28,10 +28,12 @@ export type Treatment = {
 	notes: string;
 	created_at: string;
 	carbs: number;
+
 };
 
 export type TreatmentDelta = (Treatment & {
 	minutesAgo: number;
+	drug?: string;
 });
 
 
@@ -41,7 +43,7 @@ export type EnvParam = {
 	CARBS_ABS_TIME: string;
 	TP: string;
 	DIA: string;
-	WEIGHT:string;
+	WEIGHT: string;
 };
 export type CGMSimParams = { det: number; gla: number; degludec: number; tou: number; liver: number; carbs: number; resultAct }
 export type MainParams = {

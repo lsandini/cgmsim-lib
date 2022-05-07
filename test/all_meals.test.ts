@@ -13,7 +13,7 @@ describe('all meals', () => {
 		expect(t.length).toBe(0)
 
 	});
-	test('test conversion all meals with old carbs', () => {
+	test('test conversion all meals with valid carbs', () => {
 		const ts = [...treatments] as unknown as Treatment[];
 		ts.forEach(ts => {
 			ts.created_at = moment().format();
