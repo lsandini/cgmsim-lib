@@ -5,11 +5,12 @@ function default_1(treatments) {
     //Find basal boluses
     const basals = treatments && treatments.length ?
         treatments.filter(e => e.notes)
-            .map(e => (Object.assign(Object.assign({}, e), {
-            minutesAgo: (Date.now() - moment(e.created_at).valueOf()) / (1000 * 60),
-            drug: e.notes.slice(0, 3),
-            dose: parseInt(e.notes.slice(-2))
-        }))) : [];
+            .map(e => {
+            const lastIndexEmptySpace = e.notes.lastIndexOf(' ');
+            return Object.assign(Object.assign({}, e), { minutesAgo: (Date.now() - moment(e.created_at).valueOf()) / (1000 * 60), drug: e.notes.slice(0, 3), 
+                // insulin: parseInt(e.notes.slice(-2)) 
+                insulin: parseInt(e.notes.slice(lastIndexEmptySpace), 10) });
+        }) : [];
     const lastBasals = basals.filter(function (e) {
         return e.minutesAgo <= 45 * 60; // keep only the basals from the last 45 hours
     });
@@ -31,10 +32,6 @@ function default_1(treatments) {
         lastTOU,
         lastDEG,
     };
-<<<<<<< HEAD
-    console.log(`LAST BASALS:`, `lastDET:`, lastDET, `lastGLA:`, lastGLA, `lastTOU:`, lastTOU, `lastDEG:`, lastDEG);
-=======
->>>>>>> d08e246e4ae22d06b600934b6c5536b408e30940
     return result;
 }
 exports.default = default_1;

@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const utils_2 = require("./utils");
+const utils_1 = require("./utils");
 //const logger = pino();
 const perlin_1 = require("./perlin");
 const computeBolusIOB_js_1 = require("./computeBolusIOB.js");
@@ -14,7 +14,7 @@ const carbs_js_1 = require("./carbs.js");
 const arrows_js_1 = require("./arrows.js");
 const liver_js_1 = require("./liver.js");
 const sgv_start_js_1 = require("./sgv_start.js");
-utils_2.default.info('Run Init');
+utils_1.default.info('Run Init');
 const perls = perlin_1.default();
 const main = ({ env, entries, treatments, profiles, pumpBasals }) => {
     const weight = parseInt(env.WEIGHT);
@@ -29,14 +29,16 @@ const main = ({ env, entries, treatments, profiles, pumpBasals }) => {
     const { resultAct } = computeBolusIOB_js_1.default(treatments, dia, tp);
     const { lastDET, lastGLA, lastTOU, lastDEG } = computeBasalIOB_js_1.default(treatments);
     const lastMeals = all_meals_js_1.default(treatments);
+    //activity calc insulin
     const det = detemir_js_1.default(weight, lastDET);
     const gla = glargine_js_1.default(weight, lastGLA);
     const degludec = degludec_js_1.default(lastDEG);
     const tou = toujeo_js_1.default(weight, lastTOU);
+    //activity calc carb
     const carbs = carbs_js_1.default(carbsAbs, lastMeals);
     const liver = liver_js_1.default(isf, cr);
     const cgmsim = sgv_start_js_1.default(entries, { det, gla, degludec, tou, liver, carbs, resultAct }, perls, isf);
-    utils_2.default.info('this is the new sgv: %o', cgmsim);
+    utils_1.default.info('this is the new sgv: %o', cgmsim);
     const arrows = arrows_js_1.default([cgmsim, ...entries]);
     return Object.assign(Object.assign({}, cgmsim), { direction: arrows[0].direction });
 };

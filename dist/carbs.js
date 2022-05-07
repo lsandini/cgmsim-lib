@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const utils_2 = require("./utils");
+const utils_1 = require("./utils");
 //const logger = pino();
 function carbs(carbsAbs, meals) {
     const carbs = meals || [];
@@ -19,7 +19,7 @@ function carbs(carbsAbs, meals) {
         const fast_carbs = fast + (FSR * rest);
         // the remainder is slow carbs
         const slow_carbs = (1 - FSR) * rest;
-        utils_2.default.info('carbs_g:', carbs_g, 'fast:', fast, 'rest:', rest, 'fast_carbs:', fast_carbs, 'slow_carbs: %o', slow_carbs);
+        utils_1.default.info('carbs_g:', carbs_g, 'fast:', fast, 'rest:', rest, 'fast_carbs:', fast_carbs, 'slow_carbs: %o', slow_carbs);
         let fast_carbrate = 0;
         let slow_carbrate = 0;
         if (t < (fast_carbAbsTime / 2)) {
@@ -36,7 +36,7 @@ function carbs(carbsAbs, meals) {
         else {
             fast_carbrate = 0;
             // COB = 0;
-            utils_2.default.info('fast carb absorption rate: %o', fast_carbrate);
+            utils_1.default.info('fast carb absorption rate: %o', fast_carbrate);
         }
         if (t < (slow_carbAbsTime / 2)) {
             const AT2 = Math.pow(slow_carbAbsTime, 2);
@@ -52,11 +52,11 @@ function carbs(carbsAbs, meals) {
         else {
             slow_carbrate = 0;
             // COB = 0;
-            utils_2.default.info('slow carb absorption rate: %o', slow_carbrate);
+            utils_1.default.info('slow carb absorption rate: %o', slow_carbrate);
         }
         return Object.assign(Object.assign({}, entry), { time: t, fast_carbrate: fast_carbrate, slow_carbrate: slow_carbrate, all_carbrate: fast_carbrate + slow_carbrate });
     });
-    utils_2.default.info(timeSinceMealAct);
+    utils_1.default.info(timeSinceMealAct);
     const totalCarbRate = timeSinceMealAct.reduce(function (tot, arr) {
         return tot + arr.all_carbrate;
     }, 0);

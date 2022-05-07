@@ -24,6 +24,7 @@ export declare type Treatment = {
 };
 export declare type TreatmentDelta = (Treatment & {
     minutesAgo: number;
+    drug?: string;
 });
 export declare type EnvParam = {
     CR: string;

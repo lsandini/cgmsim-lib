@@ -1,2 +1,6 @@
-declare const utils_1: any;
-declare const moment: any;
+import { Treatment } from './Types';
+declare const _default: (treatments: Treatment[], dia: number, tp: number) => {
+    resultAct: number;
+    resultIob: number;
+};
+export default _default;
