@@ -2,9 +2,12 @@ import perlin from "../src/perlin";
 describe('test perlin with fake timers', () => {
 	beforeAll(() => {
 		jest.useFakeTimers('modern');
-		jest.setSystemTime(new Date('2001-01-01'));
 	});
 
+	beforeEach(()=>{
+		jest.setSystemTime(new Date('2001-01-01'));
+
+	})
 	afterAll(() => {
 		jest.useRealTimers();
 	});
