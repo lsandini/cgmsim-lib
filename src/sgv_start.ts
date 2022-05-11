@@ -42,11 +42,6 @@ const sgv_start = (entries: Sgv[], { det, gla, degludec, tou, liver, carbs, resu
 
 	const liver_bgi = liver * deltaMinutes;
 
-	const timeSincePerlin = perls.map(entry => ({
-		...entry,
-		time: (Date.now() - moment(entry.time).valueOf()) / (1000 * 60)
-	}));
-
 	const lastPerls = perls.filter(function (e) {
 		const delta =getDeltaMinutes(e.time);
 		return delta >= 0 && delta <= 5; // keep only the latest noise value

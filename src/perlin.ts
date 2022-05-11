@@ -2,8 +2,8 @@ import { Perlin } from "./Types";
 
 const perlinNoise = require('perlin-noise');
 export default function (): Perlin[] {
-	const time = Date.now();
-
+	const todayString = new Date().toISOString().substring(0, 10);
+	const today = new Date(todayString)
 	const noise = perlinNoise.generatePerlinNoise(288, 1, {
 		amplitude: 0.3,
 		octaveCount: 3,
@@ -16,7 +16,7 @@ export default function (): Perlin[] {
 		myObject.push({
 			noise: noise[i] / 10 - 0.05,
 			order: (i),
-			time: time + (i) * 1000 * 60 * 5
+			time: today.getTime() + (i) * 1000 * 60 * 5
 		});
 	}
 
