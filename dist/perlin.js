@@ -2,7 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const perlinNoise = require('perlin-noise');
 function default_1() {
-    const time = Date.now();
+    const todayString = new Date().toISOString().substring(0, 10);
+    const today = new Date(todayString);
     const noise = perlinNoise.generatePerlinNoise(288, 1, {
         amplitude: 0.3,
         octaveCount: 3,
@@ -14,7 +15,7 @@ function default_1() {
         myObject.push({
             noise: noise[i] / 10 - 0.05,
             order: (i),
-            time: time + (i) * 1000 * 60 * 5
+            time: today.getTime() + (i) * 1000 * 60 * 5
         });
     }
     return myObject;

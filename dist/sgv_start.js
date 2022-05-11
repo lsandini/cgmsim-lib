@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const moment = require("moment");
 // import pump from './pump.js';
 const utils_1 = require("./utils");
 const utils_2 = require("./utils");
@@ -29,7 +28,6 @@ const sgv_start = (entries, { det, gla, degludec, tou, liver, carbs, resultAct }
     const BGI_ins = (globalInsulinAct * deltaMinutes * isfMMol) * -1;
     const today = new Date();
     const liver_bgi = liver * deltaMinutes;
-    const timeSincePerlin = perls.map(entry => (Object.assign(Object.assign({}, entry), { time: (Date.now() - moment(entry.time).valueOf()) / (1000 * 60) })));
     const lastPerls = perls.filter(function (e) {
         const delta = utils_2.getDeltaMinutes(e.time);
         return delta >= 0 && delta <= 5; // keep only the latest noise value
