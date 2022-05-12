@@ -1,8 +1,8 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+'use strict';
+Object.defineProperty(exports, '__esModule', { value: true });
 // import pump from './pump.js';
-const utils_1 = require("./utils");
-const utils_2 = require("./utils");
+const utils_1 = require('./utils');
+const utils_2 = require('./utils');
 //const logger = pino();
 const sgv_start = (entries, { det, gla, degludec, tou, liver, carbs, resultAct }, perls, isf) => {
     const oldSgv = entries && entries[0] ? entries[0].sgv : 90;
