@@ -7,12 +7,12 @@ jobs:
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
-        token: ${{ github.token }}
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm ci
     - run: npm run build --if-present
     - run: npm test
-    - uses: fregante/setup-git-user@v1
-    - run: git commit -m 'Update dist' -a --allow-empty
-    - run: git push
+    - uses: EndBug/add-and-commit@v9
+      with:
+        default_author: github_actions
+        message: "update dist"
