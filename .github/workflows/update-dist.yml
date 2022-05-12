@@ -14,5 +14,5 @@ jobs:
     - run: npm run build --if-present
     - run: npm test
     - uses: fregante/setup-git-user@v1
-    - run: git commit -m 'Update dist' -a
+    - run: git commit -m 'Update dist' -a --allow-empty
     - run: git push
