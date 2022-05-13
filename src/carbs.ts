@@ -77,7 +77,7 @@ export default function carbs(carbsAbs: number, meals: Pick<TreatmentDelta, 'car
 		return tot + arr.all_carbrate;
 	}, 0);
 
-	console.log(`TOTAL CARB RATE`, totalCarbRate);
+	console.log(`TOTAL CARB RATE  ${totalCarbRate}`);
 
 	return totalCarbRate;
 };
