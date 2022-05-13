@@ -60,7 +60,7 @@ function carbs(carbsAbs, meals) {
     const totalCarbRate = timeSinceMealAct.reduce(function (tot, arr) {
         return tot + arr.all_carbrate;
     }, 0);
-    console.log(`TOTAL CARB RATE`, totalCarbRate);
+    console.log(`TOTAL CARB RATE  ${totalCarbRate}`);
     return totalCarbRate;
 }
 exports.default = carbs;
