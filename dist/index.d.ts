@@ -1,4 +1,5 @@
 import main from './main';
 import downloads from './downloads';
 import upload from './upload-cgmsim';
-export { main, downloads, upload };
+import uploadActivity from './upload-activity';
+export { main, downloads, upload, uploadActivity };

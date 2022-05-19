@@ -13,7 +13,7 @@ function default_1(weight, glargines) {
         const insulin = entry.insulin;
         const duration = (22 + (12 * insulin / weight));
         const peak = (duration / 2.5);
-        const { activity } = utils_1.Activity(peak, duration, hoursAgo, insulin);
+        const { activity } = utils_1.InsulinActivity(peak, duration, hoursAgo, insulin);
         return {
             hoursAgo,
             glargineActivity: activity

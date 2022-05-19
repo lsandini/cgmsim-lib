@@ -1,0 +1,1 @@
+{"version":3,"file":"upload-activity.js","sourceRoot":"","sources":["../src/upload-activity.ts"],"names":[],"mappings":";;AACA,mCAAqC;AAErC,mBAAyB,QAAkB,EAAE,KAAa,EAAE,SAAiB;IAC5E,MAAM,OAAO,GAAG,KAAK,GAAG,mBAAmB,CAAC;IAC5C,OAAO,kBAAU,CAAC,QAAQ,EAAE,OAAO,EAAE,SAAS,CAAC,CAAC;AAEjD,CAAC;AAJD,4BAIC"}
