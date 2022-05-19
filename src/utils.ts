@@ -1,3 +1,4 @@
+import fetch from 'node-fetch';
 import * as moment from "moment";
 import pino from 'pino';
 import setupParams from "./setupParams";
