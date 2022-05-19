@@ -14,6 +14,10 @@ export type Drug = {
 	empty_space: any;
 }
 
+export type Activity = {
+	steps: number,
+	created_at: string,
+}
 export type Sgv = {
 	mills: number;
 	sgv: number;

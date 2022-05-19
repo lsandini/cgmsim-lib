@@ -1,6 +1,6 @@
 import logger from './utils';
 import { TreatmentDelta } from './Types';
-import { Activity } from './utils';
+import { InsulinActivity } from './utils';
 
 //const logger = pino();
 export default function (degludecs: Pick<TreatmentDelta, 'insulin' | 'minutesAgo'>[]): number {
@@ -12,7 +12,7 @@ export default function (degludecs: Pick<TreatmentDelta, 'insulin' | 'minutesAgo
 		const insulin = entry.insulin;
 		const duration = 42;
 		const peak = (duration / 3);
-		const { activity } = Activity(peak, duration, hoursAgo, insulin);
+		const { activity } = InsulinActivity(peak, duration, hoursAgo, insulin);
 
 		return {
 			hours: hoursAgo,

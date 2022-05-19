@@ -1,6 +1,6 @@
 import logger from './utils';
 import { TreatmentDelta } from './Types';
-import { Activity } from './utils';
+import { InsulinActivity } from './utils';
 
 //const logger = pino();
 
@@ -15,7 +15,7 @@ export default function (weight, tou: Pick<TreatmentDelta, 'insulin' | 'minutesA
 		const insulin = entry.insulin;
 		const duration = (24 + (14 * insulin / weight));
 		const peak = (duration / 2.5);
-		const { activity } = Activity(peak, duration, hoursAgo, insulin);
+		const { activity } = InsulinActivity(peak, duration, hoursAgo, insulin);
 
 		return {
 			hoursAgo,

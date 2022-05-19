@@ -1,4 +1,4 @@
-import  { Activity } from './utils';
+import  { InsulinActivity } from './utils';
 import logger from './utils';
 import { TreatmentDelta } from './Types';
 
@@ -15,7 +15,7 @@ export default function (weight: number, glargines: Pick<TreatmentDelta, 'minute
 		const insulin = entry.insulin;
 		const duration = (22 + (12 * insulin / weight));
 		const peak = (duration / 2.5);
-		const { activity } = Activity(peak, duration, hoursAgo, insulin);
+		const { activity } = InsulinActivity(peak, duration, hoursAgo, insulin);
 
 		return {
 			hoursAgo,
