@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.uploadBase = exports.getDeltaMinutes = exports.InsulinActivity = void 0;
+const node_fetch_1 = require("node-fetch");
 const moment = require("moment");
 const pino_1 = require("pino");
 const setupParams_1 = require("./setupParams");
@@ -27,7 +28,7 @@ exports.getDeltaMinutes = getDeltaMinutes;
 function uploadBase(cgmsim, api_url, apiSecret) {
     const { postParams } = setupParams_1.default(apiSecret);
     const body_json = JSON.stringify(cgmsim);
-    return fetch(api_url, Object.assign(Object.assign({}, postParams), { body: body_json }))
+    return node_fetch_1.default(api_url, Object.assign(Object.assign({}, postParams), { body: body_json }))
         .then(() => {
         logger.info('NIGTHSCOUT Updated');
     })

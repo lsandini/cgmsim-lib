@@ -15,4 +15,4 @@ export declare function InsulinActivity(peak: number, duration: number, hoursAgo
     activity: number;
 };
 export declare const getDeltaMinutes: (mills: number | string) => number;
-export declare function uploadBase(cgmsim: Sgv | Activity, api_url: string, apiSecret: string): Promise<void>;
+export declare function uploadBase(cgmsim: Sgv | Activity, api_url: string, apiSecret: string): any;
