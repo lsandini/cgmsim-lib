@@ -13,7 +13,7 @@ const sgv_start = (entries: Sgv[], { basalActivity, liver, carbs, bolusActivity 
 
 	logger.info('deltaMinutes %o', deltaMinutes);
 
-	const isfMMol = isf / 18; //mmol/l/U
+	const isfMMol = isf / 18; //(mmol/l)/U
 	//logger.info('ISF= %o', ISF);
 
 	// ENABLE THIS FOR PUMP SIMULATION
@@ -30,13 +30,13 @@ const sgv_start = (entries: Sgv[], { basalActivity, liver, carbs, bolusActivity 
 	//     }, env);
 	// }
 
-	const globalInsulinAct = basalActivity + bolusActivity + pumpBasalAct;
+	const globalInsulinAct = basalActivity + bolusActivity + pumpBasalAct; //U/min
 
-	const BGI_ins = (globalInsulinAct * deltaMinutes * isfMMol) * -1;
+	const BGI_ins = (globalInsulinAct * deltaMinutes * isfMMol) * -1; //mmol/l
 
 	const today = new Date();
 
-	const liver_bgi = liver * deltaMinutes;
+	const liver_bgi = liver * deltaMinutes;//mmol/l
 
 	const lastPerls = perls.filter(function (e) {
 		const delta =getDeltaMinutes(e.time);

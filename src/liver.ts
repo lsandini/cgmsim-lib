@@ -27,12 +27,12 @@ export default function (isf: number, cr: number): number {
 	// by multiplying the liver_bgi by the sin function, the liver loog glucose production varies in a sinusoidal
 	// form, being maximal at 6 AM and minimal ad 6 PM
 
-	const liver = (_ISF / _CR) * (10 / 60);
+	const liver = (_ISF / _CR) * (10 / 60);//(mmol/l)/min
 
 	const liver_sin = liver * sinus;
 	logger.info('liver:  %o', liver);
 	logger.info('liver_sin:  %o', liver_sin);
 
 
-	return liver_sin;
+	return liver_sin;//(mmol/l)/min
 }
