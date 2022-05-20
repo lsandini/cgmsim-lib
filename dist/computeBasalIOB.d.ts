@@ -1,7 +1,6 @@
 import { TreatmentDelta, Treatment } from './Types';
-export default function (treatments: Treatment[]): ({
-    lastDET: TreatmentDelta[];
-    lastGLA: TreatmentDelta[];
-    lastTOU: TreatmentDelta[];
-    lastDEG: TreatmentDelta[];
-});
+export declare const computeBasalActivity: (treatments: (TreatmentDelta & {
+    duration: number;
+    peak: number;
+})[]) => number;
+export default function (treatments: Treatment[], weight: number): number;

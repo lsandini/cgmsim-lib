@@ -1,65 +1,35 @@
-import logger from './utils';
-
-//const logger = pino();
-import * as moment from 'moment';
+import logger, { getDeltaMinutes, getInsulinActivity } from './utils';
 import { Treatment } from './Types';
 
-export default (treatments: Treatment[], dia: number, tp: number) => {
+export default (treatments: Treatment[], dia: number, peak: number): number => {
 
 
 	const insulin = treatments
 		.filter(e => e.insulin)
 		.map(e => ({
-			time: e.created_at,
+			minutesAgo: getDeltaMinutes(e.created_at),
 			insulin: e.insulin
-		}));
+		}))
+		.filter(e =>  e.minutesAgo <= 300);
+
 	logger.info('this is the filtered treatments (insulin): %o', insulin);
 	logger.info('length %o', insulin.length); // returns the number of boluses or length of the array
 
 	// dia is the duration of insulin action in hours
-	const td = dia * 60;
-	// tp is the time to the peak insulin action in minutes
+	const duration = dia * 60;
 
-
-	const tau = tp * (1 - tp / td) / (1 - 2 * tp / td);
-	const a = 2 * tau / td;
-	const S = 1 / (1 - a + (1 + a) * Math.exp(-td / tau));
-
-	const timeSinceBolusMin = insulin.map(entry => ({
-		...entry,
-		time: (Date.now() - moment(entry.time).valueOf()) / (1000 * 60)
-	}));
-	logger.info('this is the trimmed down insulin and time since injection data: %o', timeSinceBolusMin);
-
-	const timeSinceBolusAct = insulin.map(entry => {
-		const t = (Date.now() - moment(entry.time).valueOf()) / (1000 * 60);
+	const insulinsBolusAct = insulin.map(entry => {
 		const insulin = entry.insulin;
-		return {
-			...entry,
-			time: t,
-			activityContrib: insulin * (S / Math.pow(tau, 2)) * t * (1 - t / td) * Math.exp(-t / tau),
-			iobContrib: insulin * (1 - S * (1 - a) * ((Math.pow(t, 2) / (tau * td * (1 - a)) - t / tau - 1) * Math.exp(-t / tau) + 1))
-		};
+		return getInsulinActivity(peak, duration, entry.minutesAgo, insulin);
 	});
-	//logger.info(timeSinceBolusAct);
 
-	const lastInsulins = timeSinceBolusAct.filter(function (e) {
-		return e.time <= 300;
-	});
-	logger.info('these are the last insulins and activities: %o', lastInsulins);
+	
+	logger.info('these are the last insulins and activities: %o', insulinsBolusAct);
 
-	const resultAct = lastInsulins.reduce(function (tot, arr) {
-		return tot + arr.activityContrib;
+	const bolusAct = insulinsBolusAct.reduce(function (tot, activity) {
+		return tot + activity;
 	}, 0);
 
-	const resultIob = lastInsulins.reduce(function (tot, arr) {
-		return tot + arr.iobContrib;
-	}, 0);
-
-
-	return {
-		resultAct,
-		resultIob
-	};
+	return bolusAct;
 
 };

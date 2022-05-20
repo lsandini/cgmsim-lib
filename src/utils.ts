@@ -16,13 +16,13 @@ const logger = pino({
 
 export default logger;
 
-export function InsulinActivity(peak: number, duration: number, hoursAgo: number, insulin: number) {
-	const tau = peak * (1 - peak / duration) / (1 - 2 * peak / duration);
-	const a = 2 * tau / duration;
-	const S = 1 / (1 - a + (1 + a) * Math.exp(-duration / tau));
-	const activity = (insulin * (S / Math.pow(tau, 2)) * hoursAgo * (1 - hoursAgo / duration) * Math.exp(-hoursAgo / tau)) / 60
+export function getInsulinActivity(peakMin: number, durationMin: number, timeMin: number, insulin: number) {
+	const tau = peakMin * (1 - peakMin / durationMin) / (1 - 2 * peakMin / durationMin);
+	const a = 2 * tau / durationMin;
+	const S = 1 / (1 - a + (1 + a) * Math.exp(-durationMin / tau));
+	const activity = (insulin * (S / Math.pow(tau, 2)) * timeMin * (1 - timeMin / durationMin) * Math.exp(-timeMin / tau))
 
-	return { S, tau, activity };
+	return activity;
 }
 export const getDeltaMinutes = (mills: number | string) => Math.round(moment().diff(moment(mills), 'seconds') / 60);
 export function uploadBase(cgmsim: Sgv | Activity, api_url: string, apiSecret: string) {

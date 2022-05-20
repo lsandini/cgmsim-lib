@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const utils_1 = require("./utils");
 const utils_2 = require("./utils");
 //const logger = pino();
-const sgv_start = (entries, { det, gla, degludec, tou, liver, carbs, resultAct }, perls, isf) => {
+const sgv_start = (entries, { basalActivity, liver, carbs, bolusActivity }, perls, isf) => {
     const oldSgv = entries && entries[0] ? entries[0].sgv : 90;
     const deltaMinutes = utils_2.getDeltaMinutes(entries[0].mills);
     utils_1.default.info('deltaMinutes %o', deltaMinutes);
@@ -22,9 +22,7 @@ const sgv_start = (entries, { det, gla, degludec, tou, liver, carbs, resultAct }
     //         pumpBasals,
     //     }, env);
     // }
-    const globalBasalAct = gla + det + tou + degludec;
-    const globalMealtimeAct = resultAct;
-    const globalInsulinAct = globalBasalAct + globalMealtimeAct + pumpBasalAct;
+    const globalInsulinAct = basalActivity + bolusActivity + pumpBasalAct;
     const BGI_ins = (globalInsulinAct * deltaMinutes * isfMMol) * -1;
     const today = new Date();
     const liver_bgi = liver * deltaMinutes;
@@ -60,8 +58,8 @@ const sgv_start = (entries, { det, gla, degludec, tou, liver, carbs, resultAct }
     utils_1.default.info('-------------------------------------------');
     utils_1.default.info('total BG impact of carbs, liver and insulin for 5 minutes: + %o', (BGI_ins) + (liver_bgi * 18) + (carbs * 18), 'mg/dl');
     utils_1.default.info('this is the PUMP BASAL insulin impact for ' + deltaMinutes + ' minutes: %o', pumpBasalAct * deltaMinutes * 18 * isfMMol);
-    utils_1.default.info('this is the BASAL BOLUS  insulin impact for ' + deltaMinutes + ' minutes: %o', globalBasalAct * deltaMinutes * 18 * isfMMol);
-    utils_1.default.info('this is the MEAL BOLUS insulin impact for ' + deltaMinutes + ' minutes: %o', globalMealtimeAct * deltaMinutes * 18 * isfMMol);
+    utils_1.default.info('this is the BASAL BOLUS  insulin impact for ' + deltaMinutes + ' minutes: %o', basalActivity * deltaMinutes * 18 * isfMMol);
+    utils_1.default.info('this is the MEAL BOLUS insulin impact for ' + deltaMinutes + ' minutes: %o', bolusActivity * deltaMinutes * 18 * isfMMol);
     return dict;
 };
 exports.default = sgv_start;

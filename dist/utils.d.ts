@@ -9,10 +9,6 @@ declare const logger: import("pino").Logger<{
     };
 }>;
 export default logger;
-export declare function InsulinActivity(peak: number, duration: number, hoursAgo: number, insulin: number): {
-    S: number;
-    tau: number;
-    activity: number;
-};
+export declare function getInsulinActivity(peakMin: number, durationMin: number, timeMin: number, insulin: number): number;
 export declare const getDeltaMinutes: (mills: number | string) => number;
 export declare function uploadBase(cgmsim: Sgv | Activity, api_url: string, apiSecret: string): any;

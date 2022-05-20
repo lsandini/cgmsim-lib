@@ -37,15 +37,13 @@ export declare type EnvParam = {
     TP: string;
     DIA: string;
     WEIGHT: string;
+    SEED?: string;
 };
 export declare type CGMSimParams = {
-    det: number;
-    gla: number;
-    degludec: number;
-    tou: number;
+    basalActivity: number;
     liver: number;
     carbs: number;
-    resultAct: any;
+    bolusActivity: number;
 };
 export declare type MainParams = {
     env: EnvParam;

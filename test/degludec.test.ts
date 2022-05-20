@@ -1,5 +1,19 @@
-import degludec from '../src/degludec';
+import { computeBasalActivity } from "../src/computeBasalIOB";
+
 describe('test degludec', () => {
+	const degludec = (treatments) => {
+		const toujeoT = treatments
+			.map(e => {
+				const duration = 42 * 60;
+				const peak = (duration / 3);
+				return {
+					...e,
+					duration,
+					peak,
+				}
+			});
+		return computeBasalActivity(toujeoT)
+	}
 	test('ins:30 minutesAgo:300', () => {
 		const insulinActive = degludec([{
 			insulin: 30,

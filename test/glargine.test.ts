@@ -1,5 +1,21 @@
-import glargine from '../src/glargine';
+import { computeBasalActivity } from "../src/computeBasalIOB";
+
 describe('test glargine', () => {
+
+	const glargine = (weight, treatments) => {
+		const toujeoT = treatments
+			.map(e => {
+				const duration = (22 + (12 * e.insulin / weight)) * 60;
+				const peak = (duration / 2.5);
+				return {
+					...e,
+					duration,
+					peak,
+				}
+			});
+		return computeBasalActivity(toujeoT)
+	}
+
 	test('weight:80 ins:30 minutesAgo:300', () => {
 		const weight = 80;
 		const insulinActive = glargine(weight, [{

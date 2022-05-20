@@ -48,8 +48,9 @@ export type EnvParam = {
 	TP: string;
 	DIA: string;
 	WEIGHT: string;
+	SEED?: string;
 };
-export type CGMSimParams = { det: number; gla: number; degludec: number; tou: number; liver: number; carbs: number; resultAct }
+export type CGMSimParams = { basalActivity: number; liver: number; carbs: number; bolusActivity: number }
 export type MainParams = {
 	env: EnvParam;
 	entries: Sgv[];

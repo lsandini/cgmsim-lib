@@ -6,7 +6,7 @@ import { CGMSimParams, Perlin, Sgv } from './Types';
 import { getDeltaMinutes } from './utils';
 
 //const logger = pino();
-const sgv_start = (entries: Sgv[], { det, gla, degludec, tou, liver, carbs, resultAct }: CGMSimParams, perls: Perlin[], isf: number) => {
+const sgv_start = (entries: Sgv[], { basalActivity, liver, carbs, bolusActivity }: CGMSimParams, perls: Perlin[], isf: number) => {
 
 	const oldSgv = entries && entries[0] ? entries[0].sgv : 90;
 	const deltaMinutes = getDeltaMinutes(entries[0].mills);
@@ -30,11 +30,7 @@ const sgv_start = (entries: Sgv[], { det, gla, degludec, tou, liver, carbs, resu
 	//     }, env);
 	// }
 
-	const globalBasalAct = gla + det + tou + degludec;
-
-	const globalMealtimeAct = resultAct;
-
-	const globalInsulinAct = globalBasalAct + globalMealtimeAct + pumpBasalAct;
+	const globalInsulinAct = basalActivity + bolusActivity + pumpBasalAct;
 
 	const BGI_ins = (globalInsulinAct * deltaMinutes * isfMMol) * -1;
 
@@ -82,8 +78,8 @@ const sgv_start = (entries: Sgv[], { det, gla, degludec, tou, liver, carbs, resu
 	logger.info('total BG impact of carbs, liver and insulin for 5 minutes: + %o', (BGI_ins) + (liver_bgi * 18) + (carbs * 18), 'mg/dl');
 
 	logger.info('this is the PUMP BASAL insulin impact for ' + deltaMinutes + ' minutes: %o', pumpBasalAct * deltaMinutes * 18 * isfMMol);
-	logger.info('this is the BASAL BOLUS  insulin impact for ' + deltaMinutes + ' minutes: %o', globalBasalAct * deltaMinutes * 18 * isfMMol);
-	logger.info('this is the MEAL BOLUS insulin impact for ' + deltaMinutes + ' minutes: %o', globalMealtimeAct * deltaMinutes * 18 * isfMMol);
+	logger.info('this is the BASAL BOLUS  insulin impact for ' + deltaMinutes + ' minutes: %o', basalActivity * deltaMinutes * 18 * isfMMol);
+	logger.info('this is the MEAL BOLUS insulin impact for ' + deltaMinutes + ' minutes: %o', bolusActivity * deltaMinutes * 18 * isfMMol);
 
 	return dict;
 };

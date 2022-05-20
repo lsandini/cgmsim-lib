@@ -1,5 +1,20 @@
-import toujeo from '../src/toujeo';
+import { computeBasalActivity } from "../src/computeBasalIOB";
+
 describe('test toujeo', () => {
+
+	const toujeo=(weight,treatments)=>{
+		const toujeoT=treatments
+		.map(e => {
+			const duration = (24 + (14 * e.insulin / weight)) * 60;
+			const peak = (duration / 2.5);
+			return {
+				...e,
+				duration,
+				peak,
+			}
+		});
+		return computeBasalActivity(toujeoT)
+	}
 	test('weight:80 ins:30 minutesAgo:300', () => {
 		const weight = 80;
 		const insulinActive = toujeo(weight, [{
