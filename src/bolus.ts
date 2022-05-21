@@ -26,9 +26,7 @@ export default (treatments: Treatment[], dia: number, peak: number): number => {
 	
 	logger.info('these are the last insulins and activities: %o', insulinsBolusAct);
 
-	const bolusAct = insulinsBolusAct.reduce(function (tot, activity) {
-		return tot + activity;
-	}, 0);
+	const bolusAct = insulinsBolusAct.reduce((tot, activity) =>tot + activity, 0);
 
 	return bolusAct;
 

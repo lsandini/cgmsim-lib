@@ -6,7 +6,7 @@ import { CGMSimParams, Perlin, Sgv } from './Types';
 import { getDeltaMinutes } from './utils';
 
 //const logger = pino();
-const sgv_start = (entries: Sgv[], { basalActivity, liver, carbs, bolusActivity }: CGMSimParams, perls: Perlin[], isf: number) => {
+const sgv_start = (entries: Sgv[], { basalActivity, liver, carbsActivity, bolusActivity }: CGMSimParams, perls: Perlin[], isf: number) => {
 
 	const oldSgv = entries && entries[0] ? entries[0].sgv : 90;
 	const deltaMinutes = getDeltaMinutes(entries[0].mills);
@@ -45,7 +45,7 @@ const sgv_start = (entries: Sgv[], { basalActivity, liver, carbs, bolusActivity 
 
 	const noise = lastPerls && lastPerls.length > 0 ? (lastPerls[0].noise * 6) : 0;
 
-	const sgv_pump = Math.floor(oldSgv + (BGI_ins * 18) + (liver_bgi * 18) + (carbs * 18) + (noise * 18));
+	const sgv_pump = Math.floor(oldSgv + (BGI_ins * 18) + (liver_bgi * 18) + (carbsActivity * 18) + (noise * 18));
 	let limited_sgv_pump = sgv_pump;
 	if (sgv_pump >= 400) {
 		limited_sgv_pump = 400;
@@ -69,13 +69,13 @@ const sgv_start = (entries: Sgv[], { basalActivity, liver, carbs, bolusActivity 
 	logger.info('total BG impact of liver for ' + deltaMinutes + ' minutes: + %o', liver_bgi * 18, 'mg/dl');
 
 	logger.info('-------------------------------------------');
-	logger.info('total CARBS impact of carbs for ' + deltaMinutes + ' minutes: + %o', carbs * 18, 'mg/dl');
+	logger.info('total CARBS impact of carbs for ' + deltaMinutes + ' minutes: + %o', carbsActivity * 18, 'mg/dl');
 
 	logger.info('-------------------------------------------');
 	logger.info('total NOISE impact: + %o', noise * 18, 'mg/dl');
 
 	logger.info('-------------------------------------------');
-	logger.info('total BG impact of carbs, liver and insulin for 5 minutes: + %o', (BGI_ins) + (liver_bgi * 18) + (carbs * 18), 'mg/dl');
+	logger.info('total BG impact of carbs, liver and insulin for 5 minutes: + %o', (BGI_ins) + (liver_bgi * 18) + (carbsActivity * 18), 'mg/dl');
 
 	logger.info('this is the PUMP BASAL insulin impact for ' + deltaMinutes + ' minutes: %o', pumpBasalAct * deltaMinutes * 18 * isfMMol);
 	logger.info('this is the BASAL BOLUS  insulin impact for ' + deltaMinutes + ' minutes: %o', basalActivity * deltaMinutes * 18 * isfMMol);

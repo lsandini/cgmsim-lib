@@ -1,4 +1,4 @@
-import sgv_start from '../src/sgv_start';
+import sgv_start from '../src/sgv';
 describe('Liver test', () => {
 
 	test('nothing', () => {
@@ -6,7 +6,7 @@ describe('Liver test', () => {
 		const sgv=90;
 		const millsNow = new Date().getTime() - (1000 * 60 * minutes);
 		const r = sgv_start([{ sgv, mills: millsNow }], {
-			carbs: 0,
+			carbsActivity: 0,
 			basalActivity:0,
 			liver: 0,
 			bolusActivity: 0,			
@@ -19,7 +19,7 @@ describe('Liver test', () => {
 		const sgv=90;
 		const millsNow = new Date().getTime() - (1000 * 60 * minutes);
 		const r = sgv_start([{ sgv, mills: millsNow }], {
-			carbs:0,
+			carbsActivity:0,
 			basalActivity:0,
 			liver: 0.02,
 			bolusActivity: 0,
@@ -33,7 +33,7 @@ describe('Liver test', () => {
 		const sgv=90;
 		const millsNow = new Date().getTime() - (1000 * 60 * minutes);
 		const r = sgv_start([{ sgv, mills: millsNow }], {
-			carbs: 0,
+			carbsActivity: 0,
 			basalActivity:0.02,
 			liver: 0,
 			bolusActivity: 0,			

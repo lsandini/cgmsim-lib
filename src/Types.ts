@@ -28,8 +28,8 @@ export type Profile = {
 }
 
 export type Treatment = {
-	insulin: number;
-	notes: string;
+	insulin?: number;
+	notes?: string;
 	created_at: string;
 	carbs: number;
 
@@ -50,7 +50,7 @@ export type EnvParam = {
 	WEIGHT: string;
 	SEED?: string;
 };
-export type CGMSimParams = { basalActivity: number; liver: number; carbs: number; bolusActivity: number }
+export type CGMSimParams = { basalActivity: number; liver: number; carbsActivity: number; bolusActivity: number }
 export type MainParams = {
 	env: EnvParam;
 	entries: Sgv[];

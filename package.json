@@ -28,14 +28,14 @@
 	"homepage": "https://github.com/lsandini/cgmsim-lib#readme",
 	"devDependencies": {
 		"@types/jest": "^26.0.24",
+		"@types/node": "~14.14.31",
+		"@typescript-eslint/eslint-plugin": "^5.25.0",
+		"@typescript-eslint/parser": "^5.25.0",
 		"eslint": "^8.14.0",
 		"jest": "^26.5.5",
 		"ts-jest": "^26.5.6"
 	},
 	"dependencies": {
-		"@types/node": "~14.14.31",
-		"@typescript-eslint/eslint-plugin": "~4.16.1",
-		"@typescript-eslint/parser": "~4.16.1",
 		"crypto": "^1.0.1",
 		"https": "^1.0.0",
 		"moment": "^2.29.3",

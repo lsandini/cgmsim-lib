@@ -1,5 +1,5 @@
 import { treatments } from "./inputTest";
-import computeBasalIOB from "../src/computeBasalIOB";
+import computeBasalIOB from "../src/basal";
 import { Treatment } from "../src/Types";
 
 describe('test computeBasalIOB', () => {

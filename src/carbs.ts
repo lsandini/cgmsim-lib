@@ -1,9 +1,19 @@
-import { TreatmentDelta } from './Types';
-import logger from './utils';
+import { Treatment } from './Types';
+import logger, { getDeltaMinutes } from './utils';
 
 //const logger = pino();
 
-export default function carbs(carbsAbs: number, meals: Pick<TreatmentDelta, 'carbs' | 'minutesAgo'>[]): number {
+export default function carbs(treatments: Treatment[] = [], carbsAbs: number): number {
+
+	const meals = treatments
+		.filter(e => e.carbs && getDeltaMinutes(e.created_at) <= 360)
+		.map(e => ({
+			...e,
+			minutesAgo: getDeltaMinutes(e.created_at),
+		}));
+
+	logger.info('Last 6 hours meal: %o', meals);
+
 	const carbs = meals || [];
 	const carbAbsTime = carbsAbs; // meal absorption time in min default 360 or 6 hours
 	const fast_carbAbsTime = carbAbsTime / 6; // = 1 h or 60 min
@@ -77,7 +87,7 @@ export default function carbs(carbsAbs: number, meals: Pick<TreatmentDelta, 'car
 		return tot + arr.all_carbrate;
 	}, 0);
 
-	console.log(`TOTAL CARB RATE  ${totalCarbRate}`);
+	logger.info(`TOTAL CARB RATE:%o`,totalCarbRate);
 
 	return totalCarbRate;
 };

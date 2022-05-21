@@ -2,12 +2,27 @@ import { TreatmentDelta, Treatment } from './Types'
 import logger, { getDeltaMinutes, getInsulinActivity } from './utils';
 
 
+export const peakBasal = {
+	GLA: (duration: number) => duration / 2.5,
+	DET: (duration: number) => duration / 3,
+	TOU: (duration: number) => duration / 2.5,
+	DEG: (duration: number) => duration / 3,
+}
+export const durationBasal = {
+	GLA: (insulin: number, weight: number) => (22 + (12 * insulin / weight)) * 60,
+	DET: (insulin: number, weight: number) => (14 + (24 * insulin / weight)) * 60,
+	TOU: (insulin: number, weight: number) => (24 + (14 * insulin / weight)) * 60,
+	DEG: () => 42 * 60,
+}
+
 export const computeBasalActivity = (treatments: (TreatmentDelta & { duration: number, peak: number })[]) => {
 	// activities be expressed as U/min !!!
 	const treatmentsActivity = treatments.map(e => {
 		const minutesAgo = e.minutesAgo;
 		const insulin = e.insulin;
-		return getInsulinActivity(e.peak, e.duration, minutesAgo, insulin);		
+		const activity = getInsulinActivity(e.peak, e.duration, minutesAgo, insulin);
+		return activity > 0 ? activity : 0;
+
 	});
 	logger.info('these are the last Slow INSULINS: %o', treatmentsActivity);
 	const resultAct = treatmentsActivity.reduce((tot, activity) => {
@@ -39,8 +54,8 @@ export default function (treatments: Treatment[], weight: number): number {
 		.filter((e) => {
 			return e.drug === 'gla' || e.drug === 'Gla' || e.drug === 'lan' || e.drug === 'Lan'; // keep only the glas from the last 45 hours
 		}).map(e => {
-			const duration = (22 + (12 * e.insulin / weight)) * 60;
-			const peak = (duration / 2.5);
+			const duration = durationBasal.GLA(e.insulin, weight);
+			const peak = peakBasal.GLA(duration);
 			return {
 				...e,
 				duration,
@@ -54,8 +69,8 @@ export default function (treatments: Treatment[], weight: number): number {
 	const lastDET = lastBasals.filter(function (e) {
 		return e.drug === 'det' || e.drug === 'Det' || e.drug === 'lev' || e.drug === 'Lev'; // keep only the dets from the last 45 hours
 	}).map(e => {
-		const duration = (14 + (24 * e.insulin / weight)) * 60;
-		const peak = (duration / 3);
+		const duration = durationBasal.DET(e.insulin, weight);
+		const peak = peakBasal.DET(duration);
 		return {
 			...e,
 			duration,
@@ -69,15 +84,15 @@ export default function (treatments: Treatment[], weight: number): number {
 	const lastTOU = lastBasals.filter(function (e) {
 		return e.drug === 'tou' || e.drug === 'Tou'; // keep only the tous from the last 45 hours
 	})
-	.map(e => {
-		const duration = (24 + (14 * e.insulin / weight)) * 60;
-		const peak = (duration / 2.5);
-		return {
-			...e,
-			duration,
-			peak,
-		}
-	});
+		.map(e => {
+			const duration = durationBasal.TOU(e.insulin, weight);
+			const peak = peakBasal.TOU(duration);
+			return {
+				...e,
+				duration,
+				peak,
+			}
+		});
 	logger.debug('these are the last TOU: %o', lastTOU);
 	const activityTOU = computeBasalActivity(lastTOU)
 	logger.info('these is the total TOU activity: %o', activityTOU);
@@ -85,8 +100,8 @@ export default function (treatments: Treatment[], weight: number): number {
 	const lastDEG = lastBasals.filter(function (e) {
 		return e.drug === 'deg' || e.drug === 'Deg' || e.drug === 'tre' || e.drug === 'Tre'; // keep only the degs from the last 45 hours
 	}).map(e => {
-		const duration = 42 * 60;
-		const peak = (duration / 3);
+		const duration = durationBasal.DEG();
+		const peak = peakBasal.DEG(duration);
 		return {
 			...e,
 			duration,
@@ -97,11 +112,5 @@ export default function (treatments: Treatment[], weight: number): number {
 	const activityDEG = computeBasalActivity(lastDEG);
 	logger.info('these is the total deg activity: %o', activityDEG);
 
-	const result = {
-		lastDET,
-		lastGLA,
-		lastTOU,
-		lastDEG,		
-	};
 	return activityDEG + activityDET + activityGLA + activityTOU;
 }

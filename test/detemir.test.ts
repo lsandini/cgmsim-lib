@@ -1,11 +1,11 @@
-import { computeBasalActivity } from '../src/computeBasalIOB';
+import { computeBasalActivity, durationBasal, peakBasal } from '../src/basal';
 describe('test detemir', () => {
 
 	const detemir = (weight, treatments) => {
 		const toujeoT = treatments
 			.map(e => {
-				const duration = (14 + (24 * e.insulin / weight)) * 60;
-				const peak = (duration / 3);
+				const duration = durationBasal.DET(e.insulin,weight);
+				const peak = peakBasal.DET(duration);
 				return {
 					...e,
 					duration,
@@ -23,6 +23,25 @@ describe('test detemir', () => {
 		}])
 		expect(insulinActive).toMatchSnapshot();
 	})
+
+	test('weight:80 ins:30 all', () => {
+		const weight = 80;
+		let insulinActive = 0;
+		let insulinArr = [];
+
+		for (let i = 0; i < 2000; i++) {
+			const _insulinActive = detemir(weight, [{
+				insulin: 30,
+				minutesAgo: i,
+			}])
+			insulinActive += _insulinActive > 0 ? _insulinActive : 0;
+			insulinArr.push(_insulinActive > 0 ? _insulinActive : 0)
+
+		}
+		expect(insulinActive).toMatchSnapshot();
+		expect(insulinArr).toMatchSnapshot();
+	})
+
 
 	test('insulin 5 min ago are less active then 40 min ago', () => {
 		const insulin = 20;
