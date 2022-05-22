@@ -2,25 +2,20 @@ import logger, { getDeltaMinutes } from './utils';
 
 //const logger = pino();
 
-import perlinRun from './perlin';
-import bolus from './bolus';
+// import perlinRun from './perlin';
+// import bolus from './bolus';
 import basal from './basal';
 
-import carbs from './carbs';
-import arrowsRun from './arrows';
-import liverRun from './liver';
-import sgvStartRun from './sgv';
-import { MainParams, MainParamsUVA, Treatment, TreatmentDelta } from './Types';
-import { PatientUvaPadova } from './uvaPadova';
+// import carbs from './carbs';
+// import arrowsRun from './arrows';
+// import liverRun from './liver';
+// import sgvStartRun from './sgv';
+import { InputPatientUvaState, MainParams, MainParamsUVA, Treatment, TreatmentDelta } from './Types';
+import {  PatientUva } from './uva';
 import RK4 from './SolverRK';
 
 logger.info('Run Init');
 
-
-
-const getLast5MinuteTreatments = (treatments: TreatmentDelta[]) => {
-	return treatments
-}
 const simulator = ({
 	env,
 	treatments,
@@ -53,7 +48,7 @@ const simulator = ({
 
 
 
-	const patient = new PatientUvaPadova({})
+	const patient = new PatientUva({})
 	let t = 0
 	const tmax = 5
 
@@ -80,7 +75,7 @@ const simulator = ({
 		if (ibolus < 0) ibolus = 0
 		const carbs = carbsActivity / 5;
 
-		const u = { iir, ibolus, carbs, meal: NaN }
+		const u: InputPatientUvaState = { iir, ibolus, carbs, meal: NaN }
 
 		// this.simulationResults.push({ t, x, u, y, logData })
 

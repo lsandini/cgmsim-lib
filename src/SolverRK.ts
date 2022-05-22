@@ -3,6 +3,8 @@
    Distributed under the MIT software license.
    See https://lt1.org for further information.	*/
 
+import { PatientUvaState } from "./Types";
+
 
 // classical fixed-step Runge-Kutta solver
 //   derivatives(t,x): function that returns dx/dt
@@ -16,7 +18,7 @@
  * @param {number} dt 
  * @returns 
  */
-export function RK4(derivatives: Function, t: number, x: {}, dt: number) {
+export function RK4(derivatives: Function, t: number, x: PatientUvaState, dt: number) {
 	var k1 = timesScalar(derivatives(t, x), dt);
 	var k2 = timesScalar(derivatives(t + dt / 2, vectorSum(x, timesScalar(k1, 1 / 2))), dt);
 	var k3 = timesScalar(derivatives(t + dt / 2, vectorSum(x, timesScalar(k2, 1 / 2))), dt);

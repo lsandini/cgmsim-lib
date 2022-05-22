@@ -3,6 +3,8 @@
    Distributed under the MIT software license.
    See https://lt1.org for further information.	*/
 
+import { PatientUvaState, UvaParametersType } from "./Types";
+
 /*
 The model implemented in this file uses information from the following scientific sources:
 
@@ -31,50 +33,16 @@ The model implemented in this file uses information from the following scientifi
 
 const pmol_per_U = 6000;
 
-type UvaParametersType = {
-	BW: number;
-	Gpeq: number;
-	VG: number; // [Dalla Man, IEEE TBME, 2007]
-	k1: number; // [Dalla Man, IEEE TBME, 2007]
-	k2: number; // [Dalla Man, IEEE TBME, 2007]
-	VI: number; // [Dalla Man, IEEE TBME, 2007]
-	m1: number; // [Dalla Man, IEEE TBME, 2007]
-	m2: number; // [Dalla Man, IEEE TBME, 2007]
-	m4: number; // [Dalla Man, IEEE TBME, 2007]
-	m5: number; // [Dalla Man, IEEE TBME, 2007]
-	m6: number; // [Dalla Man, IEEE TBME, 2007]
-	HEeq: number; // [Dalla Man, IEEE TBME, 2007]
-	kmax: number; // [Dalla Man, IEEE TBME, 2007]
-	kmin: number; // [Dalla Man, IEEE TBME, 2007]
-	kabs: number; // [Dalla Man, IEEE TBME, 2007]
-	kgri: number; // [Dalla Man, IEEE TBME, 2007]
-	f: number; // [Dalla Man, IEEE TBME, 2007]
-	kp1: number; // [Dalla Man, IEEE TBME, 2007]
-	kp2: number; // [Dalla Man, IEEE TBME, 2007]
-	kp3: number; // [Dalla Man, IEEE TBME, 2007]
-	kp4: number; // [Dalla Man, IEEE TBME, 2007]
-	ki: number; // [Dalla Man, IEEE TBME, 2007]
-	Fcns: number; // [Dalla Man, IEEE TBME, 2007]
-	Vm0: number; // [Dalla Man, IEEE TBME, 2007]
-	Vmx: number; // [Dalla Man, IEEE TBME, 2007]
-	Km0: number; // [Dalla Man, IEEE TBME, 2007]
-	p2u: number; // [Dalla Man, IEEE TBME, 2007]
-	ke1: number; // [Dalla Man, IEEE TBME, 2007]
-	ke2: number; // [Dalla Man, IEEE TBME, 2007]
-	ka1: number; // [Dalla Man, JDST, 2007]
-	ka2: number; // [Dalla Man, JDST, 2007]
-	kd: number;
-};
 
 // physiological model of virtual patient
-export class PatientUvaPadova {
+export class PatientUva {
 	readonly inputList: ["meal", "iir", "ibolus"];
 	readonly outputList: ["G"];
 	readonly signalList: ["RaI", "E", "EGP", "Uid", "Uii", "I", "Qsto", "Ra", "S", "HE", "m3"];
 	defaultParameters: UvaParametersType;
 	parameters: UvaParametersType;
 	parameterList: string[];
-	xeq: {};
+	xeq: PatientUvaState;
 	stateList: string[];
 	IIReq: number;
 
