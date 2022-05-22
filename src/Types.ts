@@ -51,6 +51,13 @@ export type EnvParam = {
 	SEED?: string;
 };
 export type CGMSimParams = { basalActivity: number; liver: number; carbsActivity: number; bolusActivity: number }
+export type MainParamsUVA = {
+	env: {
+		WEIGHT: string,
+	};
+	treatments: Treatment[],
+	lastState: any,
+}
 export type MainParams = {
 	env: EnvParam;
 	entries: Sgv[];
