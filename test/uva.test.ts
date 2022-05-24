@@ -10,7 +10,7 @@ afterAll(() => {
 	jest.useRealTimers();
 });
 
-describe('uva test', () => {
+describe('uva test default PATIENT', () => {
 	test('basal  0.75 from TREATMENTS should generate flat sgv', () => {
 		//current treatments generate 0.75U/h
 		const treatments = [{
@@ -130,4 +130,59 @@ describe('uva test', () => {
 		expect(lastState).toMatchSnapshot()
 		expect(yList).toMatchSnapshot()
 	})
+
+	test('basal 0.75 from PROFILE + 50g CARBS + 5U should generate a curve', () => {
+
+		let lastState = null;
+		const yList = [];
+		const profile: Profile[] = [{
+			defaultProfile: 'pippo',
+			startDate: '2022-01-01',
+			store: {
+				'pippo': {
+					basal: 0.75
+				}
+			}
+		}]
+		const treatments: Treatment[] = [{
+			carbs: 50,
+			created_at: '2022-05-01T11:30:00',
+		},{
+			carbs: 0,
+			insulin: 7.5,
+			created_at: '2022-05-01T11:15:00',
+		}]
+
+		const now = moment('2022-05-01T11:00:00')
+		let yMax = 0;
+		for (let i = 0; i < 36; i++) {
+			const { x, y } = simulatorUVA({ env: { WEIGHT: '80' }, lastState, treatments, profile });
+			yList.push(y.Gp);
+			lastState = x;
+			yMax = y.Gp > yMax ? y.Gp : yMax;
+			jest.setSystemTime(new Date(now.add(5, 'minutes').toISOString()));
+		}
+
+
+		const yAfter1h = yList[11];
+		const yAfter2h = yList[23];
+		const yAfter3h = yList[35];
+
+		expect(yAfter1h).toBeLessThan(119)
+		expect(yAfter1h).toBeGreaterThan(118)
+
+		expect(yAfter2h).toBeLessThan(164)
+		expect(yAfter2h).toBeGreaterThan(163)
+
+		expect(yAfter3h).toBeLessThan(124)
+		expect(yAfter3h).toBeGreaterThan(123)
+		
+		expect(yMax).toBeLessThan(165.6)
+		expect(yMax).toBeGreaterThan(165.5)
+		
+		
+		expect(lastState).toMatchSnapshot()
+		expect(yList).toMatchSnapshot()
+	})
+
 })
