@@ -10,7 +10,7 @@ afterAll(() => {
 });
 
 describe('uva test', () => {
-	test('default params basal  0.75 from treatments should generate flat sgv', () => {
+	test('basal  0.75 from TREATMENTS should generate flat sgv', () => {
 		//current treatments generate 0.75U/h
 		const treatments = [{
 			"_id": "627548f4a3dc0ad67616ac95",
@@ -41,7 +41,7 @@ describe('uva test', () => {
 
 	})
 
-	test('default params basal  0.75 from profile should generate flat sgv', () => {
+	test('basal 0.75 from PROFILE should generate flat sgv', () => {
 
 		let lastState = null;
 		const yList = [];
@@ -70,6 +70,5 @@ describe('uva test', () => {
 
 		expect(lastState).toMatchSnapshot()
 		expect(yList).toMatchSnapshot()
-
 	})
 })
