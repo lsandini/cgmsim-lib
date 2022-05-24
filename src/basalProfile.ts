@@ -11,5 +11,5 @@ export default function (profile: Profile[]): number {
 	lastProfile = lastProfiles[0];
 	const defaultProfile = lastProfile.defaultProfile;
 	const defaultProfileBasals = lastProfile.store[defaultProfile].basal;
-	return defaultProfileBasals;
+	return defaultProfileBasals/60;
 }

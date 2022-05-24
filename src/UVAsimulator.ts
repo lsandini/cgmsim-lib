@@ -45,7 +45,7 @@ const simulator = ({
 
 	const carbsActivity = last5MinuteTreatments
 		.filter(i => i.carbs > 0)
-		.map(i => i.insulin)
+		.map(i => i.carbs)
 		.reduce((tot, activity) => tot + activity, 0);
 
 	const basalProfileActivity = basalProfile(profile)
@@ -59,7 +59,7 @@ const simulator = ({
 	const dt = 1
 	//get last state from mongo
 	let x = lastState ? lastState : patient.getInitialState()
-	let u = { meal: 0, iir: patient.IIReq, ibolus: 0 }
+	let u = { meal: 0, iir: 0, ibolus: 0 }
 	let y = patient.getOutputs(t, x, u)
 
 	// start simulation
@@ -74,7 +74,7 @@ const simulator = ({
 
 		// compute controller output
 		// let iir = basalActivity * 60;
-		let iir = basalProfileActivity + (basalActivity * 60);
+		let iir = (basalProfileActivity * 60) + (basalActivity * 60);
 		let ibolus = t == 0 ? bolusActivity : 0;
 		if (iir < 0) iir = 0
 		if (ibolus < 0) ibolus = 0
