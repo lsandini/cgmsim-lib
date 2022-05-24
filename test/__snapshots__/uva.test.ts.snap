@@ -1,6 +1,40 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`uva test default params basal  0.75 flat sgv 1`] = `
+exports[`uva test default params basal  0.75 from profile should generate flat sgv 1`] = `
+Object {
+  "Gp": 180.18363494598478,
+  "Gt": 136.41895969565084,
+  "I_": 42.012767601337806,
+  "Il": 2.0115782913031555,
+  "Ip": 2.0637361736974804,
+  "Isc1": 55.40656598465634,
+  "Isc2": 50.38092258329112,
+  "Qgut": 0,
+  "Qsto1": 0,
+  "Qsto2": 0,
+  "X": -0.765654286252642,
+  "XL": 42.26361895342857,
+}
+`;
+
+exports[`uva test default params basal  0.75 from profile should generate flat sgv 2`] = `
+Array [
+  95.74472129067215,
+  95.74529184782519,
+  95.74717328644708,
+  95.75084176117798,
+  95.75645105962799,
+  95.7639698153458,
+  95.77328581449758,
+  95.78426340822702,
+  95.7967702748301,
+  95.81068773916853,
+  95.82591317969442,
+  95.84235901382169,
+]
+`;
+
+exports[`uva test default params basal  0.75 from treatments should generate flat sgv 1`] = `
 Object {
   "Gp": 180.1823566567818,
   "Gt": 136.41698819141996,
@@ -17,43 +51,19 @@ Object {
 }
 `;
 
-exports[`uva test default params basal  0.75 flat sgv 2`] = `
+exports[`uva test default params basal  0.75 from treatments should generate flat sgv 2`] = `
 Array [
-  Object {
-    "Gp": 95.74472126885715,
-  },
-  Object {
-    "Gp": 95.74529134504562,
-  },
-  Object {
-    "Gp": 95.74717034686843,
-  },
-  Object {
-    "Gp": 95.75083185574134,
-  },
-  Object {
-    "Gp": 95.75642628645181,
-  },
-  Object {
-    "Gp": 95.76391840719613,
-  },
-  Object {
-    "Gp": 95.77319191553477,
-  },
-  Object {
-    "Gp": 95.78410706619388,
-  },
-  Object {
-    "Gp": 95.79652759606937,
-  },
-  Object {
-    "Gp": 95.8103311606094,
-  },
-  Object {
-    "Gp": 95.82541181990157,
-  },
-  Object {
-    "Gp": 95.84167907275628,
-  },
+  95.74472126885715,
+  95.74529134504562,
+  95.74717034686843,
+  95.75083185574134,
+  95.75642628645181,
+  95.76391840719613,
+  95.77319191553477,
+  95.78410706619388,
+  95.79652759606937,
+  95.8103311606094,
+  95.82541181990157,
+  95.84167907275628,
 ]
 `;

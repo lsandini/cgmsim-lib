@@ -5,13 +5,14 @@ import logger, { getDeltaMinutes } from './utils';
 // import perlinRun from './perlin';
 // import bolus from './bolus';
 import basal from './basal';
+import basalProfile from './basalProfile';
 
 // import carbs from './carbs';
 // import arrowsRun from './arrows';
 // import liverRun from './liver';
 // import sgvStartRun from './sgv';
 import { InputPatientUvaState, MainParams, MainParamsUVA, Treatment, TreatmentDelta } from './Types';
-import {  PatientUva } from './uva';
+import { PatientUva } from './uva';
 import RK4 from './SolverRK';
 
 logger.info('Run Init');
@@ -19,6 +20,7 @@ logger.info('Run Init');
 const simulator = ({
 	env,
 	treatments,
+	profile,
 	lastState,
 }: MainParamsUVA) => {
 
@@ -46,6 +48,8 @@ const simulator = ({
 		.map(i => i.insulin)
 		.reduce((tot, activity) => tot + activity, 0);
 
+	const basalProfileActivity = basalProfile(profile)
+
 
 
 	const patient = new PatientUva({})
@@ -69,7 +73,8 @@ const simulator = ({
 		}
 
 		// compute controller output
-		let iir = basalActivity * 60;
+		// let iir = basalActivity * 60;
+		let iir = basalProfileActivity + (basalActivity * 60);
 		let ibolus = t == 0 ? bolusActivity : 0;
 		if (iir < 0) iir = 0
 		if (ibolus < 0) ibolus = 0

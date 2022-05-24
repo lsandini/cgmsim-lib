@@ -23,10 +23,6 @@ export type Sgv = {
 	sgv: number;
 };
 
-export type Profile = {
-
-}
-
 export type Treatment = {
 	insulin?: number;
 	notes?: string;
@@ -56,6 +52,7 @@ export type MainParamsUVA = {
 		WEIGHT: string,
 	};
 	treatments: Treatment[],
+	profile: Profile[],
 	lastState: PatientUvaState,
 }
 export type MainParams = {
@@ -124,3 +121,17 @@ export type UvaParametersType = {
 	ka2: number; // [Dalla Man, JDST, 2007]
 	kd: number;
 };
+
+
+
+export type ProfileParams = {
+	basal: number;
+}
+
+export type Profile = {
+	startDate: string;
+	defaultProfile: string,
+	store: {
+		[profileName: string]: ProfileParams
+	}
+}
