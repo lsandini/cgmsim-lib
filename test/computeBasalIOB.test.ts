@@ -12,10 +12,8 @@ describe('test computeBasalIOB', () => {
 
 	const date = new Date('2022-05-07T11:20:00Z');
 
-	beforeAll(() => {
-		jest.useFakeTimers('modern');
-	});
 	beforeEach(() => {
+		jest.useFakeTimers('modern');
 		jest.setSystemTime(date);
 	})
 
@@ -33,7 +31,16 @@ describe('test computeBasalIOB', () => {
 })
 
 describe('test computeBasalIOB comparing old cgmsim', () => {
+	const date = new Date('2022-05-07T11:20:00Z');
 
+	beforeEach(() => {
+		jest.useFakeTimers('modern');
+		jest.setSystemTime(date);
+	})
+
+	afterAll(() => {
+		jest.useRealTimers();
+	});
 	test('compare old toujeo', () => {
 		let _date = moment('2022-05-06T15:00:00.000Z');
 		for (let i = 0; i < 240; i++) {
