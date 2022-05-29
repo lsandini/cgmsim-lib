@@ -1,2 +1,2 @@
 import { Perlin } from "./Types";
-export default function (): Perlin[];
+export default function (seed: any): Perlin[];

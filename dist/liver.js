@@ -21,11 +21,11 @@ function default_1(isf, cr) {
     // 0.2 mmol/l/h *10g /12 periods => bgi every 5 minutes or 0,166666 mmol/l/5min
     // by multiplying the liver_bgi by the sin function, the liver loog glucose production varies in a sinusoidal
     // form, being maximal at 6 AM and minimal ad 6 PM
-    const liver = (_ISF / _CR) * (10 / 60);
+    const liver = (_ISF / _CR) * (10 / 60); //(mmol/l)/min
     const liver_sin = liver * sinus;
     utils_1.default.info('liver:  %o', liver);
     utils_1.default.info('liver_sin:  %o', liver_sin);
-    return liver_sin;
+    return liver_sin; //(mmol/l)/min
 }
 exports.default = default_1;
 //# sourceMappingURL=liver.js.map

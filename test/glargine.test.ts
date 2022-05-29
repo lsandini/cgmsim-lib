@@ -1,5 +1,21 @@
-import glargine from '../src/glargine';
+import { computeBasalActivity, durationBasal, peakBasal } from "../src/basal";
+
 describe('test glargine', () => {
+
+	const glargine = (weight, treatments) => {
+		const toujeoT = treatments
+			.map(e => {
+				const duration = durationBasal.GLA(e.insulin,weight);
+				const peak = peakBasal.GLA(duration);
+				return {
+					...e,
+					duration,
+					peak,
+				}
+			});
+		return computeBasalActivity(toujeoT)
+	}
+
 	test('weight:80 ins:30 minutesAgo:300', () => {
 		const weight = 80;
 		const insulinActive = glargine(weight, [{
@@ -7,6 +23,23 @@ describe('test glargine', () => {
 			minutesAgo: 300
 		}])
 		expect(insulinActive).toMatchSnapshot();
+	})
+	test('weight:80 ins:30 all', () => {
+		const weight = 80;
+		let insulinActive = 0;
+		let insulinArr = [];
+
+		for (let i = 0; i < 2000; i++) {
+			const _insulinActive = glargine(weight, [{
+				insulin: 30,
+				minutesAgo: i,
+			}])
+			insulinActive += _insulinActive > 0 ? _insulinActive : 0;
+			insulinArr.push(_insulinActive > 0 ? _insulinActive : 0)
+
+		}
+		expect(insulinActive).toMatchSnapshot();
+		expect(insulinArr).toMatchSnapshot();
 	})
 
 	test('insulin 5 min ago are less active then 40 min ago', () => {

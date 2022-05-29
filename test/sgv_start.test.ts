@@ -1,4 +1,4 @@
-import sgv_start from '../src/sgv_start';
+import sgv_start from '../src/sgv';
 describe('Liver test', () => {
 
 	test('nothing', () => {
@@ -6,13 +6,10 @@ describe('Liver test', () => {
 		const sgv=90;
 		const millsNow = new Date().getTime() - (1000 * 60 * minutes);
 		const r = sgv_start([{ sgv, mills: millsNow }], {
-			carbs: 0,
-			degludec: 0,
-			det: 0,
-			gla: 0,
+			carbsActivity: 0,
+			basalActivity:0,
 			liver: 0,
-			resultAct: 0,
-			tou: 0
+			bolusActivity: 0,			
 		}, [], 30);
 		expect(r.sgv).toBe(90)
 	})
@@ -22,13 +19,11 @@ describe('Liver test', () => {
 		const sgv=90;
 		const millsNow = new Date().getTime() - (1000 * 60 * minutes);
 		const r = sgv_start([{ sgv, mills: millsNow }], {
-			carbs: 0,
-			degludec: 0,
-			det: 0,
-			gla: 0,
+			carbsActivity:0,
+			basalActivity:0,
 			liver: 0.02,
-			resultAct: 0,
-			tou: 0
+			bolusActivity: 0,
+			
 		}, [], 30);
 		expect(r.sgv).toBeGreaterThan(sgv)
 	})
@@ -38,13 +33,10 @@ describe('Liver test', () => {
 		const sgv=90;
 		const millsNow = new Date().getTime() - (1000 * 60 * minutes);
 		const r = sgv_start([{ sgv, mills: millsNow }], {
-			carbs: 0,
-			degludec: 0,
-			det: 0,
-			gla: 0.02,
+			carbsActivity: 0,
+			basalActivity:0.02,
 			liver: 0,
-			resultAct: 0,
-			tou: 0
+			bolusActivity: 0,			
 		}, [], 30);
 		expect(r.sgv).toBeLessThan(sgv)
 	})

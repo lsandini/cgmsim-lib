@@ -1,5 +1,20 @@
-import toujeo from '../src/toujeo';
+import { computeBasalActivity, durationBasal, peakBasal } from "../src/basal";
+
 describe('test toujeo', () => {
+
+	const toujeo=(weight,treatments)=>{
+		const toujeoT=treatments
+		.map(e => {
+			const duration = durationBasal.TOU(e.insulin,weight);
+			const peak = peakBasal.TOU(duration);
+		return {
+				...e,
+				duration,
+				peak,
+			}
+		});
+		return computeBasalActivity(toujeoT)
+	}
 	test('weight:80 ins:30 minutesAgo:300', () => {
 		const weight = 80;
 		const insulinActive = toujeo(weight, [{
@@ -8,6 +23,25 @@ describe('test toujeo', () => {
 		}])
 		expect(insulinActive).toMatchSnapshot();
 	})
+
+	test('weight:80 ins:30 all', () => {
+		const weight = 80;
+		let insulinActive = 0;
+		let insulinArr = [];
+
+		for (let i = 0; i < 2000; i++) {
+			const _insulinActive = toujeo(weight, [{
+				insulin: 30,
+				minutesAgo: i,
+			}])
+			insulinActive += _insulinActive > 0 ? _insulinActive : 0;
+			insulinArr.push(_insulinActive > 0 ? _insulinActive : 0)
+
+		}
+		expect(insulinActive).toMatchSnapshot();
+		expect(insulinArr).toMatchSnapshot();
+	})
+
 
 	test('insulin 5 min ago are less active then 40 min ago', () => {
 		const insulin = 20;
@@ -44,4 +78,5 @@ describe('test toujeo', () => {
 		expect(rBeforePeak).toBeLessThan(rPeak);
 		expect(rAfterPeak).toBeLessThan(rPeak);
 	});
+
 })

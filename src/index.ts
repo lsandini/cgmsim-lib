@@ -1,7 +1,7 @@
-import main from './main';
+import simulator from './CGMSIMsimulator';
 import downloads from './downloads';
-import upload from './upload-cgmsim';
+import uploadEntries from './upload-entries';
 import uploadActivity from './upload-activity';
 
 
-export {main,downloads,upload, uploadActivity};
+export { simulator, downloads, uploadEntries, uploadActivity };

@@ -1,13 +1,14 @@
 import { Perlin } from "./Types";
 
 const perlinNoise = require('perlin-noise');
-export default function (): Perlin[] {
+export default function (seed): Perlin[] {
 	const todayString = new Date().toISOString().substring(0, 10);
 	const today = new Date(todayString)
 	const noise = perlinNoise.generatePerlinNoise(288, 1, {
 		amplitude: 0.3,
 		octaveCount: 3,
 		persistence: 0.3,
+		seed,
 		mode:'daily'
 	});
 
