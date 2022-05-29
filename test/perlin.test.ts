@@ -1,4 +1,7 @@
 import perlin from "../src/perlin";
+
+import oldPerlin from "../old/oldPerlin"
+import moment = require("moment");
 describe('test perlin with fake timers', () => {
 	beforeAll(() => {
 		jest.useFakeTimers('modern');
@@ -47,4 +50,27 @@ describe('test perlin with real timers', () => {
 		}, 100);
 	})
 
+})
+describe('test comparing old perlin', () => {
+
+
+	test('run in same day should return same array', () => {
+		const perl = perlin(moment().toISOString())
+		const oldPerl = oldPerlin()
+		const countPositiveValPerl = perl.filter(p => p.noise > 0).length
+		const countPositiveValOldPerl = oldPerl.filter(p => p.noise > 0).length
+
+		const maxValPerl = perl.sort((a, b) => b.noise - a.noise)[0];
+		const maxValOldPerl = oldPerl.sort((a, b) => b.noise - a.noise)[0];
+		const minValPerl = perl.sort((a, b) => a.noise - b.noise)[0];
+		const minValOldPerl = oldPerl.sort((a, b) => a.noise - b.noise)[0];
+		const sumValPerl = perl.reduce((acc, el) => acc + el.noise, 0);
+		const sumValOldPerl = oldPerl.reduce((acc, el) => acc + el.noise, 0);
+		console.log("new", { countPositiveValPerl, maxValPerl, minValPerl, sumValPerl })
+		console.log("old", { countPositiveValOldPerl, maxValOldPerl, minValOldPerl, sumValOldPerl })
+
+
+		expect(perl.length).toBe(oldPerl.length);
+
+	})
 })

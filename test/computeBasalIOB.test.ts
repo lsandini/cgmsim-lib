@@ -30,6 +30,10 @@ describe('test computeBasalIOB', () => {
 	})
 
 
+})
+
+describe('test computeBasalIOB comparing old cgmsim', () => {
+
 	test('compare old toujeo', () => {
 		let _date = moment('2022-05-06T15:00:00.000Z');
 		for (let i = 0; i < 240; i++) {
