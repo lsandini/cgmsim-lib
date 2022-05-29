@@ -31,7 +31,7 @@ describe('Carbs test', () => {
 
 	test('test carbs <=40 with active treatments return fix carbsActive', () => {
 		const r = carbs([{
-			carbs: 40,created_at: minutesAgo(45),
+			carbs: 40,created_at: minutesAgo(45)
 		}], 360)
 		expect(r).toMatchSnapshot();
 

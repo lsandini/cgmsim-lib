@@ -28,6 +28,9 @@ export type Profile = {
 }
 
 export type Treatment = {
+	absolute?: any;
+	duration?: number;
+	eventType?: string;
 	insulin?: number;
 	notes?: string;
 	created_at: string;
