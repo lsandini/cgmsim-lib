@@ -1,6 +1,6 @@
 import { Perlin } from "./Types";
 
-const perlinNoise = require('perlin-noise');
+const perlinNoise = require('@nickxbs/perlinnoise2');
 export default function (seed): Perlin[] {
 	const todayString = new Date().toISOString().substring(0, 10);
 	const today = new Date(todayString)
