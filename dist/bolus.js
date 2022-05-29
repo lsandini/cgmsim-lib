@@ -18,9 +18,7 @@ exports.default = (treatments, dia, peak) => {
         return utils_1.getInsulinActivity(peak, duration, entry.minutesAgo, insulin);
     });
     utils_1.default.info('these are the last insulins and activities: %o', insulinsBolusAct);
-    const bolusAct = insulinsBolusAct.reduce(function (tot, activity) {
-        return tot + activity;
-    }, 0);
+    const bolusAct = insulinsBolusAct.reduce((tot, activity) => tot + activity, 0);
     return bolusAct;
 };
-//# sourceMappingURL=computeBolusIOB.js.map
+//# sourceMappingURL=bolus.js.map

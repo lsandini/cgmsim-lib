@@ -2,7 +2,11 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const utils_1 = require("./utils");
 //const logger = pino();
-function carbs(carbsAbs, meals) {
+function carbs(treatments = [], carbsAbs) {
+    const meals = treatments
+        .filter(e => e.carbs && utils_1.getDeltaMinutes(e.created_at) <= 360)
+        .map(e => (Object.assign(Object.assign({}, e), { minutesAgo: utils_1.getDeltaMinutes(e.created_at) })));
+    utils_1.default.info('Last 6 hours meal: %o', meals);
     const carbs = meals || [];
     const carbAbsTime = carbsAbs; // meal absorption time in min default 360 or 6 hours
     const fast_carbAbsTime = carbAbsTime / 6; // = 1 h or 60 min
@@ -60,7 +64,7 @@ function carbs(carbsAbs, meals) {
     const totalCarbRate = timeSinceMealAct.reduce(function (tot, arr) {
         return tot + arr.all_carbrate;
     }, 0);
-    console.log(`TOTAL CARB RATE  ${totalCarbRate}`);
+    utils_1.default.info(`TOTAL CARB RATE:%o`, totalCarbRate);
     return totalCarbRate;
 }
 exports.default = carbs;

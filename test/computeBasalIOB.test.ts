@@ -33,7 +33,7 @@ describe('test computeBasalIOB', () => {
 
 	test('compare old toujeo', () => {
 		let _date = moment('2022-05-06T15:00:00.000Z');
-		for (let i = 0; i < 300; i++) {
+		for (let i = 0; i < 240; i++) {
 			_date = _date.add(5, 'minutes');
 			jest.setSystemTime(_date.toDate());
 
@@ -46,45 +46,20 @@ describe('test computeBasalIOB', () => {
 				entries: toujeoTreatments
 			});
 
-			let oldTouActivity = oldToujeoRun(80, lastTOU);
+			let oldActivity = oldToujeoRun(80, lastTOU);
 			let result = computeBasalIOB(toujeoTreatments as unknown as Treatment[], 80);
 			const ROUND = 100000000;
 			result = Math.round(result * ROUND) / ROUND;
-			oldTouActivity = Math.round(oldTouActivity * ROUND) / ROUND;
-			// console.log('toujeo ' + _date.toISOString(), result, oldTouActivity)
-			expect(result).toBe(oldTouActivity);
-		}
-	})
-
-	test('compare old toujeo', () => {
-		let _date = moment('2022-05-06T15:00:00.000Z');
-		for (let i = 0; i < 300; i++) {
-			_date = _date.add(5, 'minutes');
-			jest.setSystemTime(_date.toDate());
-
-			const {
-				lastDET,
-				lastGLA,
-				lastTOU,
-				lastDEG,
-			} = oldComputeBasal({
-				entries: toujeoTreatments
-			});
-
-			let oldTouActivity = oldToujeoRun(80, lastTOU);
-			let result = computeBasalIOB(toujeoTreatments as unknown as Treatment[], 80);
-			const ROUND = 100000000;
-			result = Math.round(result * ROUND) / ROUND;
-			oldTouActivity = Math.round(oldTouActivity * ROUND) / ROUND;
-			// console.log('toujeo ' + _date.toISOString(), result, oldTouActivity)
-			expect(result).toBe(oldTouActivity);
+			oldActivity = Math.round(oldActivity * ROUND) / ROUND;
+			console.log('\x1b[32m', '#####toujeo (after ' + i * 5 + 'minutes)' + _date.toISOString(), result, oldActivity, '\x1b[0m')
+			expect(result).toBe(oldActivity);
 		}
 	})
 
 	test('compare old glargine', async () => {
 		let _date = moment('2022-05-06T15:00:00.000Z');
 		const p = []
-		for (let i = 0; i < 300; i++) {
+		for (let i = 0; i < 30; i++) {
 			_date = _date.add(5, 'minutes');
 			jest.setSystemTime(_date.toDate());
 
@@ -98,17 +73,17 @@ describe('test computeBasalIOB', () => {
 			});
 
 			let oldActivity = oldGlargine(80, lastGLA);
-			let result = computeBasalIOB(toujeoTreatments as unknown as Treatment[], 80);
+			let result = computeBasalIOB(glargineTreatments as unknown as Treatment[], 80);
 			const ROUND = 100000000;
 			result = Math.round(result * ROUND) / ROUND;
 			oldActivity = Math.round(oldActivity * ROUND) / ROUND;
 			// console.log('activity ' + _date.toISOString(), result, oldActivity)
-			//expect(result).toBe(oldActivity);
-			// console.log(oldActivity);
-			p.push(oldActivity);
-			await writeFile('./files/oldGLA.json', JSON.stringify(p));
+			expect(result).toBe(oldActivity);
+			console.log('\x1b[32m', '#####GLARGINE ' + _date.toISOString(), result, oldActivity, '\x1b[0m')
+			// p.push(oldActivity);
+			// await writeFile('./files/oldGLA.json', JSON.stringify(p));
 
 		}
-		console.log(p)
+		// console.log(p)
 	})
 })
