@@ -1,3 +1,5 @@
+import logger from "../src/utils";
+
 export default function(weight, toujeos) {
     
 
@@ -6,7 +8,7 @@ export default function(weight, toujeos) {
 	// const toujeos = require('./files/last_toujeo.json');
 	var jsontou = JSON.stringify(toujeos);
 	var toujeo_data = JSON.parse(jsontou);
-	console.log(toujeo_data);
+	logger.info(toujeo_data);
 	
 	// activities be expressed as U/min !!!
 	let timeSinceToujeoAct = toujeo_data.map(entry => {
@@ -27,19 +29,19 @@ export default function(weight, toujeos) {
 			 time: time,
 			 toujeoActivity:  (dose * (S / Math.pow(tau, 2)) * time * (1 - time / td) * Math.exp(-time / tau)) / 60 };
 	});
-	console.log('the is the accumulated toujeo activity:', timeSinceToujeoAct);
+	logger.info('the is the accumulated toujeo activity:%o', timeSinceToujeoAct);
 	
 	// compute the aggregated activity of last toujeos in 27 hours
 	
 	let lastToujeos = timeSinceToujeoAct.filter(function (e) {
 		return e.time <= 30;
 	});
-	console.log('these are the last toujeos and activities:',lastToujeos);
+	logger.info('these are the last toujeos and activities:%o',lastToujeos);
 	
 	var resultTouAct = lastToujeos.reduce(function(tot, arr) {
 		return tot + arr.toujeoActivity;
 	  },0);
 	
-	console.log(resultTouAct);
+	logger.info('result: %0',resultTouAct);
 	return resultTouAct
 }

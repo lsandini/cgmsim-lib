@@ -6,12 +6,11 @@ import { oldComputeBasal } from '../old/oldComputeBasal'
 import oldToujeoRun from '../old/oldToujeo'
 import oldGlargine from '../old/oldGlargine'
 import moment = require("moment");
-import { writeFile } from 'fs/promises';
 
 
 describe('test computeBasalIOB', () => {
 
-	const date = new Date('2022-05-07T11:20:00');
+	const date = new Date('2022-05-07T11:20:00Z');
 
 	beforeAll(() => {
 		jest.useFakeTimers('modern');
@@ -51,7 +50,7 @@ describe('test computeBasalIOB', () => {
 			const ROUND = 100000000;
 			result = Math.round(result * ROUND) / ROUND;
 			oldActivity = Math.round(oldActivity * ROUND) / ROUND;
-			console.log('\x1b[32m', '#####toujeo (after ' + i * 5 + 'minutes)' + _date.toISOString(), result, oldActivity, '\x1b[0m')
+			// console.log('\x1b[32m', '#####toujeo (after ' + i * 5 + 'minutes)' + _date.toISOString(), result, oldActivity, '\x1b[0m')
 			expect(result).toBe(oldActivity);
 		}
 	})
@@ -79,7 +78,7 @@ describe('test computeBasalIOB', () => {
 			oldActivity = Math.round(oldActivity * ROUND) / ROUND;
 			// console.log('activity ' + _date.toISOString(), result, oldActivity)
 			expect(result).toBe(oldActivity);
-			console.log('\x1b[32m', '#####GLARGINE ' + _date.toISOString(), result, oldActivity, '\x1b[0m')
+			// console.log('\x1b[32m', '#####GLARGINE ' + _date.toISOString(), result, oldActivity, '\x1b[0m')
 			// p.push(oldActivity);
 			// await writeFile('./files/oldGLA.json', JSON.stringify(p));
 
