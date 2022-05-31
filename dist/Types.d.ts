@@ -11,6 +11,10 @@ export declare type Drug = {
     insulin: number;
     empty_space: any;
 };
+export declare type Note = {
+    type: 'Note';
+    notes: string;
+};
 export declare type Activity = {
     steps: number;
     created_at: string;
