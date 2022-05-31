@@ -14,6 +14,10 @@ export type Drug = {
 	empty_space: any;
 }
 
+export type Note = {
+	type: 'Note',
+	notes:string,	
+}
 export type Activity = {
 	steps: number,
 	created_at: string,
