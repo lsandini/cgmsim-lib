@@ -44,7 +44,7 @@ export declare type EnvParam = {
 };
 export declare type CGMSimParams = {
     basalActivity: number;
-    liver: number;
+    liverActivity: number;
     carbsActivity: number;
     bolusActivity: number;
 };

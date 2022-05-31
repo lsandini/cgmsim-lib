@@ -34,9 +34,9 @@ export function uploadBase(cgmsim: Sgv | Activity, api_url: string, apiSecret: s
 		body: body_json,
 	})
 		.then(() => {
-			logger.info('NIGTHSCOUT Updated');
+			logger.debug('NIGTHSCOUT Updated');
 		})
 		.catch(err => {
-			logger.info(err);
+			logger.debug(err);
 		});
 }

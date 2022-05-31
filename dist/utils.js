@@ -30,10 +30,10 @@ function uploadBase(cgmsim, api_url, apiSecret) {
     const body_json = JSON.stringify(cgmsim);
     return node_fetch_1.default(api_url, Object.assign(Object.assign({}, postParams), { body: body_json }))
         .then(() => {
-        logger.info('NIGTHSCOUT Updated');
+        logger.debug('NIGTHSCOUT Updated');
     })
         .catch(err => {
-        logger.info(err);
+        logger.debug(err);
     });
 }
 exports.uploadBase = uploadBase;

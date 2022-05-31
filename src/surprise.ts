@@ -11,13 +11,13 @@ export default function ({ treatments }) {
 		const totalMeals = treatments.filter(entry =>
 			moment(entry.mills).format('YYYYMMDD') === moment().format('YYYYMMDD'));
 
-		logger.info('totalMeals  %o', totalMeals);
+		logger.debug('totalMeals  %o', totalMeals);
 
 		const totalCarbs = totalMeals.reduce(function (tot, arr) {
 			return tot + arr.carbs;
 		}, 0);
 
-		logger.info(totalCarbs);
+		logger.debug(totalCarbs);
 		if (totalCarbs < 200) {
 			return {
 				time: Date.now()

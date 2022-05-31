@@ -8,7 +8,7 @@ describe('Liver test', () => {
 		const r = sgv_start([{ sgv, mills: millsNow }], {
 			carbsActivity: 0,
 			basalActivity:0,
-			liver: 0,
+			liverActivity: 0,
 			bolusActivity: 0,			
 		}, [], 30);
 		expect(r.sgv).toBe(90)
@@ -21,7 +21,7 @@ describe('Liver test', () => {
 		const r = sgv_start([{ sgv, mills: millsNow }], {
 			carbsActivity:0,
 			basalActivity:0,
-			liver: 0.02,
+			liverActivity: 0.02,
 			bolusActivity: 0,
 			
 		}, [], 30);
@@ -35,7 +35,7 @@ describe('Liver test', () => {
 		const r = sgv_start([{ sgv, mills: millsNow }], {
 			carbsActivity: 0,
 			basalActivity:0.02,
-			liver: 0,
+			liverActivity: 0,
 			bolusActivity: 0,			
 		}, [], 30);
 		expect(r.sgv).toBeLessThan(sgv)

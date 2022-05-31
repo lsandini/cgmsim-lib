@@ -24,7 +24,7 @@ export const computeBasalActivity = (treatments: (TreatmentDelta & { duration: n
 		return activity > 0 ? activity : 0;
 
 	});
-	logger.info('these are the last Slow INSULINS: %o', treatmentsActivity);
+	logger.debug('these are the last Slow INSULINS: %o', treatmentsActivity);
 	const resultAct = treatmentsActivity.reduce((tot, activity) => {
 		return tot + activity;
 	}, 0);

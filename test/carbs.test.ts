@@ -13,26 +13,26 @@ afterAll(() => {
 	jest.useRealTimers();
 });
 
-const minutesAgo=(min)=>moment(now).add(-min,'minutes').toISOString();
+const minutesAgo = (min) => moment(now).add(-min, 'minutes').toISOString();
 describe('Carbs test', () => {
 
 	test('test carbs without treatments return 0', () => {
-		const r = carbs([], 360)
+		const r = carbs([], 360, 30, 10)
 		expect(r).toBe(0);
 
 	});
 	test('test carbs with old treatments return 0', () => {
 		const r = carbs([{
 			carbs: 44, created_at: minutesAgo(361),
-		}], 360)
+		}], 360, 30, 10)
 		expect(r).toBe(0);
 	});
 
 
 	test('test carbs <=40 with active treatments return fix carbsActive', () => {
 		const r = carbs([{
-			carbs: 40,created_at: minutesAgo(45)
-		}], 360)
+			carbs: 40, created_at: minutesAgo(45)
+		}], 360, 30, 10)
 		expect(r).toMatchSnapshot();
 
 	});
@@ -42,26 +42,26 @@ describe('Carbs test', () => {
 			carbs: 20, created_at: minutesAgo(1),
 		}, {
 			carbs: 20, created_at: minutesAgo(45),
-		}], 360)
+		}], 360, 30, 10)
 		expect(r).toMatchSnapshot();
 	});
 	test('carbs 40 min ago are more active then 60 min ago ', () => {
-		const r40 = carbs( [{
-			carbs: 20,  created_at: minutesAgo(40)
-		}],360)
-		const r60 = carbs( [{
+		const r40 = carbs([{
+			carbs: 20, created_at: minutesAgo(40)
+		}], 360, 30, 10)
+		const r60 = carbs([{
 			carbs: 20, created_at: minutesAgo(60)
-		}],360)
+		}], 360, 30, 10)
 		expect(r40).toBeGreaterThan(r60);
 	});
 
 	test('carbs 5 min ago are less active then 40 min ago', () => {
 		const r5 = carbs([{
 			carbs: 20, created_at: minutesAgo(5)
-		}], 360)
+		}], 360, 30, 10)
 		const r60 = carbs([{
 			carbs: 20, created_at: minutesAgo(40)
-		}], 360)
+		}], 360, 30, 10)
 		expect(r5).toBeLessThan(r60);
 	});
 
@@ -70,8 +70,8 @@ describe('Carbs test', () => {
 			carbs: 41, created_at: minutesAgo(1),
 		}, {
 			carbs: 41, created_at: minutesAgo(45),
-		}], 360)
-		expect(r).toBeGreaterThan(0.6);
+		}], 360, 30, 10)
+		expect(r).toBeGreaterThan(0.1);
 	});
 	it.each([
 		[[2, 21]],
@@ -82,7 +82,7 @@ describe('Carbs test', () => {
 		const e = numbers.map(n => ({
 			carbs: 20, created_at: minutesAgo(n)
 		}));
-		const r = carbs(e, 360);
+		const r = carbs(e, 360, 30, 10);
 		expect(r).toMatchSnapshot();
 
 	});

@@ -9,7 +9,7 @@ function default_1(sgvs) {
         const sgvdir2 = sgvs[1].sgv - sgvs[2].sgv;
         const sgvdir3 = sgvs[2].sgv - sgvs[3].sgv;
         const sgvdir15min = (sgvdir1 + sgvdir2 + sgvdir3) / 3;
-        utils_1.default.info('this is the mean SGV 5 min variation in the last 15 minutes: %o', sgvdir15min, 'mg/dl');
+        utils_1.default.debug('this is the mean SGV 5 min variation in the last 15 minutes: %o', sgvdir15min, 'mg/dl');
         if (sgvdir15min < -10) {
             arrows.push({
                 sgvdir: sgvdir15min,
@@ -59,7 +59,7 @@ function default_1(sgvs) {
             direction: 'Flat'
         });
     }
-    utils_1.default.info(arrows);
+    utils_1.default.info('New Arrows status result %o', arrows);
     return arrows;
 }
 exports.default = default_1;

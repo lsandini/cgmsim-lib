@@ -8,7 +8,7 @@ export default (weight, glargines) => {
 	// const glargines = require('./files/last_glargine.json');
 	var jsongla = JSON.stringify(glargines);
 	var glargine_data = JSON.parse(jsongla);
-	logger.info(glargine_data);
+	logger.debug(glargine_data);
 
 	// activities be expressed as U/min !!!
 	let timeSinceGlargineAct = glargine_data.map(entry => {
@@ -31,21 +31,21 @@ export default (weight, glargines) => {
 			glargineActivity: (dose * (S / Math.pow(tau, 2)) * time * (1 - time / td) * Math.exp(-time / tau)) / 60
 		};
 	});
-	logger.info('the is the accumulated glargine activity:%o', timeSinceGlargineAct);
+	logger.debug('the is the accumulated glargine activity:%o', timeSinceGlargineAct);
 
 	// compute the aggregated activity of last glargines in 27 hours
 
 	let lastGlargines = timeSinceGlargineAct.filter(function (e) {
 		return e.time <= 30;
 	});
-	logger.info('these are the last glargines and activities:%o', lastGlargines);
+	logger.debug('these are the last glargines and activities:%o', lastGlargines);
 
 	var resultGlaAct: number = lastGlargines.reduce(function (tot, arr) {
 		return tot + arr.glargineActivity;
 	}, 0);
 
 	return resultGlaAct
-	// logger.info(resultGlaAct);
+	// logger.debug(resultGlaAct);
 
 	// const fs = require('fs');
 	// const { duration } = require('moment');
@@ -54,6 +54,6 @@ export default (weight, glargines) => {
 	//     if (err) {
 	//         throw err;
 	//     }
-	//     logger.info("aggregated GLA activity is now is saved as JSON.");
+	//     logger.debug("aggregated GLA activity is now is saved as JSON.");
 	//   });
 };

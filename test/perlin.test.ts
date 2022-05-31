@@ -16,9 +16,10 @@ describe('test perlin with fake timers', () => {
 	});
 
 	test('run twice in same day should return same array', () => {
-		const perl = perlin('')
-		jest.setSystemTime(new Date('2001-01-01T01:01'));
-		const perl2 = perlin('')
+		jest.setSystemTime(new Date('2022-05-30T00:01'));
+		const perl = perlin('cgmsim')
+		jest.setSystemTime(new Date('2022-05-30T01:01'));
+		const perl2 = perlin('cgmsim')
 		expect(perl[0].time).toBe(perl2[0].time)
 		expect(perl[0].noise).toBe(perl2[0].noise)
 	})
@@ -55,7 +56,7 @@ describe('test comparing old perlin', () => {
 
 
 	test('run in same day should return same array', () => {
-		const perl = perlin(moment().toISOString())
+		const perl = perlin('cgmsim')
 		const oldPerl = oldPerlin()
 		const countPositiveValPerl = perl.filter(p => p.noise > 0).length
 		const countPositiveValOldPerl = oldPerl.filter(p => p.noise > 0).length
