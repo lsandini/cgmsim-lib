@@ -23,6 +23,14 @@ export declare type Sgv = {
     mills: number;
     sgv: number;
 };
+export declare type EntryValueType = {
+    sgv: number;
+    direction: string;
+};
+export declare type Entry = EntryValueType & {
+    date: number;
+    type: 'sgv';
+};
 export declare type Profile = {};
 export declare type Treatment = {
     absolute?: any;

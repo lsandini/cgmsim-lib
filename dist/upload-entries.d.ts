@@ -1,2 +1,2 @@
-import { Sgv } from './Types';
-export default function (cgmsim: Sgv, nsUrl: string, apiSecret: string): any;
+import { EntryValueType } from './Types';
+export default function (cgmsim: EntryValueType, nsUrl: string, apiSecret: string): any;

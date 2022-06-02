@@ -2,7 +2,7 @@ import fetch from 'node-fetch';
 import * as moment from "moment";
 import pino from 'pino';
 import setupParams from "./setupParams";
-import { Activity, Note, Sgv } from "./Types";
+import { Activity, Entry, Note, Sgv } from "./Types";
 
 const logger = pino({
 	level: process.env.LOG_LEVEL ?? 'error',
@@ -31,7 +31,7 @@ export function getInsulinActivity(peakMin: number, durationMin: number, timeMin
 	return activity;
 }
 export const getDeltaMinutes = (mills: number | string) => Math.round(moment().diff(moment(mills), 'seconds') / 60);
-export function uploadBase(cgmsim: Sgv | Activity | Note, nsUrlApi: string, apiSecret: string) {	
+export function uploadBase(cgmsim: Entry | Activity | Note, nsUrlApi: string, apiSecret: string) {	
 	const _isHttps = isHttps(nsUrlApi);
 
 	const { postParams } = setupParams(apiSecret,_isHttps);

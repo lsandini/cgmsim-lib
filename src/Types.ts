@@ -27,6 +27,16 @@ export type Sgv = {
 	sgv: number;
 };
 
+export type EntryValueType = {
+	sgv: number;
+	direction: string;
+
+}
+export type Entry = EntryValueType & {
+	date: number;
+	type: 'sgv';
+};
+
 export type Profile = {
 
 }
