@@ -70,7 +70,7 @@ describe('simulator test', () => {
 				sgv: result.sgv,
 			})
 			// console.log('Result ' + result.sgv + ' ' + now.toLocaleString())
-			log.push('Result ' + result.sgv + ' ' + now.toLocaleString())
+			log.push('Result ' + result.sgv + ' ' + now.toISOString())
 
 			now = now.add(5, "minutes");
 			index = index + 5;
