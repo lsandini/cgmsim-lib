@@ -12,8 +12,8 @@ export default (treatments: Treatment[], dia: number, peak: number): number => {
 		}))
 		.filter(e =>  e.minutesAgo <= 300);
 
-	logger.info('this is the filtered treatments (insulin): %o', insulin);
-	logger.info('length %o', insulin.length); // returns the number of boluses or length of the array
+	logger.debug('this is the filtered treatments (insulin): %o', insulin);
+	logger.debug('length %o', insulin.length); // returns the number of boluses or length of the array
 
 	// dia is the duration of insulin action in hours
 	const duration = dia * 60;
@@ -24,10 +24,10 @@ export default (treatments: Treatment[], dia: number, peak: number): number => {
 	});
 
 	
-	logger.info('these are the last insulins and activities: %o', insulinsBolusAct);
+	logger.debug('these are the last insulins and activities: %o', insulinsBolusAct);
 
 	const bolusAct = insulinsBolusAct.reduce((tot, activity) =>tot + activity, 0);
-
+	logger.info('these are the insulins bolus activity: %o', bolusAct);
 	return bolusAct;
 
 };

@@ -78,4 +78,5 @@ describe('test toujeo', () => {
 		expect(rBeforePeak).toBeLessThan(rPeak);
 		expect(rAfterPeak).toBeLessThan(rPeak);
 	});
+
 })

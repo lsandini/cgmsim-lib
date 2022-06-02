@@ -24,7 +24,7 @@ export const computeBasalActivity = (treatments: (TreatmentDelta & { duration: n
 		return activity > 0 ? activity : 0;
 
 	});
-	logger.info('these are the last Slow INSULINS: %o', treatmentsActivity);
+	logger.debug('these are the last Slow INSULINS: %o', treatmentsActivity);
 	const resultAct = treatmentsActivity.reduce((tot, activity) => {
 		return tot + activity;
 	}, 0);
@@ -63,7 +63,7 @@ export default function (treatments: Treatment[], weight: number): number {
 			}
 		});
 	logger.debug('these are the last GLA: %o', lastGLA);
-	const activityGLA = computeBasalActivity(lastGLA)
+	const activityGLA = lastGLA.length > 0 ? computeBasalActivity(lastGLA) : 0;
 	logger.info('these is the total GLA activity: %o', activityGLA);
 
 	const lastDET = lastBasals.filter(function (e) {
@@ -78,7 +78,8 @@ export default function (treatments: Treatment[], weight: number): number {
 		}
 	});
 	logger.debug('these are the last DET: %o', lastDET);
-	const activityDET = computeBasalActivity(lastDET)
+
+	const activityDET = lastDET.length ? computeBasalActivity(lastDET) : 0;
 	logger.info('these is the total DET activity: %o', activityDET);
 
 	const lastTOU = lastBasals.filter(function (e) {
@@ -94,7 +95,7 @@ export default function (treatments: Treatment[], weight: number): number {
 			}
 		});
 	logger.debug('these are the last TOU: %o', lastTOU);
-	const activityTOU = computeBasalActivity(lastTOU)
+	const activityTOU = lastTOU.length ? computeBasalActivity(lastTOU) : 0;
 	logger.info('these is the total TOU activity: %o', activityTOU);
 
 	const lastDEG = lastBasals.filter(function (e) {
@@ -109,7 +110,7 @@ export default function (treatments: Treatment[], weight: number): number {
 		}
 	});
 	logger.debug('these are the last deg: %o', lastDEG);
-	const activityDEG = computeBasalActivity(lastDEG);
+	const activityDEG = lastDEG.length ? computeBasalActivity(lastDEG) : 0;
 	logger.info('these is the total deg activity: %o', activityDEG);
 
 	return activityDEG + activityDET + activityGLA + activityTOU;

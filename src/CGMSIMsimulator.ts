@@ -12,7 +12,7 @@ import liverRun from './liver';
 import sgv from './sgv';
 import { MainParams } from './Types';
 
-logger.info('Run Init');
+logger.debug('Run Init');
 
 const simulator = ({
 	env,
@@ -31,11 +31,12 @@ const simulator = ({
 	const carbsAbs = parseInt(env.CARBS_ABS_TIME);
 	const cr = parseInt(env.CR);
 	const perls = perlinRun(env.SEED || 'cgmsim');
+	
 
 
 	const bolusActivity = bolus(treatments, dia, tp);
 	const basalActivity = basal(treatments, weight);
-	const carbsActivity = carbs(treatments,carbsAbs);
+	const carbsActivity = carbs(treatments,carbsAbs,isf,cr);
 	
 
 	// //activity calc insulin
@@ -45,11 +46,11 @@ const simulator = ({
 	// const tou = toujeoRun(weight, lastTOU);
 
 	//activity calc carb
-	const liver = liverRun(isf, cr);
+	const liverActivity = liverRun(isf, cr);
 
-	const newSgvValue = sgv(entries, { basalActivity, liver, carbsActivity, bolusActivity }, perls, isf);
+	const newSgvValue = sgv(entries, { basalActivity, liverActivity, carbsActivity, bolusActivity }, perls, isf);
 
-	logger.info('this is the new sgv: %o', newSgvValue);
+	logger.debug('this is the new sgv: %o', newSgvValue);
 	const arrows = arrowsRun([newSgvValue, ...entries]);
 
 	return { ...newSgvValue, direction: arrows[0].direction };

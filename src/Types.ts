@@ -14,6 +14,10 @@ export type Drug = {
 	empty_space: any;
 }
 
+export type Note = {
+	type: 'Note',
+	notes:string,	
+}
 export type Activity = {
 	steps: number,
 	created_at: string,
@@ -23,7 +27,33 @@ export type Sgv = {
 	sgv: number;
 };
 
+export type EntryValueType = {
+	sgv: number;
+	direction: string;
+
+}
+export type Entry = EntryValueType & {
+	date: number;
+	type: 'sgv';
+};
+
+export type ProfileParams = {
+	basal: number;
+}
+
+export type Profile = {
+	startDate: string;
+	defaultProfile: string,
+	store: {
+		[profileName: string]: ProfileParams
+	}
+}
+
+
 export type Treatment = {
+	absolute?: any;
+	duration?: number;
+	eventType?: string;
 	insulin?: number;
 	notes?: string;
 	created_at: string;
@@ -46,7 +76,7 @@ export type EnvParam = {
 	WEIGHT: string;
 	SEED?: string;
 };
-export type CGMSimParams = { basalActivity: number; liver: number; carbsActivity: number; bolusActivity: number }
+export type CGMSimParams = { basalActivity: number; liverActivity: number; carbsActivity: number; bolusActivity: number }
 export type MainParamsUVA = {
 	env: {
 		WEIGHT: string,
@@ -124,14 +154,3 @@ export type UvaParametersType = {
 
 
 
-export type ProfileParams = {
-	basal: number;
-}
-
-export type Profile = {
-	startDate: string;
-	defaultProfile: string,
-	store: {
-		[profileName: string]: ProfileParams
-	}
-}

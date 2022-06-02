@@ -81,7 +81,7 @@ function default_1({ treatments, profiles, pumpBasals }, env) {
         }
     }
     pumpBasals.push(...basalsToUpdate);
-    utils_1.default.info('\x1b[32m', '------------------pumpBasals %o', pumpBasals.length, '\x1b[0m');
+    utils_1.default.debug('\x1b[32m', '------------------pumpBasals %o', pumpBasals.length, '\x1b[0m');
     const td = dia * 60;
     const tp = parseInt(env.TP);
     const tau = tp * (1 - tp / td) / (1 - 2 * tp / td);
@@ -92,17 +92,17 @@ function default_1({ treatments, profiles, pumpBasals }, env) {
         const insulin = entry.insulin;
         return Object.assign(Object.assign({}, entry), { time: t, activityContrib: insulin * (S / Math.pow(tau, 2)) * t * (1 - t / td) * Math.exp(-t / tau) });
     });
-    // logger.info('basal as boluses with detailed activities: %o', timeSincePumpAct);
+    // logger.debug('basal as boluses with detailed activities: %o', timeSincePumpAct);
     const lastPumpInsulins = timeSincePumpAct.filter(function (e) {
         return e.time <= (dia * 60 * 1000);
     });
-    //  logger.info('these are the last pump basal insulins and detailed activities: %o', lastPumpInsulins);
+    //  logger.debug('these are the last pump basal insulins and detailed activities: %o', lastPumpInsulins);
     const resultPumpAct = lastPumpInsulins.reduce(function (tot, arr) {
         return tot + arr.activityContrib;
     }, 0);
-    utils_1.default.info('this is the aggregated insulin activity from pump basal in the last dia hours: %o', resultPumpAct);
+    utils_1.default.debug('this is the aggregated insulin activity from pump basal in the last dia hours: %o', resultPumpAct);
     const pumpBasalAct = JSON.stringify(resultPumpAct, null, 4);
-    utils_1.default.info('the pump\'s basal activity is: %o', pumpBasalAct);
+    utils_1.default.debug('the pump\'s basal activity is: %o', pumpBasalAct);
     return Math.round(resultPumpAct * 100000) / 100000;
 }
 exports.default = default_1;

@@ -2,10 +2,10 @@ import fetch from 'node-fetch';
 import * as moment from "moment";
 import pino from 'pino';
 import setupParams from "./setupParams";
-import { Activity, Sgv } from "./Types";
+import { Activity, Entry, Note, Sgv } from "./Types";
 
 const logger = pino({
-	level: process.env.LOG_LEVEL,
+	level: process.env.LOG_LEVEL ?? 'error',
 	transport: {
 		target: 'pino-pretty',
 		options: {
@@ -15,6 +15,12 @@ const logger = pino({
 });
 
 export default logger;
+export function isHttps(str) {
+	return str.match(/^https/)?.length > 0;
+}
+export function removeTrailingSlash(str) {
+	return str.endsWith('/') ? str.slice(0, -1) : str;
+}
 
 export function getInsulinActivity(peakMin: number, durationMin: number, timeMin: number, insulin: number) {
 	const tau = peakMin * (1 - peakMin / durationMin) / (1 - 2 * peakMin / durationMin);
@@ -25,18 +31,20 @@ export function getInsulinActivity(peakMin: number, durationMin: number, timeMin
 	return activity;
 }
 export const getDeltaMinutes = (mills: number | string) => Math.round(moment().diff(moment(mills), 'seconds') / 60);
-export function uploadBase(cgmsim: Sgv | Activity, api_url: string, apiSecret: string) {
-	const { postParams } = setupParams(apiSecret);
+export function uploadBase(cgmsim: Entry | Activity | Note, nsUrlApi: string, apiSecret: string) {	
+	const _isHttps = isHttps(nsUrlApi);
+
+	const { postParams } = setupParams(apiSecret,_isHttps);
 	const body_json = JSON.stringify(cgmsim);
 
-	return fetch(api_url, {
+	return fetch(nsUrlApi, {
 		...postParams,
 		body: body_json,
 	})
 		.then(() => {
-			logger.info('NIGTHSCOUT Updated');
+			logger.debug('NIGTHSCOUT Updated');
 		})
 		.catch(err => {
-			logger.info(err);
+			logger.debug(err);
 		});
 }

@@ -1,4 +1,4 @@
-export default function (apiSecret: string): {
+export default function (apiSecret: string, isHttps?: boolean): {
     getParams: {
         method: string;
         headers: {

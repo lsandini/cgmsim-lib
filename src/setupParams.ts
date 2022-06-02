@@ -1,9 +1,9 @@
 const { createHash } = require('crypto');
 const https = require('https');
 
-export default function(apiSecret: string) {
+export default function(apiSecret: string,isHttps:boolean=true) {
 
-    const agent = new https.Agent({ rejectUnauthorized: false, });
+    const agent = isHttps? new https.Agent({ rejectUnauthorized: false, }):null;
     const hash = createHash('sha1');
     hash.update(apiSecret);
 

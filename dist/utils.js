@@ -1,12 +1,13 @@
 "use strict";
+var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.uploadBase = exports.getDeltaMinutes = exports.getInsulinActivity = void 0;
+exports.uploadBase = exports.getDeltaMinutes = exports.getInsulinActivity = exports.removeTrailingSlash = exports.isHttps = void 0;
 const node_fetch_1 = require("node-fetch");
 const moment = require("moment");
 const pino_1 = require("pino");
 const setupParams_1 = require("./setupParams");
 const logger = pino_1.default({
-    level: process.env.LOG_LEVEL,
+    level: (_a = process.env.LOG_LEVEL) !== null && _a !== void 0 ? _a : 'error',
     transport: {
         target: 'pino-pretty',
         options: {
@@ -15,6 +16,15 @@ const logger = pino_1.default({
     }
 });
 exports.default = logger;
+function isHttps(str) {
+    var _a;
+    return ((_a = str.match(/^https/)) === null || _a === void 0 ? void 0 : _a.length) > 0;
+}
+exports.isHttps = isHttps;
+function removeTrailingSlash(str) {
+    return str.endsWith('/') ? str.slice(0, -1) : str;
+}
+exports.removeTrailingSlash = removeTrailingSlash;
 function getInsulinActivity(peakMin, durationMin, timeMin, insulin) {
     const tau = peakMin * (1 - peakMin / durationMin) / (1 - 2 * peakMin / durationMin);
     const a = 2 * tau / durationMin;
@@ -25,15 +35,16 @@ function getInsulinActivity(peakMin, durationMin, timeMin, insulin) {
 exports.getInsulinActivity = getInsulinActivity;
 const getDeltaMinutes = (mills) => Math.round(moment().diff(moment(mills), 'seconds') / 60);
 exports.getDeltaMinutes = getDeltaMinutes;
-function uploadBase(cgmsim, api_url, apiSecret) {
-    const { postParams } = setupParams_1.default(apiSecret);
+function uploadBase(cgmsim, nsUrlApi, apiSecret) {
+    const _isHttps = isHttps(nsUrlApi);
+    const { postParams } = setupParams_1.default(apiSecret, _isHttps);
     const body_json = JSON.stringify(cgmsim);
-    return node_fetch_1.default(api_url, Object.assign(Object.assign({}, postParams), { body: body_json }))
+    return node_fetch_1.default(nsUrlApi, Object.assign(Object.assign({}, postParams), { body: body_json }))
         .then(() => {
-        logger.info('NIGTHSCOUT Updated');
+        logger.debug('NIGTHSCOUT Updated');
     })
         .catch(err => {
-        logger.info(err);
+        logger.debug(err);
     });
 }
 exports.uploadBase = uploadBase;

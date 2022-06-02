@@ -3,7 +3,8 @@ import logger, { getDeltaMinutes } from './utils';
 
 //const logger = pino();
 
-export default function carbs(treatments: Treatment[] = [], carbsAbs: number): number {
+export default function carbs(treatments: Treatment[] = [], carbsAbs: number, isf: number, cr: number): number {
+	const isfMMol = isf / 18; //(mmol/l)/U
 
 	const meals = treatments
 		.filter(e => e.carbs && getDeltaMinutes(e.created_at) <= 360)
@@ -12,7 +13,7 @@ export default function carbs(treatments: Treatment[] = [], carbsAbs: number): n
 			minutesAgo: getDeltaMinutes(e.created_at),
 		}));
 
-	logger.info('Last 6 hours meal: %o', meals);
+	logger.debug('Last 6 hours meal: %o', meals);
 
 	const carbs = meals || [];
 	const carbAbsTime = carbsAbs; // meal absorption time in min default 360 or 6 hours
@@ -20,7 +21,7 @@ export default function carbs(treatments: Treatment[] = [], carbsAbs: number): n
 	const slow_carbAbsTime = carbAbsTime / 1.5; // = 4 h or 240 min
 
 	const timeSinceMealAct = carbs.map(entry => {
-		const t = entry.minutesAgo;
+		const minutesAgo = entry.minutesAgo;
 		const carbs_g = entry.carbs;
 
 		// the first 40g of every meal are always considered fast carbs
@@ -36,58 +37,51 @@ export default function carbs(treatments: Treatment[] = [], carbsAbs: number): n
 		// the remainder is slow carbs
 		const slow_carbs = (1 - FSR) * rest;
 
-		logger.info('carbs_g:', carbs_g, 'fast:', fast, 'rest:', rest, 'fast_carbs:', fast_carbs, 'slow_carbs: %o', slow_carbs);
+		logger.debug('carbs_g:', carbs_g, 'fast:', fast, 'rest:', rest, 'fast_carbs:', fast_carbs, 'slow_carbs: %o', slow_carbs);
 
 		let fast_carbrate = 0;
 		let slow_carbrate = 0;
 
 
-		if (t < (fast_carbAbsTime / 2)) {
+		if (minutesAgo < (fast_carbAbsTime / 2)) {
 			const AT2 = Math.pow(fast_carbAbsTime, 2);
-			fast_carbrate = (fast_carbs * 4 * t) / AT2;
+			fast_carbrate = (fast_carbs * 4 * minutesAgo) / AT2;
 			//COB = (fast_carbs * 2 * Math.pow(t, 2)) / AT2;
-		} else if (t < (fast_carbAbsTime)) {
-			fast_carbrate = (fast_carbs * 4 / fast_carbAbsTime) * (1 - (t / fast_carbAbsTime));
+		} else if (minutesAgo < (fast_carbAbsTime)) {
+			fast_carbrate = (fast_carbs * 4 / fast_carbAbsTime) * (1 - (minutesAgo / fast_carbAbsTime));
 			// const AAA = (4 * fast_carbs / fast_carbAbsTime);
 			// const BBB = Math.pow(t, 2) / (2 * fast_carbAbsTime);
 			// COB = (AAA * (t - BBB)) - fast_carbs;
 		} else {
 			fast_carbrate = 0;
 			// COB = 0;
-			logger.info('fast carb absorption rate: %o', fast_carbrate);
+			logger.debug('fast carb absorption rate: %o', fast_carbrate);
 		}
 
-		if (t < (slow_carbAbsTime / 2)) {
+		if (minutesAgo < (slow_carbAbsTime / 2)) {
 			const AT2 = Math.pow(slow_carbAbsTime, 2);
-			slow_carbrate = (slow_carbs * 4 * t) / AT2;
+			slow_carbrate = (slow_carbs * 4 * minutesAgo) / AT2;
 			//COB = (slow_carbs * 2 * Math.pow(t, 2)) / AT2;
-		} else if (t < (slow_carbAbsTime)) {
-			slow_carbrate = (slow_carbs * 4 / slow_carbAbsTime) * (1 - (t / slow_carbAbsTime));
+		} else if (minutesAgo < (slow_carbAbsTime)) {
+			slow_carbrate = (slow_carbs * 4 / slow_carbAbsTime) * (1 - (minutesAgo / slow_carbAbsTime));
 			// const AAA = (4 * slow_carbs / slow_carbAbsTime);
 			// const BBB = Math.pow(t, 2) / (2 * slow_carbAbsTime);
 			//COB = (AAA * (t - BBB)) - slow_carbs;
 		} else {
 			slow_carbrate = 0;
 			// COB = 0;
-			logger.info('slow carb absorption rate: %o', slow_carbrate);
+			logger.debug('slow carb absorption rate: %o', slow_carbrate);
 		}
 
-		return {
-			...entry,
-			time: t,
-			fast_carbrate: fast_carbrate,
-			slow_carbrate: slow_carbrate,
-			all_carbrate: fast_carbrate + slow_carbrate
-		};
+		return fast_carbrate + slow_carbrate;
 	});
-	logger.info(timeSinceMealAct);
+	logger.debug(timeSinceMealAct);
 
 
-	const totalCarbRate = timeSinceMealAct.reduce(function (tot, arr) {
-		return tot + arr.all_carbrate;
-	}, 0);
+	const totalCarbRate = timeSinceMealAct.reduce((tot, carbrate) => tot + carbrate, 0);
+	const DBGC = (isfMMol / cr) * totalCarbRate;//DeltaBloodGlucoseFromCarbs
+	logger.debug(`CARB RATE:%o`, totalCarbRate);
+	logger.info(`Delta blood Glucose From Carbs per minute:%o`, DBGC);
 
-	logger.info(`TOTAL CARB RATE:%o`,totalCarbRate);
-
-	return totalCarbRate;
+	return DBGC;
 };

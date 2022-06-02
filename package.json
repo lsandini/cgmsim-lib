@@ -1,6 +1,9 @@
 {
 	"name": "@lsandini/cgmsim-lib",
-	"version": "0.0.1",
+	"version": "0.0.6",
+	"publishConfig": {
+		"registry": "https://npm.pkg.github.com"
+	},
 	"description": "cgmsim-lib",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
@@ -32,15 +35,17 @@
 		"@typescript-eslint/eslint-plugin": "^5.25.0",
 		"@typescript-eslint/parser": "^5.25.0",
 		"eslint": "^8.14.0",
+		"fs": "^0.0.1-security",
 		"jest": "^26.5.5",
+		"perlin-noise": "^0.0.1",
 		"ts-jest": "^26.5.6"
 	},
 	"dependencies": {
+		"@nickxbs/perlinnoise2": "^0.0.1",
 		"crypto": "^1.0.1",
 		"https": "^1.0.0",
 		"moment": "^2.29.3",
 		"node-fetch": "^2.6.7",
-		"perlin-noise": "git+https://github.com/nickxbs/node-perlin-noise.git",
 		"pino": "^7.10.0",
 		"pino-pretty": "^7.6.1",
 		"ts-node": "^9.1.1",
