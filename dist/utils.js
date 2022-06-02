@@ -7,7 +7,7 @@ const moment = require("moment");
 const pino_1 = require("pino");
 const setupParams_1 = require("./setupParams");
 const logger = pino_1.default({
-    level: (_a = process.env.LOG_LEVEL) !== null && _a !== void 0 ? _a : 'ERROR',
+    level: (_a = process.env.LOG_LEVEL) !== null && _a !== void 0 ? _a : 'error',
     transport: {
         target: 'pino-pretty',
         options: {

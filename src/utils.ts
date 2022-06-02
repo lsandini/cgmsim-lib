@@ -5,7 +5,7 @@ import setupParams from "./setupParams";
 import { Activity, Note, Sgv } from "./Types";
 
 const logger = pino({
-	level: process.env.LOG_LEVEL ?? 'ERROR',
+	level: process.env.LOG_LEVEL ?? 'error',
 	transport: {
 		target: 'pino-pretty',
 		options: {
