@@ -12,6 +12,10 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           registry-url: https://npm.pkg.github.com/
+          scope: '@nickxbs'
+      - run: echo "$SECRETS_CONTEXT"
+        env:
+          SECRETS_CONTEXT: ${{ toJson(secrets) }}
       - run: npm ci
       - run: npm run build --if-present
       - run: npm test
