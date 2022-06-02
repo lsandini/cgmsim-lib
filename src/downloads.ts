@@ -15,20 +15,24 @@ const downloads = async (nsUrl: string, apiSecret: string) => {
 	const api_profile = _nsUrl + '/api/v1/profile.json';
 	const api_sgv = _nsUrl + '/api/v1/entries/sgv.json';
 
-	const treatments: Treatment[] = await fetch(api_url, getParams)
-		.then(resTreatments => resTreatments.json())
-		.catch(err => logger.error(err));
-
-	const profiles: Profile[] = await fetch(api_profile, getParams)
-		.then(resProfile => resProfile.json());
-
-	const entries: Sgv[] = await fetch(api_sgv, getParams)
-		.then(resSGV => resSGV.json());
-
-	return {
-		treatments,
-		profiles,
-		entries,
-	};
+	const treatments: { json: () => Promise<Treatment[]> } = fetch(api_url, getParams)
+	const profiles: { json: () => Promise<Profile[]> } = fetch(api_profile, getParams)
+	const entries: { json: () => Promise<Sgv[]> } = fetch(api_sgv, getParams)
+	return Promise.all([treatments, profiles, entries])
+		.then(([resTreatments, resProfile, resEntries]) => {
+			return Promise.all([resTreatments.json(), resProfile.json(), resEntries.json()])
+		})
+		.then(([treatments, profiles, entries,]) => {
+			return {
+				treatments,
+				profiles,
+				entries,
+			};
+		})		
+		.catch(err => {
+			logger.error(err);
+			throw new Error(err);			
+		});		
+	
 };
 export default downloads;
