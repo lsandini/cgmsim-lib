@@ -1,4 +1,5 @@
 "use strict";
+var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.uploadBase = exports.getDeltaMinutes = exports.getInsulinActivity = void 0;
 const node_fetch_1 = require("node-fetch");
@@ -6,7 +7,7 @@ const moment = require("moment");
 const pino_1 = require("pino");
 const setupParams_1 = require("./setupParams");
 const logger = pino_1.default({
-    level: process.env.LOG_LEVEL,
+    level: (_a = process.env.LOG_LEVEL) !== null && _a !== void 0 ? _a : 'ERROR',
     transport: {
         target: 'pino-pretty',
         options: {
