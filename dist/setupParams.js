@@ -2,8 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const { createHash } = require('crypto');
 const https = require('https');
-function default_1(apiSecret) {
-    const agent = new https.Agent({ rejectUnauthorized: false, });
+function default_1(apiSecret, isHttps = true) {
+    const agent = isHttps ? new https.Agent({ rejectUnauthorized: false, }) : null;
     const hash = createHash('sha1');
     hash.update(apiSecret);
     const hash_secret = hash.digest('hex');

@@ -25,11 +25,12 @@ export function getInsulinActivity(peakMin: number, durationMin: number, timeMin
 	return activity;
 }
 export const getDeltaMinutes = (mills: number | string) => Math.round(moment().diff(moment(mills), 'seconds') / 60);
-export function uploadBase(cgmsim: Sgv | Activity | Note, api_url: string, apiSecret: string) {
-	const { postParams } = setupParams(apiSecret);
+export function uploadBase(cgmsim: Sgv | Activity | Note, nsUrlApi: string, apiSecret: string) {
+	const isHttps = nsUrlApi.match(/^https/)?.length > 0;
+	const { postParams } = setupParams(apiSecret,isHttps);
 	const body_json = JSON.stringify(cgmsim);
 
-	return fetch(api_url, {
+	return fetch(nsUrlApi, {
 		...postParams,
 		body: body_json,
 	})

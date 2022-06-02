@@ -6,7 +6,9 @@ const setupParams_1 = require("./setupParams");
 //const logger = pino();
 const fetch = require('node-fetch');
 const downloads = (nsUrl, apiSecret) => tslib_1.__awaiter(void 0, void 0, void 0, function* () {
-    const { getParams } = setupParams_1.default(apiSecret);
+    var _a;
+    const isHttps = ((_a = nsUrl.match(/^https/)) === null || _a === void 0 ? void 0 : _a.length) > 0;
+    const { getParams } = setupParams_1.default(apiSecret, isHttps);
     const api_url = nsUrl + '/api/v1/treatments';
     const api_profile = nsUrl + '/api/v1/profile.json';
     const api_sgv = nsUrl + '/api/v1/entries/sgv.json';

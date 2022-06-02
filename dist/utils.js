@@ -26,10 +26,12 @@ function getInsulinActivity(peakMin, durationMin, timeMin, insulin) {
 exports.getInsulinActivity = getInsulinActivity;
 const getDeltaMinutes = (mills) => Math.round(moment().diff(moment(mills), 'seconds') / 60);
 exports.getDeltaMinutes = getDeltaMinutes;
-function uploadBase(cgmsim, api_url, apiSecret) {
-    const { postParams } = setupParams_1.default(apiSecret);
+function uploadBase(cgmsim, nsUrlApi, apiSecret) {
+    var _a;
+    const isHttps = ((_a = nsUrlApi.match(/^https/)) === null || _a === void 0 ? void 0 : _a.length) > 0;
+    const { postParams } = setupParams_1.default(apiSecret, isHttps);
     const body_json = JSON.stringify(cgmsim);
-    return node_fetch_1.default(api_url, Object.assign(Object.assign({}, postParams), { body: body_json }))
+    return node_fetch_1.default(nsUrlApi, Object.assign(Object.assign({}, postParams), { body: body_json }))
         .then(() => {
         logger.debug('NIGTHSCOUT Updated');
     })
