@@ -1,17 +1,19 @@
-import logger from './utils';
+import logger, { isHttps, removeTrailingSlash } from './utils';
 import setupParams from './setupParams';
 import { Profile, Sgv, Treatment } from './Types';
-
+import fetch from 'node-fetch';
 //const logger = pino();
-const fetch = require('node-fetch');
+
+
 
 const downloads = async (nsUrl: string, apiSecret: string) => {
-	const isHttps = nsUrl.match(/^https/)?.length > 0;
+	const _nsUrl = removeTrailingSlash(nsUrl)
+	const _isHttps = isHttps(nsUrl);
 
-	const { getParams } = setupParams(apiSecret,isHttps);
-	const api_url = nsUrl + '/api/v1/treatments';
-	const api_profile = nsUrl + '/api/v1/profile.json';
-	const api_sgv = nsUrl + '/api/v1/entries/sgv.json';
+	const { getParams } = setupParams(apiSecret, _isHttps);
+	const api_url = _nsUrl + '/api/v1/treatments';
+	const api_profile = _nsUrl + '/api/v1/profile.json';
+	const api_sgv = _nsUrl + '/api/v1/entries/sgv.json';
 
 	const treatments: Treatment[] = await fetch(api_url, getParams)
 		.then(resTreatments => resTreatments.json())

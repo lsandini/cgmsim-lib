@@ -15,6 +15,12 @@ const logger = pino({
 });
 
 export default logger;
+export function isHttps(str) {
+	return str.match(/^https/)?.length > 0;
+}
+export function removeTrailingSlash(str) {
+	return str.endsWith('/') ? str.slice(0, -1) : str;
+}
 
 export function getInsulinActivity(peakMin: number, durationMin: number, timeMin: number, insulin: number) {
 	const tau = peakMin * (1 - peakMin / durationMin) / (1 - 2 * peakMin / durationMin);
@@ -25,9 +31,10 @@ export function getInsulinActivity(peakMin: number, durationMin: number, timeMin
 	return activity;
 }
 export const getDeltaMinutes = (mills: number | string) => Math.round(moment().diff(moment(mills), 'seconds') / 60);
-export function uploadBase(cgmsim: Sgv | Activity | Note, nsUrlApi: string, apiSecret: string) {
-	const isHttps = nsUrlApi.match(/^https/)?.length > 0;
-	const { postParams } = setupParams(apiSecret,isHttps);
+export function uploadBase(cgmsim: Sgv | Activity | Note, nsUrlApi: string, apiSecret: string) {	
+	const _isHttps = isHttps(nsUrlApi);
+
+	const { postParams } = setupParams(apiSecret,_isHttps);
 	const body_json = JSON.stringify(cgmsim);
 
 	return fetch(nsUrlApi, {
