@@ -6,7 +6,7 @@ describe('simulator test', () => {
 	let date;
 	beforeEach(() => {
 
-		date = new Date('2022-05-29T22:10:00');
+		date = new Date('2022-05-29T22:10:00Z');
 
 		jest.useFakeTimers('modern');
 		jest.setSystemTime(date);
@@ -37,7 +37,7 @@ describe('simulator test', () => {
 		},
 		];
 		const treatments: Treatment[] = [{
-			created_at: now.toLocaleString(),
+			created_at: now.toISOString(),
 			notes: 'Tou 14',
 			carbs: 0
 		}]
@@ -51,14 +51,14 @@ describe('simulator test', () => {
 		}
 
 		const log = []
-		log.push('Tou 14U  ' + now.toLocaleString());
+		log.push('Tou 14U  ' + now.toISOString());
 		for (let index = 0; index < (60 * 34);) {
 			if (index === (7 * 60 + 30)) {
-				log.push('Bolus 6U  ' + now.toLocaleString())
+				log.push('Bolus 6U  ' + now.toISOString())
 				treatments.push({
 					carbs: 0,
 					insulin: 6,
-					created_at: now.toLocaleString()
+					created_at: now.toISOString()
 				})
 			}
 
