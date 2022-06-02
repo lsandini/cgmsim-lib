@@ -31,7 +31,16 @@ export declare type Entry = EntryValueType & {
     date: number;
     type: 'sgv';
 };
-export declare type Profile = {};
+export declare type ProfileParams = {
+    basal: number;
+};
+export declare type Profile = {
+    startDate: string;
+    defaultProfile: string;
+    store: {
+        [profileName: string]: ProfileParams;
+    };
+};
 export declare type Treatment = {
     absolute?: any;
     duration?: number;
@@ -60,10 +69,72 @@ export declare type CGMSimParams = {
     carbsActivity: number;
     bolusActivity: number;
 };
+export declare type MainParamsUVA = {
+    env: {
+        WEIGHT: string;
+    };
+    treatments: Treatment[];
+    profile: Profile[];
+    lastState: PatientUvaState;
+};
 export declare type MainParams = {
     env: EnvParam;
     entries: Sgv[];
     treatments: Treatment[];
     profiles: Profile[];
     pumpBasals?: {}[];
+};
+export declare type InputPatientUvaState = {
+    iir: number;
+    ibolus: number;
+    carbs: number;
+    meal: number;
+};
+export declare type PatientUvaState = {
+    Gp: number;
+    Gt: number;
+    I_: number;
+    Il: number;
+    Ip: number;
+    Isc1: number;
+    Isc2: number;
+    Qgut: number;
+    Qsto1: number;
+    Qsto2: number;
+    X: number;
+    XL: number;
+};
+export declare type UvaParametersType = {
+    BW: number;
+    Gpeq: number;
+    VG: number;
+    k1: number;
+    k2: number;
+    VI: number;
+    m1: number;
+    m2: number;
+    m4: number;
+    m5: number;
+    m6: number;
+    HEeq: number;
+    kmax: number;
+    kmin: number;
+    kabs: number;
+    kgri: number;
+    f: number;
+    kp1: number;
+    kp2: number;
+    kp3: number;
+    kp4: number;
+    ki: number;
+    Fcns: number;
+    Vm0: number;
+    Vmx: number;
+    Km0: number;
+    p2u: number;
+    ke1: number;
+    ke2: number;
+    ka1: number;
+    ka2: number;
+    kd: number;
 };
