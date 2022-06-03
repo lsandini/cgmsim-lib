@@ -38,7 +38,8 @@ function default_1(treatments, weight) {
             return Object.assign(Object.assign({}, e), { minutesAgo: utils_1.getDeltaMinutes(e.created_at), drug: e.notes.slice(0, 3), 
                 // insulin: parseInt(e.notes.slice(-2)) 
                 insulin: parseInt(e.notes.slice(lastIndexEmptySpace), 10) });
-        }) : [];
+        })
+            .filter(e => e.minutesAgo >= 0) : [];
     const lastBasals = basals.filter(function (e) {
         return e.minutesAgo <= 45 * 60; // keep only the basals from the last 45 hours
     });

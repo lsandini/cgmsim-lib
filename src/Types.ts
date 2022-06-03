@@ -34,6 +34,7 @@ export type EntryValueType = {
 }
 export type Entry = EntryValueType & {
 	date: number;
+	dateString: string;
 	type: 'sgv';
 };
 

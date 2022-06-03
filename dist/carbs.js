@@ -6,7 +6,8 @@ function carbs(treatments = [], carbsAbs, isf, cr) {
     const isfMMol = isf / 18; //(mmol/l)/U
     const meals = treatments
         .filter(e => e.carbs && utils_1.getDeltaMinutes(e.created_at) <= 360)
-        .map(e => (Object.assign(Object.assign({}, e), { minutesAgo: utils_1.getDeltaMinutes(e.created_at) })));
+        .map(e => (Object.assign(Object.assign({}, e), { minutesAgo: utils_1.getDeltaMinutes(e.created_at) })))
+        .filter(e => e.minutesAgo >= 0);
     utils_1.default.debug('Last 6 hours meal: %o', meals);
     const carbs = meals || [];
     const carbAbsTime = carbsAbs; // meal absorption time in min default 360 or 6 hours

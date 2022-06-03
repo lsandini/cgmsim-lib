@@ -29,6 +29,7 @@ export declare type EntryValueType = {
 };
 export declare type Entry = EntryValueType & {
     date: number;
+    dateString: string;
     type: 'sgv';
 };
 export declare type ProfileParams = {

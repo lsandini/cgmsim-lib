@@ -17,25 +17,24 @@ describe('simulator test', () => {
 	});
 
 	test('start from 274 22:10 + 14u tou +', () => {
-		let now = moment(date);
+		 let now = moment(date);
+		 
 
 		const entries: Sgv[] = [{
-			mills: now.add(-20, 'minutes').toDate().getTime(),
-			sgv: 274
-		}, {
-			mills: now.add(-15, 'minutes').toDate().getTime(),
-			sgv: 274
-		}, {
-			mills: now.add(-10, 'minutes').toDate().getTime(),
+			mills: now.add(-5, 'minutes').toDate().getTime(),
 			sgv: 274
 		}, {
 			mills: now.add(-5, 'minutes').toDate().getTime(),
 			sgv: 274
 		}, {
-			mills: now.toDate().getTime(),
+			mills: now.add(-0, 'minutes').toDate().getTime(),
 			sgv: 274
-		},
+		}, {
+			mills: now.add(-5, 'minutes').toDate().getTime(),
+			sgv: 274
+		}
 		];
+		now = moment(date);
 		const treatments: Treatment[] = [{
 			created_at: now.toISOString(),
 			notes: 'Tou 14',
@@ -69,6 +68,12 @@ describe('simulator test', () => {
 				mills: now.toDate().getTime(),
 				sgv: result.sgv,
 			})
+			expect(result.deltaMinutes).toBeGreaterThanOrEqual(0)
+			expect(result.basalActivity).toBeGreaterThanOrEqual(0)
+			expect(result.bolusActivity).toBeGreaterThanOrEqual(0)
+			expect(result.carbsActivity).toBeGreaterThanOrEqual(0)
+			expect(result.liverActivity).toBeGreaterThanOrEqual(0)
+			expect(result.pumpBasalActivity).toBeGreaterThanOrEqual(0)
 			// console.log('Result ' + result.sgv + ' ' + now.toLocaleString())
 			log.push('Result ' + result.sgv + ' ' + now.toISOString())
 

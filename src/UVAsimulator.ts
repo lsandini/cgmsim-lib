@@ -37,7 +37,8 @@ const simulator = ({
 		...e,
 		minutesAgo: getDeltaMinutes(e.created_at),
 		insulin: e.insulin
-	})).filter(t => t.minutesAgo < 5 && t.minutesAgo >= 0)
+	}))
+		.filter(t => t.minutesAgo < 5 && t.minutesAgo >= 0)
 
 	const bolusActivity = last5MinuteTreatments
 		.filter(i => i.insulin > 0)

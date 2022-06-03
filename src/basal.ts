@@ -22,7 +22,6 @@ export const computeBasalActivity = (treatments: (TreatmentDelta & { duration: n
 		const insulin = e.insulin;
 		const activity = getInsulinActivity(e.peak, e.duration, minutesAgo, insulin);
 		return activity > 0 ? activity : 0;
-
 	});
 	logger.debug('these are the last Slow INSULINS: %o', treatmentsActivity);
 	const resultAct = treatmentsActivity.reduce((tot, activity) => {
@@ -44,7 +43,8 @@ export default function (treatments: Treatment[], weight: number): number {
 					// insulin: parseInt(e.notes.slice(-2)) 
 					insulin: parseInt(e.notes.slice(lastIndexEmptySpace), 10)
 				}
-			}) : [];
+			})
+			.filter(e => e.minutesAgo >= 0) : [];
 
 	const lastBasals = basals.filter(function (e) {
 		return e.minutesAgo <= 45 * 60; // keep only the basals from the last 45 hours

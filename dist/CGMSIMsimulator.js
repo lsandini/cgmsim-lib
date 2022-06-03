@@ -9,6 +9,7 @@ const carbs_1 = require("./carbs");
 const arrows_1 = require("./arrows");
 const liver_1 = require("./liver");
 const sgv_1 = require("./sgv");
+const moment = require("moment");
 utils_1.default.debug('Run Init');
 const simulator = ({ env, entries, treatments, profiles, pumpBasals }) => {
     const isf = parseInt(env.ISF);
@@ -31,7 +32,9 @@ const simulator = ({ env, entries, treatments, profiles, pumpBasals }) => {
     // const tou = toujeoRun(weight, lastTOU);
     //activity calc carb
     const liverActivity = liver_1.default(isf, cr);
-    const newSgvValue = sgv_1.default(entries, { basalActivity, liverActivity, carbsActivity, bolusActivity }, perls, isf);
+    const now = moment();
+    const orderedEntries = entries.filter(e => e.mills > now.millisecond()).sort((a, b) => b.mills - a.mills);
+    const newSgvValue = sgv_1.default(orderedEntries, { basalActivity, liverActivity, carbsActivity, bolusActivity }, perls, isf);
     utils_1.default.debug('this is the new sgv: %o', newSgvValue);
     const arrows = arrows_1.default([newSgvValue, ...entries]);
     return Object.assign(Object.assign({}, newSgvValue), { direction: arrows[0].direction });

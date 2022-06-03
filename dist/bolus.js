@@ -8,7 +8,7 @@ exports.default = (treatments, dia, peak) => {
         minutesAgo: utils_1.getDeltaMinutes(e.created_at),
         insulin: e.insulin
     }))
-        .filter(e => e.minutesAgo <= 300);
+        .filter(e => e.minutesAgo <= 300 && e.minutesAgo >= 0);
     utils_1.default.debug('this is the filtered treatments (insulin): %o', insulin);
     utils_1.default.debug('length %o', insulin.length); // returns the number of boluses or length of the array
     // dia is the duration of insulin action in hours

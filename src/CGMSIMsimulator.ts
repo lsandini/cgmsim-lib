@@ -11,6 +11,7 @@ import arrowsRun from './arrows';
 import liverRun from './liver';
 import sgv from './sgv';
 import { MainParams } from './Types';
+import moment = require('moment');
 
 logger.debug('Run Init');
 
@@ -31,13 +32,13 @@ const simulator = ({
 	const carbsAbs = parseInt(env.CARBS_ABS_TIME);
 	const cr = parseInt(env.CR);
 	const perls = perlinRun(env.SEED || 'cgmsim');
-	
+
 
 
 	const bolusActivity = bolus(treatments, dia, tp);
 	const basalActivity = basal(treatments, weight);
-	const carbsActivity = carbs(treatments,carbsAbs,isf,cr);
-	
+	const carbsActivity = carbs(treatments, carbsAbs, isf, cr);
+
 
 	// //activity calc insulin
 	// const det = detemirRun(weight, lastDET);
@@ -47,8 +48,10 @@ const simulator = ({
 
 	//activity calc carb
 	const liverActivity = liverRun(isf, cr);
+	const now = moment();
+	const orderedEntries = entries.filter(e => e.mills > now.millisecond()).sort((a, b) => b.mills - a.mills)
 
-	const newSgvValue = sgv(entries, { basalActivity, liverActivity, carbsActivity, bolusActivity }, perls, isf);
+	const newSgvValue = sgv(orderedEntries, { basalActivity, liverActivity, carbsActivity, bolusActivity }, perls, isf);
 
 	logger.debug('this is the new sgv: %o', newSgvValue);
 	const arrows = arrowsRun([newSgvValue, ...entries]);

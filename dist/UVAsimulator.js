@@ -17,7 +17,8 @@ const simulator = ({ env, treatments, profile, lastState, entries }) => {
     // const cr = parseInt(env.CR);
     // const perls = perlinRun(env.SEED || 'cgmsim');
     const basalActivity = basal_1.default(treatments, weight);
-    const last5MinuteTreatments = treatments.map(e => (Object.assign(Object.assign({}, e), { minutesAgo: utils_1.getDeltaMinutes(e.created_at), insulin: e.insulin }))).filter(t => t.minutesAgo < 5 && t.minutesAgo >= 0);
+    const last5MinuteTreatments = treatments.map(e => (Object.assign(Object.assign({}, e), { minutesAgo: utils_1.getDeltaMinutes(e.created_at), insulin: e.insulin })))
+        .filter(t => t.minutesAgo < 5 && t.minutesAgo >= 0);
     const bolusActivity = last5MinuteTreatments
         .filter(i => i.insulin > 0)
         .map(i => i.insulin)
@@ -32,7 +33,7 @@ const simulator = ({ env, treatments, profile, lastState, entries }) => {
     const tmax = 5;
     const dt = 1;
     //get last state from mongo
-    let x = lastState ? lastState : patient.getInitialState(entries[0].sgv);
+    let x = lastState ? lastState : patient.getInitialState(entries && entries.length > 0 ? entries[0].sgv : null);
     let u = { meal: 0, iir: 0, ibolus: 0 };
     let y = patient.getOutputs(t, x, u);
     // start simulation

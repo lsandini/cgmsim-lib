@@ -11,7 +11,8 @@ export default function carbs(treatments: Treatment[] = [], carbsAbs: number, is
 		.map(e => ({
 			...e,
 			minutesAgo: getDeltaMinutes(e.created_at),
-		}));
+		}))
+		.filter(e=>e.minutesAgo>=0);
 
 	logger.debug('Last 6 hours meal: %o', meals);
 
