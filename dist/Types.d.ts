@@ -79,7 +79,7 @@ export declare type MainParamsUVA = {
         WEIGHT: string;
     };
     treatments: Treatment[];
-    profile: Profile[];
+    profiles: Profile[];
     lastState: PatientUvaState;
     entries: Sgv[];
 };

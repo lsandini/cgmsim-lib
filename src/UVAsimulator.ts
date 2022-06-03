@@ -20,7 +20,7 @@ logger.info('Run Init');
 const simulator = ({
 	env,
 	treatments,
-	profile,
+	profiles: profile,
 	lastState,
 	entries
 }: MainParamsUVA) => {

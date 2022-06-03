@@ -36,7 +36,7 @@ describe('uva test default PATIENT', () => {
 		for (let i = 0; i < 12; i++) {
 
 
-			const { x, y } = simulatorUVA({ env: { WEIGHT: '80' }, lastState, treatments, profile: [], entries });
+			const { x, y } = simulatorUVA({ env: { WEIGHT: '80' }, lastState, treatments, profiles: [], entries });
 			yList.push(y.Gp);
 			lastState = x;
 		}
@@ -68,7 +68,7 @@ describe('uva test default PATIENT', () => {
 			}
 		}]
 		for (let i = 0; i < 12; i++) {
-			const { x, y } = simulatorUVA({ env: { WEIGHT: '80' }, lastState, treatments: [], profile, entries });
+			const { x, y } = simulatorUVA({ env: { WEIGHT: '80' }, lastState, treatments: [], profiles: profile, entries });
 			yList.push(y.Gp);
 			lastState = x;
 		}
@@ -106,7 +106,7 @@ describe('uva test default PATIENT', () => {
 		const now = moment('2022-05-01T11:00:00')
 		let yMax = 0;
 		for (let i = 0; i < 36; i++) {
-			const { x, y } = simulatorUVA({ env: { WEIGHT: '80' }, lastState, treatments, profile, entries });
+			const { x, y } = simulatorUVA({ env: { WEIGHT: '80' }, lastState, treatments, profiles: profile, entries });
 			yList.push(y.Gp);
 			lastState = x;
 			yMax = y.Gp > yMax ? y.Gp : yMax;
@@ -160,7 +160,7 @@ describe('uva test default PATIENT', () => {
 		const now = moment('2022-05-01T11:00:00')
 		let yMax = 0;
 		for (let i = 0; i < 36; i++) {
-			const { x, y } = simulatorUVA({ env: { WEIGHT: '80' }, lastState, treatments, profile, entries });
+			const { x, y } = simulatorUVA({ env: { WEIGHT: '80' }, lastState, treatments, profiles: profile, entries });
 			yList.push(y.Gp);
 			lastState = x;
 			yMax = y.Gp > yMax ? y.Gp : yMax;

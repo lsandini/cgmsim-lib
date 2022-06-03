@@ -9,7 +9,7 @@ const basalProfile_1 = require("./basalProfile");
 const uva_1 = require("./uva");
 const SolverRK_1 = require("./SolverRK");
 utils_1.default.info('Run Init');
-const simulator = ({ env, treatments, profile, lastState, entries }) => {
+const simulator = ({ env, treatments, profiles: profile, lastState, entries }) => {
     const weight = parseInt(env.WEIGHT);
     // const dia = parseInt(env.DIA);
     // const tp = parseInt(env.TP);
