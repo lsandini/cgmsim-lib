@@ -1,9 +1,12 @@
 import moment = require('moment');
-import { Profile, Treatment } from 'src/Types';
+import { Profile, Sgv, Treatment } from '../src/Types';
 import simulatorUVA from '../src/UVAsimulator';
-beforeAll(() => {
+const now = new Date('2022-05-01T11:00:00')
+let entries: Sgv[];
+beforeEach(() => {
 	jest.useFakeTimers('modern');
-	jest.setSystemTime(new Date('2022-05-01T11:00:00'));
+	jest.setSystemTime(now);
+	entries = []
 });
 
 afterAll(() => {
@@ -32,7 +35,8 @@ describe('uva test default PATIENT', () => {
 		const yList = [];
 		for (let i = 0; i < 12; i++) {
 
-			const { x, y } = simulatorUVA({ env: { WEIGHT: '80' }, lastState, treatments, profile: [] });
+
+			const { x, y } = simulatorUVA({ env: { WEIGHT: '80' }, lastState, treatments, profile: [], entries });
 			yList.push(y.Gp);
 			lastState = x;
 		}
@@ -64,7 +68,7 @@ describe('uva test default PATIENT', () => {
 			}
 		}]
 		for (let i = 0; i < 12; i++) {
-			const { x, y } = simulatorUVA({ env: { WEIGHT: '80' }, lastState, treatments: [], profile });
+			const { x, y } = simulatorUVA({ env: { WEIGHT: '80' }, lastState, treatments: [], profile, entries });
 			yList.push(y.Gp);
 			lastState = x;
 		}
@@ -102,7 +106,7 @@ describe('uva test default PATIENT', () => {
 		const now = moment('2022-05-01T11:00:00')
 		let yMax = 0;
 		for (let i = 0; i < 36; i++) {
-			const { x, y } = simulatorUVA({ env: { WEIGHT: '80' }, lastState, treatments, profile });
+			const { x, y } = simulatorUVA({ env: { WEIGHT: '80' }, lastState, treatments, profile, entries });
 			yList.push(y.Gp);
 			lastState = x;
 			yMax = y.Gp > yMax ? y.Gp : yMax;
@@ -122,11 +126,11 @@ describe('uva test default PATIENT', () => {
 
 		expect(yAfter3h).toBeLessThan(228)
 		expect(yAfter3h).toBeGreaterThan(227)
-		
+
 		expect(yMax).toBeLessThan(234.9)
 		expect(yMax).toBeGreaterThan(234.8)
-		
-		
+
+
 		expect(lastState).toMatchSnapshot()
 		expect(yList).toMatchSnapshot()
 	})
@@ -147,7 +151,7 @@ describe('uva test default PATIENT', () => {
 		const treatments: Treatment[] = [{
 			carbs: 50,
 			created_at: '2022-05-01T11:30:00',
-		},{
+		}, {
 			carbs: 0,
 			insulin: 7.5,
 			created_at: '2022-05-01T11:15:00',
@@ -156,7 +160,7 @@ describe('uva test default PATIENT', () => {
 		const now = moment('2022-05-01T11:00:00')
 		let yMax = 0;
 		for (let i = 0; i < 36; i++) {
-			const { x, y } = simulatorUVA({ env: { WEIGHT: '80' }, lastState, treatments, profile });
+			const { x, y } = simulatorUVA({ env: { WEIGHT: '80' }, lastState, treatments, profile, entries });
 			yList.push(y.Gp);
 			lastState = x;
 			yMax = y.Gp > yMax ? y.Gp : yMax;
@@ -176,11 +180,11 @@ describe('uva test default PATIENT', () => {
 
 		expect(yAfter3h).toBeLessThan(124)
 		expect(yAfter3h).toBeGreaterThan(123)
-		
+
 		expect(yMax).toBeLessThan(165.6)
 		expect(yMax).toBeGreaterThan(165.5)
-		
-		
+
+
 		expect(lastState).toMatchSnapshot()
 		expect(yList).toMatchSnapshot()
 	})

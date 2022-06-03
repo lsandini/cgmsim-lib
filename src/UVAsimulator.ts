@@ -59,7 +59,7 @@ const simulator = ({
 
 	const dt = 1
 	//get last state from mongo
-	let x = lastState ? lastState : patient.getInitialState(entries[0].sgv)
+	let x = lastState ? lastState : patient.getInitialState(entries && entries.length > 0 ? entries[0].sgv : null)
 	let u = { meal: 0, iir: 0, ibolus: 0 }
 	let y = patient.getOutputs(t, x, u)
 
