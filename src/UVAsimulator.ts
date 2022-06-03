@@ -11,7 +11,7 @@ import basalProfile from './basalProfile';
 // import arrowsRun from './arrows';
 // import liverRun from './liver';
 // import sgvStartRun from './sgv';
-import { InputPatientUvaState, MainParams, MainParamsUVA, Treatment, TreatmentDelta } from './Types';
+import { InputPatientUvaState, MainParams, MainParamsUVA, Treatment } from './Types';
 import { PatientUva } from './uva';
 import RK4 from './SolverRK';
 
@@ -22,6 +22,7 @@ const simulator = ({
 	treatments,
 	profile,
 	lastState,
+	entries
 }: MainParamsUVA) => {
 
 	const weight = parseInt(env.WEIGHT);
@@ -58,7 +59,7 @@ const simulator = ({
 
 	const dt = 1
 	//get last state from mongo
-	let x = lastState ? lastState : patient.getInitialState()
+	let x = lastState ? lastState : patient.getInitialState(entries[0].sgv)
 	let u = { meal: 0, iir: 0, ibolus: 0 }
 	let y = patient.getOutputs(t, x, u)
 

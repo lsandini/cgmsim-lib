@@ -16,7 +16,7 @@ export type Drug = {
 
 export type Note = {
 	type: 'Note',
-	notes:string,	
+	notes: string,
 }
 export type Activity = {
 	steps: number,
@@ -38,7 +38,7 @@ export type Entry = EntryValueType & {
 };
 
 export type ProfileParams = {
-	basal: number;
+	basal: number | { value: number, time: string, timeAsSecond: number }[];
 }
 
 export type Profile = {
@@ -84,6 +84,7 @@ export type MainParamsUVA = {
 	treatments: Treatment[],
 	profile: Profile[],
 	lastState: PatientUvaState,
+	entries: Sgv[];
 }
 export type MainParams = {
 	env: EnvParam;

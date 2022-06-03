@@ -10,7 +10,7 @@ function default_1(profile) {
     }
     lastProfile = lastProfiles[0];
     const defaultProfile = lastProfile.defaultProfile;
-    const defaultProfileBasals = lastProfile.store[defaultProfile].basal;
+    const defaultProfileBasals = Array.isArray(lastProfile.store[defaultProfile].basal) ? lastProfile.store[defaultProfile].basal[0].value : lastProfile.store[defaultProfile].basal;
     return defaultProfileBasals / 60;
 }
 exports.default = default_1;

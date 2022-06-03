@@ -32,7 +32,11 @@ export declare type Entry = EntryValueType & {
     type: 'sgv';
 };
 export declare type ProfileParams = {
-    basal: number;
+    basal: number | {
+        value: number;
+        time: string;
+        timeAsSecond: number;
+    }[];
 };
 export declare type Profile = {
     startDate: string;
@@ -76,6 +80,7 @@ export declare type MainParamsUVA = {
     treatments: Treatment[];
     profile: Profile[];
     lastState: PatientUvaState;
+    entries: Sgv[];
 };
 export declare type MainParams = {
     env: EnvParam;

@@ -164,7 +164,11 @@ export class PatientUva {
 		// todo: Ipb and Ilb are not accurate
 	}
 
-	getInitialState() {
+	getInitialState(startSGV?: number) {
+		if (startSGV) {
+			this.parameters.Gpeq = startSGV * this.parameters.VG;
+			this.computeSteadyState()
+		}
 		return this.xeq;
 	}
 

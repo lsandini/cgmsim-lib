@@ -9,7 +9,7 @@ const basalProfile_1 = require("./basalProfile");
 const uva_1 = require("./uva");
 const SolverRK_1 = require("./SolverRK");
 utils_1.default.info('Run Init');
-const simulator = ({ env, treatments, profile, lastState, }) => {
+const simulator = ({ env, treatments, profile, lastState, entries }) => {
     const weight = parseInt(env.WEIGHT);
     // const dia = parseInt(env.DIA);
     // const tp = parseInt(env.TP);
@@ -32,7 +32,7 @@ const simulator = ({ env, treatments, profile, lastState, }) => {
     const tmax = 5;
     const dt = 1;
     //get last state from mongo
-    let x = lastState ? lastState : patient.getInitialState();
+    let x = lastState ? lastState : patient.getInitialState(entries[0].sgv);
     let u = { meal: 0, iir: 0, ibolus: 0 };
     let y = patient.getOutputs(t, x, u);
     // start simulation

@@ -133,7 +133,11 @@ class PatientUva {
         // console.log(this.derivatives(0, this.xeq, {carbs: 0, iir: this.IIReq, ibolus: 0}));
         // todo: Ipb and Ilb are not accurate
     }
-    getInitialState() {
+    getInitialState(startSGV) {
+        if (startSGV) {
+            this.parameters.Gpeq = startSGV * this.parameters.VG;
+            this.computeSteadyState();
+        }
         return this.xeq;
     }
     getDerivatives(_t, x, u) {

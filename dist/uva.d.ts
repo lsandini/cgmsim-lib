@@ -12,7 +12,7 @@ export declare class PatientUva {
     constructor(parameters: any);
     setParameters(parameters: any): void;
     computeSteadyState(): void;
-    getInitialState(): PatientUvaState;
+    getInitialState(startSGV?: number): PatientUvaState;
     getDerivatives(_t: any, x: any, u: any): {};
     getOutputs(_t: any, x: any, _u: any): {
         Gp: number;
