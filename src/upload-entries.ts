@@ -10,7 +10,7 @@ export default function (cgmsim: EntryValueType, nsUrl: string, apiSecret: strin
 		...cgmsim,
 		type: 'sgv',
 		dateString: now.toISOString(),
-		date: now.millisecond(),
+		date: now.toDate().getTime(),
 	}
 	return uploadBase(entry, api_url, apiSecret);
 }

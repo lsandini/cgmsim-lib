@@ -49,7 +49,7 @@ const simulator = ({
 	//activity calc carb
 	const liverActivity = liverRun(isf, cr);
 	const now = moment();
-	const orderedEntries = entries.filter(e => e.mills > now.millisecond()).sort((a, b) => b.mills - a.mills)
+	const orderedEntries = entries.filter(e => e.mills <= now.toDate().getTime()).sort((a, b) => b.mills - a.mills)
 
 	const newSgvValue = sgv(orderedEntries, { basalActivity, liverActivity, carbsActivity, bolusActivity }, perls, isf);
 
