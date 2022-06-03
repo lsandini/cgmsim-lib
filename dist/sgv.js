@@ -26,7 +26,7 @@ const sgv_start = (entries, { basalActivity, liverActivity, carbsActivity, bolus
     const bolusDeltaMinutesActivity = bolusActivity * deltaMinutes;
     const pumpBasalDeltaMinutesActivity = pumpBasalActivity * deltaMinutes;
     const globalInsulinAct = basalDeltaMinutesActivity + bolusDeltaMinutesActivity + pumpBasalDeltaMinutesActivity; //U/min
-    const BGI_ins = (globalInsulinAct * deltaMinutes * isfMMol) * -1; //mmol/l
+    const BGI_ins = (globalInsulinAct * isfMMol) * -1; //mmol/l
     const liverDeltaMinutesActivity = liverActivity * deltaMinutes; //mmol/l
     const carbsDeltaMinutesActivity = carbsActivity * deltaMinutes;
     const lastPerls = perls.filter(function (e) {
@@ -46,11 +46,11 @@ const sgv_start = (entries, { basalActivity, liverActivity, carbsActivity, bolus
         sgv: limited_sgv_pump,
         deltaMinutes,
         carbsActivity: carbsDeltaMinutesActivity * 18,
-        basalActivity: basalDeltaMinutesActivity * 18,
-        bolusActivity: bolusDeltaMinutesActivity * 18,
+        basalActivity: basalDeltaMinutesActivity * isfMMol * 18,
+        bolusActivity: bolusDeltaMinutesActivity * isfMMol * 18,
+        noiseActivity: noiseDeltaMinutesActivity * isfMMol * 18,
         liverActivity: liverDeltaMinutesActivity * 18,
         pumpBasalActivity: pumpBasalDeltaMinutesActivity * 18,
-        noiseActivity: noiseDeltaMinutesActivity * 18,
     };
     utils_1.default.debug('-------------------------------------------');
     utils_1.default.debug('OLD SGV value (' + deltaMinutes + ' minutes ago): %o', oldSgv, 'mg/dl');

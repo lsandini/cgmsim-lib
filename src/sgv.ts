@@ -36,7 +36,7 @@ const sgv_start = (entries: Sgv[], { basalActivity, liverActivity, carbsActivity
 
 	const globalInsulinAct = basalDeltaMinutesActivity + bolusDeltaMinutesActivity + pumpBasalDeltaMinutesActivity; //U/min
 
-	const BGI_ins = (globalInsulinAct * deltaMinutes * isfMMol) * -1; //mmol/l
+	const BGI_ins = (globalInsulinAct * isfMMol) * -1; //mmol/l
 
 	const liverDeltaMinutesActivity = liverActivity * deltaMinutes;//mmol/l
 
@@ -60,11 +60,11 @@ const sgv_start = (entries: Sgv[], { basalActivity, liverActivity, carbsActivity
 		sgv: limited_sgv_pump,
 		deltaMinutes,
 		carbsActivity: carbsDeltaMinutesActivity * 18,
-		basalActivity: basalDeltaMinutesActivity * 18,
-		bolusActivity: bolusDeltaMinutesActivity * 18,
+		basalActivity: basalDeltaMinutesActivity * isfMMol * 18,
+		bolusActivity: bolusDeltaMinutesActivity * isfMMol * 18,
+		noiseActivity: noiseDeltaMinutesActivity * isfMMol* 18,
 		liverActivity: liverDeltaMinutesActivity * 18,
 		pumpBasalActivity: pumpBasalDeltaMinutesActivity * 18,
-		noiseActivity: noiseDeltaMinutesActivity * 18,
 	};
 
 	logger.debug('-------------------------------------------');

@@ -5,8 +5,8 @@ declare const sgv_start: (entries: Sgv[], { basalActivity, liverActivity, carbsA
     carbsActivity: number;
     basalActivity: number;
     bolusActivity: number;
+    noiseActivity: number;
     liverActivity: number;
     pumpBasalActivity: number;
-    noiseActivity: number;
 };
 export default sgv_start;

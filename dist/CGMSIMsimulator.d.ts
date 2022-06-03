@@ -6,8 +6,8 @@ declare const simulator: ({ env, entries, treatments, profiles, pumpBasals }: Ma
     carbsActivity: number;
     basalActivity: number;
     bolusActivity: number;
+    noiseActivity: number;
     liverActivity: number;
     pumpBasalActivity: number;
-    noiseActivity: number;
 };
 export default simulator;
