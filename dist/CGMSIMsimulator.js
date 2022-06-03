@@ -33,7 +33,7 @@ const simulator = ({ env, entries, treatments, profiles, pumpBasals }) => {
     //activity calc carb
     const liverActivity = liver_1.default(isf, cr);
     const now = moment();
-    const orderedEntries = entries.filter(e => e.mills > now.toDate().getTime()).sort((a, b) => b.mills - a.mills);
+    const orderedEntries = entries.filter(e => e.mills <= now.toDate().getTime()).sort((a, b) => b.mills - a.mills);
     const newSgvValue = sgv_1.default(orderedEntries, { basalActivity, liverActivity, carbsActivity, bolusActivity }, perls, isf);
     utils_1.default.debug('this is the new sgv: %o', newSgvValue);
     const arrows = arrows_1.default([newSgvValue, ...entries]);
