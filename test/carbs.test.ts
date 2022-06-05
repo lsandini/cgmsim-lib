@@ -1,11 +1,11 @@
 import moment = require('moment');
 import carbs from '../src/carbs';
+import { oldCarbs } from '../old/oldCarbs';
+import { assert } from 'console';
 const now = '2001-01-01T07:00:00';
-beforeAll(() => {
-	jest.useFakeTimers('modern');
-});
 
 beforeEach(() => {
+	jest.useFakeTimers('modern');
 	jest.setSystemTime(new Date(now));
 
 })
@@ -73,6 +73,8 @@ describe('Carbs test', () => {
 		}], 360, 30, 10)
 		expect(r).toBeGreaterThan(0.1);
 	});
+
+
 	it.each([
 		[[2, 21]],
 		[[3, 7, 21]],
@@ -87,3 +89,38 @@ describe('Carbs test', () => {
 
 	});
 })
+
+describe('Carbs test old compare', () => {
+	beforeEach(() => {
+		jest.useFakeTimers('modern');
+		jest.setSystemTime(new Date(now));
+
+	})
+	afterAll(() => {
+		jest.useRealTimers();
+	});
+	test('should first', () => {
+
+		let now = moment();
+		const oldC = [];
+		const newC = [];
+		for (let i = 0; i < 360; i++) {
+
+			const treatment = [{
+				carbs: 41, created_at: minutesAgo(1), time: moment(minutesAgo(1)).toDate().getTime()
+			},];
+			const carbAbs = 360;
+			const newCarb = carbs(treatment, carbAbs, 36, 10);
+			const old = oldCarbs(treatment, carbAbs)
+			newC.push(newCarb)
+			oldC.push(old);
+			now = now.add(1, "minutes");
+			jest.setSystemTime(now.toDate());
+		}
+		const newT = newC.reduce((acc, i) => ((i * 5) + acc), 0)
+		const oldT = oldC.reduce((acc, i) => i + acc, 0)
+		expect(newT).toBeGreaterThan(oldT - 0.1)
+		expect(newT).toBeLessThan(oldT + 0.1)
+	})
+
+});;

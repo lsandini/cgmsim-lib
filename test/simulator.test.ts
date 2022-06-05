@@ -88,7 +88,7 @@ describe('simulator test', () => {
 
 
 
-	test('start from 119 15:00 + 50g tou +', () => {
+	test('start from 124 15:00 + 50g tou 14', () => {
 		let now = moment('2022-06-04T13:00:00.000Z');
 		jest.setSystemTime(now.toDate());
 
@@ -109,14 +109,15 @@ describe('simulator test', () => {
 		}
 		];
 		now = moment('2022-06-04T13:00:00.000Z');
-		const treatments: Treatment[] = [{
-			created_at: now.toISOString(),
-			carbs: 50
-		},{
-			created_at: '2022-06-04T01:00:00.000Z',
-			notes: 'tou 41',
-			carbs: 0
-		}]
+		const treatments: Treatment[] = [
+			{
+				created_at: now.toISOString(),
+				carbs: 50
+			}, {
+				created_at: '2022-06-04T01:00:00.000Z',
+				notes: 'tou 14',
+				carbs: 0
+			}]
 		const env: EnvParam = {
 			CARBS_ABS_TIME: '360',
 			CR: '10',
@@ -127,6 +128,7 @@ describe('simulator test', () => {
 		}
 
 		const log = []
+		log.push('Tou 14U  2022-06-04T01:00:00.000Z');
 		log.push('Meal 50g  ' + now.toISOString());
 		for (let index = 0; index < (60 * 34);) {
 			const result = simulator({ env, entries, treatments, profiles: [] })

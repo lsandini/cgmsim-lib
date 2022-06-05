@@ -49,7 +49,7 @@ const sgv_start = (entries: Sgv[], { basalActivity, liverActivity, carbsActivity
 
 	const noiseDeltaMinutesActivity = lastPerls && lastPerls.length > 0 ? (lastPerls[0].noise * deltaMinutes) : 0;
 
-	const sgv_pump = Math.floor(oldSgv + (BGI_ins * 18) + (liverDeltaMinutesActivity * 18) + (carbsActivity * 18) + (noiseDeltaMinutesActivity * 18));
+	const sgv_pump = Math.floor(oldSgv + (BGI_ins * 18) + (liverDeltaMinutesActivity * 18) + (carbsDeltaMinutesActivity * 18) + (noiseDeltaMinutesActivity * 18));
 	let limited_sgv_pump = sgv_pump;
 	if (sgv_pump >= 400) {
 		limited_sgv_pump = 400;
