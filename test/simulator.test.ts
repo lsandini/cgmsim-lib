@@ -128,9 +128,10 @@ describe('simulator test', () => {
 		}
 
 		const log = []
+		let lastSgv = 0;
 		log.push('Tou 14U  2022-06-04T01:00:00.000Z');
 		log.push('Meal 50g  ' + now.toISOString());
-		for (let index = 0; index < (60 * 34);) {
+		for (let index = 0; index < (60 * 30);) {
 			const result = simulator({ env, entries, treatments, profiles: [] })
 			entries.splice(0, 0, {
 				mills: now.toDate().getTime(),
@@ -144,12 +145,16 @@ describe('simulator test', () => {
 			expect(result.pumpBasalActivity).toBeGreaterThanOrEqual(0)
 			// console.log('Result ' + result.sgv + ' ' + now.toLocaleString())
 			log.push('Result ' + result.sgv + ' ' + now.toISOString())
+			lastSgv = result.sgv;
 
 			now = now.add(5, "minutes");
 			index = index + 5;
 			jest.setSystemTime(now.toDate());
 		}
-		expect(log).toMatchSnapshot();
+		expect(lastSgv).toBeGreaterThanOrEqual(397)
+
+
+
 
 
 	})
