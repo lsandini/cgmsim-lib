@@ -20,6 +20,7 @@ const simulator = ({
 	entries,
 	treatments,
 	profiles,
+	perlinParams,
 	pumpBasals
 }: MainParams) => {
 	const isf = parseInt(env.ISF);
@@ -31,7 +32,7 @@ const simulator = ({
 	const tp = parseInt(env.TP);
 	const carbsAbs = parseInt(env.CARBS_ABS_TIME);
 	const cr = parseInt(env.CR);
-	const perls = perlinRun(env.SEED || 'cgmsim');
+	const perls = perlinRun(perlinParams);
 
 
 

@@ -17,22 +17,22 @@ describe('test perlin with fake timers', () => {
 
 	test('run twice in same day should return same array', () => {
 		jest.setSystemTime(new Date('2022-05-30T00:01'));
-		const perl = perlin('cgmsim')
+		const perl = perlin()
 		jest.setSystemTime(new Date('2022-05-30T01:01'));
-		const perl2 = perlin('cgmsim')
+		const perl2 = perlin()
 		expect(perl[0].time).toBe(perl2[0].time)
 		expect(perl[0].noise).toBe(perl2[0].noise)
 	})
 	test('run twice different day should return different array', () => {
-		const perl = perlin('')
+		const perl = perlin()
 		jest.setSystemTime(new Date('2001-01-02T01:01'));
-		const perl2 = perlin('')
+		const perl2 = perlin()
 		expect(perl[0].time).not.toBe(perl2[0].time)
 		expect(perl[0].noise).not.toBe(perl2[0].noise)
 	})
 
 	test('run in same day should return same array', () => {
-		const perl = perlin('')
+		const perl = perlin()
 		expect(perl.length).toBe(288);
 		expect(perl[0]).not.toBe(perl[1])
 
@@ -43,9 +43,9 @@ describe('test perlin with fake timers', () => {
 describe('test perlin with real timers', () => {
 
 	test('run twice in same day should return same array', () => {
-		const perl = perlin('')
+		const perl = perlin()
 		setTimeout(() => {
-			const perl2 = perlin('')
+			const perl2 = perlin()
 			expect(perl[0].time).toBe(perl2[0].time)
 			expect(perl[0].noise).toBe(perl2[0].noise)
 		}, 100);
@@ -56,7 +56,7 @@ describe('test comparing old perlin', () => {
 
 
 	test('run in same day should return same array', () => {
-		const perl = perlin('cgmsim')
+		const perl = perlin()
 		const oldPerl = oldPerlin()
 		const countPositiveValPerl = perl.filter(p => p.noise > 0).length
 		const countPositiveValOldPerl = oldPerl.filter(p => p.noise > 0).length
