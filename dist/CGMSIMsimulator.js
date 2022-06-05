@@ -11,7 +11,7 @@ const liver_1 = require("./liver");
 const sgv_1 = require("./sgv");
 const moment = require("moment");
 utils_1.default.debug('Run Init');
-const simulator = ({ env, entries, treatments, profiles, pumpBasals }) => {
+const simulator = ({ env, entries, treatments, profiles, perlinParams, pumpBasals }) => {
     const isf = parseInt(env.ISF);
     if (isf < 9) {
         throw new Error("Isf must be greater then or equal to 9");
@@ -21,7 +21,7 @@ const simulator = ({ env, entries, treatments, profiles, pumpBasals }) => {
     const tp = parseInt(env.TP);
     const carbsAbs = parseInt(env.CARBS_ABS_TIME);
     const cr = parseInt(env.CR);
-    const perls = perlin_1.default(env.SEED || 'cgmsim');
+    const perls = perlin_1.default(perlinParams);
     const bolusActivity = bolus_1.default(treatments, dia, tp);
     const basalActivity = basal_1.default(treatments, weight);
     const carbsActivity = carbs_1.default(treatments, carbsAbs, isf, cr);

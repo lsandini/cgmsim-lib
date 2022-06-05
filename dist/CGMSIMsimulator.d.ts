@@ -1,5 +1,5 @@
 import { MainParams } from './Types';
-declare const simulator: ({ env, entries, treatments, profiles, pumpBasals }: MainParams) => {
+declare const simulator: ({ env, entries, treatments, profiles, perlinParams, pumpBasals }: MainParams) => {
     direction: import("./Types").Direction;
     sgv: number;
     deltaMinutes: number;

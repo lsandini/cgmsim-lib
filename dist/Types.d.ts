@@ -83,11 +83,20 @@ export declare type MainParamsUVA = {
     lastState: PatientUvaState;
     entries: Sgv[];
 };
+export declare type PerlinParams = {
+    amplitude: number;
+    octaveCount: number;
+    persistence: number;
+    maxAbsValue: number;
+    seed: string;
+    mode: 'daily';
+};
 export declare type MainParams = {
     env: EnvParam;
     entries: Sgv[];
     treatments: Treatment[];
     profiles: Profile[];
+    perlinParams?: PerlinParams;
     pumpBasals?: {}[];
 };
 export declare type InputPatientUvaState = {
