@@ -1,6 +1,15 @@
-import { EnvParam, Sgv, Treatment } from "../src/Types";
+import { EnvParam, PerlinParams, Sgv, Treatment } from "../src/Types";
 import simulator from "../src/CGMSIMsimulator";
 import moment = require("moment");
+
+const defaultParams:PerlinParams = {
+	amplitude: 0.3,
+	octaveCount: 3,
+	persistence: 0.3,
+	maxAbsValue: 0.05,
+	seed: 'cgmsim',
+	mode: 'daily'
+}
 
 describe('simulator test', () => {
 	let date;
@@ -62,7 +71,7 @@ describe('simulator test', () => {
 			}
 
 
-			const result = simulator({ env, entries, treatments, profiles: [] })
+			const result = simulator({ env, entries, treatments, profiles: [], perlinParams: defaultParams })
 
 			entries.splice(0, 0, {
 				mills: now.toDate().getTime(),
@@ -132,12 +141,13 @@ describe('simulator test', () => {
 		log.push('Tou 14U  2022-06-04T01:00:00.000Z');
 		log.push('Meal 50g  ' + now.toISOString());
 		for (let index = 0; index < (60 * 30);) {
-			const result = simulator({ env, entries, treatments, profiles: [] })
+			const result = simulator({ env, entries, treatments, profiles: [], })
 			entries.splice(0, 0, {
 				mills: now.toDate().getTime(),
 				sgv: result.sgv,
 			})
 			expect(result.deltaMinutes).toBeGreaterThanOrEqual(0)
+			expect(result.noiseActivity).toBe(0)
 			expect(result.basalActivity).toBeGreaterThanOrEqual(0)
 			expect(result.bolusActivity).toBeGreaterThanOrEqual(0)
 			expect(result.carbsActivity).toBeGreaterThanOrEqual(0)
