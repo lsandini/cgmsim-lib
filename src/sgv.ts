@@ -9,7 +9,7 @@ import { getDeltaMinutes } from './utils';
 const sgv_start = (entries: Sgv[], { basalActivity, liverActivity, carbsActivity, bolusActivity }: CGMSimParams, perls: Perlin[], isf: number) => {
 
 	const oldSgv = entries && entries[0] ? entries[0].sgv : 90;
-	const deltaMinutes = getDeltaMinutes(entries[0].mills);
+	const deltaMinutes = entries && entries[0] ? getDeltaMinutes(entries[0].mills) : 1;
 
 	logger.debug('deltaMinutes %o', deltaMinutes);
 
@@ -62,7 +62,7 @@ const sgv_start = (entries: Sgv[], { basalActivity, liverActivity, carbsActivity
 		carbsActivity: carbsDeltaMinutesActivity * 18,
 		basalActivity: basalDeltaMinutesActivity * isfMMol * 18,
 		bolusActivity: bolusDeltaMinutesActivity * isfMMol * 18,
-		noiseActivity: noiseDeltaMinutesActivity * isfMMol* 18,
+		noiseActivity: noiseDeltaMinutesActivity * isfMMol * 18,
 		liverActivity: liverDeltaMinutesActivity * 18,
 		pumpBasalActivity: pumpBasalDeltaMinutesActivity * 18,
 	};

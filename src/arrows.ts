@@ -1,15 +1,15 @@
 import logger from './utils';
-import { Sgv, Direction } from './Types';
+import { Direction } from './Types';
 
 //const logger = pino();
 
 
-export default function (sgvs: Pick<Sgv, 'sgv'>[]): { sgvdir: number; direction: Direction }[] {
+export default function (sgvLast, sgv1, sgv2, sgv3): { sgvdir: number; direction: Direction }[] {
 	const arrows = [];
-	if (sgvs && sgvs.length >= 4) {
-		const sgvdir1 = sgvs[0].sgv - sgvs[1].sgv;
-		const sgvdir2 = sgvs[1].sgv - sgvs[2].sgv;
-		const sgvdir3 = sgvs[2].sgv - sgvs[3].sgv;
+	if (sgvLast && sgv1 && sgv2 && sgv3) {
+		const sgvdir1 = sgvLast - sgv1;
+		const sgvdir2 = sgv1 - sgv2;
+		const sgvdir3 = sgv2 - sgv3;
 		const sgvdir15min = (sgvdir1 + sgvdir2 + sgvdir3) / 3;
 		logger.debug('this is the mean SGV 5 min variation in the last 15 minutes: %o', sgvdir15min, 'mg/dl');
 
@@ -62,7 +62,7 @@ export default function (sgvs: Pick<Sgv, 'sgv'>[]): { sgvdir: number; direction:
 			direction: 'Flat'
 		});
 	}
-	logger.info('New Arrows status result %o',arrows);
+	logger.info('New Arrows status result %o', arrows);
 
 	return arrows;
 }
