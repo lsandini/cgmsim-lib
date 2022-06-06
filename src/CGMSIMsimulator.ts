@@ -55,9 +55,9 @@ const simulator = ({
 	const newSgvValue = sgv(orderedEntries, { basalActivity, liverActivity, carbsActivity, bolusActivity }, perls, isf);
 
 	logger.debug('this is the new sgv: %o', newSgvValue);
-	const arrows = arrowsRun([newSgvValue, ...entries]);
+	// const arrows = arrowsRun([newSgvValue, ...entries]);
 
-	return { ...newSgvValue, direction: arrows[0].direction };
+	return { ...newSgvValue };
 };
 
 export default simulator;
