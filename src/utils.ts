@@ -27,8 +27,7 @@ export function getInsulinActivity(peakMin: number, durationMin: number, timeMin
 	const a = 2 * tau / durationMin;
 	const S = 1 / (1 - a + (1 + a) * Math.exp(-durationMin / tau));
 	const activity = (insulin * (S / Math.pow(tau, 2)) * timeMin * (1 - timeMin / durationMin) * Math.exp(-timeMin / tau))
-
-	return activity;
+	return activity > 0 ? activity : 0;
 }
 export const getDeltaMinutes = (mills: number | string) => Math.round(moment().diff(moment(mills), 'seconds') / 60);
 export function uploadBase(cgmsim: Entry | Activity | Note, nsUrlApi: string, apiSecret: string) {	
