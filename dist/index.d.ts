@@ -4,4 +4,5 @@ import downloads from './downloads';
 import uploadEntries from './upload-entries';
 import uploadActivity from './upload-activity';
 import uploadNotes from './upload-notes';
-export { simulator, downloads, uploadEntries, uploadActivity, simulatorUVA, uploadNotes };
+import arrows from './arrows';
+export { arrows, simulator, downloads, uploadEntries, uploadActivity, simulatorUVA, uploadNotes };

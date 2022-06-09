@@ -20,7 +20,7 @@ const computeBasalActivity = (treatments) => {
         const minutesAgo = e.minutesAgo;
         const insulin = e.insulin;
         const activity = utils_1.getInsulinActivity(e.peak, e.duration, minutesAgo, insulin);
-        return activity > 0 ? activity : 0;
+        return activity;
     });
     utils_1.default.debug('these are the last Slow INSULINS: %o', treatmentsActivity);
     const resultAct = treatmentsActivity.reduce((tot, activity) => {

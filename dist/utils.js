@@ -30,7 +30,7 @@ function getInsulinActivity(peakMin, durationMin, timeMin, insulin) {
     const a = 2 * tau / durationMin;
     const S = 1 / (1 - a + (1 + a) * Math.exp(-durationMin / tau));
     const activity = (insulin * (S / Math.pow(tau, 2)) * timeMin * (1 - timeMin / durationMin) * Math.exp(-timeMin / tau));
-    return activity;
+    return activity > 0 ? activity : 0;
 }
 exports.getInsulinActivity = getInsulinActivity;
 const getDeltaMinutes = (mills) => Math.round(moment().diff(moment(mills), 'seconds') / 60);

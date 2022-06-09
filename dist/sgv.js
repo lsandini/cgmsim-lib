@@ -6,7 +6,7 @@ const utils_2 = require("./utils");
 //const logger = pino();
 const sgv_start = (entries, { basalActivity, liverActivity, carbsActivity, bolusActivity }, perls, isf) => {
     const oldSgv = entries && entries[0] ? entries[0].sgv : 90;
-    const deltaMinutes = utils_2.getDeltaMinutes(entries[0].mills);
+    const deltaMinutes = entries && entries[0] ? utils_2.getDeltaMinutes(entries[0].mills) : 1;
     utils_1.default.debug('deltaMinutes %o', deltaMinutes);
     const isfMMol = isf / 18; //(mmol/l)/U
     //logger.debug('ISF= %o', ISF);
