@@ -1,7 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`Liver test test liver [20, 8] 1`] = `0.025462962962962965`;
-
-exports[`Liver test test liver [30, 10] 1`] = `0.03055555555555556`;
-
-exports[`Liver test test liver [40, 14] 1`] = `0.029100529100529106`;
