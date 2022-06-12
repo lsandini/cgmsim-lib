@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test bolus detection bolus 1`] = `0.0065030065414804035`;

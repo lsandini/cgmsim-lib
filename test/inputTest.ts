@@ -129,3 +129,27 @@ export const glargineTreatments = [{
 	"insulin": null
 }
 ]
+
+export const bolusTreatments = [{
+	"_id": "62764c27a3dc0ad6768cce46",
+	"enteredBy": "TheBoss",
+	"eventType": "Carb Correction",
+	"carbs": 12,
+	"created_at": "2022-05-07T10:20:00.000Z",
+	"utcOffset": 0,
+	"insulin": null
+}, {
+	"_id": "62754944a3dc0ad67616d2a2",
+	"enteredBy": "TheBoss",
+	"eventType": "Meal Bolus",
+	"insulin": 20,
+	"preBolus": 0,
+	"utcOffset": 0,
+	"protein": "",
+	"fat": "",
+	"duration": 0,
+	"profile": "",
+	"created_at": "2022-05-06T16:00:00.000Z",
+	"carbs": null
+}
+]
