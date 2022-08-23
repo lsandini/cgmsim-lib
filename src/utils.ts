@@ -55,18 +55,17 @@ export function uploadBase(cgmsim: Entry | Activity | Note, nsUrlApi: string, ap
 			logger.debug(err);
 		});
 }
-export function loadBase(cgmsim: Entry | Activity | Note, nsUrlApi: string, apiSecret: string) {
+export function loadBase( nsUrlApi: string, apiSecret: string):Promise<(Entry | Activity | Note)[]> {
 	const _isHttps = isHttps(nsUrlApi);
 
 	const { getParams } = setupParams(apiSecret, _isHttps);
-	const body_json = JSON.stringify(cgmsim);
 
 	return fetch(nsUrlApi, {
 		...getParams,
-		body: body_json,
 	})
-		.then(() => {
-			logger.debug('NIGTHSCOUT Updated');
+		.then((result:(Entry | Activity | Note)[]) => {
+			logger.debug('NIGTHSCOUT Load');
+			return result;
 		})
 		.catch(err => {
 			logger.debug(err);

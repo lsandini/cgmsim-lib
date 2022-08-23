@@ -1,9 +1,10 @@
 import { Activity } from './Types';
-import { removeTrailingSlash,loadBase } from './utils';
+import { removeTrailingSlash, loadBase } from './utils';
 
-export default function (activity: Activity, nsUrl: string, apiSecret: string) {
+export default function (nsUrl: string, apiSecret: string, fromUtcString: string=null) {
 	const _nsUrl = removeTrailingSlash(nsUrl)
-	const api_url = _nsUrl + '/api/v1/activity/';
-	return loadBase(activity, api_url, apiSecret);
+	const fromFilter = fromUtcString ? '?find[created_at][$gte]=' + fromUtcString : ''
+	const api_url = _nsUrl + '/api/v1/activity/' + fromFilter;
+	return loadBase(api_url, apiSecret);
 
 }
