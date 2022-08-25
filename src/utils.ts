@@ -63,9 +63,9 @@ export function loadBase( nsUrlApi: string, apiSecret: string):Promise<(Entry | 
 	return fetch(nsUrlApi, {
 		...getParams,
 	})
-		.then((result:(Entry | Activity | Note)[]) => {
+		.then((result) => {
 			logger.debug('NIGTHSCOUT Load');
-			return result;
+			return result.json();
 		})
 		.catch(err => {
 			logger.debug(err);
