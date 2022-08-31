@@ -35,6 +35,25 @@ describe('Physical test', () => {
 		}
 	})
 
+	// const end = moment('2001-01-01T06:00:00.000Z');
+	// let newTime = moment('2001-01-01T00:00:00.000Z');
+	// const sequenceTime = []
+	// while (newTime.toISOString() < end.toISOString()) {
+	// 	sequenceTime.push(newTime.toISOString())
+	// 	newTime = newTime.add(5, 'm');
+	// }
+	const activities05 = getFlatHeartRate({ heartRate: 170 * 0.5, created_at: '2001-01-01T00:00:00.000Z' }, 5);
+	const activities07 = getFlatHeartRate({ heartRate: 170 * 0.7, created_at: '2001-01-01T05:00:00.000Z' }, 1);
+
+	test.each([...activities05, ...activities07])('test sequence %p', (t) => {
+		jest.setSystemTime(new Date(t.created_at));
+		const activities05 = getFlatHeartRate({ heartRate: 170 * 0.5, created_at: '2001-01-01T00:00:00.000Z' }, 5);
+		const activities07 = getFlatHeartRate({ heartRate: 170 * 0.7, created_at: '2001-01-01T05:00:00.000Z' }, 1);
+		const result = physicalIsf([...activities05, ...activities07]);
+		expect(result).toMatchSnapshot();
+	})
+
+
 
 
 
