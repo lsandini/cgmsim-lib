@@ -32,7 +32,7 @@ function physicalStepsIsf(activities: (Activity & MinutesAgo)[]): number {
 	return null;
 }
 function physicalHeartRateIsf(activities: (Activity & MinutesAgo)[]): number {
-	let last240min = activities.filter((e) => e.minutesAgo <= 240);
+	let last240min = activities.filter((e) => e.minutesAgo <= 240 && e.minutesAgo >= 0);
 
 
 	// let's compute the "activity" based on the heart rate every 5 min in the last 6 hours
