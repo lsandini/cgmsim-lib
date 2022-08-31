@@ -158,9 +158,9 @@ export const bolusTreatments = [{
 }
 ]
 
-const getFlat6hHeartRate = (hr: Activity): Activity[] => {
+export const getFlatHeartRate = (hr: Activity, hoursDuration): Activity[] => {
 	const result = [];
-	const end = moment(hr.created_at).add(6, 'h');
+	const end = moment(hr.created_at).add(hoursDuration, 'h');
 	let newTime = moment(hr.created_at);
 	while (newTime.toISOString() < end.toISOString()) {
 		result.push({ created_at: newTime.toISOString(), heartRate: hr.heartRate })
@@ -171,7 +171,3 @@ const getFlat6hHeartRate = (hr: Activity): Activity[] => {
 
 	return result;
 }
-export const HRFlatActivities: Activity[] = getFlat6hHeartRate({
-		created_at: '2001-01-01T00:00:00.000Z',
-		heartRate: 70,
-	})

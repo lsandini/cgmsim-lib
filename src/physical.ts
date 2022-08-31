@@ -9,7 +9,7 @@ const MAX_HR = 170;
 
 export function physicalIsf(activities: Activity[]): number {
 	if (hasHearRate(activities)) {
-		return physicalHeartRateIsf(activities.map(a => ({ ...a, minutesAgo: getDeltaMinutes(a.created_at) })));
+	return physicalHeartRateIsf(activities.map(a => ({ ...a, minutesAgo: getDeltaMinutes(a.created_at) })));
 	} else {
 		return physicalStepsIsf(activities.map(a => ({ ...a, minutesAgo: getDeltaMinutes(a.created_at) })));
 	}
@@ -43,8 +43,8 @@ function physicalHeartRateIsf(activities: (Activity & MinutesAgo)[]): number {
 
 		const time = entry.minutesAgo;
 		const heartRate = entry.heartRate;
-		
-		const hrRatio = heartRate / MAX_HR;		
+
+		const hrRatio = heartRate / MAX_HR;
 		const lambda = 0.1;
 
 		if (hrRatio <= 0.6) {
@@ -61,8 +61,8 @@ function physicalHeartRateIsf(activities: (Activity & MinutesAgo)[]): number {
 
 		}
 	});
-	const resultHRAct = timeSinceHRAct.reduce((tot, arr) =>tot + arr, 0);	
-	return resultHRAct;
+	const resultHRAct = timeSinceHRAct.reduce((tot, arr) => tot + arr, 0);
+	return 1 + resultHRAct;
 }
 
 
