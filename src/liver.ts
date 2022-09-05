@@ -1,12 +1,11 @@
 import sinusRun from './sinus';
 import logger from './utils';
 
-//const logger = pino();
 
-export default function (isf: number, cr: number): number {
-	const _ISF = isf / 18;
+export default function (isfConstant: number, cr: number, activityFactor: number=1): number {
+	const _ISF = isfConstant / 18;
 	const _CR = cr;
-	logger.debug('ISF:', isf, 'CR: %o', cr);
+	logger.debug('ISF:', isfConstant, 'CR: %o', cr);
 
 	// the sinus and cosinus numbers vary around 1, from 0.5 to 1.5:
 	// sin starts at 1.0 at midnight, is max at 6AM, is again 1 at 12 AM, and minimums at 0.5 a 6 PM
@@ -27,7 +26,7 @@ export default function (isf: number, cr: number): number {
 	// by multiplying the liver_bgi by the sin function, the liver loog glucose production varies in a sinusoidal
 	// form, being maximal at 6 AM and minimal ad 6 PM
 
-	const liver = (_ISF / _CR) * (10 / 60);//(mmol/l)/min
+	const liver = activityFactor * (_ISF / _CR) * (10 / 60);//(mmol/l)/min
 
 	const liver_sin = liver * sinus;
 	logger.debug('liver:  %o', liver);

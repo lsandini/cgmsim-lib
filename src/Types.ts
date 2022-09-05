@@ -19,8 +19,9 @@ export type Note = {
 	notes: string,
 }
 export type Activity = {
-	steps: number,
-	created_at: string,
+	steps?: number,
+	heartRate?: number,
+	created_at: string,	
 }
 export type Sgv = {
 	mills: number;
@@ -100,8 +101,9 @@ export type MainParams = {
 	entries: Sgv[];
 	treatments: Treatment[],
 	profiles: Profile[],
-	perlinParams?: PerlinParams,
+	perlinParams?: PerlinParams,	
 	pumpBasals?: {}[]
+	activities?:Activity[]
 };
 
 export type InputPatientUvaState = {
