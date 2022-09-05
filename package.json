@@ -44,7 +44,7 @@
 		"@nickxbs/perlinnoise2": "^0.0.1",
 		"crypto": "^1.0.1",
 		"https": "^1.0.0",
-		"moment": "^2.29.3",
+		"moment": "^2.29.4",
 		"node-fetch": "^2.6.7",
 		"pino": "^7.10.0",
 		"pino-pretty": "^7.6.1",
