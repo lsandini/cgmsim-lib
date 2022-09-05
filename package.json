@@ -38,8 +38,7 @@
 		"fs": "^0.0.1-security",
 		"jest": "^26.5.5",
 		"perlin-noise": "^0.0.1",
-		"ts-jest": "^26.5.6",
-		"moment": "^2.29.4"
+		"ts-jest": "^26.5.6"
 	},
 	"dependencies": {
 		"@nickxbs/perlinnoise2": "^0.0.1",
