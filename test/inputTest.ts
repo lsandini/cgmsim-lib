@@ -1,3 +1,7 @@
+import moment = require("moment")
+import { physicalIsf } from "src/physical"
+import { Activity } from "src/Types"
+
 export const treatments = [{
 	"_id": "62764c27a3dc0ad6768cce46",
 	"enteredBy": "TheBoss",
@@ -153,3 +157,17 @@ export const bolusTreatments = [{
 	"carbs": null
 }
 ]
+
+export const getFlatHeartRate = (hr: Activity, hoursDuration): Activity[] => {
+	const result = [];
+	const end = moment(hr.created_at).add(hoursDuration, 'h');
+	let newTime = moment(hr.created_at);
+	while (newTime.toISOString() < end.toISOString()) {
+		result.push({ created_at: newTime.toISOString(), heartRate: hr.heartRate })
+		newTime = newTime.add(5, 'm');
+	}
+
+
+
+	return result;
+}

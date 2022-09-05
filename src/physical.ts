@@ -9,7 +9,7 @@ const MAX_HR = 170;
 
 export function physicalIsf(activities: Activity[]): number {
 	if (hasHearRate(activities)) {
-		return physicalHeartRateIsf(activities.map(a => ({ ...a, minutesAgo: getDeltaMinutes(a.created_at) })));
+	return physicalHeartRateIsf(activities.map(a => ({ ...a, minutesAgo: getDeltaMinutes(a.created_at) })));
 	} else {
 		return physicalStepsIsf(activities.map(a => ({ ...a, minutesAgo: getDeltaMinutes(a.created_at) })));
 	}
@@ -73,7 +73,7 @@ function physicalStepsIsf(activities: (Activity & MinutesAgo)[]): number {
 
 
 function physicalHeartRateIsf(activities: (Activity & MinutesAgo)[]): number {
-	let last240min = activities.filter((e) => e.minutesAgo <= 240);
+	let last240min = activities.filter((e) => e.minutesAgo <= 240 && e.minutesAgo >= 0);
 
 	// Here we compute the effect of heartRate on ISF
 	// let's compute the "activity" based on the heart rate every 5 min in the last 6 hours
@@ -84,9 +84,15 @@ function physicalHeartRateIsf(activities: (Activity & MinutesAgo)[]): number {
 
 		const time = entry.minutesAgo;
 		const heartRate = entry.heartRate;
+<<<<<<< HEAD
 		
 		const hrRatio = heartRate / MAX_HR;		
 		const lambda = 0.08; // very short
+=======
+
+		const hrRatio = heartRate / MAX_HR;
+		const lambda = 0.1;
+>>>>>>> 304cfcb72ffdab2456212d9ee8e5997531f2978a
 
 		if (hrRatio <= 0.6) {
 			return 0
@@ -102,8 +108,8 @@ function physicalHeartRateIsf(activities: (Activity & MinutesAgo)[]): number {
 			return heartRate / MAX_HR * (Math.exp(-lambda * time)) // "peak = exponential" very fast decay
 		}
 	});
-	const resultHRAct = timeSinceHRAct.reduce((tot, arr) =>tot + arr, 0);	
-	return resultHRAct;
+	const resultHRAct = timeSinceHRAct.reduce((tot, arr) => tot + arr, 0);
+	return 1 + resultHRAct;
 }
 
 
