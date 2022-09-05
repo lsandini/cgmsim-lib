@@ -84,15 +84,9 @@ function physicalHeartRateIsf(activities: (Activity & MinutesAgo)[]): number {
 
 		const time = entry.minutesAgo;
 		const heartRate = entry.heartRate;
-<<<<<<< HEAD
 		
 		const hrRatio = heartRate / MAX_HR;		
 		const lambda = 0.08; // very short
-=======
-
-		const hrRatio = heartRate / MAX_HR;
-		const lambda = 0.1;
->>>>>>> 304cfcb72ffdab2456212d9ee8e5997531f2978a
 
 		if (hrRatio <= 0.6) {
 			return 0
@@ -156,12 +150,6 @@ function physicalStepsLiver(activities: (Activity & MinutesAgo)[]): number {
 	// or Endogenous Glucose Production by the liver
 	return null;
 }
-
-
-
-
-
-
 
 
 // Helper functions
