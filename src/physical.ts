@@ -82,24 +82,24 @@ function physicalHeartRateIsf(activities: (Activity & MinutesAgo)[]): number {
 
 	let timeSinceHRAct = last240min.map(entry => {
 
-		const time = entry.minutesAgo;
-		const heartRate = entry.heartRate;
+		const minutesAgo = entry.minutesAgo;
+		const heartRatio = entry.heartRate/MAX_HR;
 		
-		const hrRatio = heartRate / MAX_HR;		
+		const hrRatio = entry.heartRate/ MAX_HR;		
 		const lambda = 0.08; // very short
 
 		if (hrRatio <= 0.6) {
 			return 0
 		}
 		else if (hrRatio > 0.6 && hrRatio <= 0.75) {
-			return heartRate / MAX_HR * (1 - (Math.pow(time / 240, 3))) // "low = cubic" slow decay
+			return heartRatio * (1 - (Math.pow(minutesAgo / 240, 3))) // "low = cubic" slow decay
 			//return heartRate / MAX_HR * (1 - Math.sqrt(time / 240)) // "low = square root" decay	
 		}
 		else if (hrRatio > 0.75 && hrRatio <= 0.9) {
-			return heartRate / MAX_HR * (1 - (time / 240)) // "mid = linear" decay						
+			return heartRatio * (1 - (minutesAgo / 240)) // "mid = linear" decay						
 		}
 		else if (hrRatio > 0.9) {
-			return heartRate / MAX_HR * (Math.exp(-lambda * time)) // "peak = exponential" very fast decay
+			return heartRatio * (Math.exp(-lambda * minutesAgo)) // "peak = exponential" very fast decay
 		}
 	});
 	const resultHRAct = timeSinceHRAct.reduce((tot, arr) => tot + arr, 0);
@@ -118,7 +118,7 @@ function physicalHeartRateLiver(activities: (Activity & MinutesAgo)[]): number {
 
 	let timeSinceHRAct = last240min.map(entry => {
 
-		const time = entry.minutesAgo;
+		const minutesAgo = entry.minutesAgo;
 		const heartRate = entry.heartRate;
 		
 		const hrRatio = heartRate / MAX_HR;		
@@ -131,11 +131,11 @@ function physicalHeartRateLiver(activities: (Activity & MinutesAgo)[]): number {
 			return 0
 		}
 		else if (hrRatio > 0.75 && hrRatio <= 0.9) {
-			return heartRate / MAX_HR * (1 - (time / 240)) // "linear" decay OR:
+			return hrRatio * (1 - (minutesAgo / 240)) // "linear" decay OR:
 			//return heartRate / MAX_HR * (1 - Math.sqrt(time / 240)) // "square root" decay				
 		}
 		else if (hrRatio > 0.9) {
-			return heartRate / MAX_HR * (Math.exp(-lambda * time)) // "exponential" fast decay
+			return hrRatio * (Math.exp(-lambda * minutesAgo)) // "exponential" fast decay
 		}
 	});
 	const resultHRAct = timeSinceHRAct.reduce((tot, arr) =>tot + arr, 0);	
