@@ -9,7 +9,7 @@ const MAX_HR = 170;
 
 export function physicalIsf(activities: Activity[]): number {
 	if (hasHearRate(activities)) {
-	return physicalHeartRateIsf(activities.map(a => ({ ...a, minutesAgo: getDeltaMinutes(a.created_at) })));
+		return physicalHeartRateIsf(activities.map(a => ({ ...a, minutesAgo: getDeltaMinutes(a.created_at) })));
 	} else {
 		return physicalStepsIsf(activities.map(a => ({ ...a, minutesAgo: getDeltaMinutes(a.created_at) })));
 	}
@@ -38,15 +38,15 @@ function physicalStepsIsf(activities: (Activity & MinutesAgo)[]): number {
 	// compute cumulative daily steps in the previous 7 days or 7 * 1440 min
 	// then divide by 16 hours for hourly steps and multiply by 4 for 4-hour periods
 	let last7daysSteps = activities.filter((e) => e.minutesAgo <= 10080);
-	let cumulativeSteps = last7daysSteps.reduce(function(tot, arr) {
+	let cumulativeSteps = last7daysSteps.reduce(function (tot, arr) {
 		return tot + arr.steps;
 	}, 0);
-	let mean4hourSteps = cumulativeSteps/4;
+	let mean4hourSteps = cumulativeSteps / 4;
 	console.log(`mean4hourSteps:`, mean4hourSteps);
 
 	// compute last 4 hours steps
 	let last4hoursActivities = activities.filter((e) => e.minutesAgo <= 240);
-	let last4hourSteps = last4hoursActivities.reduce(function(tot, arr) {
+	let last4hourSteps = last4hoursActivities.reduce(function (tot, arr) {
 		return tot + arr.steps;
 	}, 0);
 	console.log(`last4hourSteps:`, last4hourSteps);
@@ -58,12 +58,12 @@ function physicalStepsIsf(activities: (Activity & MinutesAgo)[]): number {
 	// if the stepcount in the last 4 hours is <= to the mean 4hours steps, no effect on ISF
 	if (stepRatio <= 1) {
 		resultStepAct = 1
-	}		
+	}
 	else if (stepRatio > 1 && stepRatio <= 3) {
 		resultStepAct = 2
 	}
 	else if (stepRatio > 3 && stepRatio <= 5) {
-		resultStepAct = 3						
+		resultStepAct = 3
 	}
 	else if (stepRatio > 5) {
 		resultStepAct = 4
@@ -83,9 +83,9 @@ function physicalHeartRateIsf(activities: (Activity & MinutesAgo)[]): number {
 	let timeSinceHRAct = last240min.map(entry => {
 
 		const minutesAgo = entry.minutesAgo;
-		const heartRatio = entry.heartRate/MAX_HR;
-		
-		const hrRatio = entry.heartRate/ MAX_HR;		
+		const heartRatio = entry.heartRate / MAX_HR;
+
+		const hrRatio = entry.heartRate / MAX_HR;
 		const lambda = 0.08; // very short
 
 		if (hrRatio <= 0.6) {
@@ -120,8 +120,8 @@ function physicalHeartRateLiver(activities: (Activity & MinutesAgo)[]): number {
 
 		const minutesAgo = entry.minutesAgo;
 		const heartRate = entry.heartRate;
-		
-		const hrRatio = heartRate / MAX_HR;		
+
+		const hrRatio = heartRate / MAX_HR;
 		const lambda = 0.03; // longer than effect on ISF, but still short
 
 		if (hrRatio <= 0.6) {
@@ -138,7 +138,7 @@ function physicalHeartRateLiver(activities: (Activity & MinutesAgo)[]): number {
 			return hrRatio * (Math.exp(-lambda * minutesAgo)) // "exponential" fast decay
 		}
 	});
-	const resultHRAct = timeSinceHRAct.reduce((tot, arr) =>tot + arr, 0);	
+	const resultHRAct = timeSinceHRAct.reduce((tot, arr) => tot + arr, 0);
 	return resultHRAct;
 }
 
