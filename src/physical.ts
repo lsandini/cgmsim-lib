@@ -92,14 +92,25 @@ function physicalHeartRateIsf(activities: (Activity & MinutesAgo)[]): number {
 			return 0
 		}
 		else if (hrRatio > 0.6 && hrRatio <= 0.75) {
-			return heartRatio * (1 - (Math.pow(minutesAgo / 240, 3))) // "low = cubic" slow decay
+			//return heartRatio * (1 - (Math.pow(minutesAgo / 240, 3))) // "low = cubic" slow decay
 			//return heartRate / MAX_HR * (1 - Math.sqrt(time / 240)) // "low = square root" decay	
+
+			// first derivative of the Math.pow function above :
+			return heartRatio * (Math.pow(minutesAgo, 2)/4608000);
+
 		}
 		else if (hrRatio > 0.75 && hrRatio <= 0.9) {
-			return heartRatio * (1 - (minutesAgo / 240)) // "mid = linear" decay						
+			//return heartRatio * (1 - (minutesAgo / 240)) // "mid = linear" decay		
+			
+			// first derivative of linear function above
+			return hrRatio / -240;
 		}
 		else if (hrRatio > 0.9) {
-			return heartRatio * (Math.exp(-lambda * minutesAgo)) // "peak = exponential" very fast decay
+			//return heartRatio * (Math.exp(-lambda * minutesAgo)) // "peak = exponential" very fast decay
+
+			// first derivative of exponential function above
+			return hrRatio * lambda * Math.exp(-lambda*minutesAgo);
+
 		}
 	});
 	const resultHRAct = timeSinceHRAct.reduce((tot, arr) => tot + arr, 0);
