@@ -84,37 +84,38 @@ function physicalHeartRateIsf(activities: (Activity & MinutesAgo)[]): number {
 
 		const minutesAgo = entry.minutesAgo;
 		const heartRatio = entry.heartRate / MAX_HR;
+		const excessHR = entry.heartRate - (0.6*MAX_HR);
 
 		const hrRatio = entry.heartRate / MAX_HR;
 		const lambda = 0.08; // very short
 
 		if (hrRatio <= 0.6) {
-			return 0
+			return 1
 		}
 		else if (hrRatio > 0.6 && hrRatio <= 0.75) {
-			//return heartRatio * (1 - (Math.pow(minutesAgo / 240, 3))) // "low = cubic" slow decay
-			//return heartRate / MAX_HR * (1 - Math.sqrt(time / 240)) // "low = square root" decay	
+			//return (1 - (Math.pow(minutesAgo / 240, 3))) // "low = cubic" slow decay
+			//return (1 - Math.sqrt(time / 240)) // "low = square root" decay	
 
 			// first derivative of the Math.pow function above :
-			return heartRatio * (Math.pow(minutesAgo, 2)/4608000);
+			return (Math.pow(minutesAgo, 2)/4608000);
 
 		}
 		else if (hrRatio > 0.75 && hrRatio <= 0.9) {
-			//return heartRatio * (1 - (minutesAgo / 240)) // "mid = linear" decay		
+			//return (1 - (minutesAgo / 240)) // "mid = linear" decay		
 			
 			// first derivative of linear function above
-			return hrRatio / -240;
+			return -1/240;
 		}
 		else if (hrRatio > 0.9) {
-			//return heartRatio * (Math.exp(-lambda * minutesAgo)) // "peak = exponential" very fast decay
+			//return (Math.exp(-lambda * minutesAgo)) // "peak = exponential" very fast decay
 
 			// first derivative of exponential function above
-			return hrRatio * lambda * Math.exp(-lambda*minutesAgo);
+			return -lambda * Math.exp(-lambda*minutesAgo);
 
 		}
 	});
 	const resultHRAct = timeSinceHRAct.reduce((tot, arr) => tot + arr, 0);
-	return 1 + resultHRAct;
+	return resultHRAct;
 }
 
 
@@ -131,6 +132,7 @@ function physicalHeartRateLiver(activities: (Activity & MinutesAgo)[]): number {
 
 		const minutesAgo = entry.minutesAgo;
 		const heartRate = entry.heartRate;
+		const excessHR = entry.heartRate - (0.6*MAX_HR);
 
 		const hrRatio = heartRate / MAX_HR;
 		const lambda = 0.03; // longer than effect on ISF, but still short
@@ -142,13 +144,13 @@ function physicalHeartRateLiver(activities: (Activity & MinutesAgo)[]): number {
 			return 0
 		}
 		else if (hrRatio > 0.75 && hrRatio <= 0.9) {
-			return hrRatio * (1 - (minutesAgo / 240)) // "linear" decay OR:
-			//return heartRate / MAX_HR * (1 - Math.sqrt(time / 240)) // "square root" decay				
+			return (-1/240) // "linear" decay OR:
+			//return (1 - Math.sqrt(time / 240)) // "square root" decay				
 		}
 		else if (hrRatio > 0.9) {
 			return hrRatio * (Math.exp(-lambda * minutesAgo)) // "exponential" fast decay
 		}
-	});
+	});	
 	const resultHRAct = timeSinceHRAct.reduce((tot, arr) => tot + arr, 0);
 	return resultHRAct;
 }
