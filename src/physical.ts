@@ -38,23 +38,24 @@ function physicalHeartRateIsf(activities: (Activity & MinutesAgo)[]): number {
 
 		const minutesAgo = entry.minutesAgo;
 		const heartRate = entry.heartRate;
-		const excessHR = entry.heartRate - (0.6*MAX_HR);
+		const excessHR = entry.heartRate - (0.6*MAX_HR); // 155-(0.6*170)=155-102=53 
+		const excessHRrel = 1 + excessHR/(0.6*MAX_HR);  // 1+(53/102) = 1.52
 
 		const hrRatio = heartRate / MAX_HR;
 		const lambda = 0.03; // longer than effect on ISF, but still short
 
 		if (hrRatio <= 0.6) {
-			return excessHR
+			return excessHRrel // just for testing purposes
 		}
 		else if (hrRatio > 0.6 && hrRatio <= 0.75) {
-			return excessHR
+			return excessHRrel
 		}
 		else if (hrRatio > 0.75 && hrRatio <= 0.9) {
-			return excessHR // "linear" decay OR:
+			return excessHRrel // "linear" decay OR:
 			//return (1 - Math.sqrt(time / 240)) // "square root" decay				
 		}
 		else if (hrRatio > 0.9) {
-			return excessHR // "exponential" fast decay
+			return excessHRrel // "exponential" fast decay
 		}
 	});
 
