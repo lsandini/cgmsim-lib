@@ -59,6 +59,7 @@ function physicalHeartRateIsf(activities: (Activity & MinutesAgo)[]): number {
 	});
 
 	const resultHRAct = timeSinceHRAct.reduce((tot, arr) => tot + arr, 0);
+	console.log(`@@@ PHYSICAL HEARTRATE ISF:`, resultHRAct )
 	return resultHRAct;
 }
 
@@ -123,6 +124,7 @@ function physicalHeartRateLiver(activities: (Activity & MinutesAgo)[]): number {
 		}
 	});	
 	const resultHRAct = timeSinceHRAct.reduce((tot, arr) => tot + arr, 0);
+	console.log(`@@@ PHYSICAL HEARTRATE LIVER:`, resultHRAct )
 	return resultHRAct;
 }
 
