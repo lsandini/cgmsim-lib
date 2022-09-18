@@ -6,9 +6,6 @@ type MinutesAgo = { minutesAgo: number };
 const MIN_HR = 10;
 const MAX_HR = 170;
 
-
-
-
 export function physicalIsf(activities: Activity[]): number {
 	if (hasHearRate(activities)) {
 		return physicalHeartRateIsf(activities.map(a => ({ ...a, minutesAgo: getDeltaMinutes(a.created_at) })));
@@ -16,7 +13,6 @@ export function physicalIsf(activities: Activity[]): number {
 		return physicalStepsIsf(activities.map(a => ({ ...a, minutesAgo: getDeltaMinutes(a.created_at) })));
 	}
 }
-
 
 export function physicalLiver(activities: Activity[]): number {
 	//TODO check activity with HR
@@ -86,7 +82,7 @@ function physicalHeartRateLiver(activities: (Activity & MinutesAgo)[]): number {
 
 		if (hrRatio <= 0.6) {
 			//during rest, the original "liver" function is not altered
-			return 0
+			return 1
 		}
 		else if (hrRatio > 0.6 && hrRatio <= 0.75) {
 			// in low intensity "fat burn" exercise, I suggest a steady low, linearly
