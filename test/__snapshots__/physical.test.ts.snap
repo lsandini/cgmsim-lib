@@ -1,337 +1,337 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T00:00:00.000Z", "heartRate": 85} 1`] = `0.8333333333333334`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T00:00:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T00:05:00.000Z", "heartRate": 85} 1`] = `1.6666666666666667`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T00:05:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T00:10:00.000Z", "heartRate": 85} 1`] = `2.5`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T00:10:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T00:15:00.000Z", "heartRate": 85} 1`] = `3.3333333333333335`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T00:15:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T00:20:00.000Z", "heartRate": 85} 1`] = `4.166666666666667`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T00:20:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T00:25:00.000Z", "heartRate": 85} 1`] = `5`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T00:25:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T00:30:00.000Z", "heartRate": 85} 1`] = `5.833333333333333`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T00:30:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T00:35:00.000Z", "heartRate": 85} 1`] = `6.666666666666666`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T00:35:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T00:40:00.000Z", "heartRate": 85} 1`] = `7.499999999999999`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T00:40:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T00:45:00.000Z", "heartRate": 85} 1`] = `8.333333333333332`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T00:45:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T00:50:00.000Z", "heartRate": 85} 1`] = `9.166666666666666`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T00:50:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T00:55:00.000Z", "heartRate": 85} 1`] = `10`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T00:55:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T01:00:00.000Z", "heartRate": 85} 1`] = `10.833333333333334`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T01:00:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T01:05:00.000Z", "heartRate": 85} 1`] = `11.666666666666668`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T01:05:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T01:10:00.000Z", "heartRate": 85} 1`] = `12.500000000000002`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T01:10:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T01:15:00.000Z", "heartRate": 85} 1`] = `13.333333333333336`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T01:15:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T01:20:00.000Z", "heartRate": 85} 1`] = `14.16666666666667`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T01:20:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T01:25:00.000Z", "heartRate": 85} 1`] = `15.000000000000004`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T01:25:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T01:30:00.000Z", "heartRate": 85} 1`] = `15.833333333333337`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T01:30:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T01:35:00.000Z", "heartRate": 85} 1`] = `16.66666666666667`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T01:35:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T01:40:00.000Z", "heartRate": 85} 1`] = `17.500000000000004`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T01:40:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T01:45:00.000Z", "heartRate": 85} 1`] = `18.333333333333336`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T01:45:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T01:50:00.000Z", "heartRate": 85} 1`] = `19.166666666666668`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T01:50:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T01:55:00.000Z", "heartRate": 85} 1`] = `20`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T01:55:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T02:00:00.000Z", "heartRate": 85} 1`] = `20.833333333333332`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T02:00:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T02:05:00.000Z", "heartRate": 85} 1`] = `21.666666666666664`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T02:05:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T02:10:00.000Z", "heartRate": 85} 1`] = `22.499999999999996`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T02:10:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T02:15:00.000Z", "heartRate": 85} 1`] = `23.33333333333333`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T02:15:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T02:20:00.000Z", "heartRate": 85} 1`] = `24.16666666666666`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T02:20:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T02:25:00.000Z", "heartRate": 85} 1`] = `24.999999999999993`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T02:25:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T02:30:00.000Z", "heartRate": 85} 1`] = `25.833333333333325`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T02:30:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T02:35:00.000Z", "heartRate": 85} 1`] = `26.666666666666657`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T02:35:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T02:40:00.000Z", "heartRate": 85} 1`] = `27.49999999999999`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T02:40:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T02:45:00.000Z", "heartRate": 85} 1`] = `28.33333333333332`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T02:45:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T02:50:00.000Z", "heartRate": 85} 1`] = `29.166666666666654`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T02:50:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T02:55:00.000Z", "heartRate": 85} 1`] = `29.999999999999986`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T02:55:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T03:00:00.000Z", "heartRate": 85} 1`] = `30.833333333333318`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T03:00:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T03:05:00.000Z", "heartRate": 85} 1`] = `31.66666666666665`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T03:05:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T03:10:00.000Z", "heartRate": 85} 1`] = `32.499999999999986`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T03:10:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T03:15:00.000Z", "heartRate": 85} 1`] = `33.33333333333332`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T03:15:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T03:20:00.000Z", "heartRate": 85} 1`] = `34.16666666666666`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T03:20:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T03:25:00.000Z", "heartRate": 85} 1`] = `34.99999999999999`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T03:25:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T03:30:00.000Z", "heartRate": 85} 1`] = `35.83333333333333`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T03:30:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T03:35:00.000Z", "heartRate": 85} 1`] = `36.666666666666664`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T03:35:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T03:40:00.000Z", "heartRate": 85} 1`] = `37.5`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T03:40:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T03:45:00.000Z", "heartRate": 85} 1`] = `38.333333333333336`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T03:45:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T03:50:00.000Z", "heartRate": 85} 1`] = `39.16666666666667`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T03:50:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T03:55:00.000Z", "heartRate": 85} 1`] = `40.00000000000001`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T03:55:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T04:00:00.000Z", "heartRate": 85} 1`] = `40.83333333333334`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T04:00:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T04:05:00.000Z", "heartRate": 85} 1`] = `40.83333333333334`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T04:05:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T04:10:00.000Z", "heartRate": 85} 1`] = `40.83333333333334`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T04:10:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T04:15:00.000Z", "heartRate": 85} 1`] = `40.83333333333334`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T04:15:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T04:20:00.000Z", "heartRate": 85} 1`] = `40.83333333333334`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T04:20:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T04:25:00.000Z", "heartRate": 85} 1`] = `40.83333333333334`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T04:25:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T04:30:00.000Z", "heartRate": 85} 1`] = `40.83333333333334`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T04:30:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T04:35:00.000Z", "heartRate": 85} 1`] = `40.83333333333334`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T04:35:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T04:40:00.000Z", "heartRate": 85} 1`] = `40.83333333333334`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T04:40:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T04:45:00.000Z", "heartRate": 85} 1`] = `40.83333333333334`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T04:45:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T04:50:00.000Z", "heartRate": 85} 1`] = `40.83333333333334`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T04:50:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T04:55:00.000Z", "heartRate": 85} 1`] = `40.83333333333334`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T04:55:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T05:00:00.000Z", "heartRate": 85} 1`] = `40.83333333333334`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T05:00:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T05:05:00.000Z", "heartRate": 85} 1`] = `40.83333333333334`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T05:05:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T05:10:00.000Z", "heartRate": 85} 1`] = `40.83333333333334`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T05:10:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T05:15:00.000Z", "heartRate": 85} 1`] = `40.83333333333334`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T05:15:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T05:20:00.000Z", "heartRate": 85} 1`] = `40.83333333333334`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T05:20:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T05:25:00.000Z", "heartRate": 85} 1`] = `40.83333333333334`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T05:25:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T05:30:00.000Z", "heartRate": 85} 1`] = `40.83333333333334`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T05:30:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T05:35:00.000Z", "heartRate": 85} 1`] = `40.83333333333334`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T05:35:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T05:40:00.000Z", "heartRate": 85} 1`] = `40.83333333333334`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T05:40:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T05:45:00.000Z", "heartRate": 85} 1`] = `40.83333333333334`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T05:45:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T05:50:00.000Z", "heartRate": 85} 1`] = `40.83333333333334`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T05:50:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T05:55:00.000Z", "heartRate": 85} 1`] = `40.83333333333334`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T05:55:00.000Z", "heartRate": 85} 1`] = `1`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T06:00:00.000Z", "heartRate": 118.99999999999999} 1`] = `41.16666666666667`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T06:00:00.000Z", "heartRate": 118.99999999999999} 1`] = `1.1666666666666665`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T06:05:00.000Z", "heartRate": 118.99999999999999} 1`] = `41.5`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T06:05:00.000Z", "heartRate": 118.99999999999999} 1`] = `1.333333333333333`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T06:10:00.000Z", "heartRate": 118.99999999999999} 1`] = `41.83333333333333`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T06:10:00.000Z", "heartRate": 118.99999999999999} 1`] = `1.4999999999999996`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T06:15:00.000Z", "heartRate": 118.99999999999999} 1`] = `42.16666666666666`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T06:15:00.000Z", "heartRate": 118.99999999999999} 1`] = `1.666666666666666`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T06:20:00.000Z", "heartRate": 118.99999999999999} 1`] = `42.499999999999986`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T06:20:00.000Z", "heartRate": 118.99999999999999} 1`] = `1.8333333333333326`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T06:25:00.000Z", "heartRate": 118.99999999999999} 1`] = `42.833333333333314`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T06:25:00.000Z", "heartRate": 118.99999999999999} 1`] = `1.9999999999999991`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T06:30:00.000Z", "heartRate": 118.99999999999999} 1`] = `43.16666666666664`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T06:30:00.000Z", "heartRate": 118.99999999999999} 1`] = `2.1666666666666656`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T06:35:00.000Z", "heartRate": 118.99999999999999} 1`] = `43.49999999999997`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T06:35:00.000Z", "heartRate": 118.99999999999999} 1`] = `2.333333333333332`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T06:40:00.000Z", "heartRate": 118.99999999999999} 1`] = `43.8333333333333`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T06:40:00.000Z", "heartRate": 118.99999999999999} 1`] = `2.4999999999999987`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T06:45:00.000Z", "heartRate": 118.99999999999999} 1`] = `44.16666666666663`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T06:45:00.000Z", "heartRate": 118.99999999999999} 1`] = `2.666666666666665`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T06:50:00.000Z", "heartRate": 118.99999999999999} 1`] = `44.49999999999996`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T06:50:00.000Z", "heartRate": 118.99999999999999} 1`] = `2.8333333333333317`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T06:55:00.000Z", "heartRate": 118.99999999999999} 1`] = `44.83333333333329`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T06:55:00.000Z", "heartRate": 118.99999999999999} 1`] = `2.9999999999999982`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T07:00:00.000Z", "heartRate": 118.99999999999999} 1`] = `45.16666666666663`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T07:00:00.000Z", "heartRate": 118.99999999999999} 1`] = `3.1666666666666647`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T07:05:00.000Z", "heartRate": 118.99999999999999} 1`] = `45.499999999999964`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T07:05:00.000Z", "heartRate": 118.99999999999999} 1`] = `3.3333333333333313`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T07:10:00.000Z", "heartRate": 118.99999999999999} 1`] = `45.8333333333333`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T07:10:00.000Z", "heartRate": 118.99999999999999} 1`] = `3.499999999999998`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T07:15:00.000Z", "heartRate": 118.99999999999999} 1`] = `46.16666666666663`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T07:15:00.000Z", "heartRate": 118.99999999999999} 1`] = `3.6666666666666643`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T07:20:00.000Z", "heartRate": 118.99999999999999} 1`] = `46.499999999999964`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T07:20:00.000Z", "heartRate": 118.99999999999999} 1`] = `3.833333333333331`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T07:25:00.000Z", "heartRate": 118.99999999999999} 1`] = `46.8333333333333`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T07:25:00.000Z", "heartRate": 118.99999999999999} 1`] = `3.9999999999999973`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T07:30:00.000Z", "heartRate": 118.99999999999999} 1`] = `47.166666666666636`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T07:30:00.000Z", "heartRate": 118.99999999999999} 1`] = `4.166666666666664`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T07:35:00.000Z", "heartRate": 118.99999999999999} 1`] = `47.49999999999997`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T07:35:00.000Z", "heartRate": 118.99999999999999} 1`] = `4.33333333333333`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T07:40:00.000Z", "heartRate": 118.99999999999999} 1`] = `47.83333333333331`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T07:40:00.000Z", "heartRate": 118.99999999999999} 1`] = `4.4999999999999964`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T07:45:00.000Z", "heartRate": 118.99999999999999} 1`] = `48.16666666666664`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T07:45:00.000Z", "heartRate": 118.99999999999999} 1`] = `4.666666666666663`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T07:50:00.000Z", "heartRate": 118.99999999999999} 1`] = `48.49999999999997`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T07:50:00.000Z", "heartRate": 118.99999999999999} 1`] = `4.83333333333333`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T07:55:00.000Z", "heartRate": 118.99999999999999} 1`] = `48.83333333333331`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T07:55:00.000Z", "heartRate": 118.99999999999999} 1`] = `4.9999999999999964`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T08:00:00.000Z", "heartRate": 85} 1`] = `47.99999999999998`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T08:00:00.000Z", "heartRate": 85} 1`] = `4.9999999999999964`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T08:05:00.000Z", "heartRate": 85} 1`] = `47.16666666666665`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T08:05:00.000Z", "heartRate": 85} 1`] = `4.9999999999999964`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T08:10:00.000Z", "heartRate": 85} 1`] = `46.33333333333332`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T08:10:00.000Z", "heartRate": 85} 1`] = `4.9999999999999964`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T08:15:00.000Z", "heartRate": 85} 1`] = `45.49999999999999`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T08:15:00.000Z", "heartRate": 85} 1`] = `4.9999999999999964`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T08:20:00.000Z", "heartRate": 85} 1`] = `44.666666666666664`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T08:20:00.000Z", "heartRate": 85} 1`] = `4.9999999999999964`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T08:25:00.000Z", "heartRate": 85} 1`] = `43.83333333333333`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T08:25:00.000Z", "heartRate": 85} 1`] = `4.9999999999999964`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T08:30:00.000Z", "heartRate": 85} 1`] = `43`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T08:30:00.000Z", "heartRate": 85} 1`] = `4.9999999999999964`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T08:35:00.000Z", "heartRate": 85} 1`] = `42.166666666666664`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T08:35:00.000Z", "heartRate": 85} 1`] = `4.9999999999999964`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T08:40:00.000Z", "heartRate": 85} 1`] = `41.33333333333333`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T08:40:00.000Z", "heartRate": 85} 1`] = `4.9999999999999964`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T08:45:00.000Z", "heartRate": 85} 1`] = `40.5`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T08:45:00.000Z", "heartRate": 85} 1`] = `4.9999999999999964`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T08:50:00.000Z", "heartRate": 85} 1`] = `39.666666666666664`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T08:50:00.000Z", "heartRate": 85} 1`] = `4.9999999999999964`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T08:55:00.000Z", "heartRate": 85} 1`] = `38.833333333333336`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T08:55:00.000Z", "heartRate": 85} 1`] = `4.9999999999999964`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T09:00:00.000Z", "heartRate": 85} 1`] = `38`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T09:00:00.000Z", "heartRate": 85} 1`] = `4.9999999999999964`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T09:05:00.000Z", "heartRate": 85} 1`] = `37.16666666666667`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T09:05:00.000Z", "heartRate": 85} 1`] = `4.9999999999999964`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T09:10:00.000Z", "heartRate": 85} 1`] = `36.333333333333336`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T09:10:00.000Z", "heartRate": 85} 1`] = `4.9999999999999964`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T09:15:00.000Z", "heartRate": 85} 1`] = `35.5`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T09:15:00.000Z", "heartRate": 85} 1`] = `4.9999999999999964`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T09:20:00.000Z", "heartRate": 85} 1`] = `34.66666666666667`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T09:20:00.000Z", "heartRate": 85} 1`] = `4.9999999999999964`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T09:25:00.000Z", "heartRate": 85} 1`] = `33.83333333333334`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T09:25:00.000Z", "heartRate": 85} 1`] = `4.9999999999999964`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T09:30:00.000Z", "heartRate": 85} 1`] = `33.00000000000001`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T09:30:00.000Z", "heartRate": 85} 1`] = `4.9999999999999964`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T09:35:00.000Z", "heartRate": 85} 1`] = `32.16666666666668`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T09:35:00.000Z", "heartRate": 85} 1`] = `4.9999999999999964`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T09:40:00.000Z", "heartRate": 85} 1`] = `31.333333333333343`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T09:40:00.000Z", "heartRate": 85} 1`] = `4.9999999999999964`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T09:45:00.000Z", "heartRate": 85} 1`] = `30.50000000000001`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T09:45:00.000Z", "heartRate": 85} 1`] = `4.9999999999999964`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T09:50:00.000Z", "heartRate": 85} 1`] = `29.666666666666675`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T09:50:00.000Z", "heartRate": 85} 1`] = `4.9999999999999964`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T09:55:00.000Z", "heartRate": 85} 1`] = `28.83333333333334`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T09:55:00.000Z", "heartRate": 85} 1`] = `4.9999999999999964`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T10:00:00.000Z", "heartRate": 85} 1`] = `28.000000000000007`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T10:00:00.000Z", "heartRate": 85} 1`] = `4.9999999999999964`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T10:05:00.000Z", "heartRate": 85} 1`] = `26.83333333333334`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T10:05:00.000Z", "heartRate": 85} 1`] = `4.9999999999999964`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T10:10:00.000Z", "heartRate": 85} 1`] = `25.66666666666667`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T10:10:00.000Z", "heartRate": 85} 1`] = `4.9999999999999964`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T10:15:00.000Z", "heartRate": 85} 1`] = `24.500000000000004`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T10:15:00.000Z", "heartRate": 85} 1`] = `4.9999999999999964`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T10:20:00.000Z", "heartRate": 85} 1`] = `23.333333333333336`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T10:20:00.000Z", "heartRate": 85} 1`] = `4.9999999999999964`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T10:25:00.000Z", "heartRate": 85} 1`] = `22.166666666666668`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T10:25:00.000Z", "heartRate": 85} 1`] = `4.9999999999999964`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T10:30:00.000Z", "heartRate": 85} 1`] = `21`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T10:30:00.000Z", "heartRate": 85} 1`] = `4.9999999999999964`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T10:35:00.000Z", "heartRate": 85} 1`] = `19.833333333333332`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T10:35:00.000Z", "heartRate": 85} 1`] = `4.9999999999999964`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T10:40:00.000Z", "heartRate": 85} 1`] = `18.666666666666664`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T10:40:00.000Z", "heartRate": 85} 1`] = `4.9999999999999964`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T10:45:00.000Z", "heartRate": 85} 1`] = `17.499999999999996`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T10:45:00.000Z", "heartRate": 85} 1`] = `4.9999999999999964`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T10:50:00.000Z", "heartRate": 85} 1`] = `16.33333333333333`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T10:50:00.000Z", "heartRate": 85} 1`] = `4.9999999999999964`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T10:55:00.000Z", "heartRate": 85} 1`] = `15.16666666666666`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T10:55:00.000Z", "heartRate": 85} 1`] = `4.9999999999999964`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T11:00:00.000Z", "heartRate": 85} 1`] = `13.999999999999995`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T11:00:00.000Z", "heartRate": 85} 1`] = `4.9999999999999964`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T11:05:00.000Z", "heartRate": 85} 1`] = `12.833333333333329`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T11:05:00.000Z", "heartRate": 85} 1`] = `4.9999999999999964`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T11:10:00.000Z", "heartRate": 85} 1`] = `11.666666666666663`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T11:10:00.000Z", "heartRate": 85} 1`] = `4.9999999999999964`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T11:15:00.000Z", "heartRate": 85} 1`] = `10.499999999999996`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T11:15:00.000Z", "heartRate": 85} 1`] = `4.9999999999999964`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T11:20:00.000Z", "heartRate": 85} 1`] = `9.33333333333333`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T11:20:00.000Z", "heartRate": 85} 1`] = `4.9999999999999964`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T11:25:00.000Z", "heartRate": 85} 1`] = `8.166666666666664`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T11:25:00.000Z", "heartRate": 85} 1`] = `4.9999999999999964`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T11:30:00.000Z", "heartRate": 85} 1`] = `6.999999999999998`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T11:30:00.000Z", "heartRate": 85} 1`] = `4.9999999999999964`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T11:35:00.000Z", "heartRate": 85} 1`] = `5.833333333333332`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T11:35:00.000Z", "heartRate": 85} 1`] = `4.9999999999999964`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T11:40:00.000Z", "heartRate": 85} 1`] = `4.666666666666666`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T11:40:00.000Z", "heartRate": 85} 1`] = `4.9999999999999964`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T11:45:00.000Z", "heartRate": 85} 1`] = `3.4999999999999996`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T11:45:00.000Z", "heartRate": 85} 1`] = `4.9999999999999964`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T11:50:00.000Z", "heartRate": 85} 1`] = `2.333333333333333`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T11:50:00.000Z", "heartRate": 85} 1`] = `4.9999999999999964`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T11:55:00.000Z", "heartRate": 85} 1`] = `1.1666666666666665`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T11:55:00.000Z", "heartRate": 85} 1`] = `4.9999999999999964`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T12:00:00.000Z", "heartRate": 85} 1`] = `0`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T12:00:00.000Z", "heartRate": 85} 1`] = `4.9999999999999964`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T12:05:00.000Z", "heartRate": 85} 1`] = `0`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T12:05:00.000Z", "heartRate": 85} 1`] = `4.83333333333333`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T12:10:00.000Z", "heartRate": 85} 1`] = `0`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T12:10:00.000Z", "heartRate": 85} 1`] = `4.666666666666663`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T12:15:00.000Z", "heartRate": 85} 1`] = `0`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T12:15:00.000Z", "heartRate": 85} 1`] = `4.4999999999999964`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T12:20:00.000Z", "heartRate": 85} 1`] = `0`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T12:20:00.000Z", "heartRate": 85} 1`] = `4.33333333333333`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T12:25:00.000Z", "heartRate": 85} 1`] = `0`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T12:25:00.000Z", "heartRate": 85} 1`] = `4.166666666666664`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T12:30:00.000Z", "heartRate": 85} 1`] = `0`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T12:30:00.000Z", "heartRate": 85} 1`] = `3.9999999999999973`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T12:35:00.000Z", "heartRate": 85} 1`] = `0`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T12:35:00.000Z", "heartRate": 85} 1`] = `3.833333333333331`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T12:40:00.000Z", "heartRate": 85} 1`] = `0`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T12:40:00.000Z", "heartRate": 85} 1`] = `3.6666666666666643`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T12:45:00.000Z", "heartRate": 85} 1`] = `0`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T12:45:00.000Z", "heartRate": 85} 1`] = `3.499999999999998`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T12:50:00.000Z", "heartRate": 85} 1`] = `0`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T12:50:00.000Z", "heartRate": 85} 1`] = `3.3333333333333313`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T12:55:00.000Z", "heartRate": 85} 1`] = `0`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T12:55:00.000Z", "heartRate": 85} 1`] = `3.1666666666666647`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T13:00:00.000Z", "heartRate": 85} 1`] = `0`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T13:00:00.000Z", "heartRate": 85} 1`] = `2.9999999999999982`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T13:05:00.000Z", "heartRate": 85} 1`] = `0`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T13:05:00.000Z", "heartRate": 85} 1`] = `2.8333333333333317`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T13:10:00.000Z", "heartRate": 85} 1`] = `0`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T13:10:00.000Z", "heartRate": 85} 1`] = `2.666666666666665`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T13:15:00.000Z", "heartRate": 85} 1`] = `0`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T13:15:00.000Z", "heartRate": 85} 1`] = `2.4999999999999987`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T13:20:00.000Z", "heartRate": 85} 1`] = `0`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T13:20:00.000Z", "heartRate": 85} 1`] = `2.333333333333332`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T13:25:00.000Z", "heartRate": 85} 1`] = `0`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T13:25:00.000Z", "heartRate": 85} 1`] = `2.1666666666666656`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T13:30:00.000Z", "heartRate": 85} 1`] = `0`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T13:30:00.000Z", "heartRate": 85} 1`] = `1.9999999999999991`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T13:35:00.000Z", "heartRate": 85} 1`] = `0`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T13:35:00.000Z", "heartRate": 85} 1`] = `1.8333333333333326`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T13:40:00.000Z", "heartRate": 85} 1`] = `0`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T13:40:00.000Z", "heartRate": 85} 1`] = `1.666666666666666`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T13:45:00.000Z", "heartRate": 85} 1`] = `0`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T13:45:00.000Z", "heartRate": 85} 1`] = `1.4999999999999996`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T13:50:00.000Z", "heartRate": 85} 1`] = `0`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T13:50:00.000Z", "heartRate": 85} 1`] = `1.333333333333333`;
 
-exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T13:55:00.000Z", "heartRate": 85} 1`] = `0`;
+exports[`Physical test physicalIsf with 6h0.5 + 2h0.7 + 6h0.5 {"created_at": "2001-01-01T13:55:00.000Z", "heartRate": 85} 1`] = `1.1666666666666665`;

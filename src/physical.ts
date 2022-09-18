@@ -27,64 +27,61 @@ export function physicalLiver(activities: Activity[]): number {
 // HEARTRATE
 
 function physicalHeartRateIsf(activities: (Activity & MinutesAgo)[]): number {
-	let last240min = activities.filter((e) => e.minutesAgo <= 240 && e.minutesAgo >= 0);
+	let last360min = activities.filter((e) => e.minutesAgo <= 360 && e.minutesAgo >= 0);
 
 	// Here we compute the effect of heartRate on ISF
 	// let's compute the "activity" based on the heart rate every 5 min in the last 6 hours
 	// this "activity" is a coefficient that will affect the ISF  
 	// ====================================================================================
 
-	let timeSinceHRAct = last240min.map(entry => {
+	let timeSinceHRAct = last360min.map(entry => {
 
 		const minutesAgo = entry.minutesAgo;
 		const heartRate = entry.heartRate;
 		const excessHR = entry.heartRate - (0.6*MAX_HR); // 155-(0.6*170)=155-102=53 
-		const excessHRrel = 1 + excessHR/(0.6*MAX_HR);  // 1+(53/102) = 1.52
+		const excessHRrel = excessHR/(0.6*MAX_HR);  // (53/102) = 0.52
 
 		const hrRatio = heartRate / MAX_HR;
-		const lambda = 0.03; // longer than effect on ISF, but still short
 
 		if (hrRatio <= 0.6) {
-			return excessHRrel // just for testing purposes
+			return 0 // just for testing purposes
 		}
 		else if (hrRatio > 0.6 && hrRatio <= 0.75) {
 			return excessHRrel
 		}
 		else if (hrRatio > 0.75 && hrRatio <= 0.9) {
-			return excessHRrel // "linear" decay OR:
-			//return (1 - Math.sqrt(time / 240)) // "square root" decay				
+			return excessHRrel 			
 		}
 		else if (hrRatio > 0.9) {
-			return excessHRrel // "exponential" fast decay
+			return excessHRrel 
 		}
 	});
-
-	const resultHRAct = timeSinceHRAct.reduce((tot, arr) => tot + arr, 0);
+	const resultHRAct = 1 + timeSinceHRAct.reduce((tot, arr) => tot + arr, 0);
 	console.log(`@@@ PHYSICAL HEARTRATE ISF:`, resultHRAct )
 	return resultHRAct;
 }
 
 
 function physicalHeartRateLiver(activities: (Activity & MinutesAgo)[]): number {
-	let last240min = activities.filter((e) => e.minutesAgo <= 240);
+	let last240min = activities.filter((e) => e.minutesAgo <= 360);
 
 	// Here we compute the effect of heartRate on liver EGP
-	// let's compute the "activity" based on the heart rate every 5 min in the last 6 hours
-	// this "activity" will affect the endogenous glucose production EGP a.k.a. "liver"
+	// Let's compute the "activity" based on the heart rate every 5 min in the last 6 hours
+	// This "activity" will affect the endogenous glucose production EGP a.k.a. "liver"
+	// Every activity point depends on the HR entry, expressed as a "relative excess of HR"
 	// ====================================================================================
 
 	let timeSinceHRAct = last240min.map(entry => {
 
 		const minutesAgo = entry.minutesAgo;
-		const heartRatio = entry.heartRate / MAX_HR;
 		const excessHR = entry.heartRate - (0.6*MAX_HR); // 155-(0.6*170)=155-102=53 
-		const excessHRrel = 1 + excessHR/(0.6*MAX_HR);  // 1+(53/102) = 1.52
+		const excessHRrel = excessHR/(0.6*MAX_HR);  // (53/102) = 0.52
 
 		const hrRatio = entry.heartRate / MAX_HR;
 
 		if (hrRatio <= 0.6) {
 			//during rest, the original "liver" function is not altered
-			return 1
+			return 0
 		}
 		else if (hrRatio > 0.6 && hrRatio <= 0.75) {
 			// in low intensity "fat burn" exercise, I suggest a steady low, linearly
@@ -124,7 +121,7 @@ function physicalHeartRateLiver(activities: (Activity & MinutesAgo)[]): number {
 			return excessHRrel * (S / Math.pow(tau, 2)) * minutesAgo * (1 - minutesAgo / td) * Math.exp(-minutesAgo / tau);
 		}
 	});	
-	const resultHRAct = timeSinceHRAct.reduce((tot, arr) => tot + arr, 0);
+	const resultHRAct = 1 + timeSinceHRAct.reduce((tot, arr) => tot + arr, 0);
 	console.log(`@@@ PHYSICAL HEARTRATE LIVER:`, resultHRAct )
 	return resultHRAct;
 }
