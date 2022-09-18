@@ -16,7 +16,7 @@ describe('Physical test', () => {
 		const activities = getFlatHeartRate({ heartRate: 170 * 0.5, created_at: '2001-01-01T00:00:00.000Z' }, 6);
 		const result = physicalIsf(activities);
 		jest.setSystemTime(new Date('2001-01-01T06:00:00.000Z'));
-		expect(result).toBe(1);
+		expect(result).toBe(0);
 	})
 
 	// test('test flat 5hr=0.5 1h=0.7', () => {
