@@ -112,13 +112,14 @@ function physicalHeartRateLiver(activities: (Activity & MinutesAgo)[]): number {
 			return Math.max(hrRatio * (240-minutesAgo)/(24000),0);
 		}
 		else if (hrRatio > 0.9) {
-			// in intense anaerobic "peak" exercise, I the activity should be high
+			// in intense anaerobic "peak" exercise, the activity should be high
 			// but decline rapidly to avoid accumulation:
 
-			// after 5 minutes the effect is = 0.0581
-			// after 10 minutes the effect is = 0.0388
-			// after 30 minutes the effect is = 0.0102
-			// after 60 minutes the effect is = 0.0019
+			// after 5 minutes the effect is = 0.05807
+			// after 10 minutes the effect is = 0.03881
+			// after 30 minutes the effect is = 0.01024
+			// after 60 minutes the effect is = 0.00189
+			// after 240 minutes the effect is = 6E107
 
 			let a = 0.15;
 			let b = 0.8; 
