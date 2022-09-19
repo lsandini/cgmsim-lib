@@ -28,26 +28,26 @@ describe('Physical test', () => {
 	// 	expect(result).toBe(2.076371170507074);
 	// })
 
-	describe('physicalIsf with 6h0.5 + 2h0.8 + 6h0.5', () => {
+	describe('ISF: physicalISF with 6h0.5 + 2h0.91 + 6h0.5', () => {
 		const activities05 = getFlatHeartRate({ heartRate: 170 * 0.5, created_at: '2001-01-01T00:00:00.000Z' }, 6);
 		const activities07 = getFlatHeartRate({ heartRate: 170 * 0.91, created_at: '2001-01-01T06:00:00.000Z' }, 2);
 		const activities05n = getFlatHeartRate({ heartRate: 170 * 0.5, created_at: '2001-01-01T08:00:00.000Z' }, 6);
 
 		test.each([...activities05, ...activities07, ...activities05n])('%p', (t) => {
 			jest.setSystemTime(new Date(t.created_at));
-			const result = physicalIsf([...activities05, ...activities07]);
+			const result = physicalIsf([...activities05, ...activities07,...activities05n]);
 			expect(result).toMatchSnapshot();
 		})
 	});
 
-	describe('physicalIsf with 6h0.5 + 2h0.8 + 6h0.5', () => {
+	describe('Liver: physicalLiver with 6h0.5 + 2h0.91 + 6h0.5', () => {
 		const activities05 = getFlatHeartRate({ heartRate: 170 * 0.5, created_at: '2001-01-01T00:00:00.000Z' }, 6);
 		const activities07 = getFlatHeartRate({ heartRate: 170 * 0.91, created_at: '2001-01-01T06:00:00.000Z' }, 2);
 		const activities05n = getFlatHeartRate({ heartRate: 170 * 0.5, created_at: '2001-01-01T08:00:00.000Z' }, 6);
 
 		test.each([...activities05, ...activities07, ...activities05n])('%p', (t) => {
 			jest.setSystemTime(new Date(t.created_at));
-			const result = physicalLiver([...activities05, ...activities07]);
+			const result = physicalLiver([...activities05, ...activities07,...activities05n]);
 			expect(result).toMatchSnapshot();
 		})
 	});
