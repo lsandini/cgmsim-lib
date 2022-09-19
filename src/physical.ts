@@ -86,6 +86,7 @@ function physicalHeartRateLiver(activities: (Activity & MinutesAgo)[]): number {
 		else if (hrRatio > 0.6 && hrRatio <= 0.75) {
 			// in low intensity "fat burn" exercise, I suggest a steady low, linearly
 			// decreasing effect over 6 hours:
+
 			// after 10 minutes the effect is (360-10)/2*36000 = 35/7200 = 0.004861	
 			// after 60 minutes the effect is (360-60)/2*36000 = 30/7200 = 0.004166		
 			// after 120 minutes the effect is (360-120)/2*36000 = 24/7200 = 0.00333
@@ -97,6 +98,7 @@ function physicalHeartRateLiver(activities: (Activity & MinutesAgo)[]): number {
 		else if (hrRatio > 0.75 && hrRatio <= 0.9) {
 			// in moderate intensity "cardio" exercise, I suggest a steady low, linearly
 			// decreasing effect over 4 hours:
+
 			// after 10 minutes the effect is (240-10)/24000 = 23/2400 = 0.009583	
 			// after 60 minutes the effect is (240-60)/24000 = 18/2400 = 0.0075		
 			// after 120 minutes the effect is (240-120)/24000 = 12/2400 = 0.005
@@ -112,15 +114,16 @@ function physicalHeartRateLiver(activities: (Activity & MinutesAgo)[]): number {
 			// duration of effect in minutes
 			var td = 120;
 			// peak of effet in minutes
-			var tp = 5;
+			var tp = 30;
 
 			var tau = tp * (1 - tp / td) / (1 - 2 * tp / td);
 			var a = 2 * tau / td;
 			var S = 1 / (1 - a + (1 + a) * Math.exp(-td / tau));
 
-			return excessHRrel * (S / Math.pow(tau, 2)) * minutesAgo * (1 - minutesAgo / td) * Math.exp(-minutesAgo / tau);
+			return -excessHRrel * (S / Math.pow(tau, 2)) * minutesAgo * (1 - minutesAgo / td) * Math.exp(-minutesAgo / tau) / 100000;
 		}
 	});	
+	//const resultHRAct = Math.min(Math.max((1 + timeSinceHRAct.reduce((tot, arr) => tot + arr, 0)),0),3);
 	const resultHRAct = 1 + timeSinceHRAct.reduce((tot, arr) => tot + arr, 0);
 	console.log(`@@@ PHYSICAL HEARTRATE LIVER:`, resultHRAct )
 	return resultHRAct;
