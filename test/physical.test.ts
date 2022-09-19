@@ -13,7 +13,7 @@ describe('Physical test', () => {
 	afterAll(() => {
 		jest.useRealTimers();
 	});
-	test('physicalIsf with flat hr =0.5', () => {
+	test('ISF: physicalIsf with flat hr =0.5', () => {
 		const activities = getFlatHeartRate({ heartRate: 170 * 0.5, created_at: '2001-01-01T00:00:00.000Z' }, 6);
 		const result = physicalIsf(activities);
 		jest.setSystemTime(new Date('2001-01-01T06:00:00.000Z'));
@@ -35,7 +35,8 @@ describe('Physical test', () => {
 
 		test.each([...activities05, ...activities07, ...activities05n])('%p', (t) => {
 			jest.setSystemTime(new Date(t.created_at));
-			const result = physicalIsf([...activities05, ...activities07,...activities05n]);
+			const pastActivities = [...activities05, ...activities07,...activities05n].filter(a=>a.created_at<=t.created_at)
+			const result = physicalIsf(pastActivities);
 			expect(result).toMatchSnapshot();
 		})
 	});
@@ -47,7 +48,8 @@ describe('Physical test', () => {
 
 		test.each([...activities05, ...activities07, ...activities05n])('%p', (t) => {
 			jest.setSystemTime(new Date(t.created_at));
-			const result = physicalLiver([...activities05, ...activities07,...activities05n]);
+			const pastActivities = [...activities05, ...activities07,...activities05n].filter(a=>a.created_at<=t.created_at)
+			const result = physicalLiver(pastActivities);
 			expect(result).toMatchSnapshot();
 		})
 	});

@@ -39,39 +39,39 @@ function physicalHeartRateIsf(activities: (Activity & MinutesAgo)[]): number {
 		const minutesAgo = entry.minutesAgo;
 		const heartRate = entry.heartRate;
 		const hrRatio = heartRate / MAX_HR;
+		if (minutesAgo >= 0 && hrRatio > 0.6) {
+			if (hrRatio <= 0.75) {
+				// in low intensity "fat burn" exercise, I suggest a steady low, linearly
+				// decreasing effect over 4 hours:
 
-		if (hrRatio <= 0.6) {
-			return 0 // just for testing purposes
-		}
-		else if (hrRatio > 0.6 && hrRatio <= 0.75) {			
-			// in low intensity "fat burn" exercise, I suggest a steady low, linearly
-			// decreasing effect over 4 hours:
+				// after 10 minutes the effect is (240-10)/24000 = 23/2400 = 0.009583	
+				// after 60 minutes the effect is (240-60)/24000 = 18/2400 = 0.0075		
+				// after 120 minutes the effect is (240-120)/24000 = 12/2400 = 0.005
+				// after 180 minutes the effect is (240-180)/24000 = 6/2400 = 0.0025
 
-			// after 10 minutes the effect is (240-10)/24000 = 23/2400 = 0.009583	
-			// after 60 minutes the effect is (240-60)/24000 = 18/2400 = 0.0075		
-			// after 120 minutes the effect is (240-120)/24000 = 12/2400 = 0.005
-			// after 180 minutes the effect is (240-180)/24000 = 6/2400 = 0.0025
+				return hrRatio * (240 - minutesAgo) / (24000);
+			}
+			else if (hrRatio > 0.75 && hrRatio <= 0.9) {
+				// in moderate intensity "cardio" exercise, I suggest a steady, linearly
+				// decreasing effect over 6 hours:
 
-			return hrRatio * (240-minutesAgo)/(24000);
-		}
-		else if (hrRatio > 0.75 && hrRatio <= 0.9) {
-			// in moderate intensity "cardio" exercise, I suggest a steady, linearly
-			// decreasing effect over 6 hours:
-
-			// after 10 minutes the effect is (360-10)/2*36000 = 35/7200 = 0.004861	
-			// after 60 minutes the effect is (360-60)/2*36000 = 30/7200 = 0.004166		
-			// after 120 minutes the effect is (360-120)/2*36000 = 24/7200 = 0.00333
-			// after 180 minutes the effect is (360-180)/2*36000 = 18/7200 = 0.00250
-			// after 240 minutes the effect is (360-240)/2*36000 = 12/7200 = 0.00166
-			return hrRatio * (360-minutesAgo)/(72000);	
-		}
-		else if (hrRatio > 0.9) {
-			return hrRatio * 0
+				// after 10 minutes the effect is (360-10)/2*36000 = 35/7200 = 0.004861	
+				// after 60 minutes the effect is (360-60)/2*36000 = 30/7200 = 0.004166		
+				// after 120 minutes the effect is (360-120)/2*36000 = 24/7200 = 0.00333
+				// after 180 minutes the effect is (360-180)/2*36000 = 18/7200 = 0.00250
+				// after 240 minutes the effect is (360-240)/2*36000 = 12/7200 = 0.00166
+				return hrRatio * (360 - minutesAgo) / (72000);
+			}
+			else if (hrRatio > 0.9) {
+				return 0
+			}
+		} else {
+			return 0;
 		}
 	});
 	const resultHRAct = 1 + timeSinceHRAct.reduce((tot, arr) => tot + arr, 0);
 
-	console.log(`@@@ PHYSICAL HEARTRATE ISF:`, resultHRAct );
+	console.log(`@@@ PHYSICAL HEARTRATE ISF:`, resultHRAct);
 	return resultHRAct;
 }
 
@@ -90,47 +90,46 @@ function physicalHeartRateLiver(activities: (Activity & MinutesAgo)[]): number {
 		const minutesAgo = entry.minutesAgo;
 		const heartRate = entry.heartRate;
 		const hrRatio = entry.heartRate / MAX_HR;
+		if (minutesAgo >= 0 && hrRatio > 0.6) {
+			if (hrRatio > 0.6 && hrRatio <= 0.75) {
+				// in low intensity "fat burn" exercise,
+				// the original "liver" function is not altered
+				return 0;
+			}
+			else if (hrRatio > 0.75 && hrRatio <= 0.9) {
+				// in moderate intensity "cardio" exercise, I suggest a steady low, linearly
+				// decreasing effect over 4 hours:
 
-		if (hrRatio <= 0.6) {
-			//during rest, the original "liver" function is not altered
+				// after 10 minutes the effect is (240-10)/24000 = 23/2400 = 0.009583	
+				// after 60 minutes the effect is (240-60)/24000 = 18/2400 = 0.0075		
+				// after 120 minutes the effect is (240-120)/24000 = 12/2400 = 0.005
+				// after 180 minutes the effect is (240-180)/24000 = 6/2400 = 0.0025
+
+				return Math.max(hrRatio * (240 - minutesAgo) / (24000), 0);
+			}
+			else if (hrRatio > 0.9) {
+				// in intense anaerobic "peak" exercise, the activity should be high
+				// but decline rapidly to avoid accumulation:
+
+				// after 5 minutes the effect is = 0.05807
+				// after 10 minutes the effect is = 0.03881
+				// after 30 minutes the effect is = 0.01024
+				// after 60 minutes the effect is = 0.00189
+				// after 240 minutes the effect is = 6E107
+
+				let a = 0.15;
+				let b = 0.8;
+				let c = -a * Math.pow(minutesAgo, b);
+				return hrRatio * 0.1 * Math.exp(c);
+			}
+		} else {
 			return 0;
 		}
-		else if (hrRatio > 0.6 && hrRatio <= 0.75) {
-			// in low intensity "fat burn" exercise,
-			// the original "liver" function is not altered
-			return hrRatio * 0;
-		}
-		else if (hrRatio > 0.75 && hrRatio <= 0.9) {
-			// in moderate intensity "cardio" exercise, I suggest a steady low, linearly
-			// decreasing effect over 4 hours:
-
-			// after 10 minutes the effect is (240-10)/24000 = 23/2400 = 0.009583	
-			// after 60 minutes the effect is (240-60)/24000 = 18/2400 = 0.0075		
-			// after 120 minutes the effect is (240-120)/24000 = 12/2400 = 0.005
-			// after 180 minutes the effect is (240-180)/24000 = 6/2400 = 0.0025
-
-			return Math.max(hrRatio * (240-minutesAgo)/(24000),0);
-		}
-		else if (hrRatio > 0.9) {
-			// in intense anaerobic "peak" exercise, the activity should be high
-			// but decline rapidly to avoid accumulation:
-
-			// after 5 minutes the effect is = 0.05807
-			// after 10 minutes the effect is = 0.03881
-			// after 30 minutes the effect is = 0.01024
-			// after 60 minutes the effect is = 0.00189
-			// after 240 minutes the effect is = 6E107
-
-			let a = 0.15;
-			let b = 0.8; 
-			let c = -a * Math.pow(minutesAgo,b);
-			return hrRatio * 0.1 * Math.exp(c);
-		}
 	});
-	console.log(`timeSinceHRAct;`, timeSinceHRAct)	;
+	console.log(`timeSinceHRAct;`, timeSinceHRAct);
 	//const resultHRAct = Math.min(Math.max((1 + timeSinceHRAct.reduce((tot, arr) => tot + arr, 0)),0),3);
 	const resultHRAct = 1 + timeSinceHRAct.reduce((tot, arr) => tot + arr, 0);
-	console.log(`@@@ PHYSICAL HEARTRATE LIVER:`, resultHRAct );
+	console.log(`@@@ PHYSICAL HEARTRATE LIVER:`, resultHRAct);
 	return resultHRAct;
 }
 
