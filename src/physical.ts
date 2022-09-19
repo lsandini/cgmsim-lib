@@ -126,7 +126,7 @@ function physicalHeartRateLiver(activities: (Activity & MinutesAgo)[]): number {
 			return 0;
 		}
 	});
-	console.log(`timeSinceHRAct;`, timeSinceHRAct);
+	//console.log(`timeSinceHRAct;`, timeSinceHRAct);
 	//const resultHRAct = Math.min(Math.max((1 + timeSinceHRAct.reduce((tot, arr) => tot + arr, 0)),0),3);
 	const resultHRAct = 1 + timeSinceHRAct.reduce((tot, arr) => tot + arr, 0);
 	console.log(`@@@ PHYSICAL HEARTRATE LIVER:`, resultHRAct);
