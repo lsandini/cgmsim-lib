@@ -38,53 +38,24 @@ function physicalHeartRateIsf(activities: (Activity & MinutesAgo)[]): number {
 
 		const minutesAgo = entry.minutesAgo;
 		const heartRate = entry.heartRate;
-		const excessHR = entry.heartRate - (0.6*MAX_HR); // 155-(0.6*170)=155-102=53 
-		const excessHRrel = excessHR/(0.6*MAX_HR);  // (53/102) = 0.52
-
 		const hrRatio = heartRate / MAX_HR;
 
 		if (hrRatio <= 0.6) {
 			return 0 // just for testing purposes
 		}
-		else if (hrRatio > 0.6 && hrRatio <= 0.75) {
-			return excessHRrel
+		else if (hrRatio > 0.6 && hrRatio <= 0.75) {			
+			// in low intensity "fat burn" exercise, I suggest a steady low, linearly
+			// decreasing effect over 4 hours:
+
+			// after 10 minutes the effect is (240-10)/24000 = 23/2400 = 0.009583	
+			// after 60 minutes the effect is (240-60)/24000 = 18/2400 = 0.0075		
+			// after 120 minutes the effect is (240-120)/24000 = 12/2400 = 0.005
+			// after 180 minutes the effect is (240-180)/24000 = 6/2400 = 0.0025
+
+			return hrRatio * (240-minutesAgo)/(24000);
 		}
 		else if (hrRatio > 0.75 && hrRatio <= 0.9) {
-			return excessHRrel 			
-		}
-		else if (hrRatio > 0.9) {
-			return excessHRrel 
-		}
-	});
-	const resultHRAct = 1 + timeSinceHRAct.reduce((tot, arr) => tot + arr, 0);
-	console.log(`@@@ PHYSICAL HEARTRATE ISF:`, resultHRAct )
-	return resultHRAct;
-}
-
-
-function physicalHeartRateLiver(activities: (Activity & MinutesAgo)[]): number {
-	let last240min = activities.filter((e) => e.minutesAgo <= 360);
-
-	// Here we compute the effect of heartRate on liver EGP
-	// Let's compute the "activity" based on the heart rate every 5 min in the last 6 hours
-	// This "activity" will affect the endogenous glucose production EGP a.k.a. "liver"
-	// Every activity point depends on the HR entry, expressed as a "relative excess of HR"
-	// ====================================================================================
-
-	let timeSinceHRAct = last240min.map(entry => {
-
-		const minutesAgo = entry.minutesAgo;
-		const excessHR = entry.heartRate - (0.6*MAX_HR); // 155-(0.6*170)=155-102=53 
-		const excessHRrel = excessHR/(0.6*MAX_HR);  // (53/102) = 0.52
-
-		const hrRatio = entry.heartRate / MAX_HR;
-
-		if (hrRatio <= 0.6) {
-			//during rest, the original "liver" function is not altered
-			return 0
-		}
-		else if (hrRatio > 0.6 && hrRatio <= 0.75) {
-			// in low intensity "fat burn" exercise, I suggest a steady low, linearly
+			// in moderate intensity "cardio" exercise, I suggest a steady, linearly
 			// decreasing effect over 6 hours:
 
 			// after 10 minutes the effect is (360-10)/2*36000 = 35/7200 = 0.004861	
@@ -92,8 +63,42 @@ function physicalHeartRateLiver(activities: (Activity & MinutesAgo)[]): number {
 			// after 120 minutes the effect is (360-120)/2*36000 = 24/7200 = 0.00333
 			// after 180 minutes the effect is (360-180)/2*36000 = 18/7200 = 0.00250
 			// after 240 minutes the effect is (360-240)/2*36000 = 12/7200 = 0.00166
-			return excessHRrel * (360-minutesAgo)/(72000);
+			return hrRatio * (360-minutesAgo)/(72000);	
+		}
+		else if (hrRatio > 0.9) {
+			return hrRatio * 0
+		}
+	});
+	const resultHRAct = 1 + timeSinceHRAct.reduce((tot, arr) => tot + arr, 0);
 
+	console.log(`@@@ PHYSICAL HEARTRATE ISF:`, resultHRAct );
+	return resultHRAct;
+}
+
+
+function physicalHeartRateLiver(activities: (Activity & MinutesAgo)[]): number {
+	let last360min = activities.filter((e) => e.minutesAgo <= 360);
+
+	// Here we compute the effect of heartRate on liver EGP
+	// Let's compute the "activity" based on the heart rate every 5 min in the last 6 hours
+	// This "activity" will affect the endogenous glucose production EGP a.k.a. "liver"
+	// Every activity point depends on the HR entry, expressed as a "relative excess of HR"
+	// ====================================================================================
+
+	let timeSinceHRAct = last360min.map(entry => {
+
+		const minutesAgo = entry.minutesAgo;
+		const heartRate = entry.heartRate;
+		const hrRatio = entry.heartRate / MAX_HR;
+
+		if (hrRatio <= 0.6) {
+			//during rest, the original "liver" function is not altered
+			return 0;
+		}
+		else if (hrRatio > 0.6 && hrRatio <= 0.75) {
+			// in low intensity "fat burn" exercise,
+			// the original "liver" function is not altered
+			return hrRatio * 0;
 		}
 		else if (hrRatio > 0.75 && hrRatio <= 0.9) {
 			// in moderate intensity "cardio" exercise, I suggest a steady low, linearly
@@ -104,28 +109,27 @@ function physicalHeartRateLiver(activities: (Activity & MinutesAgo)[]): number {
 			// after 120 minutes the effect is (240-120)/24000 = 12/2400 = 0.005
 			// after 180 minutes the effect is (240-180)/24000 = 6/2400 = 0.0025
 
-			return excessHRrel * (240-minutesAgo)/(24000);
+			return Math.max(hrRatio * (240-minutesAgo)/(24000),0);
 		}
 		else if (hrRatio > 0.9) {
-			// in intense anaerobic activity, the effect increases quickly during 
-			// the first 30 min, then reaches a plateau. When it stops,
-			// the decrease is fast.
+			// in intense anaerobic "peak" exercise, I the activity should be high
+			// but decline rapidly to avoid accumulation:
 
-			// duration of effect in minutes
-			var td = 120;
-			// peak of effet in minutes
-			var tp = 30;
+			// after 5 minutes the effect is = 0.0581
+			// after 10 minutes the effect is = 0.0388
+			// after 30 minutes the effect is = 0.0102
+			// after 60 minutes the effect is = 0.0019
 
-			var tau = tp * (1 - tp / td) / (1 - 2 * tp / td);
-			var a = 2 * tau / td;
-			var S = 1 / (1 - a + (1 + a) * Math.exp(-td / tau));
-
-			return -excessHRrel * (S / Math.pow(tau, 2)) * minutesAgo * (1 - minutesAgo / td) * Math.exp(-minutesAgo / tau) / 100000;
+			let a = 0.15;
+			let b = 0.8; 
+			let c = -a * Math.pow(minutesAgo,b);
+			return hrRatio * 0.1 * Math.exp(c);
 		}
-	});	
+	});
+	console.log(`timeSinceHRAct;`, timeSinceHRAct)	;
 	//const resultHRAct = Math.min(Math.max((1 + timeSinceHRAct.reduce((tot, arr) => tot + arr, 0)),0),3);
 	const resultHRAct = 1 + timeSinceHRAct.reduce((tot, arr) => tot + arr, 0);
-	console.log(`@@@ PHYSICAL HEARTRATE LIVER:`, resultHRAct )
+	console.log(`@@@ PHYSICAL HEARTRATE LIVER:`, resultHRAct );
 	return resultHRAct;
 }
 

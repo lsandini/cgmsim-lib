@@ -28,9 +28,9 @@ describe('Physical test', () => {
 	// 	expect(result).toBe(2.076371170507074);
 	// })
 
-	describe('physicalIsf with 6h0.5 + 2h0.7 + 6h0.5', () => {
+	describe('physicalIsf with 6h0.5 + 2h0.8 + 6h0.5', () => {
 		const activities05 = getFlatHeartRate({ heartRate: 170 * 0.5, created_at: '2001-01-01T00:00:00.000Z' }, 6);
-		const activities07 = getFlatHeartRate({ heartRate: 170 * 0.8, created_at: '2001-01-01T06:00:00.000Z' }, 2);
+		const activities07 = getFlatHeartRate({ heartRate: 170 * 0.91, created_at: '2001-01-01T06:00:00.000Z' }, 2);
 		const activities05n = getFlatHeartRate({ heartRate: 170 * 0.5, created_at: '2001-01-01T08:00:00.000Z' }, 6);
 
 		test.each([...activities05, ...activities07, ...activities05n])('%p', (t) => {
@@ -40,9 +40,9 @@ describe('Physical test', () => {
 		})
 	});
 
-	describe('physicalIsf with 6h0.5 + 2h0.7 + 6h0.5', () => {
+	describe('physicalIsf with 6h0.5 + 2h0.8 + 6h0.5', () => {
 		const activities05 = getFlatHeartRate({ heartRate: 170 * 0.5, created_at: '2001-01-01T00:00:00.000Z' }, 6);
-		const activities07 = getFlatHeartRate({ heartRate: 170 * 0.8, created_at: '2001-01-01T06:00:00.000Z' }, 2);
+		const activities07 = getFlatHeartRate({ heartRate: 170 * 0.91, created_at: '2001-01-01T06:00:00.000Z' }, 2);
 		const activities05n = getFlatHeartRate({ heartRate: 170 * 0.5, created_at: '2001-01-01T08:00:00.000Z' }, 6);
 
 		test.each([...activities05, ...activities07, ...activities05n])('%p', (t) => {
