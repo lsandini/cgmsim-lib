@@ -35,6 +35,7 @@ describe('test perlin with fake timers', () => {
 		expect(perl[0].noise).toBe(perl2[0].noise)
 	})
 	test('run twice different day should return different array', () => {
+		jest.setSystemTime(new Date('2001-01-03T01:01'));
 		const perl = perlin(defaultParams)
 		jest.setSystemTime(new Date('2001-01-02T01:01'));
 		const perl2 = perlin(defaultParams)
