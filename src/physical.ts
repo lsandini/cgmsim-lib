@@ -25,6 +25,7 @@ export function physicalLiver(activities: Activity[]): number {
 
 
 // HEARTRATE
+// =======================
 
 function physicalHeartRateIsf(activities: (Activity & MinutesAgo)[]): number {
 	let last360min = activities.filter((e) => e.minutesAgo <= 360 && e.minutesAgo >= 0);
