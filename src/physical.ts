@@ -139,6 +139,7 @@ function physicalHeartRateLiver(activities: (Activity & MinutesAgo)[]): number {
 
 
 // STEPS
+// ============================================
 
 function physicalStepsIsf(activities: (Activity & MinutesAgo)[]): number {
 

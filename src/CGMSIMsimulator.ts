@@ -36,13 +36,14 @@ const simulator = ({
 		isfActivityDependent = isfConstant * physicalIsf(activities);
 		activityFactor = physicalLiver(activities);
 	}
+
+
 	const weight = parseInt(env.WEIGHT);
 	const dia = parseInt(env.DIA);
 	const tp = parseInt(env.TP);
 	const carbsAbs = parseInt(env.CARBS_ABS_TIME);
 	const cr = parseInt(env.CR);
 	const perls = perlinRun(perlinParams);
-
 
 
 	const bolusActivity = bolus(treatments, dia, tp);
@@ -64,6 +65,9 @@ const simulator = ({
 	const newSgvValue = sgv(orderedEntries, { basalActivity, liverActivity, carbsActivity, bolusActivity }, perls, isfActivityDependent);
 
 	logger.debug('this is the new sgv: %o', newSgvValue);
+	logger.info('this is the ISF multiplicator (or physicalISF): %o', isfActivityDependent/isfConstant);
+	logger.info('this is the liver multiplicator (or physicalLiver): %o', activityFactor);
+
 	// const arrows = arrowsRun([newSgvValue, ...entries]);
 
 	return { ...newSgvValue };
