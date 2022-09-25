@@ -2,7 +2,7 @@ import fetch from 'node-fetch';
 import * as moment from "moment";
 import pino from 'pino';
 import setupParams from "./setupParams";
-import { Activity, Entry, Note, Sgv } from "./Types";
+import { Activity, Entry, Note, Sgv, SimulationResult } from "./Types";
 
 const logger = pino({
 	level: process.env.LOG_LEVEL ?? 'error',
@@ -38,7 +38,7 @@ export function getInsulinOnBoard(peakMin: number, durationMin: number, timeMin:
 }
 //IOB curve: IOB(t) = 1-S*(1-a)*((t^2/(tau*td*(1-a)) - t/tau - 1)*exp(-t/tau)+1);
 export const getDeltaMinutes = (mills: number | string) => Math.round(moment().diff(moment(mills), 'seconds') / 60);
-export function uploadBase(cgmsim: Entry | Activity | Note, nsUrlApi: string, apiSecret: string) {
+export function uploadBase(cgmsim: Entry | Activity | Note|SimulationResult, nsUrlApi: string, apiSecret: string) {
 	const _isHttps = isHttps(nsUrlApi);
 
 	const { postParams } = setupParams(apiSecret, _isHttps);

@@ -5,7 +5,8 @@ import uploadEntries from './upload-entries';
 import uploadActivity from './upload-activity';
 import loadActivity from './load-activity';
 import uploadNotes from './upload-notes';
+import uploadLogs from './upload-logs';
 import arrows from './arrows';
 
 
-export { arrows, simulator, downloads, uploadEntries, uploadActivity, loadActivity, simulatorUVA, uploadNotes };
+export { arrows, simulator, downloads, uploadEntries, uploadActivity, loadActivity, simulatorUVA, uploadNotes, uploadLogs };

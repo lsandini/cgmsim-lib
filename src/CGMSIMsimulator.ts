@@ -10,11 +10,12 @@ import carbs from './carbs';
 import arrowsRun from './arrows';
 import liverRun from './liver';
 import sgv from './sgv';
-import { MainParams } from './Types';
+import { MainParams, SimulationResult } from './Types';
 import moment = require('moment');
 import { physicalIsf, physicalLiver } from './physical';
 
 logger.debug('Run Init');
+
 
 const simulator = ({
 	env,
@@ -24,7 +25,7 @@ const simulator = ({
 	perlinParams,
 	pumpBasals,
 	activities, //7-DAYS
-}: MainParams) => {
+}: MainParams): SimulationResult => {
 
 	const isfConstant = parseInt(env.ISF);
 	let isfActivityDependent = isfConstant;
@@ -65,12 +66,12 @@ const simulator = ({
 	const newSgvValue = sgv(orderedEntries, { basalActivity, liverActivity, carbsActivity, bolusActivity }, perls, isfActivityDependent);
 
 	logger.debug('this is the new sgv: %o', newSgvValue);
-	logger.info('this is the ISF multiplicator (or physicalISF): %o', isfActivityDependent/isfConstant);
+	logger.info('this is the ISF multiplicator (or physicalISF): %o', isfActivityDependent / isfConstant);
 	logger.info('this is the liver multiplicator (or physicalLiver): %o', activityFactor);
 
 	// const arrows = arrowsRun([newSgvValue, ...entries]);
 
-	return { ...newSgvValue };
+	return { ...newSgvValue, activityFactor, isf: { dynamic: isfActivityDependent, constant: isfConstant } };
 };
 
 export default simulator;

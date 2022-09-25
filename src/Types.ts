@@ -105,6 +105,18 @@ export type MainParams = {
 	pumpBasals?: {}[]
 	activities?:Activity[]
 };
+export type SimulationResult = {
+	sgv: number;
+	deltaMinutes: number;
+	carbsActivity: number;
+	basalActivity: number;
+	bolusActivity: number;
+	noiseActivity: number;
+	liverActivity: number;
+	pumpBasalActivity: number;
+	activityFactor: number;
+	isf: { dynamic: number; constant: number }
+};
 
 export type InputPatientUvaState = {
 	iir: number;
