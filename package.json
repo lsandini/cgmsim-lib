@@ -1,6 +1,6 @@
 {
 	"name": "@lsandini/cgmsim-lib",
-	"version": "0.0.17a",
+	"version": "0.0.17b",
 	"publishConfig": {
 		"registry": "https://npm.pkg.github.com"
 	},
