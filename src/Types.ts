@@ -40,7 +40,7 @@ export type Entry = EntryValueType & {
 };
 
 export type ProfileParams = {
-	basal: number | { value: number, time: string, timeAsSecond: number }[];
+	basal: number | { value: number, time: string, timeAsSecond?: number }[];
 }
 
 export type Profile = {
@@ -59,7 +59,7 @@ export type Treatment = {
 	insulin?: number;
 	notes?: string;
 	created_at: string;
-	carbs: number;
+	carbs?: number;
 
 };
 
@@ -102,7 +102,7 @@ export type MainParams = {
 	treatments: Treatment[],
 	profiles: Profile[],
 	perlinParams?: PerlinParams,	
-	pumpBasals?: {}[]
+	pumpEnabled?: boolean,
 	activities?:Activity[]
 };
 export type SimulationResult = {
@@ -113,7 +113,6 @@ export type SimulationResult = {
 	bolusActivity: number;
 	noiseActivity: number;
 	liverActivity: number;
-	pumpBasalActivity: number;
 	activityFactor: number;
 	isf: { dynamic: number; constant: number }
 };

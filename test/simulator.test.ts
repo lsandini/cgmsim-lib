@@ -82,7 +82,6 @@ describe('simulator test', () => {
 			expect(result.bolusActivity).toBeGreaterThanOrEqual(0)
 			expect(result.carbsActivity).toBeGreaterThanOrEqual(0)
 			expect(result.liverActivity).toBeGreaterThanOrEqual(0)
-			expect(result.pumpBasalActivity).toBeGreaterThanOrEqual(0)
 			// console.log('Result ' + result.sgv + ' ' + now.toLocaleString())
 			log.push('Result ' + result.sgv + ' ' + now.toISOString())
 
@@ -152,7 +151,6 @@ describe('simulator test', () => {
 			expect(result.bolusActivity).toBeGreaterThanOrEqual(0)
 			expect(result.carbsActivity).toBeGreaterThanOrEqual(0)
 			expect(result.liverActivity).toBeGreaterThanOrEqual(0)
-			expect(result.pumpBasalActivity).toBeGreaterThanOrEqual(0)
 			// console.log('Result ' + result.sgv + ' ' + now.toLocaleString())
 			log.push('Result ' + result.sgv + ' ' + now.toISOString())
 			lastSgv = result.sgv;
