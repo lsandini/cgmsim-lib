@@ -10,6 +10,7 @@ import carbs from './carbs';
 import arrowsRun from './arrows';
 import liverRun from './liver';
 import sgv from './sgv';
+import pump from './pump';
 import { MainParams, SimulationResult } from './Types';
 import moment = require('moment');
 import { physicalIsf, physicalLiver } from './physical';
@@ -41,14 +42,15 @@ const simulator = ({
 
 	const weight = parseInt(env.WEIGHT);
 	const dia = parseInt(env.DIA);
-	const tp = parseInt(env.TP);
+	const peak = parseInt(env.TP);
 	const carbsAbs = parseInt(env.CARBS_ABS_TIME);
 	const cr = parseInt(env.CR);
 	const perls = perlinRun(perlinParams);
 
 
-	const bolusActivity = bolus(treatments, dia, tp);
-	const basalActivity = basal(treatments, weight);
+	const bolusActivity = bolus(treatments, dia, peak);
+	const basalBolusActivity = basal(treatments, weight);
+	const basalPumpActivity = pump(treatments, profiles, dia, peak)
 	const carbsActivity = carbs(treatments, carbsAbs, isfActivityDependent, cr);
 
 
@@ -63,7 +65,7 @@ const simulator = ({
 	const now = moment();
 	const orderedEntries = entries.filter(e => e.mills <= now.toDate().getTime()).sort((a, b) => b.mills - a.mills)
 
-	const newSgvValue = sgv(orderedEntries, { basalActivity, liverActivity, carbsActivity, bolusActivity }, perls, isfActivityDependent);
+	const newSgvValue = sgv(orderedEntries, { basalActivity: basalBolusActivity + basalPumpActivity, liverActivity, carbsActivity, bolusActivity }, perls, isfActivityDependent);
 
 	logger.debug('this is the new sgv: %o', newSgvValue);
 	logger.info('this is the ISF multiplicator (or physicalISF): %o', isfActivityDependent / isfConstant);
