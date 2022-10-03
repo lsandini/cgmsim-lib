@@ -6,27 +6,28 @@ function getTempBasal(treatments, duration) {
 	const computedTempBasal: { start: moment.Moment; end: moment.Moment; insulin: number; }[] = [];
 	const now = moment();
 	treatments
-		.filter(e => e._id &&
-			e.create_at &&
-			moment(e.create_at).diff(now, 'minutes') <= duration && // temps basals set in the last 3 hours
+		.filter(e =>
+			e.created_at &&
+			now.diff(moment(e.created_at), 'minutes') <= duration && // temps basals set in the last 3 hours
 			e.eventType === 'Temp Basal' &&
 			e.duration != 0
 		)
 		.sort((f, s) => {
-			return moment(f.create_at).diff(s.create_at);
+			return moment(f.created_at).diff(s.created_at);
 		})
 		.forEach((b) => {
 			if (b.absolute !== undefined) {
-				const start = moment(b.create_at);
+				const start = moment(b.created_at);
+				const end = moment(b.created_at).add(b.duration, 'minutes');
 				computedTempBasal.push({
 					start,
 					insulin: b.absolute,
-					end: start.add(b.duration, 'minutes')
+					end
 				});
 			} else {
 				const currentIndex = computedTempBasal.length - 1;
 				if (currentIndex >= 0) {
-					computedTempBasal[currentIndex].end = moment(b.create_at);
+					computedTempBasal[currentIndex].end = moment(b.created_at);
 				}
 			}
 		});
@@ -51,7 +52,7 @@ export default function (treatments: Treatment[], profiles: Profile[], dia: numb
 	const duration = dia * 60;
 
 	const lastProfile = profiles
-		.filter(e => e.store.Default && e.store['Default'])
+		.filter(profile => profile.store.Default && profile.store['Default'])
 		.sort((first, second) => (moment(second.startDate).diff(moment(first.startDate))))[0];
 
 	if (!lastProfile) {

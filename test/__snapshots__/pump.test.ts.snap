@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test pump static basal in profile and no treatments 1`] = `0.011662828783198197`;

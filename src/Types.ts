@@ -59,7 +59,7 @@ export type Treatment = {
 	insulin?: number;
 	notes?: string;
 	created_at: string;
-	carbs: number;
+	carbs?: number;
 
 };
 
