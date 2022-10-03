@@ -24,7 +24,7 @@ const simulator = ({
 	treatments,
 	profiles, //PUMP SIMULATION
 	perlinParams,
-	pumpBasals,
+	pumpEnabled,
 	activities, //7-DAYS
 }: MainParams): SimulationResult => {
 
@@ -50,7 +50,7 @@ const simulator = ({
 
 	const bolusActivity = bolus(treatments, dia, peak);
 	const basalBolusActivity = basal(treatments, weight);
-	const basalPumpActivity = pump(treatments, profiles, dia, peak)
+	const basalPumpActivity = pumpEnabled ? pump(treatments, profiles, dia, peak) : 0;
 	const carbsActivity = carbs(treatments, carbsAbs, isfActivityDependent, cr);
 
 

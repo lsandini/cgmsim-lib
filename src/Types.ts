@@ -102,7 +102,7 @@ export type MainParams = {
 	treatments: Treatment[],
 	profiles: Profile[],
 	perlinParams?: PerlinParams,	
-	pumpBasals?: {}[]
+	pumpEnabled?: boolean,
 	activities?:Activity[]
 };
 export type SimulationResult = {
