@@ -40,7 +40,7 @@ export type Entry = EntryValueType & {
 };
 
 export type ProfileParams = {
-	basal: number | { value: number, time: string, timeAsSecond: number }[];
+	basal: number | { value: number, time: string, timeAsSecond?: number }[];
 }
 
 export type Profile = {
