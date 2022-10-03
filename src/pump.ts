@@ -4,7 +4,7 @@ import { Profile, Treatment } from './Types';
 
 function getTempBasal(treatments, duration) {
 	const computedTempBasal: { start: moment.Moment; end: moment.Moment; insulin: number; }[] = [];
-	const now = moment();
+	const now = moment().utc();
 	treatments
 		.filter(e =>
 			e.created_at &&
@@ -17,8 +17,8 @@ function getTempBasal(treatments, duration) {
 		})
 		.forEach((b) => {
 			if (b.absolute !== undefined) {
-				const start = moment(b.created_at);
-				const end = moment(b.created_at).add(b.duration, 'minutes');
+				const start = moment(b.created_at).utc();
+				const end = moment(b.created_at).add(b.duration, 'minutes').utc();
 				computedTempBasal.push({
 					start,
 					insulin: b.absolute,
@@ -47,8 +47,8 @@ function getBasalFromProfile(defaultProfileBasals: { time: string, value: number
 
 export default function (treatments: Treatment[], profiles: Profile[], dia: number, peak: number) {
 	const basalAsBoluses: { minutesAgo: number, insulin: number }[] = [];
-	const endDiaAction = moment();
-	const startDiaAction = moment().add(-dia, 'hour').set({ minute: 0, second: 0, millisecond: 0 });
+	const endDiaAction = moment().utc();
+	const startDiaAction = moment().add(-dia, 'hour').set({ minute: 0, second: 0, millisecond: 0 }).utc();
 	const duration = dia * 60;
 
 	const lastProfile = profiles
