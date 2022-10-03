@@ -7,7 +7,7 @@ const MIN_HR = 10;
 const MAX_HR = 170;
 
 export function physicalIsf(activities: Activity[]): number {
-	if (hasHearRate(activities)) {
+	if (hasHeartRate(activities)) {
 		return physicalHeartRateIsf(activities.map(a => ({ ...a, minutesAgo: getDeltaMinutes(a.created_at) })));
 	} else {
 		return physicalStepsIsf(activities.map(a => ({ ...a, minutesAgo: getDeltaMinutes(a.created_at) })));
@@ -16,12 +16,31 @@ export function physicalIsf(activities: Activity[]): number {
 
 export function physicalLiver(activities: Activity[]): number {
 	//TODO check activity with HR
-	if (hasHearRate(activities)) {
+	if (hasHeartRate(activities)) {
 		return physicalHeartRateLiver(activities.map(a => ({ ...a, minutesAgo: getDeltaMinutes(a.created_at) })));
 	} else {
 		return physicalStepsLiver(activities.map(a => ({ ...a, minutesAgo: getDeltaMinutes(a.created_at) })));
 	}
 }
+
+// ALTERNATIVE
+// ===========
+// export function physicalIsf(activities: Activity[]): number {
+// 	const aaa = physicalHeartRateIsf(activities.map(a => ({ ...a, minutesAgo: getDeltaMinutes(a.created_at) })));
+// 	const bbb = physicalStepsIsf(activities.map(a => ({ ...a, minutesAgo: getDeltaMinutes(a.created_at) })));
+// 	return Math.max(aaa, bbb);
+
+// }
+
+// export function physicalLiver(activities: Activity[]): number {
+// 	//TODO check activity with HR
+// 	const aaa =  physicalHeartRateLiver(activities.map(a => ({ ...a, minutesAgo: getDeltaMinutes(a.created_at) })));
+// 	const bbb =  physicalStepsLiver(activities.map(a => ({ ...a, minutesAgo: getDeltaMinutes(a.created_at) })));
+// 	return Math.max(aaa, bbb);
+// }
+
+
+
 
 
 // HEARTRATE
@@ -197,7 +216,7 @@ function physicalStepsLiver(activities: (Activity & MinutesAgo)[]): number {
 // Helper functions
 //=================
 
-function hasHearRate(activities: Activity[]): boolean {
+function hasHeartRate(activities: Activity[]): boolean {
 	return activities.some(a => a.heartRate > MIN_HR);
 }
 
