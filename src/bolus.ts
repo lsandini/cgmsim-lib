@@ -1,7 +1,7 @@
 import logger, { getDeltaMinutes, getInsulinActivity } from './utils';
 import { Treatment } from './Types';
 
-export default (treatments: Treatment[], dia: number, peak: number): number => {
+export default (treatments: Treatment[]=[], dia: number, peak: number): number => {
 
 
 	const insulin = treatments
