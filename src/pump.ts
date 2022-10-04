@@ -34,14 +34,25 @@ function getTempBasal(treatments, duration) {
 	return computedTempBasal;
 }
 
-function getBasalFromProfile(defaultProfileBasals: { time: string, value: number }[], currentAction: moment.Moment) {
+function getBasalFromProfile(orderedProfiles: Profile[], currentAction: moment.Moment) {
 	//last basal before the end
-	const compatiblesBasalProfiles = defaultProfileBasals.filter(b => {
-		return b.time.localeCompare(currentAction.format('HH:mm')) <= 0;
-	});
-	const index = compatiblesBasalProfiles.length - 1;
-	const currentBasal = compatiblesBasalProfiles[index];
-	return currentBasal;
+	const activeProfiles = orderedProfiles.filter(p => moment(p.startDate).diff(currentAction) <= 0)
+	if(activeProfiles && activeProfiles.length>0){
+		const activeProfile=activeProfiles[0];
+		const activeProfileName=activeProfile.defaultProfile;
+		const activeProfileBasals=activeProfile.store[activeProfileName].basal;
+		if(Array.isArray(activeProfileBasals)){
+			const compatiblesBasalProfiles = activeProfileBasals.filter(b => {
+				return b.time.localeCompare(currentAction.format('HH:mm')) <= 0;
+			});
+			const index = compatiblesBasalProfiles.length - 1;
+			const currentBasal = compatiblesBasalProfiles[index];
+			return currentBasal.value;
+		}else{
+			return activeProfileBasals;
+		}
+	}
+	return 0;
 }
 
 
@@ -51,14 +62,19 @@ export default function (treatments: Treatment[], profiles: Profile[], dia: numb
 	const startDiaAction = moment().add(-dia, 'hour').set({ minute: 0, second: 0, millisecond: 0 }).utc();
 	const duration = dia * 60;
 
-	const lastProfile = profiles
-		.filter(profile => profile.store.Default && profile.store['Default'])
-		.sort((first, second) => (moment(second.startDate).diff(moment(first.startDate))))[0];
-
+	const orderedProfiles = profiles
+		.filter(profile => {
+			const profileName = profile.defaultProfile;
+			return profile.store[profileName]
+		})
+		.sort((first, second) => (moment(second.startDate).diff(moment(first.startDate))));
+	const lastProfile = orderedProfiles[0];
 	if (!lastProfile) {
 		return 0;
 	}
-	const defaultProfileBasals = lastProfile.store.Default.basal;
+	const lastProfileName = lastProfile.defaultProfile;
+
+	const defaultProfileBasals = lastProfile.store[lastProfileName].basal;
 
 
 	const computedTempBasal = getTempBasal(treatments, duration);
@@ -78,12 +94,7 @@ export default function (treatments: Treatment[], profiles: Profile[], dia: numb
 				insulin: tempBasalActives[0].insulin / 12,
 			};
 		} else {
-			let currentBasal = { value: 0 };
-			if (Array.isArray(defaultProfileBasals)) {
-				currentBasal = getBasalFromProfile(defaultProfileBasals, currentAction);
-			}else{
-				currentBasal = { value: defaultProfileBasals }
-			}
+			let currentBasal = { value: getBasalFromProfile(orderedProfiles, currentAction) };
 
 			basalToUpdate = {
 				minutesAgo: getDeltaMinutes(currentAction.toISOString()),

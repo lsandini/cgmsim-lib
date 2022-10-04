@@ -35,7 +35,7 @@ describe('test pump', () => {
 		jest.setSystemTime(_date.toDate());
 
 		const result = pump([], [{
-			startDate: _date.toISOString(),
+			startDate: '2000-01-01T00:00:00.000Z',
 			defaultProfile: 'Default',
 			store: {
 				Default: {
@@ -56,7 +56,7 @@ describe('test pump', () => {
 			created_at: '2022-05-06T10:31:00.000Z'
 		}]
 		const result = pump(treatments, [{
-			startDate: _date.toISOString(),
+			startDate: '2000-01-01T00:00:00.000Z',
 			defaultProfile: 'Default',
 			store: {
 				Default: {
@@ -84,7 +84,7 @@ describe('test pump', () => {
 		},
 		]
 		const result = pump(treatments, [{
-			startDate: _date.toISOString(),
+			startDate: '2000-01-01T00:00:00.000Z',
 			defaultProfile: 'Default',
 			store: {
 				Default: {
@@ -100,7 +100,7 @@ describe('test pump', () => {
 		jest.setSystemTime(_date.toDate());
 		const treatments = []
 		const result = pump(treatments, [{
-			startDate: _date.toISOString(),
+			startDate: '2000-01-01T00:00:00.000Z',
 			defaultProfile: 'Default',
 			store: {
 				Default: {
