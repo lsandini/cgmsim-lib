@@ -114,6 +114,7 @@ export type SimulationResult = {
 	noiseActivity: number;
 	liverActivity: number;
 	activityFactor: number;
+	notes:string;
 	isf: { dynamic: number; constant: number }
 };
 
