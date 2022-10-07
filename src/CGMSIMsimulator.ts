@@ -29,14 +29,17 @@ const simulator = ({
 }: MainParams): SimulationResult => {
 
 	const isfConstant = parseInt(env.ISF);
+	const age = parseInt(env.AGE);
+	const gender = env.GENDER;
+
 	let isfActivityDependent = isfConstant;
 	let activityFactor = 1;
 	if (isfActivityDependent < 9) {
 		throw new Error("Isf must be greater then or equal to 9");
 	}
 	if (activities && activities.length > 0) {
-		isfActivityDependent = isfConstant * physicalIsf(activities);
-		activityFactor = physicalLiver(activities);
+		isfActivityDependent = isfConstant * physicalIsf(activities, age, gender);
+		activityFactor = physicalLiver(activities, age, gender);
 	}
 
 

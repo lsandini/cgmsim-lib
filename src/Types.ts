@@ -77,6 +77,8 @@ export type EnvParam = {
 	DIA: string;
 	WEIGHT: string;
 	SEED?: string;
+	AGE: string;
+	GENDER: string
 };
 export type CGMSimParams = { basalActivity: number; liverActivity: number; carbsActivity: number; bolusActivity: number }
 export type MainParamsUVA = {

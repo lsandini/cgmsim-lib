@@ -1,10 +1,9 @@
-import { Activity } from "./Types";
+import { Activity , EnvParam } from "./Types";
 import { getDeltaMinutes } from "./utils";
 
 type MinutesAgo = { minutesAgo: number };
 
 const MIN_HR = 10;
-const MAX_HR = 170;
 
 // export function physicalIsf(activities: Activity[]): number {
 // 	if (hasHeartRate(activities)) {
@@ -25,16 +24,29 @@ const MAX_HR = 170;
 
 //ALTERNATIVE
 //===========
-export function physicalIsf(activities: Activity[]): number {
-	const aaa = physicalHeartRateIsf(activities.map(a => ({ ...a, minutesAgo: getDeltaMinutes(a.created_at) })));
+export function physicalIsf(activities: Activity[], age : number, gender : string): number {
+	
+	let MAX_HR = 170;
+	if (gender === "Male") {
+		MAX_HR = 210 - 0.7*age;
+	} else if (gender === "Female") {
+		MAX_HR = 190 - 0.4*age;
+	};
+	const aaa = physicalHeartRateIsf(activities.map(a => ({ ...a, minutesAgo: getDeltaMinutes(a.created_at) })), MAX_HR);
 	const bbb = physicalStepsIsf(activities.map(a => ({ ...a, minutesAgo: getDeltaMinutes(a.created_at) })));
 	return Math.max(aaa, bbb);
 
 }
 
-export function physicalLiver(activities: Activity[]): number {
-	//TODO check activity with HR
-	const aaa =  physicalHeartRateLiver(activities.map(a => ({ ...a, minutesAgo: getDeltaMinutes(a.created_at) })));
+export function physicalLiver(activities: Activity[], age : number, gender : string): number {
+	
+	let MAX_HR = 170;
+	if (gender === "Male") {
+		MAX_HR = 210 - 0.7*age;
+	} else if (gender === "Female") {
+		MAX_HR = 190 - 0.4*age;
+	};
+	const aaa =  physicalHeartRateLiver(activities.map(a => ({ ...a, minutesAgo: getDeltaMinutes(a.created_at) })), MAX_HR);
 	const bbb =  physicalStepsLiver(activities.map(a => ({ ...a, minutesAgo: getDeltaMinutes(a.created_at) })));
 	return Math.max(aaa, bbb);
 }
@@ -45,7 +57,7 @@ export function physicalLiver(activities: Activity[]): number {
 // HEARTRATE
 // =======================
 
-function physicalHeartRateIsf(activities: (Activity & MinutesAgo)[]): number {
+function physicalHeartRateIsf(activities: (Activity & MinutesAgo)[], MAX_HR : number): number {
 	let last360min = activities.filter((e) => e.minutesAgo <= 360 && e.minutesAgo >= 0);
 
 	// Here we compute the effect of heartRate on ISF
@@ -95,7 +107,7 @@ function physicalHeartRateIsf(activities: (Activity & MinutesAgo)[]): number {
 }
 
 
-function physicalHeartRateLiver(activities: (Activity & MinutesAgo)[]): number {
+function physicalHeartRateLiver(activities: (Activity & MinutesAgo)[], MAX_HR : number): number {
 	let last360min = activities.filter((e) => e.minutesAgo <= 360);
 
 	// Here we compute the effect of heartRate on liver EGP
@@ -190,13 +202,13 @@ function physicalStepsIsf(activities: (Activity & MinutesAgo)[]): number {
 	if (stepRatio <= 1) {
 		resultStepAct = 1
 	}
-	else if (stepRatio > 1 && stepRatio <= 3) {
+	else if (stepRatio > 1 && stepRatio <= 2) {
 		resultStepAct = 2
 	}
-	else if (stepRatio > 3 && stepRatio <= 5) {
+	else if (stepRatio > 3 && stepRatio <= 3) {
 		resultStepAct = 3
 	}
-	else if (stepRatio > 5) {
+	else if (stepRatio > 3) {
 		resultStepAct = 4
 	};
 	return resultStepAct;
