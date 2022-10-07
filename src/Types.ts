@@ -115,7 +115,7 @@ export type SimulationResult = {
 	bolusActivity: number;
 	noiseActivity: number;
 	liverActivity: number;
-	activityFactor: number;
+	activityFactor: number;	
 	isf: { dynamic: number; constant: number }
 };
 
