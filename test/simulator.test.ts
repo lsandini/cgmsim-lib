@@ -56,6 +56,8 @@ describe('simulator test', () => {
 			ISF: '32',
 			TP: '75',
 			WEIGHT: '80',
+			AGE: '51',
+			GENDER: 'MALE',
 		}
 
 		const log = []
@@ -133,6 +135,8 @@ describe('simulator test', () => {
 			ISF: '32',
 			TP: '75',
 			WEIGHT: '80',
+			AGE: '51',
+			GENDER: 'MALE',
 		}
 
 		const log = []
