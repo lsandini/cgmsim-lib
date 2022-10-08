@@ -70,7 +70,7 @@ function physicalHeartRateIsf(activities: (Activity & MinutesAgo)[], MAX_HR : nu
 		const minutesAgo = entry.minutesAgo;
 		const heartRate = entry.heartRate;
 		const hrRatio = heartRate / MAX_HR;
-		if (minutesAgo >= 0 && hrRatio > 0.6) {
+		if (minutesAgo >= 0 && hrRatio > 0.35) {  // SHOULD BE 0.6, ONLY TEST !!!
 			if (hrRatio <= 0.75) {
 				// in low intensity "fat burn" exercise, I suggest a steady low, linearly
 				// decreasing effect over 4 hours:
@@ -121,7 +121,7 @@ function physicalHeartRateLiver(activities: (Activity & MinutesAgo)[], MAX_HR : 
 		const minutesAgo = entry.minutesAgo;
 		const heartRate = entry.heartRate;
 		const hrRatio = entry.heartRate / MAX_HR;
-		if (minutesAgo >= 0 && hrRatio > 0.6) {
+		if (minutesAgo >= 0 && hrRatio > 0.35) {    // SHOULD BE 0.6, ONLY TEST !!!
 			if (hrRatio > 0.6 && hrRatio <= 0.75) {
 				// in low intensity "fat burn" exercise,
 				// the original "liver" function is not altered

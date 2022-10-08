@@ -13,12 +13,12 @@ describe('Physical test', () => {
 	afterAll(() => {
 		jest.useRealTimers();
 	});
-	test('ISF: physicalIsf with flat hr =0.5', () => {
-		const activities = getFlatHeartRate({ heartRate: 170 * 0.5, created_at: '2001-01-01T00:00:00.000Z' }, 6);
-		const result = physicalIsf(activities, 51, 'Male');
-		jest.setSystemTime(new Date('2001-01-01T06:00:00.000Z'));
-		expect(result).toBe(1);
-	})
+	// test('ISF: physicalIsf with flat hr =0.5', () => {
+	// 	const activities = getFlatHeartRate({ heartRate: 170 * 0.5, created_at: '2001-01-01T00:00:00.000Z' }, 6);
+	// 	const result = physicalIsf(activities, 51, 'Male');
+	// 	jest.setSystemTime(new Date('2001-01-01T06:00:00.000Z'));
+	// 	expect(result).toBe(1);
+	// })
 
 	// test('test flat 5hr=0.5 1h=0.7', () => {
 	// 	jest.setSystemTime(new Date('2001-01-01T06:00:00.000Z'));
