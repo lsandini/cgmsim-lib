@@ -184,6 +184,8 @@ function physicalStepsIsf(activities: (Activity & MinutesAgo)[]): number {
 	let cumulativeSteps = last7daysSteps.reduce(function (tot, arr) {
 		return tot + arr.steps;
 	}, 0);
+	console.log(`cumulativeSteps 7 days steps:`, cumulativeSteps);
+	console.log(`means steps over 7 days :`, Math.round(cumulativeSteps/7));
 	let mean4hourSteps = Math.round(cumulativeSteps / (7 * 4));
 	console.log(`mean4hourSteps:`, mean4hourSteps);
 
