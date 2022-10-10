@@ -204,14 +204,10 @@ function physicalStepsIsf(activities: (Activity & MinutesAgo)[]): number {
 	if (stepRatio <= 1) {
 		resultStepAct = 1
 	}
-	else if (stepRatio > 1 && stepRatio <= 2) {
-		resultStepAct = 2
-	}
-	else if (stepRatio > 3 && stepRatio <= 3) {
-		resultStepAct = 3
-	}
-	else if (stepRatio > 3) {
-		resultStepAct = 4
+	else if (stepRatio > 1 ) {
+		resultStepAct = 1 + stepRatio/4  
+		// if stepRatio is 1.8, result is 1 + 1.8/4 = 1.45
+		// if stepRatio is 3, result is 1 + 3/4 = 1.75
 	};
 	return resultStepAct;
 }
