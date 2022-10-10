@@ -180,15 +180,15 @@ function physicalStepsIsf(activities: (Activity & MinutesAgo)[]): number {
 
 	// compute cumulative daily steps in the previous 7 days or 7 * 1440 min
 	// then divide by 16 hours for hourly steps and multiply by 4 for 4-hour periods
-	let last7daysSteps = activities.filter((e) => e.minutesAgo <= 10080);
+	let last7daysSteps = activities.filter((e) => e.minutesAgo <= 10080 && e.steps > -1);
 	let cumulativeSteps = last7daysSteps.reduce(function (tot, arr) {
 		return tot + arr.steps;
 	}, 0);
-	let mean4hourSteps = cumulativeSteps / 4;
+	let mean4hourSteps = Math.round(cumulativeSteps / (7 * 4));
 	console.log(`mean4hourSteps:`, mean4hourSteps);
 
 	// compute last 4 hours steps
-	let last4hoursActivities = activities.filter((e) => e.minutesAgo <= 240);
+	let last4hoursActivities = activities.filter((e) => e.minutesAgo <= 240 && e.steps > -1);
 	let last4hourSteps = last4hoursActivities.reduce(function (tot, arr) {
 		return tot + arr.steps;
 	}, 0);
