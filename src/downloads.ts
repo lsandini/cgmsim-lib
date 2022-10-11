@@ -11,7 +11,7 @@ const downloads = async (nsUrl: string, apiSecret: string) => {
 	const _isHttps = isHttps(nsUrl);
 
 	const { getParams } = setupParams(apiSecret, _isHttps);
-	const api_url = _nsUrl + '/api/v1/treatments';
+	const api_url = _nsUrl + '/api/v1/treatments?count=600';
 	const api_profile = _nsUrl + '/api/v1/profile.json';
 	const api_sgv = _nsUrl + '/api/v1/entries/sgv.json';
 
