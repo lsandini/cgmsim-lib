@@ -9,6 +9,8 @@ jobs:
               id: coverage
               with:
                   output: report-markdown
+                  registry-url: https://npm.pkg.github.com/
+                  NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             - uses: marocchino/sticky-pull-request-comment@v2
               with:
                   message: ${{ steps.coverage.outputs.report }}
