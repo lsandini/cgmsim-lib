@@ -1,3 +1,2049 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`test computeBasalIOB detection drug 1`] = `0.0035966516146412695`;
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 1`] = `0.00024718`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 2`] = `0.00049151`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 3`] = `0.000733`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 4`] = `0.00097168`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 5`] = `0.00120754`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 6`] = `0.00144063`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 7`] = `0.00167094`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 8`] = `0.0018985`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 9`] = `0.00212333`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 10`] = `0.00234544`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 11`] = `0.00256485`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 12`] = `0.00278157`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 13`] = `0.00299563`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 14`] = `0.00320703`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 15`] = `0.0034158`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 16`] = `0.00362195`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 17`] = `0.0038255`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 18`] = `0.00402646`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 19`] = `0.00422485`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 20`] = `0.00442068`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 21`] = `0.00461398`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 22`] = `0.00480475`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 23`] = `0.00499302`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 24`] = `0.0051788`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 25`] = `0.0053621`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 26`] = `0.00554294`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 27`] = `0.00572133`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 28`] = `0.0058973`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 29`] = `0.00607085`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 30`] = `0.00624201`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 31`] = `0.00641078`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 32`] = `0.00657718`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 33`] = `0.00674123`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 34`] = `0.00690294`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 35`] = `0.00706232`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 36`] = `0.0072194`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 37`] = `0.00737419`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 38`] = `0.00752669`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 39`] = `0.00767693`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 40`] = `0.00782492`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 41`] = `0.00797068`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 42`] = `0.00811421`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 43`] = `0.00825554`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 44`] = `0.00839468`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 45`] = `0.00853163`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 46`] = `0.00866642`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 47`] = `0.00879907`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 48`] = `0.00892957`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 49`] = `0.00905796`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 50`] = `0.00918423`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 51`] = `0.00930841`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 52`] = `0.00943051`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 53`] = `0.00955054`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 54`] = `0.00966852`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 55`] = `0.00978446`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 56`] = `0.00989837`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 57`] = `0.01001026`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 58`] = `0.01012016`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 59`] = `0.01022807`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 60`] = `0.01033401`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 61`] = `0.01043798`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 62`] = `0.01054001`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 63`] = `0.0106401`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 64`] = `0.01073828`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 65`] = `0.01083454`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 66`] = `0.01092891`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 67`] = `0.01102139`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 68`] = `0.011112`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 69`] = `0.01120076`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 70`] = `0.01128767`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 71`] = `0.01137275`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 72`] = `0.011456`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 73`] = `0.01153745`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 74`] = `0.0116171`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 75`] = `0.01169497`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 76`] = `0.01177107`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 77`] = `0.01184541`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 78`] = `0.011918`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 79`] = `0.01198886`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 80`] = `0.01205799`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 81`] = `0.01212541`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 82`] = `0.01219113`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 83`] = `0.01225516`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 84`] = `0.01231752`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 85`] = `0.01237821`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 86`] = `0.01243725`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 87`] = `0.01249465`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 88`] = `0.01255042`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 89`] = `0.01260457`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 90`] = `0.01265711`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 91`] = `0.01270806`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 92`] = `0.01275742`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 93`] = `0.01280521`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 94`] = `0.01285144`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 95`] = `0.01289612`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 96`] = `0.01293925`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 97`] = `0.01298086`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 98`] = `0.01302095`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 99`] = `0.01305953`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 100`] = `0.01309661`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 101`] = `0.01313221`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 102`] = `0.01316633`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 103`] = `0.01319899`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 104`] = `0.01323019`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 105`] = `0.01325995`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 106`] = `0.01328828`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 107`] = `0.01331518`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 108`] = `0.01334068`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 109`] = `0.01336477`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 110`] = `0.01338747`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 111`] = `0.01340878`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 112`] = `0.01342873`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 113`] = `0.01344731`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 114`] = `0.01346455`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 115`] = `0.01348044`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 116`] = `0.013495`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 117`] = `0.01350824`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 118`] = `0.01352017`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 119`] = `0.0135308`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 120`] = `0.01354013`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 121`] = `0.01354819`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 122`] = `0.01355497`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 123`] = `0.01356048`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 124`] = `0.01356475`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 125`] = `0.01356777`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 126`] = `0.01356955`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 127`] = `0.01357012`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 128`] = `0.01356946`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 129`] = `0.0135676`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 130`] = `0.01356454`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 131`] = `0.01356029`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 132`] = `0.01355487`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 133`] = `0.01354827`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 134`] = `0.01354052`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 135`] = `0.01353161`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 136`] = `0.01352156`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 137`] = `0.01351038`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 138`] = `0.01349807`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 139`] = `0.01348465`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 140`] = `0.01347012`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 141`] = `0.01345449`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 142`] = `0.01343777`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 143`] = `0.01341997`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 144`] = `0.0134011`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 145`] = `0.01338116`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 146`] = `0.01336017`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 147`] = `0.01333813`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 148`] = `0.01331506`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 149`] = `0.01329095`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 150`] = `0.01326582`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 151`] = `0.01323968`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 152`] = `0.01321253`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 153`] = `0.01318439`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 154`] = `0.01315525`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 155`] = `0.01312514`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 156`] = `0.01309405`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 157`] = `0.013062`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 158`] = `0.01302899`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 159`] = `0.01299504`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 160`] = `0.01296014`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 161`] = `0.01292431`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 162`] = `0.01288755`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 163`] = `0.01284988`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 164`] = `0.0128113`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 165`] = `0.01277182`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 166`] = `0.01273144`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 167`] = `0.01269017`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 168`] = `0.01264803`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 169`] = `0.01260502`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 170`] = `0.01256114`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 171`] = `0.0125164`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 172`] = `0.01247082`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 173`] = `0.01242439`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 174`] = `0.01237713`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 175`] = `0.01232904`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 176`] = `0.01228014`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 177`] = `0.01223042`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 178`] = `0.01217989`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 179`] = `0.01212857`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 180`] = `0.01207645`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 181`] = `0.01202355`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 182`] = `0.01196988`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 183`] = `0.01191543`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 184`] = `0.01186022`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 185`] = `0.01180426`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 186`] = `0.01174754`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 187`] = `0.01169009`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 188`] = `0.01163189`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 189`] = `0.01157297`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 190`] = `0.01151333`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 191`] = `0.01145297`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 192`] = `0.0113919`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 193`] = `0.01133013`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 194`] = `0.01126766`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 195`] = `0.0112045`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 196`] = `0.01114066`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 197`] = `0.01107615`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 198`] = `0.01101097`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 199`] = `0.01094512`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 200`] = `0.01087861`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 201`] = `0.01081146`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 202`] = `0.01074366`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 203`] = `0.01067522`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 204`] = `0.01060615`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 205`] = `0.01053645`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 206`] = `0.01046614`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 207`] = `0.01039521`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 208`] = `0.01032367`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 209`] = `0.01025153`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 210`] = `0.0101788`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 211`] = `0.01010548`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 212`] = `0.01003157`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 213`] = `0.00995709`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 214`] = `0.00988203`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 215`] = `0.00980641`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 216`] = `0.00973023`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 217`] = `0.0096535`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 218`] = `0.00957622`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 219`] = `0.00949839`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 220`] = `0.00942003`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 221`] = `0.00934114`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 222`] = `0.00926172`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 223`] = `0.00918178`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 224`] = `0.00910132`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 225`] = `0.00902036`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 226`] = `0.00893889`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 227`] = `0.00885693`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 228`] = `0.00877447`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 229`] = `0.00869153`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 230`] = `0.0086081`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 231`] = `0.0085242`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 232`] = `0.00843983`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 233`] = `0.00835499`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 234`] = `0.00826969`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 235`] = `0.00818393`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 236`] = `0.00809773`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 237`] = `0.00801108`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 238`] = `0.00792399`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 239`] = `0.00783646`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 240`] = `0.00774851`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 241`] = `0.00766013`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 242`] = `0.00757133`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 243`] = `0.00748211`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 244`] = `0.00739249`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 245`] = `0.00730246`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 246`] = `0.00721203`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 247`] = `0.00712121`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 248`] = `0.00703`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 249`] = `0.0069384`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 250`] = `0.00684642`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 251`] = `0.00675406`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 252`] = `0.00666133`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 253`] = `0.00656824`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 254`] = `0.00647479`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 255`] = `0.00638097`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 256`] = `0.00628681`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 257`] = `0.0061923`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 258`] = `0.00609744`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 259`] = `0.00600225`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 260`] = `0.00590672`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 261`] = `0.00581086`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 262`] = `0.00571468`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 263`] = `0.00561817`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 264`] = `0.00552135`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 265`] = `0.00542422`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 266`] = `0.00532677`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 267`] = `0.00522903`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 268`] = `0.00513099`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 269`] = `0.00503265`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 270`] = `0.00493402`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 271`] = `0.0048351`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 272`] = `0.0047359`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 273`] = `0.00463643`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 274`] = `0.00453668`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 275`] = `0.00443666`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 276`] = `0.00433637`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 277`] = `0.00423583`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 278`] = `0.00413502`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 279`] = `0.00403396`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 280`] = `0.00393265`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 281`] = `0.0038311`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 282`] = `0.00372931`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 283`] = `0.00362727`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 284`] = `0.00352501`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 285`] = `0.00342251`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 286`] = `0.00331979`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 287`] = `0.00321684`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 288`] = `0.00311368`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 289`] = `0.00325749`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 290`] = `0.00339823`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 291`] = `0.00353592`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 292`] = `0.0036706`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 293`] = `0.00380226`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 294`] = `0.00393095`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 295`] = `0.00405668`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 296`] = `0.00417947`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 297`] = `0.00429933`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 298`] = `0.0044163`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 299`] = `0.00453039`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 300`] = `0.00464161`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 301`] = `0.00475`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 302`] = `0.00485557`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 303`] = `0.00495834`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 304`] = `0.00505833`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 305`] = `0.00515556`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 306`] = `0.00525005`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 307`] = `0.00534182`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 308`] = `0.00543089`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 309`] = `0.00551727`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 310`] = `0.00560099`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 311`] = `0.00568207`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 312`] = `0.00576052`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 313`] = `0.00583637`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 314`] = `0.00590963`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 315`] = `0.00598031`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 316`] = `0.00604845`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 317`] = `0.00611406`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 318`] = `0.00624201`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 319`] = `0.00641078`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 320`] = `0.00657718`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 321`] = `0.00674123`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 322`] = `0.00690294`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 323`] = `0.00706232`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 324`] = `0.0072194`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 325`] = `0.00737419`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 326`] = `0.00752669`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 327`] = `0.00767693`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 328`] = `0.00782492`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 329`] = `0.00797068`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 330`] = `0.00811421`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 331`] = `0.00825554`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 332`] = `0.00839468`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 333`] = `0.00853163`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 334`] = `0.00866642`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 335`] = `0.00879907`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 336`] = `0.00892957`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 337`] = `0.00905796`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 338`] = `0.00918423`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 339`] = `0.00930841`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 340`] = `0.00943051`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 341`] = `0.00955054`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 342`] = `0.00966852`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 343`] = `0.00978446`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 344`] = `0.00989837`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 345`] = `0.01001026`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 346`] = `0.01012016`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 347`] = `0.01022807`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 348`] = `0.01033401`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 349`] = `0.01043798`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 350`] = `0.01054001`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 351`] = `0.0106401`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 352`] = `0.01073828`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 353`] = `0.01083454`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 354`] = `0.01092891`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 355`] = `0.01102139`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 356`] = `0.011112`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 357`] = `0.01120076`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 358`] = `0.01128767`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 359`] = `0.01137275`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 360`] = `0.011456`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 361`] = `0.01153745`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 362`] = `0.0116171`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 363`] = `0.01169497`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 364`] = `0.01177107`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 365`] = `0.01184541`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 366`] = `0.011918`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 367`] = `0.01198886`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 368`] = `0.01205799`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 369`] = `0.01212541`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 370`] = `0.01219113`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 371`] = `0.01225516`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 372`] = `0.01231752`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 373`] = `0.01237821`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 374`] = `0.01243725`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 375`] = `0.01249465`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 376`] = `0.01255042`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 377`] = `0.01260457`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 378`] = `0.01265711`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 379`] = `0.01270806`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 380`] = `0.01275742`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 381`] = `0.01280521`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 382`] = `0.01285144`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 383`] = `0.01289612`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 384`] = `0.01293925`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 385`] = `0.01298086`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 386`] = `0.01302095`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 387`] = `0.01305953`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 388`] = `0.01309661`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 389`] = `0.01313221`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 390`] = `0.01316633`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 391`] = `0.01319899`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 392`] = `0.01323019`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 393`] = `0.01325995`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 394`] = `0.01328828`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 395`] = `0.01331518`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 396`] = `0.01334068`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 397`] = `0.01336477`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 398`] = `0.01338747`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 399`] = `0.01340878`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 400`] = `0.01342873`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 401`] = `0.01344731`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 402`] = `0.01346455`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 403`] = `0.01348044`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 404`] = `0.013495`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 405`] = `0.01350824`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 406`] = `0.01352017`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 407`] = `0.0135308`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 408`] = `0.01354013`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 409`] = `0.01354819`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 410`] = `0.01355497`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 411`] = `0.01356048`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 412`] = `0.01356475`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 413`] = `0.01356777`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 414`] = `0.01356955`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 415`] = `0.01357012`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 416`] = `0.01356946`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 417`] = `0.0135676`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 418`] = `0.01356454`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 419`] = `0.01356029`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 420`] = `0.01355487`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 421`] = `0.01354827`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 422`] = `0.01354052`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 423`] = `0.01353161`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 424`] = `0.01352156`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 425`] = `0.01351038`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 426`] = `0.01349807`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 427`] = `0.01348465`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 428`] = `0.01347012`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 429`] = `0.01345449`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 430`] = `0.01343777`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 431`] = `0.01341997`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 432`] = `0.0134011`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 433`] = `0.01338116`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 434`] = `0.01336017`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 435`] = `0.01333813`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 436`] = `0.01331506`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 437`] = `0.01329095`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 438`] = `0.01326582`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 439`] = `0.01323968`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 440`] = `0.01321253`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 441`] = `0.01318439`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 442`] = `0.01315525`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 443`] = `0.01312514`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 444`] = `0.01309405`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 445`] = `0.013062`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 446`] = `0.01302899`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 447`] = `0.01299504`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 448`] = `0.01296014`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 449`] = `0.01292431`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 450`] = `0.01288755`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 451`] = `0.01284988`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 452`] = `0.0128113`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 453`] = `0.01277182`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 454`] = `0.01273144`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 455`] = `0.01269017`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 456`] = `0.01264803`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 457`] = `0.01260502`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 458`] = `0.01256114`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 459`] = `0.0125164`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 460`] = `0.01247082`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 461`] = `0.01242439`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 462`] = `0.01237713`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 463`] = `0.01232904`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 464`] = `0.01228014`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 465`] = `0.01223042`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 466`] = `0.01217989`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 467`] = `0.01212857`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 468`] = `0.01207645`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 469`] = `0.01202355`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 470`] = `0.01196988`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 471`] = `0.01191543`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 472`] = `0.01186022`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 473`] = `0.01180426`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 474`] = `0.01174754`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 475`] = `0.01169009`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 476`] = `0.01163189`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 477`] = `0.01157297`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 478`] = `0.01151333`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 479`] = `0.01145297`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 480`] = `0.0113919`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 481`] = `0.01133013`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 482`] = `0.01126766`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 483`] = `0.0112045`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 484`] = `0.01114066`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 485`] = `0.01107615`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 486`] = `0.01101097`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 487`] = `0.01094512`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 488`] = `0.01087861`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 489`] = `0.01081146`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 490`] = `0.01074366`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 491`] = `0.01067522`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 492`] = `0.01060615`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 493`] = `0.01053645`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 494`] = `0.01046614`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 495`] = `0.01039521`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 496`] = `0.01032367`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 497`] = `0.01025153`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 498`] = `0.0101788`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 499`] = `0.01010548`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 500`] = `0.01003157`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 501`] = `0.00995709`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 502`] = `0.00988203`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 503`] = `0.00980641`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 504`] = `0.00973023`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 505`] = `0.0096535`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 506`] = `0.00957622`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 507`] = `0.00949839`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 508`] = `0.00942003`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 509`] = `0.00934114`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 510`] = `0.00926172`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 511`] = `0.00918178`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 512`] = `0.00910132`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 513`] = `0.00902036`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 514`] = `0.00893889`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 515`] = `0.00885693`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 516`] = `0.00877447`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 517`] = `0.00869153`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 518`] = `0.0086081`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 519`] = `0.0085242`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 520`] = `0.00843983`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 521`] = `0.00835499`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 522`] = `0.00826969`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 523`] = `0.00818393`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 524`] = `0.00809773`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 525`] = `0.00801108`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 526`] = `0.00792399`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 527`] = `0.00783646`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 528`] = `0.00774851`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 529`] = `0.00766013`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 530`] = `0.00757133`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 531`] = `0.00748211`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 532`] = `0.00739249`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 533`] = `0.00730246`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 534`] = `0.00721203`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 535`] = `0.00712121`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 536`] = `0.00703`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 537`] = `0.0069384`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 538`] = `0.00684642`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 539`] = `0.00675406`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 540`] = `0.00666133`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 541`] = `0.00656824`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 542`] = `0.00647479`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 543`] = `0.00638097`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 544`] = `0.00628681`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 545`] = `0.0061923`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 546`] = `0.00609744`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 547`] = `0.00600225`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 548`] = `0.00590672`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 549`] = `0.00581086`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 550`] = `0.00571468`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 551`] = `0.00561817`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 552`] = `0.00552135`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 553`] = `0.00542422`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 554`] = `0.00532677`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 555`] = `0.00522903`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 556`] = `0.00513099`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 557`] = `0.00503265`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 558`] = `0.00493402`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 559`] = `0.0048351`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 560`] = `0.0047359`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 561`] = `0.00463643`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 562`] = `0.00453668`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 563`] = `0.00443666`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 564`] = `0.00433637`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 565`] = `0.00423583`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 566`] = `0.00413502`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 567`] = `0.00403396`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 568`] = `0.00393265`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 569`] = `0.0038311`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 570`] = `0.00372931`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 571`] = `0.00362727`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 572`] = `0.00352501`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 573`] = `0.00342251`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 574`] = `0.00331979`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 575`] = `0.00321684`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 576`] = `0.00311368`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 577`] = `0.0030103`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 578`] = `0.00290671`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 579`] = `0.00280292`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 580`] = `0.00269892`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 581`] = `0.00259472`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 582`] = `0.00249033`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 583`] = `0.00238574`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 584`] = `0.00228096`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 585`] = `0.002176`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 586`] = `0.00207086`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 587`] = `0.00196553`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 588`] = `0.00186004`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 589`] = `0.00175437`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 590`] = `0.00164854`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 591`] = `0.00154254`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 592`] = `0.00143638`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 593`] = `0.00133006`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 594`] = `0.00122359`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 595`] = `0.00111697`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 596`] = `0.0010102`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 597`] = `0.00090329`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 598`] = `0.00079624`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 599`] = `0.00068905`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 600`] = `0.00058172`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 601`] = `0.00047427`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 602`] = `0.00036669`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 603`] = `0.00025898`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 604`] = `0.00015116`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 605`] = `0.00004321`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 606`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 607`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 608`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 609`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 610`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 611`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 612`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 613`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 614`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 615`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 616`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 617`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 618`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 619`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 620`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 621`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 622`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 623`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 624`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 625`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 626`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 627`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 628`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 629`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 630`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 631`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 632`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 633`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 634`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 635`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 636`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 637`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 638`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 639`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 640`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 641`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 642`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 643`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 644`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 645`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 646`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 647`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 648`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 649`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 650`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 651`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 652`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 653`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 654`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 655`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 656`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 657`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 658`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 659`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 660`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 661`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 662`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 663`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 664`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 665`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 666`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 667`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 668`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 669`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 670`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 671`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 672`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 673`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 674`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 675`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 676`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 677`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 678`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 679`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 680`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 681`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 682`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 683`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 684`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 685`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 686`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 687`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 688`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 689`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 690`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 691`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 692`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 693`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 694`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 695`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 696`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 697`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 698`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 699`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 700`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 701`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 702`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 703`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 704`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 705`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 706`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 707`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 708`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 709`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 710`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 711`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 712`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 713`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 714`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 715`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 716`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 717`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 718`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 719`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 720`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 721`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 722`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 723`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 724`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 725`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 726`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 727`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 728`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 729`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 730`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 731`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 732`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 733`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 734`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 735`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 736`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 737`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 738`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 739`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 740`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 741`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 742`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 743`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 744`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 745`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 746`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 747`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 748`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 749`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 750`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 751`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 752`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 753`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 754`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 755`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 756`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 757`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 758`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 759`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 760`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 761`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 762`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 763`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 764`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 765`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 766`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 767`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 768`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 769`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 770`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 771`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 772`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 773`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 774`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 775`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 776`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 777`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 778`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 779`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 780`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 781`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 782`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 783`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 784`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 785`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 786`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 787`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 788`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 789`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 790`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 791`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 792`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 793`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 794`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 795`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 796`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 797`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 798`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 799`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 800`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 801`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 802`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 803`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 804`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 805`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 806`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 807`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 808`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 809`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 810`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 811`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 812`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 813`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 814`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 815`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 816`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 817`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 818`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 819`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 820`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 821`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 822`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 823`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 824`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 825`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 826`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 827`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 828`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 829`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 830`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 831`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 832`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 833`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 834`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 835`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 836`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 837`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 838`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 839`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 840`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 841`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 842`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 843`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 844`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 845`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 846`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 847`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 848`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 849`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 850`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 851`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 852`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 853`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 854`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 855`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 856`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 857`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 858`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 859`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 860`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 861`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 862`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 863`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 864`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 865`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 866`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 867`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 868`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 869`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 870`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 871`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 872`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 873`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 874`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 875`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 876`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 877`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 878`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 879`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 880`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 881`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 882`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 883`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 884`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 885`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 886`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 887`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 888`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 889`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 890`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 891`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 892`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 893`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 894`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 895`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 896`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 897`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 898`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 899`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 900`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 901`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 902`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 903`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 904`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 905`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 906`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 907`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 908`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 909`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 910`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 911`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 912`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 913`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 914`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 915`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 916`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 917`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 918`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 919`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 920`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 921`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 922`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 923`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 924`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 925`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 926`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 927`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 928`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 929`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 930`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 931`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 932`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 933`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 934`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 935`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 936`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 937`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 938`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 939`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 940`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 941`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 942`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 943`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 944`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 945`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 946`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 947`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 948`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 949`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 950`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 951`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 952`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 953`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 954`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 955`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 956`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 957`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 958`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 959`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 960`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 961`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 962`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 963`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 964`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 965`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 966`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 967`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 968`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 969`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 970`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 971`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 972`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 973`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 974`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 975`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 976`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 977`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 978`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 979`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 980`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 981`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 982`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 983`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 984`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 985`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 986`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 987`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 988`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 989`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 990`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 991`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 992`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 993`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 994`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 995`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 996`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 997`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 998`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 999`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 1000`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 1001`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 1002`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 1003`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 1004`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 1005`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 1006`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 1007`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 1008`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 1009`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 1010`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 1011`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 1012`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 1013`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 1014`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 1015`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 1016`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 1017`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 1018`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 1019`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 1020`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 1021`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 1022`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 1023`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 1024`] = `0`;

@@ -60,11 +60,58 @@ describe('test computeBasalIOB comparing old cgmsim', () => {
 			let result = computeBasalIOB(toujeoTreatments as unknown as Treatment[], 80);
 			const ROUND = 100000000;
 			result = Math.round(result * ROUND) / ROUND;
-			oldActivity = Math.round(oldActivity * ROUND) / ROUND;
+			oldActivity = Math.max(Math.round(oldActivity * ROUND) / ROUND, 0);
 			// console.log('\x1b[32m', '#####toujeo (after ' + i * 5 + 'minutes)' + _date.toISOString(), result, oldActivity, '\x1b[0m')
 			expect(result).toBe(oldActivity);
+			expect(result).toMatchSnapshot();
 		}
 	})
+
+	test('double toujeo injection', () => {
+		let _date = moment('2022-05-06T15:00:00.000Z');
+		const results = [];
+		for (let i = 0; i < 1024; i++) {
+			_date = _date.add(5, 'minutes');
+			jest.setSystemTime(_date.toDate());
+			const doubleToujeoTreatments = [...toujeoTreatments, {
+				"_id": "627548f4a3dc0ad67616ac95",
+				"eventType": "Announcement",
+				"notes": "tou 14",
+				"utcOffset": 0,
+				"isAnnouncement": true,
+				"protein": "",
+				"fat": "",
+				"duration": 0,
+				"profile": "",
+				"enteredBy": "Boss",
+				"created_at": "2022-05-07T15:00:00.000Z",
+				"carbs": null,
+				"insulin": null
+			}]
+			const {
+				lastDET,
+				lastGLA,
+				lastTOU,
+				lastDEG,
+			} = oldComputeBasal({
+				entries: doubleToujeoTreatments
+			});
+
+			let oldActivity = oldToujeoRun(80, lastTOU);
+			let result = computeBasalIOB(doubleToujeoTreatments as unknown as Treatment[], 80);
+			const ROUND = 100000000;
+			result = Math.round(result * ROUND) / ROUND;
+			oldActivity = Math.max(Math.round(oldActivity * ROUND) / ROUND, 0);
+			// console.log('\x1b[32m', '#####toujeo (after ' + i * 5 + 'minutes)' + _date.toISOString(), result, oldActivity, '\x1b[0m')
+			// expect(result).toBe(oldActivity);
+			expect(result).toMatchSnapshot();
+			if (i > 420) {
+				expect(result).toBeLessThanOrEqual(results[results.length - 1]);
+			}
+			results.push(result);
+		}
+	})
+
 
 	test('compare old glargine', async () => {
 		let _date = moment('2022-05-06T15:00:00.000Z');

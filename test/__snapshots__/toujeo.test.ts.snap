@@ -1,5 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`test toujeo 20g activity after 5h 6h 7h should be >0.1  1`] = `0.015420334520216293`;
+
+exports[`test toujeo 20g activity after 5h 6h 7h should be >0.1  2`] = `0.015420334520216293`;
+
+exports[`test toujeo 20g activity after 5h 6h 7h should be >0.1  3`] = `0.016641617935263794`;
+
 exports[`test toujeo weight:80 ins:30 all 1`] = `29.999989583972972`;
 
 exports[`test toujeo weight:80 ins:30 all 2`] = `
