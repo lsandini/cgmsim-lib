@@ -2,7 +2,7 @@ import fetch from 'node-fetch';
 import * as moment from "moment";
 import pino from 'pino';
 import setupParams from "./setupParams";
-import { Activity, Entry, Note, Sgv, SimulationResult } from "./Types";
+import { Activity, Entry, Note, SimulationResult } from "./Types";
 
 const logger = pino({
 	level: process.env.LOG_LEVEL ?? 'error',

@@ -1,5 +1,485 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 1`] = `0.00024718`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 2`] = `0.00049151`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 3`] = `0.000733`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 4`] = `0.00097168`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 5`] = `0.00120754`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 6`] = `0.00144063`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 7`] = `0.00167094`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 8`] = `0.0018985`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 9`] = `0.00212333`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 10`] = `0.00234544`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 11`] = `0.00256485`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 12`] = `0.00278157`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 13`] = `0.00299563`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 14`] = `0.00320703`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 15`] = `0.0034158`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 16`] = `0.00362195`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 17`] = `0.0038255`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 18`] = `0.00402646`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 19`] = `0.00422485`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 20`] = `0.00442068`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 21`] = `0.00461398`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 22`] = `0.00480475`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 23`] = `0.00499302`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 24`] = `0.0051788`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 25`] = `0.0053621`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 26`] = `0.00554294`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 27`] = `0.00572133`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 28`] = `0.0058973`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 29`] = `0.00607085`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 30`] = `0.00624201`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 31`] = `0.00641078`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 32`] = `0.00657718`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 33`] = `0.00674123`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 34`] = `0.00690294`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 35`] = `0.00706232`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 36`] = `0.0072194`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 37`] = `0.00737419`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 38`] = `0.00752669`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 39`] = `0.00767693`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 40`] = `0.00782492`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 41`] = `0.00797068`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 42`] = `0.00811421`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 43`] = `0.00825554`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 44`] = `0.00839468`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 45`] = `0.00853163`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 46`] = `0.00866642`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 47`] = `0.00879907`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 48`] = `0.00892957`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 49`] = `0.00905796`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 50`] = `0.00918423`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 51`] = `0.00930841`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 52`] = `0.00943051`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 53`] = `0.00955054`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 54`] = `0.00966852`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 55`] = `0.00978446`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 56`] = `0.00989837`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 57`] = `0.01001026`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 58`] = `0.01012016`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 59`] = `0.01022807`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 60`] = `0.01033401`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 61`] = `0.01043798`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 62`] = `0.01054001`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 63`] = `0.0106401`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 64`] = `0.01073828`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 65`] = `0.01083454`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 66`] = `0.01092891`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 67`] = `0.01102139`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 68`] = `0.011112`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 69`] = `0.01120076`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 70`] = `0.01128767`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 71`] = `0.01137275`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 72`] = `0.011456`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 73`] = `0.01153745`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 74`] = `0.0116171`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 75`] = `0.01169497`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 76`] = `0.01177107`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 77`] = `0.01184541`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 78`] = `0.011918`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 79`] = `0.01198886`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 80`] = `0.01205799`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 81`] = `0.01212541`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 82`] = `0.01219113`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 83`] = `0.01225516`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 84`] = `0.01231752`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 85`] = `0.01237821`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 86`] = `0.01243725`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 87`] = `0.01249465`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 88`] = `0.01255042`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 89`] = `0.01260457`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 90`] = `0.01265711`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 91`] = `0.01270806`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 92`] = `0.01275742`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 93`] = `0.01280521`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 94`] = `0.01285144`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 95`] = `0.01289612`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 96`] = `0.01293925`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 97`] = `0.01298086`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 98`] = `0.01302095`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 99`] = `0.01305953`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 100`] = `0.01309661`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 101`] = `0.01313221`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 102`] = `0.01316633`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 103`] = `0.01319899`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 104`] = `0.01323019`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 105`] = `0.01325995`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 106`] = `0.01328828`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 107`] = `0.01331518`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 108`] = `0.01334068`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 109`] = `0.01336477`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 110`] = `0.01338747`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 111`] = `0.01340878`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 112`] = `0.01342873`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 113`] = `0.01344731`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 114`] = `0.01346455`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 115`] = `0.01348044`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 116`] = `0.013495`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 117`] = `0.01350824`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 118`] = `0.01352017`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 119`] = `0.0135308`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 120`] = `0.01354013`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 121`] = `0.01354819`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 122`] = `0.01355497`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 123`] = `0.01356048`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 124`] = `0.01356475`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 125`] = `0.01356777`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 126`] = `0.01356955`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 127`] = `0.01357012`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 128`] = `0.01356946`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 129`] = `0.0135676`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 130`] = `0.01356454`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 131`] = `0.01356029`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 132`] = `0.01355487`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 133`] = `0.01354827`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 134`] = `0.01354052`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 135`] = `0.01353161`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 136`] = `0.01352156`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 137`] = `0.01351038`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 138`] = `0.01349807`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 139`] = `0.01348465`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 140`] = `0.01347012`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 141`] = `0.01345449`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 142`] = `0.01343777`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 143`] = `0.01341997`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 144`] = `0.0134011`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 145`] = `0.01338116`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 146`] = `0.01336017`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 147`] = `0.01333813`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 148`] = `0.01331506`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 149`] = `0.01329095`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 150`] = `0.01326582`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 151`] = `0.01323968`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 152`] = `0.01321253`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 153`] = `0.01318439`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 154`] = `0.01315525`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 155`] = `0.01312514`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 156`] = `0.01309405`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 157`] = `0.013062`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 158`] = `0.01302899`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 159`] = `0.01299504`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 160`] = `0.01296014`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 161`] = `0.01292431`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 162`] = `0.01288755`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 163`] = `0.01284988`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 164`] = `0.0128113`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 165`] = `0.01277182`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 166`] = `0.01273144`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 167`] = `0.01269017`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 168`] = `0.01264803`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 169`] = `0.01260502`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 170`] = `0.01256114`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 171`] = `0.0125164`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 172`] = `0.01247082`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 173`] = `0.01242439`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 174`] = `0.01237713`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 175`] = `0.01232904`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 176`] = `0.01228014`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 177`] = `0.01223042`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 178`] = `0.01217989`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 179`] = `0.01212857`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 180`] = `0.01207645`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 181`] = `0.01202355`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 182`] = `0.01196988`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 183`] = `0.01191543`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 184`] = `0.01186022`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 185`] = `0.01180426`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 186`] = `0.01174754`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 187`] = `0.01169009`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 188`] = `0.01163189`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 189`] = `0.01157297`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 190`] = `0.01151333`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 191`] = `0.01145297`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 192`] = `0.0113919`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 193`] = `0.01133013`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 194`] = `0.01126766`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 195`] = `0.0112045`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 196`] = `0.01114066`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 197`] = `0.01107615`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 198`] = `0.01101097`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 199`] = `0.01094512`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 200`] = `0.01087861`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 201`] = `0.01081146`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 202`] = `0.01074366`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 203`] = `0.01067522`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 204`] = `0.01060615`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 205`] = `0.01053645`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 206`] = `0.01046614`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 207`] = `0.01039521`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 208`] = `0.01032367`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 209`] = `0.01025153`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 210`] = `0.0101788`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 211`] = `0.01010548`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 212`] = `0.01003157`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 213`] = `0.00995709`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 214`] = `0.00988203`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 215`] = `0.00980641`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 216`] = `0.00973023`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 217`] = `0.0096535`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 218`] = `0.00957622`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 219`] = `0.00949839`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 220`] = `0.00942003`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 221`] = `0.00934114`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 222`] = `0.00926172`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 223`] = `0.00918178`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 224`] = `0.00910132`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 225`] = `0.00902036`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 226`] = `0.00893889`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 227`] = `0.00885693`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 228`] = `0.00877447`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 229`] = `0.00869153`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 230`] = `0.0086081`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 231`] = `0.0085242`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 232`] = `0.00843983`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 233`] = `0.00835499`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 234`] = `0.00826969`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 235`] = `0.00818393`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 236`] = `0.00809773`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 237`] = `0.00801108`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 238`] = `0.00792399`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 239`] = `0.00783646`;
+
+exports[`test computeBasalIOB comparing old cgmsim compare old toujeo 240`] = `0.00774851`;
+
 exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 1`] = `0.00024718`;
 
 exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 2`] = `0.00049151`;
@@ -2047,3 +2527,5 @@ exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 1022`
 exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 1023`] = `0`;
 
 exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 1024`] = `0`;
+
+exports[`test computeBasalIOB detection drug 1`] = `0.0035966516146412695`;
