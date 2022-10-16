@@ -5,12 +5,20 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v3
+            - name: Use Node.js ${{ matrix.node-version }}
+              uses: actions/setup-node@v3
+              with:
+                node-version: ${{ matrix.node-version }}
+                registry-url: https://npm.pkg.github.com/
+            - run: npm ci
+              env:
+                NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}            
             - uses: ArtiomTr/jest-coverage-report-action@v2
               id: coverage
               with:
-                  output: report-markdown
-                  registry-url: https://npm.pkg.github.com/
-                  NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                output: report-markdown
+                registry-url: https://npm.pkg.github.com/
+                NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             - uses: marocchino/sticky-pull-request-comment@v2
               with:
-                  message: ${{ steps.coverage.outputs.report }}
+                message: ${{ steps.coverage.outputs.report }}
