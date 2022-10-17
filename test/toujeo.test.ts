@@ -78,5 +78,31 @@ describe('test toujeo', () => {
 		expect(rBeforePeak).toBeLessThan(rPeak);
 		expect(rAfterPeak).toBeLessThan(rPeak);
 	});
+	test('20g activity after 5h 6h 7h should be >0.1 ', () => {
+		const insulin = 20;
+		const weight = 80;		
+
+		const sixHoursActivity = toujeo(weight, [{
+			insulin,
+			minutesAgo: 60*6
+		}]);
+		const fiveHoursActivity = toujeo(weight, [{
+			insulin,
+			minutesAgo: 60*6
+		}]);
+		const sevenHoursActivity = toujeo(weight, [{
+			insulin,
+			minutesAgo: 60*7
+		}]);
+
+		expect(fiveHoursActivity).toBeGreaterThan(0.01);		
+		expect(sixHoursActivity).toBeGreaterThan(0.01);
+		expect(sevenHoursActivity).toBeGreaterThan(0.01);
+
+		expect(fiveHoursActivity).toMatchSnapshot();		
+		expect(sixHoursActivity).toMatchSnapshot()
+		expect(sevenHoursActivity).toMatchSnapshot()
+
+	});
 
 })

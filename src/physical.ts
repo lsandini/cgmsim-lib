@@ -1,5 +1,6 @@
-import { Activity , EnvParam } from "./Types";
-import { getDeltaMinutes } from "./utils";
+import { Activity, EnvParam } from "./Types";
+import logger, { getDeltaMinutes } from "./utils";
+
 
 type MinutesAgo = { minutesAgo: number };
 
@@ -24,30 +25,32 @@ const MIN_HR = 10;
 
 //ALTERNATIVE
 //===========
-export function physicalIsf(activities: Activity[], age : number, gender : string): number {
-	
+export function physicalIsf(activities: Activity[], age: number, gender: string): number {
+
 	let MAX_HR = 170;
-	if (gender === "Male") {
-		MAX_HR = 210 - 0.7*age;
-	} else if (gender === "Female") {
-		MAX_HR = 190 - 0.4*age;
-	};
+	if (age > 0) {
+		if (gender === "Male") {
+			MAX_HR = 210 - 0.7 * age;
+		} else if (gender === "Female") {
+			MAX_HR = 190 - 0.4 * age;
+		};
+	}
 	const aaa = physicalHeartRateIsf(activities.map(a => ({ ...a, minutesAgo: getDeltaMinutes(a.created_at) })), MAX_HR);
 	const bbb = physicalStepsIsf(activities.map(a => ({ ...a, minutesAgo: getDeltaMinutes(a.created_at) })));
 	return Math.max(aaa, bbb);
 
 }
 
-export function physicalLiver(activities: Activity[], age : number, gender : string): number {
-	
+export function physicalLiver(activities: Activity[], age: number, gender: string): number {
+
 	let MAX_HR = 170;
 	if (gender === "Male") {
-		MAX_HR = 210 - 0.7*age;
+		MAX_HR = 210 - 0.7 * age;
 	} else if (gender === "Female") {
-		MAX_HR = 190 - 0.4*age;
+		MAX_HR = 190 - 0.4 * age;
 	};
-	const aaa =  physicalHeartRateLiver(activities.map(a => ({ ...a, minutesAgo: getDeltaMinutes(a.created_at) })), MAX_HR);
-	const bbb =  physicalStepsLiver(activities.map(a => ({ ...a, minutesAgo: getDeltaMinutes(a.created_at) })));
+	const aaa = physicalHeartRateLiver(activities.map(a => ({ ...a, minutesAgo: getDeltaMinutes(a.created_at) })), MAX_HR);
+	const bbb = physicalStepsLiver(activities.map(a => ({ ...a, minutesAgo: getDeltaMinutes(a.created_at) })));
 	return Math.max(aaa, bbb);
 }
 
@@ -57,7 +60,7 @@ export function physicalLiver(activities: Activity[], age : number, gender : str
 // HEARTRATE
 // =======================
 
-function physicalHeartRateIsf(activities: (Activity & MinutesAgo)[], MAX_HR : number): number {
+function physicalHeartRateIsf(activities: (Activity & MinutesAgo)[], MAX_HR: number): number {
 	let last360min = activities.filter((e) => e.minutesAgo <= 360 && e.minutesAgo >= 0);
 
 	// Here we compute the effect of heartRate on ISF
@@ -102,12 +105,12 @@ function physicalHeartRateIsf(activities: (Activity & MinutesAgo)[], MAX_HR : nu
 	});
 	const resultHRAct = 1 + timeSinceHRAct.reduce((tot, arr) => tot + arr, 0);
 
-	console.log(`@@@ PHYSICAL HEARTRATE ISF:`, resultHRAct);
+	logger.debug(`@@@ PHYSICAL HEART RATE ISF: %o`, resultHRAct);
 	return resultHRAct;
 }
 
 
-function physicalHeartRateLiver(activities: (Activity & MinutesAgo)[], MAX_HR : number): number {
+function physicalHeartRateLiver(activities: (Activity & MinutesAgo)[], MAX_HR: number): number {
 	let last360min = activities.filter((e) => e.minutesAgo <= 360);
 
 	// Here we compute the effect of heartRate on liver EGP
@@ -160,7 +163,7 @@ function physicalHeartRateLiver(activities: (Activity & MinutesAgo)[], MAX_HR : 
 	//console.log(`timeSinceHRAct;`, timeSinceHRAct);
 	//const resultHRAct = Math.min(Math.max((1 + timeSinceHRAct.reduce((tot, arr) => tot + arr, 0)),0),3);
 	const resultHRAct = 1 + timeSinceHRAct.reduce((tot, arr) => tot + arr, 0);
-	console.log(`@@@ PHYSICAL HEARTRATE LIVER:`, resultHRAct);
+	logger.debug(`@@@ PHYSICAL HEART RATE LIVER: %o`, resultHRAct);
 	return resultHRAct;
 }
 
@@ -184,17 +187,17 @@ function physicalStepsIsf(activities: (Activity & MinutesAgo)[]): number {
 	let cumulativeSteps = last7daysSteps.reduce(function (tot, arr) {
 		return tot + arr.steps;
 	}, 0);
-	console.log(`cumulativeSteps 7 days steps:`, cumulativeSteps);
-	console.log(`means steps over 7 days :`, Math.round(cumulativeSteps/7));
+	logger.debug(`cumulativeSteps 7 days steps:`, cumulativeSteps);
+	logger.debug(`means steps over 7 days :`, Math.round(cumulativeSteps/7));
 	let mean4hourSteps = Math.round(cumulativeSteps / (7 * 4));
-	console.log(`mean4hourSteps:`, mean4hourSteps);
+	logger.debug(`mean4hourSteps: %o`, mean4hourSteps);
 
 	// compute last 4 hours steps
 	let last4hoursActivities = activities.filter((e) => e.minutesAgo <= 240 && e.steps > -1);
 	let last4hourSteps = last4hoursActivities.reduce(function (tot, arr) {
 		return tot + arr.steps;
 	}, 0);
-	console.log(`last4hourSteps:`, last4hourSteps);
+	logger.debug(`last4hourSteps: %o`, last4hourSteps);
 
 	let stepRatio = last4hourSteps / mean4hourSteps;
 
