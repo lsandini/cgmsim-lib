@@ -209,6 +209,7 @@ function physicalStepsIsf(activities: (Activity & MinutesAgo)[]): number {
 		// if stepRatio is 1.8, result is 1 + 1.8/4 = 1.45
 		// if stepRatio is 3, result is 1 + 3/4 = 1.75
 	};
+	console.log(`@@@ PHYSICAL STEPS ISF:`, resultStepAct);
 	return resultStepAct;
 }
 
@@ -218,6 +219,7 @@ function physicalStepsLiver(activities: (Activity & MinutesAgo)[]): number {
 	// Here we compute the effect of steps on liver EGP
 	// We'll assume the number of steps doesn't affect the EGP
 	// or Endogenous Glucose Production by the liver
+	console.log(`@@@ PHYSICAL STEPS LIVER:`, 1);
 	return 1;
 }
 
