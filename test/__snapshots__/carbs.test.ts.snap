@@ -10,4 +10,4 @@ exports[`Carbs test test carb [15, 22, 35, 83, 143] 1`] = `0.22962962962962966`;
 
 exports[`Carbs test test carbs <=40 with active treatments return carbsActive 1`] = `0.05925925925925926`;
 
-exports[`Carbs test test carbs <=40 with active treatments return fix carbsActive 1`] = `0.09173491386310398`;
+exports[`Carbs test test carbs <=40 with active treatments return fix carbsActive 1`] = `0.11111111111111112`;
