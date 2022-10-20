@@ -69,14 +69,14 @@ describe('Carbs test', () => {
 		expect(r5).toBeLessThan(r60);
 	});
 
- 	test('test carbs >40 with active treatments return carbsActive random', () => {
+	test('test carbs >40 with active treatments return carbsActive random', () => {
 		const r = carbs([{
 			carbs: 41, created_at: minutesAgo(1),
 		}, {
 			carbs: 41, created_at: minutesAgo(45),
 		}], 360, 30, 10)
 		expect(r).toBeGreaterThan(0);
-	}); 
+	});
 
 	it.each([
 		[[2, 21]],
@@ -106,25 +106,28 @@ describe('Carbs test old compare', () => {
 	test('should first', () => {
 
 		let now = moment();
-		const oldC = [];
-		const newC = [];
+		const oldC:number[] = [];
+		const newC:number[] = [];
+		const isf = 36;
+		const cr = 10;
+		// 
 		for (let i = 0; i < 360; i++) {
 
 			const treatment = [{
 				carbs: 41, created_at: minutesAgo(1), time: moment(minutesAgo(1)).toDate().getTime()
 			},];
 			const carbAbs = 360;
-			const newCarb = carbs(treatment, carbAbs, 36, 10);
+			const newCarb = carbs(treatment, carbAbs, isf, cr);
 			const old = oldCarbs(treatment, carbAbs)
 			newC.push(newCarb)  // new raw value is multiplied by isfMMol/CR  or 2/10 or 1/5 !
 			oldC.push(old);     // old raw value is not multiplied by CSF (isfMMol/CR)
 			now = now.add(1, "minutes");
 			jest.setSystemTime(now.toDate());
 		}
-		const newT = newC.reduce((acc, i) => ((i * 5) + acc), 0)
+		const newT = newC.reduce((acc, i) => ((i * (cr / (isf / 18))) + acc), 0)
 		const oldT = oldC.reduce((acc, i) => i + acc, 0)
-		expect(newT).toBeGreaterThan(oldT - 3)
-		expect(newT).toBeLessThan(oldT + 3)
+		expect(newT.toFixed(5)).toBe(oldT.toFixed(5));
+		expect(newT.toFixed(5)).toBe(oldT.toFixed(5))
 	})
 
 });
