@@ -37,6 +37,12 @@ export function physicalIsf(activities: Activity[], age: number, gender: string)
 	}
 	const aaa = physicalHeartRateIsf(activities.map(a => ({ ...a, minutesAgo: getDeltaMinutes(a.created_at) })), MAX_HR);
 	const bbb = physicalStepsIsf(activities.map(a => ({ ...a, minutesAgo: getDeltaMinutes(a.created_at) })));
+
+	if (aaa > bbb) {
+		logger.debug(`@@@ USING HeartRate for ISF:, %o`, aaa);
+	} else {
+		logger.debug(`@@@ USING Steps for ISF:, %o`, bbb);
+	}
 	return Math.max(aaa, bbb);
 
 }
