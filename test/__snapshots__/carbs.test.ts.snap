@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Carbs test test carb [2, 21] 1`] = `0.08518518518518518`;
+
+exports[`Carbs test test carb [3, 7, 21] 1`] = `0.11481481481481483`;
+
+exports[`Carbs test test carb [5, 27, 55, 98] 1`] = `0.13703703703703704`;
+
+exports[`Carbs test test carb [15, 22, 35, 83, 143] 1`] = `0.22962962962962966`;
+
+exports[`Carbs test test carbs <=40 with active treatments return carbsActive 1`] = `0.05925925925925926`;
+
+exports[`Carbs test test carbs <=40 with active treatments return fix carbsActive 1`] = `0.11111111111111112`;
