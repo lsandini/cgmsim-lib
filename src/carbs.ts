@@ -27,7 +27,7 @@ export default function carbs(treatments: Treatment[] = [], carbsAbs: number, is
 
 		// the first 40g of every meal at most are always considered fast carbs ???
 		// No, let the amount of fast carbs be totally random, but at most 30 g.
-		const fast = Math.min(entry.carbs, 40);
+		const fast = Math.min(Math.random() * entry.carbs, 40);
 
 		// the amount exceeding 30 grams will be randomly split into fast and slow carbs
 		const rest = entry.carbs - fast;

@@ -13,6 +13,10 @@ afterAll(() => {
 	jest.useRealTimers();
 });
 
+const mockMath = Object.create(global.Math);
+mockMath.random = () => 0.5;
+global.Math = mockMath;
+
 const minutesAgo = (min) => moment(now).add(-min, 'minutes').toISOString();
 describe('Carbs test', () => {
 
