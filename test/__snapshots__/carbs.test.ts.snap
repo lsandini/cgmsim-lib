@@ -1,13 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Carbs test test carb [2, 21] 1`] = `0.03752472787003872`;
+exports[`Carbs test test carb [2, 21] 1`] = `0.07904806557343512`;
 
-exports[`Carbs test test carb [3, 7, 21] 1`] = `0.07693170230786588`;
+exports[`Carbs test test carb [3, 7, 21] 1`] = `0.08760171378902377`;
 
-exports[`Carbs test test carb [5, 27, 55, 98] 1`] = `0.1153544988283884`;
+exports[`Carbs test test carb [5, 27, 55, 98] 1`] = `0.12409878722364139`;
 
-exports[`Carbs test test carb [15, 22, 35, 83, 143] 1`] = `0.16566087988290512`;
+exports[`Carbs test test carb [15, 22, 35, 83, 143] 1`] = `0.185559728442568`;
 
-exports[`Carbs test test carbs <=40 with active treatments return carbsActive 1`] = `0.05317371189742504`;
+exports[`Carbs test test carbs <=40 with active treatments return carbsActive 1`] = `0.0362018370092477`;
 
-exports[`Carbs test test carbs <=40 with active treatments return fix carbsActive 1`] = `0.07694685018817882`;
+exports[`Carbs test test carbs <=40 with active treatments return fix carbsActive 1`] = `0.07393044596670624`;
