@@ -1,10 +1,8 @@
 const D3Node = require('d3-node');
-const fse = require('fs-extra');
-
 const puppeteer = require('puppeteer');
 
 async function captureImage(html, { path, viewport }) {
-	const screenShotOptions = { viewport, path };
+	const screenShotOptions = { viewport };
 	
 	try {
 		const browser = await puppeteer.launch({})
@@ -25,13 +23,6 @@ async function captureImage(html, { path, viewport }) {
 export const output = async (dest, d3n): Promise<any> => {
 	const d3 = d3n.d3;
 
-	if (d3n.options.canvas) {
-		const canvas = d3n.options.canvas;
-		canvas.pngStream().pipe(fse.createWriteStream(`${dest}.png`));
-		console.log(`>> Exported canvas to ${dest}.png`);
-		return;
-	}
-
 	function eachGeoQuantize(d) {
 		const coords = d3.select(this).attr('d') || ''
 		const rounded = coords.replace(/[0-9]*\.[0-9]*/g, (x) => (+x).toFixed(4))
@@ -42,7 +33,7 @@ export const output = async (dest, d3n): Promise<any> => {
 	d3n.d3Element.selectAll('path').each(eachGeoQuantize);
 	const svgString = d3n.svgString();
 
-	await fse.outputFile(`${dest}.svg`, svgString);
+	// await fse.outputFile(`${dest}.svg`, svgString);
 
 	const html = d3n.html()
 
