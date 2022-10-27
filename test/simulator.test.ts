@@ -4,6 +4,7 @@ import moment = require("moment");
 import { getPngSnapshot } from "./inputTest";
 const { toMatchImageSnapshot } = require('jest-image-snapshot');
 
+const math=global.Math;
 const defaultParams: PerlinParams = {
 	amplitude: 0.3,
 	octaveCount: 3,
@@ -22,10 +23,16 @@ describe('simulator test', () => {
 
 		jest.useFakeTimers('modern');
 		jest.setSystemTime(date);
-	})
-
+		const mockMath = Object.create(global.Math);
+		mockMath.random = () => 0.5;
+		global.Math = mockMath;
+		
+		
+	});
+	
 	afterAll(() => {
 		jest.useRealTimers();
+		global.Math = math;
 	});
 
 	test('start from 274 22:10 + 14u tou +', () => {

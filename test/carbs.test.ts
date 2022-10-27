@@ -5,18 +5,20 @@ import { assert } from 'console';
 import { getPngSnapshot, MultiLineSgv } from './inputTest';
 const now = '2001-01-01T07:00:00';
 const { toMatchImageSnapshot } = require('jest-image-snapshot');
+const math=global.Math;
 beforeEach(() => {
 	jest.useFakeTimers('modern');
 	jest.setSystemTime(new Date(now));
 	expect.extend({ toMatchImageSnapshot });
+	const mockMath = Object.create(global.Math);
+	mockMath.random = () => 0.5;
+	global.Math = mockMath;
 })
 afterAll(() => {
 	jest.useRealTimers();
+	global.Math = math;
 });
 
-const mockMath = Object.create(global.Math);
-mockMath.random = () => 0.5;
-global.Math = mockMath;
 
 const minutesAgo = (min) => moment(now).add(-min, 'minutes').toISOString();
 describe('Carbs test', () => {
