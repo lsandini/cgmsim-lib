@@ -39,9 +39,9 @@ export function physicalIsf(activities: Activity[], age: number, gender: string)
 	const bbb = physicalStepsIsf(activities.map(a => ({ ...a, minutesAgo: getDeltaMinutes(a.created_at) })));
 
 	if (aaa > bbb) {
-		logger.debug(`@@@ USING HeartRate for ISF:, %o`, aaa);
+		logger.info(`@@@ USING HeartRate for ISF:, %o`, aaa);
 	} else {
-		logger.debug(`@@@ USING Steps for ISF:, %o`, bbb);
+		logger.info(`@@@ USING Steps for ISF:, %o`, bbb);
 	}
 	return Math.max(aaa, bbb);
 
@@ -228,8 +228,9 @@ function physicalStepsLiver(activities: (Activity & MinutesAgo)[]): number {
 	// Here we compute the effect of steps on liver EGP
 	// We'll assume the number of steps doesn't affect the EGP
 	// or Endogenous Glucose Production by the liver
-	logger.debug(`@@@ PHYSICAL STEPS LIVER: %o`);
-	return 1;
+	let resultStepAct = 1;
+	logger.debug(`@@@ PHYSICAL STEPS LIVER: %o`, resultStepAct);
+	return resultStepAct;
 }
 
 
