@@ -27,7 +27,13 @@ export function getInsulinActivity(peakMin: number, durationMin: number, timeMin
 	const a = 2 * tau / durationMin;
 	const S = 1 / (1 - a + (1 + a) * Math.exp(-durationMin / tau));
 	const activity = (insulin * (S / Math.pow(tau, 2)) * timeMin * (1 - timeMin / durationMin) * Math.exp(-timeMin / tau))
-	return activity > 0 ? activity : 0;
+	if (activity <= 0) {
+		return 0;
+	}
+	// if (timeMin < 20) {
+	// 	return activity * (timeMin / 20)
+	// }
+	return activity;
 }
 export function getInsulinOnBoard(peakMin: number, durationMin: number, timeMin: number, insulin: number) {
 	const tau = peakMin * (1 - peakMin / durationMin) / (1 - 2 * peakMin / durationMin);
@@ -38,7 +44,7 @@ export function getInsulinOnBoard(peakMin: number, durationMin: number, timeMin:
 }
 //IOB curve: IOB(t) = 1-S*(1-a)*((t^2/(tau*td*(1-a)) - t/tau - 1)*exp(-t/tau)+1);
 export const getDeltaMinutes = (mills: number | string) => Math.round(moment().diff(moment(mills), 'seconds') / 60);
-export function uploadBase(cgmsim: Entry | Activity | Note|SimulationResult, nsUrlApi: string, apiSecret: string) {
+export function uploadBase(cgmsim: Entry | Activity | Note | SimulationResult, nsUrlApi: string, apiSecret: string) {
 	const _isHttps = isHttps(nsUrlApi);
 
 	const { postParams } = setupParams(apiSecret, _isHttps);
@@ -55,7 +61,7 @@ export function uploadBase(cgmsim: Entry | Activity | Note|SimulationResult, nsU
 			logger.debug(err);
 		});
 }
-export function loadBase( nsUrlApi: string, apiSecret: string):Promise<(Entry | Activity | Note)[]> {
+export function loadBase(nsUrlApi: string, apiSecret: string): Promise<(Entry | Activity | Note)[]> {
 	const _isHttps = isHttps(nsUrlApi);
 
 	const { getParams } = setupParams(apiSecret, _isHttps);

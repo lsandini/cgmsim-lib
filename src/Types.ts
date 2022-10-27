@@ -21,7 +21,7 @@ export type Note = {
 export type Activity = {
 	steps?: number,
 	heartRate?: number,
-	created_at: string,	
+	created_at: string,
 }
 export type Sgv = {
 	mills: number;
@@ -69,6 +69,8 @@ export type TreatmentDelta = (Treatment & {
 });
 
 
+export type GenderType = 'Male' | 'Female';
+
 export type EnvParam = {
 	CR: string;
 	ISF: string;
@@ -78,17 +80,21 @@ export type EnvParam = {
 	WEIGHT: string;
 	SEED?: string;
 	AGE: string;
-	GENDER: string
+	GENDER: GenderType
 };
 export type CGMSimParams = { basalActivity: number; liverActivity: number; carbsActivity: number; bolusActivity: number }
 export type MainParamsUVA = {
 	env: {
 		WEIGHT: string,
+		AGE: string;
+		GENDER: GenderType
 	};
 	treatments: Treatment[],
 	profiles: Profile[],
-	lastState: PatientUvaState,
+	lastState: UvaPatientState,
 	entries: Sgv[];
+	activities?: Activity[];
+
 }
 export type PerlinParams = {
 	amplitude: number;
@@ -103,9 +109,9 @@ export type MainParams = {
 	entries: Sgv[];
 	treatments: Treatment[],
 	profiles: Profile[],
-	perlinParams?: PerlinParams,	
+	perlinParams?: PerlinParams,
 	pumpEnabled?: boolean,
-	activities?:Activity[]
+	activities?: Activity[]
 };
 export type SimulationResult = {
 	sgv: number;
@@ -115,18 +121,25 @@ export type SimulationResult = {
 	bolusActivity: number;
 	noiseActivity: number;
 	liverActivity: number;
-	activityFactor: number;	
+	activityFactor: number;
 	isf: { dynamic: number; constant: number }
 };
 
-export type InputPatientUvaState = {
-	iir: number;
-	ibolus: number;
-	carbs: number;
-	meal: number;
 
+export type UvaOutput = {
+	Gp: number,
+	G?: number
 }
-export type PatientUvaState = {
+export type UvaUserParams = {
+	// meal: number,
+	iir: number,
+	ibolus: number,
+	carbs: number,
+	intensity: number,
+}
+export type UvaDelta = 1
+export type UvaInterval = 5
+export type UvaPatientState = {
 	Gp: number,
 	Gt: number,
 	I_: number,
@@ -139,13 +152,18 @@ export type PatientUvaState = {
 	Qsto2: number,
 	X: number,
 	XL: number,
-
+	Y: number,
+	Z: number,
+	W: number,
 }
 
 
 export type UvaParametersType = {
 	BW: number;
 	Gpeq: number;
+	HRb: number,
+	HRmax: number,		//220-age
+
 	VG: number; // [Dalla Man, IEEE TBME, 2007]
 	k1: number; // [Dalla Man, IEEE TBME, 2007]
 	k2: number; // [Dalla Man, IEEE TBME, 2007]
@@ -176,6 +194,15 @@ export type UvaParametersType = {
 	ka1: number; // [Dalla Man, JDST, 2007]
 	ka2: number; // [Dalla Man, JDST, 2007]
 	kd: number;
+	A: number;		// [Dalla Man, JDST, 2009]
+	beta: number;			// [Dalla Man, JDST, 2009]
+	gamma: number;			// [Dalla Man, JDST, 2009]
+	a: number;			// [Dalla Man, JDST, 2009]
+	Thr: number;			// [Dalla Man, JDST, 2009]
+	Tin: number;			// [Dalla Man, JDST, 2009]
+	Tex: number;			// [Dalla Man, JDST, 2009]
+	n: number;			// [Dalla Man, JDST, 2009]
+
 };
 
 

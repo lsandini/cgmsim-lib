@@ -11,9 +11,10 @@ import basalProfile from './basalProfile';
 // import arrowsRun from './arrows';
 // import liverRun from './liver';
 // import sgvStartRun from './sgv';
-import { InputPatientUvaState, MainParams, MainParamsUVA, Treatment } from './Types';
+import { MainParamsUVA, UvaPatientState, UvaDelta, UvaInterval, UvaOutput, UvaUserParams } from './Types';
 import { PatientUva } from './uva';
 import RK4 from './SolverRK';
+import { currentIntensity } from './physical';
 
 logger.info('Run Init');
 
@@ -22,10 +23,14 @@ const simulator = ({
 	treatments,
 	profiles: profile,
 	lastState,
-	entries
+	entries,
+	activities
 }: MainParamsUVA) => {
 
 	const weight = parseInt(env.WEIGHT);
+	const age = parseInt(env.AGE);
+	const gender = env.GENDER;
+
 	// const dia = parseInt(env.DIA);
 	// const tp = parseInt(env.TP);
 	// const carbsAbs = parseInt(env.CARBS_ABS_TIME);
@@ -50,57 +55,58 @@ const simulator = ({
 		.map(i => i.carbs)
 		.reduce((tot, activity) => tot + activity, 0);
 
+	const intensity = currentIntensity(activities, age, gender) * 100
+
 	const basalProfileActivity = basalProfile(profile)
 
-
-
 	const patient = new PatientUva({})
-	let t = 0
-	const tmax = 5
+	let partialMinutes = 0
+	const fiveMinutes: UvaInterval = 5
+	const oneMinute: UvaDelta = 1
 
-	const dt = 1
 	//get last state from mongo
-	let x = lastState ? lastState : patient.getInitialState(entries && entries.length > 0 ? entries[0].sgv : null)
-	let u = { meal: 0, iir: 0, ibolus: 0 }
-	let y = patient.getOutputs(t, x, u)
-
+	let patientState: UvaPatientState = lastState ? lastState : patient.getInitialState(entries && entries.length > 0 ? entries[0].sgv : null)
+	let userParams: UvaUserParams = { iir: 0, ibolus: 0, carbs: 0, intensity: 0 }
+	//t0 result
+	let result: UvaOutput = patient.getOutputs(partialMinutes, patientState, userParams)
+	const lastPatientState = { ...patientState };
 	// start simulation
-	while (t < tmax) {
+	while (partialMinutes < fiveMinutes) {
 		// todo: sensor dynamics
-		y["G"] = y["Gp"];
+		result.G = result.Gp;
 
 		// validity check
-		if (isNaN(y["G"])) {
+		if (isNaN(result.G)) {
 			throw new Error('Error')
 		}
 
 		// compute controller output
 		// let iir = basalActivity * 60;
 		let iir = (basalProfileActivity * 60) + (basalActivity * 60);
-		let ibolus = t == 0 ? bolusActivity : 0;
+		let ibolus = partialMinutes == 0 ? bolusActivity : 0;
 		if (iir < 0) iir = 0
 		if (ibolus < 0) ibolus = 0
 		const carbs = carbsActivity / 5;
+		// const intensity = 0;//get exercise intensity
 
-		const u: InputPatientUvaState = { iir, ibolus, carbs, meal: NaN }
+
+		const userParams: UvaUserParams = { iir, ibolus, carbs, intensity }
 
 		// this.simulationResults.push({ t, x, u, y, logData })
 
 		// proceed one time step
-		x = RK4((t_, x_) => patient.getDerivatives(t_, x_, u), t, x, dt)
-		y = patient.getOutputs(t, x, u)
-		t += dt
+		patientState = RK4((time: number, state: UvaPatientState) => patient.getDerivatives(time, state, userParams), partialMinutes, patientState, oneMinute)
+		//t partialMinutes result
+		result = patient.getOutputs(partialMinutes, patientState, userParams)
+		partialMinutes += oneMinute
 	}
-	return { x, y }
-
-
-
-	//save x state
-
-
-
-
-
+	if (result.Gp > 400) {
+		return { state: lastPatientState, sgv: 400 }
+	}
+	if (result.Gp < 40) {
+		return { state: lastPatientState, sgv: 40 }
+	}
+	return { state: patientState, sgv: result.Gp }
 };
 
 export default simulator;

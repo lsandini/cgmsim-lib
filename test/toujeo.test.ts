@@ -1,18 +1,24 @@
 import { computeBasalActivity, durationBasal, peakBasal } from "../src/basal";
+import { getPngSnapshot } from "./inputTest";
+const { toMatchImageSnapshot } = require('jest-image-snapshot');
 
 describe('test toujeo', () => {
+	beforeEach(() => {
+			
+		expect.extend({ toMatchImageSnapshot });
+	})
 
-	const toujeo=(weight,treatments)=>{
-		const toujeoT=treatments
-		.map(e => {
-			const duration = durationBasal.TOU(e.insulin,weight);
-			const peak = peakBasal.TOU(duration);
-		return {
-				...e,
-				duration,
-				peak,
-			}
-		});
+	const toujeo = (weight, treatments) => {
+		const toujeoT = treatments
+			.map(e => {
+				const duration = durationBasal.TOU(e.insulin, weight);
+				const peak = peakBasal.TOU(duration);
+				return {
+					...e,
+					duration,
+					peak,
+				}
+			});
 		return computeBasalActivity(toujeoT)
 	}
 	test('weight:80 ins:30 minutesAgo:300', () => {
@@ -24,7 +30,7 @@ describe('test toujeo', () => {
 		expect(insulinActive).toMatchSnapshot();
 	})
 
-	test('weight:80 ins:30 all', () => {
+	test('weight:80 ins:30 all', async () => {
 		const weight = 80;
 		let insulinActive = 0;
 		let insulinArr = [];
@@ -40,6 +46,8 @@ describe('test toujeo', () => {
 		}
 		expect(insulinActive).toMatchSnapshot();
 		expect(insulinArr).toMatchSnapshot();
+		const png = await getPngSnapshot(insulinArr.map((sgv, index) => ({ key: index, value: sgv })), { scaleY: true })
+		expect(png).toMatchImageSnapshot();
 	})
 
 
@@ -80,26 +88,26 @@ describe('test toujeo', () => {
 	});
 	test('20g activity after 5h 6h 7h should be >0.1 ', () => {
 		const insulin = 20;
-		const weight = 80;		
+		const weight = 80;
 
 		const sixHoursActivity = toujeo(weight, [{
 			insulin,
-			minutesAgo: 60*6
+			minutesAgo: 60 * 6
 		}]);
 		const fiveHoursActivity = toujeo(weight, [{
 			insulin,
-			minutesAgo: 60*6
+			minutesAgo: 60 * 6
 		}]);
 		const sevenHoursActivity = toujeo(weight, [{
 			insulin,
-			minutesAgo: 60*7
+			minutesAgo: 60 * 7
 		}]);
 
-		expect(fiveHoursActivity).toBeGreaterThan(0.01);		
+		expect(fiveHoursActivity).toBeGreaterThan(0.01);
 		expect(sixHoursActivity).toBeGreaterThan(0.01);
 		expect(sevenHoursActivity).toBeGreaterThan(0.01);
 
-		expect(fiveHoursActivity).toMatchSnapshot();		
+		expect(fiveHoursActivity).toMatchSnapshot();
 		expect(sixHoursActivity).toMatchSnapshot()
 		expect(sevenHoursActivity).toMatchSnapshot()
 

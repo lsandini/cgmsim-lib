@@ -1,5 +1,6 @@
 import { computeBasalActivity, durationBasal, peakBasal } from "../src/basal";
-
+import { getPngSnapshot } from "./inputTest";
+const { toMatchImageSnapshot } = require('jest-image-snapshot');
 describe('test degludec', () => {
 	const degludec = (treatments) => {
 		const toujeoT = treatments
@@ -14,6 +15,10 @@ describe('test degludec', () => {
 			});
 		return computeBasalActivity(toujeoT)
 	}
+	beforeEach(() => {
+			
+		expect.extend({ toMatchImageSnapshot });
+	})
 	test('ins:30 minutesAgo:300', () => {
 		const insulinActive = degludec([{
 			insulin: 30,
@@ -25,18 +30,18 @@ describe('test degludec', () => {
 	test('ins:30 hoursAgo: 44', () => {
 		const insulinActive = degludec([{
 			insulin: 30,
-			minutesAgo: 44*60
+			minutesAgo: 44 * 60
 		}])
 		expect(insulinActive).toBe(0);
 	})
 
-	test('weight:80 ins:30 all', () => {
+	test('weight:80 ins:30 all', async () => {
 		const weight = 80;
 		let insulinActive = 0;
 		let insulinArr = [];
 
 		for (let i = 0; i < 2000; i++) {
-			const _insulinActive = degludec( [{
+			const _insulinActive = degludec([{
 				insulin: 30,
 				minutesAgo: i,
 			}])
@@ -46,6 +51,9 @@ describe('test degludec', () => {
 		}
 		expect(insulinActive).toMatchSnapshot();
 		expect(insulinArr).toMatchSnapshot();
+		const png = await getPngSnapshot(insulinArr.map((sgv, index) => ({ key: index, value: sgv })), { scaleY: true })
+		expect(png).toMatchImageSnapshot();
+
 	})
 
 

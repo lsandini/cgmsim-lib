@@ -79,8 +79,8 @@ describe('test comparing old perlin', () => {
 		const minValOldPerl = oldPerl.sort((a, b) => a.noise - b.noise)[0];
 		const sumValPerl = perl.reduce((acc, el) => acc + el.noise, 0);
 		const sumValOldPerl = oldPerl.reduce((acc, el) => acc + el.noise, 0);
-		console.log("new", { countPositiveValPerl, maxValPerl, minValPerl, sumValPerl })
-		console.log("old", { countPositiveValOldPerl, maxValOldPerl, minValOldPerl, sumValOldPerl })
+		// console.log("new", { countPositiveValPerl, maxValPerl, minValPerl, sumValPerl })
+		// console.log("old", { countPositiveValOldPerl, maxValOldPerl, minValOldPerl, sumValOldPerl })
 
 
 		expect(perl.length).toBe(oldPerl.length);

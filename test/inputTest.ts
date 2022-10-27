@@ -1,6 +1,48 @@
 import moment = require("moment")
-import { physicalIsf } from "src/physical"
 import { Activity } from "src/Types"
+const { output, line } = require("./d3Func");
+
+export type SingleLineSgv = {
+	key: number;
+	value: number;
+}[];
+export type MultiLineSgv = SingleLineSgv[] & { keys: number[] };
+
+export const getPngSnapshot = async (data: SingleLineSgv | MultiLineSgv, options = {}, name?: string): Promise<string> => {
+
+	const testDesc = expect.getState().currentTestName;
+
+
+
+	const dirBase = globalThis.dirBase;
+	const fileBase = globalThis.fileBase;
+	const filename = name || testDesc.replace(/[^a-z0-9]/gi, '_');
+
+	// console.log(data);
+
+	// create output files
+	const opts = {};
+
+	const graph = line({
+		data: data,
+		container: `<div id="container"><h2>${testDesc}</h2><div id="chart"></div></div>`,
+		lineColors: ["steelblue", "darkorange"],
+		width: 800,
+		height: 570
+		, ...options
+	});
+	try {
+		const png= await output(
+			// "./test/__visual__/" + filename,
+			`./test/__pngArchive__/${fileBase}/${filename}`,
+			graph
+		);
+		return png
+	} catch (error) {
+		throw new Error(error);
+
+	}
+}
 
 export const treatments = [{
 	"_id": "62764c27a3dc0ad6768cce46",

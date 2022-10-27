@@ -1,4 +1,4 @@
-import { Activity, EnvParam } from "./Types";
+import { Activity, EnvParam, GenderType } from "./Types";
 import logger, { getDeltaMinutes } from "./utils";
 
 
@@ -22,11 +22,7 @@ const MIN_HR = 10;
 // 		return physicalStepsLiver(activities.map(a => ({ ...a, minutesAgo: getDeltaMinutes(a.created_at) })));
 // 	}
 // }
-
-//ALTERNATIVE
-//===========
-export function physicalIsf(activities: Activity[], age: number, gender: string): number {
-
+function getMaxHr(age: number, gender: GenderType) {
 	let MAX_HR = 170;
 	if (age > 0) {
 		if (gender === "Male") {
@@ -35,6 +31,23 @@ export function physicalIsf(activities: Activity[], age: number, gender: string)
 			MAX_HR = 190 - 0.4 * age;
 		};
 	}
+	return MAX_HR;
+}
+export function currentIntensity(activities: Activity[], age: number, gender: GenderType): number {
+	let MAX_HR = getMaxHr(age, gender);
+	const intensity = physicalHeartIntensity(activities?.map(a => ({ ...a, minutesAgo: getDeltaMinutes(a.created_at) })), MAX_HR);
+	return intensity??0;
+}
+
+
+
+
+//ALTERNATIVE
+//===========
+export function physicalIsf(activities: Activity[], age: number, gender: GenderType): number {
+
+	let MAX_HR = getMaxHr(age, gender);
+
 	const aaa = physicalHeartRateIsf(activities.map(a => ({ ...a, minutesAgo: getDeltaMinutes(a.created_at) })), MAX_HR);
 	const bbb = physicalStepsIsf(activities.map(a => ({ ...a, minutesAgo: getDeltaMinutes(a.created_at) })));
 
@@ -47,14 +60,9 @@ export function physicalIsf(activities: Activity[], age: number, gender: string)
 
 }
 
-export function physicalLiver(activities: Activity[], age: number, gender: string): number {
+export function physicalLiver(activities: Activity[], age: number, gender: GenderType): number {
 
-	let MAX_HR = 170;
-	if (gender === "Male") {
-		MAX_HR = 210 - 0.7 * age;
-	} else if (gender === "Female") {
-		MAX_HR = 190 - 0.4 * age;
-	};
+	let MAX_HR = getMaxHr(age, gender);
 	const aaa = physicalHeartRateLiver(activities.map(a => ({ ...a, minutesAgo: getDeltaMinutes(a.created_at) })), MAX_HR);
 	const bbb = physicalStepsLiver(activities.map(a => ({ ...a, minutesAgo: getDeltaMinutes(a.created_at) })));
 	return Math.max(aaa, bbb);
@@ -213,8 +221,8 @@ function physicalStepsIsf(activities: (Activity & MinutesAgo)[]): number {
 	if (stepRatio <= 1) {
 		resultStepAct = 1
 	}
-	else if (stepRatio > 1 ) {
-		resultStepAct = 1 + stepRatio/4  
+	else if (stepRatio > 1) {
+		resultStepAct = 1 + stepRatio / 4
 		// if stepRatio is 1.8, result is 1 + 1.8/4 = 1.45
 		// if stepRatio is 3, result is 1 + 3/4 = 1.75
 	};
@@ -239,5 +247,20 @@ function physicalStepsLiver(activities: (Activity & MinutesAgo)[]): number {
 
 function hasHeartRate(activities: Activity[]): boolean {
 	return activities.some(a => a.heartRate > MIN_HR);
+}
+
+function physicalHeartIntensity(activities: (Activity & MinutesAgo)[], MAX_HR: number) {
+	let last5min = activities?.filter((e) => e.minutesAgo <= 5);
+
+	let minutesAgo = 360;
+	let hrRatio = 0;
+
+	last5min?.forEach(entry => {
+		if (entry.minutesAgo < minutesAgo) {
+			minutesAgo = entry.minutesAgo
+			hrRatio = entry.heartRate / MAX_HR;
+		}
+	})
+	return hrRatio > 0.8 ? 0 : hrRatio;
 }
 

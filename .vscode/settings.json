@@ -15,6 +15,7 @@
 		"glargine",
 		"Glargines",
 		"glas",
+		"ibolus",
 		"Interm",
 		"mmol",
 		"perlin",
@@ -25,5 +26,11 @@
 		"toujeo",
 		"toujeos",
 		"tous"
-	]
+	],
+	"jestrunner.runOptions": ["--detectOpenHandles"],
+	"jestrunner.debugOptions": {
+		"args": ["--detectOpenHandles"],
+		"sourcemaps": "inline",
+		"disableOptimisticBPs": true,
+	}
 }

@@ -1,11 +1,15 @@
 import { computeBasalActivity, durationBasal, peakBasal } from "../src/basal";
-
+import { getPngSnapshot } from "./inputTest";
+const { toMatchImageSnapshot } = require('jest-image-snapshot');
 describe('test glargine', () => {
-
+	beforeEach(() => {
+			
+		expect.extend({ toMatchImageSnapshot });
+	})
 	const glargine = (weight, treatments) => {
 		const toujeoT = treatments
 			.map(e => {
-				const duration = durationBasal.GLA(e.insulin,weight);
+				const duration = durationBasal.GLA(e.insulin, weight);
 				const peak = peakBasal.GLA(duration);
 				return {
 					...e,
@@ -24,7 +28,7 @@ describe('test glargine', () => {
 		}])
 		expect(insulinActive).toMatchSnapshot();
 	})
-	test('weight:80 ins:30 all', () => {
+	test('weight:80 ins:30 all', async () => {
 		const weight = 80;
 		let insulinActive = 0;
 		let insulinArr = [];
@@ -40,6 +44,9 @@ describe('test glargine', () => {
 		}
 		expect(insulinActive).toMatchSnapshot();
 		expect(insulinArr).toMatchSnapshot();
+		const png = await getPngSnapshot(insulinArr.map((sgv, index) => ({ key: index, value: sgv })), { scaleY: true })
+		expect(png).toMatchImageSnapshot();
+
 	})
 
 	test('insulin 5 min ago are less active then 40 min ago', () => {

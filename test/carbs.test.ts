@@ -2,12 +2,13 @@ import moment = require('moment');
 import carbs from '../src/carbs';
 import { oldCarbs } from '../old/oldCarbs';
 import { assert } from 'console';
+import { getPngSnapshot, MultiLineSgv } from './inputTest';
 const now = '2001-01-01T07:00:00';
-
+const { toMatchImageSnapshot } = require('jest-image-snapshot');
 beforeEach(() => {
 	jest.useFakeTimers('modern');
 	jest.setSystemTime(new Date(now));
-
+	expect.extend({ toMatchImageSnapshot });
 })
 afterAll(() => {
 	jest.useRealTimers();
@@ -71,9 +72,9 @@ describe('Carbs test', () => {
 
 	test('test carbs >40 with active treatments return carbsActive random', () => {
 		const r = carbs([{
-			carbs: 41, created_at: minutesAgo(1),
+			carbs: 40, created_at: minutesAgo(1),
 		}, {
-			carbs: 41, created_at: minutesAgo(45),
+			carbs: 40, created_at: minutesAgo(45),
 		}], 360, 30, 10)
 		expect(r).toBeGreaterThan(0);
 	});
@@ -103,7 +104,7 @@ describe('Carbs test old compare', () => {
 	afterAll(() => {
 		jest.useRealTimers();
 	});
-	test('should first', () => {
+	test('should first', async () => {
 
 		let now = moment();
 		const oldC:number[] = [];
@@ -112,9 +113,10 @@ describe('Carbs test old compare', () => {
 		const cr = 10;
 		// 
 		for (let i = 0; i < 360; i++) {
+			jest.setSystemTime(now.toDate());
 
 			const treatment = [{
-				carbs: 41, created_at: minutesAgo(1), time: moment(minutesAgo(1)).toDate().getTime()
+				carbs: 40, created_at: minutesAgo(1), time: moment(minutesAgo(1)).toDate().getTime()
 			},];
 			const carbAbs = 360;
 			const newCarb = carbs(treatment, carbAbs, isf, cr);
@@ -122,7 +124,6 @@ describe('Carbs test old compare', () => {
 			newC.push(newCarb)  // new raw value is multiplied by isfMMol/CR  or 2/10 or 1/5 !
 			oldC.push(old);     // old raw value is not multiplied by CSF (isfMMol/CR)
 			now = now.add(1, "minutes");
-			jest.setSystemTime(now.toDate());
 		}
 		const newT = newC.reduce((acc, i) => ((i * (cr / (isf / 18))) + acc), 0)
 		const oldT = oldC.reduce((acc, i) => i + acc, 0)
