@@ -94,16 +94,15 @@ export class D3Node {
 		}
 		return ''
 	}
-	async svgImage(dest:string) {
-		
-			const svgString = this.svgString();
-			await fse.outputFile(`${dest}.svg`, svgString);
-			
-			return sharp(`${dest}.svg`)
-				.png()			
-				.toBuffer()
-				
-				// .toBuffer()		
+	async svgImage(dest: string) {
+
+		const svgString = this.svgString();
+		var buf = Buffer.from(svgString, 'utf8');
+		return sharp(buf)
+			.png()
+			.toBuffer()
+
+		// .toBuffer()		
 	}
 
 	html() {
