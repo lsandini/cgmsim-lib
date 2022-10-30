@@ -3,7 +3,7 @@ import bolus from "../src/bolus";
 import { Treatment } from "../src/Types";
 const { toMatchImageSnapshot } = require('jest-image-snapshot');
 
-import moment = require("moment");
+const moment = require("moment");
 
 const dia = 6;
 const peak = 90;
@@ -48,7 +48,10 @@ describe('test bolus', () => {
 		}
 		expect(insulinActive).toMatchSnapshot();
 		expect(insulinArr).toMatchSnapshot();
-		const png = await getPngSnapshot(insulinArr.map((sgv, index) => ({ key: index * 5, value: sgv })), { scaleY: true })
+		const png = await getPngSnapshot({
+			type: 'single',
+			values: insulinArr.map((sgv, index) => ({ key: index, value: sgv }))
+		}, { scaleY: true })
 		expect(png).toMatchImageSnapshot();
 
 	})

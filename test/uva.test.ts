@@ -57,7 +57,10 @@ describe('uva test default PATIENT', () => {
 
 		expect(lastState).toMatchSnapshot()
 		expect(yList).toMatchSnapshot()
-		const png = await getPngSnapshot(yList.map((sgv, index) => ({ key: index * 5, value: sgv })))
+		const png = await getPngSnapshot({
+			type: 'single',
+			values: yList.map((sgv, index) => ({ key: index, value: sgv }))
+		}, { scaleY: true })
 		expect(png).toMatchImageSnapshot();
 
 	})
@@ -91,7 +94,10 @@ describe('uva test default PATIENT', () => {
 
 		expect(lastState).toMatchSnapshot()
 		expect(yList).toMatchSnapshot()
-		const png = await getPngSnapshot(yList.map((sgv, index) => ({ key: index * 5, value: sgv })))
+		const png = await getPngSnapshot({
+			type: 'single',
+			values: yList.map((sgv, index) => ({ key: index, value: sgv }))
+		}, { scaleY: true })
 		expect(png).toMatchImageSnapshot();
 
 	})
@@ -152,7 +158,10 @@ describe('uva test default PATIENT', () => {
 
 		expect(lastState).toMatchSnapshot()
 		expect(yList).toMatchSnapshot()
-		const png = await getPngSnapshot(yList.map((sgv, index) => ({ key: index * 5, value: sgv })))
+		const png = await getPngSnapshot({
+			type: 'single',
+			values: yList.map((sgv, index) => ({ key: index, value: sgv }))
+		}, { scaleY: true })
 		expect(png).toMatchImageSnapshot();
 		return done();
 
@@ -210,7 +219,10 @@ describe('uva test default PATIENT', () => {
 
 		expect(lastState).toMatchSnapshot()
 		expect(yList).toMatchSnapshot()
-		const png = await getPngSnapshot(yList.map((sgv, index) => ({ key: index * 5, value: sgv })))
+		const png = await getPngSnapshot({
+			type: 'single',
+			values: yList.map((sgv, index) => ({ key: index, value: sgv }))
+		}, { scaleY: true })
 		expect(png).toMatchImageSnapshot();
 
 	})
@@ -245,7 +257,10 @@ describe('uva test default PATIENT', () => {
 
 		expect(lastState).toMatchSnapshot()
 		expect(yList).toMatchSnapshot()
-		const png = await getPngSnapshot(yList.map((sgv, index) => ({ key: index * 5, value: sgv })))
+		const png = await getPngSnapshot({
+			type: 'single',
+			values: yList.map((sgv, index) => ({ key: index, value: sgv }))
+		}, { scaleY: true })
 		expect(png).toMatchImageSnapshot();
 
 	})
@@ -281,7 +296,10 @@ describe('uva test default PATIENT', () => {
 
 		expect(lastState).toMatchSnapshot()
 		expect(yList).toMatchSnapshot()
-		const png = await getPngSnapshot(yList.map((sgv, index) => ({ key: index * 5, value: sgv })))		
+		const png = await getPngSnapshot({
+			type: 'single',
+			values: yList.map((sgv, index) => ({ key: index, value: sgv }))
+		}, { scaleY: true })
 		expect(png).toMatchImageSnapshot();
 	})
 
@@ -345,7 +363,10 @@ describe('uva test default PATIENT', () => {
 
 		expect(lastState).toMatchSnapshot()
 		expect(yList).toMatchSnapshot()
-		const png = await getPngSnapshot(yList.map((sgv, index) => ({ key: index * 5, value: sgv })))
+		const png = await getPngSnapshot({
+			type: 'single',
+			values: yList.map((sgv, index) => ({ key: index, value: sgv }))
+		}, { scaleY: true })
 		expect(png).toMatchImageSnapshot();
 
 	})

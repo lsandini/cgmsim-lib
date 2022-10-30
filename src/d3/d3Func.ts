@@ -1,9 +1,21 @@
-const D3Node = require('d3-node');
 const puppeteer = require('puppeteer');
+import { D3Node } from './d3Node';
+type SgvValueDataSource = {
+	key: number;
+	value: number;
+};
+export type SingleLineSgvDataSource = {
+	type: 'single',
+	values: SgvValueDataSource[]
+};
 
+export type MultiLineSgvDataSource = {
+	type: 'multiple',
+	values: Array<SgvValueDataSource>[]
+};
 async function captureImage(html, { path, viewport }) {
 	const screenShotOptions = { viewport };
-	
+
 	try {
 		const browser = await puppeteer.launch({})
 		const page = await browser.newPage()
@@ -12,7 +24,7 @@ async function captureImage(html, { path, viewport }) {
 			await page.setViewport(viewport);
 		}
 		const screen = await page.screenshot(screenShotOptions)
-		await browser.close()		
+		await browser.close()
 		return screen;
 
 	} catch (error) {
@@ -20,7 +32,7 @@ async function captureImage(html, { path, viewport }) {
 	}
 }
 
-export const output = async (dest, d3n): Promise<any> => {
+export const output = async (dest, d3n: D3Node): Promise<any> => {
 	const d3 = d3n.d3;
 
 	function eachGeoQuantize(d) {
@@ -31,22 +43,9 @@ export const output = async (dest, d3n): Promise<any> => {
 
 	// reduce filesize of svg
 	d3n.d3Element.selectAll('path').each(eachGeoQuantize);
-	const svgString = d3n.svgString();
-
-	// await fse.outputFile(`${dest}.svg`, svgString);
-
-	const html = d3n.html()
-
-	const width = 800;
-	const height = 600;
-	let viewport = null
-	if (width && height) {
-		viewport = { width, height }
-	}
-
-	const ext = 'png'
-	const png = await captureImage(html, { path: `${dest}.${ext}`, viewport });
-	return png
+	
+	return await d3n.svgImage(dest);
+	
 
 };
 
@@ -69,6 +68,22 @@ export const line = ({
 	tickSize: _tickSize = 5,
 	tickPadding: _tickPadding = 5,
 	scaleY = false,
+}: {
+	data: MultiLineSgvDataSource | SingleLineSgvDataSource,
+	selector: string,
+	container: string,
+	style: string,
+	width: number,
+	height: number,
+	margin: { top: number, right: number, bottom: number, left: number },
+	lineWidth: number,
+	lineColor: string,
+	lineColors: string[],
+	isCurve: boolean,
+	tickSize: number,
+	tickPadding: number,
+	scaleY: boolean,
+
 }) => {
 	const d3n = new D3Node({
 		selector: _selector,
@@ -86,32 +101,45 @@ export const line = ({
 		.attr('transform', `translate(${_margin.left}, ${_margin.top})`);
 
 	const g = svg.append('g');
-	const _scale = () => {
-		if (scaleY) {
-			return allKeys ? [d3.min(data, d => d3.min(d, v => v.value)), d3.max(data, d => d3.max(d, v => v.value))] : d3.extent(data, d => d.value);
-		} else {
+
+	const _scale = (dim: 'x' | 'y') => {
+		if (dim === 'y' && !scaleY) {
 			return [0, 400];
 		}
+
+		if (dim === 'y') {
+			return data.type === 'multiple' ? [d3.min(data.values, d => d3.min(d, v => v.value)), d3.max(data.values, d => d3.max(d, v => v.value))] : d3.extent(data.values, d => d.value);
+		} else {
+			if (data.type === 'multiple') {
+				const firstRo: SgvValueDataSource[] = data.values.length > 0 ? data.values[0] : [{ key: 0, value: 0 }];
+				return d3.extent(firstRo, d => d.key);
+			}
+			return d3.extent(data.values, d => d.key);
+		}
 	}
-	const { allKeys } = data;
 	const xScale = d3.scaleLinear()
-		.domain(allKeys ? d3.extent(allKeys) : d3.extent(data, d => d.key))
+		.domain(_scale('x'))
 		.rangeRound([0, width]);
+
 	const yScale = d3.scaleLinear()
-		.domain(_scale())
+		.domain(_scale('y'))
 		.rangeRound([height, 0]);
+
 	const xAxis = d3.axisBottom(xScale)
 		.tickSize(_tickSize)
 		.tickPadding(_tickPadding);
+
 	const yAxis = d3.axisLeft(yScale)
 		.tickSize(_tickSize)
 		.tickPadding(_tickPadding);
 
-	const lineChart = d3.line()
-		.x(d => xScale(d.key))
-		.y(d => yScale(d.value));
+	const lineChart = d3.line<SgvValueDataSource>()
+		.x((d) => xScale(d.key))
+		.y((d) => yScale(d.value));
 
-	if (_isCurve) lineChart.curve(d3.curveBasis);
+	if (_isCurve) {
+		lineChart.curve(d3.curveBasis)
+	};
 
 	g.append('g')
 		.attr('transform', `translate(0, ${height})`)
@@ -123,7 +151,7 @@ export const line = ({
 		.attr('fill', 'none')
 		.attr('stroke-width', _lineWidth)
 		.selectAll('path')
-		.data(allKeys ? data : [data])
+		.data(data.type === 'multiple' ? data.values : [data.values])
 		.enter().append("path")
 		.attr('stroke', (d, i) => i < _lineColors.length ? _lineColors[i] : _lineColor)
 		.attr('d', lineChart);

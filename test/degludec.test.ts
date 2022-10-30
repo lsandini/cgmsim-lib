@@ -16,7 +16,7 @@ describe('test degludec', () => {
 		return computeBasalActivity(toujeoT)
 	}
 	beforeEach(() => {
-			
+
 		expect.extend({ toMatchImageSnapshot });
 	})
 	test('ins:30 minutesAgo:300', () => {
@@ -51,7 +51,10 @@ describe('test degludec', () => {
 		}
 		expect(insulinActive).toMatchSnapshot();
 		expect(insulinArr).toMatchSnapshot();
-		const png = await getPngSnapshot(insulinArr.map((sgv, index) => ({ key: index, value: sgv })), { scaleY: true })
+		const png = await getPngSnapshot({
+			type: 'single',
+			values: insulinArr.map((sgv, index) => ({ key: index, value: sgv }))
+		}, { scaleY: true })
 		expect(png).toMatchImageSnapshot();
 
 	})

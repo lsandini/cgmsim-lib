@@ -1,14 +1,11 @@
 import moment = require("moment")
+import { MultiLineSgvDataSource, SingleLineSgvDataSource } from "src/d3/d3Func";
 import { Activity } from "src/Types"
-const { output, line } = require("./d3Func");
+const { output, line } = require("../src/d3/d3Func");
 
-export type SingleLineSgv = {
-	key: number;
-	value: number;
-}[];
-export type MultiLineSgv = SingleLineSgv[] & { keys: number[] };
 
-export const getPngSnapshot = async (data: SingleLineSgv | MultiLineSgv, options = {}, name?: string): Promise<string> => {
+
+export const getPngSnapshot = async (data: SingleLineSgvDataSource | MultiLineSgvDataSource, options = {}, name?: string): Promise<Buffer> => {
 
 	const testDesc = expect.getState().currentTestName;
 

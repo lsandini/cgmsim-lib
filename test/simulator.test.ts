@@ -193,7 +193,11 @@ describe('simulator test', () => {
 			sgvS.map((sgv, index) => ({ key: index * 5, value: sgv })),
 		]
 		data.allKeys = noiseActivities.map((sgv, index) => index * 5)
-		const png = await getPngSnapshot(sgvS.map((sgv, index) => ({ key: index * 5, value: sgv })))
+		const png = await getPngSnapshot({
+			type: 'single',
+			values: noiseActivities.map((sgv, index) => ({ key: index, value: sgv }))
+		}, { scaleY: true })
+		
 		expect(png).toMatchImageSnapshot();
 	})
 
@@ -293,7 +297,11 @@ describe('simulator test', () => {
 		// 	sgvS.map((sgv, index) => ({ key: index * 5, value: sgv })),
 		// ]
 		// data.allKeys = noiseActivities.map((sgv, index) => index * 5)
-		const png = await getPngSnapshot(sgvS.map((sgv, index) => ({ key: index * 5, value: sgv })))
+		const png = await getPngSnapshot({
+			type: 'single',
+			values: sgvS.map((sgv, index) => ({ key: index, value: sgv }))
+		}, { scaleY: true })
+		
 		expect(png).toMatchImageSnapshot();
 		return;
 	})
