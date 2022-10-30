@@ -13,7 +13,7 @@
 	"scripts": {
 		"build": "tsc -p tsconfig-build.json",
 		"lint": "eslint",
-		"test": "jest"
+		"test": "jest --detectOpenHandles"
 	},
 	"repository": {
 		"type": "git",
