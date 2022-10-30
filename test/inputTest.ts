@@ -6,7 +6,7 @@ const { output, line } = require('../src/d3/d3Func');
 
 
 export const getPngSnapshot = async (data: SingleLineSgvDataSource | MultiLineSgvDataSource, options = {}, name?: string): Promise<Buffer> => {
-
+	jest.useRealTimers();
 	const testDesc = expect.getState().currentTestName;
 
 
