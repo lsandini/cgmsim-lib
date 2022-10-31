@@ -3,9 +3,13 @@ import { MultiLineSgvDataSource, SingleLineSgvDataSource } from 'src/d3/d3Func';
 import { Activity } from 'src/Types'
 const { output, line } = require('../src/d3/d3Func');
 
-export const diffOptions = {	
-	failureThreshold:0.2,
-	failureThresholdType:'percent'
+export const diffOptions = {
+	customDiffConfig: {
+		threshold: 0.7
+	},
+	// comparisonMethod: 'ssim',
+	failureThreshold: 100,
+	failureThresholdType: 'pixel'
 }
 
 export const getPngSnapshot = async (data: SingleLineSgvDataSource | MultiLineSgvDataSource, options = {}, name?: string): Promise<Buffer> => {

@@ -62,7 +62,12 @@ describe('test computeBasalIOB comparing old cgmsim', () => {
 			result = Math.round(result * ROUND) / ROUND;
 			oldActivity = Math.max(Math.round(oldActivity * ROUND) / ROUND, 0);
 			// console.log('\x1b[32m', '#####toujeo (after ' + i * 5 + 'minutes)' + _date.toISOString(), result, oldActivity, '\x1b[0m')
-			expect(result).toBe(oldActivity);
+			//first15minutes
+			if(i<=1){
+				expect(result).toBeLessThan(oldActivity);
+			}else{
+				expect(result).toBe(oldActivity);
+			}
 			expect(result).toMatchSnapshot();
 		}
 	})
@@ -135,7 +140,13 @@ describe('test computeBasalIOB comparing old cgmsim', () => {
 			result = Math.round(result * ROUND) / ROUND;
 			oldActivity = Math.round(oldActivity * ROUND) / ROUND;
 			// console.log('activity ' + _date.toISOString(), result, oldActivity)
-			expect(result).toBe(oldActivity);
+			//first15minutes
+			if(i<=1){
+				expect(result).toBeLessThan(oldActivity);
+			}else{
+				expect(result).toBe(oldActivity);
+			}
+			expect(result).toMatchSnapshot();
 			// console.log('\x1b[32m', '#####GLARGINE ' + _date.toISOString(), result, oldActivity, '\x1b[0m')
 			// p.push(oldActivity);
 			// await writeFile('./files/oldGLA.json', JSON.stringify(p));

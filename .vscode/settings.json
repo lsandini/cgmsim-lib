@@ -27,9 +27,9 @@
 		"toujeos",
 		"tous"
 	],
-	"jestrunner.runOptions": ["--detectOpenHandles"],
+	"jestrunner.runOptions": [],
 	"jestrunner.debugOptions": {
-		"args": ["--detectOpenHandles"],
+		"args": [],
 		"sourcemaps": "inline",
 		"disableOptimisticBPs": true,
 	}

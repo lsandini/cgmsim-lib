@@ -1,4 +1,4 @@
-const puppeteer = require('puppeteer');
+
 import { D3Node } from './d3Node';
 type SgvValueDataSource = {
 	key: number;
@@ -13,24 +13,6 @@ export type MultiLineSgvDataSource = {
 	type: 'multiple',
 	values: Array<SgvValueDataSource>[]
 };
-async function captureImage(html, { path, viewport }) {
-	const screenShotOptions = { viewport };
-
-	try {
-		const browser = await puppeteer.launch({})
-		const page = await browser.newPage()
-		await page.setContent(html)
-		if (viewport) {
-			await page.setViewport(viewport);
-		}
-		const screen = await page.screenshot(screenShotOptions)
-		await browser.close()
-		return screen;
-
-	} catch (error) {
-		console.log(error)
-	}
-}
 
 export const output = async (dest, d3n: D3Node): Promise<any> => {
 	const d3 = d3n.d3;
@@ -61,7 +43,7 @@ export const line = ({
 	width: _width = 960,
 	height: _height = 500,
 	margin: _margin = { top: 20, right: 20, bottom: 60, left: 60 },
-	lineWidth: _lineWidth = 1.5,
+	lineWidth: _lineWidth = 3,
 	lineColor: _lineColor = 'steelblue',
 	lineColors: _lineColors = ["deepskyblue", "lightskyblue", "lightblue", "#aaa", "#777", "#888"],
 	isCurve: _isCurve = true,
@@ -150,14 +132,14 @@ export const line = ({
 	g.append('g')
 		.attr('transform', `translate(0, ${height})`)
 		.call(xAxis)
-		.attr('font-size', `20`)
+		.attr('font-size', `10`)
 		.attr('opacity', `1`)
 		.attr('font-family', `arial`)
 				
 
 	g.append('g')
 	.call(yAxis)
-	.attr('font-size', `20`)
+	.attr('font-size', `10`)
 	.attr('opacity', `1`)
 	.attr('font-family', `arial`)
 	

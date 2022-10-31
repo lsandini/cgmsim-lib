@@ -1,11 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`test pump dynamic  basal in profile and no temp basal 1`] = `0.0156534620965667`;
+exports[`test pump dynamic  basal in profile and no temp basal 1`] = `0.01559265706624232`;
 
-exports[`test pump dynamic  basal in profile, no temp basal and profile switch 1`] = `0.016202282639815848`;
+exports[`test pump dynamic  basal in profile, no temp basal and profile switch 1`] = `0.01614147760949147`;
 
-exports[`test pump dynamic basal in profile and temp basal 1`] = `0.015292616304449082`;
+exports[`test pump dynamic basal in profile and temp basal 1`] = `0.015201408758962516`;
 
-exports[`test pump static basal in profile and 2 different temp basal 1`] = `0.01163839589028707`;
+exports[`test pump static basal in profile and 2 different temp basal 1`] = `0.011547188344800504`;
 
-exports[`test pump static basal in profile and no treatments 1`] = `0.011662828783198197`;
+exports[`test pump static basal in profile and no treatments 1`] = `0.011609624381664367`;
