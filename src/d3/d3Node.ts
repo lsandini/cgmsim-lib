@@ -1,6 +1,7 @@
 import { JSDOM } from 'jsdom';
 import * as d3 from 'd3';
 const sharp = require('sharp');
+import * as fse from 'fs-extra';
 
 function fixXmlCase(text: string) {
 	// Fix a jsdom issue where all SVG tagNames are lowercased:
@@ -62,6 +63,7 @@ export class D3Node {
 	createSVG(width: number, height: number, attrs?: any) {
 		const svg = (this.d3Element as any).append('svg')
 			.attr('xmlns', 'http://www.w3.org/2000/svg')
+			
 
 		if (width && height) {
 			svg.attr('width', width)
@@ -72,14 +74,7 @@ export class D3Node {
 			Object.keys(attrs).forEach(function (key) {
 				svg.attr(key, attrs[key])
 			})
-		}
-
-		if (this.options.styles) {
-			svg.append('defs')
-				.append('style')
-				.attr('type', 'text/css')
-				.text(`<![CDATA[ ${this.options.styles} ]]>`)
-		}
+		}	
 		return svg
 
 
@@ -93,9 +88,12 @@ export class D3Node {
 		}
 		return ''
 	}
-	svgImage(dest: string) {
+	async svgImage(dest: string) {
 
 		const svgString = this.svgString();
+		
+		// await fse.outputFile(`${dest}.svg`, svgString);
+
 		var buf = Buffer.from(svgString, 'utf8');
 		return sharp(buf)
 			.png()

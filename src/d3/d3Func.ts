@@ -60,7 +60,7 @@ export const line = ({
 	style: _style = '',
 	width: _width = 960,
 	height: _height = 500,
-	margin: _margin = { top: 20, right: 20, bottom: 60, left: 30 },
+	margin: _margin = { top: 20, right: 20, bottom: 60, left: 60 },
 	lineWidth: _lineWidth = 1.5,
 	lineColor: _lineColor = 'steelblue',
 	lineColors: _lineColors = ["deepskyblue", "lightskyblue", "lightblue", "#aaa", "#777", "#888"],
@@ -97,7 +97,7 @@ export const line = ({
 	const height = _height - _margin.top - _margin.bottom;
 
 	const svg = d3n.createSVG(_width, _height)
-		.append('g')
+		.append('g')		
 		.attr('transform', `translate(${_margin.left}, ${_margin.top})`);
 
 	const g = svg.append('g');
@@ -127,11 +127,17 @@ export const line = ({
 
 	const xAxis = d3.axisBottom(xScale)
 		.tickSize(_tickSize)
-		.tickPadding(_tickPadding);
-
+		.tickPadding(_tickPadding)
+		.tickFormat((dom,index)=>{
+			return dom.toString()
+		});
+		
 	const yAxis = d3.axisLeft(yScale)
 		.tickSize(_tickSize)
-		.tickPadding(_tickPadding);
+		.tickPadding(_tickPadding)
+		.tickFormat((dom,index)=>{
+			return dom.toString()
+		});
 
 	const lineChart = d3.line<SgvValueDataSource>()
 		.x((d) => xScale(d.key))
@@ -140,12 +146,21 @@ export const line = ({
 	if (_isCurve) {
 		lineChart.curve(d3.curveBasis)
 	};
-
+	
 	g.append('g')
 		.attr('transform', `translate(0, ${height})`)
-		.call(xAxis);
+		.call(xAxis)
+		.attr('font-size', `20`)
+		.attr('opacity', `1`)
+		.attr('font-family', `arial`)
+				
 
-	g.append('g').call(yAxis);
+	g.append('g')
+	.call(yAxis)
+	.attr('font-size', `20`)
+	.attr('opacity', `1`)
+	.attr('font-family', `arial`)
+	
 
 	g.append('g')
 		.attr('fill', 'none')
