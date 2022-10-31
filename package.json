@@ -10,6 +10,9 @@
 	"files": [
 		"/dist"
 	],
+	"engines": {
+		"node": ">=16.0.0"
+	  },
 	"scripts": {
 		"build": "tsc -p tsconfig-build.json",
 		"lint": "eslint",
