@@ -149,6 +149,7 @@ export const line = ({
 
 	g.append('g')
 		.attr('fill', 'none')
+		.attr('font-family', 'sans-serif')
 		.attr('stroke-width', _lineWidth)
 		.selectAll('path')
 		.data(data.type === 'multiple' ? data.values : [data.values])
