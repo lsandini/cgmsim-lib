@@ -3,7 +3,11 @@ import { MultiLineSgvDataSource, SingleLineSgvDataSource } from 'src/d3/d3Func';
 import { Activity } from 'src/Types'
 const { output, line } = require('../src/d3/d3Func');
 
-
+export const diffOptions = {
+	customDiffConfig:{
+		threshold:0.2
+	}
+}
 
 export const getPngSnapshot = async (data: SingleLineSgvDataSource | MultiLineSgvDataSource, options = {}, name?: string): Promise<Buffer> => {
 	jest.useRealTimers();

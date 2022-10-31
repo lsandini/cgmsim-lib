@@ -1,7 +1,7 @@
 import moment = require('moment');
 import { Activity, EnvParam, MainParamsUVA, Profile, Sgv, Treatment } from '../src/Types';
 import simulatorUVA from '../src/UVAsimulator';
-import { getPngSnapshot } from './inputTest';
+import { diffOptions, getPngSnapshot } from './inputTest';
 const now = new Date('2022-05-01T11:00:00')
 const { toMatchImageSnapshot } = require('jest-image-snapshot');
 
@@ -61,7 +61,7 @@ describe('uva test default PATIENT', () => {
 			type: 'single',
 			values: yList.map((sgv, index) => ({ key: index, value: sgv }))
 		}, { scaleY: true })
-		expect(png).toMatchImageSnapshot();
+		expect(png).toMatchImageSnapshot(diffOptions);
 
 	})
 
@@ -98,7 +98,7 @@ describe('uva test default PATIENT', () => {
 			type: 'single',
 			values: yList.map((sgv, index) => ({ key: index, value: sgv }))
 		}, { scaleY: true })
-		expect(png).toMatchImageSnapshot();
+		expect(png).toMatchImageSnapshot(diffOptions);
 
 	})
 
@@ -162,7 +162,7 @@ describe('uva test default PATIENT', () => {
 			type: 'single',
 			values: yList.map((sgv, index) => ({ key: index, value: sgv }))
 		}, { scaleY: true })
-		expect(png).toMatchImageSnapshot();
+		expect(png).toMatchImageSnapshot(diffOptions);
 		return done();
 
 	})
@@ -223,7 +223,7 @@ describe('uva test default PATIENT', () => {
 			type: 'single',
 			values: yList.map((sgv, index) => ({ key: index, value: sgv }))
 		}, { scaleY: true })
-		expect(png).toMatchImageSnapshot();
+		expect(png).toMatchImageSnapshot(diffOptions);
 
 	})
 	test('basal 0.75 from PROFILE + 500g CARBS should generate a curve with max 400', async () => {
@@ -261,7 +261,7 @@ describe('uva test default PATIENT', () => {
 			type: 'single',
 			values: yList.map((sgv, index) => ({ key: index, value: sgv }))
 		}, { scaleY: true })
-		expect(png).toMatchImageSnapshot();
+		expect(png).toMatchImageSnapshot(diffOptions);
 
 	})
 	test('basal 0.75 from PROFILE + 10U should generate a curve with min 40', async () => {
@@ -300,7 +300,7 @@ describe('uva test default PATIENT', () => {
 			type: 'single',
 			values: yList.map((sgv, index) => ({ key: index, value: sgv }))
 		}, { scaleY: true })
-		expect(png).toMatchImageSnapshot();
+		expect(png).toMatchImageSnapshot(diffOptions);
 	})
 
 
@@ -367,7 +367,7 @@ describe('uva test default PATIENT', () => {
 			type: 'single',
 			values: yList.map((sgv, index) => ({ key: index, value: sgv }))
 		}, { scaleY: true })
-		expect(png).toMatchImageSnapshot();
+		expect(png).toMatchImageSnapshot(diffOptions);
 
 	})
 

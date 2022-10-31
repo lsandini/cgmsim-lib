@@ -1,7 +1,7 @@
 import moment = require('moment');
 import carbs from '../src/carbs';
 import { oldCarbs } from '../old/oldCarbs';
-import { getPngSnapshot } from './inputTest';
+import { diffOptions, getPngSnapshot } from './inputTest';
 
 const now = '2001-01-01T07:00:00';
 const { toMatchImageSnapshot } = require('jest-image-snapshot');
@@ -138,7 +138,7 @@ describe('Carbs test old compare', () => {
 				oldC.map((sgv, index) => ({ key: index, value: sgv })),
 			]
 		}, { scaleY: true })
-		expect(png).toMatchImageSnapshot();
+		expect(png).toMatchImageSnapshot(diffOptions);
 	})
 
 });

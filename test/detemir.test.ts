@@ -1,5 +1,5 @@
 import { computeBasalActivity, durationBasal, peakBasal } from '../src/basal';
-import { getPngSnapshot } from './inputTest';
+import { diffOptions, getPngSnapshot } from './inputTest';
 const { toMatchImageSnapshot } = require('jest-image-snapshot');
 describe('test detemir', () => {
 	
@@ -52,7 +52,7 @@ describe('test detemir', () => {
 			values: insulinArr.map((sgv, index) => ({ key: index, value: sgv }))
 		}, { scaleY: true })
 		
-		expect(png).toMatchImageSnapshot();
+		expect(png).toMatchImageSnapshot(diffOptions);
 
 	})
 

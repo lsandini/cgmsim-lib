@@ -1,4 +1,4 @@
-import { bolusTreatments, getPngSnapshot } from "./inputTest";
+import { bolusTreatments, diffOptions, getPngSnapshot } from "./inputTest";
 import bolus from "../src/bolus";
 import { Treatment } from "../src/Types";
 const { toMatchImageSnapshot } = require('jest-image-snapshot');
@@ -52,7 +52,7 @@ describe('test bolus', () => {
 			type: 'single',
 			values: insulinArr.map((sgv, index) => ({ key: index, value: sgv }))
 		}, { scaleY: true })
-		expect(png).toMatchImageSnapshot();
+		expect(png).toMatchImageSnapshot(diffOptions);
 
 	})
 })

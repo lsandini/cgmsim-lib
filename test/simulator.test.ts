@@ -1,7 +1,7 @@
 import { EnvParam, PerlinParams, Sgv, Treatment } from "../src/Types";
 import simulator from "../src/CGMSIMsimulator";
 import moment = require("moment");
-import { getPngSnapshot } from "./inputTest";
+import { diffOptions, getPngSnapshot } from "./inputTest";
 const { toMatchImageSnapshot } = require('jest-image-snapshot');
 
 const math=global.Math;
@@ -198,7 +198,7 @@ describe('simulator test', () => {
 			values: noiseActivities.map((sgv, index) => ({ key: index, value: sgv }))
 		}, { scaleY: true })
 		
-		expect(png).toMatchImageSnapshot();
+		expect(png).toMatchImageSnapshot(diffOptions);
 	})
 
 	test('start from 250 13:00Z tou 14 8U @14:00>', async () => {
@@ -302,7 +302,7 @@ describe('simulator test', () => {
 			values: sgvS.map((sgv, index) => ({ key: index, value: sgv }))
 		}, { scaleY: true })
 		
-		expect(png).toMatchImageSnapshot();
+		expect(png).toMatchImageSnapshot(diffOptions);
 		return;
 	})
 })

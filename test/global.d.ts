@@ -1,6 +1,9 @@
 declare namespace jest {
 	interface Matchers<R> {
-		toMatchImageSnapshot(): R
+		toMatchImageSnapshot({
+			customDiffConfig:{
+				threshold:number}
+		}): R
 	}
 
 }
