@@ -5,7 +5,7 @@ const { output, line } = require('../src/d3/d3Func');
 
 export const diffOptions = {
 	customDiffConfig: {
-		threshold: 0.3
+		threshold: 0.4
 	},
 	// comparisonMethod: 'ssim',
 	failureThreshold: 80,
@@ -30,7 +30,7 @@ export const getPngSnapshot = async (data: SingleLineSgvDataSource | MultiLineSg
 	const graph = line({
 		data: data,
 		container: `<div id='container'><h2>${testDesc}</h2><div id='chart'></div></div>`,
-		lineColors: ['lightblue', 'darkorange', 'red', 'darkgreen', 'black'],
+		lineColors: ['steelblue', 'darkorange', 'red', 'darkgreen', 'black'],
 		width: 800,
 		height: 570
 		, ...options
