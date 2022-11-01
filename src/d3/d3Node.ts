@@ -93,7 +93,7 @@ export class D3Node {
 
 		const svgString = this.svgString();
 		
-		await fse.outputFile(`${dest}.svg`, svgString);
+		// await fse.outputFile(`${dest}.svg`, svgString);
 
 		var buf = Buffer.from(svgString, 'utf8');
 		return sharp(buf)
