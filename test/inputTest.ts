@@ -8,7 +8,7 @@ export const diffOptions = {
 		threshold: 0.3
 	},
 	// comparisonMethod: 'ssim',
-	failureThreshold: 10,
+	failureThreshold: 100,
 	failureThresholdType: 'pixel'
 }
 
@@ -30,7 +30,7 @@ export const getPngSnapshot = async (data: SingleLineSgvDataSource | MultiLineSg
 	const graph = line({
 		data: data,
 		container: `<div id='container'><h2>${testDesc}</h2><div id='chart'></div></div>`,
-		lineColors: ['steelblue', 'darkorange', 'red', 'darkgreen', 'black'],
+		lineColors: ['lightblue', 'darkorange', 'red', 'darkgreen', 'black'],
 		width: 800,
 		height: 570
 		, ...options

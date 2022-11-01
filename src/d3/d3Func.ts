@@ -134,14 +134,14 @@ export const line = ({
 		.call(xAxis)
 		.attr('font-size', `10`)
 		.attr('opacity', `1`)
-		.attr('font-family', `Courier`)
+		.attr('font-family', `times new roman`)
 				
 
 	g.append('g')
 	.call(yAxis)
 	.attr('font-size', `10`)
 	.attr('opacity', `1`)
-	.attr('font-family', `Courier`)
+	.attr('font-family', `times new roman`)
 	
 
 	g.append('g')
