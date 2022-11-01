@@ -8,7 +8,7 @@ export const diffOptions = {
 		threshold: 0.3
 	},
 	// comparisonMethod: 'ssim',
-	failureThreshold: 100,
+	failureThreshold: 50,
 	failureThresholdType: 'pixel'
 }
 
