@@ -30,9 +30,9 @@ export function getInsulinActivity(peakMin: number, durationMin: number, timeMin
 	if (activity <= 0) {
 		return 0;
 	}
-	// if (timeMin < 15) {
-	// 	return activity * (timeMin / 15)
-	// }
+	if (timeMin < 15) {
+		return activity * (timeMin / 15)
+	}
 	return activity;
 }
 export function getInsulinOnBoard(peakMin: number, durationMin: number, timeMin: number, insulin: number) {

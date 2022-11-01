@@ -49,8 +49,8 @@ describe('test degludec', () => {
 			insulinArr.push(_insulinActive > 0 ? _insulinActive : 0)
 
 		}
-		// expect(insulinActive).toMatchSnapshot();
-		// expect(insulinArr).toMatchSnapshot();
+		expect(insulinActive).toMatchSnapshot();
+		expect(insulinArr).toMatchSnapshot();
 		const png = await getPngSnapshot({
 			type: 'single',
 			values: insulinArr.map((sgv, index) => ({ key: index, value: sgv }))
