@@ -5,10 +5,10 @@ const { output, line } = require('../src/d3/d3Func');
 
 export const diffOptions = {
 	customDiffConfig: {
-		threshold: 0.7
+		threshold: 0.3
 	},
 	// comparisonMethod: 'ssim',
-	failureThreshold: 100,
+	failureThreshold: 10,
 	failureThresholdType: 'pixel'
 }
 
