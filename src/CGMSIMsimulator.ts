@@ -1,8 +1,5 @@
 import logger from './utils';
 
-//const logger = pino();
-
-import perlinRun from './perlin';
 import bolus from './bolus';
 import basal from './basal';
 
@@ -23,7 +20,6 @@ const simulator = ({
 	entries,
 	treatments,
 	profiles, //PUMP SIMULATION
-	perlinParams,
 	pumpEnabled,
 	activities, //7-DAYS
 }: MainParams): SimulationResult => {
@@ -48,7 +44,6 @@ const simulator = ({
 	const peak = parseInt(env.TP);
 	const carbsAbs = parseInt(env.CARBS_ABS_TIME);
 	const cr = parseInt(env.CR);
-	const perls = perlinRun(perlinParams);
 
 
 	const bolusActivity = bolus(treatments, dia, peak);
@@ -68,7 +63,7 @@ const simulator = ({
 	const now = moment();
 	const orderedEntries = entries.filter(e => e.mills <= now.toDate().getTime()).sort((a, b) => b.mills - a.mills)
 
-	const newSgvValue = sgv(orderedEntries, { basalActivity: basalBolusActivity + basalPumpActivity, liverActivity, carbsActivity, bolusActivity }, perls, isfActivityDependent);
+	const newSgvValue = sgv(orderedEntries, { basalActivity: basalBolusActivity + basalPumpActivity, liverActivity, carbsActivity, bolusActivity }, isfActivityDependent);
 
 	logger.debug('this is the new sgv: %o', newSgvValue);
 	logger.info('this is the ISF multiplicator (or physicalISF): %o', isfActivityDependent / isfConstant);

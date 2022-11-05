@@ -1,10 +1,6 @@
 export type Direction = 'DoubleDown' | 'SingleDown' | 'FortyFiveDown' | 'Flat' | 'FortyFiveUp' | 'SingleUp' | 'DoubleUp';
 
-export type Perlin = {
-	noise: number,
-	order: number,
-	time: number
-}
+
 
 export type Drug = {
 	time: number;
@@ -96,20 +92,11 @@ export type MainParamsUVA = {
 	activities?: Activity[];
 
 }
-export type PerlinParams = {
-	amplitude: number;
-	octaveCount: number;
-	persistence: number;
-	maxAbsValue: number;
-	seed: string;
-	mode: 'daily';
-}
 export type MainParams = {
 	env: EnvParam;
 	entries: Sgv[];
 	treatments: Treatment[],
 	profiles: Profile[],
-	perlinParams?: PerlinParams,
 	pumpEnabled?: boolean,
 	activities?: Activity[]
 };
@@ -119,7 +106,6 @@ export type SimulationResult = {
 	carbsActivity: number;
 	basalActivity: number;
 	bolusActivity: number;
-	noiseActivity: number;
 	liverActivity: number;
 	activityFactor: number;
 	isf: { dynamic: number; constant: number }

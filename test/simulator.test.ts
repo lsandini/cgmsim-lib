@@ -1,18 +1,10 @@
-import { EnvParam, PerlinParams, Sgv, Treatment } from "../src/Types";
+import { EnvParam,  Sgv, Treatment } from "../src/Types";
 import simulator from "../src/CGMSIMsimulator";
 import moment = require("moment");
 import { diffOptions, getPngSnapshot } from "./inputTest";
 const { toMatchImageSnapshot } = require('jest-image-snapshot');
 
 const math=global.Math;
-const defaultParams: PerlinParams = {
-	amplitude: 0.3,
-	octaveCount: 3,
-	persistence: 0.3,
-	maxAbsValue: 0.05,
-	seed: 'cgmsim',
-	mode: 'daily'
-}
 
 describe('simulator test', () => {
 	let date;
@@ -83,7 +75,7 @@ describe('simulator test', () => {
 			}
 
 
-			const result = simulator({ env, entries, treatments, profiles: [], perlinParams: defaultParams })
+			const result = simulator({ env, entries, treatments, profiles: []})
 
 			entries.splice(0, 0, {
 				mills: now.toDate().getTime(),
@@ -164,8 +156,6 @@ describe('simulator test', () => {
 			})
 			sgvS.push(result.sgv)
 			expect(result.deltaMinutes).toBeGreaterThanOrEqual(0)
-			expect(result.noiseActivity).toBe(0)
-			noiseActivities.push(result.noiseActivity)
 			expect(result.basalActivity).toBeGreaterThanOrEqual(0)
 			basalActivities.push(result.basalActivity)
 			expect(result.bolusActivity).toBeGreaterThanOrEqual(0)
@@ -267,8 +257,6 @@ describe('simulator test', () => {
 			})
 			sgvS.push(result.sgv)
 			expect(result.deltaMinutes).toBeGreaterThanOrEqual(0)
-			expect(result.noiseActivity).toBe(0)
-			noiseActivities.push(result.noiseActivity)
 			expect(result.basalActivity).toBeGreaterThanOrEqual(0)
 			basalActivities.push(result.basalActivity)
 			expect(result.bolusActivity).toBeGreaterThanOrEqual(0)

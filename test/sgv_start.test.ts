@@ -10,7 +10,7 @@ describe('Liver test', () => {
 			basalActivity:0,
 			liverActivity: 0,
 			bolusActivity: 0,			
-		}, [], 30);
+		}, 30);
 		expect(r.sgv).toBe(90)
 	})
 
@@ -24,7 +24,7 @@ describe('Liver test', () => {
 			liverActivity: 0.02,
 			bolusActivity: 0,
 			
-		}, [], 30);
+		},  30);
 		expect(r.sgv).toBeGreaterThan(sgv)
 	})
 
@@ -37,7 +37,7 @@ describe('Liver test', () => {
 			basalActivity:0.02,
 			liverActivity: 0,
 			bolusActivity: 0,			
-		}, [], 30);
+		},  30);
 		expect(r.sgv).toBeLessThan(sgv)
 	})
 	// it.each([
