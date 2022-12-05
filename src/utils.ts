@@ -44,22 +44,22 @@ export function getInsulinOnBoard(peakMin: number, durationMin: number, timeMin:
 }
 //IOB curve: IOB(t) = 1-S*(1-a)*((t^2/(tau*td*(1-a)) - t/tau - 1)*exp(-t/tau)+1);
 export const getDeltaMinutes = (mills: number | string) => Math.round(moment().diff(moment(mills), 'seconds') / 60);
-export function uploadBase(cgmsim: Entry | Activity | Note | SimulationResult, nsUrlApi: string, apiSecret: string) {
+export function uploadBase(cgmsim: Entry | Activity | Note | SimulationResult, nsUrlApi: string, apiSecret: string, instanceName?:string) {
 	const _isHttps = isHttps(nsUrlApi);
 
-	const { postParams } = setupParams(apiSecret, _isHttps);
+	const { postParams } = setupParams(apiSecret, _isHttps,instanceName);
 	const body_json = JSON.stringify(cgmsim);
 
 	return fetch(nsUrlApi, {
-		...postParams,
-		body: body_json,
+	...postParams,
+	body: body_json,
+})
+	.then(() => {
+		logger.debug('NIGTHSCOUT Updated');
 	})
-		.then(() => {
-			logger.debug('NIGTHSCOUT Updated');
-		})
-		.catch(err => {
-			logger.debug(err);
-		});
+	.catch(err => {
+		logger.debug(err);
+	});
 }
 export function loadBase(nsUrlApi: string, apiSecret: string): Promise<(Entry | Activity | Note)[]> {
 	const _isHttps = isHttps(nsUrlApi);
