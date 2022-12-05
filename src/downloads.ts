@@ -6,11 +6,11 @@ import fetch from 'node-fetch';
 
 
 
-const downloads = async (nsUrl: string, apiSecret: string) => {
+const downloads = async (nsUrl: string, apiSecret: string, instanceName: string) => {
 	const _nsUrl = removeTrailingSlash(nsUrl)
 	const _isHttps = isHttps(nsUrl);
 
-	const { getParams } = setupParams(apiSecret, _isHttps);
+	const { getParams } = setupParams(apiSecret, _isHttps, instanceName);
 	const api_url = _nsUrl + '/api/v1/treatments?count=600';
 	const api_profile = _nsUrl + '/api/v1/profile.json';
 	const api_sgv = _nsUrl + '/api/v1/entries/sgv.json';
@@ -28,11 +28,11 @@ const downloads = async (nsUrl: string, apiSecret: string) => {
 				profiles,
 				entries,
 			};
-		})		
+		})
 		.catch(err => {
 			logger.error(err);
-			throw new Error(err);			
-		});		
-	
+			throw new Error(err);
+		});
+
 };
 export default downloads;
