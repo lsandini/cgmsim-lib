@@ -132,10 +132,8 @@ export class PatientUva {
 		const Gpeq = params.Gpeq * params.VG	// convert from mg/dL to mg/kg
 
 		// tissue glucose concentration
-		const D = Math.pow(params.Vm0 - params.k1 * Gpeq + params.Km0 * params.k2, 2)
-			+ 4 * params.k2 * params.Km0 * params.k1 * Gpeq;
-		const Gteq = (-params.Vm0 + params.k1 * Gpeq - params.Km0 * params.k2
-			+ Math.sqrt(D)) / 2 / params.k2;
+		const D = Math.pow(params.Vm0 - params.k1 * Gpeq + params.Km0 * params.k2, 2) + 4 * params.k2 * params.Km0 * params.k1 * Gpeq;
+		const Gteq = (-params.Vm0 + params.k1 * Gpeq - params.Km0 * params.k2 + Math.sqrt(D)) / 2 / params.k2;
 		const EGPeq = params.Fcns + params.k1 * Gpeq - params.k2 * Gteq;
 		const XLeq = (params.kp1 - params.kp2 * Gpeq - EGPeq) / params.kp3;
 
@@ -143,15 +141,11 @@ export class PatientUva {
 		const m3eq = params.HEeq * params.m1 / (1 - params.HEeq);
 		const Ilb = Ipb * params.m2 / (params.m1 + m3eq);
 		const Raieq = (params.m2 + params.m4) * Ipb - params.m1 * Ilb;
-		const Isceq = solve2x2LSE(
-			[[params.ka1, params.ka2],
-			[params.kd, -params.ka2]],
-			[Raieq, 0]);
+		const Isceq = solve2x2LSE([[params.ka1, params.ka2], [params.kd, -params.ka2]], [Raieq, 0]);
 		const Isc1eq = Isceq[0];
 		const Isc2eq = Isceq[1];
 
-		this.IIReq = Isc1eq * (params.kd + params.ka1) * params.BW
-			* 60 / pmol_per_U;	// pmol/min  -> U/h
+		this.IIReq = Isc1eq * (params.kd + params.ka1) * params.BW * 60 / pmol_per_U;	// pmol/min  -> U/h
 
 		this.xeq = {
 			Gp: Gpeq,
@@ -185,7 +179,7 @@ export class PatientUva {
 		return this.xeq;
 	}
 
-	getDerivatives(time: number, state: UvaPatientState, userParams: UvaUserParams) {
+	getDerivatives(time: number, state: UvaPatientState, userParams: UvaUserParams):UvaPatientState {
 
 		const params = this.parameters;
 
@@ -321,6 +315,5 @@ function solve2x2LSE(A, B) {
 
 	const det = a * d - b * c;
 
-	return [(+ d * B[0] - b * B[1]) / det,
-	(- c * B[0] + a * B[1]) / det];
+	return [(+ d * B[0] - b * B[1]) / det, (- c * B[0] + a * B[1]) / det];
 }

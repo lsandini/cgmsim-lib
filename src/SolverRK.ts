@@ -12,39 +12,56 @@ import { UvaPatientState } from "./Types";
 //   dt: time step
 /**
  * 
- * @param {function} derivatives 
+ * @param {(time: number, state: UvaPatientState) => UvaPatientState} derivatives 
  * @param {number} t 
  * @param {number} x 
  * @param {number} dt 
  * @returns 
  */
-export function RK4(derivatives: Function, t: number, x: UvaPatientState, dt: number) {
-	var k1 = timesScalar(derivatives(t, x), dt);
-	var k2 = timesScalar(derivatives(t + dt / 2, vectorSum(x, timesScalar(k1, 1 / 2))), dt);
-	var k3 = timesScalar(derivatives(t + dt / 2, vectorSum(x, timesScalar(k2, 1 / 2))), dt);
-	var k4 = timesScalar(derivatives(t + dt, vectorSum(x, k3)), dt);
+export function RK4(derivatives: (time: number, state: UvaPatientState) => UvaPatientState, t: number, x: UvaPatientState, dt: number) {
+	const k1 = timesScalar(derivatives(t, x), dt);
+	const k2 = timesScalar(derivatives(t + dt / 2, vectorSum([x, timesScalar(k1, 1 / 2)])), dt);
+	const k3 = timesScalar(derivatives(t + dt / 2, vectorSum([x, timesScalar(k2, 1 / 2)])), dt);
+	const k4 = timesScalar(derivatives(t + dt, vectorSum([x, k3])), dt);
 
-	return vectorSum(x, timesScalar(k1, 1 / 6), timesScalar(k2, 1 / 3), timesScalar(k3, 1 / 3), timesScalar(k4, 1 / 6));
+	return vectorSum([x, timesScalar(k1, 1 / 6), timesScalar(k2, 1 / 3), timesScalar(k3, 1 / 3), timesScalar(k4, 1 / 6)]);
 }
 
 // compute sum of n vectors
-function vectorSum(...X) {
-	return X.reduce((a, b) => {
-		for (let k in b) {
+function vectorSum(X: UvaPatientState[]): UvaPatientState {
+	return X.reduce<UvaPatientState>((a, b) => {
+		for (const k in b) {
 			if (b.hasOwnProperty(k))
 				a[k] = (a[k] || 0) + b[k]
 		}
 		return a
-	}, {}
+	}, {
+		Gp: 0,
+		Gt: 0,
+		I_: 0,
+		Il: 0,
+		Ip: 0,
+		Isc1: 0,
+		Isc2: 0,
+		Qgut: 0,
+		Qsto1: 0,
+		Qsto2: 0,
+		W: 0,
+		X: 0,
+		XL: 0,
+		Y: 0,
+		Z: 0,
+	}
 	)
 }
 
 // multiply state vector by scalar
-function timesScalar(X, a) {
-	return Object.keys(X).reduce(function (result, key) {
-		result[key] = X[key] * a
-		return result
-	}, {})
+function timesScalar(X: UvaPatientState, a: number): UvaPatientState {
+	const clone = Object.assign({}, X);
+	for (const property in clone) {
+		clone[property] = clone[property] * a;
+	}
+	return clone;
 }
 
 
