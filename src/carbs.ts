@@ -7,7 +7,7 @@ export default function carbs(treatments: Treatment[] = [], carbsAbs: number, is
 	const isfMMol = isf / 18; //(mmol/l)/U
 
 	const meals = treatments
-		.filter(e => e.carbs && getDeltaMinutes(e.created_at) <= 360)
+		.filter(e => e.carbs && getDeltaMinutes(e.created_at) <= carbsAbs)
 		.map(e => ({
 			...e,
 			minutesAgo: getDeltaMinutes(e.created_at),
