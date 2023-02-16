@@ -59,6 +59,8 @@ export function uploadBase(cgmsim: Entry | Activity | Note | SimulationResult, n
 	})
 	.catch(err => {
 		logger.debug(err);
+		throw new Error(err);
+
 	});
 }
 export function loadBase(nsUrlApi: string, apiSecret: string): Promise<(Entry | Activity | Note)[]> {
@@ -75,5 +77,6 @@ export function loadBase(nsUrlApi: string, apiSecret: string): Promise<(Entry | 
 		})
 		.catch(err => {
 			logger.debug(err);
+			throw new Error(err);
 		});
 }

@@ -15,12 +15,25 @@ const downloads = async (nsUrl: string, apiSecret: string, instanceName: string)
 	const api_profile = _nsUrl + '/api/v1/profile.json';
 	const api_sgv = _nsUrl + '/api/v1/entries/sgv.json';
 
-	const treatments: { json: () => Promise<Treatment[]> } = fetch(api_url, getParams)
-	const profiles: { json: () => Promise<Profile[]> } = fetch(api_profile, getParams)
-	const entries: { json: () => Promise<Sgv[]> } = fetch(api_sgv, getParams)
+	type ResponseType<T> = {
+		statusText: string;
+		status: number;
+		json: () => Promise<T[]>;
+	};
+
+	const treatments: ResponseType<Treatment> = fetch(api_url, getParams)
+	const profiles: ResponseType<Profile> = fetch(api_profile, getParams)
+	const entries: ResponseType<Sgv> = fetch(api_sgv, getParams)
 	return Promise.all([treatments, profiles, entries])
 		.then(([resTreatments, resProfile, resEntries]) => {
-			return Promise.all([resTreatments.json(), resProfile.json(), resEntries.json()])
+			if (resTreatments.status === 200 && resProfile.status === 200 && resEntries.status === 200) {
+				return Promise.all([resTreatments.json(), resProfile.json(), resEntries.json()])
+			} else {
+				throw new Error(`
+				treatments: ${resTreatments.statusText}; 
+				profiles: ${resProfile.statusText}; 
+				entries: ${resEntries.statusText}`);
+			}
 		})
 		.then(([treatments, profiles, entries,]) => {
 			return {

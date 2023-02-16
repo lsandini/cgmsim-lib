@@ -4,8 +4,7 @@ import { Treatment } from './Types';
 export default (treatments: Treatment[]=[], dia: number, peak: number): number => {
 
 
-	const insulin = treatments
-		.filter(e => e.insulin)
+	const insulin = treatments?.filter(e => e.insulin)
 		.map(e => ({
 			minutesAgo: getDeltaMinutes(e.created_at),
 			insulin: e.insulin
@@ -18,7 +17,7 @@ export default (treatments: Treatment[]=[], dia: number, peak: number): number =
 	// dia is the duration of insulin action in hours
 	const duration = dia * 60;
 
-	const insulinsBolusAct = insulin.map(entry => {
+	const insulinsBolusAct = insulin?.map(entry => {
 		const insulin = entry.insulin;
 		return getInsulinActivity(peak, duration, entry.minutesAgo, insulin);
 	});

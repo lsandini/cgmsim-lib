@@ -23,6 +23,12 @@ const simulator = ({
 	pumpEnabled,
 	activities, //7-DAYS
 }: MainParams): SimulationResult => {
+	if (!treatments) {
+		throw new Error('treatments is ' + treatments)
+	}
+	if (!profiles) {
+		throw new Error('profiles is ' + profiles)
+	}
 
 	const isfConstant = parseInt(env.ISF);
 	const age = parseInt(env.AGE);
