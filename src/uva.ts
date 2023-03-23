@@ -171,14 +171,6 @@ export class PatientUva {
 		// todo: Ipb and Ilb are not accurate
 	}
 
-	getInitialState(startSGV?: number) {
-		if (startSGV) {
-			this.parameters.Gpeq = startSGV * this.parameters.VG;
-			this.computeSteadyState()
-		}
-		return this.xeq;
-	}
-
 	getDerivatives(time: number, state: UvaPatientState, userParams: UvaUserParams):UvaPatientState {
 
 		const params = this.parameters;

@@ -21,11 +21,18 @@ logger.info('Run Init');
 const simulator = ({
 	env,
 	treatments,
-	profiles: profile,
+	profiles,
 	lastState,
 	entries,
+	pumpEnabled,
 	activities
 }: MainParamsUVA) => {
+	if (!treatments) {
+		throw new Error('treatments is ' + treatments)
+	}
+	if (!profiles) {
+		throw new Error('profiles is ' + profiles)
+	}
 
 	const weight = parseInt(env.WEIGHT);
 	const age = parseInt(env.AGE);
@@ -57,7 +64,7 @@ const simulator = ({
 
 	const intensity = currentIntensity(activities, age, gender) * 100
 
-	const basalProfileActivity = basalProfile(profile)
+	const basalProfileActivity = pumpEnabled ? basalProfile(profiles) : 0;
 
 	const patient = new PatientUva({})
 	let partialMinutes = 0
@@ -65,7 +72,7 @@ const simulator = ({
 	const oneMinute: UvaDelta = 1
 
 	//get last state from mongo
-	let patientState: UvaPatientState = lastState ? lastState : patient.getInitialState(entries && entries.length > 0 ? entries[0].sgv : null)
+	let patientState: UvaPatientState = lastState ? lastState : null;
 	let userParams: UvaUserParams = { iir: 0, ibolus: 0, carbs: 0, intensity: 0 }
 	//t0 result
 	let result: UvaOutput = patient.getOutputs(partialMinutes, patientState, userParams)

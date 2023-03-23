@@ -89,6 +89,7 @@ export type MainParamsUVA = {
 	profiles: Profile[],
 	lastState: UvaPatientState,
 	entries: Sgv[];
+	pumpEnabled:boolean;
 	activities?: Activity[];
 
 }
