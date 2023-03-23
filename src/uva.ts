@@ -171,6 +171,10 @@ export class PatientUva {
 		// todo: Ipb and Ilb are not accurate
 	}
 
+	getInitialState() {
+		return this.xeq;
+	}
+
 	getDerivatives(time: number, state: UvaPatientState, userParams: UvaUserParams):UvaPatientState {
 
 		const params = this.parameters;

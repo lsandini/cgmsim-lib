@@ -72,7 +72,7 @@ const simulator = ({
 	const oneMinute: UvaDelta = 1
 
 	//get last state from mongo
-	let patientState: UvaPatientState = lastState ? lastState : null;
+	let patientState: UvaPatientState = lastState ? lastState : patient.getInitialState()
 	let userParams: UvaUserParams = { iir: 0, ibolus: 0, carbs: 0, intensity: 0 }
 	//t0 result
 	let result: UvaOutput = patient.getOutputs(partialMinutes, patientState, userParams)
