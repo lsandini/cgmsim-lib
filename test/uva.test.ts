@@ -6,7 +6,7 @@ const now = new Date('2022-05-01T11:00:00')
 const { toMatchImageSnapshot } = require('jest-image-snapshot');
 
 let entries: Sgv[];
-const math=global.Math;
+const math = global.Math;
 beforeEach(() => {
 	jest.useFakeTimers('modern');
 	jest.setSystemTime(now);
@@ -14,7 +14,7 @@ beforeEach(() => {
 	const mockMath = Object.create(global.Math);
 	mockMath.random = () => 0.5;
 	global.Math = mockMath;
-	
+
 	entries = []
 });
 
@@ -50,7 +50,7 @@ describe('uva test default PATIENT', () => {
 		for (let i = 0; i < 12; i++) {
 
 
-			const { state, sgv } = simulatorUVA({ env, lastState, treatments, profiles: [], entries });
+			const { state, sgv } = simulatorUVA({ env, lastState, treatments, profiles: [], pumpEnabled: true, entries });
 			yList.push(sgv);
 			lastState = state;
 		}
@@ -87,7 +87,7 @@ describe('uva test default PATIENT', () => {
 			}
 		}]
 		for (let i = 0; i < 12; i++) {
-			const { state, sgv } = simulatorUVA({ env, lastState, treatments: [], profiles: profile, entries });
+			const { state, sgv } = simulatorUVA({ env, lastState, treatments: [], profiles: profile, pumpEnabled: true, entries });
 			yList.push(sgv);
 			lastState = state;
 		}
@@ -131,7 +131,7 @@ describe('uva test default PATIENT', () => {
 		const now = moment('2022-05-01T11:00:00')
 		let sgvMax = 0;
 		for (let i = 0; i < 36; i++) {
-			const { state, sgv } = simulatorUVA({ env, lastState, treatments, profiles: profile, entries });
+			const { state, sgv } = simulatorUVA({ env, lastState, treatments, profiles: profile, pumpEnabled: true, entries });
 			yList.push(sgv);
 			lastState = state;
 			sgvMax = sgv > sgvMax ? sgv : sgvMax;
@@ -192,7 +192,7 @@ describe('uva test default PATIENT', () => {
 		const now = moment('2022-05-01T11:00:00')
 		let sgvMax = 0;
 		for (let i = 0; i < 36; i++) {
-			const { state, sgv } = simulatorUVA({ env, lastState, treatments, profiles: profile, entries });
+			const { state, sgv } = simulatorUVA({ env, lastState, treatments, profiles: profile, pumpEnabled: true, entries });
 			yList.push(sgv);
 			lastState = state;
 			sgvMax = sgv > sgvMax ? sgv : sgvMax;
@@ -247,7 +247,7 @@ describe('uva test default PATIENT', () => {
 		const now = moment('2022-05-01T11:00:00')
 		let sgvMax = 0;
 		for (let i = 0; i < 36; i++) {
-			const { state, sgv } = simulatorUVA({ env, lastState, treatments, profiles: profile, entries });
+			const { state, sgv } = simulatorUVA({ env, lastState, treatments, profiles: profile, pumpEnabled: true, entries });
 			yList.push(sgv);
 			lastState = state;
 			sgvMax = sgv > sgvMax ? sgv : sgvMax;
@@ -266,7 +266,7 @@ describe('uva test default PATIENT', () => {
 	})
 	test('basal 0.75 from PROFILE + 10U should generate a curve with min 40', async () => {
 
-		let lastState = null;		
+		let lastState = null;
 		const yList = [];
 		const profile: Profile[] = [{
 			defaultProfile: 'pippo',
@@ -286,7 +286,7 @@ describe('uva test default PATIENT', () => {
 		const now = moment('2022-05-01T11:00:00')
 		let sgvMax = 0;
 		for (let i = 0; i < 36; i++) {
-			const { state, sgv } = simulatorUVA({ env, lastState, treatments, profiles: profile, entries });
+			const { state, sgv } = simulatorUVA({ env, lastState, treatments, profiles: profile, entries, pumpEnabled: true });
 			yList.push(sgv);
 			lastState = state;
 			sgvMax = sgv > sgvMax ? sgv : sgvMax;
@@ -344,7 +344,7 @@ describe('uva test default PATIENT', () => {
 		const now = moment('2022-05-01T11:00:00')
 		let sgvMax = 0;
 		for (let i = 0; i < 36; i++) {
-			const { state, sgv } = simulatorUVA({ env, lastState, treatments: [], profiles: profile, entries, activities });
+			const { state, sgv } = simulatorUVA({ env, lastState, treatments: [], profiles: profile, entries, activities, pumpEnabled: true });
 			yList.push(sgv);
 			lastState = state;
 			sgvMax = sgv > sgvMax ? sgv : sgvMax;
