@@ -55,7 +55,7 @@ export function uploadBase(cgmsim: Entry | Activity | Note | SimulationResult, n
 	body: body_json,
 })
 	.then(() => {
-		logger.debug('NIGTHSCOUT Updated');
+		logger.debug('NIGHTSCOUT Updated');
 	})
 	.catch(err => {
 		logger.debug(err);
@@ -72,7 +72,7 @@ export function loadBase(nsUrlApi: string, apiSecret: string): Promise<(Entry | 
 		...getParams,
 	})
 		.then((result) => {
-			logger.debug('NIGTHSCOUT Load');
+			logger.debug('NIGHTSCOUT Load');
 			return result.json();
 		})
 		.catch(err => {
