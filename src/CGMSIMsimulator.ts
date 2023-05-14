@@ -14,7 +14,6 @@ import { physicalIsf, physicalLiver } from './physical';
 
 logger.debug('Run Init');
 
-
 const simulator = ({
 	env,
 	entries,
@@ -24,10 +23,10 @@ const simulator = ({
 	activities, //7-DAYS
 }: MainParams): SimulationResult => {
 	if (!treatments) {
-		throw new Error('treatments is ' + treatments)
+		throw new Error('treatments is ' + treatments);
 	}
 	if (!profiles) {
-		throw new Error('profiles is ' + profiles)
+		throw new Error('profiles is ' + profiles);
 	}
 
 	const isfConstant = parseInt(env.ISF);
@@ -37,13 +36,13 @@ const simulator = ({
 	let isfActivityDependent = isfConstant;
 	let activityFactor = 1;
 	if (isfActivityDependent < 9) {
-		throw new Error("Isf must be greater then or equal to 9");
+		throw new Error('Isf must be greater then or equal to 9');
 	}
 	if (activities && activities.length > 0) {
-		isfActivityDependent = isfConstant * physicalIsf(activities, age, gender);
+		isfActivityDependent =
+			isfConstant * physicalIsf(activities, age, gender);
 		activityFactor = physicalLiver(activities, age, gender);
 	}
-
 
 	const weight = parseInt(env.WEIGHT);
 	const dia = parseInt(env.DIA);
@@ -51,12 +50,12 @@ const simulator = ({
 	const carbsAbs = parseInt(env.CARBS_ABS_TIME);
 	const cr = parseInt(env.CR);
 
-
 	const bolusActivity = bolus(treatments, dia, peak);
 	const basalBolusActivity = basal(treatments, weight);
-	const basalPumpActivity = pumpEnabled ? pump(treatments, profiles, dia, peak) : 0;
+	const basalPumpActivity = pumpEnabled
+		? pump(treatments, profiles, dia, peak)
+		: 0;
 	const carbsActivity = carbs(treatments, carbsAbs, isfActivityDependent, cr);
-
 
 	// //activity calc insulin
 	// const det = detemirRun(weight, lastDET);
@@ -67,18 +66,38 @@ const simulator = ({
 	//activity calc carb
 	const liverActivity = liverRun(isfConstant, cr, activityFactor);
 	const now = moment();
-	const orderedEntries = entries.filter(e => e.mills <= now.toDate().getTime()).sort((a, b) => b.mills - a.mills)
+	const orderedEntries = entries
+		.filter((e) => e.mills <= now.toDate().getTime())
+		.sort((a, b) => b.mills - a.mills);
 
-	const newSgvValue = sgv(orderedEntries, { basalActivity: basalBolusActivity + basalPumpActivity, liverActivity, carbsActivity, bolusActivity }, isfActivityDependent);
+	const newSgvValue = sgv(
+		orderedEntries,
+		{
+			basalActivity: basalBolusActivity + basalPumpActivity,
+			liverActivity,
+			carbsActivity,
+			bolusActivity,
+		},
+		isfActivityDependent
+	);
 
 	logger.debug('this is the new sgv: %o', newSgvValue);
-	logger.info('this is the ISF multiplicator (or physicalISF): %o', isfActivityDependent / isfConstant);
-	logger.info('this is the liver multiplicator (or physicalLiver): %o', activityFactor);
+	logger.info(
+		'this is the ISF multiplicator (or physicalISF): %o',
+		isfActivityDependent / isfConstant
+	);
+	logger.info(
+		'this is the liver multiplicator (or physicalLiver): %o',
+		activityFactor
+	);
 
 	// const arrows = arrowsRun([newSgvValue, ...entries]);
 
-	return { ...newSgvValue, activityFactor, isf: { dynamic: isfActivityDependent, constant: isfConstant } };
+	return {
+		...newSgvValue,
+		activityFactor,
+		isf: { dynamic: isfActivityDependent, constant: isfConstant },
+	};
 };
 
 export default simulator;
-

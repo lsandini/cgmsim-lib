@@ -6,15 +6,25 @@ import { Activity } from './Types';
 import { SimulationResult } from './Types';
 import { Note } from './Types';
 
-export function uploadNotes(notes: string, nsUrl: string, apiSecret: string, instanceName: string) {
-	const _nsUrl = removeTrailingSlash(nsUrl)
+export function uploadNotes(
+	notes: string,
+	nsUrl: string,
+	apiSecret: string,
+	instanceName: string
+) {
+	const _nsUrl = removeTrailingSlash(nsUrl);
 	const api_url = _nsUrl + '/api/v1/treatments/';
-	const noteTreatment: Note = { type: 'Note', notes }
+	const noteTreatment: Note = { type: 'Note', notes };
 	return uploadBase(noteTreatment, api_url, apiSecret, instanceName);
 }
 
-export function uploadLogs(simResult: SimulationResult & { notes: string }, nsUrl: string, apiSecret: string, instanceName: string) {
-	const _nsUrl = removeTrailingSlash(nsUrl)
+export function uploadLogs(
+	simResult: SimulationResult & { notes: string },
+	nsUrl: string,
+	apiSecret: string,
+	instanceName: string
+) {
+	const _nsUrl = removeTrailingSlash(nsUrl);
 	const api_url = _nsUrl + '/api/v1/treatments/';
 	const now = moment();
 	const sim = {
@@ -22,12 +32,17 @@ export function uploadLogs(simResult: SimulationResult & { notes: string }, nsUr
 		type: 'logs',
 		dateString: now.toISOString(),
 		date: now.toDate().getTime(),
-	}
+	};
 	return uploadBase(sim, api_url, apiSecret, instanceName);
 }
 
-export function uploadEntries(cgmsim: EntryValueType, nsUrl: string, apiSecret: string, instanceName: string) {
-	const _nsUrl = removeTrailingSlash(nsUrl)
+export function uploadEntries(
+	cgmsim: EntryValueType,
+	nsUrl: string,
+	apiSecret: string,
+	instanceName: string
+) {
+	const _nsUrl = removeTrailingSlash(nsUrl);
 	const api_url = _nsUrl + '/api/v1/entries/';
 	const now = moment();
 	const entry: Entry = {
@@ -35,15 +50,18 @@ export function uploadEntries(cgmsim: EntryValueType, nsUrl: string, apiSecret: 
 		type: 'sgv',
 		dateString: now.toISOString(),
 		date: now.toDate().getTime(),
-	}
+	};
 	return uploadBase(entry, api_url, apiSecret, instanceName);
 }
 
-export function uploadActivity(activity: Activity, nsUrl: string, apiSecret: string) {
-
+export function uploadActivity(
+	activity: Activity,
+	nsUrl: string,
+	apiSecret: string
+) {
 	logger.debug('log something %o', activity);
 
-	const _nsUrl = removeTrailingSlash(nsUrl)
+	const _nsUrl = removeTrailingSlash(nsUrl);
 	const api_url = _nsUrl + '/api/v1/activity/';
 	return uploadBase(activity, api_url, apiSecret);
 }

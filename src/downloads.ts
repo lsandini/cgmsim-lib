@@ -4,10 +4,12 @@ import { Profile, Sgv, Treatment } from './Types';
 import fetch from 'node-fetch';
 //const logger = pino();
 
-
-
-const downloads = async (nsUrl: string, apiSecret: string, instanceName: string) => {
-	const _nsUrl = removeTrailingSlash(nsUrl)
+const downloads = async (
+	nsUrl: string,
+	apiSecret: string,
+	instanceName: string
+) => {
+	const _nsUrl = removeTrailingSlash(nsUrl);
 	const _isHttps = isHttps(nsUrl);
 
 	const { getParams } = setupParams(apiSecret, _isHttps, instanceName);
@@ -21,31 +23,38 @@ const downloads = async (nsUrl: string, apiSecret: string, instanceName: string)
 		json: () => Promise<T[]>;
 	};
 
-	const treatments: ResponseType<Treatment> = fetch(api_url, getParams)
-	const profiles: ResponseType<Profile> = fetch(api_profile, getParams)
-	const entries: ResponseType<Sgv> = fetch(api_sgv, getParams)
+	const treatments: ResponseType<Treatment> = fetch(api_url, getParams);
+	const profiles: ResponseType<Profile> = fetch(api_profile, getParams);
+	const entries: ResponseType<Sgv> = fetch(api_sgv, getParams);
 	return Promise.all([treatments, profiles, entries])
 		.then(([resTreatments, resProfile, resEntries]) => {
-			if (resTreatments.status === 200 && resProfile.status === 200 && resEntries.status === 200) {
-				return Promise.all([resTreatments.json(), resProfile.json(), resEntries.json()])
+			if (
+				resTreatments.status === 200 &&
+				resProfile.status === 200 &&
+				resEntries.status === 200
+			) {
+				return Promise.all([
+					resTreatments.json(),
+					resProfile.json(),
+					resEntries.json(),
+				]);
 			} else {
 				throw new Error(`
-				treatments: ${resTreatments.statusText}; 
-				profiles: ${resProfile.statusText}; 
+				treatments: ${resTreatments.statusText};
+				profiles: ${resProfile.statusText};
 				entries: ${resEntries.statusText}`);
 			}
 		})
-		.then(([treatments, profiles, entries,]) => {
+		.then(([treatments, profiles, entries]) => {
 			return {
 				treatments,
 				profiles,
 				entries,
 			};
 		})
-		.catch(err => {
+		.catch((err) => {
 			logger.error(err);
 			throw new Error(err);
 		});
-
 };
 export default downloads;

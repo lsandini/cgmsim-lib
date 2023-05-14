@@ -3,7 +3,21 @@ import simulatorUVA from './UVAsimulator';
 import downloads from './downloads';
 import loadActivity from './load-activity';
 import arrows from './arrows';
-import {uploadNotes, uploadActivity, uploadEntries, uploadLogs } from './upload';
+import {
+	uploadNotes,
+	uploadActivity,
+	uploadEntries,
+	uploadLogs,
+} from './upload';
 
-
-export { arrows, simulator, downloads, loadActivity, simulatorUVA,uploadEntries, uploadActivity, uploadNotes, uploadLogs };
+export {
+	arrows,
+	simulator,
+	downloads,
+	loadActivity,
+	simulatorUVA,
+	uploadEntries,
+	uploadActivity,
+	uploadNotes,
+	uploadLogs,
+};

@@ -1,8 +1,11 @@
 import sinusRun from './sinus';
 import logger from './utils';
 
-
-export default function (isfConstant: number, cr: number, activityFactor: number=1): number {
+export default function (
+	isfConstant: number,
+	cr: number,
+	activityFactor: number = 1
+): number {
 	const _ISF = isfConstant / 18;
 	const _CR = cr;
 	logger.debug('ISF:', isfConstant, 'CR: %o', cr);
@@ -13,7 +16,6 @@ export default function (isfConstant: number, cr: number, activityFactor: number
 	const { sinus, cosinus } = sinusRun(Date.now());
 	logger.debug('sinus:  %o', sinus);
 	logger.debug('cosinus:  %o', cosinus);
-
 
 	// let's simulate the carb impact of the liver, producing 10g of carbs / hour
 	// if the ISF is 2 mmol/l/U,
@@ -26,12 +28,11 @@ export default function (isfConstant: number, cr: number, activityFactor: number
 	// by multiplying the liver_bgi by the sin function, the liver loog glucose production varies in a sinusoidal
 	// form, being maximal at 6 AM and minimal ad 6 PM
 
-	const liver = activityFactor * (_ISF / _CR) * (10 / 60);//(mmol/l)/min
+	const liver = activityFactor * (_ISF / _CR) * (10 / 60); //(mmol/l)/min
 
 	const liver_sin = liver * sinus;
 	logger.debug('liver:  %o', liver);
 	logger.info('liver_sin:  %o', liver_sin);
 
-
-	return liver_sin;//(mmol/l)/min
+	return liver_sin; //(mmol/l)/min
 }

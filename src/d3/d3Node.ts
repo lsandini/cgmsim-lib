@@ -6,16 +6,17 @@ import * as fse from 'fs-extra';
 function fixXmlCase(text: string) {
 	// Fix a jsdom issue where all SVG tagNames are lowercased:
 	// https://github.com/tmpvar/jsdom/issues/620
-	var tagNames = ['linearGradient', 'radialGradient', 'clipPath', 'textPath']
+	var tagNames = ['linearGradient', 'radialGradient', 'clipPath', 'textPath'];
 	for (var i = 0, l = tagNames.length; i < l; i++) {
-		var tagName = tagNames[i]
+		var tagName = tagNames[i];
 		text = text.replace(
 			new RegExp('(<|</)' + tagName.toLowerCase() + '\\b', 'g'),
 			function (all, start) {
-				return start + tagName
-			})
+				return start + tagName;
+			}
+		);
 	}
-	return text
+	return text;
 }
 
 export class D3Node {
@@ -24,14 +25,30 @@ export class D3Node {
 
 	document: Document;
 
-	options: { d3Module: typeof d3; selector: string; container: string; styles: string; canvasModule: string; };
+	options: {
+		d3Module: typeof d3;
+		selector: string;
+		container: string;
+		styles: string;
+		canvasModule: string;
+	};
 	jsDom: JSDOM;
 	window: Window & typeof globalThis;
-	constructor({ d3Module = d3, selector = '', container = '', styles = '', svgStyles = '', canvasModule = '' }) {
+	constructor({
+		d3Module = d3,
+		selector = '',
+		container = '',
+		styles = '',
+		svgStyles = '',
+		canvasModule = '',
+	}) {
 		// deprecates props
-		if (svgStyles && !styles) { // deprecated svgStyles option
-			console.warn('WARNING: svgStyles is deprecated, please use styles instead !!')
-			styles = svgStyles
+		if (svgStyles && !styles) {
+			// deprecated svgStyles option
+			console.warn(
+				'WARNING: svgStyles is deprecated, please use styles instead !!'
+			);
+			styles = svgStyles;
 		}
 
 		// // auto-new instance, so we always have 'this'
@@ -40,74 +57,71 @@ export class D3Node {
 		// }
 
 		// setup DOM
-		let jsDom = new JSDOM()
+		let jsDom = new JSDOM();
 		if (container) {
-			jsDom = new JSDOM(container)
+			jsDom = new JSDOM(container);
 		}
-		const document = jsDom.window.document
+		const document = jsDom.window.document;
 
 		// setup d3 selection
-		let d3Element = d3Module.select(document.body)
+		let d3Element = d3Module.select(document.body);
 		if (selector) {
-			d3Element = d3Element.select(selector)
+			d3Element = d3Element.select(selector);
 		}
 
-		this.options = { d3Module, selector, container, styles, canvasModule }
-		this.jsDom = new JSDOM()
-		this.document = document
-		this.window = document.defaultView
-		this.d3Element = d3Element
-		this.d3 = d3Module
+		this.options = { d3Module, selector, container, styles, canvasModule };
+		this.jsDom = new JSDOM();
+		this.document = document;
+		this.window = document.defaultView;
+		this.d3Element = d3Element;
+		this.d3 = d3Module;
 	}
 
 	createSVG(width: number, height: number, attrs?: any) {
-		const svg = (this.d3Element as any).append('svg')
-			.attr('xmlns', 'http://www.w3.org/2000/svg')
-			
+		const svg = (this.d3Element as any)
+			.append('svg')
+			.attr('xmlns', 'http://www.w3.org/2000/svg');
 
 		if (width && height) {
 			svg.attr('width', width)
 				.attr('height', height)
-				.attr('style','background-color:black; color:white;')
+				.attr('style', 'background-color:black; color:white;');
 		}
 
 		if (attrs) {
 			Object.keys(attrs).forEach(function (key) {
-				svg.attr(key, attrs[key])
-			})
-		}	
-		return svg
-
-
+				svg.attr(key, attrs[key]);
+			});
+		}
+		return svg;
 	}
-
 
 	svgString() {
 		if ((this.d3Element.select('svg') as any).node()) {
 			// temp until: https://github.com/tmpvar/jsdom/issues/1368
-			return fixXmlCase(((this.d3Element.select('svg') as any).node() as Element).outerHTML)
+			return fixXmlCase(
+				((this.d3Element.select('svg') as any).node() as Element)
+					.outerHTML
+			);
 		}
-		return ''
+		return '';
 	}
 	async svgImage(dest: string) {
-
 		const svgString = this.svgString();
-		
+
 		// await fse.outputFile(`${dest}.svg`, svgString);
 
 		var buf = Buffer.from(svgString, 'utf8');
-		return sharp(buf)
-			.png()
-			.toBuffer()
+		return sharp(buf).png().toBuffer();
 
-		// .toBuffer()		
+		// .toBuffer()
 	}
 
 	html() {
-		return this.jsDom.serialize()
+		return this.jsDom.serialize();
 	}
 
 	chartHTML() {
-		return this.document.querySelector(this.options.selector).outerHTML
+		return this.document.querySelector(this.options.selector).outerHTML;
 	}
 }
