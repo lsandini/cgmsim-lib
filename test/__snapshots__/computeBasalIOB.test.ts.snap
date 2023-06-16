@@ -2588,4 +2588,2052 @@ exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 1023`
 
 exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 1024`] = `0`;
 
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 1`] = `0.00008239`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 2`] = `0.00032767`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 3`] = `0.000733`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 4`] = `0.00097168`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 5`] = `0.00120754`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 6`] = `0.00144063`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 7`] = `0.00167094`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 8`] = `0.0018985`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 9`] = `0.00212333`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 10`] = `0.00234544`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 11`] = `0.00256485`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 12`] = `0.00278157`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 13`] = `0.00299563`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 14`] = `0.00320703`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 15`] = `0.0034158`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 16`] = `0.00362195`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 17`] = `0.0038255`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 18`] = `0.00402646`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 19`] = `0.00422485`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 20`] = `0.00442068`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 21`] = `0.00461398`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 22`] = `0.00480475`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 23`] = `0.00499302`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 24`] = `0.0051788`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 25`] = `0.0053621`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 26`] = `0.00554294`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 27`] = `0.00572133`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 28`] = `0.0058973`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 29`] = `0.00607085`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 30`] = `0.00624201`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 31`] = `0.00641078`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 32`] = `0.00657718`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 33`] = `0.00674123`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 34`] = `0.00690294`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 35`] = `0.00706232`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 36`] = `0.0072194`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 37`] = `0.00737419`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 38`] = `0.00752669`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 39`] = `0.00767693`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 40`] = `0.00782492`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 41`] = `0.00797068`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 42`] = `0.00811421`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 43`] = `0.00825554`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 44`] = `0.00839468`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 45`] = `0.00853163`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 46`] = `0.00866642`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 47`] = `0.00879907`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 48`] = `0.00892957`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 49`] = `0.00905796`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 50`] = `0.00918423`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 51`] = `0.00930841`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 52`] = `0.00943051`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 53`] = `0.00955054`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 54`] = `0.00966852`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 55`] = `0.00978446`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 56`] = `0.00989837`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 57`] = `0.01001026`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 58`] = `0.01012016`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 59`] = `0.01022807`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 60`] = `0.01033401`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 61`] = `0.01043798`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 62`] = `0.01054001`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 63`] = `0.0106401`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 64`] = `0.01073828`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 65`] = `0.01083454`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 66`] = `0.01092891`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 67`] = `0.01102139`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 68`] = `0.011112`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 69`] = `0.01120076`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 70`] = `0.01128767`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 71`] = `0.01137275`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 72`] = `0.011456`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 73`] = `0.01153745`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 74`] = `0.0116171`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 75`] = `0.01169497`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 76`] = `0.01177107`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 77`] = `0.01184541`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 78`] = `0.011918`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 79`] = `0.01198886`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 80`] = `0.01205799`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 81`] = `0.01212541`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 82`] = `0.01219113`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 83`] = `0.01225516`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 84`] = `0.01231752`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 85`] = `0.01237821`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 86`] = `0.01243725`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 87`] = `0.01249465`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 88`] = `0.01255042`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 89`] = `0.01260457`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 90`] = `0.01265711`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 91`] = `0.01270806`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 92`] = `0.01275742`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 93`] = `0.01280521`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 94`] = `0.01285144`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 95`] = `0.01289612`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 96`] = `0.01293925`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 97`] = `0.01298086`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 98`] = `0.01302095`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 99`] = `0.01305953`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 100`] = `0.01309661`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 101`] = `0.01313221`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 102`] = `0.01316633`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 103`] = `0.01319899`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 104`] = `0.01323019`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 105`] = `0.01325995`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 106`] = `0.01328828`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 107`] = `0.01331518`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 108`] = `0.01334068`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 109`] = `0.01336477`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 110`] = `0.01338747`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 111`] = `0.01340878`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 112`] = `0.01342873`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 113`] = `0.01344731`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 114`] = `0.01346455`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 115`] = `0.01348044`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 116`] = `0.013495`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 117`] = `0.01350824`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 118`] = `0.01352017`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 119`] = `0.0135308`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 120`] = `0.01354013`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 121`] = `0.01354819`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 122`] = `0.01355497`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 123`] = `0.01356048`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 124`] = `0.01356475`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 125`] = `0.01356777`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 126`] = `0.01356955`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 127`] = `0.01357012`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 128`] = `0.01356946`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 129`] = `0.0135676`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 130`] = `0.01356454`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 131`] = `0.01356029`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 132`] = `0.01355487`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 133`] = `0.01354827`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 134`] = `0.01354052`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 135`] = `0.01353161`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 136`] = `0.01352156`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 137`] = `0.01351038`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 138`] = `0.01349807`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 139`] = `0.01348465`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 140`] = `0.01347012`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 141`] = `0.01345449`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 142`] = `0.01343777`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 143`] = `0.01341997`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 144`] = `0.0134011`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 145`] = `0.01338116`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 146`] = `0.01336017`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 147`] = `0.01333813`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 148`] = `0.01331506`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 149`] = `0.01329095`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 150`] = `0.01326582`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 151`] = `0.01323968`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 152`] = `0.01321253`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 153`] = `0.01318439`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 154`] = `0.01315525`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 155`] = `0.01312514`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 156`] = `0.01309405`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 157`] = `0.013062`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 158`] = `0.01302899`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 159`] = `0.01299504`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 160`] = `0.01296014`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 161`] = `0.01292431`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 162`] = `0.01288755`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 163`] = `0.01284988`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 164`] = `0.0128113`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 165`] = `0.01277182`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 166`] = `0.01273144`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 167`] = `0.01269017`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 168`] = `0.01264803`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 169`] = `0.01260502`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 170`] = `0.01256114`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 171`] = `0.0125164`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 172`] = `0.01247082`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 173`] = `0.01242439`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 174`] = `0.01237713`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 175`] = `0.01232904`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 176`] = `0.01228014`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 177`] = `0.01223042`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 178`] = `0.01217989`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 179`] = `0.01212857`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 180`] = `0.01207645`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 181`] = `0.01202355`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 182`] = `0.01196988`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 183`] = `0.01191543`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 184`] = `0.01186022`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 185`] = `0.01180426`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 186`] = `0.01174754`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 187`] = `0.01169009`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 188`] = `0.01163189`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 189`] = `0.01157297`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 190`] = `0.01151333`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 191`] = `0.01145297`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 192`] = `0.0113919`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 193`] = `0.01133013`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 194`] = `0.01126766`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 195`] = `0.0112045`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 196`] = `0.01114066`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 197`] = `0.01107615`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 198`] = `0.01101097`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 199`] = `0.01094512`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 200`] = `0.01087861`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 201`] = `0.01081146`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 202`] = `0.01074366`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 203`] = `0.01067522`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 204`] = `0.01060615`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 205`] = `0.01053645`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 206`] = `0.01046614`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 207`] = `0.01039521`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 208`] = `0.01032367`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 209`] = `0.01025153`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 210`] = `0.0101788`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 211`] = `0.01010548`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 212`] = `0.01003157`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 213`] = `0.00995709`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 214`] = `0.00988203`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 215`] = `0.00980641`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 216`] = `0.00973023`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 217`] = `0.0096535`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 218`] = `0.00957622`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 219`] = `0.00949839`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 220`] = `0.00942003`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 221`] = `0.00934114`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 222`] = `0.00926172`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 223`] = `0.00918178`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 224`] = `0.00910132`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 225`] = `0.00902036`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 226`] = `0.00893889`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 227`] = `0.00885693`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 228`] = `0.00877447`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 229`] = `0.00869153`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 230`] = `0.0086081`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 231`] = `0.0085242`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 232`] = `0.00843983`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 233`] = `0.00835499`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 234`] = `0.00826969`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 235`] = `0.00818393`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 236`] = `0.00809773`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 237`] = `0.00801108`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 238`] = `0.00792399`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 239`] = `0.00783646`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 240`] = `0.00774851`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 241`] = `0.00766013`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 242`] = `0.00757133`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 243`] = `0.00748211`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 244`] = `0.00739249`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 245`] = `0.00730246`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 246`] = `0.00721203`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 247`] = `0.00712121`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 248`] = `0.00703`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 249`] = `0.0069384`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 250`] = `0.00684642`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 251`] = `0.00675406`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 252`] = `0.00666133`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 253`] = `0.00656824`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 254`] = `0.00647479`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 255`] = `0.00638097`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 256`] = `0.00628681`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 257`] = `0.0061923`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 258`] = `0.00609744`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 259`] = `0.00600225`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 260`] = `0.00590672`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 261`] = `0.00581086`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 262`] = `0.00571468`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 263`] = `0.00561817`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 264`] = `0.00552135`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 265`] = `0.00542422`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 266`] = `0.00532677`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 267`] = `0.00522903`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 268`] = `0.00513099`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 269`] = `0.00503265`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 270`] = `0.00493402`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 271`] = `0.0048351`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 272`] = `0.0047359`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 273`] = `0.00463643`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 274`] = `0.00453668`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 275`] = `0.00443666`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 276`] = `0.00433637`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 277`] = `0.00423583`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 278`] = `0.00413502`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 279`] = `0.00403396`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 280`] = `0.00393265`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 281`] = `0.0038311`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 282`] = `0.00372931`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 283`] = `0.00362727`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 284`] = `0.00352501`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 285`] = `0.00342251`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 286`] = `0.00331979`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 287`] = `0.00321684`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 288`] = `0.00311368`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 289`] = `0.00306135`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 290`] = `0.00310966`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 291`] = `0.0032568`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 292`] = `0.00330044`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 293`] = `0.00334207`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 294`] = `0.00338172`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 295`] = `0.00341938`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 296`] = `0.00345509`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 297`] = `0.00348885`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 298`] = `0.00352068`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 299`] = `0.00355059`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 300`] = `0.0035786`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 301`] = `0.00360472`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 302`] = `0.00362897`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 303`] = `0.00365136`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 304`] = `0.00367191`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 305`] = `0.00369062`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 306`] = `0.00370752`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 307`] = `0.00372262`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 308`] = `0.00373594`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 309`] = `0.00374748`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 310`] = `0.00375725`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 311`] = `0.00376529`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 312`] = `0.00377159`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 313`] = `0.00377617`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 314`] = `0.00377905`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 315`] = `0.00378024`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 316`] = `0.00377975`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 317`] = `0.0037776`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 318`] = `0.00383864`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 319`] = `0.00394137`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 320`] = `0.00404259`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 321`] = `0.0041423`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 322`] = `0.00424051`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 323`] = `0.00433724`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 324`] = `0.00443249`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 325`] = `0.00452627`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 326`] = `0.0046186`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 327`] = `0.00470948`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 328`] = `0.00479893`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 329`] = `0.00488694`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 330`] = `0.00497354`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 331`] = `0.00505874`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 332`] = `0.00514253`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 333`] = `0.00522494`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 334`] = `0.00530596`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 335`] = `0.00538561`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 336`] = `0.00546391`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 337`] = `0.00554085`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 338`] = `0.00561645`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 339`] = `0.00569071`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 340`] = `0.00576366`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 341`] = `0.00583528`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 342`] = `0.0059056`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 343`] = `0.00597462`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 344`] = `0.00604236`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 345`] = `0.00610881`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 346`] = `0.006174`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 347`] = `0.00623792`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 348`] = `0.00630059`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 349`] = `0.00636202`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 350`] = `0.00642221`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 351`] = `0.00648117`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 352`] = `0.00653891`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 353`] = `0.00659545`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 354`] = `0.00665078`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 355`] = `0.00670492`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 356`] = `0.00675788`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 357`] = `0.00680966`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 358`] = `0.00686027`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 359`] = `0.00690972`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 360`] = `0.00695802`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 361`] = `0.00700518`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 362`] = `0.0070512`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 363`] = `0.00709609`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 364`] = `0.00713987`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 365`] = `0.00718253`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 366`] = `0.0072241`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 367`] = `0.00726456`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 368`] = `0.00730394`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 369`] = `0.00734224`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 370`] = `0.00737947`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 371`] = `0.00741564`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 372`] = `0.00745075`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 373`] = `0.00748481`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 374`] = `0.00751783`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 375`] = `0.00754982`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 376`] = `0.00758078`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 377`] = `0.00761073`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 378`] = `0.00763966`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 379`] = `0.00766759`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 380`] = `0.00769453`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 381`] = `0.00772048`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 382`] = `0.00774544`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 383`] = `0.00776944`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 384`] = `0.00779246`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 385`] = `0.00781453`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 386`] = `0.00783565`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 387`] = `0.00785582`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 388`] = `0.00787505`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 389`] = `0.00789336`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 390`] = `0.00791074`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 391`] = `0.0079272`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 392`] = `0.00794275`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 393`] = `0.00795741`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 394`] = `0.00797116`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 395`] = `0.00798403`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 396`] = `0.00799601`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 397`] = `0.00800712`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 398`] = `0.00801736`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 399`] = `0.00802674`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 400`] = `0.00803526`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 401`] = `0.00804294`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 402`] = `0.00804977`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 403`] = `0.00805577`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 404`] = `0.00806094`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 405`] = `0.00806528`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 406`] = `0.00806881`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 407`] = `0.00807153`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 408`] = `0.00807345`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 409`] = `0.00807457`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 410`] = `0.0080749`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 411`] = `0.00807445`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 412`] = `0.00807322`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 413`] = `0.00807121`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 414`] = `0.00806845`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 415`] = `0.00806492`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 416`] = `0.00806064`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 417`] = `0.00805561`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 418`] = `0.00804984`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 419`] = `0.00804333`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 420`] = `0.0080361`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 421`] = `0.00802814`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 422`] = `0.00801947`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 423`] = `0.00801008`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 424`] = `0.00799999`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 425`] = `0.0079892`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 426`] = `0.00797771`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 427`] = `0.00796554`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 428`] = `0.00795269`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 429`] = `0.00793915`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 430`] = `0.00792495`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 431`] = `0.00791008`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 432`] = `0.00789455`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 433`] = `0.00787837`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 434`] = `0.00786154`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 435`] = `0.00784407`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 436`] = `0.00782595`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 437`] = `0.00780721`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 438`] = `0.00778784`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 439`] = `0.00776785`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 440`] = `0.00774724`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 441`] = `0.00772602`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 442`] = `0.0077042`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 443`] = `0.00768177`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 444`] = `0.00765875`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 445`] = `0.00763514`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 446`] = `0.00761095`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 447`] = `0.00758618`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 448`] = `0.00756083`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 449`] = `0.00753492`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 450`] = `0.00750844`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 451`] = `0.0074814`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 452`] = `0.00745381`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 453`] = `0.00742566`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 454`] = `0.00739698`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 455`] = `0.00736775`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 456`] = `0.007338`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 457`] = `0.00730771`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 458`] = `0.0072769`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 459`] = `0.00724556`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 460`] = `0.00721372`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 461`] = `0.00718136`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 462`] = `0.0071485`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 463`] = `0.00711514`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 464`] = `0.00708128`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 465`] = `0.00704693`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 466`] = `0.00701209`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 467`] = `0.00697677`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 468`] = `0.00694098`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 469`] = `0.00690471`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 470`] = `0.00686797`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 471`] = `0.00683077`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 472`] = `0.00679311`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 473`] = `0.006755`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 474`] = `0.00671643`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 475`] = `0.00667742`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 476`] = `0.00663797`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 477`] = `0.00659808`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 478`] = `0.00655776`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 479`] = `0.006517`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 480`] = `0.00647583`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 481`] = `0.00643423`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 482`] = `0.00639222`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 483`] = `0.0063498`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 484`] = `0.00630697`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 485`] = `0.00626373`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 486`] = `0.0062201`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 487`] = `0.00617607`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 488`] = `0.00613165`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 489`] = `0.00608684`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 490`] = `0.00604165`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 491`] = `0.00599608`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 492`] = `0.00595014`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 493`] = `0.00590383`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 494`] = `0.00585714`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 495`] = `0.0058101`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 496`] = `0.0057627`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 497`] = `0.00571494`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 498`] = `0.00566683`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 499`] = `0.00561837`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 500`] = `0.00556957`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 501`] = `0.00552042`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 502`] = `0.00547095`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 503`] = `0.00542113`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 504`] = `0.00537099`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 505`] = `0.00532053`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 506`] = `0.00526974`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 507`] = `0.00521864`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 508`] = `0.00516722`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 509`] = `0.00511549`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 510`] = `0.00506346`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 511`] = `0.00501112`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 512`] = `0.00495848`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 513`] = `0.00490554`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 514`] = `0.00485231`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 515`] = `0.0047988`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 516`] = `0.00474499`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 517`] = `0.00469091`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 518`] = `0.00463654`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 519`] = `0.0045819`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 520`] = `0.00452699`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 521`] = `0.00447181`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 522`] = `0.00441636`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 523`] = `0.00436065`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 524`] = `0.00430468`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 525`] = `0.00424846`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 526`] = `0.00419198`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 527`] = `0.00413525`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 528`] = `0.00407828`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 529`] = `0.00402107`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 530`] = `0.00396361`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 531`] = `0.00390592`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 532`] = `0.003848`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 533`] = `0.00378984`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 534`] = `0.00373146`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 535`] = `0.00367286`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 536`] = `0.00361403`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 537`] = `0.00355499`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 538`] = `0.00349573`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 539`] = `0.00343626`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 540`] = `0.00337658`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 541`] = `0.00331669`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 542`] = `0.00325661`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 543`] = `0.00319632`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 544`] = `0.00313583`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 545`] = `0.00307515`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 546`] = `0.00301428`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 547`] = `0.00295322`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 548`] = `0.00289198`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 549`] = `0.00283055`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 550`] = `0.00276894`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 551`] = `0.00270716`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 552`] = `0.0026452`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 553`] = `0.00258307`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 554`] = `0.00252077`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 555`] = `0.0024583`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 556`] = `0.00239567`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 557`] = `0.00233288`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 558`] = `0.00226993`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 559`] = `0.00220683`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 560`] = `0.00214357`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 561`] = `0.00208016`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 562`] = `0.00201661`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 563`] = `0.00195291`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 564`] = `0.00188907`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 565`] = `0.00182508`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 566`] = `0.00176096`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 567`] = `0.00169671`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 568`] = `0.00163232`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 569`] = `0.0015678`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 570`] = `0.00150316`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 571`] = `0.00143839`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 572`] = `0.0013735`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 573`] = `0.00130849`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 574`] = `0.00124336`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 575`] = `0.00117811`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 576`] = `0.00111275`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 577`] = `0.00104728`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 578`] = `0.00098171`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 579`] = `0.00091602`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 580`] = `0.00085024`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 581`] = `0.00078435`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 582`] = `0.00071836`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 583`] = `0.00065228`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 584`] = `0.0005861`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 585`] = `0.00051983`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 586`] = `0.00045347`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 587`] = `0.00038702`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 588`] = `0.00032049`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 589`] = `0.00025387`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 590`] = `0.00018717`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 591`] = `0.00012039`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 592`] = `0.00005354`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 593`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 594`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 595`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 596`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 597`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 598`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 599`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 600`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 601`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 602`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 603`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 604`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 605`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 606`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 607`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 608`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 609`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 610`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 611`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 612`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 613`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 614`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 615`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 616`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 617`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 618`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 619`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 620`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 621`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 622`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 623`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 624`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 625`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 626`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 627`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 628`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 629`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 630`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 631`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 632`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 633`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 634`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 635`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 636`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 637`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 638`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 639`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 640`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 641`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 642`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 643`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 644`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 645`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 646`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 647`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 648`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 649`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 650`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 651`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 652`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 653`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 654`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 655`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 656`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 657`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 658`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 659`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 660`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 661`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 662`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 663`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 664`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 665`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 666`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 667`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 668`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 669`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 670`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 671`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 672`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 673`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 674`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 675`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 676`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 677`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 678`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 679`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 680`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 681`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 682`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 683`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 684`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 685`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 686`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 687`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 688`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 689`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 690`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 691`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 692`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 693`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 694`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 695`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 696`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 697`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 698`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 699`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 700`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 701`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 702`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 703`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 704`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 705`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 706`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 707`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 708`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 709`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 710`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 711`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 712`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 713`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 714`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 715`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 716`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 717`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 718`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 719`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 720`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 721`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 722`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 723`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 724`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 725`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 726`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 727`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 728`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 729`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 730`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 731`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 732`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 733`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 734`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 735`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 736`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 737`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 738`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 739`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 740`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 741`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 742`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 743`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 744`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 745`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 746`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 747`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 748`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 749`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 750`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 751`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 752`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 753`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 754`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 755`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 756`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 757`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 758`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 759`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 760`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 761`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 762`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 763`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 764`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 765`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 766`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 767`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 768`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 769`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 770`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 771`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 772`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 773`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 774`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 775`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 776`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 777`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 778`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 779`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 780`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 781`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 782`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 783`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 784`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 785`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 786`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 787`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 788`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 789`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 790`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 791`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 792`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 793`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 794`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 795`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 796`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 797`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 798`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 799`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 800`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 801`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 802`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 803`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 804`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 805`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 806`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 807`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 808`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 809`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 810`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 811`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 812`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 813`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 814`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 815`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 816`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 817`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 818`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 819`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 820`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 821`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 822`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 823`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 824`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 825`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 826`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 827`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 828`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 829`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 830`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 831`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 832`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 833`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 834`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 835`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 836`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 837`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 838`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 839`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 840`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 841`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 842`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 843`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 844`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 845`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 846`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 847`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 848`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 849`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 850`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 851`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 852`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 853`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 854`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 855`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 856`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 857`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 858`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 859`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 860`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 861`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 862`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 863`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 864`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 865`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 866`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 867`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 868`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 869`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 870`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 871`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 872`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 873`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 874`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 875`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 876`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 877`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 878`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 879`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 880`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 881`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 882`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 883`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 884`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 885`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 886`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 887`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 888`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 889`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 890`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 891`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 892`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 893`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 894`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 895`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 896`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 897`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 898`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 899`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 900`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 901`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 902`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 903`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 904`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 905`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 906`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 907`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 908`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 909`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 910`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 911`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 912`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 913`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 914`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 915`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 916`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 917`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 918`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 919`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 920`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 921`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 922`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 923`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 924`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 925`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 926`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 927`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 928`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 929`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 930`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 931`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 932`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 933`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 934`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 935`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 936`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 937`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 938`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 939`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 940`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 941`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 942`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 943`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 944`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 945`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 946`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 947`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 948`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 949`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 950`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 951`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 952`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 953`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 954`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 955`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 956`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 957`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 958`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 959`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 960`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 961`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 962`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 963`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 964`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 965`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 966`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 967`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 968`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 969`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 970`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 971`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 972`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 973`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 974`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 975`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 976`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 977`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 978`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 979`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 980`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 981`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 982`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 983`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 984`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 985`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 986`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 987`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 988`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 989`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 990`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 991`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 992`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 993`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 994`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 995`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 996`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 997`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 998`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 999`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 1000`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 1001`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 1002`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 1003`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 1004`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 1005`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 1006`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 1007`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 1008`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 1009`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 1010`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 1011`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 1012`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 1013`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 1014`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 1015`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 1016`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 1017`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 1018`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 1019`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 1020`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 1021`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 1022`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 1023`] = `0`;
+
+exports[`test computeBasalIOB comparing old cgmsim wrong toujeo entry 1024`] = `0`;
+
 exports[`test computeBasalIOB detection drug 1`] = `0.0035966516146412695`;
