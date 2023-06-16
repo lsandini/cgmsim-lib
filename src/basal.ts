@@ -47,15 +47,20 @@ export default function (treatments: Treatment[], weight: number): number {
 					.filter((e) => e.notes)
 					.map((e) => {
 						const lastIndexEmptySpace = e.notes.lastIndexOf(' ');
+						console.log(
+							'tou',
+							parseInt(e.notes.slice(lastIndexEmptySpace), 10)
+						);
 						return {
 							...e,
 							minutesAgo: getDeltaMinutes(e.created_at),
 							drug: e.notes.slice(0, 3),
 							// insulin: parseInt(e.notes.slice(-2))
-							insulin: parseInt(
-								e.notes.slice(lastIndexEmptySpace),
-								10
-							),
+							insulin:
+								parseInt(
+									e.notes.slice(lastIndexEmptySpace),
+									10
+								) || 0,
 						};
 					})
 					.filter((e) => e.minutesAgo >= 0)
