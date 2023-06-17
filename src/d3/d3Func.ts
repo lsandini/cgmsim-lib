@@ -1,16 +1,16 @@
 import { D3Node } from './d3Node';
-type SgvValueDataSource = {
+type ValueDataSource = {
 	key: number;
 	value: number;
 };
-export type SingleLineSgvDataSource = {
+export type SingleLineDataSource = {
 	type: 'single';
-	values: SgvValueDataSource[];
+	values: ValueDataSource[];
 };
 
-export type MultiLineSgvDataSource = {
+export type MultiLineDataSource = {
 	type: 'multiple';
-	values: Array<SgvValueDataSource>[];
+	values: Array<ValueDataSource>[];
 };
 
 export const output = async (dest, d3n: D3Node): Promise<any> => {
@@ -57,7 +57,7 @@ export const line = ({
 	tickPadding: _tickPadding = 5,
 	scaleY = false,
 }: {
-	data: MultiLineSgvDataSource | SingleLineSgvDataSource;
+	data: MultiLineDataSource | SingleLineDataSource;
 	selector: string;
 	container: string;
 	style: string;
@@ -104,7 +104,7 @@ export const line = ({
 				: d3.extent(data.values, (d) => d.value);
 		} else {
 			if (data.type === 'multiple') {
-				const firstRo: SgvValueDataSource[] =
+				const firstRo: ValueDataSource[] =
 					data.values.length > 0
 						? data.values[0]
 						: [{ key: 0, value: 0 }];
@@ -134,7 +134,7 @@ export const line = ({
 		});
 
 	const lineChart = d3
-		.line<SgvValueDataSource>()
+		.line<ValueDataSource>()
 		.x((d) => xScale(d.key))
 		.y((d) => yScale(d.value));
 

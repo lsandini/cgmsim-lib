@@ -47,8 +47,8 @@ export default function (treatments: Treatment[], weight: number): number {
 					.filter((e) => e.notes)
 					.map((e) => {
 						const lastIndexEmptySpace = e.notes.lastIndexOf(' ');
-						console.log(
-							'tou',
+						logger.debug(
+							'tou %o',
 							parseInt(e.notes.slice(lastIndexEmptySpace), 10)
 						);
 						return {

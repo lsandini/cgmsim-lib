@@ -1,5 +1,5 @@
 import moment = require('moment');
-import { MultiLineSgvDataSource, SingleLineSgvDataSource } from 'src/d3/d3Func';
+import { MultiLineDataSource, SingleLineDataSource } from 'src/d3/d3Func';
 import { Activity } from 'src/Types';
 const { output, line } = require('../src/d3/d3Func');
 
@@ -13,7 +13,7 @@ export const diffOptions = {
 };
 
 export const getPngSnapshot = async (
-    data: SingleLineSgvDataSource | MultiLineSgvDataSource,
+    data: SingleLineDataSource | MultiLineDataSource,
     options = {},
     name?: string
 ): Promise<Buffer> => {
@@ -23,11 +23,6 @@ export const getPngSnapshot = async (
     const dirBase = globalThis.dirBase;
     const fileBase = globalThis.fileBase;
     const filename = name || testDesc.replace(/[^a-z0-9]/gi, '_');
-
-    // console.log(data);
-
-    // create output files
-    const opts = {};
 
     const graph = line({
         data: data,

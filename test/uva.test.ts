@@ -12,29 +12,30 @@ import { diffOptions, getPngSnapshot } from './inputTest';
 const now = new Date('2022-05-01T11:00:00');
 const { toMatchImageSnapshot } = require('jest-image-snapshot');
 
-let entries: Sgv[];
-const math = global.Math;
-beforeEach(() => {
-    jest.useFakeTimers('modern');
-    jest.setSystemTime(now);
-    expect.extend({ toMatchImageSnapshot });
-    const mockMath = Object.create(global.Math);
-    mockMath.random = () => 0.5;
-    global.Math = mockMath;
-
-    entries = [];
-});
-
-afterAll(() => {
-    jest.useRealTimers();
-    global.Math = math;
-});
-const env: MainParamsUVA['env'] = {
-    AGE: '40',
-    GENDER: 'Male',
-    WEIGHT: '80',
-};
 describe('uva test default PATIENT', () => {
+    let entries: Sgv[];
+    const math = global.Math;
+    beforeEach(() => {
+        jest.useFakeTimers('modern');
+        jest.setSystemTime(now);
+        expect.extend({ toMatchImageSnapshot });
+        const mockMath = Object.create(global.Math);
+        mockMath.random = () => 0.5;
+        global.Math = mockMath;
+
+        entries = [];
+    });
+
+    afterAll(() => {
+        jest.useRealTimers();
+        global.Math = math;
+    });
+    const env: MainParamsUVA['env'] = {
+        AGE: '40',
+        GENDER: 'Male',
+        WEIGHT: '80',
+    };
+
     test('basal  0.75 from TREATMENTS should generate flat sgv', async () => {
         //current treatments generate 0.75U/h
         const treatments = [
