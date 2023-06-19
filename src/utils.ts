@@ -29,8 +29,7 @@ export function getInsulinActivity(
 	insulin: number
 ) {
 	const tau =
-		(peakMin * (1 - peakMin / durationMin)) /
-		(1 - (2 * peakMin) / durationMin);
+		(peakMin * (1 - peakMin / durationMin)) / (1 - (2 * peakMin) / durationMin);
 	const a = (2 * tau) / durationMin;
 	const S = 1 / (1 - a + (1 + a) * Math.exp(-durationMin / tau));
 	const activity =
@@ -54,8 +53,7 @@ export function getInsulinOnBoard(
 	insulin: number
 ) {
 	const tau =
-		(peakMin * (1 - peakMin / durationMin)) /
-		(1 - (2 * peakMin) / durationMin);
+		(peakMin * (1 - peakMin / durationMin)) / (1 - (2 * peakMin) / durationMin);
 	const a = (2 * tau) / durationMin;
 	const S = 1 / (1 - a + (1 + a) * Math.exp(-durationMin / tau));
 	const iob =

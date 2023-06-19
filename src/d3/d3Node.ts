@@ -83,7 +83,8 @@ export class D3Node {
 			.attr('xmlns', 'http://www.w3.org/2000/svg');
 
 		if (width && height) {
-			svg.attr('width', width)
+			svg
+				.attr('width', width)
 				.attr('height', height)
 				.attr('style', 'background-color:black; color:white;');
 		}
@@ -100,8 +101,7 @@ export class D3Node {
 		if ((this.d3Element.select('svg') as any).node()) {
 			// temp until: https://github.com/tmpvar/jsdom/issues/1368
 			return fixXmlCase(
-				((this.d3Element.select('svg') as any).node() as Element)
-					.outerHTML
+				((this.d3Element.select('svg') as any).node() as Element).outerHTML
 			);
 		}
 		return '';

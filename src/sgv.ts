@@ -8,12 +8,7 @@ import { getDeltaMinutes } from './utils';
 //const logger = pino();
 const sgv_start = (
 	entries: Sgv[],
-	{
-		basalActivity,
-		liverActivity,
-		carbsActivity,
-		bolusActivity,
-	}: CGMSimParams,
+	{ basalActivity, liverActivity, carbsActivity, bolusActivity }: CGMSimParams,
 	isf: number
 ) => {
 	const oldSgv = entries && entries[0] ? entries[0].sgv : 90;

@@ -8,12 +8,9 @@ export const peakBasal = {
 	DEG: (duration: number) => duration / 3,
 };
 export const durationBasal = {
-	GLA: (insulin: number, weight: number) =>
-		(22 + (12 * insulin) / weight) * 60,
-	DET: (insulin: number, weight: number) =>
-		(14 + (24 * insulin) / weight) * 60,
-	TOU: (insulin: number, weight: number) =>
-		(24 + (14 * insulin) / weight) * 60,
+	GLA: (insulin: number, weight: number) => (22 + (12 * insulin) / weight) * 60,
+	DET: (insulin: number, weight: number) => (14 + (24 * insulin) / weight) * 60,
+	TOU: (insulin: number, weight: number) => (24 + (14 * insulin) / weight) * 60,
 	DEG: () => 42 * 60,
 };
 
@@ -56,11 +53,7 @@ export default function (treatments: Treatment[], weight: number): number {
 							minutesAgo: getDeltaMinutes(e.created_at),
 							drug: e.notes.slice(0, 3),
 							// insulin: parseInt(e.notes.slice(-2))
-							insulin:
-								parseInt(
-									e.notes.slice(lastIndexEmptySpace),
-									10
-								) || 0,
+							insulin: parseInt(e.notes.slice(lastIndexEmptySpace), 10) || 0,
 						};
 					})
 					.filter((e) => e.minutesAgo >= 0)

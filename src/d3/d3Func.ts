@@ -18,9 +18,7 @@ export const output = async (dest, d3n: D3Node): Promise<any> => {
 
 	function eachGeoQuantize(d) {
 		const coords = d3.select(this).attr('d') || '';
-		const rounded = coords.replace(/[0-9]*\.[0-9]*/g, (x) =>
-			(+x).toFixed(4)
-		);
+		const rounded = coords.replace(/[0-9]*\.[0-9]*/g, (x) => (+x).toFixed(4));
 		d3.select(this).attr('d', rounded);
 	}
 
@@ -105,9 +103,7 @@ export const line = ({
 		} else {
 			if (data.type === 'multiple') {
 				const firstRo: ValueDataSource[] =
-					data.values.length > 0
-						? data.values[0]
-						: [{ key: 0, value: 0 }];
+					data.values.length > 0 ? data.values[0] : [{ key: 0, value: 0 }];
 				return d3.extent(firstRo, (d) => d.key);
 			}
 			return d3.extent(data.values, (d) => d.key);

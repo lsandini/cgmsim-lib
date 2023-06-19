@@ -230,10 +230,7 @@ function physicalStepsIsf(activities: (Activity & MinutesAgo)[]): number {
 		return tot + arr.steps;
 	}, 0);
 	logger.debug(`cumulativeSteps 7 days steps: %o`, cumulativeSteps);
-	logger.debug(
-		`means steps over 7 days: %o`,
-		Math.round(cumulativeSteps / 7)
-	);
+	logger.debug(`means steps over 7 days: %o`, Math.round(cumulativeSteps / 7));
 	let mean4hourSteps = Math.max(Math.round(cumulativeSteps / (7 * 4)), 1500);
 	logger.debug(`mean4hourSteps, min 1500: %o`, mean4hourSteps);
 

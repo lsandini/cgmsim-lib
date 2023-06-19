@@ -6,9 +6,7 @@ export default function (
 	isHttps: boolean = true,
 	instanceName = null
 ) {
-	const agent = isHttps
-		? new https.Agent({ rejectUnauthorized: false })
-		: null;
+	const agent = isHttps ? new https.Agent({ rejectUnauthorized: false }) : null;
 	const hash = createHash('sha1');
 	hash.update(apiSecret);
 

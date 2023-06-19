@@ -145,16 +145,10 @@ export class PatientUva {
 
 		// tissue glucose concentration
 		const D =
-			Math.pow(
-				params.Vm0 - params.k1 * Gpeq + params.Km0 * params.k2,
-				2
-			) +
+			Math.pow(params.Vm0 - params.k1 * Gpeq + params.Km0 * params.k2, 2) +
 			4 * params.k2 * params.Km0 * params.k1 * Gpeq;
 		const Gteq =
-			(-params.Vm0 +
-				params.k1 * Gpeq -
-				params.Km0 * params.k2 +
-				Math.sqrt(D)) /
+			(-params.Vm0 + params.k1 * Gpeq - params.Km0 * params.k2 + Math.sqrt(D)) /
 			2 /
 			params.k2;
 		const EGPeq = params.Fcns + params.k1 * Gpeq - params.k2 * Gteq;
@@ -290,22 +284,13 @@ export class PatientUva {
 		// declare vector of derivatives dx/dt
 		return {
 			// Gp [Dalla Man, JDST, 2014] (A1), [Dalla Man, IEEE TBME, 2007] (1)
-			Gp:
-				EGP +
-				Ra -
-				Uii -
-				E -
-				params.k1 * state.Gp +
-				params.k2 * state.Gt,
+			Gp: EGP + Ra - Uii - E - params.k1 * state.Gp + params.k2 * state.Gt,
 
 			// Gt [Dalla Man, JDST, 2014] (A1), [Dalla Man, IEEE TBME, 2007] (1)
 			Gt: -Uid + params.k1 * state.Gp - params.k2 * state.Gt,
 
 			// Ip [Dalla Man, JDST, 2014] (A2)
-			Ip:
-				-(params.m2 + params.m4) * state.Ip +
-				params.m1 * state.Il +
-				Rai,
+			Ip: -(params.m2 + params.m4) * state.Ip + params.m1 * state.Il + Rai,
 
 			// Il [Dalla Man, JDST, 2014] (A2)
 			Il: params.m2 * state.Ip - (params.m1 + m3) * state.Il,
@@ -326,14 +311,10 @@ export class PatientUva {
 			I_: -params.ki * (state.I_ - I),
 
 			// X [Dalla Man, JDST, 2014] (A11), [Dalla Man, IEEE TBME, 2007] (18)
-			X:
-				-params.p2u * state.X +
-				params.p2u * (I - this.xeq.Ip / params.VI),
+			X: -params.p2u * state.X + params.p2u * (I - this.xeq.Ip / params.VI),
 
 			// Isc1 [Dalla Man, JDST, 2014] (A16)
-			Isc1:
-				-(params.kd + params.ka1) * state.Isc1 +
-				(IIR + bolus) / params.BW,
+			Isc1: -(params.kd + params.ka1) * state.Isc1 + (IIR + bolus) / params.BW,
 
 			// Isc2 [Dalla Man, JDST, 2014] (A16)
 			Isc2: params.kd * state.Isc1 - params.ka2 * state.Isc2,

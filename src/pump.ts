@@ -23,9 +23,7 @@ function getProfileSwitch(treatments, duration) {
 		.forEach((tr) => {
 			if (tr.profileJson && tr.percentage) {
 				const start = moment(tr.created_at).utc();
-				const end = moment(tr.created_at)
-					.add(tr.duration, 'minutes')
-					.utc();
+				const end = moment(tr.created_at).add(tr.duration, 'minutes').utc();
 				const profile = JSON.parse(tr.profileJson);
 				if (Array.isArray(profile.basal)) {
 					const basals = profile.basal.map((pb) => ({
@@ -47,9 +45,7 @@ function getProfileSwitch(treatments, duration) {
 			} else {
 				const currentIndex = computedProfilesSwitch.length - 1;
 				if (currentIndex >= 0) {
-					computedProfilesSwitch[currentIndex].end = moment(
-						tr.created_at
-					);
+					computedProfilesSwitch[currentIndex].end = moment(tr.created_at);
 				}
 			}
 		});
@@ -77,9 +73,7 @@ function getTempBasal(treatments, duration) {
 		.forEach((b) => {
 			if (b.absolute !== undefined) {
 				const start = moment(b.created_at).utc();
-				const end = moment(b.created_at)
-					.add(b.duration, 'minutes')
-					.utc();
+				const end = moment(b.created_at).add(b.duration, 'minutes').utc();
 				computedTempBasal.push({
 					start,
 					insulin: b.absolute,
@@ -106,8 +100,7 @@ function getBasalFromProfiles(
 	if (activeProfiles && activeProfiles.length > 0) {
 		const activeProfile = activeProfiles[0];
 		const activeProfileName = activeProfile.defaultProfile;
-		const activeProfileBasals =
-			activeProfile.store[activeProfileName].basal;
+		const activeProfileBasals = activeProfile.store[activeProfileName].basal;
 		return activeBasalByTime(activeProfileBasals, currentAction);
 	}
 	return 0;
@@ -164,14 +157,10 @@ export default function (
 		currentAction.add(5, 'minutes')
 	) {
 		const tempBasalActives = computedTempBasal.filter(
-			(t) =>
-				t.start.diff(currentAction) <= 0 &&
-				t.end.diff(currentAction) > 0
+			(t) => t.start.diff(currentAction) <= 0 && t.end.diff(currentAction) > 0
 		);
 		const profilesStichActives = computedProfileSwitch.filter(
-			(t) =>
-				t.start.diff(currentAction) <= 0 &&
-				t.end.diff(currentAction) > 0
+			(t) => t.start.diff(currentAction) <= 0 && t.end.diff(currentAction) > 0
 		);
 		let basalToUpdate: { minutesAgo: number; insulin: number };
 		//if there is a temp basal actives
@@ -203,8 +192,7 @@ export default function (
 
 	const pumpBasalAct = basalAsBoluses.reduce(
 		(tot, entry) =>
-			tot +
-			getInsulinActivity(peak, duration, entry.minutesAgo, entry.insulin),
+			tot + getInsulinActivity(peak, duration, entry.minutesAgo, entry.insulin),
 		0
 	);
 	logger.debug("the pump's basal activity is: %o", pumpBasalAct);

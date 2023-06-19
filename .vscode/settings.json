@@ -55,5 +55,6 @@
 	},
 	"[typescript]": {
 		"editor.defaultFormatter": "esbenp.prettier-vscode"
-	}
+	},
+	"editor.indentSize": "tabSize"
 }
