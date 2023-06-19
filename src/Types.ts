@@ -85,6 +85,9 @@ export type CGMSimParams = {
 	carbsActivity: number;
 	bolusActivity: number;
 };
+export type UserParams = {
+	nsUrl: string;
+};
 export type MainParamsUVA = {
 	env: {
 		WEIGHT: string;
@@ -97,7 +100,7 @@ export type MainParamsUVA = {
 	entries: Sgv[];
 	pumpEnabled: boolean;
 	activities?: Activity[];
-	idUser:string;
+	user: UserParams;
 };
 export type MainParams = {
 	env: EnvParam;
@@ -106,7 +109,7 @@ export type MainParams = {
 	profiles: Profile[];
 	pumpEnabled?: boolean;
 	activities?: Activity[];
-	idUser:string;
+	user: UserParams;
 };
 export type SimulationResult = {
 	sgv: number;

@@ -13,7 +13,7 @@ const now = new Date('2022-05-01T11:00:00');
 const { toMatchImageSnapshot } = require('jest-image-snapshot');
 
 describe('uva test default PATIENT', () => {
-	const idUser='testUser';
+  const nsUrl = 'testUser';
   let entries: Sgv[];
   const math = global.Math;
   beforeEach(() => {
@@ -66,7 +66,7 @@ describe('uva test default PATIENT', () => {
         profiles: [],
         pumpEnabled: true,
         entries,
-				idUser,
+        user: { nsUrl },
       });
       yList.push(sgv);
       lastState = state;
@@ -115,7 +115,7 @@ describe('uva test default PATIENT', () => {
         profiles: profile,
         pumpEnabled: true,
         entries,
-				idUser,
+        user: { nsUrl },
       });
       yList.push(sgv);
       lastState = state;
@@ -173,7 +173,7 @@ describe('uva test default PATIENT', () => {
         profiles: profile,
         pumpEnabled: true,
         entries,
-				idUser,
+        user: { nsUrl },
       });
       yList.push(sgv);
       lastState = state;
@@ -246,7 +246,7 @@ describe('uva test default PATIENT', () => {
         profiles: profile,
         pumpEnabled: true,
         entries,
-				idUser,
+        user: { nsUrl },
       });
       yList.push(sgv);
       lastState = state;
@@ -312,7 +312,7 @@ describe('uva test default PATIENT', () => {
         profiles: profile,
         pumpEnabled: true,
         entries,
-				idUser,
+        user: { nsUrl },
       });
       yList.push(sgv);
       lastState = state;
@@ -363,7 +363,7 @@ describe('uva test default PATIENT', () => {
         profiles: profile,
         entries,
         pumpEnabled: true,
-				idUser,
+        user: { nsUrl },
       });
       yList.push(sgv);
       lastState = state;
@@ -438,7 +438,7 @@ describe('uva test default PATIENT', () => {
         entries,
         activities,
         pumpEnabled: true,
-				idUser,
+        user: { nsUrl },
       });
       yList.push(sgv);
       lastState = state;

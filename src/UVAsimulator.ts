@@ -33,9 +33,9 @@ const simulator = ({
 	entries,
 	pumpEnabled,
 	activities,
-	idUser
+	user
 }: MainParamsUVA) => {
-	logger.info('Run Init UVASimulator:%o', idUser);
+	logger.info('Run Init UVA NSUrl:%o', user.nsUrl);
 
 	if (!treatments) {
 		throw new Error('treatments is ' + treatments);

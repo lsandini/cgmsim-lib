@@ -8,7 +8,7 @@ const math = global.Math;
 
 describe('simulator test', () => {
   let date;
-	const idUser='testUser';
+  const nsUrl = 'testUser';
 
   beforeEach(() => {
     date = new Date('2022-05-29T22:10:00Z');
@@ -83,7 +83,7 @@ describe('simulator test', () => {
         entries,
         treatments,
         profiles: [],
-				idUser
+        user: { nsUrl },
       });
 
       entries.splice(0, 0, {
@@ -167,7 +167,7 @@ describe('simulator test', () => {
         entries,
         treatments,
         profiles: [],
-				idUser
+        user: { nsUrl },
       });
       entries.splice(0, 0, {
         mills: now.toDate().getTime(),
@@ -284,7 +284,7 @@ describe('simulator test', () => {
         entries,
         treatments,
         profiles: [],
-				idUser,
+        user: { nsUrl },
       });
       entries.splice(0, 0, {
         mills: now.toDate().getTime(),

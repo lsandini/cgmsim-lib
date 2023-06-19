@@ -20,9 +20,9 @@ const simulator = ({
 	profiles, //PUMP SIMULATION
 	pumpEnabled,
 	activities, //7-DAYS
-	idUser
+	user
 }: MainParams): SimulationResult => {
-	logger.info('Run Init CGMSimulator:%o', idUser);
+	logger.info('Run Init CGMSim NSUrl:%o', user.nsUrl);
 
 	if (!treatments) {
 		throw new Error('treatments is ' + treatments);
