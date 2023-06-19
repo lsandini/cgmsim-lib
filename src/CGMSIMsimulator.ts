@@ -12,7 +12,6 @@ import { MainParams, SimulationResult } from './Types';
 import moment = require('moment');
 import { physicalIsf, physicalLiver } from './physical';
 
-logger.debug('Run Init');
 
 const simulator = ({
 	env,
@@ -21,7 +20,10 @@ const simulator = ({
 	profiles, //PUMP SIMULATION
 	pumpEnabled,
 	activities, //7-DAYS
+	idUser
 }: MainParams): SimulationResult => {
+	logger.info('Run Init CGMSimulator:%o', idUser);
+
 	if (!treatments) {
 		throw new Error('treatments is ' + treatments);
 	}

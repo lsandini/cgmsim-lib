@@ -18,12 +18,12 @@ import {
 	UvaInterval,
 	UvaOutput,
 	UvaUserParams,
+
 } from './Types';
 import { PatientUva } from './uva';
 import RK4 from './SolverRK';
 import { currentIntensity } from './physical';
 
-logger.info('Run Init');
 
 const simulator = ({
 	env,
@@ -33,7 +33,10 @@ const simulator = ({
 	entries,
 	pumpEnabled,
 	activities,
+	idUser
 }: MainParamsUVA) => {
+	logger.info('Run Init UVASimulator:%o', idUser);
+
 	if (!treatments) {
 		throw new Error('treatments is ' + treatments);
 	}

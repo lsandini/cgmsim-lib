@@ -97,6 +97,7 @@ export type MainParamsUVA = {
 	entries: Sgv[];
 	pumpEnabled: boolean;
 	activities?: Activity[];
+	idUser:string;
 };
 export type MainParams = {
 	env: EnvParam;
@@ -105,6 +106,7 @@ export type MainParams = {
 	profiles: Profile[];
 	pumpEnabled?: boolean;
 	activities?: Activity[];
+	idUser:string;
 };
 export type SimulationResult = {
 	sgv: number;
