@@ -110,7 +110,7 @@ export default function (now: number) {
 		cosinus: COScorr,
 	};
 
-	logger.info('sin cosin curves result: %o', sinCurves);
+	logger.debug('sin cosin curves result: %o', sinCurves);
 
 	return sinCurves;
 }

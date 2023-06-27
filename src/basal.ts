@@ -81,9 +81,8 @@ export default function (treatments: Treatment[], weight: number): number {
 				peak,
 			};
 		});
-	logger.debug('these are the last GLA: %o', lastGLA);
 	const activityGLA = lastGLA.length > 0 ? computeBasalActivity(lastGLA) : 0;
-	logger.info('these is the total GLA activity: %o', activityGLA);
+	logger.debug('these are the last GLA: %o', { lastGLA, activityGLA });
 
 	const lastDET = lastBasals
 		.filter(function (e) {
@@ -103,10 +102,9 @@ export default function (treatments: Treatment[], weight: number): number {
 				peak,
 			};
 		});
-	logger.debug('these are the last DET: %o', lastDET);
 
 	const activityDET = lastDET.length ? computeBasalActivity(lastDET) : 0;
-	logger.info('these is the total DET activity: %o', activityDET);
+	logger.debug('these are the last DET: %o', { lastDET, activityDET });
 
 	const lastTOU = lastBasals
 		.filter(function (e) {
@@ -121,9 +119,8 @@ export default function (treatments: Treatment[], weight: number): number {
 				peak,
 			};
 		});
-	logger.debug('these are the last TOU: %o', lastTOU);
 	const activityTOU = lastTOU.length ? computeBasalActivity(lastTOU) : 0;
-	logger.info('these is the total TOU activity: %o', activityTOU);
+	logger.debug('these are the last TOU: %o', { lastTOU, activityTOU });
 
 	const lastDEG = lastBasals
 		.filter(function (e) {
@@ -143,9 +140,8 @@ export default function (treatments: Treatment[], weight: number): number {
 				peak,
 			};
 		});
-	logger.debug('these are the last deg: %o', lastDEG);
 	const activityDEG = lastDEG.length ? computeBasalActivity(lastDEG) : 0;
-	logger.info('these is the total deg activity: %o', activityDEG);
+	logger.debug('these are the last deg: %o', { lastDEG, activityDEG });
 
 	return activityDEG + activityDET + activityGLA + activityTOU;
 }

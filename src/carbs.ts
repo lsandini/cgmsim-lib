@@ -104,7 +104,7 @@ export default function carbs(
 	);
 	const DBGC = (isfMMol / cr) * totalCarbRate; //DeltaBloodGlucoseFromCarbs
 	logger.debug(`CARB RATE:%o`, totalCarbRate);
-	logger.info(`Delta blood Glucose From Carbs per minute:%o`, DBGC);
+	logger.debug(`Delta blood Glucose From Carbs per minute:%o`, DBGC);
 
 	return DBGC;
 }

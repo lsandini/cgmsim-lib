@@ -34,6 +34,6 @@ export default (
 		(tot, activity) => tot + activity,
 		0
 	);
-	logger.info('these are the insulins bolus activity: %o', bolusAct);
+	logger.debug('these are the insulins bolus activity: %o', bolusAct);
 	return bolusAct;
 };
