@@ -3,10 +3,12 @@ import * as moment from 'moment';
 import pino, { LevelWithSilent, TransportTargetOptions } from 'pino';
 import setupParams from './setupParams';
 import { Activity, Entry, Note, SimulationResult } from './Types';
-import * as dotenv from 'dotenv';
-dotenv.config({ path: __dirname+'/.env' });
+import { load } from 'ts-dotenv';
+const env = load({
+	LOGTAIL_SECRET: { type: String, optional: true },
+});
 
-const token: string = process.env.LOGTAIL_SECRET;
+const token: string = env.LOGTAIL_SECRET;
 const level: LevelWithSilent | string = process.env.LOG_LEVEL ?? 'error';
 
 const targets: TransportTargetOptions[] = [
