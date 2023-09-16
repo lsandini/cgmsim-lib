@@ -3,7 +3,8 @@ import * as moment from 'moment';
 import pino, { LevelWithSilent, TransportTargetOptions } from 'pino';
 import setupParams from './setupParams';
 import { Activity, Entry, Note, SimulationResult } from './Types';
-require(`dotenv`).config();
+import * as dotenv from 'dotenv';
+dotenv.config({ path: __dirname+'/.env' });
 
 const token: string = process.env.LOGTAIL_SECRET;
 const level: LevelWithSilent | string = process.env.LOG_LEVEL ?? 'error';
