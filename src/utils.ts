@@ -1,16 +1,34 @@
 import fetch from 'node-fetch';
 import * as moment from 'moment';
-import pino from 'pino';
+import pino, { LevelWithSilent, TransportTargetOptions } from 'pino';
 import setupParams from './setupParams';
 import { Activity, Entry, Note, SimulationResult } from './Types';
+require(`dotenv`).config();
 
-const logger = pino({
-	level: process.env.LOG_LEVEL ?? 'error',
-	transport: {
+const token: string = process.env.LOGTAIL_SECRET;
+const level: LevelWithSilent | string = process.env.LOG_LEVEL ?? 'error';
+
+const targets: TransportTargetOptions[] = [
+	{
 		target: 'pino-pretty',
 		options: {
 			colorize: true,
 		},
+		level,
+	},
+];
+if (token) {
+	targets.push({
+		target: '@logtail/pino',
+		options: { sourceToken: token },
+		level,
+	});
+}
+
+const logger = pino({
+	level,
+	transport: {
+		targets,
 	},
 });
 
