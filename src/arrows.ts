@@ -1,13 +1,29 @@
 import logger from './utils';
 import { Direction } from './Types';
 
-//const logger = pino();
-
+/**
+ * Calculates the direction of blood glucose change based on recent data.
+ * @param sgvLast - The most recent blood glucose value.
+ * @param sgv1 - Blood glucose value 5 minutes ago.
+ * @param sgv2 - Blood glucose value 10 minutes ago.
+ * @param sgv3 - Blood glucose value 15 minutes ago.
+ * @returns An object containing the direction of blood glucose change and the variation.
+ * @example
+ * // Calculate blood glucose direction based on recent data
+ * const sgvLast = 120;
+ * const sgv1 = 115;
+ * const sgv2 = 110;
+ * const sgv3 = 105;
+ *
+ * const result = calculateGlucoseDirection(sgvLast, sgv1, sgv2, sgv3);
+ * console.log("Blood glucose direction:", result.direction);
+ * console.log("Blood glucose variation:", result.sgvdir);
+ */
 export default function (
-	sgvLast,
-	sgv1,
-	sgv2,
-	sgv3
+	sgvLast: number,
+	sgv1: number,
+	sgv2: number,
+	sgv3: number
 ): { sgvdir: number; direction: Direction } {
 	if (sgvLast && sgv1 && sgv2 && sgv3) {
 		const sgvdir1 = sgvLast - sgv1;

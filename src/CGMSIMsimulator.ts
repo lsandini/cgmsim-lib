@@ -11,17 +11,21 @@ import pump from './pump';
 import { MainParams, SimulationResult } from './Types';
 import moment = require('moment');
 import { physicalIsf, physicalLiver } from './physical';
-
-
-const simulator = ({
-	env,
-	entries,
-	treatments,
-	profiles, //PUMP SIMULATION
-	pumpEnabled,
-	activities, //7-DAYS
-	user
-}: MainParams): SimulationResult => {
+/**
+ * Simulation module for blood glucose data calculation.
+ * @param params - Main parameters for running the simulation.
+ * @returns Simulation result containing blood glucose data and other parameters.
+ */
+const simulator = (params: MainParams): SimulationResult => {
+	const {
+		env,
+		entries,
+		treatments,
+		profiles, //PUMP SIMULATION
+		pumpEnabled,
+		activities, //7-DAYS
+		user,
+	} = params;
 	logger.info('Run Init CGMSim NSUrl:%o', user.nsUrl);
 
 	if (!treatments) {

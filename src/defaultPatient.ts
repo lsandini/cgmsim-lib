@@ -1,0 +1,45 @@
+// physiological model of virtual patient
+export const defaultPatient = {
+	BW: 75,
+	Gpeq: 100,
+	HRb: 60,
+	HRmax: 197, //220-age
+	VG: 1.88, // [Dalla Man, IEEE TBME, 2007]
+	k1: 0.065, // [Dalla Man, IEEE TBME, 2007]
+	k2: 0.079, // [Dalla Man, IEEE TBME, 2007]
+	VI: 0.05, // [Dalla Man, IEEE TBME, 2007]
+	m1: 0.19, // [Dalla Man, IEEE TBME, 2007]
+	m2: 0.484, // [Dalla Man, IEEE TBME, 2007]
+	m4: 0.194, // [Dalla Man, IEEE TBME, 2007]
+	m5: 0.0304, // [Dalla Man, IEEE TBME, 2007]
+	m6: 0.6471, // [Dalla Man, IEEE TBME, 2007]
+	HEeq: 0.6, // [Dalla Man, IEEE TBME, 2007]
+	kmax: 0.0558, // [Dalla Man, IEEE TBME, 2007]
+	kmin: 0.008, // [Dalla Man, IEEE TBME, 2007]
+	kabs: 0.057, // [Dalla Man, IEEE TBME, 2007]
+	kgri: 0.0558, // [Dalla Man, IEEE TBME, 2007]
+	f: 0.9, // [Dalla Man, IEEE TBME, 2007]
+	kp1: 2.7, // [Dalla Man, IEEE TBME, 2007]
+	kp2: 0.0021, // [Dalla Man, IEEE TBME, 2007]
+	kp3: 0.009, // [Dalla Man, IEEE TBME, 2007]
+	kp4: 0.0618, // [Dalla Man, IEEE TBME, 2007]
+	ki: 0.0079, // [Dalla Man, IEEE TBME, 2007]
+	Fcns: 1, // [Dalla Man, IEEE TBME, 2007]
+	Vm0: 2.5, // [Dalla Man, IEEE TBME, 2007]
+	Vmx: 0.047, // [Dalla Man, IEEE TBME, 2007]
+	Km0: 225.59, // [Dalla Man, IEEE TBME, 2007]
+	p2u: 0.0331, // [Dalla Man, IEEE TBME, 2007]
+	ke1: 0.0005, // [Dalla Man, IEEE TBME, 2007]
+	ke2: 339, // [Dalla Man, IEEE TBME, 2007]
+	ka1: 0.0018, // [Dalla Man, JDST, 2007]
+	ka2: 0.0182, // [Dalla Man, JDST, 2007]
+	kd: 0.0164, // [Dalla Man, JDST, 2007]
+	A: 0.0003, // [Dalla Man, JDST, 2009]
+	beta: 0.01, // [Dalla Man, JDST, 2009]
+	gamma: 1e-7, // [Dalla Man, JDST, 2009]
+	a: 0.1, // [Dalla Man, JDST, 2009]
+	Thr: 5, // [Dalla Man, JDST, 2009]
+	Tin: 1, // [Dalla Man, JDST, 2009]
+	Tex: 600, // [Dalla Man, JDST, 2009]
+	n: 4,
+};

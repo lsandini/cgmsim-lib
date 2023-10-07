@@ -6,10 +6,11 @@ import { Activity, Entry, Note, SimulationResult } from './Types';
 import { load } from 'ts-dotenv';
 const env = load({
 	LOGTAIL_SECRET: { type: String, optional: true },
+	LOG_LEVEL: { type: String, optional: true },
 });
 
 const token: string = env.LOGTAIL_SECRET;
-const level: LevelWithSilent | string = process.env.LOG_LEVEL ?? 'error';
+const level: LevelWithSilent | string = env.LOG_LEVEL ?? 'error';
 
 const targets: TransportTargetOptions[] = [
 	{
@@ -96,7 +97,7 @@ export function uploadBase(
 	nsUrlApi: string,
 	apiSecret: string,
 	instanceName?: string
-) {
+): Promise<void> {
 	const _isHttps = isHttps(nsUrlApi);
 
 	const { postParams } = setupParams(apiSecret, _isHttps, instanceName);

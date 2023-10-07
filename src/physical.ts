@@ -32,6 +32,23 @@ function getMaxHr(age: number, gender: GenderType) {
 	}
 	return MAX_HR;
 }
+/**
+ * Calculates the current intensity of physical activity based on user parameters.
+ * @param activities - Physical activity data.
+ * @param age - User's age.
+ * @param gender - User's gender.
+ * @returns Current intensity of physical activity as a percentage.
+ * @example
+ * // Calculate the current intensity of physical activity
+ * const activityData = [
+ *   // ... physical activity data ...
+ * ];
+ * const userAge = 30;
+ * const userGender = "Male";
+ *
+ * const intensity = currentIntensity(activityData, userAge, userGender);
+ * console.log("Current physical activity intensity:", intensity + "%");
+ */
 export function currentIntensity(
 	activities: Activity[],
 	age: number,

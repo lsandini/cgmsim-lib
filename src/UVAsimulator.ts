@@ -18,23 +18,59 @@ import {
 	UvaInterval,
 	UvaOutput,
 	UvaUserParams,
-
 } from './Types';
 import { PatientUva } from './uva';
 import RK4 from './SolverRK';
 import { currentIntensity } from './physical';
-
-
-const simulator = ({
-	env,
-	treatments,
-	profiles,
-	lastState,
-	entries,
-	pumpEnabled,
-	activities,
-	user
-}: MainParamsUVA) => {
+/**
+ * Simulates blood glucose levels in response to various parameters and inputs.
+ * @param params - Main parameters for running the simulation.
+ * @returns Simulation result containing blood glucose data and patient state.
+ * @example
+ * // Run a blood glucose simulation with specified parameters
+ * const simulationParams = {
+ *   env: {
+ *     WEIGHT: "70",
+ *     AGE: "35",
+ *     GENDER: "Male",
+ *     // ... other environment parameters ...
+ *   },
+ *   treatments: [
+ *     // ... treatment data ...
+ *   ],
+ *   profiles: [
+ *     // ... profile data ...
+ *   ],
+ *   lastState: {
+ *     // ... patient state data ...
+ *   },
+ *   entries: [
+ *     // ... blood glucose entry data ...
+ *   ],
+ *   pumpEnabled: true,
+ *   activities: [
+ *     // ... activity data ...
+ *   ],
+ *   user: {
+ *     nsUrl: "https://nightscout.example.com",
+ *     // ... other user-related data ...
+ *   },
+ * };
+ *
+ * const simulationResult = simulator(simulationParams);
+ * console.log("Blood glucose simulation result:", simulationResult);
+ */
+const simulator = (params: MainParamsUVA) => {
+	const {
+		env,
+		treatments,
+		profiles,
+		lastState,
+		entries,
+		pumpEnabled,
+		activities,
+		user,
+	} = params;
 	logger.info('Run Init UVA NSUrl:%o', user.nsUrl);
 
 	if (!treatments) {

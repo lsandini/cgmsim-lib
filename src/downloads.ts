@@ -2,8 +2,26 @@ import logger, { isHttps, removeTrailingSlash } from './utils';
 import setupParams from './setupParams';
 import { Profile, Sgv, Treatment } from './Types';
 import fetch from 'node-fetch';
-//const logger = pino();
-
+/**
+ * Downloads data from the Nightscout API, including treatments, profiles, and entries.
+ * @param nsUrl - Nightscout URL.
+ * @param apiSecret - Nightscout API secret.
+ * @param instanceName - Name of the Nightscout instance.
+ * @returns A promise that resolves with downloaded data.
+ * @example
+ * // Download data from Nightscout API
+ * const apiUrl = "https://nightscout.example.com";
+ * const apiSecret = "apiSecret123";
+ * const instanceName = "myInstance";
+ *
+ * downloads(apiUrl, apiSecret, instanceName)
+ *   .then((downloadedData) => {
+ *     console.log("Downloaded data:", downloadedData);
+ *   })
+ *   .catch((error) => {
+ *     console.error("Error downloading data:", error);
+ *   });
+ */
 const downloads = async (
 	nsUrl: string,
 	apiSecret: string,

@@ -22,14 +22,9 @@ export const oldCarbs = (meal, carbAbsTime) => {
   });
 
   var karbs = lastMeals;
-  var carbrate = 0;
-  var COB = 0;
 
-  // const carbAbsTime = parseInt(process.env.CARBS_ABS_TIME); // meal absoption time in min defautl 360 or 6 hours
   const fast_carbAbsTime = carbAbsTime / 6; // = 1 h or 60 min
   const slow_carbAbsTime = carbAbsTime / 1.5; // = 4 h or 240 min
-  const ISF = process.env.ISF; // insulin sensitivity factor in mmol/l/U, default 2
-  const CR = process.env.CR; // carb ratio in g/U, default 10
 
   let timeSinceMealAct = karbs.map((entry) => {
     var t = entry.time;

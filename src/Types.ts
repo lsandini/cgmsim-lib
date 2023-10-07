@@ -1,3 +1,6 @@
+/**
+ * Represents the direction of blood glucose change.
+ */
 export type Direction =
 	| 'DoubleDown'
 	| 'SingleDown'
@@ -7,6 +10,9 @@ export type Direction =
 	| 'SingleUp'
 	| 'DoubleUp';
 
+	/**
+ * Represents drug information.
+ */
 export type Drug = {
 	time: number;
 	drug: string;
@@ -15,34 +21,58 @@ export type Drug = {
 	empty_space: any;
 };
 
+/**
+ * Represents a note with associated notes.
+ */
 export type Note = {
 	type: 'Note';
 	notes: string;
 };
+
+/**
+ * Represents physical activity data.
+ */
 export type Activity = {
 	steps?: number;
 	heartRate?: number;
 	created_at: string;
 };
+
+/**
+ * Represents a blood glucose entry.
+ */
 export type Sgv = {
 	mills: number;
 	sgv: number;
 };
 
+/**
+ * Represents a blood glucose entry value type.
+ */
 export type EntryValueType = {
 	sgv: number;
 	direction: string;
 };
+
+/**
+ * Represents a blood glucose entry with additional date information.
+ */
 export type Entry = EntryValueType & {
 	date: number;
 	dateString: string;
 	type: 'sgv';
 };
 
+/**
+ * Represents parameters for a profile.
+ */
 export type ProfileParams = {
 	basal: number | { value: number; time: string; timeAsSecond?: number }[];
 };
 
+/**
+ * Represents a profile with associated profile parameters.
+ */
 export type Profile = {
 	startDate: string;
 	defaultProfile: string;
@@ -51,6 +81,9 @@ export type Profile = {
 	};
 };
 
+/**
+ * Represents treatment data.
+ */
 export type Treatment = {
 	absolute?: any;
 	duration?: number;
@@ -61,13 +94,22 @@ export type Treatment = {
 	carbs?: number;
 };
 
+/**
+ * Represents a treatment delta with additional minutes ago information.
+ */
 export type TreatmentDelta = Treatment & {
 	minutesAgo: number;
 	drug?: string;
 };
 
+/**
+ * Represents a gender type.
+ */
 export type GenderType = 'Male' | 'Female';
 
+/**
+ * Represents environmental parameters.
+ */
 export type EnvParam = {
 	CR: string;
 	ISF: string;
@@ -79,15 +121,27 @@ export type EnvParam = {
 	AGE: string;
 	GENDER: GenderType;
 };
+
+/**
+ * Represents parameters for a CGM simulation.
+ */
 export type CGMSimParams = {
 	basalActivity: number;
 	liverActivity: number;
 	carbsActivity: number;
 	bolusActivity: number;
 };
+
+/**
+ * Represents user parameters.
+ */
 export type UserParams = {
 	nsUrl: string;
 };
+
+/**
+ * Represents main parameters for a UVA simulation.
+ */
 export type MainParamsUVA = {
 	env: {
 		WEIGHT: string;
@@ -102,6 +156,10 @@ export type MainParamsUVA = {
 	activities?: Activity[];
 	user: UserParams;
 };
+
+/**
+ * Represents main parameters for a simulation.
+ */
 export type MainParams = {
 	env: EnvParam;
 	entries: Sgv[];
@@ -111,6 +169,10 @@ export type MainParams = {
 	activities?: Activity[];
 	user: UserParams;
 };
+
+/**
+ * Represents the result of a simulation.
+ */
 export type SimulationResult = {
 	sgv: number;
 	deltaMinutes: number;
@@ -122,10 +184,17 @@ export type SimulationResult = {
 	isf: { dynamic: number; constant: number };
 };
 
+/**
+ * Represents the output of a UVA simulation.
+ */
 export type UvaOutput = {
 	Gp: number;
 	G?: number;
 };
+
+/**
+ * Represents user parameters for a UVA simulation.
+ */
 export type UvaUserParams = {
 	// meal: number,
 	iir: number;
@@ -133,8 +202,19 @@ export type UvaUserParams = {
 	carbs: number;
 	intensity: number;
 };
+
+/**
+ * Represents a time delta for a UVA simulation.
+ */
 export type UvaDelta = 1;
+
+/**
+ * Represents an interval for a UVA simulation.
+ */
 export type UvaInterval = 5;
+/**
+ * Represents the state of a UVA patient.
+ */
 export type UvaPatientState = {
 	Gp: number;
 	Gt: number;
@@ -152,7 +232,9 @@ export type UvaPatientState = {
 	Z: number;
 	W: number;
 };
-
+/**
+ * Represents parameters for a UVA simulation.
+ */
 export type UvaParametersType = {
 	BW: number;
 	Gpeq: number;
