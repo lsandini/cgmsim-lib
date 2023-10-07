@@ -15,6 +15,7 @@
   },
   "scripts": {
     "build": "tsc -p tsconfig-build.json",
+    "doc": "typedoc",
     "lint": "eslint",
     "test": "jest"
   },
