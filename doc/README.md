@@ -64,7 +64,7 @@ console.log("Blood glucose variation:", result.sgvdir);
 
 #### Defined in
 
-[arrows.ts:22](https://github.com/lsandini/cgmsim-lib/blob/2af3f84/src/arrows.ts#L22)
+[arrows.ts:22](https://github.com/lsandini/cgmsim-lib/blob/272cb60/src/arrows.ts#L22)
 
 ___
 
@@ -105,7 +105,7 @@ downloads(apiUrl, apiSecret)
 
 #### Defined in
 
-[downloads.ts:23](https://github.com/lsandini/cgmsim-lib/blob/2af3f84/src/downloads.ts#L23)
+[downloads.ts:23](https://github.com/lsandini/cgmsim-lib/blob/272cb60/src/downloads.ts#L23)
 
 ___
 
@@ -148,7 +148,7 @@ loadActivityData(apiUrl, apiSecret, fromDate)
 
 #### Defined in
 
-[load-activity.ts:23](https://github.com/lsandini/cgmsim-lib/blob/2af3f84/src/load-activity.ts#L23)
+[load-activity.ts:23](https://github.com/lsandini/cgmsim-lib/blob/272cb60/src/load-activity.ts#L23)
 
 ___
 
@@ -172,7 +172,7 @@ Simulation result containing blood glucose data and other parameters.
 
 #### Defined in
 
-[CGMSIMsimulator.ts:19](https://github.com/lsandini/cgmsim-lib/blob/2af3f84/src/CGMSIMsimulator.ts#L19)
+[CGMSIMsimulator.ts:19](https://github.com/lsandini/cgmsim-lib/blob/272cb60/src/CGMSIMsimulator.ts#L19)
 
 ___
 
@@ -253,7 +253,7 @@ console.log("Blood glucose simulation result:", simulationResult);
 
 #### Defined in
 
-[UVAsimulator.ts:54](https://github.com/lsandini/cgmsim-lib/blob/2af3f84/src/UVAsimulator.ts#L54)
+[UVAsimulator.ts:54](https://github.com/lsandini/cgmsim-lib/blob/272cb60/src/UVAsimulator.ts#L54)
 
 ___
 
@@ -296,7 +296,7 @@ uploadActivity(activityData, "https://nightscout.example.com", "apiSecret123")
 
 #### Defined in
 
-[upload.ts:128](https://github.com/lsandini/cgmsim-lib/blob/2af3f84/src/upload.ts#L128)
+[upload.ts:128](https://github.com/lsandini/cgmsim-lib/blob/272cb60/src/upload.ts#L128)
 
 ___
 
@@ -339,7 +339,7 @@ uploadEntries(glucoseEntry, "https://nightscout.example.com", "apiSecret123")
 
 #### Defined in
 
-[upload.ts:91](https://github.com/lsandini/cgmsim-lib/blob/2af3f84/src/upload.ts#L91)
+[upload.ts:91](https://github.com/lsandini/cgmsim-lib/blob/272cb60/src/upload.ts#L91)
 
 ___
 
@@ -383,7 +383,7 @@ uploadLogs(simulationResult, "https://nightscout.example.com", "apiSecret123")
 
 #### Defined in
 
-[upload.ts:55](https://github.com/lsandini/cgmsim-lib/blob/2af3f84/src/upload.ts#L55)
+[upload.ts:55](https://github.com/lsandini/cgmsim-lib/blob/272cb60/src/upload.ts#L55)
 
 ___
 
@@ -422,4 +422,4 @@ uploadNotes("Important note", "https://nightscout.example.com", "apiSecret123")
 
 #### Defined in
 
-[upload.ts:24](https://github.com/lsandini/cgmsim-lib/blob/2af3f84/src/upload.ts#L24)
+[upload.ts:24](https://github.com/lsandini/cgmsim-lib/blob/272cb60/src/upload.ts#L24)

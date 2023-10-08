@@ -42,7 +42,7 @@ Represents physical activity data.
 
 #### Defined in
 
-[Types.ts:35](https://github.com/lsandini/cgmsim-lib/blob/2af3f84/src/Types.ts#L35)
+[Types.ts:35](https://github.com/lsandini/cgmsim-lib/blob/272cb60/src/Types.ts#L35)
 
 ___
 
@@ -54,7 +54,7 @@ Represents the direction of blood glucose change.
 
 #### Defined in
 
-[Types.ts:4](https://github.com/lsandini/cgmsim-lib/blob/2af3f84/src/Types.ts#L4)
+[Types.ts:4](https://github.com/lsandini/cgmsim-lib/blob/272cb60/src/Types.ts#L4)
 
 ___
 
@@ -66,7 +66,7 @@ Represents a blood glucose entry with additional date information.
 
 #### Defined in
 
-[Types.ts:60](https://github.com/lsandini/cgmsim-lib/blob/2af3f84/src/Types.ts#L60)
+[Types.ts:60](https://github.com/lsandini/cgmsim-lib/blob/272cb60/src/Types.ts#L60)
 
 ___
 
@@ -85,7 +85,7 @@ Represents a blood glucose entry value type.
 
 #### Defined in
 
-[Types.ts:52](https://github.com/lsandini/cgmsim-lib/blob/2af3f84/src/Types.ts#L52)
+[Types.ts:52](https://github.com/lsandini/cgmsim-lib/blob/272cb60/src/Types.ts#L52)
 
 ___
 
@@ -111,7 +111,7 @@ Represents environmental parameters.
 
 #### Defined in
 
-[Types.ts:113](https://github.com/lsandini/cgmsim-lib/blob/2af3f84/src/Types.ts#L113)
+[Types.ts:113](https://github.com/lsandini/cgmsim-lib/blob/272cb60/src/Types.ts#L113)
 
 ___
 
@@ -123,7 +123,7 @@ Represents a gender type.
 
 #### Defined in
 
-[Types.ts:108](https://github.com/lsandini/cgmsim-lib/blob/2af3f84/src/Types.ts#L108)
+[Types.ts:108](https://github.com/lsandini/cgmsim-lib/blob/272cb60/src/Types.ts#L108)
 
 ___
 
@@ -147,7 +147,7 @@ Represents main parameters for a simulation.
 
 #### Defined in
 
-[Types.ts:164](https://github.com/lsandini/cgmsim-lib/blob/2af3f84/src/Types.ts#L164)
+[Types.ts:164](https://github.com/lsandini/cgmsim-lib/blob/272cb60/src/Types.ts#L164)
 
 ___
 
@@ -176,7 +176,7 @@ Represents main parameters for a UVA simulation.
 
 #### Defined in
 
-[Types.ts:145](https://github.com/lsandini/cgmsim-lib/blob/2af3f84/src/Types.ts#L145)
+[Types.ts:145](https://github.com/lsandini/cgmsim-lib/blob/272cb60/src/Types.ts#L145)
 
 ___
 
@@ -195,7 +195,7 @@ Represents a note with associated notes.
 
 #### Defined in
 
-[Types.ts:27](https://github.com/lsandini/cgmsim-lib/blob/2af3f84/src/Types.ts#L27)
+[Types.ts:27](https://github.com/lsandini/cgmsim-lib/blob/272cb60/src/Types.ts#L27)
 
 ___
 
@@ -215,7 +215,7 @@ Represents a profile with associated profile parameters.
 
 #### Defined in
 
-[Types.ts:76](https://github.com/lsandini/cgmsim-lib/blob/2af3f84/src/Types.ts#L76)
+[Types.ts:76](https://github.com/lsandini/cgmsim-lib/blob/272cb60/src/Types.ts#L76)
 
 ___
 
@@ -233,7 +233,7 @@ Represents parameters for a profile.
 
 #### Defined in
 
-[Types.ts:69](https://github.com/lsandini/cgmsim-lib/blob/2af3f84/src/Types.ts#L69)
+[Types.ts:69](https://github.com/lsandini/cgmsim-lib/blob/272cb60/src/Types.ts#L69)
 
 ___
 
@@ -252,7 +252,7 @@ Represents a blood glucose entry.
 
 #### Defined in
 
-[Types.ts:44](https://github.com/lsandini/cgmsim-lib/blob/2af3f84/src/Types.ts#L44)
+[Types.ts:44](https://github.com/lsandini/cgmsim-lib/blob/272cb60/src/Types.ts#L44)
 
 ___
 
@@ -279,7 +279,7 @@ Represents the result of a simulation.
 
 #### Defined in
 
-[Types.ts:177](https://github.com/lsandini/cgmsim-lib/blob/2af3f84/src/Types.ts#L177)
+[Types.ts:177](https://github.com/lsandini/cgmsim-lib/blob/272cb60/src/Types.ts#L177)
 
 ___
 
@@ -303,7 +303,7 @@ Represents treatment data.
 
 #### Defined in
 
-[Types.ts:87](https://github.com/lsandini/cgmsim-lib/blob/2af3f84/src/Types.ts#L87)
+[Types.ts:87](https://github.com/lsandini/cgmsim-lib/blob/272cb60/src/Types.ts#L87)
 
 ___
 
@@ -321,7 +321,7 @@ Represents user parameters.
 
 #### Defined in
 
-[Types.ts:138](https://github.com/lsandini/cgmsim-lib/blob/2af3f84/src/Types.ts#L138)
+[Types.ts:138](https://github.com/lsandini/cgmsim-lib/blob/272cb60/src/Types.ts#L138)
 
 ___
 
@@ -380,7 +380,7 @@ Represents parameters for a UVA simulation.
 
 #### Defined in
 
-[Types.ts:239](https://github.com/lsandini/cgmsim-lib/blob/2af3f84/src/Types.ts#L239)
+[Types.ts:239](https://github.com/lsandini/cgmsim-lib/blob/272cb60/src/Types.ts#L239)
 
 ___
 
@@ -412,4 +412,4 @@ Represents the state of a UVA patient.
 
 #### Defined in
 
-[Types.ts:219](https://github.com/lsandini/cgmsim-lib/blob/2af3f84/src/Types.ts#L219)
+[Types.ts:219](https://github.com/lsandini/cgmsim-lib/blob/272cb60/src/Types.ts#L219)
