@@ -38,7 +38,7 @@ describe('uva test default PATIENT', () => {
     WEIGHT: '80',
   };
 
-  test('basal  0.75 from TREATMENTS (gla 30) should generate flat sgv', async () => {
+  test('basal  with gla 30 should generate flat sgv', async () => {
     //current treatments generate 0.75U/h
     const treatments = [
       {
