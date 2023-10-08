@@ -38,7 +38,7 @@ describe('uva test default PATIENT', () => {
     WEIGHT: '80',
   };
 
-  test('basal  0.75 from TREATMENTS should generate flat sgv', async () => {
+  test('basal  0.75 from TREATMENTS (gla 30) should generate flat sgv', async () => {
     //current treatments generate 0.75U/h
     const treatments = [
       {
@@ -59,7 +59,7 @@ describe('uva test default PATIENT', () => {
     ];
     let lastState = null;
     const yList = [];
-    for (let i = 0; i < 12; i++) {
+    for (let i = 0; i < 12 * 20; i++) {
       const { state, sgv } = simulatorUVA({
         env,
         lastState,
@@ -68,7 +68,7 @@ describe('uva test default PATIENT', () => {
         pumpEnabled: true,
         entries,
         user: { nsUrl },
-		defaultPatient
+        defaultPatient,
       });
       yList.push(sgv);
       lastState = state;
@@ -86,30 +86,21 @@ describe('uva test default PATIENT', () => {
     expect(png).toMatchImageSnapshot(diffOptions);
   });
 
-  test('basal 0.75 from PROFILE should generate flat sgv', async () => {
+  test('basal 0.70 from PROFILE should generate flat sgv', async () => {
     let lastState = null;
     const yList = [];
     const profile: Profile[] = [
       {
-        defaultProfile: 'pippo',
+        defaultProfile: 'foo',
         startDate: '2022-01-01',
         store: {
-          pippo: {
-            basal: 0.75,
-          },
-        },
-      },
-      {
-        defaultProfile: 'pippo2',
-        startDate: '2021-01-01',
-        store: {
-          pippo2: {
-            basal: 0.85,
+          foo: {
+            basal: 0.7,
           },
         },
       },
     ];
-    for (let i = 0; i < 12; i++) {
+    for (let i = 0; i < 12 * 24; i++) {
       const { state, sgv } = simulatorUVA({
         env,
         lastState,
@@ -118,7 +109,7 @@ describe('uva test default PATIENT', () => {
         pumpEnabled: true,
         entries,
         user: { nsUrl },
-		defaultPatient
+        defaultPatient,
       });
       yList.push(sgv);
       lastState = state;
@@ -141,19 +132,19 @@ describe('uva test default PATIENT', () => {
     const yList = [];
     const profile: Profile[] = [
       {
-        defaultProfile: 'pippo',
+        defaultProfile: 'foo',
         startDate: '2022-01-01',
         store: {
-          pippo: {
+          foo: {
             basal: 0.75,
           },
         },
       },
       {
-        defaultProfile: 'pippo2',
+        defaultProfile: 'foo2',
         startDate: '2021-01-01',
         store: {
-          pippo2: {
+          foo2: {
             basal: 0.85,
           },
         },
@@ -177,7 +168,7 @@ describe('uva test default PATIENT', () => {
         pumpEnabled: true,
         entries,
         user: { nsUrl },
-		defaultPatient
+        defaultPatient,
       });
       yList.push(sgv);
       lastState = state;
@@ -219,10 +210,10 @@ describe('uva test default PATIENT', () => {
     const yList = [];
     const profile: Profile[] = [
       {
-        defaultProfile: 'pippo',
+        defaultProfile: 'foo',
         startDate: '2022-01-01',
         store: {
-          pippo: {
+          foo: {
             basal: 0.75,
           },
         },
@@ -251,7 +242,7 @@ describe('uva test default PATIENT', () => {
         pumpEnabled: true,
         entries,
         user: { nsUrl },
-		defaultPatient
+        defaultPatient,
       });
       yList.push(sgv);
       lastState = state;
@@ -291,10 +282,10 @@ describe('uva test default PATIENT', () => {
     const yList = [];
     const profile: Profile[] = [
       {
-        defaultProfile: 'pippo',
+        defaultProfile: 'foo',
         startDate: '2022-01-01',
         store: {
-          pippo: {
+          foo: {
             basal: 0.75,
           },
         },
@@ -318,7 +309,7 @@ describe('uva test default PATIENT', () => {
         pumpEnabled: true,
         entries,
         user: { nsUrl },
-		defaultPatient
+        defaultPatient,
       });
       yList.push(sgv);
       lastState = state;
@@ -342,10 +333,10 @@ describe('uva test default PATIENT', () => {
     const yList = [];
     const profile: Profile[] = [
       {
-        defaultProfile: 'pippo',
+        defaultProfile: 'foo',
         startDate: '2022-01-01',
         store: {
-          pippo: {
+          foo: {
             basal: 0.79,
           },
         },
@@ -370,7 +361,7 @@ describe('uva test default PATIENT', () => {
         entries,
         pumpEnabled: true,
         user: { nsUrl },
-		defaultPatient
+        defaultPatient,
       });
       yList.push(sgv);
       lastState = state;
@@ -398,10 +389,10 @@ describe('uva test default PATIENT', () => {
     const yList = [];
     const profile: Profile[] = [
       {
-        defaultProfile: 'pippo',
+        defaultProfile: 'foo',
         startDate: '2022-01-01',
         store: {
-          pippo: {
+          foo: {
             basal: 0.75,
           },
         },
@@ -446,7 +437,7 @@ describe('uva test default PATIENT', () => {
         activities,
         pumpEnabled: true,
         user: { nsUrl },
-		defaultPatient
+        defaultPatient,
       });
       yList.push(sgv);
       lastState = state;
