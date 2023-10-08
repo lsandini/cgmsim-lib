@@ -1,7 +1,7 @@
-import { UvaParametersType } from './Types';
+import { UvaPatientType } from './Types';
 
 // physiological model of virtual patient
-export const defaultPatient: UvaParametersType = {
+export const defaultPatient: UvaPatientType = {
 	BW: 75,
 	Gpeq: 100,
 	HRb: 60,

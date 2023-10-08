@@ -6,7 +6,7 @@
 import {
 	UvaPatientState,
 	UvaOutput,
-	UvaParametersType,
+	UvaPatientType,
 	UvaUserParams,
 } from './Types';
 import { defaultPatient } from './defaultPatient';
@@ -28,13 +28,13 @@ export class PatientUva {
 		'HE',
 		'm3'
 	];
-	defaultParameters: UvaParametersType;
-	parameters: UvaParametersType;
+	defaultParameters: UvaPatientType;
+	parameters: UvaPatientType;
 	parameterList: string[];
 	xeq: UvaPatientState;
 	IIReq: number;
 
-	constructor(parameters: UvaParametersType) {
+	constructor(parameters: UvaPatientType) {
 		// // list of inputs used by this model
 		// this.inputList = ["meal", "iir", "ibolus"]
 

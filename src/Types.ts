@@ -155,7 +155,7 @@ export type MainParamsUVA = {
 	pumpEnabled: boolean;
 	activities?: Activity[];
 	user: UserParams;
-	defaultPatient: UvaParametersType;
+	defaultPatient: UvaPatientType;
 };
 
 /**
@@ -189,6 +189,9 @@ export type SimulationResult = {
  * Represents the output of a UVA simulation.
  */
 export type UvaOutput = {
+	/**
+	 * Glucose in plasma
+	 */
 	Gp: number;
 	G?: number;
 };
@@ -217,26 +220,71 @@ export type UvaInterval = 5;
  * Represents the state of a UVA patient.
  */
 export type UvaPatientState = {
+	/**
+	 * Glucose in plasma
+	 */
 	Gp: number;
+	/**
+	 * Glucose in tissue
+	 */
 	Gt: number;
+	/**
+	 * Insulin delay compartment 1
+	 */
 	I_: number;
+	/**
+	 * Insulin in liver
+	 */
 	Il: number;
+	/**
+	 * Insulin in plasma
+	 */
 	Ip: number;
+	/**
+	 * Subcutaneous insulin in compartment 1
+	 */
 	Isc1: number;
+	/**
+	 * Subcutaneous insulin in compartment 2
+	 */
 	Isc2: number;
+	/**
+	 * Glucose mass in intestine
+	 */
 	Qgut: number;
+	/**
+	 * Carbs in stomach, solid phase
+	 */
 	Qsto1: number;
+	/**
+	 * Carbs in stomach, liquid phase
+	 */
 	Qsto2: number;
+	/**
+	 * Insulin in the interstitial fluid
+	 */
 	X: number;
+	/**
+	 * Insulin delay compartment 2
+	 */
 	XL: number;
+	/**
+	 * Increased energy consumption estimated through heart rate
+	 */
 	Y: number;
+	/**
+	 * Exercise-induced changes in insulin sensitivity
+	 */
 	Z: number;
+	/**
+	 *
+	 */
 	W: number;
 };
 /**
  * Represents parameters for a UVA simulation.
  */
-export type UvaParametersType = {
+export type UvaPatientType = {
 	/**
 	 * Body weight.
 	 */
@@ -351,7 +399,7 @@ export type UvaParametersType = {
 	Km0: number;
 	/**
 	 * Insulin action on the peripheral glucose utilization.
-	*/
+	 */
 	p2u: number;
 	/**
 	 * Glomerular filtration rate.
