@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`uva test default PATIENT basal  0.75 from TREATMENTS (gla 30) should generate flat sgv 1`] = `
+exports[`uva test default PATIENT basal  with gla 30 should generate flat sgv 1`] = `
 Object {
   "Gp": 174.37004745786894,
   "Gt": 131.1799508421002,
@@ -20,7 +20,7 @@ Object {
 }
 `;
 
-exports[`uva test default PATIENT basal  0.75 from TREATMENTS (gla 30) should generate flat sgv 2`] = `
+exports[`uva test default PATIENT basal  with gla 30 should generate flat sgv 2`] = `
 Array [
   100.00004341832658,
   100.00063926368067,
