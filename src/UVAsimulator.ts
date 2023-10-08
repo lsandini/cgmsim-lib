@@ -1,16 +1,7 @@
 import logger, { getDeltaMinutes } from './utils';
 
-//const logger = pino();
-
-// import perlinRun from './perlin';
-// import bolus from './bolus';
 import basal from './basal';
 import basalProfile from './basalProfile';
-
-// import carbs from './carbs';
-// import arrowsRun from './arrows';
-// import liverRun from './liver';
-// import sgvStartRun from './sgv';
 import {
 	MainParamsUVA,
 	UvaPatientState,
@@ -70,7 +61,9 @@ const simulator = (params: MainParamsUVA) => {
 		pumpEnabled,
 		activities,
 		user,
+		defaultPatient
 	} = params;
+
 	logger.info('Run Init UVA NSUrl:%o', user.nsUrl);
 
 	if (!treatments) {
@@ -84,11 +77,6 @@ const simulator = (params: MainParamsUVA) => {
 	const age = parseInt(env.AGE);
 	const gender = env.GENDER;
 
-	// const dia = parseInt(env.DIA);
-	// const tp = parseInt(env.TP);
-	// const carbsAbs = parseInt(env.CARBS_ABS_TIME);
-	// const cr = parseInt(env.CR);
-	// const perls = perlinRun(env.SEED || 'cgmsim');
 	const basalActivity = basal(treatments, weight);
 
 	const last5MinuteTreatments = treatments
@@ -113,7 +101,7 @@ const simulator = (params: MainParamsUVA) => {
 
 	const basalProfileActivity = pumpEnabled ? basalProfile(profiles) : 0;
 
-	const patient = new PatientUva({});
+	const patient = new PatientUva(defaultPatient);
 	let partialMinutes = 0;
 	const fiveMinutes: UvaInterval = 5;
 	const oneMinute: UvaDelta = 1;

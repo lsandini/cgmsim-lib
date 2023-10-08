@@ -1,6 +1,6 @@
 @lsandini/cgmsim-lib
 
-# @lsandini/cgmsim-lib - v0.1.7
+# @lsandini/cgmsim-lib - v0.1.8
 
 ## Table of contents
 
@@ -64,13 +64,13 @@ console.log("Blood glucose variation:", result.sgvdir);
 
 #### Defined in
 
-[arrows.ts:22](https://github.com/lsandini/cgmsim-lib/blob/b266280/src/arrows.ts#L22)
+[arrows.ts:22](https://github.com/lsandini/cgmsim-lib/blob/2af3f84/src/arrows.ts#L22)
 
 ___
 
 ### downloads
 
-▸ **downloads**(`nsUrl`, `apiSecret`, `instanceName`): `Promise`<{ `entries`: [`Sgv`](modules/types.md#sgv)[] ; `profiles`: [`Profile`](modules/types.md#profile)[] ; `treatments`: [`Treatment`](modules/types.md#treatment)[]  }\>
+▸ **downloads**(`nsUrl`, `apiSecret`): `Promise`<{ `entries`: [`Sgv`](modules/types.md#sgv)[] ; `profiles`: [`Profile`](modules/types.md#profile)[] ; `treatments`: [`Treatment`](modules/types.md#treatment)[]  }\>
 
 Downloads data from the Nightscout API, including treatments, profiles, and entries.
 
@@ -80,7 +80,6 @@ Downloads data from the Nightscout API, including treatments, profiles, and entr
 | :------ | :------ | :------ |
 | `nsUrl` | `string` | Nightscout URL. |
 | `apiSecret` | `string` | Nightscout API secret. |
-| `instanceName` | `string` | Name of the Nightscout instance. |
 
 #### Returns
 
@@ -94,9 +93,8 @@ A promise that resolves with downloaded data.
 // Download data from Nightscout API
 const apiUrl = "https://nightscout.example.com";
 const apiSecret = "apiSecret123";
-const instanceName = "myInstance";
 
-downloads(apiUrl, apiSecret, instanceName)
+downloads(apiUrl, apiSecret)
   .then((downloadedData) => {
     console.log("Downloaded data:", downloadedData);
   })
@@ -107,7 +105,7 @@ downloads(apiUrl, apiSecret, instanceName)
 
 #### Defined in
 
-[downloads.ts:25](https://github.com/lsandini/cgmsim-lib/blob/b266280/src/downloads.ts#L25)
+[downloads.ts:23](https://github.com/lsandini/cgmsim-lib/blob/2af3f84/src/downloads.ts#L23)
 
 ___
 
@@ -150,7 +148,7 @@ loadActivityData(apiUrl, apiSecret, fromDate)
 
 #### Defined in
 
-[load-activity.ts:23](https://github.com/lsandini/cgmsim-lib/blob/b266280/src/load-activity.ts#L23)
+[load-activity.ts:23](https://github.com/lsandini/cgmsim-lib/blob/2af3f84/src/load-activity.ts#L23)
 
 ___
 
@@ -174,7 +172,7 @@ Simulation result containing blood glucose data and other parameters.
 
 #### Defined in
 
-[CGMSIMsimulator.ts:19](https://github.com/lsandini/cgmsim-lib/blob/b266280/src/CGMSIMsimulator.ts#L19)
+[CGMSIMsimulator.ts:19](https://github.com/lsandini/cgmsim-lib/blob/2af3f84/src/CGMSIMsimulator.ts#L19)
 
 ___
 
@@ -255,7 +253,7 @@ console.log("Blood glucose simulation result:", simulationResult);
 
 #### Defined in
 
-[UVAsimulator.ts:63](https://github.com/lsandini/cgmsim-lib/blob/b266280/src/UVAsimulator.ts#L63)
+[UVAsimulator.ts:54](https://github.com/lsandini/cgmsim-lib/blob/2af3f84/src/UVAsimulator.ts#L54)
 
 ___
 
@@ -298,13 +296,13 @@ uploadActivity(activityData, "https://nightscout.example.com", "apiSecret123")
 
 #### Defined in
 
-[upload.ts:134](https://github.com/lsandini/cgmsim-lib/blob/b266280/src/upload.ts#L134)
+[upload.ts:128](https://github.com/lsandini/cgmsim-lib/blob/2af3f84/src/upload.ts#L128)
 
 ___
 
 ### uploadEntries
 
-▸ **uploadEntries**(`cgmsim`, `nsUrl`, `apiSecret`, `instanceName`): `Promise`<`void`\>
+▸ **uploadEntries**(`cgmsim`, `nsUrl`, `apiSecret`): `Promise`<`void`\>
 
 Uploads entries (e.g., blood glucose readings) to the Nightscout API.
 
@@ -315,7 +313,6 @@ Uploads entries (e.g., blood glucose readings) to the Nightscout API.
 | `cgmsim` | [`EntryValueType`](modules/types.md#entryvaluetype) | The entry data to upload. |
 | `nsUrl` | `string` | Nightscout URL. |
 | `apiSecret` | `string` | Nightscout API secret. |
-| `instanceName` | `string` | Name of the Nightscout instance. |
 
 #### Returns
 
@@ -331,7 +328,7 @@ const glucoseEntry = {
   // ... glucose entry data ...
 };
 
-uploadEntries(glucoseEntry, "https://nightscout.example.com", "apiSecret123", "myInstance")
+uploadEntries(glucoseEntry, "https://nightscout.example.com", "apiSecret123")
   .then(() => {
     console.log("Blood glucose entry uploaded successfully.");
   })
@@ -342,13 +339,13 @@ uploadEntries(glucoseEntry, "https://nightscout.example.com", "apiSecret123", "m
 
 #### Defined in
 
-[upload.ts:96](https://github.com/lsandini/cgmsim-lib/blob/b266280/src/upload.ts#L96)
+[upload.ts:91](https://github.com/lsandini/cgmsim-lib/blob/2af3f84/src/upload.ts#L91)
 
 ___
 
 ### uploadLogs
 
-▸ **uploadLogs**(`simResult`, `nsUrl`, `apiSecret`, `instanceName`): `Promise`<`void`\>
+▸ **uploadLogs**(`simResult`, `nsUrl`, `apiSecret`): `Promise`<`void`\>
 
 Uploads logs to the Nightscout API.
 
@@ -359,7 +356,6 @@ Uploads logs to the Nightscout API.
 | `simResult` | [`SimulationResult`](modules/types.md#simulationresult) & { `notes`: `string`  } | Simulation result with attached notes. |
 | `nsUrl` | `string` | Nightscout URL. |
 | `apiSecret` | `string` | Nightscout API secret. |
-| `instanceName` | `string` | Name of the Nightscout instance. |
 
 #### Returns
 
@@ -376,7 +372,7 @@ const simulationResult = {
   notes: "Simulation complete",
 };
 
-uploadLogs(simulationResult, "https://nightscout.example.com", "apiSecret123", "myInstance")
+uploadLogs(simulationResult, "https://nightscout.example.com", "apiSecret123")
   .then(() => {
     console.log("Logs uploaded successfully.");
   })
@@ -387,13 +383,13 @@ uploadLogs(simulationResult, "https://nightscout.example.com", "apiSecret123", "
 
 #### Defined in
 
-[upload.ts:58](https://github.com/lsandini/cgmsim-lib/blob/b266280/src/upload.ts#L58)
+[upload.ts:55](https://github.com/lsandini/cgmsim-lib/blob/2af3f84/src/upload.ts#L55)
 
 ___
 
 ### uploadNotes
 
-▸ **uploadNotes**(`notes`, `nsUrl`, `apiSecret`, `instanceName`): `Promise`<`void`\>
+▸ **uploadNotes**(`notes`, `nsUrl`, `apiSecret`): `Promise`<`void`\>
 
 Uploads notes to the Nightscout API.
 
@@ -404,7 +400,6 @@ Uploads notes to the Nightscout API.
 | `notes` | `string` | The notes to upload. |
 | `nsUrl` | `string` | Nightscout URL. |
 | `apiSecret` | `string` | Nightscout API secret. |
-| `instanceName` | `string` | Name of the Nightscout instance. |
 
 #### Returns
 
@@ -416,7 +411,7 @@ A promise that resolves when the upload is complete.
 
 ```ts
 // Upload a note to Nightscout
-uploadNotes("Important note", "https://nightscout.example.com", "apiSecret123", "myInstance")
+uploadNotes("Important note", "https://nightscout.example.com", "apiSecret123")
   .then(() => {
     console.log("Note uploaded successfully.");
   })
@@ -427,4 +422,4 @@ uploadNotes("Important note", "https://nightscout.example.com", "apiSecret123", 
 
 #### Defined in
 
-[upload.ts:25](https://github.com/lsandini/cgmsim-lib/blob/b266280/src/upload.ts#L25)
+[upload.ts:24](https://github.com/lsandini/cgmsim-lib/blob/2af3f84/src/upload.ts#L24)

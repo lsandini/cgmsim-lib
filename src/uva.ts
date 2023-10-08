@@ -11,33 +11,7 @@ import {
 } from './Types';
 import { defaultPatient } from './defaultPatient';
 
-/*
-The model implemented in this file uses information from the following scientific sources:
-
-[Dalla Man, IEEE TBME, 2006]
-	Dalla Man, Ch.; Camilleri, M.; Cobelli, C.
-	"A System Model of Oral Glucose Absorption: Validation on Gold Standard Data"
-	IEEE Transactions on Biomedical Engineering, Volume 53, Number 12, December 2006
-
-[Dalla Man, JDST, 2007]
-	Dalla Man, Ch.; Raimondo, D.M.; Rizza, R. A.; Cobelli, C.
-	"GIM, Simulation Software of Meal Glucose-Insulin Model."
-	Journal of Diabetes Science and Technology, Volume 1, Issue 3, May 2007
-
-[Dalla Man, IEEE TBME, 2007]
-	Dalla Man, Ch.; Camilleri, M.; Cobelli, C.
-	"Meal Simulation Model of the Glucose-Insulin System"
-	IEEE Transactions on Biomedical Engineering, Volume 54, Number 10, October 2007
-
-[Dalla Man, JDST, 2014]
-	Dalla Man, Ch. et al.
-	"The UVA/PADOVA Type 1 Diabetes Simulator: New Features"
-	Journal of Diabetes Science and Technology, Volume 8, Issue 1, 2014
-
-// */
-
 const pmol_per_U = 6000;
-
 export class PatientUva {
 	readonly inputList: ['meal', 'iir', 'ibolus'];
 	readonly outputList: ['G'];
@@ -60,7 +34,7 @@ export class PatientUva {
 	xeq: UvaPatientState;
 	IIReq: number;
 
-	constructor(parameters: Partial<UvaParametersType>) {
+	constructor(parameters: UvaParametersType) {
 		// // list of inputs used by this model
 		// this.inputList = ["meal", "iir", "ibolus"]
 
@@ -70,17 +44,11 @@ export class PatientUva {
 		// // list of intermediate signals
 		// this.signalList = ["RaI", "E", "EGP", "Uid", "Uii", "I", "Qsto", "Ra", "S", "HE", "m3"]
 
-		// default parameters
-		this.defaultParameters = defaultPatient;
 
-		// load parameters handed over to this instance
-		if (typeof parameters === 'undefined') {
-			parameters = {};
-		}
-		this.parameters = { ...this.defaultParameters, ...parameters };
+		this.parameters = {...parameters };
 
 		// extract full list of parameters
-		this.parameterList = Object.keys(this.defaultParameters);
+		this.parameterList = Object.keys(this.parameters);
 
 		// compute equilibrium
 		this.computeSteadyState();

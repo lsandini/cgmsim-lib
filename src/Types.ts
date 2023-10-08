@@ -10,7 +10,7 @@ export type Direction =
 	| 'SingleUp'
 	| 'DoubleUp';
 
-	/**
+/**
  * Represents drug information.
  */
 export type Drug = {
@@ -155,6 +155,7 @@ export type MainParamsUVA = {
 	pumpEnabled: boolean;
 	activities?: Activity[];
 	user: UserParams;
+	defaultPatient: UvaParametersType;
 };
 
 /**
@@ -236,47 +237,172 @@ export type UvaPatientState = {
  * Represents parameters for a UVA simulation.
  */
 export type UvaParametersType = {
+	/**
+	 * Body weight.
+	 */
 	BW: number;
+	/**
+	 * Steady-state of glucose in plasma.
+	 */
 	Gpeq: number;
+	/**
+	 * Heart rate at rest.
+	 */
 	HRb: number;
+	/**
+	 * Maximal heart rate (220-age).
+	 */
 	HRmax: number; //220-age
-
-	VG: number; // [Dalla Man, IEEE TBME, 2007]
-	k1: number; // [Dalla Man, IEEE TBME, 2007]
-	k2: number; // [Dalla Man, IEEE TBME, 2007]
-	VI: number; // [Dalla Man, IEEE TBME, 2007]
-	m1: number; // [Dalla Man, IEEE TBME, 2007]
-	m2: number; // [Dalla Man, IEEE TBME, 2007]
-	m4: number; // [Dalla Man, IEEE TBME, 2007]
-	m5: number; // [Dalla Man, IEEE TBME, 2007]
-	m6: number; // [Dalla Man, IEEE TBME, 2007]
-	HEeq: number; // [Dalla Man, IEEE TBME, 2007]
-	kmax: number; // [Dalla Man, IEEE TBME, 2007]
-	kmin: number; // [Dalla Man, IEEE TBME, 2007]
-	kabs: number; // [Dalla Man, IEEE TBME, 2007]
-	kgri: number; // [Dalla Man, IEEE TBME, 2007]
-	f: number; // [Dalla Man, IEEE TBME, 2007]
-	kp1: number; // [Dalla Man, IEEE TBME, 2007]
-	kp2: number; // [Dalla Man, IEEE TBME, 2007]
-	kp3: number; // [Dalla Man, IEEE TBME, 2007]
-	kp4: number; // [Dalla Man, IEEE TBME, 2007]
-	ki: number; // [Dalla Man, IEEE TBME, 2007]
-	Fcns: number; // [Dalla Man, IEEE TBME, 2007]
-	Vm0: number; // [Dalla Man, IEEE TBME, 2007]
-	Vmx: number; // [Dalla Man, IEEE TBME, 2007]
-	Km0: number; // [Dalla Man, IEEE TBME, 2007]
-	p2u: number; // [Dalla Man, IEEE TBME, 2007]
-	ke1: number; // [Dalla Man, IEEE TBME, 2007]
-	ke2: number; // [Dalla Man, IEEE TBME, 2007]
+	/**
+	 * Distribution volume of glucose.
+	 */
+	VG: number;
+	/**
+	 * Rate parameter from Gp to Gt.
+	 */
+	k1: number;
+	/**
+	 * Rate parameter from Gt to Gp.
+	 */
+	k2: number;
+	/**
+	 * Distribution volume of insulin.
+	 */
+	VI: number;
+	/**
+	 * Rate parameter from Il to Ip.
+	 */
+	m1: number;
+	/**
+	 * Rate parameter from Ip to Il.
+	 */
+	m2: number;
+	/**
+	 * Rate parameter from Ip to periphery.
+	 */
+	m4: number;
+	/**
+	 * Rate parameter of hepatic extraction (slope).
+	 */
+	m5: number;
+	/**
+	 * Rate parameter of hepatic extraction (offset).
+	 */
+	m6: number;
+	/**
+	 * Steady-state hepatic extraction of insulin.
+	 */
+	HEeq: number;
+	/**
+	 * Maximal emptying rate of stomach.
+	 */
+	kmax: number;
+	/**
+	 * Minimal emptying rate of stomach.
+	 */
+	kmin: number;
+	/**
+	 * Rate constant of intestinal absorption.
+	 */
+	kabs: number;
+	/**
+	 * Rate of grinding.
+	 */
+	kgri: number;
+	/**
+	 * Fraction of intestinal absorption.
+	 */
+	f: number;
+	/**
+	 * Extrapolated at zero glucose and insulin.
+	 */
+	kp1: number;
+	/**
+	 * Liver glucose effectiveness.
+	 */
+	kp2: number;
+	/**
+	 * Amplitude of insulin action on the liver.
+	 */
+	kp3: number;
+	/**
+	 * Amplitude of portal insulin action on the liver.
+	 */
+	kp4: number;
+	/**
+	 * Delay between insulin signal and insulin action.
+	 */
+	ki: number;
+	/**
+	 * Glucose uptake by the brain and erythrocytes.
+	 */
+	Fcns: number;
+	/**
+	 * Michaelis-Menten constant (offset).
+	 */
+	Vm0: number;
+	/**
+	 * Michaelis-Menten constant (slope).
+	 */
+	Vmx: number;
+	/**
+	 * Michaelis-Menten constant (offset).
+	 */
+	Km0: number;
+	/**
+	 * Insulin action on the peripheral glucose utilization.
+	*/
+	p2u: number;
+	/**
+	 * Glomerular filtration rate.
+	 */
+	ke1: number;
+	/**
+	 * Renal threshold of glucose.
+	 */
+	ke2: number;
+	/**
+	 * Rate constant of nonmonomeric insulin absorption.
+	 */
 	ka1: number; // [Dalla Man, JDST, 2007]
+	/**
+	 * Rate constant of monomeric insulin absorption.
+	 */
 	ka2: number; // [Dalla Man, JDST, 2007]
+	/**
+	 * Rate constant of insulin dissociation.
+	 */
 	kd: number;
+	/**
+	 * Factor for exercise-induced increase in insulin sensitivity
+	 */
 	A: number; // [Dalla Man, JDST, 2009]
+	/**
+	 * Factor for exercise-induced increase in insulin-independent glucose clearance
+	 */
 	beta: number; // [Dalla Man, JDST, 2009]
+	/**
+	 * Factor for exercise-induced increase in glucose uptake
+	 */
 	gamma: number; // [Dalla Man, JDST, 2009]
+	/**
+	 * Parameter for calculating Z
+	 */
 	a: number; // [Dalla Man, JDST, 2009]
+	/**
+	 * Time constant for Y
+	 */
 	Thr: number; // [Dalla Man, JDST, 2009]
+	/**
+	 * Time constant for Z
+	 */
 	Tin: number; // [Dalla Man, JDST, 2009]
+	/**
+	 * Time constant for Z
+	 */
 	Tex: number; // [Dalla Man, JDST, 2009]
+	/**
+	 * Parameter for calculating Z
+	 */
 	n: number; // [Dalla Man, JDST, 2009]
 };

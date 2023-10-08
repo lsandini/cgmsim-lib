@@ -10,11 +10,10 @@ import { Note } from './Types';
  * @param notes - The notes to upload.
  * @param nsUrl - Nightscout URL.
  * @param apiSecret - Nightscout API secret.
- * @param instanceName - Name of the Nightscout instance.
  * @returns A promise that resolves when the upload is complete.
  * @example
  * // Upload a note to Nightscout
- * uploadNotes("Important note", "https://nightscout.example.com", "apiSecret123", "myInstance")
+ * uploadNotes("Important note", "https://nightscout.example.com", "apiSecret123")
  *   .then(() => {
  *     console.log("Note uploaded successfully.");
  *   })
@@ -26,19 +25,17 @@ export function uploadNotes(
 	notes: string,
 	nsUrl: string,
 	apiSecret: string,
-	instanceName: string
 ) {
 	const _nsUrl = removeTrailingSlash(nsUrl);
 	const api_url = _nsUrl + '/api/v1/treatments/';
 	const noteTreatment: Note = { type: 'Note', notes };
-	return uploadBase(noteTreatment, api_url, apiSecret, instanceName);
+	return uploadBase(noteTreatment, api_url, apiSecret);
 }
 /**
  * Uploads logs to the Nightscout API.
  * @param simResult - Simulation result with attached notes.
  * @param nsUrl - Nightscout URL.
  * @param apiSecret - Nightscout API secret.
- * @param instanceName - Name of the Nightscout instance.
  * @returns A promise that resolves when the upload is complete.
  * @example
  * // Upload simulation logs to Nightscout
@@ -47,7 +44,7 @@ export function uploadNotes(
  *   notes: "Simulation complete",
  * };
  *
- * uploadLogs(simulationResult, "https://nightscout.example.com", "apiSecret123", "myInstance")
+ * uploadLogs(simulationResult, "https://nightscout.example.com", "apiSecret123")
  *   .then(() => {
  *     console.log("Logs uploaded successfully.");
  *   })
@@ -59,7 +56,6 @@ export function uploadLogs(
 	simResult: SimulationResult & { notes: string },
 	nsUrl: string,
 	apiSecret: string,
-	instanceName: string
 ) {
 	const _nsUrl = removeTrailingSlash(nsUrl);
 	const api_url = _nsUrl + '/api/v1/treatments/';
@@ -70,14 +66,13 @@ export function uploadLogs(
 		dateString: now.toISOString(),
 		date: now.toDate().getTime(),
 	};
-	return uploadBase(sim, api_url, apiSecret, instanceName);
+	return uploadBase(sim, api_url, apiSecret);
 }
 /**
  * Uploads entries (e.g., blood glucose readings) to the Nightscout API.
  * @param cgmsim - The entry data to upload.
  * @param nsUrl - Nightscout URL.
  * @param apiSecret - Nightscout API secret.
- * @param instanceName - Name of the Nightscout instance.
  * @returns A promise that resolves when the upload is complete.
  * @example
  * // Upload a blood glucose entry to Nightscout
@@ -85,7 +80,7 @@ export function uploadLogs(
  *   // ... glucose entry data ...
  * };
  *
- * uploadEntries(glucoseEntry, "https://nightscout.example.com", "apiSecret123", "myInstance")
+ * uploadEntries(glucoseEntry, "https://nightscout.example.com", "apiSecret123")
  *   .then(() => {
  *     console.log("Blood glucose entry uploaded successfully.");
  *   })
@@ -97,7 +92,6 @@ export function uploadEntries(
 	cgmsim: EntryValueType,
 	nsUrl: string,
 	apiSecret: string,
-	instanceName: string
 ) {
 	const _nsUrl = removeTrailingSlash(nsUrl);
 	const api_url = _nsUrl + '/api/v1/entries/';
@@ -108,7 +102,7 @@ export function uploadEntries(
 		dateString: now.toISOString(),
 		date: now.toDate().getTime(),
 	};
-	return uploadBase(entry, api_url, apiSecret, instanceName);
+	return uploadBase(entry, api_url, apiSecret);
 }
 
 /**

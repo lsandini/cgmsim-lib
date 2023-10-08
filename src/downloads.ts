@@ -6,15 +6,13 @@ import fetch from 'node-fetch';
  * Downloads data from the Nightscout API, including treatments, profiles, and entries.
  * @param nsUrl - Nightscout URL.
  * @param apiSecret - Nightscout API secret.
- * @param instanceName - Name of the Nightscout instance.
  * @returns A promise that resolves with downloaded data.
  * @example
  * // Download data from Nightscout API
  * const apiUrl = "https://nightscout.example.com";
  * const apiSecret = "apiSecret123";
- * const instanceName = "myInstance";
  *
- * downloads(apiUrl, apiSecret, instanceName)
+ * downloads(apiUrl, apiSecret)
  *   .then((downloadedData) => {
  *     console.log("Downloaded data:", downloadedData);
  *   })
@@ -25,12 +23,11 @@ import fetch from 'node-fetch';
 const downloads = async (
 	nsUrl: string,
 	apiSecret: string,
-	instanceName: string
 ) => {
 	const _nsUrl = removeTrailingSlash(nsUrl);
 	const _isHttps = isHttps(nsUrl);
 
-	const { getParams } = setupParams(apiSecret, _isHttps, instanceName);
+	const { getParams } = setupParams(apiSecret, _isHttps);
 	const api_url = _nsUrl + '/api/v1/treatments?count=600';
 	const api_profile = _nsUrl + '/api/v1/profile.json';
 	const api_sgv = _nsUrl + '/api/v1/entries/sgv.json';

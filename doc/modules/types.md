@@ -1,4 +1,4 @@
-[@lsandini/cgmsim-lib - v0.1.7](../README.md) / types
+[@lsandini/cgmsim-lib - v0.1.8](../README.md) / types
 
 # Module: types
 
@@ -21,6 +21,7 @@
 - [SimulationResult](types.md#simulationresult)
 - [Treatment](types.md#treatment)
 - [UserParams](types.md#userparams)
+- [UvaParametersType](types.md#uvaparameterstype)
 - [UvaPatientState](types.md#uvapatientstate)
 
 ## Type Aliases
@@ -41,7 +42,7 @@ Represents physical activity data.
 
 #### Defined in
 
-[Types.ts:35](https://github.com/lsandini/cgmsim-lib/blob/b266280/src/Types.ts#L35)
+[Types.ts:35](https://github.com/lsandini/cgmsim-lib/blob/2af3f84/src/Types.ts#L35)
 
 ___
 
@@ -53,7 +54,7 @@ Represents the direction of blood glucose change.
 
 #### Defined in
 
-[Types.ts:4](https://github.com/lsandini/cgmsim-lib/blob/b266280/src/Types.ts#L4)
+[Types.ts:4](https://github.com/lsandini/cgmsim-lib/blob/2af3f84/src/Types.ts#L4)
 
 ___
 
@@ -65,7 +66,7 @@ Represents a blood glucose entry with additional date information.
 
 #### Defined in
 
-[Types.ts:60](https://github.com/lsandini/cgmsim-lib/blob/b266280/src/Types.ts#L60)
+[Types.ts:60](https://github.com/lsandini/cgmsim-lib/blob/2af3f84/src/Types.ts#L60)
 
 ___
 
@@ -84,7 +85,7 @@ Represents a blood glucose entry value type.
 
 #### Defined in
 
-[Types.ts:52](https://github.com/lsandini/cgmsim-lib/blob/b266280/src/Types.ts#L52)
+[Types.ts:52](https://github.com/lsandini/cgmsim-lib/blob/2af3f84/src/Types.ts#L52)
 
 ___
 
@@ -110,7 +111,7 @@ Represents environmental parameters.
 
 #### Defined in
 
-[Types.ts:113](https://github.com/lsandini/cgmsim-lib/blob/b266280/src/Types.ts#L113)
+[Types.ts:113](https://github.com/lsandini/cgmsim-lib/blob/2af3f84/src/Types.ts#L113)
 
 ___
 
@@ -122,7 +123,7 @@ Represents a gender type.
 
 #### Defined in
 
-[Types.ts:108](https://github.com/lsandini/cgmsim-lib/blob/b266280/src/Types.ts#L108)
+[Types.ts:108](https://github.com/lsandini/cgmsim-lib/blob/2af3f84/src/Types.ts#L108)
 
 ___
 
@@ -146,7 +147,7 @@ Represents main parameters for a simulation.
 
 #### Defined in
 
-[Types.ts:163](https://github.com/lsandini/cgmsim-lib/blob/b266280/src/Types.ts#L163)
+[Types.ts:164](https://github.com/lsandini/cgmsim-lib/blob/2af3f84/src/Types.ts#L164)
 
 ___
 
@@ -161,6 +162,7 @@ Represents main parameters for a UVA simulation.
 | Name | Type |
 | :------ | :------ |
 | `activities?` | [`Activity`](types.md#activity)[] |
+| `defaultPatient` | [`UvaParametersType`](types.md#uvaparameterstype) |
 | `entries` | [`Sgv`](types.md#sgv)[] |
 | `env` | { `AGE`: `string` ; `GENDER`: [`GenderType`](types.md#gendertype) ; `WEIGHT`: `string`  } |
 | `env.AGE` | `string` |
@@ -174,7 +176,7 @@ Represents main parameters for a UVA simulation.
 
 #### Defined in
 
-[Types.ts:145](https://github.com/lsandini/cgmsim-lib/blob/b266280/src/Types.ts#L145)
+[Types.ts:145](https://github.com/lsandini/cgmsim-lib/blob/2af3f84/src/Types.ts#L145)
 
 ___
 
@@ -193,7 +195,7 @@ Represents a note with associated notes.
 
 #### Defined in
 
-[Types.ts:27](https://github.com/lsandini/cgmsim-lib/blob/b266280/src/Types.ts#L27)
+[Types.ts:27](https://github.com/lsandini/cgmsim-lib/blob/2af3f84/src/Types.ts#L27)
 
 ___
 
@@ -213,7 +215,7 @@ Represents a profile with associated profile parameters.
 
 #### Defined in
 
-[Types.ts:76](https://github.com/lsandini/cgmsim-lib/blob/b266280/src/Types.ts#L76)
+[Types.ts:76](https://github.com/lsandini/cgmsim-lib/blob/2af3f84/src/Types.ts#L76)
 
 ___
 
@@ -231,7 +233,7 @@ Represents parameters for a profile.
 
 #### Defined in
 
-[Types.ts:69](https://github.com/lsandini/cgmsim-lib/blob/b266280/src/Types.ts#L69)
+[Types.ts:69](https://github.com/lsandini/cgmsim-lib/blob/2af3f84/src/Types.ts#L69)
 
 ___
 
@@ -250,7 +252,7 @@ Represents a blood glucose entry.
 
 #### Defined in
 
-[Types.ts:44](https://github.com/lsandini/cgmsim-lib/blob/b266280/src/Types.ts#L44)
+[Types.ts:44](https://github.com/lsandini/cgmsim-lib/blob/2af3f84/src/Types.ts#L44)
 
 ___
 
@@ -277,7 +279,7 @@ Represents the result of a simulation.
 
 #### Defined in
 
-[Types.ts:176](https://github.com/lsandini/cgmsim-lib/blob/b266280/src/Types.ts#L176)
+[Types.ts:177](https://github.com/lsandini/cgmsim-lib/blob/2af3f84/src/Types.ts#L177)
 
 ___
 
@@ -301,7 +303,7 @@ Represents treatment data.
 
 #### Defined in
 
-[Types.ts:87](https://github.com/lsandini/cgmsim-lib/blob/b266280/src/Types.ts#L87)
+[Types.ts:87](https://github.com/lsandini/cgmsim-lib/blob/2af3f84/src/Types.ts#L87)
 
 ___
 
@@ -319,7 +321,66 @@ Represents user parameters.
 
 #### Defined in
 
-[Types.ts:138](https://github.com/lsandini/cgmsim-lib/blob/b266280/src/Types.ts#L138)
+[Types.ts:138](https://github.com/lsandini/cgmsim-lib/blob/2af3f84/src/Types.ts#L138)
+
+___
+
+### UvaParametersType
+
+Ƭ **UvaParametersType**: `Object`
+
+Represents parameters for a UVA simulation.
+
+#### Type declaration
+
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `A` | `number` | Factor for exercise-induced increase in insulin sensitivity |
+| `BW` | `number` | Body weight. |
+| `Fcns` | `number` | Glucose uptake by the brain and erythrocytes. |
+| `Gpeq` | `number` | Steady-state of glucose in plasma. |
+| `HEeq` | `number` | Steady-state hepatic extraction of insulin. |
+| `HRb` | `number` | Heart rate at rest. |
+| `HRmax` | `number` | Maximal heart rate (220-age). |
+| `Km0` | `number` | Michaelis-Menten constant (offset). |
+| `Tex` | `number` | Time constant for Z |
+| `Thr` | `number` | Time constant for Y |
+| `Tin` | `number` | Time constant for Z |
+| `VG` | `number` | Distribution volume of glucose. |
+| `VI` | `number` | Distribution volume of insulin. |
+| `Vm0` | `number` | Michaelis-Menten constant (offset). |
+| `Vmx` | `number` | Michaelis-Menten constant (slope). |
+| `a` | `number` | Parameter for calculating Z |
+| `beta` | `number` | Factor for exercise-induced increase in insulin-independent glucose clearance |
+| `f` | `number` | Fraction of intestinal absorption. |
+| `gamma` | `number` | Factor for exercise-induced increase in glucose uptake |
+| `k1` | `number` | Rate parameter from Gp to Gt. |
+| `k2` | `number` | Rate parameter from Gt to Gp. |
+| `ka1` | `number` | Rate constant of nonmonomeric insulin absorption. |
+| `ka2` | `number` | Rate constant of monomeric insulin absorption. |
+| `kabs` | `number` | Rate constant of intestinal absorption. |
+| `kd` | `number` | Rate constant of insulin dissociation. |
+| `ke1` | `number` | Glomerular filtration rate. |
+| `ke2` | `number` | Renal threshold of glucose. |
+| `kgri` | `number` | Rate of grinding. |
+| `ki` | `number` | Delay between insulin signal and insulin action. |
+| `kmax` | `number` | Maximal emptying rate of stomach. |
+| `kmin` | `number` | Minimal emptying rate of stomach. |
+| `kp1` | `number` | Extrapolated at zero glucose and insulin. |
+| `kp2` | `number` | Liver glucose effectiveness. |
+| `kp3` | `number` | Amplitude of insulin action on the liver. |
+| `kp4` | `number` | Amplitude of portal insulin action on the liver. |
+| `m1` | `number` | Rate parameter from Il to Ip. |
+| `m2` | `number` | Rate parameter from Ip to Il. |
+| `m4` | `number` | Rate parameter from Ip to periphery. |
+| `m5` | `number` | Rate parameter of hepatic extraction (slope). |
+| `m6` | `number` | Rate parameter of hepatic extraction (offset). |
+| `n` | `number` | Parameter for calculating Z |
+| `p2u` | `number` | Insulin action on the peripheral glucose utilization. |
+
+#### Defined in
+
+[Types.ts:239](https://github.com/lsandini/cgmsim-lib/blob/2af3f84/src/Types.ts#L239)
 
 ___
 
@@ -351,4 +412,4 @@ Represents the state of a UVA patient.
 
 #### Defined in
 
-[Types.ts:218](https://github.com/lsandini/cgmsim-lib/blob/b266280/src/Types.ts#L218)
+[Types.ts:219](https://github.com/lsandini/cgmsim-lib/blob/2af3f84/src/Types.ts#L219)

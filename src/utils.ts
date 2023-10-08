@@ -96,11 +96,10 @@ export function uploadBase(
 	cgmsim: Entry | Activity | Note | SimulationResult,
 	nsUrlApi: string,
 	apiSecret: string,
-	instanceName?: string
 ): Promise<void> {
 	const _isHttps = isHttps(nsUrlApi);
 
-	const { postParams } = setupParams(apiSecret, _isHttps, instanceName);
+	const { postParams } = setupParams(apiSecret, _isHttps);
 	const body_json = JSON.stringify(cgmsim);
 
 	return fetch(nsUrlApi, {

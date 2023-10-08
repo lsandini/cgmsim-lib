@@ -9,6 +9,7 @@ import {
 } from '../src/Types';
 import simulatorUVA from '../src/UVAsimulator';
 import { diffOptions, getPngSnapshot } from './inputTest';
+import { defaultPatient } from 'src/defaultPatient';
 const now = new Date('2022-05-01T11:00:00');
 const { toMatchImageSnapshot } = require('jest-image-snapshot');
 
@@ -67,6 +68,7 @@ describe('uva test default PATIENT', () => {
         pumpEnabled: true,
         entries,
         user: { nsUrl },
+		defaultPatient
       });
       yList.push(sgv);
       lastState = state;
@@ -116,6 +118,7 @@ describe('uva test default PATIENT', () => {
         pumpEnabled: true,
         entries,
         user: { nsUrl },
+		defaultPatient
       });
       yList.push(sgv);
       lastState = state;
@@ -174,6 +177,7 @@ describe('uva test default PATIENT', () => {
         pumpEnabled: true,
         entries,
         user: { nsUrl },
+		defaultPatient
       });
       yList.push(sgv);
       lastState = state;
@@ -247,6 +251,7 @@ describe('uva test default PATIENT', () => {
         pumpEnabled: true,
         entries,
         user: { nsUrl },
+		defaultPatient
       });
       yList.push(sgv);
       lastState = state;
@@ -313,6 +318,7 @@ describe('uva test default PATIENT', () => {
         pumpEnabled: true,
         entries,
         user: { nsUrl },
+		defaultPatient
       });
       yList.push(sgv);
       lastState = state;
@@ -364,6 +370,7 @@ describe('uva test default PATIENT', () => {
         entries,
         pumpEnabled: true,
         user: { nsUrl },
+		defaultPatient
       });
       yList.push(sgv);
       lastState = state;
@@ -439,6 +446,7 @@ describe('uva test default PATIENT', () => {
         activities,
         pumpEnabled: true,
         user: { nsUrl },
+		defaultPatient
       });
       yList.push(sgv);
       lastState = state;
