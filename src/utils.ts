@@ -4,6 +4,8 @@ import pino, { LevelWithSilent, TransportTargetOptions } from 'pino';
 import setupParams from './setupParams';
 import { Activity, Entry, Note, SimulationResult } from './Types';
 import { load } from 'ts-dotenv';
+import pinoPretty from 'pino-pretty';
+
 const env = load({
 	LOGTAIL_SECRET: { type: String, optional: true },
 	LOG_LEVEL: { type: String, optional: true },
@@ -14,26 +16,19 @@ const token: string = env.LOGTAIL_SECRET;
 const level: LevelWithSilent | string = env.LOG_LEVEL ?? 'error';
 
 const targets: TransportTargetOptions[] = [];
-if (env.NODE_ENV === 'development') {
-	targets.push({
-		target: 'pino-pretty',
-		options: {
-			colorize: true,
-		},
-		level,
-	});
-}
+
 if (token) {
 	targets.push({
 		target: '@logtail/pino',
 		options: { sourceToken: token },
+
 		level,
 	});
 }
 
 const logger = pino({
 	level,
-	prettyPrint: env.NODE_ENV === 'development',
+	prettifier: process.env.NODE_ENV === 'development' ? pinoPretty : null,
 	transport: {
 		targets,
 	},
