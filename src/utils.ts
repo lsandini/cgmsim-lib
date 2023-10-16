@@ -7,20 +7,22 @@ import { load } from 'ts-dotenv';
 const env = load({
 	LOGTAIL_SECRET: { type: String, optional: true },
 	LOG_LEVEL: { type: String, optional: true },
+	NODE_ENV: { type: String, optional: true },
 });
 
 const token: string = env.LOGTAIL_SECRET;
 const level: LevelWithSilent | string = env.LOG_LEVEL ?? 'error';
 
-const targets: TransportTargetOptions[] = [
-	{
+const targets: TransportTargetOptions[] = [];
+if (env.NODE_ENV === 'development') {
+	targets.push({
 		target: 'pino-pretty',
 		options: {
 			colorize: true,
 		},
 		level,
-	},
-];
+	});
+}
 if (token) {
 	targets.push({
 		target: '@logtail/pino',
@@ -31,6 +33,7 @@ if (token) {
 
 const logger = pino({
 	level,
+	prettyPrint: env.NODE_ENV === 'development',
 	transport: {
 		targets,
 	},
@@ -95,7 +98,7 @@ export const getDeltaMinutes = (mills: number | string) =>
 export function uploadBase(
 	cgmsim: Entry | Activity | Note | SimulationResult,
 	nsUrlApi: string,
-	apiSecret: string,
+	apiSecret: string
 ): Promise<void> {
 	const _isHttps = isHttps(nsUrlApi);
 
