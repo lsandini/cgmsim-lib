@@ -40,13 +40,13 @@ const downloads = async (nsUrl: string, apiSecret: string) => {
 	const api_profile = _nsUrl + '/api/v1/profile.json';
 	const api_sgv = _nsUrl + '/api/v1/entries/sgv.json';
 
-	const treatments: Promise<Treatment> = fetchCast<Treatment>(
+	const treatments = fetchCast<Treatment>(
 		fetch(api_url, getParams)
 	);
-	const profiles: Promise<Profile> = fetchCast<Profile>(
+	const profiles = fetchCast<Profile>(
 		fetch(api_profile, getParams)
 	);
-	const entries: Promise<Sgv> = fetchCast<Sgv>(fetch(api_sgv, getParams));
+	const entries = fetchCast<Sgv>(fetch(api_sgv, getParams));
 
 	return Promise.all([treatments, profiles, entries])
 		.then(([treatments, profiles, entries]) => {
