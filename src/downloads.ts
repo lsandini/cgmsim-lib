@@ -3,10 +3,10 @@ import setupParams from './setupParams';
 import { Profile, Sgv, Treatment } from './Types';
 import fetch, { Response } from 'node-fetch';
 
-async function fetchCast<T>(fetchData: Promise<Response>): Promise<T> {
+async function fetchCast<T>(fetchData: Promise<Response>): Promise<T[]> {
 	const response = await fetchData;
 	if (response.status === 200) {
-		const data: T = await response.json();
+		const data: T[] = await response.json();
 		return data;
 	} else {
 		throw new Error('Request error');
