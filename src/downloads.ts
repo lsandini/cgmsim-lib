@@ -1,7 +1,18 @@
 import logger, { isHttps, removeTrailingSlash } from './utils';
 import setupParams from './setupParams';
 import { Profile, Sgv, Treatment } from './Types';
-import fetch from 'node-fetch';
+import fetch, { Response } from 'node-fetch';
+
+async function fetchCast<T>(fetchData: Promise<Response>): Promise<T> {
+	const response = await fetchData;
+	if (response.status === 200) {
+		const data: T = await response.json();
+		return data;
+	} else {
+		throw new Error('Request error');
+	}
+}
+
 /**
  * Downloads data from the Nightscout API, including treatments, profiles, and entries.
  * @param nsUrl - Nightscout URL.
@@ -20,10 +31,7 @@ import fetch from 'node-fetch';
  *     console.error("Error downloading data:", error);
  *   });
  */
-const downloads = async (
-	nsUrl: string,
-	apiSecret: string,
-) => {
+const downloads = async (nsUrl: string, apiSecret: string) => {
 	const _nsUrl = removeTrailingSlash(nsUrl);
 	const _isHttps = isHttps(nsUrl);
 
@@ -32,34 +40,15 @@ const downloads = async (
 	const api_profile = _nsUrl + '/api/v1/profile.json';
 	const api_sgv = _nsUrl + '/api/v1/entries/sgv.json';
 
-	type ResponseType<T> = {
-		statusText: string;
-		status: number;
-		json: () => Promise<T[]>;
-	};
+	const treatments: Promise<Treatment> = fetchCast<Treatment>(
+		fetch(api_url, getParams)
+	);
+	const profiles: Promise<Profile> = fetchCast<Profile>(
+		fetch(api_profile, getParams)
+	);
+	const entries: Promise<Sgv> = fetchCast<Sgv>(fetch(api_sgv, getParams));
 
-	const treatments: ResponseType<Treatment> = fetch(api_url, getParams);
-	const profiles: ResponseType<Profile> = fetch(api_profile, getParams);
-	const entries: ResponseType<Sgv> = fetch(api_sgv, getParams);
 	return Promise.all([treatments, profiles, entries])
-		.then(([resTreatments, resProfile, resEntries]) => {
-			if (
-				resTreatments.status === 200 &&
-				resProfile.status === 200 &&
-				resEntries.status === 200
-			) {
-				return Promise.all([
-					resTreatments.json(),
-					resProfile.json(),
-					resEntries.json(),
-				]);
-			} else {
-				throw new Error(`
-				treatments: ${resTreatments.statusText};
-				profiles: ${resProfile.statusText};
-				entries: ${resEntries.statusText}`);
-			}
-		})
 		.then(([treatments, profiles, entries]) => {
 			return {
 				treatments,
@@ -72,4 +61,5 @@ const downloads = async (
 			throw new Error(err);
 		});
 };
+
 export default downloads;
