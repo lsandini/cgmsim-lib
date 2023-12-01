@@ -2,12 +2,14 @@ import { TreatmentDelta, Treatment } from './Types';
 import logger, { getDeltaMinutes, getInsulinActivity } from './utils';
 
 export const peakBasal = {
+	COR: (duration: number) => duration / 2.5,
 	GLA: (duration: number) => duration / 2.5,
 	DET: (duration: number) => duration / 3,
 	TOU: (duration: number) => duration / 2.5,
 	DEG: (duration: number) => duration / 3,
 };
 export const durationBasal = {
+	COR: (insulin: number, weight: number) => (16 + (12 * insulin) / weight) * 60,
 	GLA: (insulin: number, weight: number) => (22 + (12 * insulin) / weight) * 60,
 	DET: (insulin: number, weight: number) => (14 + (24 * insulin) / weight) * 60,
 	TOU: (insulin: number, weight: number) => (24 + (14 * insulin) / weight) * 60,
@@ -143,5 +145,26 @@ export default function (treatments: Treatment[], weight: number): number {
 	const activityDEG = lastDEG.length ? computeBasalActivity(lastDEG) : 0;
 	logger.debug('these are the last deg: %o', { lastDEG, activityDEG });
 
-	return activityDEG + activityDET + activityGLA + activityTOU;
+	const lastCOR = lastBasals
+		.filter((e) => {
+			return (
+				e.drug === 'pre' ||
+				e.drug === 'Pre' ||
+				e.drug === 'cor' ||
+				e.drug === 'Cor'
+			); // keep only the cortisones from the last 45 hours
+		})
+		.map((e) => {
+			const duration = durationBasal.COR(e.insulin, weight);
+			const peak = peakBasal.COR(duration);
+			return {
+				...e,
+				duration,
+				peak,
+			};
+		});
+	const activityCOR = lastCOR.length > 0 ? computeBasalActivity(lastCOR) : 0;
+	logger.debug('these are the last COR: %o', { lastCOR, activityCOR });
+
+	return activityDEG + activityDET + activityGLA + activityTOU - (activityCOR/2);
 }
