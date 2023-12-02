@@ -2,6 +2,7 @@ import logger from './utils';
 
 import bolus from './bolus';
 import basal from './basal';
+import cortisone from './cortisone';
 
 import carbs from './carbs';
 import arrowsRun from './arrows';
@@ -57,6 +58,7 @@ const simulator = (params: MainParams): SimulationResult => {
 
 	const bolusActivity = bolus(treatments, dia, peak);
 	const basalBolusActivity = basal(treatments, weight);
+	const cortisoneActivity = cortisone(treatments, weight);
 	const basalPumpActivity = pumpEnabled
 		? pump(treatments, profiles, dia, peak)
 		: 0;
@@ -78,7 +80,7 @@ const simulator = (params: MainParams): SimulationResult => {
 	const newSgvValue = sgv(
 		orderedEntries,
 		{
-			basalActivity: basalBolusActivity + basalPumpActivity,
+			basalActivity: basalBolusActivity + basalPumpActivity-cortisoneActivity,
 			liverActivity,
 			carbsActivity,
 			bolusActivity,

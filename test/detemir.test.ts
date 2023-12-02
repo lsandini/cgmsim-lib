@@ -55,7 +55,7 @@ describe('test detemir', () => {
           value: sgv,
         })),
       },
-      { scaleY: true }
+      { scaleY: 1}
     );
 
     expect(png).toMatchImageSnapshot(diffOptions);

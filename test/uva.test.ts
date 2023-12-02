@@ -81,7 +81,7 @@ describe('uva test default PATIENT', () => {
         type: 'single',
         values: yList.map((sgv, index) => ({ key: index, value: sgv })),
       },
-      { scaleY: true }
+      { scaleY: 400 }
     );
     expect(png).toMatchImageSnapshot(diffOptions);
   });
@@ -122,7 +122,7 @@ describe('uva test default PATIENT', () => {
         type: 'single',
         values: yList.map((sgv, index) => ({ key: index, value: sgv })),
       },
-      { scaleY: true }
+      { scaleY: 400 }
     );
     expect(png).toMatchImageSnapshot(diffOptions);
   });
@@ -199,7 +199,7 @@ describe('uva test default PATIENT', () => {
         type: 'single',
         values: yList.map((sgv, index) => ({ key: index, value: sgv })),
       },
-      { scaleY: true }
+      { scaleY: 400 }
     );
     expect(png).toMatchImageSnapshot(diffOptions);
     return done();
@@ -273,7 +273,7 @@ describe('uva test default PATIENT', () => {
         type: 'single',
         values: yList.map((sgv, index) => ({ key: index, value: sgv })),
       },
-      { scaleY: true }
+      { scaleY: 400 }
     );
     expect(png).toMatchImageSnapshot(diffOptions);
   });
@@ -324,7 +324,7 @@ describe('uva test default PATIENT', () => {
         type: 'single',
         values: yList.map((sgv, index) => ({ key: index, value: sgv })),
       },
-      { scaleY: true }
+      { scaleY: 400 }
     );
     expect(png).toMatchImageSnapshot(diffOptions);
   });
@@ -376,7 +376,7 @@ describe('uva test default PATIENT', () => {
         type: 'single',
         values: yList.map((sgv, index) => ({ key: index, value: sgv })),
       },
-      { scaleY: true }
+      { scaleY: 400 }
     );
     expect(png).toMatchImageSnapshot(diffOptions);
   });
@@ -461,7 +461,7 @@ describe('uva test default PATIENT', () => {
         type: 'single',
         values: yList.map((sgv, index) => ({ key: index, value: sgv })),
       },
-      { scaleY: true }
+      { scaleY: 400 }
     );
     expect(png).toMatchImageSnapshot(diffOptions);
   });

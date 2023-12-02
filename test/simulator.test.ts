@@ -210,7 +210,7 @@ describe('simulator test', () => {
           value: sgv,
         })),
       },
-      { scaleY: true }
+      { scaleY: 400 }
     );
 
     expect(png).toMatchImageSnapshot(diffOptions);
@@ -325,7 +325,7 @@ describe('simulator test', () => {
         type: 'single',
         values: sgvS.map((sgv, index) => ({ key: index, value: sgv })),
       },
-      { scaleY: true }
+      { scaleY: 400 }
     );
 
     expect(png).toMatchImageSnapshot(diffOptions);

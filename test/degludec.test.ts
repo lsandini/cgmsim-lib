@@ -62,7 +62,7 @@ describe('test degludec', () => {
           value: sgv,
         })),
       },
-      { scaleY: true }
+      { scaleY: 1 }
     );
     expect(png).toMatchImageSnapshot(diffOptions);
   });

@@ -57,7 +57,7 @@ describe('test bolus', () => {
           value: sgv,
         })),
       },
-      { scaleY: true }
+      { scaleY: 1}
     );
     expect(png).toMatchImageSnapshot(diffOptions);
   });

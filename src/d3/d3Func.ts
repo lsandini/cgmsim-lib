@@ -68,7 +68,7 @@ export const line = ({
 	isCurve: boolean;
 	tickSize: number;
 	tickPadding: number;
-	scaleY: boolean;
+	scaleY: boolean | number;
 }) => {
 	const d3n = new D3Node({
 		selector: _selector,
@@ -92,14 +92,19 @@ export const line = ({
 		if (dim === 'y' && !scaleY) {
 			return [0, 400];
 		}
+		if (dim === 'y' && typeof scaleY === 'number' && data.type === 'single') {
+			const max = d3.max(data.values, (d) => d.value);
+			return [0, max > scaleY ? max : scaleY];
+		}
+		if (dim === 'y' && typeof scaleY === 'number' && data.type === 'multiple') {
+			const max = d3.max(data.values, (d) => d3.max(d, (v) => v.value));
+			return [0, max > scaleY ? max : scaleY];
+		}
 
 		if (dim === 'y') {
 			return data.type === 'multiple'
-				? [
-						d3.min(data.values, (d) => d3.min(d, (v) => v.value)),
-						d3.max(data.values, (d) => d3.max(d, (v) => v.value)),
-				  ]
-				: d3.extent(data.values, (d) => d.value);
+				? [0, d3.max(data.values, (d) => d3.max(d, (v) => v.value))]
+				: [0, d3.max(data.values, (d) => d.value)];
 		} else {
 			if (data.type === 'multiple') {
 				const firstRo: ValueDataSource[] =
