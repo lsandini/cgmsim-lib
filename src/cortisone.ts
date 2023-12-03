@@ -2,7 +2,7 @@ import { TreatmentDelta, Treatment } from './Types';
 import logger, { getDeltaMinutes, getTreatmentActivity } from './utils';
 
 export const peakCortisone = {
-	COR: (duration: number) => duration / 2.5,
+	COR: (duration: number) => duration / 3,
 };
 export const durationCortisone = {
 	COR: (insulin: number, weight: number) => (16 + (12 * insulin) / weight) * 60,

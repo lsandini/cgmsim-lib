@@ -45,29 +45,48 @@ describe('test cortisone', () => {
 
   test('weight:80 mg:200 all', async () => {
     const weight = 80;
-    const units = 200;
-    let cortisoneActive = 0;
-    let cortisoneArr = [];
+    const units40 = 40;
+    const units200 = 200;
+    let cortisone40Active = 0;
+    let cortisone40Arr = [];
+    let cortisone200Active = 0;
+    let cortisone200Arr = [];
 
     for (let i = 0; i < 3000; i++) {
-      const _cortisoneActive = cortisone(weight, [
+      const _cortisone40Active = cortisone(weight, [
         {
-          units,
+          units: units40,
           minutesAgo: i,
         },
       ]);
-      cortisoneActive += _cortisoneActive > 0 ? _cortisoneActive : 0;
-      cortisoneArr.push(_cortisoneActive > 0 ? _cortisoneActive : 0);
+      const _cortisone200Active = cortisone(weight, [
+        {
+          units: units200,
+          minutesAgo: i,
+        },
+      ]);
+      cortisone40Active += _cortisone40Active > 0 ? _cortisone40Active : 0;
+      cortisone40Arr.push(_cortisone40Active > 0 ? _cortisone40Active : 0);
+      cortisone200Active += _cortisone200Active > 0 ? _cortisone200Active : 0;
+      cortisone200Arr.push(_cortisone200Active > 0 ? _cortisone200Active : 0);
     }
-    expect(cortisoneActive).toMatchSnapshot();
-    expect(cortisoneArr).toMatchSnapshot();
+    expect(cortisone40Active).toMatchSnapshot();
+    expect(cortisone40Arr).toMatchSnapshot();
+    expect(cortisone200Active).toMatchSnapshot();
+    expect(cortisone200Arr).toMatchSnapshot();
     const png = await getPngSnapshot(
       {
-        type: 'single',
-        values: cortisoneArr.map((sgv, index) => ({
-          key: index,
-          value: sgv,
-        })),
+        type: 'multiple',
+        values: [
+          cortisone40Arr.map((sgv, index) => ({
+            key: index,
+            value: sgv,
+          })),
+          cortisone200Arr.map((sgv, index) => ({
+            key: index,
+            value: sgv,
+          })),
+        ],
       },
       { scaleY: 1 }
     );
@@ -75,51 +94,51 @@ describe('test cortisone', () => {
     expect(png).toMatchImageSnapshot(diffOptions);
   });
 
-//   test('cortisone 5 min ago are less active then 40 min ago', () => {
-//     const units = 10;
-//     const weight = 80;
+  //   test('cortisone 5 min ago are less active then 40 min ago', () => {
+  //     const units = 10;
+  //     const weight = 80;
 
-//     const r5 = cortisone(weight, [
-//       {
-//         units,
-//         minutesAgo: 5,
-//       },
-//     ]);
-//     const r40 = cortisone(weight, [
-//       {
-//         units,
-//         minutesAgo: 40,
-//       },
-//     ]);
-//     expect(r5).toBeLessThan(r40);
-//   });
-//   test('peak has the greatest activity', () => {
-//     const units = 20;
-//     const weight = 80;
+  //     const r5 = cortisone(weight, [
+  //       {
+  //         units,
+  //         minutesAgo: 5,
+  //       },
+  //     ]);
+  //     const r40 = cortisone(weight, [
+  //       {
+  //         units,
+  //         minutesAgo: 40,
+  //       },
+  //     ]);
+  //     expect(r5).toBeLessThan(r40);
+  //   });
+  //   test('peak has the greatest activity', () => {
+  //     const units = 20;
+  //     const weight = 80;
 
-//     const toujeoPeakHours = (24 + (14 * units) / weight) / 2.5;
+  //     const toujeoPeakHours = (24 + (14 * units) / weight) / 2.5;
 
-//     const rBeforePeak = cortisone(weight, [
-//       {
-//         units,
-//         minutesAgo: toujeoPeakHours * 60 + 10,
-//       },
-//     ]);
-//     const rPeak = cortisone(weight, [
-//       {
-//         units,
-//         minutesAgo: toujeoPeakHours * 60,
-//       },
-//     ]);
-//     const rAfterPeak = cortisone(weight, [
-//       {
-//         units,
-//         minutesAgo: toujeoPeakHours * 60 - 10,
-//       },
-//     ]);
-//     expect(rBeforePeak).toBeLessThan(rPeak);
-//     expect(rAfterPeak).toBeLessThan(rPeak);
-//   });
+  //     const rBeforePeak = cortisone(weight, [
+  //       {
+  //         units,
+  //         minutesAgo: toujeoPeakHours * 60 + 10,
+  //       },
+  //     ]);
+  //     const rPeak = cortisone(weight, [
+  //       {
+  //         units,
+  //         minutesAgo: toujeoPeakHours * 60,
+  //       },
+  //     ]);
+  //     const rAfterPeak = cortisone(weight, [
+  //       {
+  //         units,
+  //         minutesAgo: toujeoPeakHours * 60 - 10,
+  //       },
+  //     ]);
+  //     expect(rBeforePeak).toBeLessThan(rPeak);
+  //     expect(rAfterPeak).toBeLessThan(rPeak);
+  //   });
   test('200mg cortisone, the activity after 5h 6h 7h should be >0.1 ', () => {
     const units = 20;
     const weight = 80;
