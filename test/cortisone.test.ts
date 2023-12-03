@@ -43,7 +43,7 @@ describe('test cortisone', () => {
     expect(cortisoneActive).toMatchSnapshot();
   });
 
-  test('weight:80 mg:200 all', async () => {
+  test('weight:80 mg:40vs200 all', async () => {
     const weight = 80;
     const units40 = 40;
     const units200 = 200;

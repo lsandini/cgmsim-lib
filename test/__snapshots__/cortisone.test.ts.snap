@@ -8,9 +8,9 @@ exports[`test cortisone 200mg cortisone, the activity after 5h 6h 7h should be >
 
 exports[`test cortisone 200mg cortisone, the activity after 5h 6h 7h should be >0.1  3`] = `0.028218149403888`;
 
-exports[`test cortisone weight:80 mg:200 all 1`] = `39.98982165156125`;
+exports[`test cortisone weight:80 mg:40vs200 all 1`] = `39.98982165156125`;
 
-exports[`test cortisone weight:80 mg:200 all 2`] = `
+exports[`test cortisone weight:80 mg:40vs200 all 2`] = `
 Array [
   0,
   0.0000183499279380782,
@@ -3015,9 +3015,9 @@ Array [
 ]
 `;
 
-exports[`test cortisone weight:80 mg:200 all 3`] = `199.98827300930503`;
+exports[`test cortisone weight:80 mg:40vs200 all 3`] = `199.98827300930503`;
 
-exports[`test cortisone weight:80 mg:200 all 4`] = `
+exports[`test cortisone weight:80 mg:40vs200 all 4`] = `
 Array [
   0,
   0.000021006964746425568,
