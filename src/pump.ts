@@ -1,4 +1,4 @@
-import logger, { getDeltaMinutes, getInsulinActivity } from './utils';
+import logger, { getDeltaMinutes, getTreatmentActivity } from './utils';
 import * as moment from 'moment';
 import { Profile, Treatment } from './Types';
 
@@ -192,7 +192,7 @@ export default function (
 
 	const pumpBasalAct = basalAsBoluses.reduce(
 		(tot, entry) =>
-			tot + getInsulinActivity(peak, duration, entry.minutesAgo, entry.insulin),
+			tot + getTreatmentActivity(peak, duration, entry.minutesAgo, entry.insulin),
 		0
 	);
 	logger.debug("the pump's basal activity is: %o", pumpBasalAct);

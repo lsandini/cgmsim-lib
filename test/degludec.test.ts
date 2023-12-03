@@ -1,8 +1,15 @@
+import { TreatmentDelta } from 'src/Types';
 import { computeBasalActivity, durationBasal, peakBasal } from '../src/basal';
 import { diffOptions, getPngSnapshot } from './inputTest';
 const { toMatchImageSnapshot } = require('jest-image-snapshot');
+
+type MockTreatment = {
+    units: TreatmentDelta['units'];
+    minutesAgo: TreatmentDelta['minutesAgo'];
+  };
+
 describe('test degludec', () => {
-  const degludec = (treatments) => {
+  const degludec = (treatments:MockTreatment[]):number => {
     const toujeoT = treatments.map((e) => {
       const duration = durationBasal.DEG();
       const peak = peakBasal.DEG(duration);
@@ -20,7 +27,7 @@ describe('test degludec', () => {
   test('ins:30 minutesAgo:300', () => {
     const insulinActive = degludec([
       {
-        insulin: 30,
+        units:30,
         minutesAgo: 300,
       },
     ]);
@@ -30,7 +37,7 @@ describe('test degludec', () => {
   test('ins:30 hoursAgo: 44', () => {
     const insulinActive = degludec([
       {
-        insulin: 30,
+        units:30,
         minutesAgo: 44 * 60,
       },
     ]);
@@ -45,7 +52,7 @@ describe('test degludec', () => {
     for (let i = 0; i < 2000; i++) {
       const _insulinActive = degludec([
         {
-          insulin: 30,
+          units:30,
           minutesAgo: i,
         },
       ]);
@@ -68,40 +75,40 @@ describe('test degludec', () => {
   });
 
   test('insulin 5 min ago are less active then 40 min ago', () => {
-    const insulin = 20;
+    const units = 20;
 
     const r5 = degludec([
       {
-        insulin,
+        units,
         minutesAgo: 5,
       },
     ]);
     const r40 = degludec([
       {
-        insulin,
+        units,
         minutesAgo: 40,
       },
     ]);
     expect(r5).toBeLessThan(r40);
   });
   test('peak has the greatest activity', () => {
-    const insulin = 20;
+    const units = 20;
     const degludecPeakHours = 42 / 3;
     const rBeforePeak = degludec([
       {
-        insulin,
+        units,
         minutesAgo: degludecPeakHours * 60 + 10,
       },
     ]);
     const rPeak = degludec([
       {
-        insulin,
+        units,
         minutesAgo: degludecPeakHours * 60,
       },
     ]);
     const rAfterPeak = degludec([
       {
-        insulin,
+        units,
         minutesAgo: degludecPeakHours * 60 - 10,
       },
     ]);

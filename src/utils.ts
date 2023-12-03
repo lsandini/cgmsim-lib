@@ -42,18 +42,18 @@ export function removeTrailingSlash(str) {
 	return str.endsWith('/') ? str.slice(0, -1) : str;
 }
 
-export function getInsulinActivity(
+export function getTreatmentActivity(
 	peakMin: number,
 	durationMin: number,
 	timeMin: number,
-	insulin: number
+	units: number
 ) {
 	const tau =
 		(peakMin * (1 - peakMin / durationMin)) / (1 - (2 * peakMin) / durationMin);
 	const a = (2 * tau) / durationMin;
 	const S = 1 / (1 - a + (1 + a) * Math.exp(-durationMin / tau));
 	const activity =
-		insulin *
+		units *
 		(S / Math.pow(tau, 2)) *
 		timeMin *
 		(1 - timeMin / durationMin) *

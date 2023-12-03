@@ -80,10 +80,11 @@ const simulator = (params: MainParams): SimulationResult => {
 	const newSgvValue = sgv(
 		orderedEntries,
 		{
-			basalActivity: basalBolusActivity + basalPumpActivity-cortisoneActivity,
+			basalActivity: basalBolusActivity + basalPumpActivity,
 			liverActivity,
 			carbsActivity,
 			bolusActivity,
+			cortisoneActivity
 		},
 		isfActivityDependent
 	);

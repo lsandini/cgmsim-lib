@@ -8,7 +8,13 @@ import { getDeltaMinutes } from './utils';
 //const logger = pino();
 const sgv_start = (
 	entries: Sgv[],
-	{ basalActivity, liverActivity, carbsActivity, bolusActivity }: CGMSimParams,
+	{
+		basalActivity,
+		liverActivity,
+		carbsActivity,
+		bolusActivity,
+		cortisoneActivity,
+	}: CGMSimParams,
 	isf: number
 ) => {
 	const oldSgv = entries && entries[0] ? entries[0].sgv : 90;
@@ -24,6 +30,9 @@ const sgv_start = (
 	//=================================
 
 	const basalDeltaMinutesActivity = basalActivity * deltaMinutes;
+	const cortisoneDeltaMinutesActivity = cortisoneActivity
+		? cortisoneActivity * deltaMinutes
+		: 0;
 	const bolusDeltaMinutesActivity = bolusActivity * deltaMinutes;
 
 	const globalInsulinAct =
@@ -39,7 +48,8 @@ const sgv_start = (
 		oldSgv +
 			BGI_ins * 18 +
 			liverDeltaMinutesActivity * 18 +
-			carbsDeltaMinutesActivity * 18
+			carbsDeltaMinutesActivity * 18 -
+			cortisoneDeltaMinutesActivity * 18
 	);
 	let limited_sgv_pump = sgv_pump;
 	if (sgv_pump >= 400) {
@@ -52,6 +62,7 @@ const sgv_start = (
 		deltaMinutes,
 		carbsActivity: carbsDeltaMinutesActivity * 18,
 		basalActivity: basalDeltaMinutesActivity * isfMMol * 18,
+		cortisoneActivity: cortisoneDeltaMinutesActivity * isfMMol * 18,
 		bolusActivity: bolusDeltaMinutesActivity * isfMMol * 18,
 		liverActivity: liverDeltaMinutesActivity * 18,
 	};
@@ -79,6 +90,14 @@ const sgv_start = (
 
 	logger.debug('-------------------------------------------');
 	logger.debug(
+		'total BG impact of cortisone for 5 minutes: + %o',
+		cortisoneDeltaMinutesActivity * 18,
+		'mg/dl'
+	);
+
+
+	logger.debug('-------------------------------------------');
+	logger.debug(
 		'total CARBS impact of carbs for ' + deltaMinutes + ' minutes: + %o',
 		carbsActivity * 18,
 		'mg/dl'
@@ -90,6 +109,7 @@ const sgv_start = (
 		BGI_ins + liverDeltaMinutesActivity * 18 + carbsActivity * 18,
 		'mg/dl'
 	);
+
 
 	logger.debug(
 		'this is the BASAL BOLUS  insulin impact for ' +

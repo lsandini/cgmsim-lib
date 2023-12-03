@@ -97,10 +97,12 @@ export type Treatment = {
 /**
  * Represents a treatment delta with additional minutes ago information.
  */
-export type TreatmentDelta = Treatment & {
+export type TreatmentDelta = {
+	units: Treatment['insulin'];
 	minutesAgo: number;
-	drug?: string;
-};
+	duration: number;
+	peak: number;
+}
 
 /**
  * Represents a gender type.
@@ -130,6 +132,7 @@ export type CGMSimParams = {
 	liverActivity: number;
 	carbsActivity: number;
 	bolusActivity: number;
+	cortisoneActivity?: number;
 };
 
 /**

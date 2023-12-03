@@ -1,4 +1,4 @@
-import logger, { getDeltaMinutes, getInsulinActivity } from './utils';
+import logger, { getDeltaMinutes, getTreatmentActivity } from './utils';
 import { Treatment } from './Types';
 
 export default (
@@ -21,8 +21,8 @@ export default (
 	const duration = dia * 60;
 
 	const insulinsBolusAct = insulin?.map((entry) => {
-		const insulin = entry.insulin;
-		return getInsulinActivity(peak, duration, entry.minutesAgo, insulin);
+		const units = entry.insulin;
+		return getTreatmentActivity(peak, duration, entry.minutesAgo, units);
 	});
 
 	logger.debug(

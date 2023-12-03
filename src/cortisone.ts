@@ -1,5 +1,5 @@
 import { TreatmentDelta, Treatment } from './Types';
-import logger, { getDeltaMinutes, getInsulinActivity } from './utils';
+import logger, { getDeltaMinutes, getTreatmentActivity } from './utils';
 
 export const peakCortisone = {
 	COR: (duration: number) => duration / 2.5,
@@ -9,17 +9,17 @@ export const durationCortisone = {
 };
 
 export const computeCortisoneActivity = (
-	treatments: (TreatmentDelta & { duration: number; peak: number })[]
+	treatments: (TreatmentDelta )[]
 ) => {
 	// activities be expressed as U/min !!!
 	const treatmentsActivity = treatments.map((e) => {
 		const minutesAgo = e.minutesAgo;
-		const insulin = e.insulin;
-		const activity = getInsulinActivity(
+		const units = e.units;
+		const activity = getTreatmentActivity(
 			e.peak,
 			e.duration,
 			minutesAgo,
-			insulin
+			units
 		);
 		return activity;
 	});
@@ -32,7 +32,7 @@ export const computeCortisoneActivity = (
 
 export default function (treatments: Treatment[], weight: number): number {
 	//Find Cortisone boluses
-	const Cortisones =
+	const cortisones =
 		treatments && treatments.length
 			? treatments
 					.filter((e) => e.notes)
@@ -46,14 +46,14 @@ export default function (treatments: Treatment[], weight: number): number {
 							...e,
 							minutesAgo: getDeltaMinutes(e.created_at),
 							drug: e.notes.slice(0, 3),
-							// insulin: parseInt(e.notes.slice(-2))
-							insulin: parseInt(e.notes.slice(lastIndexEmptySpace), 10) || 0,
+							// units: parseInt(e.notes.slice(-2))
+							units: parseInt(e.notes.slice(lastIndexEmptySpace), 10) || 0,
 						};
 					})
 					.filter((e) => e.minutesAgo >= 0)
 			: [];
 
-	const lastCortisones = Cortisones.filter(function (e) {
+	const lastCortisones = cortisones.filter(function (e) {
 		return e.minutesAgo <= 45 * 60; // keep only the Cortisones from the last 45 hours
 	});
 
