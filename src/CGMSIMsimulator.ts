@@ -1,4 +1,4 @@
-import logger from './utils';
+import logger, { getDeltaMinutes, transformNoteTreatmentsDrug } from './utils';
 
 import bolus from './bolus';
 import basal from './basal';
@@ -56,9 +56,16 @@ const simulator = (params: MainParams): SimulationResult => {
 	const carbsAbs = parseInt(env.CARBS_ABS_TIME);
 	const cr = parseInt(env.CR);
 
+	//Find basal boluses
+	const drugs = transformNoteTreatmentsDrug(treatments);
+
+	const activeDrugTreatments = drugs.filter(function (e) {
+		return e.minutesAgo <= 45 * 60; // keep only the basals from the last 45 hours
+	});
+
 	const bolusActivity = bolus(treatments, dia, peak);
-	const basalBolusActivity = basal(treatments, weight);
-	const cortisoneActivity = cortisone(treatments, weight);
+	const basalBolusActivity = basal(activeDrugTreatments, weight);
+	const cortisoneActivity = cortisone(activeDrugTreatments, weight);
 	const basalPumpActivity = pumpEnabled
 		? pump(treatments, profiles, dia, peak)
 		: 0;
@@ -84,7 +91,7 @@ const simulator = (params: MainParams): SimulationResult => {
 			liverActivity,
 			carbsActivity,
 			bolusActivity,
-			cortisoneActivity
+			cortisoneActivity,
 		},
 		isfActivityDependent
 	);

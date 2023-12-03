@@ -1,5 +1,7 @@
 import { TreatmentDelta } from 'src/Types';
-import { computeBasalActivity, durationBasal, peakBasal } from '../src/basal';
+import { computeBasalActivity } from '../src/basal';
+import { drugs } from '../src/drug';
+
 import { diffOptions, getPngSnapshot } from './inputTest';
 const { toMatchImageSnapshot } = require('jest-image-snapshot');
 describe('test detemir', () => {
@@ -14,8 +16,8 @@ describe('test detemir', () => {
 
   const detemir = (weight: number, treatments: MockTreatment[]): number => {
     const detemirT = treatments.map((e) => {
-      const duration = durationBasal.DET(e.units, weight);
-      const peak = peakBasal.DET(duration);
+      const duration = drugs.DET.duration(e.units, weight);
+      const peak = drugs.DET.peak(duration);
       return {
         ...e,
         duration,

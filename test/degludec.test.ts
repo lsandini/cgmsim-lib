@@ -1,6 +1,7 @@
 import { TreatmentDelta } from 'src/Types';
-import { computeBasalActivity, durationBasal, peakBasal } from '../src/basal';
+import { computeBasalActivity,  } from '../src/basal';
 import { diffOptions, getPngSnapshot } from './inputTest';
+import { drugs } from '../src/drug';
 const { toMatchImageSnapshot } = require('jest-image-snapshot');
 
 type MockTreatment = {
@@ -11,8 +12,8 @@ type MockTreatment = {
 describe('test degludec', () => {
   const degludec = (treatments:MockTreatment[]):number => {
     const toujeoT = treatments.map((e) => {
-      const duration = durationBasal.DEG();
-      const peak = peakBasal.DEG(duration);
+      const duration = drugs.DEG.duration();
+      const peak = drugs.DEG.peak(duration);
       return {
         ...e,
         duration,

@@ -1,5 +1,6 @@
 import { TreatmentDelta } from 'src/Types';
-import { computeBasalActivity, durationBasal, peakBasal } from '../src/basal';
+import { computeBasalActivity } from '../src/basal';
+import { drugs } from '../src/drug';
 import { diffOptions, getPngSnapshot } from './inputTest';
 const { toMatchImageSnapshot } = require('jest-image-snapshot');
 
@@ -14,8 +15,8 @@ describe('test glargine', () => {
   });
   const glargine = (weight, treatments:MockTreatment[]): number => {
     const toujeoT = treatments.map((e) => {
-      const duration = durationBasal.GLA(e.units, weight);
-      const peak = peakBasal.GLA(duration);
+      const duration = drugs.GLA.duration(e.units, weight);
+      const peak = drugs.GLA.peak(duration);
       return {
         ...e,
         duration,

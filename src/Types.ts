@@ -94,6 +94,13 @@ export type Treatment = {
 	carbs?: number;
 };
 
+export type TreatmentDrug = {
+	drug: string;
+	units: Treatment['insulin'];
+	minutesAgo: number;
+};
+
+
 /**
  * Represents a treatment delta with additional minutes ago information.
  */
@@ -102,7 +109,7 @@ export type TreatmentDelta = {
 	minutesAgo: number;
 	duration: number;
 	peak: number;
-}
+};
 
 /**
  * Represents a gender type.

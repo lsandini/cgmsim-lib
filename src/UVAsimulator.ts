@@ -1,4 +1,4 @@
-import logger, { getDeltaMinutes } from './utils';
+import logger, { getDeltaMinutes, transformNoteTreatmentsDrug } from './utils';
 
 import basal from './basal';
 import basalProfile from './basalProfile';
@@ -76,8 +76,14 @@ const simulator = (params: MainParamsUVA) => {
 	const weight = parseInt(env.WEIGHT);
 	const age = parseInt(env.AGE);
 	const gender = env.GENDER;
+	const drugs = transformNoteTreatmentsDrug(treatments);
 
-	const basalActivity = basal(treatments, weight);
+	const activeDrugTreatments = drugs.filter(function (e) {
+		return e.minutesAgo <= 45 * 60; // keep only the basals from the last 45 hours
+	});
+
+
+	const basalActivity = basal(activeDrugTreatments, weight);
 
 	const last5MinuteTreatments = treatments
 		.map((e) => ({

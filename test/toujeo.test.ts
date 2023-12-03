@@ -1,5 +1,7 @@
 import { TreatmentDelta } from 'src/Types';
-import { computeBasalActivity, durationBasal, peakBasal } from '../src/basal';
+import { computeBasalActivity } from '../src/basal';
+import { drugs } from '../src/drug';
+
 import { diffOptions, getPngSnapshot } from './inputTest';
 const { toMatchImageSnapshot } = require('jest-image-snapshot');
 
@@ -15,8 +17,8 @@ describe('test toujeo', () => {
 
   const toujeo = (weight, treatments:MockTreatment[]) => {
     const toujeoT = treatments.map((e) => {
-      const duration = durationBasal.TOU(e.units, weight);
-      const peak = peakBasal.TOU(duration);
+      const duration = drugs.TOU.duration(e.units, weight);
+      const peak = drugs.TOU.peak(duration);
       return {
         ...e,
         duration,

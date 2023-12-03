@@ -1,4 +1,5 @@
-import { TreatmentDelta, Treatment } from './Types';
+import { TreatmentDelta, Treatment, TreatmentDrug } from './Types';
+import { getDrugActivity } from './drug';
 import logger, { getDeltaMinutes, getTreatmentActivity } from './utils';
 
 export const peakCortisone = {
@@ -8,9 +9,7 @@ export const durationCortisone = {
 	COR: (insulin: number, weight: number) => (16 + (12 * insulin) / weight) * 60,
 };
 
-export const computeCortisoneActivity = (
-	treatments: (TreatmentDelta )[]
-) => {
+export const computeCortisoneActivity = (treatments: TreatmentDelta[]) => {
 	// activities be expressed as U/min !!!
 	const treatmentsActivity = treatments.map((e) => {
 		const minutesAgo = e.minutesAgo;
@@ -30,54 +29,13 @@ export const computeCortisoneActivity = (
 	return resultAct;
 };
 
-export default function (treatments: Treatment[], weight: number): number {
+export default function (treatments: TreatmentDrug[], weight: number): number {
 	//Find Cortisone boluses
-	const cortisones =
-		treatments && treatments.length
-			? treatments
-					.filter((e) => e.notes)
-					.map((e) => {
-						const lastIndexEmptySpace = e.notes.lastIndexOf(' ');
-						logger.debug(
-							'cortisone %o',
-							parseInt(e.notes.slice(lastIndexEmptySpace), 10)
-						);
-						return {
-							...e,
-							minutesAgo: getDeltaMinutes(e.created_at),
-							drug: e.notes.slice(0, 3),
-							// units: parseInt(e.notes.slice(-2))
-							units: parseInt(e.notes.slice(lastIndexEmptySpace), 10) || 0,
-						};
-					})
-					.filter((e) => e.minutesAgo >= 0)
-			: [];
 
-	const lastCortisones = cortisones.filter(function (e) {
-		return e.minutesAgo <= 45 * 60; // keep only the Cortisones from the last 45 hours
-	});
-
-
-	const lastCOR = lastCortisones
-		.filter((e) => {
-			return (
-				e.drug === 'pre' ||
-				e.drug === 'Pre' ||
-				e.drug === 'cor' ||
-				e.drug === 'Cor'
-			); // keep only the Cortisonees from the last 45 hours
-		})
-		.map((e) => {
-			const duration = durationCortisone.COR(e.insulin, weight);
-			const peak = peakCortisone.COR(duration);
-			return {
-				...e,
-				duration,
-				peak,
-			};
-		});
-	const activityCOR = lastCOR.length > 0 ? computeCortisoneActivity(lastCOR) : 0;
+	const lastCOR = getDrugActivity(treatments, weight, 'COR');
+	const activityCOR =
+		lastCOR.length > 0 ? computeCortisoneActivity(lastCOR) : 0;
 	logger.debug('these are the last COR: %o', { lastCOR, activityCOR });
 
-	return  (activityCOR/2);
+	return activityCOR / 2;
 }

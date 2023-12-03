@@ -48,7 +48,7 @@ const sgv_start = (
 		oldSgv +
 			BGI_ins * 18 +
 			liverDeltaMinutesActivity * 18 +
-			carbsDeltaMinutesActivity * 18 -
+			carbsDeltaMinutesActivity * 18 +
 			cortisoneDeltaMinutesActivity * 18
 	);
 	let limited_sgv_pump = sgv_pump;
