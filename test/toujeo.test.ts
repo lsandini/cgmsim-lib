@@ -6,16 +6,16 @@ import { diffOptions, getPngSnapshot } from './inputTest';
 const { toMatchImageSnapshot } = require('jest-image-snapshot');
 
 type MockTreatment = {
-    units: TreatmentDelta['units'];
-    minutesAgo: TreatmentDelta['minutesAgo'];
-  };
+  units: TreatmentDelta['units'];
+  minutesAgo: TreatmentDelta['minutesAgo'];
+};
 
 describe('test toujeo', () => {
   beforeEach(() => {
     expect.extend({ toMatchImageSnapshot });
   });
 
-  const toujeo = (weight, treatments:MockTreatment[]) => {
+  const toujeo = (weight, treatments: MockTreatment[]) => {
     const toujeoT = treatments.map((e) => {
       const duration = drugs.TOU.duration(e.units, weight);
       const peak = drugs.TOU.peak(duration);
@@ -63,7 +63,7 @@ describe('test toujeo', () => {
           value: sgv,
         })),
       },
-      { scaleY: 1}
+      { scaleY: 1 }
     );
 
     expect(png).toMatchImageSnapshot(diffOptions);

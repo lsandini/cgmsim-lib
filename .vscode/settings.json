@@ -1,63 +1,66 @@
-{	
-    "cSpell.words": [
-		"Basals",
-		"carb",
-		"carbrate",
-		"cgmsim",
-		"cosin",
-		"cosinus",
-		"degludec",
-		"degludecs",
-		"degs",
-		"detemir",
-		"detemirs",
-		"dets",
-		"Fcns",
-		"glargine",
-		"Glargines",
-		"glas",
-		"glycemic",
-		"ibolus",
-		"Interm",
-		"logtail",
-		"mmol",
-		"perlin",
-		"pino",
-		"sgvdir",
-		"sgvs",
-		"sinusdata",
-		"toujeo",
-		"toujeos",
-		"tous"
-	],
-    "jestrunner.runOptions": [],
-    "jestrunner.debugOptions": {
-        "args": [],
-        "sourcemaps": "inline",
-        "disableOptimisticBPs": true
-	},
-	"prettier.useTabs": true,
-	"prettier.singleQuote": true,
-	"[html]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
-	},
-	"[xml]": {
-		"editor.defaultFormatter": "DotJoshJohnson.xml"
-	},
-	"[javascript]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
-	},	
-	"[jsonc]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
-	},
-	"[css]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
-	},
-	"[javascriptreact]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
-	},
-	"[typescript]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
-	},
-	"editor.indentSize": "tabSize"
+{
+  "cSpell.words": [
+    "Basals",
+    "carb",
+    "carbrate",
+    "cgmsim",
+    "cosin",
+    "cosinus",
+    "degludec",
+    "degludecs",
+    "degs",
+    "detemir",
+    "detemirs",
+    "dets",
+    "Fcns",
+    "glargine",
+    "Glargines",
+    "glas",
+    "glycemic",
+    "ibolus",
+    "Interm",
+    "logtail",
+    "mmol",
+    "perlin",
+    "pino",
+    "sgvdir",
+    "sgvs",
+    "sinusdata",
+    "toujeo",
+    "toujeos",
+    "tous"
+  ],
+  "jestrunner.runOptions": [],
+  "jestrunner.debugOptions": {
+    "args": [],
+    "sourcemaps": "inline",
+    "disableOptimisticBPs": true
+  },
+  "prettier.useTabs": true,
+  "prettier.singleQuote": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[xml]": {
+    "editor.defaultFormatter": "DotJoshJohnson.xml"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.indentSize": "tabSize",
+  "editor.tabSize": 2,
+  "editor.formatOnSave": true
 }

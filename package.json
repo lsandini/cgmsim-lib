@@ -17,7 +17,8 @@
     "build": "tsc -p tsconfig-build.json",
     "doc": "typedoc",
     "lint": "eslint",
-    "test": "jest"
+    "test": "jest",
+    "format": "npx prettier --write src/**/*.ts"
   },
   "repository": {
     "type": "git",
