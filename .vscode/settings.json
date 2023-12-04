@@ -62,5 +62,8 @@
   },
   "editor.indentSize": "tabSize",
   "editor.tabSize": 2,
-  "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "editor.detectIndentation": false,
+  "prettier.trailingComma": "all",
+  "prettier.printWidth": 140
 }
