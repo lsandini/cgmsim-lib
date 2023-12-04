@@ -16,26 +16,26 @@ export default function (now: number) {
 	//timestamp in fraction of a day;
 	logger.debug(
 		'timestamp in fraction of a day %o',
-		now / 86400000 - Math.floor(now / 86400000)
+		now / 86400000 - Math.floor(now / 86400000),
 	);
 
 	//fraction of a day in hours;
 	logger.debug(
 		'fraction of a day in hours %o',
-		(now / 86400000 - Math.floor(now / 86400000)) * 24
+		(now / 86400000 - Math.floor(now / 86400000)) * 24,
 	);
 
 	//fraction of a day in hours adding 2 for UTC+2;
 	logger.debug(
 		'fraction of a day in hours adding 2 for UTC+2 %o',
-		(now / 86400000 - Math.floor(now / 86400000)) * 24 + 2
+		(now / 86400000 - Math.floor(now / 86400000)) * 24 + 2,
 	);
 
 	// time of the day in hours - decimals, not minutes
 	const hours = (now / 86400000 - Math.floor(now / 86400000)) * 24 + 2;
 	logger.debug(
 		'time of the day in hours - using decimals, not minutes:  %o',
-		hours.toFixed(2)
+		hours.toFixed(2),
 	);
 
 	// express minutes also;
@@ -44,7 +44,7 @@ export default function (now: number) {
 	logger.debug(
 		'express minutes in minutes also: %o',
 		minutes.toFixed(),
-		'minutes'
+		'minutes',
 	);
 
 	// time of the day in 2 pi cycle;
@@ -59,14 +59,14 @@ export default function (now: number) {
 	const SIN = Math.sin((dayCycleDeg * Math.PI) / 180);
 	logger.debug(
 		'value of the sin function according to hours, oscillating from -1 to +1:  %o',
-		SIN.toFixed(2)
+		SIN.toFixed(2),
 	);
 
 	// value of the sin function oscillating between 0 and 2;
 	const sinInterm = Math.sin((dayCycleDeg * Math.PI) / 180) + 1;
 	logger.debug(
 		'value of the sin function oscillating between 0 and 2:  %o',
-		sinInterm.toFixed(2)
+		sinInterm.toFixed(2),
 	);
 
 	//==========================================================================================
@@ -76,7 +76,7 @@ export default function (now: number) {
 	const sinCorr = sinFunction / 5 + 1;
 	logger.debug(
 		'value of the sin function oscillating around 1, +/- 20 %, starting from 1 and ending in 1:  %o',
-		sinCorr.toFixed(2)
+		sinCorr.toFixed(2),
 	);
 	logger.debug(
 		'When the time of day is ' +
@@ -84,7 +84,7 @@ export default function (now: number) {
 			' hours and ' +
 			minutes.toFixed() +
 			' minutes, the sinusoidal value is: ' +
-			sinCorr.toFixed(3)
+			sinCorr.toFixed(3),
 	);
 
 	//==========================================================================================
@@ -94,7 +94,7 @@ export default function (now: number) {
 	const COScorr = cosinFunction / 5 + 1;
 	logger.debug(
 		'value of the cos function oscillating around 1, +/- 0.5, starting from 1.5 and ending in 1.5: :  %o',
-		COScorr.toFixed(2)
+		COScorr.toFixed(2),
 	);
 	logger.debug(
 		'When the time of day is ' +
@@ -102,7 +102,7 @@ export default function (now: number) {
 			' hours and ' +
 			minutes.toFixed() +
 			' minutes, the cosinusoidal value is: ' +
-			COScorr.toFixed(3)
+			COScorr.toFixed(3),
 	);
 
 	const sinCurves = {

@@ -83,7 +83,6 @@ const simulator = (params: MainParamsUVA) => {
 		return e.minutesAgo <= 45 * 60; // keep only the basals from the last 45 hours
 	});
 
-
 	const basalActivity = basal(activeDrugTreatments, weight);
 
 	const last5MinuteTreatments = treatments
@@ -133,7 +132,7 @@ const simulator = (params: MainParamsUVA) => {
 	let result: UvaOutput = patient.getOutputs(
 		partialMinutes,
 		patientState,
-		userParams
+		userParams,
 	);
 	const lastPatientState = { ...patientState };
 	// start simulation
@@ -169,7 +168,7 @@ const simulator = (params: MainParamsUVA) => {
 				patient.getDerivatives(time, state, userParams),
 			partialMinutes,
 			patientState,
-			oneMinute
+			oneMinute,
 		);
 		//t partialMinutes result
 		result = patient.getOutputs(partialMinutes, patientState, userParams);

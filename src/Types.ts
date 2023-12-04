@@ -100,7 +100,6 @@ export type TreatmentDrug = {
 	minutesAgo: number;
 };
 
-
 /**
  * Represents a treatment delta with additional minutes ago information.
  */

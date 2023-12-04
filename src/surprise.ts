@@ -8,7 +8,7 @@ export default function ({ treatments }) {
 	if (moment().hours() === 23) {
 		const totalMeals = treatments.filter(
 			(entry) =>
-				moment(entry.mills).format('YYYYMMDD') === moment().format('YYYYMMDD')
+				moment(entry.mills).format('YYYYMMDD') === moment().format('YYYYMMDD'),
 		);
 
 		logger.debug('totalMeals  %o', totalMeals);

@@ -167,7 +167,7 @@ export const line = ({
 		.enter()
 		.append('path')
 		.attr('stroke', (d, i) =>
-			i < _lineColors.length ? _lineColors[i] : _lineColor
+			i < _lineColors.length ? _lineColors[i] : _lineColor,
 		)
 		.attr('d', lineChart);
 

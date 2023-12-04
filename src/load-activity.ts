@@ -23,7 +23,7 @@ import { removeTrailingSlash, loadBase } from './utils';
 export default function (
 	nsUrl: string,
 	apiSecret: string,
-	fromUtcString: string = null
+	fromUtcString: string = null,
 ) {
 	const _nsUrl = removeTrailingSlash(nsUrl);
 	const fromFilter = fromUtcString

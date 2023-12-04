@@ -36,7 +36,7 @@ export const drugs = {
 export const getDrugActivity = (
 	treatments: TreatmentDrug[],
 	weight: number,
-	drug: keyof typeof drugs
+	drug: keyof typeof drugs,
 ) => {
 	const currentDrug = drugs[drug];
 	return treatments
@@ -52,23 +52,24 @@ export const getDrugActivity = (
 			};
 		});
 };
-export function transformNoteTreatmentsDrug(treatments: Treatment[]):TreatmentDrug[] {
+export function transformNoteTreatmentsDrug(
+	treatments: Treatment[],
+): TreatmentDrug[] {
 	return treatments && treatments.length
 		? treatments
-			.filter((e) => e.notes)
-			.map((e) => {
-				const lastIndexEmptySpace = e.notes.lastIndexOf(' ');
-				logger.debug(
-					'treatments %o',
-					parseInt(e.notes.slice(lastIndexEmptySpace), 10)
-				);
-				return {
-					minutesAgo: getDeltaMinutes(e.created_at),
-					drug: e.notes.slice(0, 3),
-					units: parseInt(e.notes.slice(lastIndexEmptySpace), 10) || 0,
-				};
-			})
-			.filter((e) => e.minutesAgo >= 0)
+				.filter((e) => e.notes)
+				.map((e) => {
+					const lastIndexEmptySpace = e.notes.lastIndexOf(' ');
+					logger.debug(
+						'treatments %o',
+						parseInt(e.notes.slice(lastIndexEmptySpace), 10),
+					);
+					return {
+						minutesAgo: getDeltaMinutes(e.created_at),
+						drug: e.notes.slice(0, 3),
+						units: parseInt(e.notes.slice(lastIndexEmptySpace), 10) || 0,
+					};
+				})
+				.filter((e) => e.minutesAgo >= 0)
 		: [];
 }
-

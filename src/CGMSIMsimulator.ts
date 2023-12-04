@@ -91,17 +91,17 @@ const simulator = (params: MainParams): SimulationResult => {
 			bolusActivity,
 			cortisoneActivity,
 		},
-		isfActivityDependent
+		isfActivityDependent,
 	);
 
 	logger.debug('this is the new sgv: %o', newSgvValue);
 	logger.info(
 		'this is the ISF multiplicator (or physicalISF): %o',
-		isfActivityDependent / isfConstant
+		isfActivityDependent / isfConstant,
 	);
 	logger.info(
 		'this is the liver multiplicator (or physicalLiver): %o',
-		activityFactor
+		activityFactor,
 	);
 
 	// const arrows = arrowsRun([newSgvValue, ...entries]);

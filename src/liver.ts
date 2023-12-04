@@ -4,7 +4,7 @@ import logger from './utils';
 export default function (
 	isfConstant: number,
 	cr: number,
-	activityFactor: number = 1
+	activityFactor: number = 1,
 ): number {
 	const _ISF = isfConstant / 18;
 	const _CR = cr;

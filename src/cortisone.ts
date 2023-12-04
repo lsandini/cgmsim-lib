@@ -18,7 +18,7 @@ export const computeCortisoneActivity = (treatments: TreatmentDelta[]) => {
 			e.peak,
 			e.duration,
 			minutesAgo,
-			units
+			units,
 		);
 		return activity;
 	});

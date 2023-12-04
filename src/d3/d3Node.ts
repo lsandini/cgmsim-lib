@@ -13,7 +13,7 @@ function fixXmlCase(text: string) {
 			new RegExp('(<|</)' + tagName.toLowerCase() + '\\b', 'g'),
 			function (all, start) {
 				return start + tagName;
-			}
+			},
 		);
 	}
 	return text;
@@ -46,7 +46,7 @@ export class D3Node {
 		if (svgStyles && !styles) {
 			// deprecated svgStyles option
 			console.warn(
-				'WARNING: svgStyles is deprecated, please use styles instead !!'
+				'WARNING: svgStyles is deprecated, please use styles instead !!',
 			);
 			styles = svgStyles;
 		}
@@ -101,7 +101,7 @@ export class D3Node {
 		if ((this.d3Element.select('svg') as any).node()) {
 			// temp until: https://github.com/tmpvar/jsdom/issues/1368
 			return fixXmlCase(
-				((this.d3Element.select('svg') as any).node() as Element).outerHTML
+				((this.d3Element.select('svg') as any).node() as Element).outerHTML,
 			);
 		}
 		return '';

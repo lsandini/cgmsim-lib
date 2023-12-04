@@ -23,7 +23,7 @@ export default function (
 	sgvLast: number,
 	sgv1: number,
 	sgv2: number,
-	sgv3: number
+	sgv3: number,
 ): { sgvdir: number; direction: Direction } {
 	if (sgvLast && sgv1 && sgv2 && sgv3) {
 		const sgvdir1 = sgvLast - sgv1;
@@ -33,7 +33,7 @@ export default function (
 		logger.debug(
 			'this is the mean SGV 5 min variation in the last 15 minutes: %o',
 			sgvdir15min,
-			'mg/dl'
+			'mg/dl',
 		);
 
 		if (sgvdir15min < -10) {

@@ -7,7 +7,7 @@ export default function carbs(
 	treatments: Treatment[] = [],
 	carbsAbs: number,
 	isf: number,
-	cr: number
+	cr: number,
 ): number {
 	const isfMMol = isf / 18; //(mmol/l)/U
 
@@ -54,7 +54,7 @@ export default function carbs(
 			'fast_carbs:',
 			fast_carbs,
 			'slow_carbs: %o',
-			slow_carbs
+			slow_carbs,
 		);
 
 		let fast_carbrate = 0;
@@ -100,7 +100,7 @@ export default function carbs(
 
 	const totalCarbRate = timeSinceMealAct.reduce(
 		(tot, carbrate) => tot + carbrate,
-		0
+		0,
 	);
 	const DBGC = (isfMMol / cr) * totalCarbRate; //DeltaBloodGlucoseFromCarbs
 	logger.debug(`CARB RATE:%o`, totalCarbRate);

@@ -4,7 +4,7 @@ import { Treatment } from './Types';
 export default (
 	treatments: Treatment[] = [],
 	dia: number,
-	peak: number
+	peak: number,
 ): number => {
 	const insulin = treatments
 		?.filter((e) => e.insulin)
@@ -27,12 +27,12 @@ export default (
 
 	logger.debug(
 		'these are the last insulins and activities: %o',
-		insulinsBolusAct
+		insulinsBolusAct,
 	);
 
 	const bolusAct = insulinsBolusAct.reduce(
 		(tot, activity) => tot + activity,
-		0
+		0,
 	);
 	logger.debug('these are the insulins bolus activity: %o', bolusAct);
 	return bolusAct;
