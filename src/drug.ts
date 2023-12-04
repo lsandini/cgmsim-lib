@@ -1,4 +1,5 @@
-import { TreatmentDrug } from './Types';
+import { Treatment, TreatmentDrug } from './Types';
+import logger, { getDeltaMinutes } from './utils';
 
 export const drugs = {
 	GLA: {
@@ -51,3 +52,23 @@ export const getDrugActivity = (
 			};
 		});
 };
+export function transformNoteTreatmentsDrug(treatments: Treatment[]):TreatmentDrug[] {
+	return treatments && treatments.length
+		? treatments
+			.filter((e) => e.notes)
+			.map((e) => {
+				const lastIndexEmptySpace = e.notes.lastIndexOf(' ');
+				logger.debug(
+					'treatments %o',
+					parseInt(e.notes.slice(lastIndexEmptySpace), 10)
+				);
+				return {
+					minutesAgo: getDeltaMinutes(e.created_at),
+					drug: e.notes.slice(0, 3),
+					units: parseInt(e.notes.slice(lastIndexEmptySpace), 10) || 0,
+				};
+			})
+			.filter((e) => e.minutesAgo >= 0)
+		: [];
+}
+

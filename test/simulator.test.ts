@@ -130,7 +130,7 @@ describe('simulator test', () => {
     now = moment('2022-06-04T13:00:00.000Z');
     const treatments: Treatment[] = [
       {
-        created_at: now.toISOString(),
+        created_at: '2022-06-04T13:00:00.000Z',
         carbs: 40,
       },
       {
@@ -174,7 +174,9 @@ describe('simulator test', () => {
         mills: now.toDate().getTime(),
         sgv: result.sgv,
       });
-      sgvS.push(result.sgv);
+      for (let i = 0; i < 5; i++) {
+        sgvS.push(result.sgv);
+      }
       expect(result.deltaMinutes).toBeGreaterThanOrEqual(0);
       expect(result.basalActivity).toBeGreaterThanOrEqual(0);
       basalActivities.push(result.basalActivity);
@@ -206,7 +208,7 @@ describe('simulator test', () => {
     const png = await getPngSnapshot(
       {
         type: 'single',
-        values: noiseActivities.map((sgv, index) => ({
+        values: sgvS.map((sgv, index) => ({
           key: index,
           value: sgv,
         })),

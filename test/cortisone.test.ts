@@ -8,7 +8,7 @@ import {
   peakCortisone,
 } from '../src/cortisone';
 import { diffOptions, getPngSnapshot } from './inputTest';
-import { transformNoteTreatmentsDrug } from '../src/utils';
+import { transformNoteTreatmentsDrug } from '../src/drug';
 const { toMatchImageSnapshot } = require('jest-image-snapshot');
 
 describe('test cortisone', () => {

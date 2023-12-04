@@ -1,17 +1,15 @@
-import logger, { getDeltaMinutes, transformNoteTreatmentsDrug } from './utils';
-
+import logger from './utils';
 import bolus from './bolus';
 import basal from './basal';
 import cortisone from './cortisone';
-
 import carbs from './carbs';
-import arrowsRun from './arrows';
 import liverRun from './liver';
 import sgv from './sgv';
 import pump from './pump';
 import { MainParams, SimulationResult } from './Types';
 import moment = require('moment');
 import { physicalIsf, physicalLiver } from './physical';
+import { transformNoteTreatmentsDrug } from './drug';
 /**
  * Simulation module for blood glucose data calculation.
  * @param params - Main parameters for running the simulation.

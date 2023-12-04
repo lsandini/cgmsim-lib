@@ -5,7 +5,7 @@ import { oldComputeBasal } from '../old/oldComputeBasal';
 import oldToujeoRun from '../old/oldToujeo';
 import oldGlargine from '../old/oldGlargine';
 import moment = require('moment');
-import { transformNoteTreatmentsDrug } from '../src/utils';
+import { transformNoteTreatmentsDrug } from '../src/drug';
 
 describe('test computeBasalIOB', () => {
   const date = new Date('2022-05-07T11:20:00Z');

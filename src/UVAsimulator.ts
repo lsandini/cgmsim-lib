@@ -1,4 +1,4 @@
-import logger, { getDeltaMinutes, transformNoteTreatmentsDrug } from './utils';
+import logger, { getDeltaMinutes } from './utils';
 
 import basal from './basal';
 import basalProfile from './basalProfile';
@@ -13,6 +13,7 @@ import {
 import { PatientUva } from './uva';
 import RK4 from './SolverRK';
 import { currentIntensity } from './physical';
+import { transformNoteTreatmentsDrug } from './drug';
 /**
  * Simulates blood glucose levels in response to various parameters and inputs.
  * @param params - Main parameters for running the simulation.
