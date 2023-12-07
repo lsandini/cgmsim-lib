@@ -1,8 +1,7 @@
 import { EnvParam, Sgv, Treatment } from '../src/Types';
 import simulator from '../src/CGMSIMsimulator';
 import moment = require('moment');
-import { diffOptions, getPngSnapshot } from './inputTest';
-import cortisone from 'src/cortisone';
+import { diffOptions, getPngSnapshot, testGenerator } from './inputTest';
 const { toMatchImageSnapshot } = require('jest-image-snapshot');
 
 const math = global.Math;
@@ -176,16 +175,16 @@ describe('simulator test', () => {
       });
       for (let i = 0; i < 5; i++) {
         sgvS.push(result.sgv);
+        basalActivities.push(result.basalActivity * 18 * 5);
+        bolusActivities.push(result.bolusActivity * 18 * 5);
+        carbsActivities.push(result.carbsActivity * 18 * 5);
+        liverActivities.push(result.liverActivity * 18 * 5);
       }
       expect(result.deltaMinutes).toBeGreaterThanOrEqual(0);
       expect(result.basalActivity).toBeGreaterThanOrEqual(0);
-      basalActivities.push(result.basalActivity);
       expect(result.bolusActivity).toBeGreaterThanOrEqual(0);
-      bolusActivities.push(result.bolusActivity);
       expect(result.carbsActivity).toBeGreaterThanOrEqual(0);
-      carbsActivities.push(result.carbsActivity);
       expect(result.liverActivity).toBeGreaterThanOrEqual(0);
-      liverActivities.push(result.liverActivity);
 
       // console.log('Result ' + result.sgv + ' ' + now.toLocaleString())
       log.push('Result ' + result.sgv + ' ' + now.toISOString());
@@ -197,23 +196,36 @@ describe('simulator test', () => {
     }
     expect(lastSgv).toBeGreaterThanOrEqual(397);
     let data: any = [
-      // noiseActivities.map((sgv, index) => ({ key: index*5, value: sgv })),
-      // basalActivities.map((sgv, index) => ({ key: index*5, value: sgv })),
-      // bolusActivities.map((sgv, index) => ({ key: index*5, value: sgv })),
-      // carbsActivities.map((sgv, index) => ({ key: index*5, value: sgv })),
-      // liverActivities.map((sgv, index) => ({ key: index*5, value: sgv })),
       sgvS.map((sgv, index) => ({ key: index * 5, value: sgv })),
     ];
     data.allKeys = noiseActivities.map((sgv, index) => index * 5);
     const png = await getPngSnapshot(
       {
-        type: 'single',
-        values: sgvS.map((sgv, index) => ({
-          key: index,
-          value: sgv,
-        })),
+        type: 'multiple',
+        values: [
+          sgvS.map((sgv, index) => ({
+            key: index,
+            value: sgv,
+            name: 'sgv',
+          })),
+          bolusActivities.map((val, index) => ({
+            key: index,
+            value: val,
+            name: 'bolus',
+          })),
+          basalActivities.map((val, index) => ({
+            key: index,
+            value: val,
+            name: 'basal',
+          })),
+          liverActivities.map((val, index) => ({
+            key: index,
+            value: val,
+            name: 'liver',
+          })),
+        ],
       },
-      { scaleY: 400 }
+      { scaleY: 400 },
     );
 
     expect(png).toMatchImageSnapshot(diffOptions);
@@ -328,7 +340,7 @@ describe('simulator test', () => {
         type: 'single',
         values: sgvS.map((sgv, index) => ({ key: index, value: sgv })),
       },
-      { scaleY: 400 }
+      { scaleY: 400 },
     );
 
     expect(png).toMatchImageSnapshot(diffOptions);
@@ -357,36 +369,36 @@ describe('simulator test', () => {
         sgv: startSgv,
       },
     ];
-	const entriesCortisone: Sgv[] = [
-		{
-		  mills: now.add(-5, 'minutes').toDate().getTime(),
-		  sgv: startSgv,
-		},
-		{
-		  mills: now.add(-5, 'minutes').toDate().getTime(),
-		  sgv: startSgv,
-		},
-		{
-		  mills: now.add(-5, 'minutes').toDate().getTime(),
-		  sgv: startSgv,
-		},
-		{
-		  mills: now.add(-5, 'minutes').toDate().getTime(),
-		  sgv: startSgv,
-		},
-	  ];
+    const entriesCortisone: Sgv[] = [
+      {
+        mills: now.add(-5, 'minutes').toDate().getTime(),
+        sgv: startSgv,
+      },
+      {
+        mills: now.add(-5, 'minutes').toDate().getTime(),
+        sgv: startSgv,
+      },
+      {
+        mills: now.add(-5, 'minutes').toDate().getTime(),
+        sgv: startSgv,
+      },
+      {
+        mills: now.add(-5, 'minutes').toDate().getTime(),
+        sgv: startSgv,
+      },
+    ];
     now = moment('2022-06-04T13:00:00.000Z');
     const treatmentsCortisone: Treatment = {
       created_at: '2022-06-04T10:14:00.000Z',
       notes: 'cor 40',
       carbs: 0,
     };
-	const treatmentsBolus= {
-        eventType: 'Meal Bolus',
-        insulin: 5,
-        created_at: '2022-06-04T14:30:00.000Z',
-        carbs: null,
-      }
+    const treatmentsBolus = {
+      eventType: 'Meal Bolus',
+      insulin: 5,
+      created_at: '2022-06-04T14:30:00.000Z',
+      carbs: null,
+    };
     const treatments: Treatment[] = [
       {
         created_at: '2022-06-04T10:00:00.000Z',
@@ -420,8 +432,8 @@ describe('simulator test', () => {
     for (let index = 0; index < 60 * 24; ) {
       const resultCortisone = simulator({
         env,
-        entries:entriesCortisone,
-        treatments:[...treatments,treatmentsCortisone,treatmentsBolus],
+        entries: entriesCortisone,
+        treatments: [...treatments, treatmentsCortisone, treatmentsBolus],
         profiles: [],
         user: { nsUrl },
       });
@@ -433,10 +445,10 @@ describe('simulator test', () => {
         sgvSCortisone.push(resultCortisone.sgv);
       }
 
-	  const result = simulator({
+      const result = simulator({
         env,
         entries,
-        treatments:[...treatments],
+        treatments: [...treatments],
         profiles: [],
         user: { nsUrl },
       });
@@ -467,11 +479,78 @@ describe('simulator test', () => {
       {
         type: 'multiple',
         values: [
-			sgvSCortisone.map((sgv, index) => ({ key: index, value: sgv })),
-			sgvS.map((sgv, index) => ({ key: index, value: sgv }))
-		],
+          sgvSCortisone.map((sgv, index) => ({ key: index, value: sgv })),
+          sgvS.map((sgv, index) => ({ key: index, value: sgv })),
+        ],
       },
-      { scaleY: 400 }
+      { scaleY: 400 },
+    );
+
+    expect(png).toMatchImageSnapshot(diffOptions);
+    return;
+  });
+
+  test('start from 100 @12:00Z with deg23(-4h) + cor 40mg(+1h) + bolus 5u(+1.5h)', async () => {
+    const result = testGenerator(100, {
+      treatments: [
+        {
+          type: 'COR',
+          minutes: 60,
+          units: 40,
+        },
+        {
+          type: 'DEG',
+          minutes: -240,
+          units: 23,
+        },
+      ],
+      boluses: [
+        {
+          insulin: 5,
+          minutes: 90,
+        },
+      ],
+      carbs: [],
+    });
+
+    expect(result.sgvS).toMatchSnapshot();
+    const png = await getPngSnapshot(
+      {
+        type: 'multiple',
+        values: [
+          result.sgvS.map((value, index) => ({
+            key: index,
+            value: value,
+            name: 'sgvS',
+          })),
+          result.carbsActivities.map((value, index) => ({
+            key: index,
+            value: value * 10,
+            name: 'carbsActivities',
+          })),
+          result.basalActivities.map((value, index) => ({
+            key: index,
+            value: value * 10,
+            name: 'basalActivities',
+          })),
+          result.bolusActivities.map((value, index) => ({
+            key: index,
+            value: value * 10,
+            name: 'bolusActivities',
+          })),
+          result.cortisoneActivity.map((value, index) => ({
+            key: index,
+            value: value * 10,
+            name: 'cortisoneActivity',
+          })),
+          result.liverActivities.map((value, index) => ({
+            key: index,
+            value: value * 10,
+            name: 'liverActivities',
+          })),
+        ],
+      },
+      { scaleY: 400 },
     );
 
     expect(png).toMatchImageSnapshot(diffOptions);

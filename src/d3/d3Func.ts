@@ -2,6 +2,7 @@ import { D3Node } from './d3Node';
 type ValueDataSource = {
 	key: number;
 	value: number;
+	name?: string;
 };
 export type SingleLineDataSource = {
 	type: 'single';
@@ -32,9 +33,12 @@ export const line = ({
 	data,
 	selector: _selector = '#chart',
 	container: _container = `
-    <div id="container">
+    <div id="container" style="display:flex;flex-direction:column">
       <h2>Line Chart</h2>
-      <div id="chart"></div>
+      <div id="chart">
+
+	  </div>
+
     </div>`,
 	style: _style = '',
 	width: _width = 960,
@@ -44,11 +48,15 @@ export const line = ({
 	lineColor: _lineColor = 'steelblue',
 	lineColors: _lineColors = [
 		'deepskyblue',
-		'lightskyblue',
-		'lightblue',
-		'#aaa',
-		'#777',
-		'#888',
+		'gold',
+		'purple',
+		'darkgreen',
+		'red',
+		'darkorange',
+		'black',
+		'grey',
+		'brown',
+		'grey1',
 	],
 	isCurve: _isCurve = true,
 	tickSize: _tickSize = 5,
@@ -108,7 +116,9 @@ export const line = ({
 		} else {
 			if (data.type === 'multiple') {
 				const firstRo: ValueDataSource[] =
-					data.values.length > 0 ? data.values[0] : [{ key: 0, value: 0 }];
+					data.values.length > 0
+						? data.values[0]
+						: [{ key: 0, value: 0, name: '' }];
 				return d3.extent(firstRo, (d) => d.key);
 			}
 			return d3.extent(data.values, (d) => d.key);
@@ -170,6 +180,27 @@ export const line = ({
 			i < _lineColors.length ? _lineColors[i] : _lineColor,
 		)
 		.attr('d', lineChart);
+	if (data.type === 'multiple') {
+		// const legend = d3n.getLegend('#my_dataviz');
+		const legend = svg;
+
+		data.values.forEach((val, index) => {
+			legend
+				.append('circle')
+				.attr('cx', 100)
+				.attr('cy', 10 + 30 * index)
+				.attr('r', 6)
+				.style('fill', _lineColors[index]);
+			legend
+				.append('text')
+				.attr('x', 120)
+				.attr('y', 10 + 30 * index)
+				.text(val[0]?.name ? val[0].name : 'data_' + index)
+				.style('font-size', '15px')
+				.style('fill', _lineColors[index])
+				.attr('alignment-baseline', 'middle');
+		});
+	}
 
 	return d3n;
 };

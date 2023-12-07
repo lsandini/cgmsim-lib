@@ -187,6 +187,7 @@ export type SimulationResult = {
 	sgv: number;
 	deltaMinutes: number;
 	carbsActivity: number;
+	cortisoneActivity: number;
 	basalActivity: number;
 	bolusActivity: number;
 	liverActivity: number;

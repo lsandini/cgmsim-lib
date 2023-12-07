@@ -65,12 +65,13 @@ export class D3Node {
 
 		// setup d3 selection
 		let d3Element = d3Module.select(document.body);
+
 		if (selector) {
 			d3Element = d3Element.select(selector);
 		}
 
 		this.options = { d3Module, selector, container, styles, canvasModule };
-		this.jsDom = new JSDOM();
+		this.jsDom = jsDom;
 		this.document = document;
 		this.window = document.defaultView;
 		this.d3Element = d3Element;
@@ -95,6 +96,14 @@ export class D3Node {
 			});
 		}
 		return svg;
+	}
+	getLegend(selector: string) {
+		let d3Element = this.d3.select(this.document.body);
+
+		if (selector) {
+			d3Element = d3Element.select(selector);
+		}
+		return d3Element;
 	}
 
 	svgString() {
