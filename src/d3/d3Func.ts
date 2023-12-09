@@ -52,11 +52,10 @@ export const line = ({
 		'purple',
 		'darkgreen',
 		'red',
-		'darkorange',
-		'black',
+		'orange',
 		'grey',
-		'brown',
-		'grey1',
+		'pink',
+		'blue',
 	],
 	isCurve: _isCurve = true,
 	tickSize: _tickSize = 5,
@@ -194,7 +193,7 @@ export const line = ({
 			legend
 				.append('text')
 				.attr('x', 120)
-				.attr('y', 10 + 30 * index)
+				.attr('y', 14 + 30 * index)
 				.text(val[0]?.name ? val[0].name : 'data_' + index)
 				.style('font-size', '15px')
 				.style('fill', _lineColors[index])

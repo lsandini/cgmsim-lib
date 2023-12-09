@@ -255,6 +255,9 @@ type TestResult = {
   liverActivities: number[];
   cortisoneActivity: number[];
   sgvS: number[];
+  activityFactor: number[];
+  isfConstantFactor: number[];
+  isfDynamicFactor: number[];
 };
 type TestBolus = {
   insulin: number;
@@ -262,6 +265,7 @@ type TestBolus = {
 };
 export const testGenerator = (
   startSgv: number,
+  hoursDuration: number,
   {
     treatments,
     carbs,
@@ -290,6 +294,9 @@ export const testGenerator = (
   const carbsActivities = [];
   const liverActivities = [];
   const cortisoneActivity = [];
+  const activityFactor = [];
+  const isfConstantFactor = [];
+  const isfDynamicFactor = [];
   const sgvS = [];
   let now = () => moment('2022-02-02T12:00:00.000Z');
   const entries: Sgv[] = [
@@ -334,7 +341,7 @@ export const testGenerator = (
   let _now = now();
   jest.setSystemTime(_now.toDate());
 
-  for (let index = 0; index < 60 * 4; ) {
+  for (let index = 0; index < 60 * hoursDuration; ) {
     const result = simulator({
       env,
       entries,
@@ -346,14 +353,17 @@ export const testGenerator = (
       mills: _now.toDate().getTime(),
       sgv: result.sgv,
     });
-    for (let i = 0; i < 5; i++) {
-      sgvS.push(result.sgv);
-      basalActivities.push(result.basalActivity);
-      bolusActivities.push(result.bolusActivity);
-      carbsActivities.push(result.carbsActivity);
-      liverActivities.push(result.liverActivity);
-      cortisoneActivity.push(result.cortisoneActivity);
-    }
+    // for (let i = 0; i < 5; i++) {
+    sgvS.push(result.sgv);
+    basalActivities.push(result.basalActivity);
+    bolusActivities.push(result.bolusActivity);
+    carbsActivities.push(result.carbsActivity);
+    liverActivities.push(result.liverActivity);
+    cortisoneActivity.push(result.cortisoneActivity);
+    activityFactor.push(result.activityFactor);
+    isfConstantFactor.push(result.isf.constant);
+    isfDynamicFactor.push(result.isf.dynamic);
+    // }
 
     _now = _now.add(5, 'minutes');
     index = index + 5;
@@ -367,6 +377,9 @@ export const testGenerator = (
     carbsActivities,
     liverActivities,
     cortisoneActivity,
+    activityFactor,
+    isfConstantFactor,
+    isfDynamicFactor,
     sgvS,
   };
 };
