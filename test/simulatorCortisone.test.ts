@@ -29,17 +29,22 @@ describe('simulatorCortisone test', () => {
         {
           type: 'COR',
           minutes: 60,
-          units: 40,
+          units: 20,
         },
         {
           type: 'DEG',
-          minutes: -240,
+          minutes: -(4 * 60),
+          units: 23,
+        },
+        {
+          type: 'DEG',
+          minutes: 20 * 60,
           units: 23,
         },
       ],
       boluses: [
         {
-          insulin: 5,
+          insulin: 3,
           minutes: 90,
         },
       ],
@@ -85,11 +90,6 @@ describe('simulatorCortisone test', () => {
             key: index * 5,
             value: value * 10,
             name: 'activityFactor',
-          })),
-          result.isfConstantFactor.map((value, index) => ({
-            key: index * 5,
-            value: value,
-            name: 'isfConstantFactor',
           })),
           result.isfDynamicFactor.map((value, index) => ({
             key: index * 5,
