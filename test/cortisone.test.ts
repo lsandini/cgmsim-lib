@@ -2,13 +2,9 @@ import { treatments } from './inputTest';
 import computeCortisone from '../src/cortisone';
 import { Treatment, TreatmentDelta, TreatmentDrug } from '../src/Types';
 import moment = require('moment');
-import {
-  computeCortisoneActivity,
-  durationCortisone,
-  peakCortisone,
-} from '../src/cortisone';
+import { computeCortisoneActivity } from '../src/cortisone';
 import { diffOptions, getPngSnapshot } from './inputTest';
-import { transformNoteTreatmentsDrug } from '../src/drug';
+import { drugs, transformNoteTreatmentsDrug } from '../src/drug';
 const { toMatchImageSnapshot } = require('jest-image-snapshot');
 
 describe('test cortisone', () => {
@@ -23,8 +19,8 @@ describe('test cortisone', () => {
 
   const cortisone = (weight, treatments: MockTreatment[]): number => {
     const cortisoneT: TreatmentDelta[] = treatments.map((e) => {
-      const duration = durationCortisone.COR(e.units, weight);
-      const peak = peakCortisone.COR(duration);
+      const duration = drugs.COR.duration(e.units, weight);
+      const peak = drugs.COR.peak(duration);
       return {
         ...e,
         duration,
@@ -89,7 +85,7 @@ describe('test cortisone', () => {
           })),
         ],
       },
-      { scaleY: 1 }
+      { scaleY: 1 },
     );
 
     expect(png).toMatchImageSnapshot(diffOptions);
@@ -185,7 +181,9 @@ describe('test computeCortisone', () => {
   });
 
   test('detection drug', () => {
-	const drugs = transformNoteTreatmentsDrug(treatments as unknown as Treatment[]);
+    const drugs = transformNoteTreatmentsDrug(
+      treatments as unknown as Treatment[],
+    );
 
     const result = computeCortisone(drugs, 80);
 
@@ -237,7 +235,9 @@ describe('check insert value string', () => {
         insulin: null,
       },
     ];
-	const drugs = transformNoteTreatmentsDrug(treatments as unknown as Treatment[]);
+    const drugs = transformNoteTreatmentsDrug(
+      treatments as unknown as Treatment[],
+    );
     let result = computeCortisone(drugs, 80);
     expect(result).toBeDefined();
     //expect(result).toMatchSnapshot();
@@ -265,12 +265,11 @@ describe('check insert value string', () => {
         insulin: null,
       },
     ];
-	const drugsTou = transformNoteTreatmentsDrug(toujeoTreatment as unknown as Treatment[]);
-
-    let result = computeCortisone(
-		drugsTou,
-      80
+    const drugsTou = transformNoteTreatmentsDrug(
+      toujeoTreatment as unknown as Treatment[],
     );
+
+    let result = computeCortisone(drugsTou, 80);
     expect(result).toBe(0);
     //expect(result).toMatchSnapshot();
   });
