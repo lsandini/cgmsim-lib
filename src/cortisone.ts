@@ -2,13 +2,6 @@ import { TreatmentDelta, Treatment, TreatmentDrug } from './Types';
 import { getDrugActivity } from './drug';
 import logger, { getDeltaMinutes, getTreatmentActivity } from './utils';
 
-export const peakCortisone = {
-	COR: (duration: number) => duration / 3,
-};
-export const durationCortisone = {
-	COR: (insulin: number, weight: number) => (16 + (12 * insulin) / weight) * 60,
-};
-
 export const computeCortisoneActivity = (treatments: TreatmentDelta[]) => {
 	// activities be expressed as U/min !!!
 	const treatmentsActivity = treatments.map((e) => {
@@ -22,7 +15,7 @@ export const computeCortisoneActivity = (treatments: TreatmentDelta[]) => {
 		);
 		return activity;
 	});
-	logger.debug('these are the last Slow INSULINS: %o', treatmentsActivity);
+	logger.debug('these are the last Cortisone: %o', treatmentsActivity);
 	const resultAct = treatmentsActivity.reduce((tot, activity) => {
 		return tot + activity;
 	}, 0);

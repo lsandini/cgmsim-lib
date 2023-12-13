@@ -139,6 +139,7 @@ export type CGMSimParams = {
 	carbsActivity: number;
 	bolusActivity: number;
 	cortisoneActivity?: number;
+	alcoholActivity?: number;
 };
 
 /**
@@ -192,6 +193,7 @@ export type SimulationResult = {
 	bolusActivity: number;
 	liverActivity: number;
 	activityFactor: number;
+	alcoholActivity: number;
 	isf: { dynamic: number; constant: number };
 };
 

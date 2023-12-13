@@ -2,6 +2,7 @@ import logger from './utils';
 import bolus from './bolus';
 import basal from './basal';
 import cortisone from './cortisone';
+import alcohol from './alcohol';
 import carbs from './carbs';
 import liverRun from './liver';
 import sgv from './sgv';
@@ -64,6 +65,7 @@ const simulator = (params: MainParams): SimulationResult => {
 	const bolusActivity = bolus(treatments, dia, peak);
 	const basalBolusActivity = basal(activeDrugTreatments, weight);
 	const cortisoneActivity = cortisone(activeDrugTreatments, weight);
+	const alcoholActivity = alcohol(activeDrugTreatments, weight, gender);
 	const basalPumpActivity = pumpEnabled
 		? pump(treatments, profiles, dia, peak)
 		: 0;
@@ -90,6 +92,7 @@ const simulator = (params: MainParams): SimulationResult => {
 			carbsActivity,
 			bolusActivity,
 			cortisoneActivity,
+			alcoholActivity,
 		},
 		isfActivityDependent,
 	);

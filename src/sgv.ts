@@ -14,6 +14,7 @@ const sgv_start = (
 		carbsActivity,
 		bolusActivity,
 		cortisoneActivity,
+		alcoholActivity,
 	}: CGMSimParams,
 	isf: number,
 ) => {
@@ -33,6 +34,9 @@ const sgv_start = (
 	const cortisoneDeltaMinutesActivity = cortisoneActivity
 		? cortisoneActivity * deltaMinutes
 		: 0;
+	const alcoholDeltaMinutesActivity = alcoholActivity
+		? alcoholActivity * deltaMinutes
+		: 0;
 	const bolusDeltaMinutesActivity = bolusActivity * deltaMinutes;
 
 	const globalInsulinAct =
@@ -49,7 +53,8 @@ const sgv_start = (
 			BGI_ins * 18 +
 			liverDeltaMinutesActivity * 18 +
 			carbsDeltaMinutesActivity * 18 +
-			cortisoneDeltaMinutesActivity * 18,
+			cortisoneDeltaMinutesActivity * 18 +
+			alcoholDeltaMinutesActivity * 18,
 	);
 	let limited_sgv_pump = sgv_pump;
 	if (sgv_pump >= 400) {
@@ -65,6 +70,7 @@ const sgv_start = (
 		cortisoneActivity: cortisoneDeltaMinutesActivity * isfMMol * 18,
 		bolusActivity: bolusDeltaMinutesActivity * isfMMol * 18,
 		liverActivity: liverDeltaMinutesActivity * 18,
+		alcoholActivity: alcoholDeltaMinutesActivity * 18,
 	};
 
 	logger.debug('-------------------------------------------');
