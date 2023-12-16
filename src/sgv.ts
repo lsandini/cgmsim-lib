@@ -48,13 +48,15 @@ const sgv_start = (
 
 	const carbsDeltaMinutesActivity = carbsActivity * deltaMinutes;
 
+  // alcohol only suppresses liver, but doesn't otherwise impact svg.
+  const liverAlcoholMinutesActivity = Math.max(0, liverDeltaMinutesActivity - alcoholDeltaMinutesActivity);
+
 	const sgv_pump = Math.floor(
 		oldSgv +
 			BGI_ins * 18 +
-			liverDeltaMinutesActivity * 18 +
 			carbsDeltaMinutesActivity * 18 +
 			cortisoneDeltaMinutesActivity * 18 +
-			alcoholDeltaMinutesActivity * 18,
+      liverAlcoholMinutesActivity * 18
 	);
 	let limited_sgv_pump = sgv_pump;
 	if (sgv_pump >= 400) {
@@ -98,6 +100,13 @@ const sgv_start = (
 	logger.debug(
 		'total BG impact of cortisone for 5 minutes: + %o',
 		cortisoneDeltaMinutesActivity * 18,
+		'mg/dl',
+	);
+
+  logger.debug('-------------------------------------------');
+	logger.debug(
+		'total BG impact of Alcohol for 5 minutes: + %o',
+		alcoholDeltaMinutesActivity * 18,
 		'mg/dl',
 	);
 

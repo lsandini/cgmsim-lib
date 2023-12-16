@@ -35,7 +35,11 @@ export default function (treatments: TreatmentDrug[], weight: number): number {
 
 	const lastDEG = getDrugActivity(treatments, weight, 'DEG');
 	const activityDEG = lastDEG.length ? computeBasalActivity(lastDEG) : 0;
-	logger.debug('these are the last deg: %o', { lastDEG, activityDEG });
+	logger.debug('these are the last DEG: %o', { lastDEG, activityDEG });
 
-	return activityDEG + activityDET + activityGLA + activityTOU;
+  const lastNPH = getDrugActivity(treatments, weight, 'NPH');
+	const activityNPH = lastNPH.length ? computeBasalActivity(lastNPH) : 0;
+	logger.debug('these are the last NPH: %o', { lastNPH, activityNPH });
+
+	return activityDEG + activityDET + activityGLA + activityTOU + activityNPH;
 }

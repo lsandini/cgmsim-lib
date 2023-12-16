@@ -71,11 +71,6 @@ const simulator = (params: MainParams): SimulationResult => {
 		: 0;
 	const carbsActivity = carbs(treatments, carbsAbs, isfActivityDependent, cr);
 
-	// //activity calc insulin
-	// const det = detemirRun(weight, lastDET);
-	// const gla = glargineRun(weight, lastGLA);
-	// const degludec = degludecRun(lastDEG);
-	// const tou = toujeoRun(weight, lastTOU);
 
 	//activity calc carb
 	const liverActivity = liverRun(isfConstant, cr, activityFactor);

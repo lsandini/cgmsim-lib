@@ -25,6 +25,12 @@ export const drugs = {
 		peak: (duration: number) => duration / 3,
 		duration: () => 42 * 60,
 	},
+  NPH: {
+		names: ['pro', 'Pro', 'nph', 'Nph'],
+		peak: (duration: number) => duration / 3.5,
+		duration: (units: number, weight: number) =>
+			(12 + (20 * units) / weight) * 60,
+	},
 	COR: {
 		names: ['pre', 'Pre', 'cor', 'Cor'],
 		peak: (duration: number) => duration / 3,
