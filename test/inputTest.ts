@@ -254,6 +254,7 @@ type TestResult = {
   carbsActivities: number[];
   liverActivities: number[];
   cortisoneActivity: number[];
+  alcoholActivity: number[];
   sgvS: number[];
   activityFactor: number[];
   isfConstantFactor: number[];
@@ -294,6 +295,7 @@ export const testGenerator = (
   const carbsActivities = [];
   const liverActivities = [];
   const cortisoneActivity = [];
+  const alcoholActivity = [];
   const activityFactor = [];
   const isfConstantFactor = [];
   const isfDynamicFactor = [];
@@ -360,6 +362,7 @@ export const testGenerator = (
     carbsActivities.push(result.carbsActivity);
     liverActivities.push(result.liverActivity);
     cortisoneActivity.push(result.cortisoneActivity);
+    alcoholActivity.push(result.alcoholActivity);
     activityFactor.push(result.activityFactor);
     isfConstantFactor.push(result.isf.constant);
     isfDynamicFactor.push(result.isf.dynamic);
@@ -377,6 +380,7 @@ export const testGenerator = (
     carbsActivities,
     liverActivities,
     cortisoneActivity,
+    alcoholActivity,
     activityFactor,
     isfConstantFactor,
     isfDynamicFactor,
