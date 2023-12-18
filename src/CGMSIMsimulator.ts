@@ -71,9 +71,11 @@ const simulator = (params: MainParams): SimulationResult => {
 		: 0;
 	const carbsActivity = carbs(treatments, carbsAbs, isfActivityDependent, cr);
 
-
 	//activity calc carb
-	const liverActivity = liverRun(isfConstant, cr, activityFactor);
+	const liverActivity = liverRun(isfConstant, cr, {
+		physical: activityFactor,
+		alcohol: alcoholActivity,
+	});
 	const now = moment();
 	const orderedEntries = entries
 		.filter((e) => e.mills <= now.toDate().getTime())

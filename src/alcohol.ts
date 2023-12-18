@@ -37,6 +37,7 @@ export const computeAlcoholActivity = (
 	const treatmentsActivity = treatments.map((e) => {
 		const minutesAgo = e.minutesAgo;
 		const units = e.units;
+		// TODO rewrite alcoolActivity as %
 		const activity = getAlcoholActivity(
 			gender,
 			weight,
