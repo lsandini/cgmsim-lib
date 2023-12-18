@@ -13,7 +13,7 @@ function getAlcoholActivity(
 	const peakAlcoholAmountMin = 60; //min
 	const r = gender === 'Male' ? 0.68 : 0.55;
 	const eliminationRate = gender === 'Male' ? 0.016 / 60 : 0.018 / 60; //g/100ml/min
-	const peakAmount = (units / (weightKg * 1000 * r)) * 100; //g/100ml
+	const peakAmount = (units * 12 / (weightKg * 1000 * r)) * 100; //g/100ml
 	const washoutDuration = peakAlcoholAmountMin + peakAmount / eliminationRate; //min
 	if (washoutDuration < timeMin) {
 		return getTreatmentActivity(
@@ -63,5 +63,5 @@ export default function (
 		lastALC.length > 0 ? computeAlcoholActivity(lastALC, weight, gender) : 0;
 	logger.debug('these are the last ALC: %o', { lastALC, activityALC });
 
-	return activityALC;
+	return activityALC / 2;
 }

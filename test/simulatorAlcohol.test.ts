@@ -105,4 +105,93 @@ describe('simulatorAlcohol test', () => {
     expect(png).toMatchImageSnapshot(diffOptions);
     return;
   });
+
+  test('start from 100 @12:00Z with deg22(-6h) + alc 1U(+1h) + alc 4U(+2h)', async () => {
+    const result = testGenerator(180, 24, {
+      treatments: [
+        {
+          type: 'ALC',
+          minutes: 60,
+          units: 1,
+        },
+        {
+          type: 'ALC',
+          minutes: 120,
+          units: 4,
+        },
+        {
+          type: 'DEG',
+          minutes: -(6 * 60),
+          units: 20,
+        },
+        {
+          type: 'DEG',
+          minutes: 18 * 60,
+          units: 20,
+        },
+      ],
+      boluses: [
+      ],
+      carbs: [],
+    });
+
+    expect(result.sgvS).toMatchSnapshot();
+    const png = await getPngSnapshot(
+      {
+        type: 'multiple',
+        values: [
+          result.sgvS.map((value, index) => ({
+            key: index * 5,
+            value: value,
+            name: 'sgvS',
+          })),
+          result.carbsActivities.map((value, index) => ({
+            key: index * 5,
+            value: value * 10,
+            name: 'carbsActivities',
+          })),
+          result.basalActivities.map((value, index) => ({
+            key: index * 5,
+            value: value * 10,
+            name: 'basalActivities',
+          })),
+          result.bolusActivities.map((value, index) => ({
+            key: index * 5,
+            value: value * 10,
+            name: 'bolusActivities',
+          })),
+          result.cortisoneActivity.map((value, index) => ({
+            key: index * 5,
+            value: value * 10,
+            name: 'cortisoneActivity',
+          })),
+          result.alcoholActivity.map((value, index) => ({
+            key: index * 5,
+            value: value * 50,
+            name: 'alcoholActivity',
+          })),
+          result.liverActivities.map((value, index) => ({
+            key: index * 5,
+            value: value * 10,
+            name: 'liverActivities',
+          })),
+          result.activityFactor.map((value, index) => ({
+            key: index * 5,
+            value: value * 10,
+            name: 'activityFactor',
+          })),
+          result.isfDynamicFactor.map((value, index) => ({
+            key: index * 5,
+            value: value,
+            name: 'isfDynamicFactor',
+          })),
+        ],
+      },
+      { scaleY: 400 },
+    );
+
+    expect(png).toMatchImageSnapshot(diffOptions);
+    return;
+  });
+
 });
