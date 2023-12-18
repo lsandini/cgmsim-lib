@@ -283,7 +283,7 @@ export const testGenerator = (
     CARBS_ABS_TIME: '360',
     CR: '10',
     DIA: '6',
-    ISF: '32',
+    ISF: '30',
     TP: '75',
     WEIGHT: '80',
     AGE: '51',

@@ -23,29 +23,38 @@ describe('simulatorCortisone test', () => {
     global.Math = math;
   });
 
-  test('start from 100 @12:00Z with deg23(-4h) + cor 40mg(+1h) + bolus 5u(+1.5h)', async () => {
-    const result = testGenerator(100, 24, {
+  test('start from 150 @12:00Z with deg22(-4h) + cor 40mg(+1h) + bolus 3u(+3h)', async () => {
+    const result = testGenerator(150, 48, {
       treatments: [
         {
           type: 'COR',
           minutes: 60,
-          units: 20,
+          units: 40,
         },
         {
           type: 'DEG',
           minutes: -(4 * 60),
-          units: 23,
+          units: 22,
         },
         {
           type: 'DEG',
-          minutes: 20 * 60,
-          units: 23,
+          minutes: -(4 * 60) + 24 * 60,
+          units: 22,
+        },
+        {
+          type: 'DEG',
+          minutes: -(4 * 60) + 24 * 60 * 2,
+          units: 22,
         },
       ],
       boluses: [
         {
-          insulin: 3,
-          minutes: 90,
+          insulin: 5,
+          minutes: 180,
+        },
+        {
+          insulin: 5,
+          minutes: 600,
         },
       ],
       carbs: [],
