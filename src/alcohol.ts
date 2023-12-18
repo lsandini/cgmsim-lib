@@ -13,14 +13,17 @@ function getAlcoholActivity(
 	const peakAlcoholAmountMin = 60; //min
 	const r = gender === 'Male' ? 0.68 : 0.55;
 	const eliminationRate = gender === 'Male' ? 0.016 / 60 : 0.018 / 60; //g/100ml/min
-	const peakAmount = (units * 12 / (weightKg * 1000 * r)) * 100; //g/100ml
+	const peakAmount = ((units * 12) / (weightKg * 1000 * r)) * 100; //g/100ml
 	const washoutDuration = peakAlcoholAmountMin + peakAmount / eliminationRate; //min
+	const unitsWeighted = units * 12 * (80 / weightKg);
 	if (washoutDuration < timeMin) {
-		return getTreatmentActivity(
-			peakMin,
-			durationMin,
-			timeMin - washoutDuration,
-			units,
+		return (
+			getTreatmentActivity(
+				peakMin,
+				durationMin,
+				timeMin - washoutDuration,
+				unitsWeighted,
+			) / 35
 		);
 	}
 	return 0;
