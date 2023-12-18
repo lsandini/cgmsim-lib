@@ -29,7 +29,7 @@ describe('simulatorAlcohol test', () => {
         {
           type: 'ALC',
           minutes: 60,
-          units: 5,
+          units: 2,
         },
         {
           type: 'DEG',
@@ -117,7 +117,7 @@ describe('simulatorAlcohol test', () => {
         {
           type: 'ALC',
           minutes: 120,
-          units: 5,
+          units: 4,
         },
         {
           type: 'DEG',
