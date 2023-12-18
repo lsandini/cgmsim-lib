@@ -23,7 +23,7 @@ function getAlcoholActivity(
 				durationMin,
 				timeMin - washoutDuration,
 				unitsWeighted,
-			) / 35
+			) / 0.35
 		);
 	}
 	return 0;
@@ -67,5 +67,5 @@ export default function (
 		lastALC.length > 0 ? computeAlcoholActivity(lastALC, weight, gender) : 0;
 	logger.debug('these are the last ALC: %o', { lastALC, activityALC });
 
-	return activityALC / 2;
+	return activityALC;
 }

@@ -29,7 +29,7 @@ describe('simulatorAlcohol test', () => {
         {
           type: 'ALC',
           minutes: 60,
-          units: 2,
+          units: 5,
         },
         {
           type: 'DEG',
@@ -42,12 +42,12 @@ describe('simulatorAlcohol test', () => {
           units: 23,
         },
       ],
-      boluses: [
-      ],
+      boluses: [],
       carbs: [],
     });
 
     expect(result.sgvS).toMatchSnapshot();
+    expect(result.alcoholActivity).toMatchSnapshot();
     const png = await getPngSnapshot(
       {
         type: 'multiple',
@@ -117,7 +117,7 @@ describe('simulatorAlcohol test', () => {
         {
           type: 'ALC',
           minutes: 120,
-          units: 4,
+          units: 5,
         },
         {
           type: 'DEG',
@@ -130,12 +130,13 @@ describe('simulatorAlcohol test', () => {
           units: 20,
         },
       ],
-      boluses: [
-      ],
+      boluses: [],
       carbs: [],
     });
 
     expect(result.sgvS).toMatchSnapshot();
+    expect(result.alcoholActivity).toMatchSnapshot();
+
     const png = await getPngSnapshot(
       {
         type: 'multiple',
@@ -193,5 +194,4 @@ describe('simulatorAlcohol test', () => {
     expect(png).toMatchImageSnapshot(diffOptions);
     return;
   });
-
 });
