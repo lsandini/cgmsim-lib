@@ -37,11 +37,17 @@ export const drugs = {
 		duration: (insulin: number, weight: number) =>
 			(16 + (12 * insulin) / weight) * 60,
 	},
-	ALC: {
-		names: ['alc', 'Alc'],
-		peak: () => 90,
-		duration: () => 240,
-	},
+	// ALC: {
+	// 	names: ['alc', 'Alc'],
+	// 	peak: () => 90,
+	// 	duration: () => 240,
+	// },
+  ALC: {
+    names: ['alc', 'Alc'],
+		peak: (duration: number) => duration / 2.5,
+		duration: (units: number, weight: number) =>
+			(3 + (40 * units) / weight) * 60,
+	}
 };
 
 export const getDrugActivity = (
