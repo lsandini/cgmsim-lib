@@ -21,11 +21,7 @@ import { Note } from './Types';
  *     console.error("Error uploading note:", error);
  *   });
  **/
-export function uploadNotes(
-	notes: string,
-	nsUrl: string,
-	apiSecret: string,
-) {
+export function uploadNotes(notes: string, nsUrl: string, apiSecret: string) {
 	const _nsUrl = removeTrailingSlash(nsUrl);
 	const api_url = _nsUrl + '/api/v1/treatments/';
 	const noteTreatment: Note = { type: 'Note', notes };
@@ -128,7 +124,7 @@ export function uploadEntries(
 export function uploadActivity(
 	activity: Activity,
 	nsUrl: string,
-	apiSecret: string
+	apiSecret: string,
 ) {
 	logger.debug('log something %o', activity);
 

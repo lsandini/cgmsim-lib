@@ -67,7 +67,7 @@ describe('Physical test', () => {
           type: 'multiple',
           values: [arrIsf, arrActivities],
         },
-        { scaleY: true }
+        { scaleY: 2 }
       );
 
       expect(png).toMatchImageSnapshot(diffOptions);

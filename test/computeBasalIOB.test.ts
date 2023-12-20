@@ -5,6 +5,7 @@ import { oldComputeBasal } from '../old/oldComputeBasal';
 import oldToujeoRun from '../old/oldToujeo';
 import oldGlargine from '../old/oldGlargine';
 import moment = require('moment');
+import { transformNoteTreatmentsDrug } from '../src/drug';
 
 describe('test computeBasalIOB', () => {
   const date = new Date('2022-05-07T11:20:00Z');
@@ -18,7 +19,10 @@ describe('test computeBasalIOB', () => {
   });
 
   test('detection drug', () => {
-    const result = computeBasalIOB(treatments as unknown as Treatment[], 80);
+    const drugs = transformNoteTreatmentsDrug(
+      treatments as unknown as Treatment[]
+    );
+    const result = computeBasalIOB(drugs, 80);
 
     expect(result).toMatchSnapshot();
   });
@@ -68,7 +72,10 @@ describe('check insert value string', () => {
         insulin: null,
       },
     ];
-    let result = computeBasalIOB(toujeoTreatment as unknown as Treatment[], 80);
+    const drugsTou = transformNoteTreatmentsDrug(
+      toujeoTreatment as unknown as Treatment[]
+    );
+    let result = computeBasalIOB(drugsTou, 80);
     expect(result).toBeDefined();
     //expect(result).toMatchSnapshot();
   });
@@ -95,7 +102,10 @@ describe('check insert value string', () => {
         insulin: null,
       },
     ];
-    let result = computeBasalIOB(toujeoTreatment as unknown as Treatment[], 80);
+    const drugsTou = transformNoteTreatmentsDrug(
+      toujeoTreatment as unknown as Treatment[]
+    );
+    let result = computeBasalIOB(drugsTou, 80);
     expect(result).toBe(0);
     //expect(result).toMatchSnapshot();
   });
@@ -122,10 +132,10 @@ describe('test computeBasalIOB comparing old cgmsim', () => {
       });
 
       let oldActivity = oldToujeoRun(80, lastTOU);
-      let result = computeBasalIOB(
-        toujeoTreatments as unknown as Treatment[],
-        80
+      const drugsTou = transformNoteTreatmentsDrug(
+        toujeoTreatments as unknown as Treatment[]
       );
+      let result = computeBasalIOB(drugsTou, 80);
       const ROUND = 100000000;
       result = Math.round(result * ROUND) / ROUND;
       oldActivity = Math.max(Math.round(oldActivity * ROUND) / ROUND, 0);
@@ -169,10 +179,10 @@ describe('test computeBasalIOB comparing old cgmsim', () => {
       });
 
       let oldActivity = oldToujeoRun(80, lastTOU);
-      let result = computeBasalIOB(
-        doubleToujeoTreatments as unknown as Treatment[],
-        80
+      const drugsDoubleTou = transformNoteTreatmentsDrug(
+        doubleToujeoTreatments as unknown as Treatment[]
       );
+      let result = computeBasalIOB(drugsDoubleTou, 80);
       const ROUND = 100000000;
       result = Math.round(result * ROUND) / ROUND;
       oldActivity = Math.max(Math.round(oldActivity * ROUND) / ROUND, 0);
@@ -198,10 +208,10 @@ describe('test computeBasalIOB comparing old cgmsim', () => {
       });
 
       let oldActivity = oldGlargine(80, lastGLA);
-      let result = computeBasalIOB(
-        glargineTreatments as unknown as Treatment[],
-        80
+      const drugsGla = transformNoteTreatmentsDrug(
+        glargineTreatments as unknown as Treatment[]
       );
+      let result = computeBasalIOB(drugsGla, 80);
       const ROUND = 100000000;
       result = Math.round(result * ROUND) / ROUND;
       oldActivity = Math.round(oldActivity * ROUND) / ROUND;

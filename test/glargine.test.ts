@@ -1,14 +1,22 @@
-import { computeBasalActivity, durationBasal, peakBasal } from '../src/basal';
+import { TreatmentDelta } from 'src/Types';
+import { computeBasalActivity } from '../src/basal';
+import { drugs } from '../src/drug';
 import { diffOptions, getPngSnapshot } from './inputTest';
 const { toMatchImageSnapshot } = require('jest-image-snapshot');
+
+type MockTreatment = {
+  units: TreatmentDelta['units'];
+  minutesAgo: TreatmentDelta['minutesAgo'];
+};
+
 describe('test glargine', () => {
   beforeEach(() => {
     expect.extend({ toMatchImageSnapshot });
   });
-  const glargine = (weight, treatments) => {
+  const glargine = (weight, treatments:MockTreatment[]): number => {
     const toujeoT = treatments.map((e) => {
-      const duration = durationBasal.GLA(e.insulin, weight);
-      const peak = peakBasal.GLA(duration);
+      const duration = drugs.GLA.duration(e.units, weight);
+      const peak = drugs.GLA.peak(duration);
       return {
         ...e,
         duration,
@@ -22,7 +30,7 @@ describe('test glargine', () => {
     const weight = 80;
     const insulinActive = glargine(weight, [
       {
-        insulin: 30,
+        units: 30,
         minutesAgo: 300,
       },
     ]);
@@ -36,7 +44,7 @@ describe('test glargine', () => {
     for (let i = 0; i < 2000; i++) {
       const _insulinActive = glargine(weight, [
         {
-          insulin: 30,
+          units: 30,
           minutesAgo: i,
         },
       ]);
@@ -53,51 +61,51 @@ describe('test glargine', () => {
           value: sgv,
         })),
       },
-      { scaleY: true }
+      { scaleY: 1 }
     );
 
     expect(png).toMatchImageSnapshot(diffOptions);
   });
 
   test('insulin 5 min ago are less active then 40 min ago', () => {
-    const insulin = 20;
+    const units = 20;
     const weight = 80;
 
     const r5 = glargine(weight, [
       {
-        insulin,
+        units,
         minutesAgo: 5,
       },
     ]);
     const r40 = glargine(weight, [
       {
-        insulin,
+        units,
         minutesAgo: 40,
       },
     ]);
     expect(r5).toBeLessThan(r40);
   });
   test('peak has the greatest activity', () => {
-    const insulin = 20;
+    const units = 20;
     const weight = 80;
 
-    const glarginePeakHours = (22 + (12 * insulin) / weight) / 2.5;
+    const glarginePeakHours = (22 + (12 * units) / weight) / 2.5;
 
     const rBeforePeak = glargine(weight, [
       {
-        insulin,
+        units,
         minutesAgo: glarginePeakHours * 60 + 10,
       },
     ]);
     const rPeak = glargine(weight, [
       {
-        insulin,
+        units,
         minutesAgo: glarginePeakHours * 60,
       },
     ]);
     const rAfterPeak = glargine(weight, [
       {
-        insulin,
+        units,
         minutesAgo: glarginePeakHours * 60 - 10,
       },
     ]);

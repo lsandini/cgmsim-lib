@@ -1,4 +1,7 @@
-import { computeBasalActivity, durationBasal, peakBasal } from '../src/basal';
+import { TreatmentDelta } from 'src/Types';
+import { computeBasalActivity } from '../src/basal';
+import { drugs } from '../src/drug';
+
 import { diffOptions, getPngSnapshot } from './inputTest';
 const { toMatchImageSnapshot } = require('jest-image-snapshot');
 describe('test detemir', () => {
@@ -6,24 +9,29 @@ describe('test detemir', () => {
     expect.extend({ toMatchImageSnapshot });
   });
 
-  const detemir = (weight, treatments) => {
-    const toujeoT = treatments.map((e) => {
-      const duration = durationBasal.DET(e.insulin, weight);
-      const peak = peakBasal.DET(duration);
+  type MockTreatment = {
+    units: TreatmentDelta['units'];
+    minutesAgo: TreatmentDelta['minutesAgo'];
+  };
+
+  const detemir = (weight: number, treatments: MockTreatment[]): number => {
+    const detemirT = treatments.map((e) => {
+      const duration = drugs.DET.duration(e.units, weight);
+      const peak = drugs.DET.peak(duration);
       return {
         ...e,
         duration,
         peak,
       };
     });
-    return computeBasalActivity(toujeoT);
+    return computeBasalActivity(detemirT);
   };
 
   test('weight:80 ins:30 minutesAgo:300', () => {
     const weight = 80;
     const insulinActive = detemir(weight, [
       {
-        insulin: 30,
+        units: 30,
         minutesAgo: 300,
       },
     ]);
@@ -38,7 +46,7 @@ describe('test detemir', () => {
     for (let i = 0; i < 2000; i++) {
       const _insulinActive = detemir(weight, [
         {
-          insulin: 30,
+          units: 30,
           minutesAgo: i,
         },
       ]);
@@ -55,50 +63,50 @@ describe('test detemir', () => {
           value: sgv,
         })),
       },
-      { scaleY: true }
+      { scaleY: 1 }
     );
 
     expect(png).toMatchImageSnapshot(diffOptions);
   });
 
   test('insulin 5 min ago are less active then 40 min ago', () => {
-    const insulin = 20;
+    const units = 20;
     const weight = 80;
 
     const r5 = detemir(weight, [
       {
-        insulin,
+        units,
         minutesAgo: 5,
       },
     ]);
     const r40 = detemir(weight, [
       {
-        insulin,
+        units,
         minutesAgo: 40,
       },
     ]);
     expect(r5).toBeLessThan(r40);
   });
   test('peak has the greatest activity', () => {
-    const insulin = 20;
+    const units = 20;
     const weight = 80;
 
-    const detemirPeakHours = (14 + (24 * insulin) / weight) / 3;
+    const detemirPeakHours = (14 + (24 * units) / weight) / 3;
     const rBeforePeak = detemir(weight, [
       {
-        insulin,
+        units,
         minutesAgo: detemirPeakHours * 60 + 10,
       },
     ]);
     const rPeak = detemir(weight, [
       {
-        insulin,
+        units,
         minutesAgo: detemirPeakHours * 60,
       },
     ]);
     const rAfterPeak = detemir(weight, [
       {
-        insulin,
+        units,
         minutesAgo: detemirPeakHours * 60 - 10,
       },
     ]);

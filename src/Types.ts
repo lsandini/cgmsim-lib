@@ -94,12 +94,20 @@ export type Treatment = {
 	carbs?: number;
 };
 
+export type TreatmentDrug = {
+	drug: string;
+	units: Treatment['insulin'];
+	minutesAgo: number;
+};
+
 /**
  * Represents a treatment delta with additional minutes ago information.
  */
-export type TreatmentDelta = Treatment & {
+export type TreatmentDelta = {
+	units: Treatment['insulin'];
 	minutesAgo: number;
-	drug?: string;
+	duration: number;
+	peak: number;
 };
 
 /**
@@ -130,6 +138,8 @@ export type CGMSimParams = {
 	liverActivity: number;
 	carbsActivity: number;
 	bolusActivity: number;
+	cortisoneActivity?: number;
+	alcoholActivity?: number;
 };
 
 /**
@@ -178,10 +188,12 @@ export type SimulationResult = {
 	sgv: number;
 	deltaMinutes: number;
 	carbsActivity: number;
+	cortisoneActivity: number;
 	basalActivity: number;
 	bolusActivity: number;
 	liverActivity: number;
 	activityFactor: number;
+	alcoholActivity: number;
 	isf: { dynamic: number; constant: number };
 };
 

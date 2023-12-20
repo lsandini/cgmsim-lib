@@ -1,16 +1,16 @@
 import logger from './utils';
-
 import bolus from './bolus';
 import basal from './basal';
-
+import cortisone from './cortisone';
+import alcohol from './alcohol';
 import carbs from './carbs';
-import arrowsRun from './arrows';
 import liverRun from './liver';
 import sgv from './sgv';
 import pump from './pump';
 import { MainParams, SimulationResult } from './Types';
 import moment = require('moment');
 import { physicalIsf, physicalLiver } from './physical';
+import { transformNoteTreatmentsDrug } from './drug';
 /**
  * Simulation module for blood glucose data calculation.
  * @param params - Main parameters for running the simulation.
@@ -55,21 +55,27 @@ const simulator = (params: MainParams): SimulationResult => {
 	const carbsAbs = parseInt(env.CARBS_ABS_TIME);
 	const cr = parseInt(env.CR);
 
+	//Find basal boluses
+	const drugs = transformNoteTreatmentsDrug(treatments);
+
+	const activeDrugTreatments = drugs.filter(function (e) {
+		return e.minutesAgo <= 45 * 60; // keep only the basals from the last 45 hours
+	});
+
 	const bolusActivity = bolus(treatments, dia, peak);
-	const basalBolusActivity = basal(treatments, weight);
+	const basalBolusActivity = basal(activeDrugTreatments, weight);
+	const cortisoneActivity = cortisone(activeDrugTreatments, weight);
+	const alcoholActivity = alcohol(activeDrugTreatments, weight, gender);
 	const basalPumpActivity = pumpEnabled
 		? pump(treatments, profiles, dia, peak)
 		: 0;
 	const carbsActivity = carbs(treatments, carbsAbs, isfActivityDependent, cr);
 
-	// //activity calc insulin
-	// const det = detemirRun(weight, lastDET);
-	// const gla = glargineRun(weight, lastGLA);
-	// const degludec = degludecRun(lastDEG);
-	// const tou = toujeoRun(weight, lastTOU);
-
 	//activity calc carb
-	const liverActivity = liverRun(isfConstant, cr, activityFactor);
+	const liverActivity = liverRun(isfConstant, cr, {
+		physical: activityFactor,
+		alcohol: alcoholActivity,
+	});
 	const now = moment();
 	const orderedEntries = entries
 		.filter((e) => e.mills <= now.toDate().getTime())
@@ -82,18 +88,20 @@ const simulator = (params: MainParams): SimulationResult => {
 			liverActivity,
 			carbsActivity,
 			bolusActivity,
+			cortisoneActivity,
+			alcoholActivity,
 		},
-		isfActivityDependent
+		isfActivityDependent,
 	);
 
 	logger.debug('this is the new sgv: %o', newSgvValue);
 	logger.info(
 		'this is the ISF multiplicator (or physicalISF): %o',
-		isfActivityDependent / isfConstant
+		isfActivityDependent / isfConstant,
 	);
 	logger.info(
 		'this is the liver multiplicator (or physicalLiver): %o',
-		activityFactor
+		activityFactor,
 	);
 
 	// const arrows = arrowsRun([newSgvValue, ...entries]);

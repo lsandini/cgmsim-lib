@@ -26,7 +26,7 @@ export class PatientUva {
 		'Ra',
 		'S',
 		'HE',
-		'm3'
+		'm3',
 	];
 	defaultParameters: UvaPatientType;
 	parameters: UvaPatientType;
@@ -44,8 +44,7 @@ export class PatientUva {
 		// // list of intermediate signals
 		// this.signalList = ["RaI", "E", "EGP", "Uid", "Uii", "I", "Qsto", "Ra", "S", "HE", "m3"]
 
-
-		this.parameters = {...parameters };
+		this.parameters = { ...parameters };
 
 		// extract full list of parameters
 		this.parameterList = Object.keys(this.parameters);
@@ -88,7 +87,7 @@ export class PatientUva {
 				[params.ka1, params.ka2],
 				[params.kd, -params.ka2],
 			],
-			[Raieq, 0]
+			[Raieq, 0],
 		);
 		const Isc1eq = Isceq[0];
 		const Isc2eq = Isceq[1];
@@ -127,7 +126,7 @@ export class PatientUva {
 	getDerivatives(
 		time: number,
 		state: UvaPatientState,
-		userParams: UvaUserParams
+		userParams: UvaUserParams,
 	): UvaPatientState {
 		const params = this.parameters;
 
@@ -179,7 +178,7 @@ export class PatientUva {
 		// endogenous glucose production // [Dalla Man, JDST, 2014] (A5), [Dalla Man, IEEE TBME, 2007] (10) (Ipo = 0)
 		const EGP = Math.max(
 			0,
-			params.kp1 - params.kp2 * state.Gp - params.kp3 * state.XL
+			params.kp1 - params.kp2 * state.Gp - params.kp3 * state.XL,
 		); // in mg/kg/min
 
 		// renal glucose excretion // [Dalla Man, JDST, 2014] (A14), [Dalla Man, IEEE TBME, 2007] (27)
@@ -259,7 +258,7 @@ export class PatientUva {
 	getOutputs(
 		time: number,
 		state: UvaPatientState,
-		userParams: UvaUserParams
+		userParams: UvaUserParams,
 	): UvaOutput {
 		return {
 			Gp: state.Gp / this.parameters.VG,

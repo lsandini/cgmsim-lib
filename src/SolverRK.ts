@@ -21,16 +21,16 @@ export function RK4(
 	derivatives: (time: number, state: UvaPatientState) => UvaPatientState,
 	t: number,
 	x: UvaPatientState,
-	dt: number
+	dt: number,
 ) {
 	const k1 = timesScalar(derivatives(t, x), dt);
 	const k2 = timesScalar(
 		derivatives(t + dt / 2, vectorSum([x, timesScalar(k1, 1 / 2)])),
-		dt
+		dt,
 	);
 	const k3 = timesScalar(
 		derivatives(t + dt / 2, vectorSum([x, timesScalar(k2, 1 / 2)])),
-		dt
+		dt,
 	);
 	const k4 = timesScalar(derivatives(t + dt, vectorSum([x, k3])), dt);
 
@@ -68,7 +68,7 @@ function vectorSum(X: UvaPatientState[]): UvaPatientState {
 			XL: 0,
 			Y: 0,
 			Z: 0,
-		}
+		},
 	);
 }
 

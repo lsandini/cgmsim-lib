@@ -1,4 +1,4 @@
-import logger, { getDeltaMinutes, getInsulinActivity } from './utils';
+import logger, { getDeltaMinutes, getTreatmentActivity } from './utils';
 import * as moment from 'moment';
 import { Profile, Treatment } from './Types';
 
@@ -15,7 +15,7 @@ function getProfileSwitch(treatments, duration) {
 				e.created_at &&
 				now.diff(moment(e.created_at), 'minutes') <= duration && // temps basals set in the last 3 hours
 				e.eventType === 'Profile Switch' &&
-				e.duration != 0
+				e.duration != 0,
 		)
 		.sort((f, s) => {
 			return moment(f.created_at).diff(s.created_at);
@@ -65,7 +65,7 @@ function getTempBasal(treatments, duration) {
 				e.created_at &&
 				now.diff(moment(e.created_at), 'minutes') <= duration && // temps basals set in the last 3 hours
 				e.eventType === 'Temp Basal' &&
-				e.duration != 0
+				e.duration != 0,
 		)
 		.sort((f, s) => {
 			return moment(f.created_at).diff(s.created_at);
@@ -91,11 +91,11 @@ function getTempBasal(treatments, duration) {
 
 function getBasalFromProfiles(
 	orderedProfiles: Profile[],
-	currentAction: moment.Moment
+	currentAction: moment.Moment,
 ) {
 	//last basal before the end
 	const activeProfiles = orderedProfiles.filter(
-		(p) => moment(p.startDate).diff(currentAction) <= 0
+		(p) => moment(p.startDate).diff(currentAction) <= 0,
 	);
 	if (activeProfiles && activeProfiles.length > 0) {
 		const activeProfile = activeProfiles[0];
@@ -110,7 +110,7 @@ function activeBasalByTime(
 	activeProfileBasals:
 		| { value: number; time: string; timeAsSecond?: number }[]
 		| number,
-	currentAction: moment.Moment
+	currentAction: moment.Moment,
 ) {
 	if (Array.isArray(activeProfileBasals)) {
 		const compatiblesBasalProfiles = activeProfileBasals.filter((b) => {
@@ -128,7 +128,7 @@ export default function (
 	treatments: Treatment[],
 	profiles: Profile[],
 	dia: number,
-	peak: number
+	peak: number,
 ) {
 	const basalAsBoluses: { minutesAgo: number; insulin: number }[] = [];
 	const endDiaAction = moment().utc();
@@ -144,7 +144,7 @@ export default function (
 			return profile.store[profileName];
 		})
 		.sort((first, second) =>
-			moment(second.startDate).diff(moment(first.startDate))
+			moment(second.startDate).diff(moment(first.startDate)),
 		);
 
 	const computedTempBasal = getTempBasal(treatments, duration);
@@ -157,10 +157,10 @@ export default function (
 		currentAction.add(5, 'minutes')
 	) {
 		const tempBasalActives = computedTempBasal.filter(
-			(t) => t.start.diff(currentAction) <= 0 && t.end.diff(currentAction) > 0
+			(t) => t.start.diff(currentAction) <= 0 && t.end.diff(currentAction) > 0,
 		);
 		const profilesStichActives = computedProfileSwitch.filter(
-			(t) => t.start.diff(currentAction) <= 0 && t.end.diff(currentAction) > 0
+			(t) => t.start.diff(currentAction) <= 0 && t.end.diff(currentAction) > 0,
 		);
 		let basalToUpdate: { minutesAgo: number; insulin: number };
 		//if there is a temp basal actives
@@ -172,7 +172,7 @@ export default function (
 		} else if (profilesStichActives.length > 0) {
 			const basal = activeBasalByTime(
 				profilesStichActives[0].basal,
-				currentAction
+				currentAction,
 			);
 			basalToUpdate = {
 				minutesAgo: getDeltaMinutes(currentAction.toISOString()),
@@ -192,8 +192,9 @@ export default function (
 
 	const pumpBasalAct = basalAsBoluses.reduce(
 		(tot, entry) =>
-			tot + getInsulinActivity(peak, duration, entry.minutesAgo, entry.insulin),
-		0
+			tot +
+			getTreatmentActivity(peak, duration, entry.minutesAgo, entry.insulin),
+		0,
 	);
 	logger.debug("the pump's basal activity is: %o", pumpBasalAct);
 	return pumpBasalAct;

@@ -52,7 +52,7 @@ function getMaxHr(age: number, gender: GenderType) {
 export function currentIntensity(
 	activities: Activity[],
 	age: number,
-	gender: GenderType
+	gender: GenderType,
 ): number {
 	let MAX_HR = getMaxHr(age, gender);
 	const intensity = physicalHeartIntensity(
@@ -60,7 +60,7 @@ export function currentIntensity(
 			...a,
 			minutesAgo: getDeltaMinutes(a.created_at),
 		})),
-		MAX_HR
+		MAX_HR,
 	);
 	return intensity ?? 0;
 }
@@ -70,7 +70,7 @@ export function currentIntensity(
 export function physicalIsf(
 	activities: Activity[],
 	age: number,
-	gender: GenderType
+	gender: GenderType,
 ): number {
 	let MAX_HR = getMaxHr(age, gender);
 
@@ -79,13 +79,13 @@ export function physicalIsf(
 			...a,
 			minutesAgo: getDeltaMinutes(a.created_at),
 		})),
-		MAX_HR
+		MAX_HR,
 	);
 	const bbb = physicalStepsIsf(
 		activities.map((a) => ({
 			...a,
 			minutesAgo: getDeltaMinutes(a.created_at),
-		}))
+		})),
 	);
 
 	if (aaa > bbb) {
@@ -99,7 +99,7 @@ export function physicalIsf(
 export function physicalLiver(
 	activities: Activity[],
 	age: number,
-	gender: GenderType
+	gender: GenderType,
 ): number {
 	let MAX_HR = getMaxHr(age, gender);
 	const aaa = physicalHeartRateLiver(
@@ -107,13 +107,13 @@ export function physicalLiver(
 			...a,
 			minutesAgo: getDeltaMinutes(a.created_at),
 		})),
-		MAX_HR
+		MAX_HR,
 	);
 	const bbb = physicalStepsLiver(
 		activities.map((a) => ({
 			...a,
 			minutesAgo: getDeltaMinutes(a.created_at),
-		}))
+		})),
 	);
 	return Math.max(aaa, bbb);
 }
@@ -123,10 +123,10 @@ export function physicalLiver(
 
 function physicalHeartRateIsf(
 	activities: (Activity & MinutesAgo)[],
-	MAX_HR: number
+	MAX_HR: number,
 ): number {
 	let last360min = activities.filter(
-		(e) => e.minutesAgo <= 360 && e.minutesAgo >= 0
+		(e) => e.minutesAgo <= 360 && e.minutesAgo >= 0,
 	);
 
 	// Here we compute the effect of heartRate on ISF
@@ -174,7 +174,7 @@ function physicalHeartRateIsf(
 
 function physicalHeartRateLiver(
 	activities: (Activity & MinutesAgo)[],
-	MAX_HR: number
+	MAX_HR: number,
 ): number {
 	let last360min = activities.filter((e) => e.minutesAgo <= 360);
 
@@ -241,7 +241,7 @@ function physicalStepsIsf(activities: (Activity & MinutesAgo)[]): number {
 	// compute cumulative daily steps in the previous 7 days or 7 * 1440 min
 	// then divide by 16 hours for hourly steps and multiply by 4 for 4-hour periods
 	let last7daysSteps = activities.filter(
-		(e) => e.minutesAgo <= 10080 && e.steps > -1
+		(e) => e.minutesAgo <= 10080 && e.steps > -1,
 	);
 	let cumulativeSteps = last7daysSteps.reduce(function (tot, arr) {
 		return tot + arr.steps;
@@ -253,7 +253,7 @@ function physicalStepsIsf(activities: (Activity & MinutesAgo)[]): number {
 
 	// compute last 4 hours steps
 	let last4hoursActivities = activities.filter(
-		(e) => e.minutesAgo <= 240 && e.steps > -1
+		(e) => e.minutesAgo <= 240 && e.steps > -1,
 	);
 	let last4hourSteps = last4hoursActivities.reduce(function (tot, arr) {
 		return tot + arr.steps;
@@ -294,7 +294,7 @@ function hasHeartRate(activities: Activity[]): boolean {
 
 function physicalHeartIntensity(
 	activities: (Activity & MinutesAgo)[],
-	MAX_HR: number
+	MAX_HR: number,
 ) {
 	let last5min = activities?.filter((e) => e.minutesAgo <= 5);
 

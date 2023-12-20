@@ -13,7 +13,7 @@ function fixXmlCase(text: string) {
 			new RegExp('(<|</)' + tagName.toLowerCase() + '\\b', 'g'),
 			function (all, start) {
 				return start + tagName;
-			}
+			},
 		);
 	}
 	return text;
@@ -46,7 +46,7 @@ export class D3Node {
 		if (svgStyles && !styles) {
 			// deprecated svgStyles option
 			console.warn(
-				'WARNING: svgStyles is deprecated, please use styles instead !!'
+				'WARNING: svgStyles is deprecated, please use styles instead !!',
 			);
 			styles = svgStyles;
 		}
@@ -65,12 +65,13 @@ export class D3Node {
 
 		// setup d3 selection
 		let d3Element = d3Module.select(document.body);
+
 		if (selector) {
 			d3Element = d3Element.select(selector);
 		}
 
 		this.options = { d3Module, selector, container, styles, canvasModule };
-		this.jsDom = new JSDOM();
+		this.jsDom = jsDom;
 		this.document = document;
 		this.window = document.defaultView;
 		this.d3Element = d3Element;
@@ -96,12 +97,20 @@ export class D3Node {
 		}
 		return svg;
 	}
+	getLegend(selector: string) {
+		let d3Element = this.d3.select(this.document.body);
+
+		if (selector) {
+			d3Element = d3Element.select(selector);
+		}
+		return d3Element;
+	}
 
 	svgString() {
 		if ((this.d3Element.select('svg') as any).node()) {
 			// temp until: https://github.com/tmpvar/jsdom/issues/1368
 			return fixXmlCase(
-				((this.d3Element.select('svg') as any).node() as Element).outerHTML
+				((this.d3Element.select('svg') as any).node() as Element).outerHTML,
 			);
 		}
 		return '';

@@ -1,7 +1,7 @@
 import { EnvParam, Sgv, Treatment } from '../src/Types';
 import simulator from '../src/CGMSIMsimulator';
 import moment = require('moment');
-import { diffOptions, getPngSnapshot } from './inputTest';
+import { diffOptions, getPngSnapshot, testGenerator } from './inputTest';
 const { toMatchImageSnapshot } = require('jest-image-snapshot');
 
 const math = global.Math;
@@ -129,7 +129,7 @@ describe('simulator test', () => {
     now = moment('2022-06-04T13:00:00.000Z');
     const treatments: Treatment[] = [
       {
-        created_at: now.toISOString(),
+        created_at: '2022-06-04T13:00:00.000Z',
         carbs: 40,
       },
       {
@@ -173,16 +173,18 @@ describe('simulator test', () => {
         mills: now.toDate().getTime(),
         sgv: result.sgv,
       });
-      sgvS.push(result.sgv);
+      for (let i = 0; i < 5; i++) {
+        sgvS.push(result.sgv);
+        basalActivities.push(result.basalActivity * 18 * 5);
+        bolusActivities.push(result.bolusActivity * 18 * 5);
+        carbsActivities.push(result.carbsActivity * 18 * 5);
+        liverActivities.push(result.liverActivity * 18 * 5);
+      }
       expect(result.deltaMinutes).toBeGreaterThanOrEqual(0);
       expect(result.basalActivity).toBeGreaterThanOrEqual(0);
-      basalActivities.push(result.basalActivity);
       expect(result.bolusActivity).toBeGreaterThanOrEqual(0);
-      bolusActivities.push(result.bolusActivity);
       expect(result.carbsActivity).toBeGreaterThanOrEqual(0);
-      carbsActivities.push(result.carbsActivity);
       expect(result.liverActivity).toBeGreaterThanOrEqual(0);
-      liverActivities.push(result.liverActivity);
 
       // console.log('Result ' + result.sgv + ' ' + now.toLocaleString())
       log.push('Result ' + result.sgv + ' ' + now.toISOString());
@@ -194,29 +196,42 @@ describe('simulator test', () => {
     }
     expect(lastSgv).toBeGreaterThanOrEqual(397);
     let data: any = [
-      // noiseActivities.map((sgv, index) => ({ key: index*5, value: sgv })),
-      // basalActivities.map((sgv, index) => ({ key: index*5, value: sgv })),
-      // bolusActivities.map((sgv, index) => ({ key: index*5, value: sgv })),
-      // carbsActivities.map((sgv, index) => ({ key: index*5, value: sgv })),
-      // liverActivities.map((sgv, index) => ({ key: index*5, value: sgv })),
       sgvS.map((sgv, index) => ({ key: index * 5, value: sgv })),
     ];
     data.allKeys = noiseActivities.map((sgv, index) => index * 5);
     const png = await getPngSnapshot(
       {
-        type: 'single',
-        values: noiseActivities.map((sgv, index) => ({
-          key: index,
-          value: sgv,
-        })),
+        type: 'multiple',
+        values: [
+          sgvS.map((sgv, index) => ({
+            key: index,
+            value: sgv,
+            name: 'sgv',
+          })),
+          bolusActivities.map((val, index) => ({
+            key: index,
+            value: val,
+            name: 'bolus',
+          })),
+          basalActivities.map((val, index) => ({
+            key: index,
+            value: val,
+            name: 'basal',
+          })),
+          liverActivities.map((val, index) => ({
+            key: index,
+            value: val,
+            name: 'liver',
+          })),
+        ],
       },
-      { scaleY: true }
+      { scaleY: 400 },
     );
 
     expect(png).toMatchImageSnapshot(diffOptions);
   });
 
-  test('start from 250 13:00Z tou 14 8U @14:00>', async () => {
+  test('start from 250 13:00Z and tou 14u + bolus 8U @14:00', async () => {
     let now = moment('2022-06-04T13:00:00.000Z');
     jest.setSystemTime(now.toDate());
     const entries: Sgv[] = [
@@ -325,7 +340,150 @@ describe('simulator test', () => {
         type: 'single',
         values: sgvS.map((sgv, index) => ({ key: index, value: sgv })),
       },
-      { scaleY: true }
+      { scaleY: 400 },
+    );
+
+    expect(png).toMatchImageSnapshot(diffOptions);
+    return;
+  });
+
+  test('start from 100 @13:00Z with deg23 + cor 40mg @14:00 + bolus 5u @14.30', async () => {
+    let now = moment('2022-06-04T13:00:00.000Z');
+    jest.setSystemTime(now.toDate());
+    const startSgv = 100;
+    const entries: Sgv[] = [
+      {
+        mills: now.add(-5, 'minutes').toDate().getTime(),
+        sgv: startSgv,
+      },
+      {
+        mills: now.add(-5, 'minutes').toDate().getTime(),
+        sgv: startSgv,
+      },
+      {
+        mills: now.add(-5, 'minutes').toDate().getTime(),
+        sgv: startSgv,
+      },
+      {
+        mills: now.add(-5, 'minutes').toDate().getTime(),
+        sgv: startSgv,
+      },
+    ];
+    const entriesCortisone: Sgv[] = [
+      {
+        mills: now.add(-5, 'minutes').toDate().getTime(),
+        sgv: startSgv,
+      },
+      {
+        mills: now.add(-5, 'minutes').toDate().getTime(),
+        sgv: startSgv,
+      },
+      {
+        mills: now.add(-5, 'minutes').toDate().getTime(),
+        sgv: startSgv,
+      },
+      {
+        mills: now.add(-5, 'minutes').toDate().getTime(),
+        sgv: startSgv,
+      },
+    ];
+    now = moment('2022-06-04T13:00:00.000Z');
+    const treatmentsCortisone: Treatment = {
+      created_at: '2022-06-04T10:14:00.000Z',
+      notes: 'cor 40',
+      carbs: 0,
+    };
+    const treatmentsBolus = {
+      eventType: 'Meal Bolus',
+      insulin: 5,
+      created_at: '2022-06-04T14:30:00.000Z',
+      carbs: null,
+    };
+    const treatments: Treatment[] = [
+      {
+        created_at: '2022-06-04T10:00:00.000Z',
+        notes: 'deg 23',
+        carbs: 0,
+      },
+      {
+        created_at: '2022-06-05T10:00:00.000Z',
+        notes: 'deg 23',
+        carbs: 0,
+      },
+    ];
+    const env: EnvParam = {
+      CARBS_ABS_TIME: '360',
+      CR: '10',
+      DIA: '6',
+      ISF: '32',
+      TP: '75',
+      WEIGHT: '80',
+      AGE: '51',
+      GENDER: 'Male',
+    };
+
+    const log = [];
+    let lastSgv = 0;
+    log.push('Cor 40mg  2022-06-04T01:00:00.000Z');
+
+    const sgvSCortisone = [];
+    const sgvS = [];
+
+    for (let index = 0; index < 60 * 24; ) {
+      const resultCortisone = simulator({
+        env,
+        entries: entriesCortisone,
+        treatments: [...treatments, treatmentsCortisone, treatmentsBolus],
+        profiles: [],
+        user: { nsUrl },
+      });
+      entriesCortisone.splice(0, 0, {
+        mills: now.toDate().getTime(),
+        sgv: resultCortisone.sgv,
+      });
+      for (let i = 0; i < 5; i++) {
+        sgvSCortisone.push(resultCortisone.sgv);
+      }
+
+      const result = simulator({
+        env,
+        entries,
+        treatments: [...treatments],
+        profiles: [],
+        user: { nsUrl },
+      });
+      entries.splice(0, 0, {
+        mills: now.toDate().getTime(),
+        sgv: result.sgv,
+      });
+      for (let i = 0; i < 5; i++) {
+        sgvS.push(result.sgv);
+      }
+
+      now = now.add(5, 'minutes');
+      index = index + 5;
+      jest.setSystemTime(now.toDate());
+    }
+    expect(sgvSCortisone).toMatchSnapshot();
+    expect(lastSgv).toMatchSnapshot();
+    // let data: any = [
+    // 	// noiseActivities.map((sgv, index) => ({ key: index*5, value: sgv })),
+    // 	// basalActivities.map((sgv, index) => ({ key: index*5, value: sgv })),
+    // 	// bolusActivities.map((sgv, index) => ({ key: index*5, value: sgv })),
+    // 	// carbsActivities.map((sgv, index) => ({ key: index*5, value: sgv })),
+    // 	// liverActivities.map((sgv, index) => ({ key: index*5, value: sgv })),
+    // 	sgvS.map((sgv, index) => ({ key: index * 5, value: sgv })),
+    // ]
+    // data.allKeys = noiseActivities.map((sgv, index) => index * 5)
+    const png = await getPngSnapshot(
+      {
+        type: 'multiple',
+        values: [
+          sgvSCortisone.map((sgv, index) => ({ key: index, value: sgv })),
+          sgvS.map((sgv, index) => ({ key: index, value: sgv })),
+        ],
+      },
+      { scaleY: 400 },
     );
 
     expect(png).toMatchImageSnapshot(diffOptions);

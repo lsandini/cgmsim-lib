@@ -1,6 +1,8 @@
 import moment = require('moment');
 import { MultiLineDataSource, SingleLineDataSource } from 'src/d3/d3Func';
-import { Activity } from 'src/Types';
+import { drugs } from '../src/drug';
+import { Activity, EnvParam, Sgv } from '../src/Types';
+import simulator from '../src/CGMSIMsimulator';
 const { output, line } = require('../src/d3/d3Func');
 
 export const diffOptions = {
@@ -15,7 +17,7 @@ export const diffOptions = {
 export const getPngSnapshot = async (
   data: SingleLineDataSource | MultiLineDataSource,
   options = {},
-  name?: string
+  name?: string,
 ): Promise<Buffer> => {
   jest.useRealTimers();
   const testDesc = expect.getState().currentTestName;
@@ -26,8 +28,13 @@ export const getPngSnapshot = async (
 
   const graph = line({
     data: data,
-    container: `<div id='container'><h2>${testDesc}</h2><div id='chart'></div></div>`,
-    lineColors: ['steelblue', 'darkorange', 'red', 'darkgreen', 'black'],
+    container: `
+    <div id='container' style="display:flex;flex-direction:column;">
+      <h2>${testDesc}</h2>
+      <div id='chart'></div>	  	
+      <svg id="my_dataviz" height=300 width=450></svg>
+    </div>`,
+    // lineColors: ['steelblue', 'darkorange', 'red', 'darkgreen', 'black'],
     width: 800,
     height: 570,
     ...options,
@@ -36,7 +43,7 @@ export const getPngSnapshot = async (
     const png = await output(
       // './test/__visual__/' + filename,
       `./test/__pngArchive__/${fileBase}/${filename}`,
-      graph
+      graph,
     );
     return png;
   } catch (error) {
@@ -214,6 +221,8 @@ export const bolusTreatments = [
   },
 ];
 
+const nsUrl = 'testUser';
+
 export const getFlatHeartRate = (hr: Activity, hoursDuration): Activity[] => {
   const result = [];
   const end = moment(hr.created_at).add(hoursDuration, 'h');
@@ -227,4 +236,154 @@ export const getFlatHeartRate = (hr: Activity, hoursDuration): Activity[] => {
   }
 
   return result;
+};
+
+type TestCarb = {
+  grams: number;
+  minutes: number;
+};
+type TestTreatment = {
+  units: number;
+  type: keyof typeof drugs;
+  minutes: number;
+};
+type TestResult = {
+  noiseActivities: number[];
+  basalActivities: number[];
+  bolusActivities: number[];
+  carbsActivities: number[];
+  liverActivities: number[];
+  cortisoneActivity: number[];
+  alcoholActivity: number[];
+  sgvS: number[];
+  activityFactor: number[];
+  isfConstantFactor: number[];
+  isfDynamicFactor: number[];
+};
+type TestBolus = {
+  insulin: number;
+  minutes: number;
+};
+export const testGenerator = (
+  startSgv: number,
+  hoursDuration: number,
+  {
+    treatments,
+    carbs,
+    boluses,
+  }: {
+    treatments: TestTreatment[];
+    carbs: TestCarb[];
+    boluses: TestBolus[];
+  },
+): TestResult => {
+  jest.useFakeTimers('modern');
+
+  const env: EnvParam = {
+    CARBS_ABS_TIME: '360',
+    CR: '10',
+    DIA: '6',
+    ISF: '30',
+    TP: '75',
+    WEIGHT: '80',
+    AGE: '51',
+    GENDER: 'Male',
+  };
+  const noiseActivities = [];
+  const basalActivities = [];
+  const bolusActivities = [];
+  const carbsActivities = [];
+  const liverActivities = [];
+  const cortisoneActivity = [];
+  const alcoholActivity = [];
+  const activityFactor = [];
+  const isfConstantFactor = [];
+  const isfDynamicFactor = [];
+  const sgvS = [];
+  let now = () => moment('2022-02-02T12:00:00.000Z');
+  const entries: Sgv[] = [
+    {
+      mills: now().add(-20, 'minutes').toDate().getTime(),
+      sgv: startSgv,
+    },
+    {
+      mills: now().add(-15, 'minutes').toDate().getTime(),
+      sgv: startSgv,
+    },
+    {
+      mills: now().add(-10, 'minutes').toDate().getTime(),
+      sgv: startSgv,
+    },
+    {
+      mills: now().add(-5, 'minutes').toDate().getTime(),
+      sgv: startSgv,
+    },
+  ];
+  const nsTreatments = [];
+  treatments.forEach((t) => {
+    nsTreatments.push({
+      created_at: now().add(t.minutes, 'minutes').utc().format(),
+      notes: `${drugs[t.type].names[0]} ${t.units}`,
+    });
+  });
+  carbs.forEach((t) => {
+    nsTreatments.push({
+      created_at: now().add(t.minutes, 'minutes').utc().format(),
+      carbs: t.grams,
+    });
+  });
+
+  boluses.forEach((t) => {
+    nsTreatments.push({
+      created_at: now().add(t.minutes, 'minutes').utc().format(),
+      eventType: 'Meal Bolus',
+      insulin: t.insulin,
+    });
+  });
+  let _now = now();
+  jest.setSystemTime(_now.toDate());
+
+  for (let index = 0; index < 60 * hoursDuration; ) {
+    const result = simulator({
+      env,
+      entries,
+      treatments: nsTreatments,
+      profiles: [],
+      user: { nsUrl },
+    });
+    entries.splice(0, 0, {
+      mills: _now.toDate().getTime(),
+      sgv: result.sgv,
+    });
+    // for (let i = 0; i < 5; i++) {
+    sgvS.push(result.sgv);
+    basalActivities.push(result.basalActivity);
+    bolusActivities.push(result.bolusActivity);
+    carbsActivities.push(result.carbsActivity);
+    liverActivities.push(result.liverActivity);
+    cortisoneActivity.push(result.cortisoneActivity);
+    alcoholActivity.push(result.alcoholActivity);
+    activityFactor.push(result.activityFactor);
+    isfConstantFactor.push(result.isf.constant);
+    isfDynamicFactor.push(result.isf.dynamic);
+    // }
+
+    _now = _now.add(5, 'minutes');
+    index = index + 5;
+    jest.setSystemTime(_now.toDate());
+  }
+
+  return {
+    noiseActivities,
+    basalActivities,
+    bolusActivities,
+    carbsActivities,
+    liverActivities,
+    cortisoneActivity,
+    alcoholActivity,
+    activityFactor,
+    isfConstantFactor,
+    isfDynamicFactor,
+    sgvS,
+  };
 };

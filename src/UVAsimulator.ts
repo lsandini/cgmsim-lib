@@ -13,6 +13,7 @@ import {
 import { PatientUva } from './uva';
 import RK4 from './SolverRK';
 import { currentIntensity } from './physical';
+import { transformNoteTreatmentsDrug } from './drug';
 /**
  * Simulates blood glucose levels in response to various parameters and inputs.
  * @param params - Main parameters for running the simulation.
@@ -76,8 +77,13 @@ const simulator = (params: MainParamsUVA) => {
 	const weight = parseInt(env.WEIGHT);
 	const age = parseInt(env.AGE);
 	const gender = env.GENDER;
+	const drugs = transformNoteTreatmentsDrug(treatments);
 
-	const basalActivity = basal(treatments, weight);
+	const activeDrugTreatments = drugs.filter(function (e) {
+		return e.minutesAgo <= 45 * 60; // keep only the basals from the last 45 hours
+	});
+
+	const basalActivity = basal(activeDrugTreatments, weight);
 
 	const last5MinuteTreatments = treatments
 		.map((e) => ({
@@ -126,7 +132,7 @@ const simulator = (params: MainParamsUVA) => {
 	let result: UvaOutput = patient.getOutputs(
 		partialMinutes,
 		patientState,
-		userParams
+		userParams,
 	);
 	const lastPatientState = { ...patientState };
 	// start simulation
@@ -162,7 +168,7 @@ const simulator = (params: MainParamsUVA) => {
 				patient.getDerivatives(time, state, userParams),
 			partialMinutes,
 			patientState,
-			oneMinute
+			oneMinute,
 		);
 		//t partialMinutes result
 		result = patient.getOutputs(partialMinutes, patientState, userParams);
