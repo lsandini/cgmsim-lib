@@ -25,7 +25,7 @@ export const drugs = {
 		peak: (duration: number) => duration / 3,
 		duration: () => 42 * 60,
 	},
-  NPH: {
+	NPH: {
 		names: ['pro', 'Pro', 'nph', 'Nph'],
 		peak: (duration: number) => duration / 3.5,
 		duration: (units: number, weight: number) =>
@@ -42,12 +42,14 @@ export const drugs = {
 	// 	peak: () => 90,
 	// 	duration: () => 240,
 	// },
-  ALC: {
-    names: ['alc', 'Alc'],
+	ALC: {
+		names: ['alc', 'Alc'],
 		peak: (duration: number) => duration / 2.5,
-		duration: (units: number, weight: number) =>
-			(3 + (40 * units) / weight) * 60,
-	}
+		duration: (drinks: number, weight: number) => {
+			const _duration = ((40 * drinks) / weight) * 100;
+			return _duration > 240 ? _duration : 240;
+		},
+	},
 };
 
 export const getDrugActivity = (
