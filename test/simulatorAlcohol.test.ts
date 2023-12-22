@@ -110,14 +110,14 @@ describe('simulatorAlcohol test', () => {
     const result = testGenerator(180, 24, {
       treatments: [
         {
-          type: 'ALC',
+          type: 'BEER',
           minutes: 60,
-          units: 1,
+          units: 3.3,
         },
         {
-          type: 'ALC',
+          type: 'BEER',
           minutes: 120,
-          units: 4,
+          units: 10,
         },
         {
           type: 'DEG',

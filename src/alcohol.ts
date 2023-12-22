@@ -67,5 +67,10 @@ export default function (
 		lastALC.length > 0 ? computeAlcoholActivity(lastALC, weight, gender) : 0;
 	logger.debug('these are the last ALC: %o', { lastALC, activityALC });
 
-	return activityALC;
+  const lastBEER = getDrugActivity(treatments, weight, 'BEER');
+	const activityBEER =
+		lastBEER.length > 0 ? computeAlcoholActivity(lastBEER, weight, gender) : 0;
+	logger.debug('these are the last BEER: %o', { lastBEER, activityBEER });
+
+	return activityALC + activityBEER;
 }
