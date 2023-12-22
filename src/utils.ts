@@ -139,3 +139,8 @@ export function loadBase(
 			throw new Error(err);
 		});
 }
+export function roundTo8Decimals(number: number) {
+	let multiplier = Math.pow(10, 8);
+	let roundedNumber = Math.round(number * multiplier) / multiplier;
+	return roundedNumber;
+}

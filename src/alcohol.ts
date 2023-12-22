@@ -1,6 +1,10 @@
 import { TreatmentDelta, Treatment, TreatmentDrug, GenderType } from './Types';
 import { getDrugActivity } from './drug';
-import logger, { getDeltaMinutes, getTreatmentActivity } from './utils';
+import logger, {
+	getDeltaMinutes,
+	getTreatmentActivity,
+	roundTo8Decimals,
+} from './utils';
 
 function getAlcoholActivity(
 	gender: 'Male' | 'Female',
@@ -13,9 +17,9 @@ function getAlcoholActivity(
 	const peakAlcoholAmountMin = 60; //min
 	const r = gender === 'Male' ? 0.68 : 0.55;
 	const eliminationRate = gender === 'Male' ? 0.016 / 60 : 0.018 / 60; //g/100ml/min
-	const peakAmount = ((units * 12) / (weightKg * 1000 * r)) * 100; //g/100ml
+	const peakAmount = (units / (weightKg * 1000 * r)) * 100; //g/100ml
 	const washoutDuration = peakAlcoholAmountMin + peakAmount / eliminationRate; //min
-	const unitsWeighted = units * 12 * (80 / weightKg);
+	const unitsWeighted = units * (80 / weightKg);
 	if (washoutDuration < timeMin) {
 		return (
 			getTreatmentActivity(
@@ -67,10 +71,10 @@ export default function (
 		lastALC.length > 0 ? computeAlcoholActivity(lastALC, weight, gender) : 0;
 	logger.debug('these are the last ALC: %o', { lastALC, activityALC });
 
-  const lastBEER = getDrugActivity(treatments, weight, 'BEER');
+	const lastBEER = getDrugActivity(treatments, weight, 'BEER');
 	const activityBEER =
 		lastBEER.length > 0 ? computeAlcoholActivity(lastBEER, weight, gender) : 0;
 	logger.debug('these are the last BEER: %o', { lastBEER, activityBEER });
 
-	return activityALC + activityBEER;
+	return roundTo8Decimals(activityALC + activityBEER);
 }

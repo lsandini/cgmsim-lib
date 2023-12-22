@@ -2588,4 +2588,4 @@ exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 1023`
 
 exports[`test computeBasalIOB comparing old cgmsim double toujeo injection 1024`] = `0`;
 
-exports[`test computeBasalIOB detection drug 1`] = `0.0035966516146412695`;
+exports[`test computeBasalIOB detection drug 1`] = `0.00359665`;

@@ -1,4 +1,8 @@
-import logger, { getDeltaMinutes, getTreatmentActivity } from './utils';
+import logger, {
+	getDeltaMinutes,
+	getTreatmentActivity,
+	roundTo8Decimals,
+} from './utils';
 import { Treatment } from './Types';
 
 export default (
@@ -35,5 +39,5 @@ export default (
 		0,
 	);
 	logger.debug('these are the insulins bolus activity: %o', bolusAct);
-	return bolusAct;
+	return roundTo8Decimals(bolusAct);
 };

@@ -194,4 +194,52 @@ describe('simulatorAlcohol test', () => {
     expect(png).toMatchImageSnapshot(diffOptions);
     return;
   });
+
+  test('compare alcool with beer', async () => {
+    const resultBeer = testGenerator(180, 8, {
+      treatments: [
+        {
+          type: 'BEER',
+          minutes: 60,
+          units: 3.3,
+        },
+        {
+          type: 'DEG',
+          minutes: -(6 * 60),
+          units: 20,
+        },
+        {
+          type: 'DEG',
+          minutes: 18 * 60,
+          units: 20,
+        },
+      ],
+      boluses: [],
+      carbs: [],
+    });
+    const resultAlcool = testGenerator(180, 8, {
+      treatments: [
+        {
+          type: 'ALC',
+          minutes: 60,
+          units: 1,
+        },
+        {
+          type: 'DEG',
+          minutes: -(6 * 60),
+          units: 20,
+        },
+        {
+          type: 'DEG',
+          minutes: 18 * 60,
+          units: 20,
+        },
+      ],
+      boluses: [],
+      carbs: [],
+    });
+    expect(resultBeer.sgvS).toEqual(resultAlcool.sgvS);
+    expect(resultBeer.alcoholActivity).toEqual(resultAlcool.alcoholActivity);
+    return;
+  });
 });

@@ -1,6 +1,6 @@
 import { TreatmentDelta, TreatmentDrug } from './Types';
 import { getDrugActivity } from './drug';
-import logger, { getTreatmentActivity } from './utils';
+import logger, { getTreatmentActivity, roundTo8Decimals } from './utils';
 
 export const computeBasalActivity = (treatments: TreatmentDelta[]) => {
 	// activities be expressed as U/min !!!
@@ -37,9 +37,11 @@ export default function (treatments: TreatmentDrug[], weight: number): number {
 	const activityDEG = lastDEG.length ? computeBasalActivity(lastDEG) : 0;
 	logger.debug('these are the last DEG: %o', { lastDEG, activityDEG });
 
-  const lastNPH = getDrugActivity(treatments, weight, 'NPH');
+	const lastNPH = getDrugActivity(treatments, weight, 'NPH');
 	const activityNPH = lastNPH.length ? computeBasalActivity(lastNPH) : 0;
 	logger.debug('these are the last NPH: %o', { lastNPH, activityNPH });
 
-	return activityDEG + activityDET + activityGLA + activityTOU + activityNPH;
+	return roundTo8Decimals(
+		activityDEG + activityDET + activityGLA + activityTOU + activityNPH,
+	);
 }
