@@ -53,8 +53,9 @@ export const drugs = {
   BEER: {
 		names: ['bee', 'Bee'],
 		peak: (duration: number) => duration / 2.5,
-		duration: (drinks: number, weight: number) => {
-			const _duration = ((40 * (drinks/3.3)) / weight) * 100; // when beer expressed in dL, 3.3dL = 1 drink
+		duration: (dL: number, weight: number) => {
+			const drinks=dL/3.3;
+			const _duration = ((40 * drinks) / weight) * 100; // when beer expressed in dL, 3.3dL = 1 drink
 			return _duration > 240 ? _duration : 240;
 		},
 	},
