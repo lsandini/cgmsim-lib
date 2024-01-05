@@ -1,4 +1,4 @@
-import { EnvParam, Sgv, Treatment } from '../src/Types';
+import { EnvParam, Sgv, NSTreatment } from '../src/Types';
 import simulator from '../src/CGMSIMsimulator';
 import moment = require('moment');
 import { diffOptions, getPngSnapshot, testGenerator } from './inputTest';
@@ -48,7 +48,7 @@ describe('simulator test', () => {
       },
     ];
     now = moment(date);
-    const treatments: Treatment[] = [
+    const treatments: NSTreatment[] = [
       {
         created_at: now.toISOString(),
         notes: 'Tou 14',
@@ -127,7 +127,7 @@ describe('simulator test', () => {
       },
     ];
     now = moment('2022-06-04T13:00:00.000Z');
-    const treatments: Treatment[] = [
+    const treatments: NSTreatment[] = [
       {
         created_at: '2022-06-04T13:00:00.000Z',
         carbs: 40,
@@ -253,7 +253,7 @@ describe('simulator test', () => {
       },
     ];
     now = moment('2022-06-04T13:00:00.000Z');
-    const treatments: Treatment[] = [
+    const treatments: NSTreatment[] = [
       {
         eventType: 'Meal Bolus',
         insulin: 5,
@@ -388,7 +388,7 @@ describe('simulator test', () => {
       },
     ];
     now = moment('2022-06-04T13:00:00.000Z');
-    const treatmentsCortisone: Treatment = {
+    const treatmentsCortisone: NSTreatment = {
       created_at: '2022-06-04T10:14:00.000Z',
       notes: 'cor 40',
       carbs: 0,
@@ -399,7 +399,7 @@ describe('simulator test', () => {
       created_at: '2022-06-04T14:30:00.000Z',
       carbs: null,
     };
-    const treatments: Treatment[] = [
+    const treatments: NSTreatment[] = [
       {
         created_at: '2022-06-04T10:00:00.000Z',
         notes: 'deg 23',

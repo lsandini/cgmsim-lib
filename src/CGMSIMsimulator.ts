@@ -76,6 +76,7 @@ const simulator = (params: MainParams): SimulationResult => {
 		physical: activityFactor,
 		alcohol: alcoholActivity,
 	});
+
 	const now = moment();
 	const orderedEntries = entries
 		.filter((e) => e.mills <= now.toDate().getTime())

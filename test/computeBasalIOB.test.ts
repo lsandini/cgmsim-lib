@@ -1,6 +1,6 @@
 import { treatments, toujeoTreatments, glargineTreatments } from './inputTest';
 import computeBasalIOB from '../src/basal';
-import { Treatment } from '../src/Types';
+import { NSTreatment } from '../src/Types';
 import { oldComputeBasal } from '../old/oldComputeBasal';
 import oldToujeoRun from '../old/oldToujeo';
 import oldGlargine from '../old/oldGlargine';
@@ -20,7 +20,7 @@ describe('test computeBasalIOB', () => {
 
   test('detection drug', () => {
     const drugs = transformNoteTreatmentsDrug(
-      treatments as unknown as Treatment[]
+      treatments as unknown as NSTreatment[],
     );
     const result = computeBasalIOB(drugs, 80);
 
@@ -73,7 +73,7 @@ describe('check insert value string', () => {
       },
     ];
     const drugsTou = transformNoteTreatmentsDrug(
-      toujeoTreatment as unknown as Treatment[]
+      toujeoTreatment as unknown as NSTreatment[],
     );
     let result = computeBasalIOB(drugsTou, 80);
     expect(result).toBeDefined();
@@ -103,7 +103,7 @@ describe('check insert value string', () => {
       },
     ];
     const drugsTou = transformNoteTreatmentsDrug(
-      toujeoTreatment as unknown as Treatment[]
+      toujeoTreatment as unknown as NSTreatment[],
     );
     let result = computeBasalIOB(drugsTou, 80);
     expect(result).toBe(0);
@@ -133,7 +133,7 @@ describe('test computeBasalIOB comparing old cgmsim', () => {
 
       let oldActivity = oldToujeoRun(80, lastTOU);
       const drugsTou = transformNoteTreatmentsDrug(
-        toujeoTreatments as unknown as Treatment[]
+        toujeoTreatments as unknown as NSTreatment[],
       );
       let result = computeBasalIOB(drugsTou, 80);
       const ROUND = 100000000;
@@ -180,7 +180,7 @@ describe('test computeBasalIOB comparing old cgmsim', () => {
 
       let oldActivity = oldToujeoRun(80, lastTOU);
       const drugsDoubleTou = transformNoteTreatmentsDrug(
-        doubleToujeoTreatments as unknown as Treatment[]
+        doubleToujeoTreatments as unknown as NSTreatment[],
       );
       let result = computeBasalIOB(drugsDoubleTou, 80);
       const ROUND = 100000000;
@@ -209,7 +209,7 @@ describe('test computeBasalIOB comparing old cgmsim', () => {
 
       let oldActivity = oldGlargine(80, lastGLA);
       const drugsGla = transformNoteTreatmentsDrug(
-        glargineTreatments as unknown as Treatment[]
+        glargineTreatments as unknown as NSTreatment[],
       );
       let result = computeBasalIOB(drugsGla, 80);
       const ROUND = 100000000;

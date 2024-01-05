@@ -1,7 +1,7 @@
 import moment = require('moment');
-import { Profile } from './Types';
-export default function (profile: Profile[]): number {
-	let lastProfile: Profile = null;
+import { NSProfile } from './Types';
+export default function (profile: NSProfile[]): number {
+	let lastProfile: NSProfile = null;
 	let lastProfiles = profile.sort((first, second) =>
 		moment(second.startDate).diff(-moment(first.startDate)),
 	);

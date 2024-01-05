@@ -2,10 +2,12 @@ import moment = require('moment');
 import carbs from '../src/carbs';
 import { oldCarbs } from '../old/oldCarbs';
 import { diffOptions, getPngSnapshot } from './inputTest';
+import { NSTreatment } from '../src/Types';
 
 const now = '2001-01-01T07:00:00';
 const { toMatchImageSnapshot } = require('jest-image-snapshot');
 const math = global.Math;
+
 beforeEach(() => {
   jest.useFakeTimers('modern');
   jest.setSystemTime(new Date(now));
@@ -29,13 +31,14 @@ describe('Carbs test', () => {
     const r = carbs(
       [
         {
+          eventType: 'Meal Bolus',
           carbs: 44,
           created_at: minutesAgo(361),
         },
       ],
       360,
       30,
-      10
+      10,
     );
     expect(r).toBe(0);
   });
@@ -44,13 +47,14 @@ describe('Carbs test', () => {
     const r = carbs(
       [
         {
+          eventType: 'Meal Bolus',
           carbs: 40,
           created_at: minutesAgo(45),
         },
       ],
       360,
       30,
-      10
+      10,
     );
     expect(r).toMatchSnapshot();
   });
@@ -59,17 +63,19 @@ describe('Carbs test', () => {
     const r = carbs(
       [
         {
+          eventType: 'Meal Bolus',
           carbs: 20,
           created_at: minutesAgo(1),
         },
         {
+          eventType: 'Meal Bolus',
           carbs: 20,
           created_at: minutesAgo(45),
         },
       ],
       360,
       30,
-      10
+      10,
     );
     expect(r).toMatchSnapshot();
   });
@@ -78,24 +84,26 @@ describe('Carbs test', () => {
     const r40 = carbs(
       [
         {
+          eventType: 'Meal Bolus',
           carbs: 20,
           created_at: minutesAgo(40),
         },
       ],
       360,
       30,
-      10
+      10,
     );
     const r60 = carbs(
       [
         {
+          eventType: 'Meal Bolus',
           carbs: 20,
           created_at: minutesAgo(60),
         },
       ],
       360,
       30,
-      10
+      10,
     );
     expect(r40).toBeGreaterThan(r60);
   });
@@ -104,24 +112,26 @@ describe('Carbs test', () => {
     const r5 = carbs(
       [
         {
+          eventType: 'Meal Bolus',
           carbs: 20,
           created_at: minutesAgo(5),
         },
       ],
       360,
       30,
-      10
+      10,
     );
     const r60 = carbs(
       [
         {
+          eventType: 'Meal Bolus',
           carbs: 20,
           created_at: minutesAgo(40),
         },
       ],
       360,
       30,
-      10
+      10,
     );
     expect(r5).toBeLessThan(r60);
   });
@@ -130,17 +140,19 @@ describe('Carbs test', () => {
     const r = carbs(
       [
         {
+          eventType: 'Meal Bolus',
           carbs: 40,
           created_at: minutesAgo(1),
         },
         {
+          eventType: 'Meal Bolus',
           carbs: 40,
           created_at: minutesAgo(45),
         },
       ],
       360,
       30,
-      10
+      10,
     );
     expect(r).toBeGreaterThan(0);
   });
@@ -151,7 +163,8 @@ describe('Carbs test', () => {
     [[5, 27, 55, 98]],
     [[15, 22, 35, 83, 143]],
   ])('test carb %p', (numbers: number[]) => {
-    const e = numbers.map((n) => ({
+    const e: NSTreatment[] = numbers.map((n) => ({
+      eventType: 'Meal Bolus',
       carbs: 20,
       created_at: minutesAgo(n),
     }));
@@ -160,7 +173,7 @@ describe('Carbs test', () => {
   });
 });
 
-describe('Carbs test old compare', () => {
+describe('Carbs test compare old', () => {
   beforeEach(() => {
     jest.useFakeTimers('modern');
     jest.setSystemTime(new Date(now));
@@ -180,6 +193,7 @@ describe('Carbs test old compare', () => {
 
       const treatment = [
         {
+          eventType: 'Meal Bolus',
           carbs: 40,
           created_at: minutesAgo(1),
           time: moment(minutesAgo(1)).toDate().getTime(),
@@ -204,7 +218,7 @@ describe('Carbs test old compare', () => {
           oldC.map((sgv, index) => ({ key: index, value: sgv })),
         ],
       },
-      { scaleY: true }
+      { scaleY: true },
     );
     expect(png).toMatchImageSnapshot(diffOptions);
   });

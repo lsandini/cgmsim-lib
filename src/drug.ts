@@ -1,4 +1,4 @@
-import { Treatment, TreatmentDrug } from './Types';
+import { NSTreatment, NSTreatmentParsed, TreatmentBiexpParam } from './Types';
 import logger, { getDeltaMinutes } from './utils';
 
 export const drugs = {
@@ -69,11 +69,11 @@ export const drugs = {
 	},
 };
 
-export const getDrugActivity = (
-	treatments: TreatmentDrug[],
+export const getTreatmentBiexpParam = (
+	treatments: NSTreatmentParsed[],
 	weight: number,
 	drug: keyof typeof drugs,
-) => {
+): TreatmentBiexpParam[] => {
 	const currentDrug = drugs[drug];
 	return treatments
 		.filter((e) => currentDrug.names.some((n) => n === e.drug))
@@ -81,8 +81,9 @@ export const getDrugActivity = (
 			const duration = currentDrug.duration(e.units, weight);
 			const peak = currentDrug.peak(duration);
 			const units = currentDrug.units(e.units);
+			const minutesAgo = e.minutesAgo;
 			return {
-				...e,
+				minutesAgo,
 				units,
 				duration,
 				peak,
@@ -91,8 +92,8 @@ export const getDrugActivity = (
 };
 
 export function transformNoteTreatmentsDrug(
-	treatments: Treatment[],
-): TreatmentDrug[] {
+	treatments: NSTreatment[],
+): NSTreatmentParsed[] {
 	return treatments && treatments.length
 		? treatments
 				.filter((e) => e.notes)

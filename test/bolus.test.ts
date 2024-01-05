@@ -1,6 +1,6 @@
 import { bolusTreatments, diffOptions, getPngSnapshot } from './inputTest';
 import bolus from '../src/bolus';
-import { Treatment } from '../src/Types';
+import { NSTreatment } from '../src/Types';
 const { toMatchImageSnapshot } = require('jest-image-snapshot');
 
 const moment = require('moment');
@@ -25,7 +25,11 @@ describe('test bolus', () => {
     let _date = moment('2022-05-06T16:30:00.000Z');
     jest.setSystemTime(_date.toDate());
 
-    const result = bolus(bolusTreatments as unknown as Treatment[], dia, peak);
+    const result = bolus(
+      bolusTreatments as unknown as NSTreatment[],
+      dia,
+      peak,
+    );
 
     expect(result).toMatchSnapshot();
   });
@@ -37,11 +41,11 @@ describe('test bolus', () => {
     for (let t = 0; t < 100; t++) {
       _date = _date.add(5, 'minutes');
       jest.setSystemTime(_date.toDate());
-      const boluses = bolusTreatments as unknown as Treatment[];
+      const boluses = bolusTreatments as unknown as NSTreatment[];
       const _insulinActive = bolus(
         boluses.filter((b) => b.insulin > 0),
         dia,
-        peak
+        peak,
       );
       expect(_insulinActive).toBeGreaterThanOrEqual(0);
       insulinActive += _insulinActive > 0 ? _insulinActive : 0;
@@ -57,7 +61,7 @@ describe('test bolus', () => {
           value: sgv,
         })),
       },
-      { scaleY: 1}
+      { scaleY: 1 },
     );
     expect(png).toMatchImageSnapshot(diffOptions);
   });

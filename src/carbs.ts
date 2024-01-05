@@ -1,10 +1,10 @@
-import { Treatment } from './Types';
+import { NSTreatment } from './Types';
 import logger, { getDeltaMinutes } from './utils';
 
 //const logger = pino();
 
 export default function carbs(
-	treatments: Treatment[] = [],
+	treatments: NSTreatment[] = [],
 	carbsAbs: number,
 	isf: number,
 	cr: number,

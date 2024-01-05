@@ -1,3 +1,5 @@
+import { drugs } from './drug';
+
 /**
  * Represents the direction of blood glucose change.
  */
@@ -73,7 +75,7 @@ export type ProfileParams = {
 /**
  * Represents a profile with associated profile parameters.
  */
-export type Profile = {
+export type NSProfile = {
 	startDate: string;
 	defaultProfile: string;
 	store: {
@@ -84,27 +86,29 @@ export type Profile = {
 /**
  * Represents treatment data.
  */
-export type Treatment = {
+export type NSTreatment = {
 	absolute?: any;
 	duration?: number;
-	eventType?: string;
+	eventType: string;
 	insulin?: number;
 	notes?: string;
 	created_at: string;
 	carbs?: number;
+	profileJson?: string;
+	percentage?: number;
 };
 
-export type TreatmentDrug = {
+export type NSTreatmentParsed = {
 	drug: string;
-	units: Treatment['insulin'];
+	units: number;
 	minutesAgo: number;
 };
 
 /**
  * Represents a treatment delta with additional minutes ago information.
  */
-export type TreatmentDelta = {
-	units: Treatment['insulin'];
+export type TreatmentBiexpParam = {
+	units: number;
 	minutesAgo: number;
 	duration: number;
 	peak: number;
@@ -138,8 +142,8 @@ export type CGMSimParams = {
 	liverActivity: number;
 	carbsActivity: number;
 	bolusActivity: number;
-	cortisoneActivity?: number;
-	alcoholActivity?: number;
+	cortisoneActivity: number;
+	alcoholActivity: number;
 };
 
 /**
@@ -158,8 +162,8 @@ export type MainParamsUVA = {
 		AGE: string;
 		GENDER: GenderType;
 	};
-	treatments: Treatment[];
-	profiles: Profile[];
+	treatments: NSTreatment[];
+	profiles: NSProfile[];
 	lastState: UvaPatientState;
 	entries: Sgv[];
 	pumpEnabled: boolean;
@@ -174,8 +178,8 @@ export type MainParamsUVA = {
 export type MainParams = {
 	env: EnvParam;
 	entries: Sgv[];
-	treatments: Treatment[];
-	profiles: Profile[];
+	treatments: NSTreatment[];
+	profiles: NSProfile[];
 	pumpEnabled?: boolean;
 	activities?: Activity[];
 	user: UserParams;

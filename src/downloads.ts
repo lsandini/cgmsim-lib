@@ -1,6 +1,6 @@
 import logger, { isHttps, removeTrailingSlash } from './utils';
 import setupParams from './setupParams';
-import { Profile, Sgv, Treatment } from './Types';
+import { NSProfile, Sgv, NSTreatment } from './Types';
 import fetch, { Response } from 'node-fetch';
 
 async function fetchCast<T>(fetchData: Promise<Response>): Promise<T[]> {
@@ -40,8 +40,8 @@ const downloads = async (nsUrl: string, apiSecret: string) => {
 	const api_profile = _nsUrl + '/api/v1/profile.json';
 	const api_sgv = _nsUrl + '/api/v1/entries/sgv.json';
 
-	const treatments = fetchCast<Treatment>(fetch(api_url, getParams));
-	const profiles = fetchCast<Profile>(fetch(api_profile, getParams));
+	const treatments = fetchCast<NSTreatment>(fetch(api_url, getParams));
+	const profiles = fetchCast<NSProfile>(fetch(api_profile, getParams));
 	const entries = fetchCast<Sgv>(fetch(api_sgv, getParams));
 
 	return Promise.all([treatments, profiles, entries])

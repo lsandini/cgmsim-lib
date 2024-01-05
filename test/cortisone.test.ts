@@ -1,10 +1,11 @@
 import { treatments } from './inputTest';
 import computeCortisone from '../src/cortisone';
-import { Treatment, TreatmentDelta, TreatmentDrug } from '../src/Types';
+import { NSTreatment, TreatmentBiexpParam } from '../src/Types';
 import moment = require('moment');
-import { computeCortisoneActivity } from '../src/cortisone';
 import { diffOptions, getPngSnapshot } from './inputTest';
 import { drugs, transformNoteTreatmentsDrug } from '../src/drug';
+import cortisone from '../src/cortisone';
+import { getBiexpTreatmentActivity } from '../src/utils';
 const { toMatchImageSnapshot } = require('jest-image-snapshot');
 
 describe('test cortisone', () => {
@@ -12,31 +13,18 @@ describe('test cortisone', () => {
     expect.extend({ toMatchImageSnapshot });
   });
 
-  type MockTreatment = {
-    units: TreatmentDelta['units'];
-    minutesAgo: TreatmentDelta['minutesAgo'];
-  };
-
-  const cortisone = (weight, treatments: MockTreatment[]): number => {
-    const cortisoneT: TreatmentDelta[] = treatments.map((e) => {
-      const duration = drugs.COR.duration(e.units, weight);
-      const peak = drugs.COR.peak(duration);
-      return {
-        ...e,
-        duration,
-        peak,
-      };
-    });
-    return computeCortisoneActivity(cortisoneT);
-  };
   test('weight:80 units:10 minutesAgo:300', () => {
     const weight = 80;
-    const cortisoneActive = cortisone(weight, [
-      {
-        units: 10,
-        minutesAgo: 300,
-      },
-    ]);
+    const cortisoneActive = cortisone(
+      [
+        {
+          units: 10,
+          minutesAgo: 300,
+          drug: 'Cor',
+        },
+      ],
+      weight,
+    );
     expect(cortisoneActive).toMatchSnapshot();
   });
 
@@ -50,18 +38,26 @@ describe('test cortisone', () => {
     let cortisone200Arr = [];
 
     for (let i = 0; i < 3000; i++) {
-      const _cortisone40Active = cortisone(weight, [
-        {
-          units: units40,
-          minutesAgo: i,
-        },
-      ]);
-      const _cortisone200Active = cortisone(weight, [
-        {
-          units: units200,
-          minutesAgo: i,
-        },
-      ]);
+      const _cortisone40Active = cortisone(
+        [
+          {
+            units: units40,
+            minutesAgo: i,
+            drug: 'Cor',
+          },
+        ],
+        weight,
+      );
+      const _cortisone200Active = cortisone(
+        [
+          {
+            units: units200,
+            minutesAgo: i,
+            drug: 'Cor',
+          },
+        ],
+        weight,
+      );
       cortisone40Active += _cortisone40Active > 0 ? _cortisone40Active : 0;
       cortisone40Arr.push(_cortisone40Active > 0 ? _cortisone40Active : 0);
       cortisone200Active += _cortisone200Active > 0 ? _cortisone200Active : 0;
@@ -90,74 +86,40 @@ describe('test cortisone', () => {
 
     expect(png).toMatchImageSnapshot(diffOptions);
   });
-
-  //   test('cortisone 5 min ago are less active then 40 min ago', () => {
-  //     const units = 10;
-  //     const weight = 80;
-
-  //     const r5 = cortisone(weight, [
-  //       {
-  //         units,
-  //         minutesAgo: 5,
-  //       },
-  //     ]);
-  //     const r40 = cortisone(weight, [
-  //       {
-  //         units,
-  //         minutesAgo: 40,
-  //       },
-  //     ]);
-  //     expect(r5).toBeLessThan(r40);
-  //   });
-  //   test('peak has the greatest activity', () => {
-  //     const units = 20;
-  //     const weight = 80;
-
-  //     const toujeoPeakHours = (24 + (14 * units) / weight) / 2.5;
-
-  //     const rBeforePeak = cortisone(weight, [
-  //       {
-  //         units,
-  //         minutesAgo: toujeoPeakHours * 60 + 10,
-  //       },
-  //     ]);
-  //     const rPeak = cortisone(weight, [
-  //       {
-  //         units,
-  //         minutesAgo: toujeoPeakHours * 60,
-  //       },
-  //     ]);
-  //     const rAfterPeak = cortisone(weight, [
-  //       {
-  //         units,
-  //         minutesAgo: toujeoPeakHours * 60 - 10,
-  //       },
-  //     ]);
-  //     expect(rBeforePeak).toBeLessThan(rPeak);
-  //     expect(rAfterPeak).toBeLessThan(rPeak);
-  //   });
   test('200mg cortisone, the activity after 5h 6h 7h should be >0.1 ', () => {
     const units = 20;
     const weight = 80;
 
-    const sixHoursActivity = cortisone(weight, [
-      {
-        units,
-        minutesAgo: 60 * 6,
-      },
-    ]);
-    const fiveHoursActivity = cortisone(weight, [
-      {
-        units,
-        minutesAgo: 60 * 6,
-      },
-    ]);
-    const sevenHoursActivity = cortisone(weight, [
-      {
-        units,
-        minutesAgo: 60 * 7,
-      },
-    ]);
+    const sixHoursActivity = cortisone(
+      [
+        {
+          units,
+          minutesAgo: 60 * 6,
+          drug: 'Cor',
+        },
+      ],
+      weight,
+    );
+    const fiveHoursActivity = cortisone(
+      [
+        {
+          units,
+          minutesAgo: 60 * 6,
+          drug: 'Cor',
+        },
+      ],
+      weight,
+    );
+    const sevenHoursActivity = cortisone(
+      [
+        {
+          units,
+          minutesAgo: 60 * 7,
+          drug: 'Cor',
+        },
+      ],
+      weight,
+    );
 
     expect(fiveHoursActivity).toBeGreaterThan(0.01);
     expect(sixHoursActivity).toBeGreaterThan(0.01);
@@ -182,7 +144,7 @@ describe('test computeCortisone', () => {
 
   test('detection drug', () => {
     const drugs = transformNoteTreatmentsDrug(
-      treatments as unknown as Treatment[],
+      treatments as unknown as NSTreatment[],
     );
 
     const result = computeCortisone(drugs, 80);
@@ -202,18 +164,7 @@ describe('check insert value string', () => {
   afterAll(() => {
     jest.useRealTimers();
   });
-  test.each([
-    // 'tou8',
-    // 'tou8 ',
-    // 'tou 8',
-    // 'tou  8',
-    // 'tou_8',
-    // 'tou 8i',
-    // 'tou8 i',
-    // 'tou 8i',
-    // 'tou  8i',
-    'Cor 200',
-  ])('correct cortisone entry', (note) => {
+  test.each(['Cor 200'])('correct cortisone entry', (note) => {
     let _date = moment('2022-05-06T15:00:00.000Z');
     const results = [];
     _date = _date.add(5, 'minutes');
@@ -236,7 +187,7 @@ describe('check insert value string', () => {
       },
     ];
     const drugs = transformNoteTreatmentsDrug(
-      treatments as unknown as Treatment[],
+      treatments as unknown as NSTreatment[],
     );
     let result = computeCortisone(drugs, 80);
     expect(result).toBeDefined();
@@ -266,11 +217,10 @@ describe('check insert value string', () => {
       },
     ];
     const drugsTou = transformNoteTreatmentsDrug(
-      toujeoTreatment as unknown as Treatment[],
+      toujeoTreatment as unknown as NSTreatment[],
     );
 
     let result = computeCortisone(drugsTou, 80);
     expect(result).toBe(0);
-    //expect(result).toMatchSnapshot();
   });
 });

@@ -1,47 +1,37 @@
-import { TreatmentDelta } from 'src/Types';
-import { computeBasalActivity,  } from '../src/basal';
 import { diffOptions, getPngSnapshot } from './inputTest';
-import { drugs } from '../src/drug';
+import basal from '../src/basal';
 const { toMatchImageSnapshot } = require('jest-image-snapshot');
 
-type MockTreatment = {
-    units: TreatmentDelta['units'];
-    minutesAgo: TreatmentDelta['minutesAgo'];
-  };
-
 describe('test degludec', () => {
-  const degludec = (treatments:MockTreatment[]):number => {
-    const toujeoT = treatments.map((e) => {
-      const duration = drugs.DEG.duration();
-      const peak = drugs.DEG.peak(duration);
-      return {
-        ...e,
-        duration,
-        peak,
-      };
-    });
-    return computeBasalActivity(toujeoT);
-  };
+  const weight = 80;
   beforeEach(() => {
     expect.extend({ toMatchImageSnapshot });
   });
   test('ins:30 minutesAgo:300', () => {
-    const insulinActive = degludec([
-      {
-        units:30,
-        minutesAgo: 300,
-      },
-    ]);
+    const insulinActive = basal(
+      [
+        {
+          units: 30,
+          minutesAgo: 300,
+          drug: 'Deg',
+        },
+      ],
+      weight,
+    );
     expect(insulinActive).toMatchSnapshot();
   });
 
   test('ins:30 hoursAgo: 44', () => {
-    const insulinActive = degludec([
-      {
-        units:30,
-        minutesAgo: 44 * 60,
-      },
-    ]);
+    const insulinActive = basal(
+      [
+        {
+          units: 30,
+          minutesAgo: 44 * 60,
+          drug: 'Deg',
+        },
+      ],
+      weight,
+    );
     expect(insulinActive).toBe(0);
   });
 
@@ -51,12 +41,16 @@ describe('test degludec', () => {
     let insulinArr = [];
 
     for (let i = 0; i < 2000; i++) {
-      const _insulinActive = degludec([
-        {
-          units:30,
-          minutesAgo: i,
-        },
-      ]);
+      const _insulinActive = basal(
+        [
+          {
+            units: 30,
+            minutesAgo: i,
+            drug: 'Deg',
+          },
+        ],
+        weight,
+      );
       insulinActive += _insulinActive > 0 ? _insulinActive : 0;
       insulinArr.push(_insulinActive > 0 ? _insulinActive : 0);
     }
@@ -70,7 +64,7 @@ describe('test degludec', () => {
           value: sgv,
         })),
       },
-      { scaleY: 1 }
+      { scaleY: 1 },
     );
     expect(png).toMatchImageSnapshot(diffOptions);
   });
@@ -78,41 +72,66 @@ describe('test degludec', () => {
   test('insulin 5 min ago are less active then 40 min ago', () => {
     const units = 20;
 
-    const r5 = degludec([
-      {
-        units,
-        minutesAgo: 5,
-      },
-    ]);
-    const r40 = degludec([
-      {
-        units,
-        minutesAgo: 40,
-      },
-    ]);
+    const r5 = basal(
+      [
+        {
+          units,
+          minutesAgo: 5,
+          drug: 'Deg',
+        },
+      ],
+      weight,
+    );
+
+    const r40 = basal(
+      [
+        {
+          units,
+          minutesAgo: 40,
+          drug: 'Deg',
+        },
+      ],
+      weight,
+    );
+
     expect(r5).toBeLessThan(r40);
   });
   test('peak has the greatest activity', () => {
     const units = 20;
     const degludecPeakHours = 42 / 3;
-    const rBeforePeak = degludec([
-      {
-        units,
-        minutesAgo: degludecPeakHours * 60 + 10,
-      },
-    ]);
-    const rPeak = degludec([
-      {
-        units,
-        minutesAgo: degludecPeakHours * 60,
-      },
-    ]);
-    const rAfterPeak = degludec([
-      {
-        units,
-        minutesAgo: degludecPeakHours * 60 - 10,
-      },
-    ]);
+    const rBeforePeak = basal(
+      [
+        {
+          units,
+          minutesAgo: degludecPeakHours * 60 + 10,
+          drug: 'Deg',
+        },
+      ],
+      weight,
+    );
+
+    const rPeak = basal(
+      [
+        {
+          units,
+          minutesAgo: degludecPeakHours * 60,
+          drug: 'Deg',
+        },
+      ],
+      weight,
+    );
+
+    const rAfterPeak = basal(
+      [
+        {
+          units,
+          minutesAgo: degludecPeakHours * 60 - 10,
+          drug: 'Deg',
+        },
+      ],
+      weight,
+    );
+
     expect(rBeforePeak).toBeLessThan(rPeak);
     expect(rAfterPeak).toBeLessThan(rPeak);
   });

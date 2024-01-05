@@ -1,8 +1,8 @@
-import logger, { getDeltaMinutes, getTreatmentActivity } from './utils';
+import logger, { getDeltaMinutes, getBiexpTreatmentActivity } from './utils';
 import * as moment from 'moment';
-import { Profile, Treatment } from './Types';
+import { NSProfile, NSTreatment } from './Types';
 
-function getProfileSwitch(treatments, duration) {
+function getProfileSwitch(treatments: NSTreatment[], duration: number) {
 	const computedProfilesSwitch: {
 		start: moment.Moment;
 		end: moment.Moment;
@@ -52,7 +52,7 @@ function getProfileSwitch(treatments, duration) {
 	return computedProfilesSwitch;
 }
 
-function getTempBasal(treatments, duration) {
+function getTempBasal(treatments: NSTreatment[], duration: number) {
 	const computedTempBasal: {
 		start: moment.Moment;
 		end: moment.Moment;
@@ -90,7 +90,7 @@ function getTempBasal(treatments, duration) {
 }
 
 function getBasalFromProfiles(
-	orderedProfiles: Profile[],
+	orderedProfiles: NSProfile[],
 	currentAction: moment.Moment,
 ) {
 	//last basal before the end
@@ -125,8 +125,8 @@ function activeBasalByTime(
 }
 
 export default function (
-	treatments: Treatment[],
-	profiles: Profile[],
+	treatments: NSTreatment[],
+	profiles: NSProfile[],
 	dia: number,
 	peak: number,
 ) {
@@ -193,7 +193,12 @@ export default function (
 	const pumpBasalAct = basalAsBoluses.reduce(
 		(tot, entry) =>
 			tot +
-			getTreatmentActivity(peak, duration, entry.minutesAgo, entry.insulin),
+			getBiexpTreatmentActivity({
+				peak,
+				duration,
+				minutesAgo: entry.minutesAgo,
+				units: entry.insulin,
+			}),
 		0,
 	);
 	logger.debug("the pump's basal activity is: %o", pumpBasalAct);

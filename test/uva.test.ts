@@ -3,9 +3,9 @@ import {
   Activity,
   EnvParam,
   MainParamsUVA,
-  Profile,
+  NSProfile,
   Sgv,
-  Treatment,
+  NSTreatment,
 } from '../src/Types';
 import simulatorUVA from '../src/UVAsimulator';
 import { diffOptions, getPngSnapshot } from './inputTest';
@@ -81,7 +81,7 @@ describe('uva test default PATIENT', () => {
         type: 'single',
         values: yList.map((sgv, index) => ({ key: index, value: sgv })),
       },
-      { scaleY: 400 }
+      { scaleY: 400 },
     );
     expect(png).toMatchImageSnapshot(diffOptions);
   });
@@ -89,7 +89,7 @@ describe('uva test default PATIENT', () => {
   test('basal 0.70 from PROFILE should generate flat sgv', async () => {
     let lastState = null;
     const yList = [];
-    const profile: Profile[] = [
+    const profile: NSProfile[] = [
       {
         defaultProfile: 'foo',
         startDate: '2022-01-01',
@@ -122,7 +122,7 @@ describe('uva test default PATIENT', () => {
         type: 'single',
         values: yList.map((sgv, index) => ({ key: index, value: sgv })),
       },
-      { scaleY: 400 }
+      { scaleY: 400 },
     );
     expect(png).toMatchImageSnapshot(diffOptions);
   });
@@ -130,7 +130,7 @@ describe('uva test default PATIENT', () => {
   test('basal 0.75 from PROFILE + 50g CARBS should generate a curve', async (done) => {
     let lastState = null;
     const yList = [];
-    const profile: Profile[] = [
+    const profile: NSProfile[] = [
       {
         defaultProfile: 'foo',
         startDate: '2022-01-01',
@@ -150,7 +150,7 @@ describe('uva test default PATIENT', () => {
         },
       },
     ];
-    const treatments: Treatment[] = [
+    const treatments: NSTreatment[] = [
       {
         carbs: 50,
         created_at: '2022-05-01T10:59:00',
@@ -199,7 +199,7 @@ describe('uva test default PATIENT', () => {
         type: 'single',
         values: yList.map((sgv, index) => ({ key: index, value: sgv })),
       },
-      { scaleY: 400 }
+      { scaleY: 400 },
     );
     expect(png).toMatchImageSnapshot(diffOptions);
     return done();
@@ -208,7 +208,7 @@ describe('uva test default PATIENT', () => {
   test('basal 0.75 from PROFILE + 50g CARBS + 5U should generate a curve', async () => {
     let lastState = null;
     const yList = [];
-    const profile: Profile[] = [
+    const profile: NSProfile[] = [
       {
         defaultProfile: 'foo',
         startDate: '2022-01-01',
@@ -219,7 +219,7 @@ describe('uva test default PATIENT', () => {
         },
       },
     ];
-    const treatments: Treatment[] = [
+    const treatments: NSTreatment[] = [
       {
         carbs: 50,
         created_at: '2022-05-01T11:30:00',
@@ -273,14 +273,14 @@ describe('uva test default PATIENT', () => {
         type: 'single',
         values: yList.map((sgv, index) => ({ key: index, value: sgv })),
       },
-      { scaleY: 400 }
+      { scaleY: 400 },
     );
     expect(png).toMatchImageSnapshot(diffOptions);
   });
   test('basal 0.75 from PROFILE + 500g CARBS should generate a curve with max 400', async () => {
     let lastState = null;
     const yList = [];
-    const profile: Profile[] = [
+    const profile: NSProfile[] = [
       {
         defaultProfile: 'foo',
         startDate: '2022-01-01',
@@ -291,7 +291,7 @@ describe('uva test default PATIENT', () => {
         },
       },
     ];
-    const treatments: Treatment[] = [
+    const treatments: NSTreatment[] = [
       {
         carbs: 150,
         created_at: '2022-05-01T11:30:00',
@@ -324,14 +324,14 @@ describe('uva test default PATIENT', () => {
         type: 'single',
         values: yList.map((sgv, index) => ({ key: index, value: sgv })),
       },
-      { scaleY: 400 }
+      { scaleY: 400 },
     );
     expect(png).toMatchImageSnapshot(diffOptions);
   });
   test('basal 0.75 from PROFILE + 10U should generate a curve with min 40', async () => {
     let lastState = null;
     const yList = [];
-    const profile: Profile[] = [
+    const profile: NSProfile[] = [
       {
         defaultProfile: 'foo',
         startDate: '2022-01-01',
@@ -342,7 +342,7 @@ describe('uva test default PATIENT', () => {
         },
       },
     ];
-    const treatments: Treatment[] = [
+    const treatments: NSTreatment[] = [
       {
         carbs: 0,
         insulin: 10,
@@ -376,7 +376,7 @@ describe('uva test default PATIENT', () => {
         type: 'single',
         values: yList.map((sgv, index) => ({ key: index, value: sgv })),
       },
-      { scaleY: 400 }
+      { scaleY: 400 },
     );
     expect(png).toMatchImageSnapshot(diffOptions);
   });
@@ -387,7 +387,7 @@ describe('uva test default PATIENT', () => {
     const constantHr = 0.6;
     const heartRate = maxHrMale40 * constantHr; //109.2
     const yList = [];
-    const profile: Profile[] = [
+    const profile: NSProfile[] = [
       {
         defaultProfile: 'foo',
         startDate: '2022-01-01',
@@ -461,7 +461,7 @@ describe('uva test default PATIENT', () => {
         type: 'single',
         values: yList.map((sgv, index) => ({ key: index, value: sgv })),
       },
-      { scaleY: 400 }
+      { scaleY: 400 },
     );
     expect(png).toMatchImageSnapshot(diffOptions);
   });

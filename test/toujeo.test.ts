@@ -1,40 +1,24 @@
-import { TreatmentDelta } from 'src/Types';
-import { computeBasalActivity } from '../src/basal';
-import { drugs } from '../src/drug';
-
+import basal from '../src/basal';
 import { diffOptions, getPngSnapshot } from './inputTest';
 const { toMatchImageSnapshot } = require('jest-image-snapshot');
-
-type MockTreatment = {
-  units: TreatmentDelta['units'];
-  minutesAgo: TreatmentDelta['minutesAgo'];
-};
 
 describe('test toujeo', () => {
   beforeEach(() => {
     expect.extend({ toMatchImageSnapshot });
   });
 
-  const toujeo = (weight, treatments: MockTreatment[]) => {
-    const toujeoT = treatments.map((e) => {
-      const duration = drugs.TOU.duration(e.units, weight);
-      const peak = drugs.TOU.peak(duration);
-      return {
-        ...e,
-        duration,
-        peak,
-      };
-    });
-    return computeBasalActivity(toujeoT);
-  };
   test('weight:80 ins:30 minutesAgo:300', () => {
     const weight = 80;
-    const insulinActive = toujeo(weight, [
-      {
-        units: 30,
-        minutesAgo: 300,
-      },
-    ]);
+    const insulinActive = basal(
+      [
+        {
+          units: 30,
+          minutesAgo: 300,
+          drug: 'Tou',
+        },
+      ],
+      weight,
+    );
     expect(insulinActive).toMatchSnapshot();
   });
 
@@ -44,12 +28,16 @@ describe('test toujeo', () => {
     let insulinArr = [];
 
     for (let i = 0; i < 2000; i++) {
-      const _insulinActive = toujeo(weight, [
-        {
-          units: 30,
-          minutesAgo: i,
-        },
-      ]);
+      const _insulinActive = basal(
+        [
+          {
+            units: 30,
+            minutesAgo: i,
+            drug: 'Tou',
+          },
+        ],
+        weight,
+      );
       insulinActive += _insulinActive > 0 ? _insulinActive : 0;
       insulinArr.push(_insulinActive > 0 ? _insulinActive : 0);
     }
@@ -63,7 +51,7 @@ describe('test toujeo', () => {
           value: sgv,
         })),
       },
-      { scaleY: 1 }
+      { scaleY: 1 },
     );
 
     expect(png).toMatchImageSnapshot(diffOptions);
@@ -73,18 +61,26 @@ describe('test toujeo', () => {
     const units = 20;
     const weight = 80;
 
-    const r5 = toujeo(weight, [
-      {
-        units,
-        minutesAgo: 5,
-      },
-    ]);
-    const r40 = toujeo(weight, [
-      {
-        units,
-        minutesAgo: 40,
-      },
-    ]);
+    const r5 = basal(
+      [
+        {
+          units,
+          minutesAgo: 5,
+          drug: 'Tou',
+        },
+      ],
+      weight,
+    );
+    const r40 = basal(
+      [
+        {
+          units,
+          minutesAgo: 40,
+          drug: 'Tou',
+        },
+      ],
+      weight,
+    );
     expect(r5).toBeLessThan(r40);
   });
   test('peak has the greatest activity', () => {
@@ -93,24 +89,36 @@ describe('test toujeo', () => {
 
     const toujeoPeakHours = (24 + (14 * units) / weight) / 2.5;
 
-    const rBeforePeak = toujeo(weight, [
-      {
-        units,
-        minutesAgo: toujeoPeakHours * 60 + 10,
-      },
-    ]);
-    const rPeak = toujeo(weight, [
-      {
-        units,
-        minutesAgo: toujeoPeakHours * 60,
-      },
-    ]);
-    const rAfterPeak = toujeo(weight, [
-      {
-        units,
-        minutesAgo: toujeoPeakHours * 60 - 10,
-      },
-    ]);
+    const rBeforePeak = basal(
+      [
+        {
+          units,
+          minutesAgo: toujeoPeakHours * 60 + 10,
+          drug: 'Tou',
+        },
+      ],
+      weight,
+    );
+    const rPeak = basal(
+      [
+        {
+          units,
+          minutesAgo: toujeoPeakHours * 60,
+          drug: 'Tou',
+        },
+      ],
+      weight,
+    );
+    const rAfterPeak = basal(
+      [
+        {
+          units,
+          minutesAgo: toujeoPeakHours * 60 - 10,
+          drug: 'Tou',
+        },
+      ],
+      weight,
+    );
     expect(rBeforePeak).toBeLessThan(rPeak);
     expect(rAfterPeak).toBeLessThan(rPeak);
   });
@@ -118,24 +126,36 @@ describe('test toujeo', () => {
     const units = 20;
     const weight = 80;
 
-    const sixHoursActivity = toujeo(weight, [
-      {
-        units,
-        minutesAgo: 60 * 6,
-      },
-    ]);
-    const fiveHoursActivity = toujeo(weight, [
-      {
-        units,
-        minutesAgo: 60 * 6,
-      },
-    ]);
-    const sevenHoursActivity = toujeo(weight, [
-      {
-        units,
-        minutesAgo: 60 * 7,
-      },
-    ]);
+    const sixHoursActivity = basal(
+      [
+        {
+          units,
+          minutesAgo: 60 * 6,
+          drug: 'Tou',
+        },
+      ],
+      weight,
+    );
+    const fiveHoursActivity = basal(
+      [
+        {
+          units,
+          minutesAgo: 60 * 6,
+          drug: 'Tou',
+        },
+      ],
+      weight,
+    );
+    const sevenHoursActivity = basal(
+      [
+        {
+          units,
+          minutesAgo: 60 * 7,
+          drug: 'Tou',
+        },
+      ],
+      weight,
+    );
 
     expect(fiveHoursActivity).toBeGreaterThan(0.01);
     expect(sixHoursActivity).toBeGreaterThan(0.01);

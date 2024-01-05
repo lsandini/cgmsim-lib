@@ -1,17 +1,22 @@
-import { TreatmentDelta, Treatment, TreatmentDrug, GenderType } from './Types';
-import { getDrugActivity } from './drug';
+import {
+	TreatmentBiexpParam,
+	NSTreatment,
+	NSTreatmentParsed,
+	GenderType,
+} from './Types';
+import { getTreatmentBiexpParam } from './drug';
 import logger, {
 	getDeltaMinutes,
-	getTreatmentActivity,
+	getBiexpTreatmentActivity,
 	roundTo8Decimals,
 } from './utils';
 
 function getAlcoholActivity(
 	gender: 'Male' | 'Female',
 	weightKg: number,
-	peakMin: number,
-	durationMin: number,
-	timeMin: number, //minutesAgo
+	peak: number,
+	duration: number,
+	minutesAgo: number, //minutesAgo
 	units: number,
 ): number {
 	const peakAlcoholAmountMin = 60; //min
@@ -20,21 +25,21 @@ function getAlcoholActivity(
 	const peakAmount = (units / (weightKg * 1000 * r)) * 100; //g/100ml
 	const washoutDuration = peakAlcoholAmountMin + peakAmount / eliminationRate; //min
 	const unitsWeighted = units * (80 / weightKg);
-	if (washoutDuration < timeMin) {
+	if (washoutDuration < minutesAgo) {
 		return (
-			getTreatmentActivity(
-				peakMin,
-				durationMin,
-				timeMin - washoutDuration,
-				unitsWeighted,
-			) / 0.35
+			getBiexpTreatmentActivity({
+				peak,
+				duration,
+				minutesAgo: minutesAgo - washoutDuration,
+				units: unitsWeighted,
+			}) / 0.35
 		);
 	}
 	return 0;
 }
 
 export const computeAlcoholActivity = (
-	treatments: TreatmentDelta[],
+	treatments: TreatmentBiexpParam[],
 	weight: number,
 	gender: GenderType,
 ) => {
@@ -60,18 +65,18 @@ export const computeAlcoholActivity = (
 };
 
 export default function (
-	treatments: TreatmentDrug[],
+	treatments: NSTreatmentParsed[],
 	weight: number,
 	gender: GenderType,
 ): number {
 	//Find Alcohol boluses
 
-	const lastALC = getDrugActivity(treatments, weight, 'ALC');
+	const lastALC = getTreatmentBiexpParam(treatments, weight, 'ALC');
 	const activityALC =
 		lastALC.length > 0 ? computeAlcoholActivity(lastALC, weight, gender) : 0;
 	logger.debug('these are the last ALC: %o', { lastALC, activityALC });
 
-	const lastBEER = getDrugActivity(treatments, weight, 'BEER');
+	const lastBEER = getTreatmentBiexpParam(treatments, weight, 'BEER');
 	const activityBEER =
 		lastBEER.length > 0 ? computeAlcoholActivity(lastBEER, weight, gender) : 0;
 	logger.debug('these are the last BEER: %o', { lastBEER, activityBEER });

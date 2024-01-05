@@ -1,8 +1,9 @@
 import moment = require('moment');
 import { MultiLineDataSource, SingleLineDataSource } from 'src/d3/d3Func';
 import { drugs } from '../src/drug';
-import { Activity, EnvParam, Sgv } from '../src/Types';
+import { Activity, EnvParam, Sgv, TreatmentBiexpParam } from '../src/Types';
 import simulator from '../src/CGMSIMsimulator';
+import { getBiexpTreatmentActivity } from '../src/utils';
 const { output, line } = require('../src/d3/d3Func');
 
 export const diffOptions = {
@@ -386,4 +387,13 @@ export const testGenerator = (
     isfDynamicFactor,
     sgvS,
   };
+};
+
+export const computeBasalActivityForTest = (
+  treatments: TreatmentBiexpParam[],
+) => {
+  // expressed U/min !!!
+  return treatments
+    .map(getBiexpTreatmentActivity)
+    .reduce((tot, activity) => tot + activity, 0);
 };

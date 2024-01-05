@@ -1,39 +1,24 @@
-import { TreatmentDelta } from 'src/Types';
-import { computeBasalActivity } from '../src/basal';
-import { drugs } from '../src/drug';
+import basal from '../src/basal';
 import { diffOptions, getPngSnapshot } from './inputTest';
 const { toMatchImageSnapshot } = require('jest-image-snapshot');
-
-type MockTreatment = {
-  units: TreatmentDelta['units'];
-  minutesAgo: TreatmentDelta['minutesAgo'];
-};
 
 describe('test glargine', () => {
   beforeEach(() => {
     expect.extend({ toMatchImageSnapshot });
   });
-  const glargine = (weight, treatments:MockTreatment[]): number => {
-    const toujeoT = treatments.map((e) => {
-      const duration = drugs.GLA.duration(e.units, weight);
-      const peak = drugs.GLA.peak(duration);
-      return {
-        ...e,
-        duration,
-        peak,
-      };
-    });
-    return computeBasalActivity(toujeoT);
-  };
 
   test('weight:80 ins:30 minutesAgo:300', () => {
     const weight = 80;
-    const insulinActive = glargine(weight, [
-      {
-        units: 30,
-        minutesAgo: 300,
-      },
-    ]);
+    const insulinActive = basal(
+      [
+        {
+          units: 30,
+          minutesAgo: 300,
+          drug: 'Gla',
+        },
+      ],
+      weight,
+    );
     expect(insulinActive).toMatchSnapshot();
   });
   test('weight:80 ins:30 all', async () => {
@@ -42,12 +27,16 @@ describe('test glargine', () => {
     let insulinArr = [];
 
     for (let i = 0; i < 2000; i++) {
-      const _insulinActive = glargine(weight, [
-        {
-          units: 30,
-          minutesAgo: i,
-        },
-      ]);
+      const _insulinActive = basal(
+        [
+          {
+            units: 30,
+            minutesAgo: i,
+            drug: 'Gla',
+          },
+        ],
+        weight,
+      );
       insulinActive += _insulinActive > 0 ? _insulinActive : 0;
       insulinArr.push(_insulinActive > 0 ? _insulinActive : 0);
     }
@@ -61,7 +50,7 @@ describe('test glargine', () => {
           value: sgv,
         })),
       },
-      { scaleY: 1 }
+      { scaleY: 1 },
     );
 
     expect(png).toMatchImageSnapshot(diffOptions);
@@ -71,18 +60,26 @@ describe('test glargine', () => {
     const units = 20;
     const weight = 80;
 
-    const r5 = glargine(weight, [
-      {
-        units,
-        minutesAgo: 5,
-      },
-    ]);
-    const r40 = glargine(weight, [
-      {
-        units,
-        minutesAgo: 40,
-      },
-    ]);
+    const r5 = basal(
+      [
+        {
+          units,
+          minutesAgo: 5,
+          drug: 'Gla',
+        },
+      ],
+      weight,
+    );
+    const r40 = basal(
+      [
+        {
+          units,
+          minutesAgo: 40,
+          drug: 'Gla',
+        },
+      ],
+      weight,
+    );
     expect(r5).toBeLessThan(r40);
   });
   test('peak has the greatest activity', () => {
@@ -91,24 +88,36 @@ describe('test glargine', () => {
 
     const glarginePeakHours = (22 + (12 * units) / weight) / 2.5;
 
-    const rBeforePeak = glargine(weight, [
-      {
-        units,
-        minutesAgo: glarginePeakHours * 60 + 10,
-      },
-    ]);
-    const rPeak = glargine(weight, [
-      {
-        units,
-        minutesAgo: glarginePeakHours * 60,
-      },
-    ]);
-    const rAfterPeak = glargine(weight, [
-      {
-        units,
-        minutesAgo: glarginePeakHours * 60 - 10,
-      },
-    ]);
+    const rBeforePeak = basal(
+      [
+        {
+          units,
+          minutesAgo: glarginePeakHours * 60 + 10,
+          drug: 'Gla',
+        },
+      ],
+      weight,
+    );
+    const rPeak = basal(
+      [
+        {
+          units,
+          minutesAgo: glarginePeakHours * 60,
+          drug: 'Gla',
+        },
+      ],
+      weight,
+    );
+    const rAfterPeak = basal(
+      [
+        {
+          units,
+          minutesAgo: glarginePeakHours * 60 - 10,
+          drug: 'Gla',
+        },
+      ],
+      weight,
+    );
     expect(rBeforePeak).toBeLessThan(rPeak);
     expect(rAfterPeak).toBeLessThan(rPeak);
   });
