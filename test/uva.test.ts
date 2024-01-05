@@ -152,6 +152,7 @@ describe('uva test default PATIENT', () => {
     ];
     const treatments: NSTreatment[] = [
       {
+        eventType: 'Meal Bolus',
         carbs: 50,
         created_at: '2022-05-01T10:59:00',
       },
@@ -221,10 +222,12 @@ describe('uva test default PATIENT', () => {
     ];
     const treatments: NSTreatment[] = [
       {
+        eventType: 'Meal Bolus',
         carbs: 50,
         created_at: '2022-05-01T11:30:00',
       },
       {
+        eventType: 'Meal Bolus',
         carbs: 0,
         insulin: 7.5,
         created_at: '2022-05-01T11:15:00',
@@ -293,6 +296,7 @@ describe('uva test default PATIENT', () => {
     ];
     const treatments: NSTreatment[] = [
       {
+        eventType: 'Meal Bolus',
         carbs: 150,
         created_at: '2022-05-01T11:30:00',
       },
@@ -344,6 +348,7 @@ describe('uva test default PATIENT', () => {
     ];
     const treatments: NSTreatment[] = [
       {
+        eventType: 'Meal Bolus',
         carbs: 0,
         insulin: 10,
         created_at: '2022-05-01T11:15:00',

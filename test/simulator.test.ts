@@ -50,6 +50,7 @@ describe('simulator test', () => {
     now = moment(date);
     const treatments: NSTreatment[] = [
       {
+        eventType: 'Announcement',
         created_at: now.toISOString(),
         notes: 'Tou 14',
         carbs: 0,
@@ -72,6 +73,7 @@ describe('simulator test', () => {
       if (index === 7 * 60 + 30) {
         log.push('Bolus 6U  ' + now.toISOString());
         treatments.push({
+          eventType: 'Meal Bolus',
           carbs: 0,
           insulin: 6,
           created_at: now.toISOString(),
@@ -129,10 +131,12 @@ describe('simulator test', () => {
     now = moment('2022-06-04T13:00:00.000Z');
     const treatments: NSTreatment[] = [
       {
+        eventType: 'Meal Bolus',
         created_at: '2022-06-04T13:00:00.000Z',
         carbs: 40,
       },
       {
+        eventType: 'Announcement',
         created_at: '2022-06-04T01:00:00.000Z',
         notes: 'tou 14',
         carbs: 0,
@@ -261,11 +265,13 @@ describe('simulator test', () => {
         carbs: null,
       },
       {
+        eventType: 'Announcement',
         created_at: '2022-06-04T10:00:00.000Z',
         notes: 'tou 14',
         carbs: 0,
       },
       {
+        eventType: 'Announcement',
         created_at: '2022-06-05T10:00:00.000Z',
         notes: 'tou 14',
         carbs: 0,
@@ -389,6 +395,7 @@ describe('simulator test', () => {
     ];
     now = moment('2022-06-04T13:00:00.000Z');
     const treatmentsCortisone: NSTreatment = {
+      eventType: 'Announcement',
       created_at: '2022-06-04T10:14:00.000Z',
       notes: 'cor 40',
       carbs: 0,
@@ -401,11 +408,13 @@ describe('simulator test', () => {
     };
     const treatments: NSTreatment[] = [
       {
+        eventType: 'Announcement',
         created_at: '2022-06-04T10:00:00.000Z',
         notes: 'deg 23',
         carbs: 0,
       },
       {
+        eventType: 'Announcement',
         created_at: '2022-06-05T10:00:00.000Z',
         notes: 'deg 23',
         carbs: 0,
