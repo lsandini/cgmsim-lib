@@ -29,7 +29,7 @@ function getAlcoholActivity(
 	return 0;
 }
 
-export const computeAlcoholActivity = (
+const computeAlcoholActivity = (
 	treatments: TreatmentBiexpParam[],
 	weight: number,
 	gender: GenderType,
