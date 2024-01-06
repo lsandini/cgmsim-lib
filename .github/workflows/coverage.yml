@@ -22,7 +22,9 @@ jobs:
             - uses: marocchino/sticky-pull-request-comment@v2
               with:
                 message: ${{ steps.coverage.outputs.report }}
-
-            # - name: Run tests
-            #   run: |
-            #     npx jest --coverage --coverageReporters json-summary    
+            - name: Tests
+              run: yarn test-ci
+            - name: Generating coverage badges
+              uses: jpb06/jest-badges-action@latest
+              with:
+                branches: coverage
