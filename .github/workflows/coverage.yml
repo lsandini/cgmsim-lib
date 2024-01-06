@@ -16,39 +16,13 @@ jobs:
             - uses: ArtiomTr/jest-coverage-report-action@v2
               id: coverage
               with:
-                output: report-markdown
+                output: comment, report-markdown
                 registry-url: https://npm.pkg.github.com/
                 NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             - uses: marocchino/sticky-pull-request-comment@v2
               with:
                 message: ${{ steps.coverage.outputs.report }}
 
-            - name: Run tests
-              run: |
-                npx jest --coverage --coverageReporters json-summary    
-
-            - name: Jest Coverage Comment
-              uses: MishaKav/jest-coverage-comment@main
-              with:
-                hide-comment: true
-                coverage-summary-path: ./coverage/report.json
-
-            - name: Check the output coverage
-              run: |
-                echo "Coverage Percentage - ${{ steps.coverageComment.outputs.coverage }}"
-                echo "Coverage Color - ${{ steps.coverageComment.outputs.color }}"
-                echo "Summary HTML - ${{ steps.coverageComment.outputs.summaryHtml }}"
-      
-            - name: Create the badge
-              if: github.ref == 'refs/heads/main'
-              uses: schneegans/dynamic-badges-action@v1.6.0
-              with:
-                auth: ${{ secrets.JEST_COVERAGE_COMMENT }}
-                gistID: 5e90d640f8c212ab7bbac38f72323f80
-                filename: jest-coverage-comment__main.json
-                label: Coverage
-                message: ${{ steps.coverageComment.outputs.coverage }}%
-                color: ${{ steps.coverageComment.outputs.color }}
-                namedLogo: javascript        
-
-
+            # - name: Run tests
+            #   run: |
+            #     npx jest --coverage --coverageReporters json-summary    
