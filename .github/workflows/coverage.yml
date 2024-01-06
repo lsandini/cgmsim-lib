@@ -19,13 +19,16 @@ jobs:
                 output: report-markdown
                 registry-url: https://npm.pkg.github.com/
                 NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            - uses: marocchino/sticky-pull-request-comment@v2
+              with:
+                message: ${{ steps.coverage.outputs.report }}
 
             - name: Jest Coverage Comment
               uses: MishaKav/jest-coverage-comment@main
               with:
                 hide-comment: true
-                coverage-summary-path: ./coverage/coverage-final.json
-                
+                coverage-summary-path: ./coverage/report.json
+
             - name: Check the output coverage
               run: |
                 echo "Coverage Percentage - ${{ steps.coverageComment.outputs.coverage }}"
@@ -44,6 +47,4 @@ jobs:
                 color: ${{ steps.coverageComment.outputs.color }}
                 namedLogo: javascript        
 
-            - uses: marocchino/sticky-pull-request-comment@v2
-              with:
-                message: ${{ steps.coverage.outputs.report }}
+
