@@ -1,10 +1,10 @@
 import moment = require('moment');
-import { MultiLineDataSource, SingleLineDataSource } from 'src/d3/d3Func';
+import { MultiLineDataSource, SingleLineDataSource } from 'test/d3/d3Func';
 import { drugs } from '../src/drug';
 import { Activity, EnvParam, Sgv, TreatmentBiexpParam } from '../src/Types';
 import simulator from '../src/CGMSIMsimulator';
 import { getBiexpTreatmentActivity } from '../src/utils';
-const { output, line } = require('../src/d3/d3Func');
+const { output, line } = require('../test/d3/d3Func');
 
 export const diffOptions = {
   customDiffConfig: {

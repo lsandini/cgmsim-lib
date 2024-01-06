@@ -3,6 +3,7 @@ module.exports = {
   testEnvironment: './jest.customEnv.js',
   setupFiles: ['<rootDir>/.jest/setEnvVars.js'],
   testPathIgnorePatterns: ['<rootDir>/dist'],
+  coveragePathIgnorePatterns: ['<rootDir>/dist', '<rootDir>/test'],
   coverageThreshold: {
     global: {
       lines: 80,
