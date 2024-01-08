@@ -30,4 +30,4 @@ npm install @lsandini/cgmsim-lib
 
 ## Documentation
 
-[Types definition](doc/readme.md)
+[Types definition](doc/README.md)
