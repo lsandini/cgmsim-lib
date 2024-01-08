@@ -1,6 +1,6 @@
 @lsandini/cgmsim-lib
 
-# @lsandini/cgmsim-lib - v0.1.8
+# @lsandini/cgmsim-lib - v0.2.1
 
 ## Table of contents
 
@@ -64,13 +64,13 @@ console.log("Blood glucose variation:", result.sgvdir);
 
 #### Defined in
 
-[arrows.ts:22](https://github.com/lsandini/cgmsim-lib/blob/c3ccd62/src/arrows.ts#L22)
+[arrows.ts:22](https://github.com/lsandini/cgmsim-lib/blob/dd12c66/src/arrows.ts#L22)
 
 ___
 
 ### downloads
 
-▸ **downloads**(`nsUrl`, `apiSecret`): `Promise`<{ `entries`: [`Sgv`](modules/types.md#sgv)[] ; `profiles`: [`Profile`](modules/types.md#profile)[] ; `treatments`: [`Treatment`](modules/types.md#treatment)[]  }\>
+▸ **downloads**(`nsUrl`, `apiSecret`): `Promise`<{ `entries`: [`Sgv`](modules/types.md#sgv)[] ; `profiles`: [`NSProfile`](modules/types.md#nsprofile)[] ; `treatments`: [`NSTreatment`](modules/types.md#nstreatment)[]  }\>
 
 Downloads data from the Nightscout API, including treatments, profiles, and entries.
 
@@ -83,7 +83,7 @@ Downloads data from the Nightscout API, including treatments, profiles, and entr
 
 #### Returns
 
-`Promise`<{ `entries`: [`Sgv`](modules/types.md#sgv)[] ; `profiles`: [`Profile`](modules/types.md#profile)[] ; `treatments`: [`Treatment`](modules/types.md#treatment)[]  }\>
+`Promise`<{ `entries`: [`Sgv`](modules/types.md#sgv)[] ; `profiles`: [`NSProfile`](modules/types.md#nsprofile)[] ; `treatments`: [`NSTreatment`](modules/types.md#nstreatment)[]  }\>
 
 A promise that resolves with downloaded data.
 
@@ -105,7 +105,7 @@ downloads(apiUrl, apiSecret)
 
 #### Defined in
 
-[downloads.ts:23](https://github.com/lsandini/cgmsim-lib/blob/c3ccd62/src/downloads.ts#L23)
+[downloads.ts:34](https://github.com/lsandini/cgmsim-lib/blob/dd12c66/src/downloads.ts#L34)
 
 ___
 
@@ -148,7 +148,7 @@ loadActivityData(apiUrl, apiSecret, fromDate)
 
 #### Defined in
 
-[load-activity.ts:23](https://github.com/lsandini/cgmsim-lib/blob/c3ccd62/src/load-activity.ts#L23)
+[load-activity.ts:23](https://github.com/lsandini/cgmsim-lib/blob/dd12c66/src/load-activity.ts#L23)
 
 ___
 
@@ -172,7 +172,7 @@ Simulation result containing blood glucose data and other parameters.
 
 #### Defined in
 
-[CGMSIMsimulator.ts:19](https://github.com/lsandini/cgmsim-lib/blob/c3ccd62/src/CGMSIMsimulator.ts#L19)
+[CGMSIMsimulator.ts:19](https://github.com/lsandini/cgmsim-lib/blob/dd12c66/src/CGMSIMsimulator.ts#L19)
 
 ___
 
@@ -253,7 +253,7 @@ console.log("Blood glucose simulation result:", simulationResult);
 
 #### Defined in
 
-[UVAsimulator.ts:54](https://github.com/lsandini/cgmsim-lib/blob/c3ccd62/src/UVAsimulator.ts#L54)
+[UVAsimulator.ts:55](https://github.com/lsandini/cgmsim-lib/blob/dd12c66/src/UVAsimulator.ts#L55)
 
 ___
 
@@ -296,7 +296,7 @@ uploadActivity(activityData, "https://nightscout.example.com", "apiSecret123")
 
 #### Defined in
 
-[upload.ts:128](https://github.com/lsandini/cgmsim-lib/blob/c3ccd62/src/upload.ts#L128)
+[upload.ts:124](https://github.com/lsandini/cgmsim-lib/blob/dd12c66/src/upload.ts#L124)
 
 ___
 
@@ -339,7 +339,7 @@ uploadEntries(glucoseEntry, "https://nightscout.example.com", "apiSecret123")
 
 #### Defined in
 
-[upload.ts:91](https://github.com/lsandini/cgmsim-lib/blob/c3ccd62/src/upload.ts#L91)
+[upload.ts:87](https://github.com/lsandini/cgmsim-lib/blob/dd12c66/src/upload.ts#L87)
 
 ___
 
@@ -383,7 +383,7 @@ uploadLogs(simulationResult, "https://nightscout.example.com", "apiSecret123")
 
 #### Defined in
 
-[upload.ts:55](https://github.com/lsandini/cgmsim-lib/blob/c3ccd62/src/upload.ts#L55)
+[upload.ts:51](https://github.com/lsandini/cgmsim-lib/blob/dd12c66/src/upload.ts#L51)
 
 ___
 
@@ -422,4 +422,4 @@ uploadNotes("Important note", "https://nightscout.example.com", "apiSecret123")
 
 #### Defined in
 
-[upload.ts:24](https://github.com/lsandini/cgmsim-lib/blob/c3ccd62/src/upload.ts#L24)
+[upload.ts:24](https://github.com/lsandini/cgmsim-lib/blob/dd12c66/src/upload.ts#L24)
