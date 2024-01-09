@@ -84,6 +84,14 @@ export type NSProfile = {
 	};
 };
 
+/**
+ * Represents the treatment information for a Meal Bolus event.
+ * @typedef {Object} MealBolusTreatment
+ * @property {'Meal Bolus'} eventType - The type of event, set to 'Meal Bolus'.
+ * @property {number} insulin - The amount of insulin administered for the meal bolus.
+ * @property {number} carbs - The number of carbohydrates consumed.
+ * @property {TypeDateISO} created_at - The date of the treatment creation in ISO format.
+ */
 export type MealBolusTreatment = {
 	eventType: 'Meal Bolus';
 	insulin: number;
@@ -91,6 +99,15 @@ export type MealBolusTreatment = {
 	created_at: TypeDateISO;
 };
 
+/**
+ * Represents the treatment information for a Profile Switch event.
+ * @typedef {Object} ProfileSwitchTreatment
+ * @property {'Profile Switch'} eventType - The type of event, set to 'Profile Switch'.
+ * @property {number} duration - The duration of the profile switch in minutes.
+ * @property {TypeDateISO} created_at - The date of the treatment creation in ISO format.
+ * @property {string} profileJson - The JSON representation of the new profile.
+ * @property {number} percentage - The percentage change applied during the profile switch.
+ */
 export type ProfileSwitchTreatment = {
 	eventType: 'Profile Switch';
 	duration: number;
@@ -99,6 +116,14 @@ export type ProfileSwitchTreatment = {
 	percentage: number;
 };
 
+/**
+ * Represents the treatment information for a Temporary Basal event.
+ * @typedef {Object} TempBasalTreatment
+ * @property {'Temp Basal'} eventType - The type of event, set to 'Temp Basal'.
+ * @property {number} absolute - The absolute insulin rate for the temporary basal.
+ * @property {number} duration - The duration of the temporary basal in minutes.
+ * @property {TypeDateISO} created_at - The date of the treatment creation in ISO format.
+ */
 export type TempBasalTreatment = {
 	eventType: 'Temp Basal';
 	absolute: number;
@@ -106,12 +131,30 @@ export type TempBasalTreatment = {
 	created_at: TypeDateISO;
 };
 
+/**
+ * Represents the treatment information for a Carb Correction event.
+ * @typedef {Object} CarbCorrectionTreatment
+ * @property {'Carb Correction'} eventType - The type of event, set to 'Carb Correction'.
+ * @property {TypeDateISO} created_at - The date of the treatment creation in ISO format.
+ * @property {number} carbs - The number of carbohydrates considered for correction.
+ */
 export type CarbCorrectionTreatment = {
 	eventType: 'Carb Correction';
 	created_at: TypeDateISO;
 	carbs: number;
 };
 
+/**
+ * Represents the  announcement as treatment.
+ * @typedef {Object} AnnouncementTreatment
+ * @property {TypeDateISO} created_at - The date of the treatment creation in ISO format.
+ * @property {'Announcement'} eventType - The type of event, set to 'Announcement'.
+ * @property {string} notes - Additional notes for the treatment, where the following abbreviations can be used:
+ *   - Basal treatments: "gla x", "det x", "tou x", "deg x".
+ *   - Cortisone treatments: "pro x", "pre x".
+ *   - Alcohol-based treatments: "alc x", "bee x".
+ *   Please adhere to these conventions when using the 'notes' field.
+ */
 export type AnnouncementTreatment = {
 	created_at: TypeDateISO;
 	eventType: 'Announcement';
