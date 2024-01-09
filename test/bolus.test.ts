@@ -1,6 +1,6 @@
 import { bolusTreatments, diffOptions, getPngSnapshot } from './inputTest';
 import bolus from '../src/bolus';
-import { NSTreatment } from '../src/Types';
+import { NSTreatment, isMealBolusTreatment } from '../src/Types';
 const { toMatchImageSnapshot } = require('jest-image-snapshot');
 
 const moment = require('moment');
@@ -43,7 +43,7 @@ describe('test bolus', () => {
       jest.setSystemTime(_date.toDate());
       const boluses = bolusTreatments as unknown as NSTreatment[];
       const _insulinActive = bolus(
-        boluses.filter((b) => b.insulin > 0),
+        boluses.filter(isMealBolusTreatment).filter((b) => b.insulin > 0),
         dia,
         peak,
       );

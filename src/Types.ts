@@ -84,20 +84,62 @@ export type NSProfile = {
 	};
 };
 
+export type MealBolusTreatment = {
+	eventType: 'Meal Bolus';
+	insulin: number;
+	carbs: number;
+	created_at: TypeDateISO;
+};
+
+export type ProfileSwitchTreatment = {
+	eventType: 'Profile Switch';
+	duration: number;
+	created_at: TypeDateISO;
+	profileJson: string;
+	percentage: number;
+};
+
+export type TempBasalTreatment = {
+	eventType: 'Temp Basal';
+	absolute: number;
+	duration: number;
+	created_at: TypeDateISO;
+};
+
+export type CarbCorrectionTreatment = {
+	eventType: 'Carb Correction';
+	created_at: TypeDateISO;
+	carbs: number;
+};
+
+export type AnnouncementTreatment = {
+	created_at: TypeDateISO;
+	eventType: 'Announcement';
+	notes: string;
+};
 /**
  * Represents treatment data.
  */
-export type NSTreatment = {
-	absolute?: any;
-	duration?: number;
-	eventType: string;
-	insulin?: number;
-	notes?: string;
-	created_at: TypeDateISO;
-	carbs?: number;
-	profileJson?: string;
-	percentage?: number;
-};
+export type NSTreatment =
+	| MealBolusTreatment
+	| ProfileSwitchTreatment
+	| TempBasalTreatment
+	| CarbCorrectionTreatment
+	| AnnouncementTreatment;
+
+export const isMealBolusTreatment = (
+	treatment: NSTreatment,
+): treatment is MealBolusTreatment => treatment.eventType === 'Meal Bolus';
+
+export const isAnnouncementTreatment = (
+	treatment: NSTreatment,
+): treatment is AnnouncementTreatment => treatment.eventType === 'Announcement';
+
+export const isCarbsTreatment = (
+	treatment: NSTreatment,
+): treatment is MealBolusTreatment | CarbCorrectionTreatment =>
+	treatment.eventType === 'Meal Bolus' ||
+	treatment.eventType === 'Carb Correction';
 
 export type NSTreatmentParsed = {
 	drug: string;

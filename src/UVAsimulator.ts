@@ -9,6 +9,8 @@ import {
 	UvaInterval,
 	UvaOutput,
 	UvaUserParams,
+	isCarbsTreatment,
+	isMealBolusTreatment,
 } from './Types';
 import { PatientUva } from './uva';
 import RK4 from './SolverRK';
@@ -85,20 +87,19 @@ const simulator = (params: MainParamsUVA) => {
 
 	const basalActivity = basal(activeDrugTreatments, weight);
 
-	const last5MinuteTreatments = treatments
-		.map((e) => ({
-			...e,
-			minutesAgo: getDeltaMinutes(e.created_at),
-			insulin: e.insulin,
-		}))
-		.filter((t) => t.minutesAgo < 5 && t.minutesAgo >= 0);
+	const last5MinuteTreatments = treatments.filter(
+		(t) =>
+			getDeltaMinutes(t.created_at) < 5 && getDeltaMinutes(t.created_at) >= 0,
+	);
 
 	const bolusActivity = last5MinuteTreatments
+		.filter(isMealBolusTreatment)
 		.filter((i) => i.insulin > 0)
 		.map((i) => i.insulin)
 		.reduce((tot, activity) => tot + activity, 0);
 
 	const carbsActivity = last5MinuteTreatments
+		.filter(isCarbsTreatment)
 		.filter((i) => i.carbs > 0)
 		.map((i) => i.carbs)
 		.reduce((tot, activity) => tot + activity, 0);

@@ -7,6 +7,8 @@
 ### Type Aliases
 
 - [Activity](types.md#activity)
+- [AnnouncementTreatment](types.md#announcementtreatment)
+- [CarbCorrectionTreatment](types.md#carbcorrectiontreatment)
 - [Direction](types.md#direction)
 - [Entry](types.md#entry)
 - [EntryValueType](types.md#entryvaluetype)
@@ -14,10 +16,12 @@
 - [GenderType](types.md#gendertype)
 - [MainParams](types.md#mainparams)
 - [MainParamsUVA](types.md#mainparamsuva)
+- [MealBolusTreatment](types.md#mealbolustreatment)
 - [NSProfile](types.md#nsprofile)
 - [NSTreatment](types.md#nstreatment)
 - [Note](types.md#note)
 - [ProfileParams](types.md#profileparams)
+- [ProfileSwitchTreatment](types.md#profileswitchtreatment)
 - [Sgv](types.md#sgv)
 - [SimulationResult](types.md#simulationresult)
 - [TDateISODate](types.md#tdateisodate)
@@ -29,6 +33,7 @@
 - [TMonth](types.md#tmonth)
 - [TSeconds](types.md#tseconds)
 - [TYear](types.md#tyear)
+- [TempBasalTreatment](types.md#tempbasaltreatment)
 - [TypeDateISO](types.md#typedateiso)
 - [UserParams](types.md#userparams)
 - [UvaPatientState](types.md#uvapatientstate)
@@ -52,7 +57,43 @@ Represents physical activity data.
 
 #### Defined in
 
-[Types.ts:38](https://github.com/lsandini/cgmsim-lib/blob/d01b958/src/Types.ts#L38)
+[Types.ts:38](https://github.com/lsandini/cgmsim-lib/blob/1e109d0/src/Types.ts#L38)
+
+___
+
+### AnnouncementTreatment
+
+Ƭ **AnnouncementTreatment**: `Object`
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `created_at` | [`TypeDateISO`](types.md#typedateiso) |
+| `eventType` | ``"Announcement"`` |
+| `notes` | `string` |
+
+#### Defined in
+
+[Types.ts:115](https://github.com/lsandini/cgmsim-lib/blob/1e109d0/src/Types.ts#L115)
+
+___
+
+### CarbCorrectionTreatment
+
+Ƭ **CarbCorrectionTreatment**: `Object`
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `carbs` | `number` |
+| `created_at` | [`TypeDateISO`](types.md#typedateiso) |
+| `eventType` | ``"Carb Correction"`` |
+
+#### Defined in
+
+[Types.ts:109](https://github.com/lsandini/cgmsim-lib/blob/1e109d0/src/Types.ts#L109)
 
 ___
 
@@ -64,7 +105,7 @@ Represents the direction of blood glucose change.
 
 #### Defined in
 
-[Types.ts:7](https://github.com/lsandini/cgmsim-lib/blob/d01b958/src/Types.ts#L7)
+[Types.ts:7](https://github.com/lsandini/cgmsim-lib/blob/1e109d0/src/Types.ts#L7)
 
 ___
 
@@ -76,7 +117,7 @@ Represents a blood glucose entry with additional date information.
 
 #### Defined in
 
-[Types.ts:63](https://github.com/lsandini/cgmsim-lib/blob/d01b958/src/Types.ts#L63)
+[Types.ts:63](https://github.com/lsandini/cgmsim-lib/blob/1e109d0/src/Types.ts#L63)
 
 ___
 
@@ -95,7 +136,7 @@ Represents a blood glucose entry value type.
 
 #### Defined in
 
-[Types.ts:55](https://github.com/lsandini/cgmsim-lib/blob/d01b958/src/Types.ts#L55)
+[Types.ts:55](https://github.com/lsandini/cgmsim-lib/blob/1e109d0/src/Types.ts#L55)
 
 ___
 
@@ -121,7 +162,7 @@ Represents environmental parameters.
 
 #### Defined in
 
-[Types.ts:126](https://github.com/lsandini/cgmsim-lib/blob/d01b958/src/Types.ts#L126)
+[Types.ts:168](https://github.com/lsandini/cgmsim-lib/blob/1e109d0/src/Types.ts#L168)
 
 ___
 
@@ -133,7 +174,7 @@ Represents a gender type.
 
 #### Defined in
 
-[Types.ts:121](https://github.com/lsandini/cgmsim-lib/blob/d01b958/src/Types.ts#L121)
+[Types.ts:163](https://github.com/lsandini/cgmsim-lib/blob/1e109d0/src/Types.ts#L163)
 
 ___
 
@@ -157,7 +198,7 @@ Represents main parameters for a simulation.
 
 #### Defined in
 
-[Types.ts:179](https://github.com/lsandini/cgmsim-lib/blob/d01b958/src/Types.ts#L179)
+[Types.ts:221](https://github.com/lsandini/cgmsim-lib/blob/1e109d0/src/Types.ts#L221)
 
 ___
 
@@ -186,7 +227,26 @@ Represents main parameters for a UVA simulation.
 
 #### Defined in
 
-[Types.ts:160](https://github.com/lsandini/cgmsim-lib/blob/d01b958/src/Types.ts#L160)
+[Types.ts:202](https://github.com/lsandini/cgmsim-lib/blob/1e109d0/src/Types.ts#L202)
+
+___
+
+### MealBolusTreatment
+
+Ƭ **MealBolusTreatment**: `Object`
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `carbs` | `number` |
+| `created_at` | [`TypeDateISO`](types.md#typedateiso) |
+| `eventType` | ``"Meal Bolus"`` |
+| `insulin` | `number` |
+
+#### Defined in
+
+[Types.ts:87](https://github.com/lsandini/cgmsim-lib/blob/1e109d0/src/Types.ts#L87)
 
 ___
 
@@ -206,33 +266,19 @@ Represents a profile with associated profile parameters.
 
 #### Defined in
 
-[Types.ts:79](https://github.com/lsandini/cgmsim-lib/blob/d01b958/src/Types.ts#L79)
+[Types.ts:79](https://github.com/lsandini/cgmsim-lib/blob/1e109d0/src/Types.ts#L79)
 
 ___
 
 ### NSTreatment
 
-Ƭ **NSTreatment**: `Object`
+Ƭ **NSTreatment**: [`MealBolusTreatment`](types.md#mealbolustreatment) \| [`ProfileSwitchTreatment`](types.md#profileswitchtreatment) \| [`TempBasalTreatment`](types.md#tempbasaltreatment) \| [`CarbCorrectionTreatment`](types.md#carbcorrectiontreatment) \| [`AnnouncementTreatment`](types.md#announcementtreatment)
 
 Represents treatment data.
 
-#### Type declaration
-
-| Name | Type |
-| :------ | :------ |
-| `absolute?` | `any` |
-| `carbs?` | `number` |
-| `created_at` | [`TypeDateISO`](types.md#typedateiso) |
-| `duration?` | `number` |
-| `eventType` | `string` |
-| `insulin?` | `number` |
-| `notes?` | `string` |
-| `percentage?` | `number` |
-| `profileJson?` | `string` |
-
 #### Defined in
 
-[Types.ts:90](https://github.com/lsandini/cgmsim-lib/blob/d01b958/src/Types.ts#L90)
+[Types.ts:123](https://github.com/lsandini/cgmsim-lib/blob/1e109d0/src/Types.ts#L123)
 
 ___
 
@@ -251,7 +297,7 @@ Represents a note with associated notes.
 
 #### Defined in
 
-[Types.ts:30](https://github.com/lsandini/cgmsim-lib/blob/d01b958/src/Types.ts#L30)
+[Types.ts:30](https://github.com/lsandini/cgmsim-lib/blob/1e109d0/src/Types.ts#L30)
 
 ___
 
@@ -269,7 +315,27 @@ Represents parameters for a profile.
 
 #### Defined in
 
-[Types.ts:72](https://github.com/lsandini/cgmsim-lib/blob/d01b958/src/Types.ts#L72)
+[Types.ts:72](https://github.com/lsandini/cgmsim-lib/blob/1e109d0/src/Types.ts#L72)
+
+___
+
+### ProfileSwitchTreatment
+
+Ƭ **ProfileSwitchTreatment**: `Object`
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `created_at` | [`TypeDateISO`](types.md#typedateiso) |
+| `duration` | `number` |
+| `eventType` | ``"Profile Switch"`` |
+| `percentage` | `number` |
+| `profileJson` | `string` |
+
+#### Defined in
+
+[Types.ts:94](https://github.com/lsandini/cgmsim-lib/blob/1e109d0/src/Types.ts#L94)
 
 ___
 
@@ -288,7 +354,7 @@ Represents a blood glucose entry.
 
 #### Defined in
 
-[Types.ts:47](https://github.com/lsandini/cgmsim-lib/blob/d01b958/src/Types.ts#L47)
+[Types.ts:47](https://github.com/lsandini/cgmsim-lib/blob/1e109d0/src/Types.ts#L47)
 
 ___
 
@@ -317,7 +383,7 @@ Represents the result of a simulation.
 
 #### Defined in
 
-[Types.ts:192](https://github.com/lsandini/cgmsim-lib/blob/d01b958/src/Types.ts#L192)
+[Types.ts:234](https://github.com/lsandini/cgmsim-lib/blob/1e109d0/src/Types.ts#L234)
 
 ___
 
@@ -329,7 +395,7 @@ Represent a string like `2021-01-08`
 
 #### Defined in
 
-[TypeDateISO.ts:12](https://github.com/lsandini/cgmsim-lib/blob/d01b958/src/TypeDateISO.ts#L12)
+[TypeDateISO.ts:12](https://github.com/lsandini/cgmsim-lib/blob/1e109d0/src/TypeDateISO.ts#L12)
 
 ___
 
@@ -341,7 +407,7 @@ Represent a string like `14:42:34.678`
 
 #### Defined in
 
-[TypeDateISO.ts:17](https://github.com/lsandini/cgmsim-lib/blob/d01b958/src/TypeDateISO.ts#L17)
+[TypeDateISO.ts:17](https://github.com/lsandini/cgmsim-lib/blob/1e109d0/src/TypeDateISO.ts#L17)
 
 ___
 
@@ -351,7 +417,7 @@ ___
 
 #### Defined in
 
-[TypeDateISO.ts:3](https://github.com/lsandini/cgmsim-lib/blob/d01b958/src/TypeDateISO.ts#L3)
+[TypeDateISO.ts:3](https://github.com/lsandini/cgmsim-lib/blob/1e109d0/src/TypeDateISO.ts#L3)
 
 ___
 
@@ -361,7 +427,7 @@ ___
 
 #### Defined in
 
-[TypeDateISO.ts:4](https://github.com/lsandini/cgmsim-lib/blob/d01b958/src/TypeDateISO.ts#L4)
+[TypeDateISO.ts:4](https://github.com/lsandini/cgmsim-lib/blob/1e109d0/src/TypeDateISO.ts#L4)
 
 ___
 
@@ -371,7 +437,7 @@ ___
 
 #### Defined in
 
-[TypeDateISO.ts:7](https://github.com/lsandini/cgmsim-lib/blob/d01b958/src/TypeDateISO.ts#L7)
+[TypeDateISO.ts:7](https://github.com/lsandini/cgmsim-lib/blob/1e109d0/src/TypeDateISO.ts#L7)
 
 ___
 
@@ -381,7 +447,7 @@ ___
 
 #### Defined in
 
-[TypeDateISO.ts:5](https://github.com/lsandini/cgmsim-lib/blob/d01b958/src/TypeDateISO.ts#L5)
+[TypeDateISO.ts:5](https://github.com/lsandini/cgmsim-lib/blob/1e109d0/src/TypeDateISO.ts#L5)
 
 ___
 
@@ -391,7 +457,7 @@ ___
 
 #### Defined in
 
-[TypeDateISO.ts:2](https://github.com/lsandini/cgmsim-lib/blob/d01b958/src/TypeDateISO.ts#L2)
+[TypeDateISO.ts:2](https://github.com/lsandini/cgmsim-lib/blob/1e109d0/src/TypeDateISO.ts#L2)
 
 ___
 
@@ -401,7 +467,7 @@ ___
 
 #### Defined in
 
-[TypeDateISO.ts:6](https://github.com/lsandini/cgmsim-lib/blob/d01b958/src/TypeDateISO.ts#L6)
+[TypeDateISO.ts:6](https://github.com/lsandini/cgmsim-lib/blob/1e109d0/src/TypeDateISO.ts#L6)
 
 ___
 
@@ -411,7 +477,26 @@ ___
 
 #### Defined in
 
-[TypeDateISO.ts:1](https://github.com/lsandini/cgmsim-lib/blob/d01b958/src/TypeDateISO.ts#L1)
+[TypeDateISO.ts:1](https://github.com/lsandini/cgmsim-lib/blob/1e109d0/src/TypeDateISO.ts#L1)
+
+___
+
+### TempBasalTreatment
+
+Ƭ **TempBasalTreatment**: `Object`
+
+#### Type declaration
+
+| Name | Type |
+| :------ | :------ |
+| `absolute` | `number` |
+| `created_at` | [`TypeDateISO`](types.md#typedateiso) |
+| `duration` | `number` |
+| `eventType` | ``"Temp Basal"`` |
+
+#### Defined in
+
+[Types.ts:102](https://github.com/lsandini/cgmsim-lib/blob/1e109d0/src/Types.ts#L102)
 
 ___
 
@@ -423,7 +508,7 @@ Represent a string like `2021-01-08T14:42:34.678Z` (format: ISO 8601).
 
 #### Defined in
 
-[TypeDateISO.ts:23](https://github.com/lsandini/cgmsim-lib/blob/d01b958/src/TypeDateISO.ts#L23)
+[TypeDateISO.ts:23](https://github.com/lsandini/cgmsim-lib/blob/1e109d0/src/TypeDateISO.ts#L23)
 
 ___
 
@@ -441,7 +526,7 @@ Represents user parameters.
 
 #### Defined in
 
-[Types.ts:153](https://github.com/lsandini/cgmsim-lib/blob/d01b958/src/Types.ts#L153)
+[Types.ts:195](https://github.com/lsandini/cgmsim-lib/blob/1e109d0/src/Types.ts#L195)
 
 ___
 
@@ -473,7 +558,7 @@ Represents the state of a UVA patient.
 
 #### Defined in
 
-[Types.ts:239](https://github.com/lsandini/cgmsim-lib/blob/d01b958/src/Types.ts#L239)
+[Types.ts:281](https://github.com/lsandini/cgmsim-lib/blob/1e109d0/src/Types.ts#L281)
 
 ___
 
@@ -532,4 +617,4 @@ Represents parameters for a UVA simulation.
 
 #### Defined in
 
-[Types.ts:304](https://github.com/lsandini/cgmsim-lib/blob/d01b958/src/Types.ts#L304)
+[Types.ts:346](https://github.com/lsandini/cgmsim-lib/blob/1e109d0/src/Types.ts#L346)

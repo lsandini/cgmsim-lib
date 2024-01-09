@@ -54,7 +54,6 @@ describe('simulator test', () => {
         eventType: 'Announcement',
         created_at: now.toISOString() as TypeDateISO,
         notes: 'Tou 14',
-        carbs: 0,
       },
     ];
     const env: EnvParam = {
@@ -135,12 +134,12 @@ describe('simulator test', () => {
         eventType: 'Meal Bolus',
         created_at: '2022-06-04T13:00:00.000Z',
         carbs: 40,
+        insulin: 0,
       },
       {
         eventType: 'Announcement',
         created_at: '2022-06-04T01:00:00.000Z',
         notes: 'tou 14',
-        carbs: 0,
       },
     ];
     const env: EnvParam = {
@@ -269,13 +268,11 @@ describe('simulator test', () => {
         eventType: 'Announcement',
         created_at: '2022-06-04T10:00:00.000Z',
         notes: 'tou 14',
-        carbs: 0,
       },
       {
         eventType: 'Announcement',
         created_at: '2022-06-05T10:00:00.000Z',
         notes: 'tou 14',
-        carbs: 0,
       },
     ];
     const env: EnvParam = {
@@ -399,7 +396,6 @@ describe('simulator test', () => {
       eventType: 'Announcement',
       created_at: '2022-06-04T10:14:00.000Z',
       notes: 'cor 40',
-      carbs: 0,
     };
     const treatmentsBolus: NSTreatment = {
       eventType: 'Meal Bolus',
@@ -412,13 +408,11 @@ describe('simulator test', () => {
         eventType: 'Announcement',
         created_at: '2022-06-04T10:00:00.000Z',
         notes: 'deg 23',
-        carbs: 0,
       },
       {
         eventType: 'Announcement',
         created_at: '2022-06-05T10:00:00.000Z',
         notes: 'deg 23',
-        carbs: 0,
       },
     ];
     const env: EnvParam = {

@@ -42,21 +42,11 @@ describe('uva test default PATIENT', () => {
 
   test('basal  with gla 30 should generate flat sgv', async () => {
     //current treatments generate 0.75U/h
-    const treatments = [
+    const treatments: NSTreatment[] = [
       {
-        _id: '627548f4a3dc0ad67616ac95',
         eventType: 'Announcement',
         notes: 'gla 30',
-        utcOffset: 0,
-        isAnnouncement: true,
-        protein: '',
-        fat: '',
-        duration: 0,
-        profile: '',
-        enteredBy: 'Boss',
         created_at: '2022-05-01T08:41:00' as TypeDateISO,
-        carbs: null,
-        insulin: null,
       },
     ];
     let lastState = null;
@@ -156,6 +146,7 @@ describe('uva test default PATIENT', () => {
       {
         eventType: 'Meal Bolus',
         carbs: 50,
+        insulin: 0,
         created_at: '2022-05-01T10:59:00' as TypeDateISO,
       },
     ];
@@ -226,6 +217,7 @@ describe('uva test default PATIENT', () => {
       {
         eventType: 'Meal Bolus',
         carbs: 50,
+        insulin: 0,
         created_at: '2022-05-01T11:30:00' as TypeDateISO,
       },
       {
@@ -300,6 +292,7 @@ describe('uva test default PATIENT', () => {
       {
         eventType: 'Meal Bolus',
         carbs: 150,
+        insulin: 0,
         created_at: '2022-05-01T11:30:00' as TypeDateISO,
       },
     ];
