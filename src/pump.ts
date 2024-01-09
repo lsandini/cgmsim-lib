@@ -1,6 +1,7 @@
 import logger, { getDeltaMinutes, getBiexpTreatmentActivity } from './utils';
 import * as moment from 'moment';
 import { NSProfile, NSTreatment } from './Types';
+import { TypeDateISO } from './TypeDateISO';
 
 function getProfileSwitch(treatments: NSTreatment[], duration: number) {
 	const computedProfilesSwitch: {
@@ -166,7 +167,7 @@ export default function (
 		//if there is a temp basal actives
 		if (tempBasalActives.length > 0) {
 			basalToUpdate = {
-				minutesAgo: getDeltaMinutes(currentAction.toISOString()),
+				minutesAgo: getDeltaMinutes(currentAction.toISOString() as TypeDateISO),
 				insulin: tempBasalActives[0].insulin / 12,
 			};
 		} else if (profilesStichActives.length > 0) {
@@ -175,7 +176,7 @@ export default function (
 				currentAction,
 			);
 			basalToUpdate = {
-				minutesAgo: getDeltaMinutes(currentAction.toISOString()),
+				minutesAgo: getDeltaMinutes(currentAction.toISOString() as TypeDateISO),
 				insulin: basal / 12,
 			};
 		} else {
@@ -183,7 +184,7 @@ export default function (
 				value: getBasalFromProfiles(orderedProfiles, currentAction),
 			};
 			basalToUpdate = {
-				minutesAgo: getDeltaMinutes(currentAction.toISOString()),
+				minutesAgo: getDeltaMinutes(currentAction.toISOString() as TypeDateISO),
 				insulin: currentBasal.value / 12,
 			};
 		}
