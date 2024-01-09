@@ -2,6 +2,7 @@ import { EnvParam, Sgv, NSTreatment } from '../src/Types';
 import simulator from '../src/CGMSIMsimulator';
 import moment = require('moment');
 import { diffOptions, getPngSnapshot, testGenerator } from './inputTest';
+import { TypeDateISO } from '../src/TypeDateISO';
 const { toMatchImageSnapshot } = require('jest-image-snapshot');
 
 const math = global.Math;
@@ -51,7 +52,7 @@ describe('simulator test', () => {
     const treatments: NSTreatment[] = [
       {
         eventType: 'Announcement',
-        created_at: now.toISOString(),
+        created_at: now.toISOString() as TypeDateISO,
         notes: 'Tou 14',
         carbs: 0,
       },
@@ -76,7 +77,7 @@ describe('simulator test', () => {
           eventType: 'Meal Bolus',
           carbs: 0,
           insulin: 6,
-          created_at: now.toISOString(),
+          created_at: now.toISOString() as TypeDateISO,
         });
       }
 
@@ -400,7 +401,7 @@ describe('simulator test', () => {
       notes: 'cor 40',
       carbs: 0,
     };
-    const treatmentsBolus = {
+    const treatmentsBolus: NSTreatment = {
       eventType: 'Meal Bolus',
       insulin: 5,
       created_at: '2022-06-04T14:30:00.000Z',

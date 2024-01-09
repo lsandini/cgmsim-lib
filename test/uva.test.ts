@@ -10,6 +10,8 @@ import {
 import simulatorUVA from '../src/UVAsimulator';
 import { diffOptions, getPngSnapshot } from './inputTest';
 import { defaultPatient } from '../src/defaultPatient';
+import { TypeDateISO } from '../src/TypeDateISO';
+
 const now = new Date('2022-05-01T11:00:00');
 const { toMatchImageSnapshot } = require('jest-image-snapshot');
 
@@ -52,7 +54,7 @@ describe('uva test default PATIENT', () => {
         duration: 0,
         profile: '',
         enteredBy: 'Boss',
-        created_at: '2022-05-01T08:41:00',
+        created_at: '2022-05-01T08:41:00' as TypeDateISO,
         carbs: null,
         insulin: null,
       },
@@ -154,7 +156,7 @@ describe('uva test default PATIENT', () => {
       {
         eventType: 'Meal Bolus',
         carbs: 50,
-        created_at: '2022-05-01T10:59:00',
+        created_at: '2022-05-01T10:59:00' as TypeDateISO,
       },
     ];
 
@@ -224,13 +226,13 @@ describe('uva test default PATIENT', () => {
       {
         eventType: 'Meal Bolus',
         carbs: 50,
-        created_at: '2022-05-01T11:30:00',
+        created_at: '2022-05-01T11:30:00' as TypeDateISO,
       },
       {
         eventType: 'Meal Bolus',
         carbs: 0,
         insulin: 7.5,
-        created_at: '2022-05-01T11:15:00',
+        created_at: '2022-05-01T11:15:00' as TypeDateISO,
       },
     ];
 
@@ -298,7 +300,7 @@ describe('uva test default PATIENT', () => {
       {
         eventType: 'Meal Bolus',
         carbs: 150,
-        created_at: '2022-05-01T11:30:00',
+        created_at: '2022-05-01T11:30:00' as TypeDateISO,
       },
     ];
 
@@ -351,7 +353,7 @@ describe('uva test default PATIENT', () => {
         eventType: 'Meal Bolus',
         carbs: 0,
         insulin: 10,
-        created_at: '2022-05-01T11:15:00',
+        created_at: '2022-05-01T11:15:00' as TypeDateISO,
       },
     ];
 
@@ -406,27 +408,27 @@ describe('uva test default PATIENT', () => {
     const activities: Activity[] = [
       {
         heartRate,
-        created_at: '2022-05-01T11:30:00',
+        created_at: '2022-05-01T11:30:00' as TypeDateISO,
       },
       {
         heartRate,
-        created_at: '2022-05-01T11:35:00',
+        created_at: '2022-05-01T11:35:00' as TypeDateISO,
       },
       {
         heartRate,
-        created_at: '2022-05-01T11:40:00',
+        created_at: '2022-05-01T11:40:00' as TypeDateISO,
       },
       {
         heartRate,
-        created_at: '2022-05-01T11:45:00',
+        created_at: '2022-05-01T11:45:00' as TypeDateISO,
       },
       {
         heartRate,
-        created_at: '2022-05-01T11:50:00',
+        created_at: '2022-05-01T11:50:00' as TypeDateISO,
       },
       {
         heartRate,
-        created_at: '2022-05-01T11:55:00',
+        created_at: '2022-05-01T11:55:00' as TypeDateISO,
       },
     ];
 

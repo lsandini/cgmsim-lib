@@ -1,5 +1,6 @@
 import moment = require('moment');
 import pump from '../src/pump';
+import { NSTreatment } from '../src/Types';
 
 const dia = 6;
 const peak = 90;
@@ -22,7 +23,7 @@ const dynamicBasal = [
     value: 1,
   },
 ];
-const profileSwitch = [
+const profileSwitch: NSTreatment[] = [
   {
     eventType: 'Profile Switch',
     percentage: 130,
@@ -33,7 +34,7 @@ const profileSwitch = [
     }),
   },
 ];
-const tmpBasal = [
+const tmpBasal: NSTreatment[] = [
   {
     eventType: 'Temp Basal',
     absolute: 0,
@@ -85,7 +86,7 @@ describe('test pump', () => {
         },
       ],
       dia,
-      peak
+      peak,
     );
 
     expect(result).toMatchSnapshot();
@@ -93,7 +94,7 @@ describe('test pump', () => {
   test('static basal in profile and temp basal 0', () => {
     let _date = moment('2022-05-06T16:30:00.000Z');
     jest.setSystemTime(_date.toDate());
-    const treatments = [
+    const treatments: NSTreatment[] = [
       {
         eventType: 'Temp Basal',
         absolute: 0,
@@ -115,7 +116,7 @@ describe('test pump', () => {
         },
       ],
       dia,
-      peak
+      peak,
     );
 
     expect(result).toBe(0);
@@ -139,7 +140,7 @@ describe('test pump', () => {
         },
       ],
       dia,
-      peak
+      peak,
     );
 
     expect(result).toMatchSnapshot();
@@ -162,7 +163,7 @@ describe('test pump', () => {
         },
       ],
       dia,
-      peak
+      peak,
     );
 
     expect(result).toMatchSnapshot();
@@ -185,7 +186,7 @@ describe('test pump', () => {
         },
       ],
       dia,
-      peak
+      peak,
     );
 
     expect(result).toMatchSnapshot();
@@ -209,7 +210,7 @@ describe('test pump', () => {
         },
       ],
       dia,
-      peak
+      peak,
     );
 
     expect(result).toMatchSnapshot();

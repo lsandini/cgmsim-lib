@@ -1,3 +1,4 @@
+import { TypeDateISO } from './TypeDateISO';
 import { drugs } from './drug';
 
 /**
@@ -37,7 +38,7 @@ export type Note = {
 export type Activity = {
 	steps?: number;
 	heartRate?: number;
-	created_at: string;
+	created_at: TypeDateISO;
 };
 
 /**
@@ -92,7 +93,7 @@ export type NSTreatment = {
 	eventType: string;
 	insulin?: number;
 	notes?: string;
-	created_at: string;
+	created_at: TypeDateISO;
 	carbs?: number;
 	profileJson?: string;
 	percentage?: number;

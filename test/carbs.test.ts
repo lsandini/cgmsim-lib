@@ -3,6 +3,7 @@ import carbs from '../src/carbs';
 import { oldCarbs } from '../old/oldCarbs';
 import { diffOptions, getPngSnapshot } from './inputTest';
 import { NSTreatment } from '../src/Types';
+import { TypeDateISO } from '../src/TypeDateISO';
 
 const now = '2001-01-01T07:00:00';
 const { toMatchImageSnapshot } = require('jest-image-snapshot');
@@ -21,7 +22,8 @@ afterAll(() => {
   global.Math = math;
 });
 
-const minutesAgo = (min) => moment(now).add(-min, 'minutes').toISOString();
+const minutesAgo = (min) =>
+  moment(now).add(-min, 'minutes').toISOString() as TypeDateISO;
 describe('Carbs test', () => {
   test('test carbs without treatments return 0', () => {
     const r = carbs([], 360, 30, 10);
