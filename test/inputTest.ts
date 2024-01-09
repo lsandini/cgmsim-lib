@@ -265,13 +265,13 @@ export const testGenerator = (
   jest.useFakeTimers('modern');
 
   const env: EnvParam = {
-    CARBS_ABS_TIME: '360',
-    CR: '10',
-    DIA: '6',
-    ISF: '30',
-    TP: '75',
-    WEIGHT: '80',
-    AGE: '51',
+    CARBS_ABS_TIME: 360,
+    CR: 10,
+    DIA: 6,
+    ISF: 30,
+    TP: 75,
+    WEIGHT: 80,
+    AGE: 51,
     GENDER: 'Male',
   };
   const noiseActivities = [];

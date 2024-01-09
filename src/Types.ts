@@ -33,7 +33,12 @@ export type Note = {
 };
 
 /**
- * Represents physical activity data.
+ * Represents data related to physical activity.
+ *
+ * @typedef {Object} Activity
+ * @property {number | undefined} steps - The number of steps taken (optional).
+ * @property {number | undefined} heartRate - The heart rate during the activity (optional).
+ * @property {TypeDateISO} created_at - The timestamp indicating when the activity data was recorded in ISO format.
  */
 export type Activity = {
 	steps?: number;
@@ -43,12 +48,15 @@ export type Activity = {
 
 /**
  * Represents a blood glucose entry.
+ *
+ * @typedef {Object} Sgv
+ * @property {number} mills - The timestamp of the blood glucose entry in milliseconds.
+ * @property {number} sgv - The blood glucose value.
  */
 export type Sgv = {
 	mills: number;
 	sgv: number;
 };
-
 /**
  * Represents a blood glucose entry value type.
  */
@@ -206,20 +214,30 @@ export type TreatmentBiexpParam = {
 export type GenderType = 'Male' | 'Female';
 
 /**
- * Represents environmental parameters.
+ * Represents environmental parameters for a simulation.
+ *
+ * @typedef {Object} EnvParam
+ * @property {number} CR - Carbohydrate Ratio (CR) for insulin calculation.
+ * @property {number} ISF - Insulin Sensitivity Factor (ISF) for insulin calculation.
+ * @property {number} CARBS_ABS_TIME - Time taken for carbohydrates to be absorbed (in minutes default 360).
+ * @property {number} TP - Time period for insulin activity (Time Peak) (in minutes default 75).
+ * @property {number} DIA - Duration of Insulin Action (DIA) (in hours default: 6).
+ * @property {number} WEIGHT - Weight of the simulated user (in cm).
+ * @property {string | undefined} SEED - Seed value for randomization (optional).
+ * @property {number} AGE - Age of the simulated user.
+ * @property {GenderType} GENDER - Gender of the simulated user ('Male' or 'Female').
  */
 export type EnvParam = {
-	CR: string;
-	ISF: string;
-	CARBS_ABS_TIME: string;
-	TP: string;
-	DIA: string;
-	WEIGHT: string;
+	CR: number;
+	ISF: number;
+	CARBS_ABS_TIME: number;
+	TP: number;
+	DIA: number;
+	WEIGHT: number;
 	SEED?: string;
-	AGE: string;
+	AGE: number;
 	GENDER: GenderType;
 };
-
 /**
  * Represents parameters for a CGM simulation.
  */

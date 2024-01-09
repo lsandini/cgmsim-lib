@@ -57,13 +57,14 @@ describe('simulator test', () => {
       },
     ];
     const env: EnvParam = {
-      CARBS_ABS_TIME: '360',
-      CR: '10',
-      DIA: '6',
-      ISF: '32',
-      TP: '75',
-      WEIGHT: '80',
-      AGE: '51',
+      CARBS_ABS_TIME: 360,
+      CR: 10,
+      DIA: 6,
+      ISF: 32,
+      TP: 75,
+      WEIGHT: 80,
+      AGE: 51,
+
       GENDER: 'Male',
     };
 
@@ -143,13 +144,14 @@ describe('simulator test', () => {
       },
     ];
     const env: EnvParam = {
-      CARBS_ABS_TIME: '360',
-      CR: '10',
-      DIA: '6',
-      ISF: '32',
-      TP: '75',
-      WEIGHT: '80',
-      AGE: '51',
+      CARBS_ABS_TIME: 360,
+      CR: 10,
+      DIA: 6,
+      ISF: 32,
+      TP: 75,
+      WEIGHT: 80,
+      AGE: 51,
+
       GENDER: 'Male',
     };
 
@@ -276,13 +278,13 @@ describe('simulator test', () => {
       },
     ];
     const env: EnvParam = {
-      CARBS_ABS_TIME: '360',
-      CR: '10',
-      DIA: '6',
-      ISF: '32',
-      TP: '75',
-      WEIGHT: '80',
-      AGE: '51',
+      CARBS_ABS_TIME: 360,
+      CR: 10,
+      DIA: 6,
+      ISF: 32,
+      TP: 75,
+      WEIGHT: 80,
+      AGE: 51,
       GENDER: 'Male',
     };
 
@@ -416,13 +418,13 @@ describe('simulator test', () => {
       },
     ];
     const env: EnvParam = {
-      CARBS_ABS_TIME: '360',
-      CR: '10',
-      DIA: '6',
-      ISF: '32',
-      TP: '75',
-      WEIGHT: '80',
-      AGE: '51',
+      CARBS_ABS_TIME: 360,
+      CR: 10,
+      DIA: 6,
+      ISF: 32,
+      TP: 75,
+      WEIGHT: 80,
+      AGE: 51,
       GENDER: 'Male',
     };
 

@@ -1,4 +1,4 @@
-import { Activity, EnvParam, GenderType } from './Types';
+import { Activity, GenderType } from './Types';
 import logger, { getDeltaMinutes } from './utils';
 
 type MinutesAgo = { minutesAgo: number };
