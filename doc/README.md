@@ -64,13 +64,13 @@ console.log("Blood glucose variation:", result.sgvdir);
 
 #### Defined in
 
-[arrows.ts:22](https://github.com/lsandini/cgmsim-lib/blob/fd8f38e/src/arrows.ts#L22)
+[arrows.ts:22](https://github.com/lsandini/cgmsim-lib/blob/1548d52/src/arrows.ts#L22)
 
 ___
 
 ### downloads
 
-▸ **downloads**(`nsUrl`, `apiSecret`): `Promise`<{ `entries`: [`Sgv`](modules/types.md#sgv)[] ; `profiles`: [`NSProfile`](modules/types.md#nsprofile)[] ; `treatments`: [`NSTreatment`](modules/types.md#nstreatment)[]  }\>
+▸ **downloads**(`nsUrl`, `apiSecret`): `Promise`\<\{ `entries`: [`Sgv`](modules/types.md#sgv)[] ; `profiles`: [`NSProfile`](modules/types.md#nsprofile)[] ; `treatments`: [`NSTreatment`](modules/types.md#nstreatment)[]  }\>
 
 Downloads data from the Nightscout API, including treatments, profiles, and entries.
 
@@ -83,7 +83,7 @@ Downloads data from the Nightscout API, including treatments, profiles, and entr
 
 #### Returns
 
-`Promise`<{ `entries`: [`Sgv`](modules/types.md#sgv)[] ; `profiles`: [`NSProfile`](modules/types.md#nsprofile)[] ; `treatments`: [`NSTreatment`](modules/types.md#nstreatment)[]  }\>
+`Promise`\<\{ `entries`: [`Sgv`](modules/types.md#sgv)[] ; `profiles`: [`NSProfile`](modules/types.md#nsprofile)[] ; `treatments`: [`NSTreatment`](modules/types.md#nstreatment)[]  }\>
 
 A promise that resolves with downloaded data.
 
@@ -105,13 +105,13 @@ downloads(apiUrl, apiSecret)
 
 #### Defined in
 
-[downloads.ts:34](https://github.com/lsandini/cgmsim-lib/blob/fd8f38e/src/downloads.ts#L34)
+[downloads.ts:34](https://github.com/lsandini/cgmsim-lib/blob/1548d52/src/downloads.ts#L34)
 
 ___
 
 ### loadActivity
 
-▸ **loadActivity**(`nsUrl`, `apiSecret`, `fromUtcString?`): `Promise`<([`Note`](modules/types.md#note) \| [`Activity`](modules/types.md#activity) \| [`Entry`](modules/types.md#entry))[]\>
+▸ **loadActivity**(`nsUrl`, `apiSecret`, `fromUtcString?`): `Promise`\<([`Note`](modules/types.md#note) \| [`Activity`](modules/types.md#activity) \| [`Entry`](modules/types.md#entry))[]\>
 
 Loads activity data from the Nightscout API based on optional time filter.
 
@@ -125,7 +125,7 @@ Loads activity data from the Nightscout API based on optional time filter.
 
 #### Returns
 
-`Promise`<([`Note`](modules/types.md#note) \| [`Activity`](modules/types.md#activity) \| [`Entry`](modules/types.md#entry))[]\>
+`Promise`\<([`Note`](modules/types.md#note) \| [`Activity`](modules/types.md#activity) \| [`Entry`](modules/types.md#entry))[]\>
 
 A promise that resolves with the loaded activity data.
 
@@ -148,7 +148,7 @@ loadActivityData(apiUrl, apiSecret, fromDate)
 
 #### Defined in
 
-[load-activity.ts:23](https://github.com/lsandini/cgmsim-lib/blob/fd8f38e/src/load-activity.ts#L23)
+[load-activity.ts:23](https://github.com/lsandini/cgmsim-lib/blob/1548d52/src/load-activity.ts#L23)
 
 ___
 
@@ -172,7 +172,7 @@ Simulation result containing blood glucose data and other parameters.
 
 #### Defined in
 
-[CGMSIMsimulator.ts:19](https://github.com/lsandini/cgmsim-lib/blob/fd8f38e/src/CGMSIMsimulator.ts#L19)
+[CGMSIMsimulator.ts:19](https://github.com/lsandini/cgmsim-lib/blob/1548d52/src/CGMSIMsimulator.ts#L19)
 
 ___
 
@@ -197,7 +197,7 @@ Simulation result containing blood glucose data and patient state.
 | Name | Type |
 | :------ | :------ |
 | `sgv` | `number` |
-| `state` | { `Gp`: `number` ; `Gt`: `number` ; `I_`: `number` ; `Il`: `number` ; `Ip`: `number` ; `Isc1`: `number` ; `Isc2`: `number` ; `Qgut`: `number` ; `Qsto1`: `number` ; `Qsto2`: `number` ; `W`: `number` ; `X`: `number` ; `XL`: `number` ; `Y`: `number` ; `Z`: `number`  } |
+| `state` | \{ `Gp`: `number` ; `Gt`: `number` ; `I_`: `number` ; `Il`: `number` ; `Ip`: `number` ; `Isc1`: `number` ; `Isc2`: `number` ; `Qgut`: `number` ; `Qsto1`: `number` ; `Qsto2`: `number` ; `W`: `number` ; `X`: `number` ; `XL`: `number` ; `Y`: `number` ; `Z`: `number`  } |
 | `state.Gp` | `number` |
 | `state.Gt` | `number` |
 | `state.I_` | `number` |
@@ -253,13 +253,13 @@ console.log("Blood glucose simulation result:", simulationResult);
 
 #### Defined in
 
-[UVAsimulator.ts:57](https://github.com/lsandini/cgmsim-lib/blob/fd8f38e/src/UVAsimulator.ts#L57)
+[UVAsimulator.ts:57](https://github.com/lsandini/cgmsim-lib/blob/1548d52/src/UVAsimulator.ts#L57)
 
 ___
 
 ### uploadActivity
 
-▸ **uploadActivity**(`activity`, `nsUrl`, `apiSecret`): `Promise`<`void`\>
+▸ **uploadActivity**(`activity`, `nsUrl`, `apiSecret`): `Promise`\<`void`\>
 
 Uploads activity data to the Nightscout API.
 
@@ -273,7 +273,7 @@ Uploads activity data to the Nightscout API.
 
 #### Returns
 
-`Promise`<`void`\>
+`Promise`\<`void`\>
 
 A promise that resolves when the upload is complete.
 
@@ -296,13 +296,13 @@ uploadActivity(activityData, "https://nightscout.example.com", "apiSecret123")
 
 #### Defined in
 
-[upload.ts:124](https://github.com/lsandini/cgmsim-lib/blob/fd8f38e/src/upload.ts#L124)
+[upload.ts:124](https://github.com/lsandini/cgmsim-lib/blob/1548d52/src/upload.ts#L124)
 
 ___
 
 ### uploadEntries
 
-▸ **uploadEntries**(`cgmsim`, `nsUrl`, `apiSecret`): `Promise`<`void`\>
+▸ **uploadEntries**(`cgmsim`, `nsUrl`, `apiSecret`): `Promise`\<`void`\>
 
 Uploads entries (e.g., blood glucose readings) to the Nightscout API.
 
@@ -316,7 +316,7 @@ Uploads entries (e.g., blood glucose readings) to the Nightscout API.
 
 #### Returns
 
-`Promise`<`void`\>
+`Promise`\<`void`\>
 
 A promise that resolves when the upload is complete.
 
@@ -339,13 +339,13 @@ uploadEntries(glucoseEntry, "https://nightscout.example.com", "apiSecret123")
 
 #### Defined in
 
-[upload.ts:87](https://github.com/lsandini/cgmsim-lib/blob/fd8f38e/src/upload.ts#L87)
+[upload.ts:87](https://github.com/lsandini/cgmsim-lib/blob/1548d52/src/upload.ts#L87)
 
 ___
 
 ### uploadLogs
 
-▸ **uploadLogs**(`simResult`, `nsUrl`, `apiSecret`): `Promise`<`void`\>
+▸ **uploadLogs**(`simResult`, `nsUrl`, `apiSecret`): `Promise`\<`void`\>
 
 Uploads logs to the Nightscout API.
 
@@ -353,13 +353,13 @@ Uploads logs to the Nightscout API.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `simResult` | [`SimulationResult`](modules/types.md#simulationresult) & { `notes`: `string`  } | Simulation result with attached notes. |
+| `simResult` | [`SimulationResult`](modules/types.md#simulationresult) & \{ `notes`: `string`  } | Simulation result with attached notes. |
 | `nsUrl` | `string` | Nightscout URL. |
 | `apiSecret` | `string` | Nightscout API secret. |
 
 #### Returns
 
-`Promise`<`void`\>
+`Promise`\<`void`\>
 
 A promise that resolves when the upload is complete.
 
@@ -383,13 +383,13 @@ uploadLogs(simulationResult, "https://nightscout.example.com", "apiSecret123")
 
 #### Defined in
 
-[upload.ts:51](https://github.com/lsandini/cgmsim-lib/blob/fd8f38e/src/upload.ts#L51)
+[upload.ts:51](https://github.com/lsandini/cgmsim-lib/blob/1548d52/src/upload.ts#L51)
 
 ___
 
 ### uploadNotes
 
-▸ **uploadNotes**(`notes`, `nsUrl`, `apiSecret`): `Promise`<`void`\>
+▸ **uploadNotes**(`notes`, `nsUrl`, `apiSecret`): `Promise`\<`void`\>
 
 Uploads notes to the Nightscout API.
 
@@ -403,7 +403,7 @@ Uploads notes to the Nightscout API.
 
 #### Returns
 
-`Promise`<`void`\>
+`Promise`\<`void`\>
 
 A promise that resolves when the upload is complete.
 
@@ -422,4 +422,4 @@ uploadNotes("Important note", "https://nightscout.example.com", "apiSecret123")
 
 #### Defined in
 
-[upload.ts:24](https://github.com/lsandini/cgmsim-lib/blob/fd8f38e/src/upload.ts#L24)
+[upload.ts:24](https://github.com/lsandini/cgmsim-lib/blob/1548d52/src/upload.ts#L24)
