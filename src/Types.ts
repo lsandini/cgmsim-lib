@@ -234,8 +234,6 @@ export type EnvParam = {
 	DIA: number;
 	/** Weight of the simulated user (in cm). */
 	WEIGHT: number;
-	/** Seed value for randomization (optional). */
-	SEED?: string;
 	/** Age of the simulated user. */
 	AGE: number;
 	/** Gender of the simulated user ('Male' or 'Female'). */
