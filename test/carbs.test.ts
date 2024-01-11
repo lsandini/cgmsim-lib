@@ -3,6 +3,7 @@ import carbs from '../src/carbs';
 import { oldCarbs } from '../old/oldCarbs';
 import { diffOptions, getPngSnapshot } from './inputTest';
 import { NSTreatment } from '../src/Types';
+import { TypeDateISO } from '../src/TypeDateISO';
 
 const now = '2001-01-01T07:00:00';
 const { toMatchImageSnapshot } = require('jest-image-snapshot');
@@ -21,7 +22,8 @@ afterAll(() => {
   global.Math = math;
 });
 
-const minutesAgo = (min) => moment(now).add(-min, 'minutes').toISOString();
+const minutesAgo = (min) =>
+  moment(now).add(-min, 'minutes').toISOString() as TypeDateISO;
 describe('Carbs test', () => {
   test('test carbs without treatments return 0', () => {
     const r = carbs([], 360, 30, 10);
@@ -33,6 +35,7 @@ describe('Carbs test', () => {
         {
           eventType: 'Meal Bolus',
           carbs: 44,
+          insulin: 0,
           created_at: minutesAgo(361),
         },
       ],
@@ -49,6 +52,7 @@ describe('Carbs test', () => {
         {
           eventType: 'Meal Bolus',
           carbs: 40,
+          insulin: 0,
           created_at: minutesAgo(45),
         },
       ],
@@ -65,11 +69,13 @@ describe('Carbs test', () => {
         {
           eventType: 'Meal Bolus',
           carbs: 20,
+          insulin: 0,
           created_at: minutesAgo(1),
         },
         {
           eventType: 'Meal Bolus',
           carbs: 20,
+          insulin: 0,
           created_at: minutesAgo(45),
         },
       ],
@@ -86,6 +92,7 @@ describe('Carbs test', () => {
         {
           eventType: 'Meal Bolus',
           carbs: 20,
+          insulin: 0,
           created_at: minutesAgo(40),
         },
       ],
@@ -98,6 +105,7 @@ describe('Carbs test', () => {
         {
           eventType: 'Meal Bolus',
           carbs: 20,
+          insulin: 0,
           created_at: minutesAgo(60),
         },
       ],
@@ -114,6 +122,7 @@ describe('Carbs test', () => {
         {
           eventType: 'Meal Bolus',
           carbs: 20,
+          insulin: 0,
           created_at: minutesAgo(5),
         },
       ],
@@ -126,6 +135,7 @@ describe('Carbs test', () => {
         {
           eventType: 'Meal Bolus',
           carbs: 20,
+          insulin: 0,
           created_at: minutesAgo(40),
         },
       ],
@@ -142,11 +152,13 @@ describe('Carbs test', () => {
         {
           eventType: 'Meal Bolus',
           carbs: 40,
+          insulin: 0,
           created_at: minutesAgo(1),
         },
         {
           eventType: 'Meal Bolus',
           carbs: 40,
+          insulin: 0,
           created_at: minutesAgo(45),
         },
       ],
@@ -166,6 +178,7 @@ describe('Carbs test', () => {
     const e: NSTreatment[] = numbers.map((n) => ({
       eventType: 'Meal Bolus',
       carbs: 20,
+      insulin: 0,
       created_at: minutesAgo(n),
     }));
     const r = carbs(e, 360, 30, 10);
@@ -195,12 +208,13 @@ describe('Carbs test compare old', () => {
         {
           eventType: 'Meal Bolus',
           carbs: 40,
+          insulin: 0,
           created_at: minutesAgo(1),
           time: moment(minutesAgo(1)).toDate().getTime(),
         },
       ];
       const carbAbs = 360;
-      const newCarb = carbs(treatment, carbAbs, isf, cr);
+      const newCarb = carbs(treatment as NSTreatment[], carbAbs, isf, cr);
       const old = oldCarbs(treatment, carbAbs);
       newC.push(newCarb); // new raw value is multiplied by isfMMol/CR  or 2/10 or 1/5 !
       oldC.push(old); // old raw value is not multiplied by CSF (isfMMol/CR)

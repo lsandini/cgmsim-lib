@@ -10,6 +10,8 @@ import {
 import simulatorUVA from '../src/UVAsimulator';
 import { diffOptions, getPngSnapshot } from './inputTest';
 import { defaultPatient } from '../src/defaultPatient';
+import { TypeDateISO } from '../src/TypeDateISO';
+
 const now = new Date('2022-05-01T11:00:00');
 const { toMatchImageSnapshot } = require('jest-image-snapshot');
 
@@ -40,21 +42,11 @@ describe('uva test default PATIENT', () => {
 
   test('basal  with gla 30 should generate flat sgv', async () => {
     //current treatments generate 0.75U/h
-    const treatments = [
+    const treatments: NSTreatment[] = [
       {
-        _id: '627548f4a3dc0ad67616ac95',
         eventType: 'Announcement',
         notes: 'gla 30',
-        utcOffset: 0,
-        isAnnouncement: true,
-        protein: '',
-        fat: '',
-        duration: 0,
-        profile: '',
-        enteredBy: 'Boss',
-        created_at: '2022-05-01T08:41:00',
-        carbs: null,
-        insulin: null,
+        created_at: '2022-05-01T08:41:00' as TypeDateISO,
       },
     ];
     let lastState = null;
@@ -154,7 +146,8 @@ describe('uva test default PATIENT', () => {
       {
         eventType: 'Meal Bolus',
         carbs: 50,
-        created_at: '2022-05-01T10:59:00',
+        insulin: 0,
+        created_at: '2022-05-01T10:59:00' as TypeDateISO,
       },
     ];
 
@@ -224,13 +217,14 @@ describe('uva test default PATIENT', () => {
       {
         eventType: 'Meal Bolus',
         carbs: 50,
-        created_at: '2022-05-01T11:30:00',
+        insulin: 0,
+        created_at: '2022-05-01T11:30:00' as TypeDateISO,
       },
       {
         eventType: 'Meal Bolus',
         carbs: 0,
         insulin: 7.5,
-        created_at: '2022-05-01T11:15:00',
+        created_at: '2022-05-01T11:15:00' as TypeDateISO,
       },
     ];
 
@@ -298,7 +292,8 @@ describe('uva test default PATIENT', () => {
       {
         eventType: 'Meal Bolus',
         carbs: 150,
-        created_at: '2022-05-01T11:30:00',
+        insulin: 0,
+        created_at: '2022-05-01T11:30:00' as TypeDateISO,
       },
     ];
 
@@ -351,7 +346,7 @@ describe('uva test default PATIENT', () => {
         eventType: 'Meal Bolus',
         carbs: 0,
         insulin: 10,
-        created_at: '2022-05-01T11:15:00',
+        created_at: '2022-05-01T11:15:00' as TypeDateISO,
       },
     ];
 
@@ -406,27 +401,27 @@ describe('uva test default PATIENT', () => {
     const activities: Activity[] = [
       {
         heartRate,
-        created_at: '2022-05-01T11:30:00',
+        created_at: '2022-05-01T11:30:00' as TypeDateISO,
       },
       {
         heartRate,
-        created_at: '2022-05-01T11:35:00',
+        created_at: '2022-05-01T11:35:00' as TypeDateISO,
       },
       {
         heartRate,
-        created_at: '2022-05-01T11:40:00',
+        created_at: '2022-05-01T11:40:00' as TypeDateISO,
       },
       {
         heartRate,
-        created_at: '2022-05-01T11:45:00',
+        created_at: '2022-05-01T11:45:00' as TypeDateISO,
       },
       {
         heartRate,
-        created_at: '2022-05-01T11:50:00',
+        created_at: '2022-05-01T11:50:00' as TypeDateISO,
       },
       {
         heartRate,
-        created_at: '2022-05-01T11:55:00',
+        created_at: '2022-05-01T11:55:00' as TypeDateISO,
       },
     ];
 

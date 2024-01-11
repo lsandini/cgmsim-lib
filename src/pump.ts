@@ -1,6 +1,7 @@
 import logger, { getDeltaMinutes, getBiexpTreatmentActivity } from './utils';
 import * as moment from 'moment';
 import { NSProfile, NSTreatment } from './Types';
+import { TypeDateISO } from './TypeDateISO';
 
 function getProfileSwitch(treatments: NSTreatment[], duration: number) {
 	const computedProfilesSwitch: {
@@ -21,7 +22,11 @@ function getProfileSwitch(treatments: NSTreatment[], duration: number) {
 			return moment(f.created_at).diff(s.created_at);
 		})
 		.forEach((tr) => {
-			if (tr.profileJson && tr.percentage) {
+			if (
+				tr.eventType === 'Profile Switch' &&
+				tr.profileJson &&
+				tr.percentage
+			) {
 				const start = moment(tr.created_at).utc();
 				const end = moment(tr.created_at).add(tr.duration, 'minutes').utc();
 				const profile = JSON.parse(tr.profileJson);
@@ -65,13 +70,13 @@ function getTempBasal(treatments: NSTreatment[], duration: number) {
 				e.created_at &&
 				now.diff(moment(e.created_at), 'minutes') <= duration && // temps basals set in the last 3 hours
 				e.eventType === 'Temp Basal' &&
-				e.duration != 0,
+				e.duration !== 0,
 		)
 		.sort((f, s) => {
 			return moment(f.created_at).diff(s.created_at);
 		})
 		.forEach((b) => {
-			if (b.absolute !== undefined) {
+			if (b.eventType === 'Temp Basal' && b.absolute !== undefined) {
 				const start = moment(b.created_at).utc();
 				const end = moment(b.created_at).add(b.duration, 'minutes').utc();
 				computedTempBasal.push({
@@ -166,7 +171,7 @@ export default function (
 		//if there is a temp basal actives
 		if (tempBasalActives.length > 0) {
 			basalToUpdate = {
-				minutesAgo: getDeltaMinutes(currentAction.toISOString()),
+				minutesAgo: getDeltaMinutes(currentAction.toISOString() as TypeDateISO),
 				insulin: tempBasalActives[0].insulin / 12,
 			};
 		} else if (profilesStichActives.length > 0) {
@@ -175,7 +180,7 @@ export default function (
 				currentAction,
 			);
 			basalToUpdate = {
-				minutesAgo: getDeltaMinutes(currentAction.toISOString()),
+				minutesAgo: getDeltaMinutes(currentAction.toISOString() as TypeDateISO),
 				insulin: basal / 12,
 			};
 		} else {
@@ -183,7 +188,7 @@ export default function (
 				value: getBasalFromProfiles(orderedProfiles, currentAction),
 			};
 			basalToUpdate = {
-				minutesAgo: getDeltaMinutes(currentAction.toISOString()),
+				minutesAgo: getDeltaMinutes(currentAction.toISOString() as TypeDateISO),
 				insulin: currentBasal.value / 12,
 			};
 		}

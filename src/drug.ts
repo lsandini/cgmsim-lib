@@ -1,4 +1,9 @@
-import { NSTreatment, NSTreatmentParsed, TreatmentBiexpParam } from './Types';
+import {
+	NSTreatment,
+	NSTreatmentParsed,
+	TreatmentBiexpParam,
+	isAnnouncementTreatment,
+} from './Types';
 import logger, { getDeltaMinutes } from './utils';
 
 export const drugs = {
@@ -96,6 +101,7 @@ export function transformNoteTreatmentsDrug(
 ): NSTreatmentParsed[] {
 	return treatments && treatments.length
 		? treatments
+				?.filter(isAnnouncementTreatment)
 				.filter((e) => e.notes)
 				.map((e) => {
 					const lastIndexEmptySpace = e.notes.lastIndexOf(' ');

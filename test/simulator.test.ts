@@ -2,6 +2,7 @@ import { EnvParam, Sgv, NSTreatment } from '../src/Types';
 import simulator from '../src/CGMSIMsimulator';
 import moment = require('moment');
 import { diffOptions, getPngSnapshot, testGenerator } from './inputTest';
+import { TypeDateISO } from '../src/TypeDateISO';
 const { toMatchImageSnapshot } = require('jest-image-snapshot');
 
 const math = global.Math;
@@ -51,19 +52,19 @@ describe('simulator test', () => {
     const treatments: NSTreatment[] = [
       {
         eventType: 'Announcement',
-        created_at: now.toISOString(),
+        created_at: now.toISOString() as TypeDateISO,
         notes: 'Tou 14',
-        carbs: 0,
       },
     ];
     const env: EnvParam = {
-      CARBS_ABS_TIME: '360',
-      CR: '10',
-      DIA: '6',
-      ISF: '32',
-      TP: '75',
-      WEIGHT: '80',
-      AGE: '51',
+      CARBS_ABS_TIME: 360,
+      CR: 10,
+      DIA: 6,
+      ISF: 32,
+      TP: 75,
+      WEIGHT: 80,
+      AGE: 51,
+
       GENDER: 'Male',
     };
 
@@ -76,7 +77,7 @@ describe('simulator test', () => {
           eventType: 'Meal Bolus',
           carbs: 0,
           insulin: 6,
-          created_at: now.toISOString(),
+          created_at: now.toISOString() as TypeDateISO,
         });
       }
 
@@ -134,22 +135,23 @@ describe('simulator test', () => {
         eventType: 'Meal Bolus',
         created_at: '2022-06-04T13:00:00.000Z',
         carbs: 40,
+        insulin: 0,
       },
       {
         eventType: 'Announcement',
         created_at: '2022-06-04T01:00:00.000Z',
         notes: 'tou 14',
-        carbs: 0,
       },
     ];
     const env: EnvParam = {
-      CARBS_ABS_TIME: '360',
-      CR: '10',
-      DIA: '6',
-      ISF: '32',
-      TP: '75',
-      WEIGHT: '80',
-      AGE: '51',
+      CARBS_ABS_TIME: 360,
+      CR: 10,
+      DIA: 6,
+      ISF: 32,
+      TP: 75,
+      WEIGHT: 80,
+      AGE: 51,
+
       GENDER: 'Male',
     };
 
@@ -268,23 +270,21 @@ describe('simulator test', () => {
         eventType: 'Announcement',
         created_at: '2022-06-04T10:00:00.000Z',
         notes: 'tou 14',
-        carbs: 0,
       },
       {
         eventType: 'Announcement',
         created_at: '2022-06-05T10:00:00.000Z',
         notes: 'tou 14',
-        carbs: 0,
       },
     ];
     const env: EnvParam = {
-      CARBS_ABS_TIME: '360',
-      CR: '10',
-      DIA: '6',
-      ISF: '32',
-      TP: '75',
-      WEIGHT: '80',
-      AGE: '51',
+      CARBS_ABS_TIME: 360,
+      CR: 10,
+      DIA: 6,
+      ISF: 32,
+      TP: 75,
+      WEIGHT: 80,
+      AGE: 51,
       GENDER: 'Male',
     };
 
@@ -398,9 +398,8 @@ describe('simulator test', () => {
       eventType: 'Announcement',
       created_at: '2022-06-04T10:14:00.000Z',
       notes: 'cor 40',
-      carbs: 0,
     };
-    const treatmentsBolus = {
+    const treatmentsBolus: NSTreatment = {
       eventType: 'Meal Bolus',
       insulin: 5,
       created_at: '2022-06-04T14:30:00.000Z',
@@ -411,23 +410,21 @@ describe('simulator test', () => {
         eventType: 'Announcement',
         created_at: '2022-06-04T10:00:00.000Z',
         notes: 'deg 23',
-        carbs: 0,
       },
       {
         eventType: 'Announcement',
         created_at: '2022-06-05T10:00:00.000Z',
         notes: 'deg 23',
-        carbs: 0,
       },
     ];
     const env: EnvParam = {
-      CARBS_ABS_TIME: '360',
-      CR: '10',
-      DIA: '6',
-      ISF: '32',
-      TP: '75',
-      WEIGHT: '80',
-      AGE: '51',
+      CARBS_ABS_TIME: 360,
+      CR: 10,
+      DIA: 6,
+      ISF: 32,
+      TP: 75,
+      WEIGHT: 80,
+      AGE: 51,
       GENDER: 'Male',
     };
 

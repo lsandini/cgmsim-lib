@@ -1,9 +1,16 @@
 import moment = require('moment');
 import { MultiLineDataSource, SingleLineDataSource } from 'test/d3/d3Func';
 import { drugs } from '../src/drug';
-import { Activity, EnvParam, Sgv, TreatmentBiexpParam } from '../src/Types';
+import {
+  Activity,
+  EnvParam,
+  NSTreatment,
+  Sgv,
+  TreatmentBiexpParam,
+} from '../src/Types';
 import simulator from '../src/CGMSIMsimulator';
 import { getBiexpTreatmentActivity } from '../src/utils';
+import { TypeDateISO } from '../src/TypeDateISO';
 const { output, line } = require('../test/d3/d3Func');
 
 export const diffOptions = {
@@ -52,51 +59,28 @@ export const getPngSnapshot = async (
   }
 };
 
-export const treatments = [
+export const treatments: NSTreatment[] = [
   {
-    _id: '62764c27a3dc0ad6768cce46',
-    enteredBy: 'TheBoss',
     eventType: 'Carb Correction',
     carbs: 12,
     created_at: '2022-05-07T10:20:00.000Z',
-    utcOffset: 0,
-    insulin: null,
   },
   {
-    _id: '62754944a3dc0ad67616d2a2',
-    enteredBy: 'TheBoss',
     eventType: 'Meal Bolus',
     insulin: 2,
-    preBolus: 15,
-    utcOffset: 0,
-    protein: '',
-    fat: '',
-    duration: 0,
-    profile: '',
     created_at: '2022-05-06T16:00:00.000Z',
     carbs: null,
   },
   {
-    _id: '627548f4a3dc0ad67616ac95',
     eventType: 'Announcement',
     notes: 'gla 10',
-    utcOffset: 0,
-    isAnnouncement: true,
-    protein: '',
-    fat: '',
-    duration: 0,
-    profile: '',
-    enteredBy: 'Boss',
     created_at: '2022-05-06T15:00:00.000Z',
-    carbs: null,
-    insulin: null,
   },
   {
-    _id: '6272bd41a3dc0ad676e0cefe',
     created_at: '2022-05-04T16:50:00.000Z',
     eventType: 'Meal Bolus',
     carbs: 30,
-    insulin: null,
+    insulin: 0,
   },
 ];
 
@@ -281,13 +265,13 @@ export const testGenerator = (
   jest.useFakeTimers('modern');
 
   const env: EnvParam = {
-    CARBS_ABS_TIME: '360',
-    CR: '10',
-    DIA: '6',
-    ISF: '30',
-    TP: '75',
-    WEIGHT: '80',
-    AGE: '51',
+    CARBS_ABS_TIME: 360,
+    CR: 10,
+    DIA: 6,
+    ISF: 30,
+    TP: 75,
+    WEIGHT: 80,
+    AGE: 51,
     GENDER: 'Male',
   };
   const noiseActivities = [];
@@ -320,25 +304,29 @@ export const testGenerator = (
       sgv: startSgv,
     },
   ];
-  const nsTreatments = [];
+  const nsTreatments: NSTreatment[] = [];
   treatments.forEach((t) => {
     nsTreatments.push({
-      created_at: now().add(t.minutes, 'minutes').utc().format(),
+      eventType: 'Announcement',
+      created_at: now().add(t.minutes, 'minutes').utc().format() as TypeDateISO,
       notes: `${drugs[t.type].names[0]} ${t.units}`,
     });
   });
   carbs.forEach((t) => {
     nsTreatments.push({
-      created_at: now().add(t.minutes, 'minutes').utc().format(),
+      eventType: 'Meal Bolus',
+      created_at: now().add(t.minutes, 'minutes').utc().format() as TypeDateISO,
       carbs: t.grams,
+      insulin: 0,
     });
   });
 
   boluses.forEach((t) => {
     nsTreatments.push({
-      created_at: now().add(t.minutes, 'minutes').utc().format(),
       eventType: 'Meal Bolus',
+      created_at: now().add(t.minutes, 'minutes').utc().format() as TypeDateISO,
       insulin: t.insulin,
+      carbs: 0,
     });
   });
   let _now = now();

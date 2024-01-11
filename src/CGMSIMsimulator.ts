@@ -35,8 +35,8 @@ const simulator = (params: MainParams): SimulationResult => {
 		throw new Error('profiles is ' + profiles);
 	}
 
-	const isfConstant = parseInt(env.ISF);
-	const age = parseInt(env.AGE);
+	const isfConstant = env.ISF;
+	const age = env.AGE;
 	const gender = env.GENDER;
 
 	let isfActivityDependent = isfConstant;
@@ -49,11 +49,11 @@ const simulator = (params: MainParams): SimulationResult => {
 		activityFactor = physicalLiver(activities, age, gender);
 	}
 
-	const weight = parseInt(env.WEIGHT);
-	const dia = parseInt(env.DIA);
-	const peak = parseInt(env.TP);
-	const carbsAbs = parseInt(env.CARBS_ABS_TIME);
-	const cr = parseInt(env.CR);
+	const weight = env.WEIGHT;
+	const dia = env.DIA;
+	const peak = env.TP;
+	const carbsAbs = env.CARBS_ABS_TIME;
+	const cr = env.CR;
 
 	//Find basal boluses
 	const drugs = transformNoteTreatmentsDrug(treatments);

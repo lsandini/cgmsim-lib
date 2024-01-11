@@ -16,9 +16,15 @@ jobs:
             - uses: ArtiomTr/jest-coverage-report-action@v2
               id: coverage
               with:
-                output: report-markdown
+                output: comment, report-markdown
                 registry-url: https://npm.pkg.github.com/
                 NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             - uses: marocchino/sticky-pull-request-comment@v2
               with:
                 message: ${{ steps.coverage.outputs.report }}
+            - name: Tests
+              run: yarn test-ci
+            - name: Generating coverage badges
+              uses: jpb06/jest-badges-action@latest
+              with:
+                branches: coverage

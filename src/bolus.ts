@@ -3,7 +3,7 @@ import logger, {
 	getBiexpTreatmentActivity,
 	roundTo8Decimals,
 } from './utils';
-import { NSTreatment } from './Types';
+import { NSTreatment, isMealBolusTreatment } from './Types';
 
 export default (
 	treatments: NSTreatment[] = [],
@@ -11,7 +11,8 @@ export default (
 	peak: number,
 ): number => {
 	const insulin = treatments
-		?.filter((e) => e.insulin)
+		?.filter(isMealBolusTreatment)
+		.filter((e) => e.insulin)
 		.map((e) => ({
 			minutesAgo: getDeltaMinutes(e.created_at),
 			insulin: e.insulin,

@@ -11,6 +11,7 @@ import {
 } from './Types';
 import { load } from 'ts-dotenv';
 import pinoPretty from 'pino-pretty';
+import { TypeDateISO } from './TypeDateISO';
 
 const env = load({
 	LOGTAIL_SECRET: { type: String, optional: true },
@@ -74,7 +75,7 @@ export function getBiexpTreatmentActivity({
 	return activity;
 }
 
-export const getDeltaMinutes = (mills: number | string) =>
+export const getDeltaMinutes = (mills: number | TypeDateISO) =>
 	Math.round(moment().diff(moment(mills), 'seconds') / 60);
 
 export function uploadBase(
