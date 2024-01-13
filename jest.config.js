@@ -4,7 +4,7 @@ module.exports = {
   setupFiles: ['<rootDir>/.jest/setEnvVars.js'],
   testPathIgnorePatterns: ['<rootDir>/dist'],
   coveragePathIgnorePatterns: ['<rootDir>/dist', '<rootDir>/test'],
-  coverageReporters: ["json-summary"],
+  coverageReporters: ["json-summary", 'lcov'],
   coverageThreshold: {
     global: {
       lines: 80,
