@@ -1,4 +1,4 @@
-import { NSTreatment, isCarbsTreatment } from './Types';
+import { NSTreatment, isMealBolusTreatment } from './Types';
 import logger, { getDeltaMinutes } from './utils';
 
 //const logger = pino();
@@ -12,8 +12,8 @@ export default function carbs(
 	const isfMMol = isf / 18; //(mmol/l)/U
 
 	const meals = treatments
-		?.filter(isCarbsTreatment)
-		.filter((e) => e.carbs && getDeltaMinutes(e.created_at) <= carbsAbs)
+		?.filter(isMealBolusTreatment)
+		.filter((e) => e?.carbs > 0 && getDeltaMinutes(e.created_at) <= carbsAbs)
 		.map((e) => ({
 			...e,
 			minutesAgo: getDeltaMinutes(e.created_at),

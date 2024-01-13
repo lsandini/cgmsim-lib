@@ -105,16 +105,23 @@ export type NSProfile = {
 	};
 };
 
+//Note', 'Profile Switch', 'Temp Basal', 'Meal Bolus', 'Bolus Wizard', 'Correction Bolus', 'Temporary Target', 'Insulin Change', 'Site Change', 'Sensor Start', 'Sensor Stop'
+
 /**
  * Represents the treatment information for a Meal Bolus event.
  */
 export type MealBolusTreatment = {
 	/** The type of event, set to 'Meal Bolus'. */
-	eventType: 'Meal Bolus';
+	eventType:
+		| 'Meal Bolus'
+		| 'Bolus'
+		| 'Correction Bolus'
+		| 'Bolus Wizard'
+		| 'Carb Correction';
 	/** The amount of insulin administered for the meal bolus. */
-	insulin: number;
+	insulin?: number;
 	/** The number of carbohydrates consumed. */
-	carbs: number;
+	carbs?: number;
 	/** The date of the treatment creation in ISO format. */
 	created_at: TypeDateISO;
 };
@@ -150,18 +157,6 @@ export type TempBasalTreatment = {
 };
 
 /**
- * Represents the treatment information for a Carb Correction event.
- */
-export type CarbCorrectionTreatment = {
-	/** The type of event, set to 'Carb Correction'. */
-	eventType: 'Carb Correction';
-	/** The date of the treatment creation in ISO format. */
-	created_at: TypeDateISO;
-	/** The number of carbohydrates considered for correction. */
-	carbs: number;
-};
-
-/**
  * Represents the announcement as treatment.
  */
 export type AnnouncementTreatment = {
@@ -180,22 +175,19 @@ export type NSTreatment =
 	| MealBolusTreatment
 	| ProfileSwitchTreatment
 	| TempBasalTreatment
-	| CarbCorrectionTreatment
 	| AnnouncementTreatment;
 
 export const isMealBolusTreatment = (
 	treatment: NSTreatment,
-): treatment is MealBolusTreatment => treatment.eventType === 'Meal Bolus';
+): treatment is MealBolusTreatment =>
+	treatment.eventType === 'Meal Bolus' ||
+	treatment.eventType === 'Bolus' ||
+	treatment.eventType === 'Bolus Wizard' ||
+	treatment.eventType === 'Correction Bolus';
 
 export const isAnnouncementTreatment = (
 	treatment: NSTreatment,
 ): treatment is AnnouncementTreatment => treatment.eventType === 'Announcement';
-
-export const isCarbsTreatment = (
-	treatment: NSTreatment,
-): treatment is MealBolusTreatment | CarbCorrectionTreatment =>
-	treatment.eventType === 'Meal Bolus' ||
-	treatment.eventType === 'Carb Correction';
 
 export type NSTreatmentParsed = {
 	drug: string;

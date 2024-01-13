@@ -12,7 +12,7 @@ export default (
 ): number => {
 	const insulin = treatments
 		?.filter(isMealBolusTreatment)
-		.filter((e) => e.insulin)
+		.filter((e) => e?.insulin > 0)
 		.map((e) => ({
 			minutesAgo: getDeltaMinutes(e.created_at),
 			insulin: e.insulin,

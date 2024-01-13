@@ -9,7 +9,6 @@ import {
 	UvaInterval,
 	UvaOutput,
 	UvaUserParams,
-	isCarbsTreatment,
 	isMealBolusTreatment,
 } from './Types';
 import { PatientUva } from './uva';
@@ -94,13 +93,13 @@ const simulator = (params: MainParamsUVA) => {
 
 	const bolusActivity = last5MinuteTreatments
 		.filter(isMealBolusTreatment)
-		.filter((i) => i.insulin > 0)
+		.filter((i) => i?.insulin > 0)
 		.map((i) => i.insulin)
 		.reduce((tot, activity) => tot + activity, 0);
 
 	const carbsActivity = last5MinuteTreatments
-		.filter(isCarbsTreatment)
-		.filter((i) => i.carbs > 0)
+		.filter(isMealBolusTreatment)
+		.filter((i) => i?.carbs > 0)
 		.map((i) => i.carbs)
 		.reduce((tot, activity) => tot + activity, 0);
 
