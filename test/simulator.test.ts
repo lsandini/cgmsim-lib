@@ -1,4 +1,4 @@
-import { EnvParam, Sgv, NSTreatment } from '../src/Types';
+import { EnvParam, Sgv, NSTreatment, Activity, MainParams } from '../src/Types';
 import simulator from '../src/CGMSIMsimulator';
 import moment = require('moment');
 import { diffOptions, getPngSnapshot, testGenerator } from './inputTest';
@@ -494,5 +494,156 @@ describe('simulator test', () => {
 
     expect(png).toMatchImageSnapshot(diffOptions);
     return;
+  });
+});
+
+describe('Simulator', () => {
+  beforeEach(() => {
+    jest.useFakeTimers('modern'); // Use modern fake timers
+  });
+
+  afterEach(() => {
+    jest.useRealTimers(); // Restore real timers after each test
+  });
+
+  test('throws an error when treatments are not provided', () => {
+    let now = moment('2022-06-04T13:00:00.000Z');
+    jest.setSystemTime(now.toDate());
+    const startSgv = 100;
+    const env: EnvParam = {
+      CARBS_ABS_TIME: 360,
+      CR: 10,
+      DIA: 6,
+      ISF: 32,
+      TP: 75,
+      WEIGHT: 80,
+      AGE: 51,
+      GENDER: 'Male',
+    };
+    // Arrange
+    const paramsWithoutTreatments = {
+      env: env,
+      entries: [
+        {
+          mills: now.add(-5, 'minutes').toDate().getTime(),
+          sgv: startSgv,
+        },
+        {
+          mills: now.add(-5, 'minutes').toDate().getTime(),
+          sgv: startSgv,
+        },
+        {
+          mills: now.add(-5, 'minutes').toDate().getTime(),
+          sgv: startSgv,
+        },
+        {
+          mills: now.add(-5, 'minutes').toDate().getTime(),
+          sgv: startSgv,
+        },
+      ],
+      profiles: [],
+      pumpEnabled: true,
+      activities: [],
+      user: { nsUrl: 'example-nsUrl' },
+      treatments: null,
+    };
+
+    // Act
+    jest.advanceTimersByTime(0); // Manually advance timers
+    jest.runAllTimers();
+
+    // Assert
+    expect(() => simulator(paramsWithoutTreatments)).toThrowError('treatments is null');
+  });
+});
+
+describe('Simulator', () => {
+  beforeEach(() => {
+    jest.useFakeTimers('modern'); // Use modern fake timers
+  });
+
+  afterEach(() => {
+    jest.useRealTimers(); // Restore real timers after each test
+  });
+
+  test('throws an error when profiles are not provided', () => {
+    let now = moment('2022-06-04T13:00:00.000Z');
+    jest.setSystemTime(now.toDate());
+    const startSgv = 100;
+
+    const env: EnvParam = {
+      CARBS_ABS_TIME: 360,
+      CR: 10,
+      DIA: 6,
+      ISF: 32,
+      TP: 75,
+      WEIGHT: 80,
+      AGE: 51,
+      GENDER: 'Male',
+    };
+    // Arrange
+    const paramsWithoutProfiles = {
+      env: env,
+      entries: [
+        {
+          mills: now.add(-5, 'minutes').toDate().getTime(),
+          sgv: startSgv,
+        },
+        {
+          mills: now.add(-5, 'minutes').toDate().getTime(),
+          sgv: startSgv,
+        },
+        {
+          mills: now.add(-5, 'minutes').toDate().getTime(),
+          sgv: startSgv,
+        },
+        {
+          mills: now.add(-5, 'minutes').toDate().getTime(),
+          sgv: startSgv,
+        },
+      ],
+      profiles: null,
+      pumpEnabled: true,
+      activities: [],
+      user: { nsUrl: 'example-nsUrl' },
+      treatments: [],
+    };
+
+    // Act
+    jest.advanceTimersByTime(0); // Manually advance timers
+    jest.runAllTimers();
+
+    // Assert
+    expect(() => simulator(paramsWithoutProfiles)).toThrowError('profiles is null');
+  });
+});
+
+
+describe('Simulator', () => {
+  test('throws an error when isfActivityDependent is less than 9', () => {
+
+    // Arrange
+    const env: EnvParam = {
+      CARBS_ABS_TIME: 360,
+      CR: 10,
+      DIA: 6,
+      ISF: 8,
+      TP: 75,
+      WEIGHT: 80,
+      AGE: 51,
+      GENDER: 'Male',
+    };
+    const paramsWithLowIsf = {
+      env: env,
+      entries: [],
+      profiles: [],
+      pumpEnabled: true,
+      activities: [],
+      user: { nsUrl: 'example-nsUrl' },
+      treatments: [],
+    };
+
+    // Act & Assert
+    expect(() => simulator(paramsWithLowIsf)).toThrowError('Isf must be greater than or equal to 9');
   });
 });

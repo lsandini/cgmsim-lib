@@ -42,7 +42,7 @@ const simulator = (params: MainParams): SimulationResult => {
 	let isfActivityDependent = isfConstant;
 	let activityFactor = 1;
 	if (isfActivityDependent < 9) {
-		throw new Error('Isf must be greater then or equal to 9');
+		throw new Error('Isf must be greater than or equal to 9');
 	}
 	if (activities && activities.length > 0) {
 		isfActivityDependent = isfConstant * physicalIsf(activities, age, gender);
