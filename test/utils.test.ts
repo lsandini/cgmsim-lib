@@ -1,7 +1,7 @@
 import { isHttps, removeTrailingSlash } from '../src/utils';
 import * as utils from '../src/utils';
 import fetch from 'node-fetch';
-import { loadBase, uploadBase, roundTo8Decimals } from '../src/utils';
+import { loadBase, uploadBase, roundTo8Decimals, getBiexpTreatmentActivity, getDeltaMinutes } from '../src/utils';
 import { Entry } from 'src/Types';
 
 jest.mock('node-fetch');
@@ -191,5 +191,67 @@ describe('roundTo8Decimals function', () => {
 
     // Ensure that the roundedNumber has the desired precision
     expect(result.toString().split('.')[1].length).toBe(8);
+  });
+});
+
+describe('getBiexpTreatmentActivity function', () => {
+  it('should return 0 when activity is less than or equal to 0', () => {
+    const result = getBiexpTreatmentActivity({
+      peak: 10,
+      duration: 30,
+      minutesAgo: 20,
+      units: 5,
+    });
+    expect(result).toBe(0.16367332278955893);
+  });
+
+  it('should return 0 when activity is less than or equal to 0', () => {
+    const result = getBiexpTreatmentActivity({
+      peak: 55,
+      duration: 180,
+      minutesAgo: 200,
+      units: 5,
+    });
+    expect(result).toBe(0);
+  });
+
+  it('should adjust activity when minutesAgo is less than 15', () => {
+    const result = getBiexpTreatmentActivity({
+      peak: 10,
+      duration: 30,
+      minutesAgo: 10,
+      units: 5,
+    });
+    const expectedActivity = 0.17990112581954254;
+    expect(result).toBe(expectedActivity);
+  });
+
+  it('should return normal activity when conditions are met', () => {
+    const result = getBiexpTreatmentActivity({
+      peak: 10,
+      duration: 30,
+      minutesAgo: 20,
+      units: 5,
+    });
+    const expectedActivity =
+      5 * (1 / Math.pow((10 * (1 - 10 / 30)) / (1 - (2 * 10) / 30), 2)) * 20 * (1 - 20 / 30) * Math.exp(-20 / ((10 * (1 - 10 / 30)) / (1 - (2 * 10) / 30)));
+    expect(result).toBe(0.16367332278955893);
+  });
+});
+
+
+const moment = require('moment');
+
+describe('getDeltaMinutes', () => {
+  it('should return the difference in minutes from now to the given time', () => {
+    const now = moment();
+    const fiveMinutesAgo = now.clone().subtract(5, 'minutes');
+
+    // Convert the moment object to a timestamp in milliseconds
+    const fiveMinutesAgoMillis = fiveMinutesAgo.valueOf();
+
+    const deltaMinutes = getDeltaMinutes(fiveMinutesAgoMillis);
+
+    expect(deltaMinutes).toBeCloseTo(5, 0);
   });
 });
