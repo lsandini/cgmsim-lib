@@ -1,4 +1,4 @@
-import logger, {
+import getLogger, {
 	getDeltaMinutes,
 	getBiexpTreatmentActivity,
 	roundTo8Decimals,
@@ -19,8 +19,8 @@ export default (
 		}))
 		.filter((e) => e.minutesAgo <= 300 && e.minutesAgo >= 0);
 
-	logger.debug('this is the filtered treatments (insulin): %o', insulin);
-	logger.debug('length %o', insulin.length); // returns the number of boluses or length of the array
+	getLogger().debug('this is the filtered treatments (insulin): %o', insulin);
+	getLogger().debug('length %o', insulin.length); // returns the number of boluses or length of the array
 
 	// dia is the duration of insulin action in hours
 	const duration = dia * 60;
@@ -35,7 +35,7 @@ export default (
 		});
 	});
 
-	logger.debug(
+	getLogger().debug(
 		'these are the last insulins and activities: %o',
 		insulinsBolusAct,
 	);
@@ -44,6 +44,6 @@ export default (
 		(tot, activity) => tot + activity,
 		0,
 	);
-	logger.debug('these are the insulins bolus activity: %o', bolusAct);
+	getLogger().debug('these are the insulins bolus activity: %o', bolusAct);
 	return roundTo8Decimals(bolusAct);
 };

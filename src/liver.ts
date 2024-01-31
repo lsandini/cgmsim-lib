@@ -1,5 +1,5 @@
 import sinusRun from './sinus';
-import logger from './utils';
+import getLogger from './utils';
 
 export default function (
 	isfConstant: number,
@@ -8,7 +8,7 @@ export default function (
 ): number {
 	const _ISF = isfConstant / 18;
 	const _CR = cr;
-	logger.debug('ISF:', isfConstant, 'CR: %o', cr);
+	getLogger().debug('ISF:', isfConstant, 'CR: %o', cr);
 	const activityFactor = activities?.physical >= 0 ? activities.physical : 1;
 	const alcoholFactor =
 		activities?.alcohol >= 1
@@ -21,8 +21,8 @@ export default function (
 	// sin starts at 1.0 at midnight, is max at 6AM, is again 1 at 12 AM, and minimums at 0.5 a 6 PM
 	// cosin starts at 1.5 at midnight, is 1 at 6AM, is minimus at 0.5 12 AM, and is 1 again at 6 PM
 	const { sinus, cosinus } = sinusRun(Date.now());
-	logger.debug('sinus:  %o', sinus);
-	logger.debug('cosinus:  %o', cosinus);
+	getLogger().debug('sinus:  %o', sinus);
+	getLogger().debug('cosinus:  %o', cosinus);
 
 	// let's simulate the carb impact of the liver, producing 10g of carbs / hour
 	// if the ISF is 2 mmol/l/U,
@@ -38,8 +38,8 @@ export default function (
 	const liver = (1 - alcoholFactor) * activityFactor * (_ISF / _CR) * (10 / 60); //(mmol/l)/min
 
 	const liver_sin = liver * sinus;
-	logger.debug('liver:  %o', liver);
-	logger.info('liver_sin:  %o', liver_sin);
+	getLogger().debug('liver:  %o', liver);
+	getLogger().info('liver_sin:  %o', liver_sin);
 
 	return liver_sin; //(mmol/l)/min
 }

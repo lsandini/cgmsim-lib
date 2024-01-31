@@ -1,5 +1,5 @@
 import * as moment from 'moment';
-import logger from './utils';
+import getLogger from './utils';
 
 //const logger = pino();
 export default function ({ treatments }) {
@@ -11,13 +11,13 @@ export default function ({ treatments }) {
 				moment(entry.mills).format('YYYYMMDD') === moment().format('YYYYMMDD'),
 		);
 
-		logger.debug('totalMeals  %o', totalMeals);
+		getLogger().debug('totalMeals  %o', totalMeals);
 
 		const totalCarbs = totalMeals.reduce(function (tot, arr) {
 			return tot + arr.carbs;
 		}, 0);
 
-		logger.debug(totalCarbs);
+		getLogger().debug(totalCarbs);
 		if (totalCarbs < 200) {
 			return {
 				time: Date.now(),

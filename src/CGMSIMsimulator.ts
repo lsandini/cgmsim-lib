@@ -1,4 +1,4 @@
-import logger from './utils';
+import getLogger, { setLogger } from './utils';
 import bolus from './bolus';
 import basal from './basal';
 import cortisone from './cortisone';
@@ -26,7 +26,8 @@ const simulator = (params: MainParams): SimulationResult => {
 		activities, //7-DAYS
 		user,
 	} = params;
-	logger.info('Run Init CGMSim NSUrl:%o', user.nsUrl);
+	setLogger(user.nsUrl);
+	getLogger().info('Run Init CGMSim NSUrl:%o', user.nsUrl);
 
 	if (!treatments) {
 		throw new Error('treatments is ' + treatments);
@@ -95,12 +96,12 @@ const simulator = (params: MainParams): SimulationResult => {
 		isfActivityDependent,
 	);
 
-	logger.debug('this is the new sgv: %o', newSgvValue);
-	logger.info(
+	getLogger().debug('this is the new sgv: %o', newSgvValue);
+	getLogger().info(
 		'this is the ISF multiplicator (or physicalISF): %o',
 		isfActivityDependent / isfConstant,
 	);
-	logger.info(
+	getLogger().info(
 		'this is the liver multiplicator (or physicalLiver): %o',
 		activityFactor,
 	);

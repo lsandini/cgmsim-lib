@@ -1,5 +1,5 @@
 import { Activity, GenderType } from './Types';
-import logger, { getDeltaMinutes } from './utils';
+import getLogger, { getDeltaMinutes } from './utils';
 
 type MinutesAgo = { minutesAgo: number };
 
@@ -89,9 +89,9 @@ export function physicalIsf(
 	);
 
 	if (aaa > bbb) {
-		logger.info(`@@@ USING HeartRate for ISF:, %o`, aaa);
+		getLogger().info(`@@@ USING HeartRate for ISF:, %o`, aaa);
 	} else {
-		logger.info(`@@@ USING Steps for ISF:, %o`, bbb);
+		getLogger().info(`@@@ USING Steps for ISF:, %o`, bbb);
 	}
 	return Math.max(aaa, bbb);
 }
@@ -168,7 +168,7 @@ function physicalHeartRateIsf(
 	});
 	const resultHRAct = 1 + timeSinceHRAct.reduce((tot, arr) => tot + arr, 0);
 
-	logger.debug(`@@@ PHYSICAL HEART RATE ISF: %o`, resultHRAct);
+	getLogger().debug(`@@@ PHYSICAL HEART RATE ISF: %o`, resultHRAct);
 	return resultHRAct;
 }
 
@@ -225,7 +225,7 @@ function physicalHeartRateLiver(
 	//console.log(`timeSinceHRAct;`, timeSinceHRAct);
 	//const resultHRAct = Math.min(Math.max((1 + timeSinceHRAct.reduce((tot, arr) => tot + arr, 0)),0),3);
 	const resultHRAct = 1 + timeSinceHRAct.reduce((tot, arr) => tot + arr, 0);
-	logger.debug(`@@@ PHYSICAL HEART RATE LIVER: %o`, resultHRAct);
+	getLogger().debug(`@@@ PHYSICAL HEART RATE LIVER: %o`, resultHRAct);
 	return resultHRAct;
 }
 
@@ -246,10 +246,13 @@ function physicalStepsIsf(activities: (Activity & MinutesAgo)[]): number {
 	let cumulativeSteps = last7daysSteps.reduce(function (tot, arr) {
 		return tot + arr.steps;
 	}, 0);
-	logger.debug(`cumulativeSteps 7 days steps: %o`, cumulativeSteps);
-	logger.debug(`means steps over 7 days: %o`, Math.round(cumulativeSteps / 7));
+	getLogger().debug(`cumulativeSteps 7 days steps: %o`, cumulativeSteps);
+	getLogger().debug(
+		`means steps over 7 days: %o`,
+		Math.round(cumulativeSteps / 7),
+	);
 	let mean4hourSteps = Math.max(Math.round(cumulativeSteps / (7 * 4)), 1500);
-	logger.debug(`mean4hourSteps, min 1500: %o`, mean4hourSteps);
+	getLogger().debug(`mean4hourSteps, min 1500: %o`, mean4hourSteps);
 
 	// compute last 4 hours steps
 	let last4hoursActivities = activities.filter(
@@ -258,7 +261,7 @@ function physicalStepsIsf(activities: (Activity & MinutesAgo)[]): number {
 	let last4hourSteps = last4hoursActivities.reduce(function (tot, arr) {
 		return tot + arr.steps;
 	}, 0);
-	logger.debug(`last4hourSteps: %o`, last4hourSteps);
+	getLogger().debug(`last4hourSteps: %o`, last4hourSteps);
 
 	let stepRatio = last4hourSteps / mean4hourSteps;
 
@@ -272,7 +275,7 @@ function physicalStepsIsf(activities: (Activity & MinutesAgo)[]): number {
 		// if stepRatio is 1.8, result is 1 + 1.8/6 = 1.30
 		// if stepRatio is 3, result is 1 + 3/6 = 1.5
 	}
-	logger.debug(`@@@ PHYSICAL STEPS ISF: %o`, resultStepAct);
+	getLogger().debug(`@@@ PHYSICAL STEPS ISF: %o`, resultStepAct);
 	return resultStepAct;
 }
 
@@ -281,7 +284,7 @@ function physicalStepsLiver(activities: (Activity & MinutesAgo)[]): number {
 	// We'll assume the number of steps doesn't affect the EGP
 	// or Endogenous Glucose Production by the liver
 	let resultStepAct = 1;
-	logger.debug(`@@@ PHYSICAL STEPS LIVER: %o`, resultStepAct);
+	getLogger().debug(`@@@ PHYSICAL STEPS LIVER: %o`, resultStepAct);
 	return resultStepAct;
 }
 

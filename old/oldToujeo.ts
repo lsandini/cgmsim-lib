@@ -1,4 +1,4 @@
-import logger from '../src/utils';
+import getLogger from '../src/utils';
 
 export default function (weight, toujeos) {
   // const weight = parseInt(process.env.WEIGHT);
@@ -6,7 +6,7 @@ export default function (weight, toujeos) {
   // const toujeos = require('./files/last_toujeo.json');
   var jsontou = JSON.stringify(toujeos);
   var toujeo_data = JSON.parse(jsontou);
-  logger.debug(toujeo_data);
+  getLogger().debug(toujeo_data);
 
   // activities be expressed as U/min !!!
   let timeSinceToujeoAct = toujeo_data.map((entry) => {
@@ -34,19 +34,25 @@ export default function (weight, toujeos) {
         60,
     };
   });
-  logger.debug('the is the accumulated toujeo activity:%o', timeSinceToujeoAct);
+  getLogger().debug(
+    'the is the accumulated toujeo activity:%o',
+    timeSinceToujeoAct,
+  );
 
   // compute the aggregated activity of last toujeos in 27 hours
 
   let lastToujeos = timeSinceToujeoAct.filter(function (e) {
     return e.time <= 30;
   });
-  logger.debug('these are the last toujeos and activities:%o', lastToujeos);
+  getLogger().debug(
+    'these are the last toujeos and activities:%o',
+    lastToujeos,
+  );
 
   var resultTouAct = lastToujeos.reduce(function (tot, arr) {
     return tot + arr.toujeoActivity;
   }, 0);
 
-  logger.debug('result: %0', resultTouAct);
+  getLogger().debug('result: %0', resultTouAct);
   return resultTouAct;
 }

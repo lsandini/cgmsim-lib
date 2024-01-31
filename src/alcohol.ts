@@ -1,6 +1,9 @@
 import { TreatmentBiexpParam, NSTreatmentParsed, GenderType } from './Types';
 import { getTreatmentBiexpParam } from './drug';
-import logger, { getBiexpTreatmentActivity, roundTo8Decimals } from './utils';
+import getLogger, {
+	getBiexpTreatmentActivity,
+	roundTo8Decimals,
+} from './utils';
 
 function getAlcoholActivity(
 	gender: 'Male' | 'Female',
@@ -47,7 +50,7 @@ const computeAlcoholActivity = (
 		);
 		return activity;
 	});
-	logger.debug('these are the last Alcohol: %o', treatmentsActivity);
+	getLogger().debug('these are the last Alcohol: %o', treatmentsActivity);
 	const resultAct = treatmentsActivity.reduce((tot, activity) => {
 		return tot + activity;
 	}, 0);
@@ -63,13 +66,13 @@ export default function (
 	const lastALC = getTreatmentBiexpParam(treatments, weight, 'ALC');
 	const activityALC =
 		lastALC.length > 0 ? computeAlcoholActivity(lastALC, weight, gender) : 0;
-	logger.debug('these are the last ALC: %o', { lastALC, activityALC });
+	getLogger().debug('these are the last ALC: %o', { lastALC, activityALC });
 
 	//Find Beer in treatments
 	const lastBEER = getTreatmentBiexpParam(treatments, weight, 'BEER');
 	const activityBEER =
 		lastBEER.length > 0 ? computeAlcoholActivity(lastBEER, weight, gender) : 0;
-	logger.debug('these are the last BEER: %o', { lastBEER, activityBEER });
+	getLogger().debug('these are the last BEER: %o', { lastBEER, activityBEER });
 
 	return roundTo8Decimals(activityALC + activityBEER);
 }

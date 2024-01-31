@@ -1,7 +1,7 @@
 import { removeTrailingSlash, uploadBase } from './utils';
 import { Entry, EntryValueType } from './Types';
 import moment = require('moment');
-import logger from './utils';
+import getLogger from './utils';
 import { Activity } from './Types';
 import { SimulationResult } from './Types';
 import { Note } from './Types';
@@ -126,7 +126,7 @@ export function uploadActivity(
 	nsUrl: string,
 	apiSecret: string,
 ) {
-	logger.debug('log something %o', activity);
+	getLogger().debug('log something %o', activity);
 
 	const _nsUrl = removeTrailingSlash(nsUrl);
 	const api_url = _nsUrl + '/api/v1/activity/';

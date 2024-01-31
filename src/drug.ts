@@ -4,7 +4,7 @@ import {
 	TreatmentBiexpParam,
 	isAnnouncementTreatment,
 } from './Types';
-import logger, { getDeltaMinutes } from './utils';
+import getLogger, { getDeltaMinutes } from './utils';
 
 export const drugs = {
 	GLA: {
@@ -105,7 +105,7 @@ export function transformNoteTreatmentsDrug(
 				.filter((e) => e.notes)
 				.map((e) => {
 					const lastIndexEmptySpace = e.notes.lastIndexOf(' ');
-					logger.debug(
+					getLogger().debug(
 						'treatments %o',
 						parseFloat(e.notes.slice(lastIndexEmptySpace)),
 					);

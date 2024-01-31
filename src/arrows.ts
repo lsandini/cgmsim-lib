@@ -1,4 +1,4 @@
-import logger from './utils';
+import getLogger from './utils';
 import { Direction } from './Types';
 
 /**
@@ -30,7 +30,7 @@ export default function (
 		const sgvdir2 = sgv1 - sgv2;
 		const sgvdir3 = sgv2 - sgv3;
 		const sgvdir15min = (sgvdir1 + sgvdir2 + sgvdir3) / 3;
-		logger.debug(
+		getLogger().debug(
 			'this is the mean SGV 5 min variation in the last 15 minutes: %o',
 			sgvdir15min,
 			'mg/dl',

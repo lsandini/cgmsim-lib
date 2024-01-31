@@ -1,6 +1,9 @@
 import { TreatmentBiexpParam, NSTreatmentParsed } from './Types';
 import { getTreatmentBiexpParam } from './drug';
-import logger, { getBiexpTreatmentActivity, roundTo8Decimals } from './utils';
+import getLogger, {
+	getBiexpTreatmentActivity,
+	roundTo8Decimals,
+} from './utils';
 
 const computeBasalActivity = (treatments: TreatmentBiexpParam[]) => {
 	// expressed U/min !!!
@@ -15,23 +18,23 @@ export default function (
 ): number {
 	const lastGLA = getTreatmentBiexpParam(treatments, weight, 'GLA');
 	const activityGLA = lastGLA.length ? computeBasalActivity(lastGLA) : 0;
-	logger.debug('these are the last GLA: %o', { lastGLA, activityGLA });
+	getLogger().debug('these are the last GLA: %o', { lastGLA, activityGLA });
 
 	const lastDET = getTreatmentBiexpParam(treatments, weight, 'DET');
 	const activityDET = lastDET.length ? computeBasalActivity(lastDET) : 0;
-	logger.debug('these are the last DET: %o', { lastDET, activityDET });
+	getLogger().debug('these are the last DET: %o', { lastDET, activityDET });
 
 	const lastTOU = getTreatmentBiexpParam(treatments, weight, 'TOU');
 	const activityTOU = lastTOU.length ? computeBasalActivity(lastTOU) : 0;
-	logger.debug('these are the last TOU: %o', { lastTOU, activityTOU });
+	getLogger().debug('these are the last TOU: %o', { lastTOU, activityTOU });
 
 	const lastDEG = getTreatmentBiexpParam(treatments, weight, 'DEG');
 	const activityDEG = lastDEG.length ? computeBasalActivity(lastDEG) : 0;
-	logger.debug('these are the last DEG: %o', { lastDEG, activityDEG });
+	getLogger().debug('these are the last DEG: %o', { lastDEG, activityDEG });
 
 	const lastNPH = getTreatmentBiexpParam(treatments, weight, 'NPH');
 	const activityNPH = lastNPH.length ? computeBasalActivity(lastNPH) : 0;
-	logger.debug('these are the last NPH: %o', { lastNPH, activityNPH });
+	getLogger().debug('these are the last NPH: %o', { lastNPH, activityNPH });
 
 	return roundTo8Decimals(
 		activityDEG + activityDET + activityGLA + activityTOU + activityNPH,

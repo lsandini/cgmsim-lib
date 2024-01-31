@@ -1,4 +1,4 @@
-import logger, { isHttps, removeTrailingSlash } from './utils';
+import getLogger, { isHttps, removeTrailingSlash } from './utils';
 import setupParams from './setupParams';
 import { NSProfile, Sgv, NSTreatment } from './Types';
 import fetch, { Response } from 'node-fetch';
@@ -53,7 +53,7 @@ const downloads = async (nsUrl: string, apiSecret: string) => {
 			};
 		})
 		.catch((err) => {
-			logger.error(err);
+			getLogger().error(err);
 			throw new Error(err);
 		});
 };

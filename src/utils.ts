@@ -24,6 +24,12 @@ const level: LevelWithSilent | string = env.LOG_LEVEL ?? 'error';
 
 const targets: TransportTargetOptions[] = [];
 
+let _nsUrl = null;
+
+export const setLogger = (nsUrl) => {
+	_nsUrl = nsUrl;
+};
+
 if (token) {
 	targets.push({
 		target: '@logtail/pino',
@@ -40,17 +46,17 @@ const logger = pino({
 		targets,
 	},
 });
-
-export default logger;
+const getLogger = () => logger.child({ nsUrl: _nsUrl });
+export default getLogger;
 
 export function isHttps(url: string | null | undefined): boolean {
-  if (!url) {
-    return false; // Return false for null or undefined input
-  }
+	if (!url) {
+		return false; // Return false for null or undefined input
+	}
 
-  // Rest of the function remains the same
-  const pattern = /^https:\/\//i;
-  return pattern.test(url);
+	// Rest of the function remains the same
+	const pattern = /^https:\/\//i;
+	return pattern.test(url);
 }
 
 export function removeTrailingSlash(str) {
@@ -99,10 +105,10 @@ export function uploadBase(
 		body: body_json,
 	})
 		.then(() => {
-			logger.debug('NIGHTSCOUT Updated');
+			getLogger().debug('NIGHTSCOUT Updated');
 		})
 		.catch((err) => {
-			logger.debug(err);
+			getLogger().debug(err);
 			throw new Error(err);
 		});
 }
@@ -117,11 +123,11 @@ export function loadBase(
 		...getParams,
 	})
 		.then((result) => {
-			logger.debug('NIGHTSCOUT Load');
+			getLogger().debug('NIGHTSCOUT Load');
 			return result.json();
 		})
 		.catch((err) => {
-			logger.debug(err);
+			getLogger().debug(err);
 			throw new Error(err);
 		});
 }

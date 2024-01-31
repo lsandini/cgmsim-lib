@@ -1,4 +1,4 @@
-import logger, { getDeltaMinutes } from './utils';
+import getLogger, { getDeltaMinutes, setLogger } from './utils';
 
 import basal from './basal';
 import basalProfile from './basalProfile';
@@ -65,8 +65,8 @@ const simulator = (params: MainParamsUVA) => {
 		user,
 		defaultPatient,
 	} = params;
-
-	logger.info('Run Init UVA NSUrl:%o', user.nsUrl);
+	setLogger(user.nsUrl);
+	getLogger().info('Run Init UVA NSUrl:%o', user.nsUrl);
 
 	if (!treatments) {
 		throw new Error('treatments is ' + treatments);
@@ -117,8 +117,8 @@ const simulator = (params: MainParamsUVA) => {
 		? lastState
 		: patient.getInitialState();
 
-	logger.debug('basalProfileActivity:%o', basalProfileActivity * 60);
-	logger.debug('basalActivity:%o', basalActivity * 60);
+	getLogger().debug('basalProfileActivity:%o', basalProfileActivity * 60);
+	getLogger().debug('basalActivity:%o', basalActivity * 60);
 
 	let iir = basalProfileActivity * 60 + basalActivity * 60;
 
@@ -136,7 +136,7 @@ const simulator = (params: MainParamsUVA) => {
 	);
 	const lastPatientState = { ...patientState };
 	// start simulation
-	logger.info('lastPatientState:%o', lastPatientState);
+	getLogger().info('lastPatientState:%o', lastPatientState);
 
 	while (partialMinutes < fiveMinutes) {
 		// todo: sensor dynamics
@@ -149,7 +149,7 @@ const simulator = (params: MainParamsUVA) => {
 
 		// compute controller output
 		// let iir = basalActivity * 60;
-		logger.debug('patientState:%o', patientState);
+		getLogger().debug('patientState:%o', patientState);
 
 		// let iir = basalProfileActivity * 60 + basalActivity * 60;
 		let ibolus = partialMinutes == 0 ? bolusActivity : 0;
@@ -181,7 +181,7 @@ const simulator = (params: MainParamsUVA) => {
 		return { state: lastPatientState, sgv: 40 };
 	}
 	const res = { state: patientState, sgv: result.Gp };
-	logger.info('uva output:%o', res);
+	getLogger().info('uva output:%o', res);
 	return res;
 };
 

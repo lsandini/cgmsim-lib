@@ -1,7 +1,7 @@
 import * as moment from 'moment';
 // import pump from './pump.js';
 
-import logger from './utils';
+import getLogger from './utils';
 import { CGMSimParams, Sgv } from './Types';
 import { getDeltaMinutes } from './utils';
 
@@ -22,10 +22,10 @@ const sgv_start = (
 	const deltaMinutes =
 		entries && entries[0] ? getDeltaMinutes(entries[0].mills) : 1;
 
-	logger.debug('deltaMinutes %o', deltaMinutes);
+	getLogger().debug('deltaMinutes %o', deltaMinutes);
 
 	const isfMMol = isf / 18; //(mmol/l)/U
-	//logger.debug('ISF= %o', ISF);
+	//getLogger().debug('ISF= %o', ISF);
 
 	// ENABLE THIS FOR PUMP SIMULATION
 	//=================================
@@ -76,61 +76,61 @@ const sgv_start = (
 		alcoholActivity,
 	};
 
-	logger.debug('-------------------------------------------');
-	logger.debug(
+	getLogger().debug('-------------------------------------------');
+	getLogger().debug(
 		'OLD SGV value (' + deltaMinutes + ' minutes ago): %o',
 		oldSgv,
 		'mg/dl',
 	);
 
-	logger.debug('-------------------------------------------');
-	logger.debug(
+	getLogger().debug('-------------------------------------------');
+	getLogger().debug(
 		'total BG impact of insulin for ' + deltaMinutes + ' minutes: %o',
 		BGI_ins * 18,
 		'mg/dl',
 	);
 
-	logger.debug('-------------------------------------------');
-	logger.debug(
+	getLogger().debug('-------------------------------------------');
+	getLogger().debug(
 		'total BG impact of liver for ' + deltaMinutes + ' minutes: + %o',
 		liverDeltaMinutesActivity * 18,
 		'mg/dl',
 	);
 
-	logger.debug('-------------------------------------------');
-	logger.debug(
+	getLogger().debug('-------------------------------------------');
+	getLogger().debug(
 		'total BG impact of cortisone for 5 minutes: + %o',
 		cortisoneDeltaMinutesActivity * 18,
 		'mg/dl',
 	);
 
-	logger.debug('-------------------------------------------');
-	logger.debug(
+	getLogger().debug('-------------------------------------------');
+	getLogger().debug(
 		'total CARBS impact of carbs for ' + deltaMinutes + ' minutes: + %o',
 		carbsActivity * 18,
 		'mg/dl',
 	);
 
-	logger.debug('-------------------------------------------');
-	logger.debug(
+	getLogger().debug('-------------------------------------------');
+	getLogger().debug(
 		'total BG impact of carbs, liver and insulin for 5 minutes: + %o',
 		BGI_ins + liverDeltaMinutesActivity * 18 + carbsActivity * 18,
 		'mg/dl',
 	);
 
-	logger.debug(
+	getLogger().debug(
 		'this is the BASAL BOLUS  insulin impact for ' +
 			deltaMinutes +
 			' minutes: %o',
 		basalActivity * deltaMinutes * 18 * isfMMol,
 	);
-	logger.debug(
+	getLogger().debug(
 		'this is the MEAL BOLUS insulin impact for ' +
 			deltaMinutes +
 			' minutes: %o',
 		bolusActivity * deltaMinutes * 18 * isfMMol,
 	);
-	logger.info('this is the simulator result: %o', dict);
+	getLogger().info('this is the simulator result: %o', dict);
 
 	return dict;
 };

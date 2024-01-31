@@ -1,5 +1,5 @@
 import { NSTreatment, isMealBolusTreatment } from './Types';
-import logger, { getDeltaMinutes } from './utils';
+import getLogger, { getDeltaMinutes } from './utils';
 
 //const logger = pino();
 
@@ -20,7 +20,7 @@ export default function carbs(
 		}))
 		.filter((e) => e.minutesAgo >= 0);
 
-	logger.debug('Last 6 hours meal: %o', meals);
+	getLogger().debug('Last 6 hours meal: %o', meals);
 
 	const carbs = meals || [];
 	const carbAbsTime = carbsAbs; // meal absorption time in min default 360 or 6 hours
@@ -45,7 +45,7 @@ export default function carbs(
 		// the remainder is slow carbs
 		const slow_carbs = (1 - FSR) * rest;
 
-		logger.debug(
+		getLogger().debug(
 			'carbs_g:',
 			carbs_g,
 			'fast:',
@@ -75,7 +75,7 @@ export default function carbs(
 		} else {
 			fast_carbrate = 0;
 			// COB = 0;
-			logger.debug('fast carb absorption rate: %o', fast_carbrate);
+			getLogger().debug('fast carb absorption rate: %o', fast_carbrate);
 		}
 
 		if (minutesAgo < slow_carbAbsTime / 2) {
@@ -92,20 +92,20 @@ export default function carbs(
 		} else {
 			slow_carbrate = 0;
 			// COB = 0;
-			logger.debug('slow carb absorption rate: %o', slow_carbrate);
+			getLogger().debug('slow carb absorption rate: %o', slow_carbrate);
 		}
 
 		return fast_carbrate + slow_carbrate;
 	});
-	logger.debug(timeSinceMealAct);
+	getLogger().debug(timeSinceMealAct);
 
 	const totalCarbRate = timeSinceMealAct.reduce(
 		(tot, carbrate) => tot + carbrate,
 		0,
 	);
 	const DBGC = (isfMMol / cr) * totalCarbRate; //DeltaBloodGlucoseFromCarbs
-	logger.debug(`CARB RATE:%o`, totalCarbRate);
-	logger.debug(`Delta blood Glucose From Carbs per minute:%o`, DBGC);
+	getLogger().debug(`CARB RATE:%o`, totalCarbRate);
+	getLogger().debug(`Delta blood Glucose From Carbs per minute:%o`, DBGC);
 
 	return DBGC;
 }

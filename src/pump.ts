@@ -1,4 +1,4 @@
-import logger, { getDeltaMinutes, getBiexpTreatmentActivity } from './utils';
+import getLogger, { getDeltaMinutes, getBiexpTreatmentActivity } from './utils';
 import * as moment from 'moment';
 import { NSProfile, NSTreatment } from './Types';
 import { TypeDateISO } from './TypeDateISO';
@@ -206,6 +206,6 @@ export default function (
 			}),
 		0,
 	);
-	logger.debug("the pump's basal activity is: %o", pumpBasalAct);
+	getLogger().debug("the pump's basal activity is: %o", pumpBasalAct);
 	return pumpBasalAct;
 }

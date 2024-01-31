@@ -1,4 +1,4 @@
-import logger from '../src/utils';
+import getLogger from '../src/utils';
 
 export default (weight, glargines) => {
   var resultGlaAct = 0;
@@ -8,7 +8,7 @@ export default (weight, glargines) => {
   // const glargines = require('./files/last_glargine.json');
   var jsongla = JSON.stringify(glargines);
   var glargine_data = JSON.parse(jsongla);
-  logger.debug(glargine_data);
+  getLogger().debug(glargine_data);
 
   // activities be expressed as U/min !!!
   let timeSinceGlargineAct = glargine_data.map((entry) => {
@@ -36,9 +36,9 @@ export default (weight, glargines) => {
         60,
     };
   });
-  logger.debug(
+  getLogger().debug(
     'the is the accumulated glargine activity:%o',
-    timeSinceGlargineAct
+    timeSinceGlargineAct,
   );
 
   // compute the aggregated activity of last glargines in 27 hours
@@ -46,14 +46,17 @@ export default (weight, glargines) => {
   let lastGlargines = timeSinceGlargineAct.filter(function (e) {
     return e.time <= 30;
   });
-  logger.debug('these are the last glargines and activities:%o', lastGlargines);
+  getLogger().debug(
+    'these are the last glargines and activities:%o',
+    lastGlargines,
+  );
 
   var resultGlaAct: number = lastGlargines.reduce(function (tot, arr) {
     return tot + arr.glargineActivity;
   }, 0);
 
   return resultGlaAct;
-  // logger.debug(resultGlaAct);
+  // getLogger().debug(resultGlaAct);
 
   // const fs = require('fs');
   // const { duration } = require('moment');
@@ -62,6 +65,6 @@ export default (weight, glargines) => {
   //     if (err) {
   //         throw err;
   //     }
-  //     logger.debug("aggregated GLA activity is now is saved as JSON.");
+  //     getLogger().debug("aggregated GLA activity is now is saved as JSON.");
   //   });
 };

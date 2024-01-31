@@ -1,5 +1,5 @@
 import moment = require('moment');
-import logger from '../src/utils';
+import getLogger from '../src/utils';
 
 export const oldCarbs = (meal, carbAbsTime) => {
   const meals = meal.map((entry) => ({
@@ -11,9 +11,9 @@ export const oldCarbs = (meal, carbAbsTime) => {
     mills: entry.time,
     time: (Date.now() - moment(entry.time).valueOf()) / (1000 * 60),
   }));
-  logger.debug(
+  getLogger().debug(
     'this is the trimmed down meals and time since last meal:%o',
-    timeSinceMealMin
+    timeSinceMealMin,
   );
 
   // this is for the calculations of carbs ingestion
@@ -46,7 +46,7 @@ export const oldCarbs = (meal, carbAbsTime) => {
     //console.log(fast_random_ratio);
     //console.log(fast_carbs);
     //console.log(slow_carbs);
-    logger.debug(
+    getLogger().debug(
       'carbs_g:%o',
       carbs_g,
       'fast:%o',
@@ -56,7 +56,7 @@ export const oldCarbs = (meal, carbAbsTime) => {
       'fast_carbs:%o',
       fast_carbs,
       'slow_carbs:%o',
-      slow_carbs
+      slow_carbs,
     );
 
     if (t < fast_carbAbsTime / 2) {
@@ -72,7 +72,7 @@ export const oldCarbs = (meal, carbAbsTime) => {
     } else {
       var fast_carbrate = 0;
       //var COB = 0;
-      logger.debug('fast carb absorption rate:%o', fast_carbrate);
+      getLogger().debug('fast carb absorption rate:%o', fast_carbrate);
     }
 
     if (t < slow_carbAbsTime / 2) {
@@ -88,7 +88,7 @@ export const oldCarbs = (meal, carbAbsTime) => {
     } else {
       var slow_carbrate = 0;
       // var COB = 0;
-      logger.debug('slow carb absorption rate:%o', slow_carbrate);
+      getLogger().debug('slow carb absorption rate:%o', slow_carbrate);
     }
 
     return {
@@ -99,13 +99,13 @@ export const oldCarbs = (meal, carbAbsTime) => {
       all_carbrate: fast_carbrate + slow_carbrate,
     };
   });
-  logger.debug(timeSinceMealAct);
+  getLogger().debug(timeSinceMealAct);
 
   var totalCarbRate = timeSinceMealAct.reduce(function (tot, arr) {
     return tot + arr.all_carbrate;
   }, 0);
 
-  logger.debug(totalCarbRate);
+  getLogger().debug(totalCarbRate);
   return totalCarbRate;
 
   // let carbrateString = JSON.stringify(totalCarbRate);
