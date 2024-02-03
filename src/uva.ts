@@ -9,7 +9,6 @@ import {
 	UvaPatientType,
 	UvaUserParams,
 } from './Types';
-import { defaultPatient } from './defaultPatient';
 
 const pmol_per_U = 6000;
 export class PatientUva {

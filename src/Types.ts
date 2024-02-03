@@ -211,28 +211,6 @@ export type TreatmentBiexpParam = {
 export type GenderType = 'Male' | 'Female';
 
 /**
- * Represents environmental parameters for a simulation.
- */
-export type EnvParam = {
-	/** Carbohydrate Ratio (CR) for insulin calculation. */
-	CR: number;
-	/** Insulin Sensitivity Factor (ISF) for insulin calculation. */
-	ISF: number;
-	/** Time taken for carbohydrates to be absorbed (in minutes default 360). */
-	CARBS_ABS_TIME: number;
-	/** Time period for insulin activity (Time Peak) (in minutes default 75). */
-	TP: number;
-	/** Duration of Insulin Action (DIA) (in hours default: 6). */
-	DIA: number;
-	/** Weight of the simulated user (in cm). */
-	WEIGHT: number;
-	/** Age of the simulated user. */
-	AGE: number;
-	/** Gender of the simulated user ('Male' or 'Female'). */
-	GENDER: GenderType;
-};
-
-/**
  * Represents parameters for a CGM simulation.
  */
 export type CGMSimParams = {
@@ -251,36 +229,58 @@ export type UserParams = {
 	nsUrl: string;
 };
 
+type PatientInfoBase = {
+	/** Weight of the simulated user (in cm). */
+	WEIGHT: number;
+	/** Age of the simulated user. */
+	AGE: number;
+	/** Gender of the simulated user ('Male' or 'Female'). */
+	GENDER: GenderType;
+};
+
 /**
- * Represents main parameters for a UVA simulation.
+ * Represents patient parameters for a cgmsim simulation.
  */
-export type MainParamsUVA = {
-	env: {
-		WEIGHT: string;
-		AGE: string;
-		GENDER: GenderType;
-	};
+export type PatientInfoUva = PatientInfoBase;
+
+/**
+ * Represents patient parameters for a cgmsim simulation.
+ */
+
+export type PatientInfoCgmsim = PatientInfoBase & {
+	/** Carbohydrate Ratio (CR) for insulin calculation. */
+	CR: number;
+	/** Insulin Sensitivity Factor (ISF) for insulin calculation. */
+	ISF: number;
+	/** Time taken for carbohydrates to be absorbed (in minutes default 360). */
+	CARBS_ABS_TIME: number;
+	/** Time period for insulin activity (Time Peak) (in minutes default 75). */
+	TP: number;
+	/** Duration of Insulin Action (DIA) (in hours default: 6). */
+	DIA: number;
+};
+
+type MainParamsBase = {
+	patient: PatientInfoBase;
 	treatments: NSTreatment[];
 	profiles: NSProfile[];
-	lastState: UvaPatientState;
-	entries: Sgv[];
 	pumpEnabled: boolean;
 	activities?: Activity[];
 	user: UserParams;
-	defaultPatient: UvaPatientType;
+};
+/**
+ * Represents main parameters for a UVA simulation.
+ */
+export type MainParamsUVA = MainParamsBase & {
+	lastState: UvaPatientState;
 };
 
 /**
  * Represents main parameters for a simulation.
  */
-export type MainParams = {
-	env: EnvParam;
+export type MainParams = MainParamsBase & {
+	patient: PatientInfoCgmsim;
 	entries: Sgv[];
-	treatments: NSTreatment[];
-	profiles: NSProfile[];
-	pumpEnabled?: boolean;
-	activities?: Activity[];
-	user: UserParams;
 };
 
 /**

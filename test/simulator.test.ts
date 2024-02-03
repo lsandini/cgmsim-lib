@@ -1,4 +1,10 @@
-import { EnvParam, Sgv, NSTreatment, Activity, MainParams } from '../src/Types';
+import {
+  PatientInfoCgmsim,
+  Sgv,
+  NSTreatment,
+  Activity,
+  MainParams,
+} from '../src/Types';
 import simulator from '../src/CGMSIMsimulator';
 import moment = require('moment');
 import { diffOptions, getPngSnapshot, testGenerator } from './inputTest';
@@ -56,7 +62,7 @@ describe('simulator test', () => {
         notes: 'Tou 14',
       },
     ];
-    const env: EnvParam = {
+    const patient: PatientInfoCgmsim = {
       CARBS_ABS_TIME: 360,
       CR: 10,
       DIA: 6,
@@ -80,10 +86,11 @@ describe('simulator test', () => {
           created_at: now.toISOString() as TypeDateISO,
         });
       }
-
+      const pumpEnabled = false;
       const result = simulator({
-        env,
+        patient: patient,
         entries,
+        pumpEnabled,
         treatments,
         profiles: [],
         user: { nsUrl },
@@ -143,7 +150,7 @@ describe('simulator test', () => {
         notes: 'tou 14',
       },
     ];
-    const env: EnvParam = {
+    const patient: PatientInfoCgmsim = {
       CARBS_ABS_TIME: 360,
       CR: 10,
       DIA: 6,
@@ -166,12 +173,13 @@ describe('simulator test', () => {
     const carbsActivities = [];
     const liverActivities = [];
     const sgvS = [];
-
+    const pumpEnabled = false;
     for (let index = 0; index < 60 * 30; ) {
       const result = simulator({
-        env,
+        patient: patient,
         entries,
         treatments,
+        pumpEnabled,
         profiles: [],
         user: { nsUrl },
       });
@@ -277,7 +285,7 @@ describe('simulator test', () => {
         notes: 'tou 14',
       },
     ];
-    const env: EnvParam = {
+    const patient: PatientInfoCgmsim = {
       CARBS_ABS_TIME: 360,
       CR: 10,
       DIA: 6,
@@ -298,12 +306,14 @@ describe('simulator test', () => {
     const carbsActivities = [];
     const liverActivities = [];
     const sgvS = [];
+    const pumpEnabled = false;
 
     for (let index = 0; index < 60 * 4; ) {
       const result = simulator({
-        env,
+        patient: patient,
         entries,
         treatments,
+        pumpEnabled,
         profiles: [],
         user: { nsUrl },
       });
@@ -417,7 +427,7 @@ describe('simulator test', () => {
         notes: 'deg 23',
       },
     ];
-    const env: EnvParam = {
+    const patient: PatientInfoCgmsim = {
       CARBS_ABS_TIME: 360,
       CR: 10,
       DIA: 6,
@@ -431,14 +441,14 @@ describe('simulator test', () => {
     const log = [];
     let lastSgv = 0;
     log.push('Cor 40mg  2022-06-04T01:00:00.000Z');
-
+    const pumpEnabled = false;
     const sgvSCortisone = [];
     const sgvS = [];
-
     for (let index = 0; index < 60 * 24; ) {
       const resultCortisone = simulator({
-        env,
+        patient: patient,
         entries: entriesCortisone,
+        pumpEnabled,
         treatments: [...treatments, treatmentsCortisone, treatmentsBolus],
         profiles: [],
         user: { nsUrl },
@@ -452,10 +462,11 @@ describe('simulator test', () => {
       }
 
       const result = simulator({
-        env,
+        patient: patient,
         entries,
         treatments: [...treatments],
         profiles: [],
+        pumpEnabled,
         user: { nsUrl },
       });
       entries.splice(0, 0, {
@@ -510,7 +521,7 @@ describe('Simulator', () => {
     let now = moment('2022-06-04T13:00:00.000Z');
     jest.setSystemTime(now.toDate());
     const startSgv = 100;
-    const env: EnvParam = {
+    const patient: PatientInfoCgmsim = {
       CARBS_ABS_TIME: 360,
       CR: 10,
       DIA: 6,
@@ -522,7 +533,7 @@ describe('Simulator', () => {
     };
     // Arrange
     const paramsWithoutTreatments = {
-      env: env,
+      patient,
       entries: [
         {
           mills: now.add(-5, 'minutes').toDate().getTime(),
@@ -553,7 +564,9 @@ describe('Simulator', () => {
     jest.runAllTimers();
 
     // Assert
-    expect(() => simulator(paramsWithoutTreatments)).toThrowError('treatments is null');
+    expect(() => simulator(paramsWithoutTreatments)).toThrowError(
+      'treatments is null',
+    );
   });
 });
 
@@ -571,7 +584,7 @@ describe('Simulator', () => {
     jest.setSystemTime(now.toDate());
     const startSgv = 100;
 
-    const env: EnvParam = {
+    const patient: PatientInfoCgmsim = {
       CARBS_ABS_TIME: 360,
       CR: 10,
       DIA: 6,
@@ -583,7 +596,7 @@ describe('Simulator', () => {
     };
     // Arrange
     const paramsWithoutProfiles = {
-      env: env,
+      patient,
       entries: [
         {
           mills: now.add(-5, 'minutes').toDate().getTime(),
@@ -614,16 +627,16 @@ describe('Simulator', () => {
     jest.runAllTimers();
 
     // Assert
-    expect(() => simulator(paramsWithoutProfiles)).toThrowError('profiles is null');
+    expect(() => simulator(paramsWithoutProfiles)).toThrowError(
+      'profiles is null',
+    );
   });
 });
 
-
 describe('Simulator', () => {
   test('throws an error when isfActivityDependent is less than 9', () => {
-
     // Arrange
-    const env: EnvParam = {
+    const patient: PatientInfoCgmsim = {
       CARBS_ABS_TIME: 360,
       CR: 10,
       DIA: 6,
@@ -634,7 +647,7 @@ describe('Simulator', () => {
       GENDER: 'Male',
     };
     const paramsWithLowIsf = {
-      env: env,
+      patient,
       entries: [],
       profiles: [],
       pumpEnabled: true,
@@ -644,6 +657,8 @@ describe('Simulator', () => {
     };
 
     // Act & Assert
-    expect(() => simulator(paramsWithLowIsf)).toThrowError('Isf must be greater than or equal to 9');
+    expect(() => simulator(paramsWithLowIsf)).toThrowError(
+      'Isf must be greater than or equal to 9',
+    );
   });
 });

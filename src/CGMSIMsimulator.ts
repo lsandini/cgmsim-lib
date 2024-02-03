@@ -18,7 +18,7 @@ import { transformNoteTreatmentsDrug } from './drug';
  */
 const simulator = (params: MainParams): SimulationResult => {
 	const {
-		env,
+		patient: env,
 		entries,
 		treatments,
 		profiles, //PUMP SIMULATION

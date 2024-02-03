@@ -3,7 +3,7 @@ import { MultiLineDataSource, SingleLineDataSource } from 'test/d3/d3Func';
 import { drugs } from '../src/drug';
 import {
   Activity,
-  EnvParam,
+  PatientInfoCgmsim,
   NSTreatment,
   Sgv,
   TreatmentBiexpParam,
@@ -264,7 +264,7 @@ export const testGenerator = (
 ): TestResult => {
   jest.useFakeTimers('modern');
 
-  const env: EnvParam = {
+  const env: PatientInfoCgmsim = {
     CARBS_ABS_TIME: 360,
     CR: 10,
     DIA: 6,
@@ -330,11 +330,13 @@ export const testGenerator = (
     });
   });
   let _now = now();
+  const pumpEnabled = false;
   jest.setSystemTime(_now.toDate());
 
   for (let index = 0; index < 60 * hoursDuration; ) {
     const result = simulator({
-      env,
+      patient: env,
+      pumpEnabled,
       entries,
       treatments: nsTreatments,
       profiles: [],

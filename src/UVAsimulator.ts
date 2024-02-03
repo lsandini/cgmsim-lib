@@ -15,6 +15,8 @@ import { PatientUva } from './uva';
 import RK4 from './SolverRK';
 import { currentIntensity } from './physical';
 import { transformNoteTreatmentsDrug } from './drug';
+import { defaultPatient } from './defaultPatient';
+
 /**
  * Simulates blood glucose levels in response to various parameters and inputs.
  * @param params - Main parameters for running the simulation.
@@ -53,17 +55,15 @@ import { transformNoteTreatmentsDrug } from './drug';
  * const simulationResult = simulator(simulationParams);
  * console.log("Blood glucose simulation result:", simulationResult);
  */
-const simulator = (params: MainParamsUVA) => {
+const UVAsimulator = (params: MainParamsUVA) => {
 	const {
-		env,
+		patient: env,
 		treatments,
 		profiles,
 		lastState,
-		entries,
 		pumpEnabled,
 		activities,
 		user,
-		defaultPatient,
 	} = params;
 
 	logger.info('Run Init UVA NSUrl:%o', user.nsUrl);
@@ -75,8 +75,8 @@ const simulator = (params: MainParamsUVA) => {
 		throw new Error('profiles is ' + profiles);
 	}
 
-	const weight = parseInt(env.WEIGHT);
-	const age = parseInt(env.AGE);
+	const weight = env.WEIGHT;
+	const age = env.AGE;
 	const gender = env.GENDER;
 	const drugs = transformNoteTreatmentsDrug(treatments);
 
@@ -185,4 +185,4 @@ const simulator = (params: MainParamsUVA) => {
 	return res;
 };
 
-export default simulator;
+export default UVAsimulator;

@@ -1,15 +1,13 @@
 import moment = require('moment');
 import {
   Activity,
-  EnvParam,
   MainParamsUVA,
   NSProfile,
   Sgv,
   NSTreatment,
 } from '../src/Types';
-import simulatorUVA from '../src/UVAsimulator';
+import UVAsimulator from '../src/UVAsimulator';
 import { diffOptions, getPngSnapshot } from './inputTest';
-import { defaultPatient } from '../src/defaultPatient';
 import { TypeDateISO } from '../src/TypeDateISO';
 
 const now = new Date('2022-05-01T11:00:00');
@@ -34,10 +32,10 @@ describe('uva test default PATIENT', () => {
     jest.useRealTimers();
     global.Math = math;
   });
-  const env: MainParamsUVA['env'] = {
-    AGE: '40',
+  const patient: MainParamsUVA['patient'] = {
+    AGE: 40,
     GENDER: 'Male',
-    WEIGHT: '80',
+    WEIGHT: 80,
   };
 
   test('basal  with gla 30 should generate flat sgv', async () => {
@@ -52,15 +50,13 @@ describe('uva test default PATIENT', () => {
     let lastState = null;
     const yList = [];
     for (let i = 0; i < 12 * 20; i++) {
-      const { state, sgv } = simulatorUVA({
-        env,
+      const { state, sgv } = UVAsimulator({
+        patient,
         lastState,
         treatments,
         profiles: [],
         pumpEnabled: true,
-        entries,
         user: { nsUrl },
-        defaultPatient,
       });
       yList.push(sgv);
       lastState = state;
@@ -93,15 +89,13 @@ describe('uva test default PATIENT', () => {
       },
     ];
     for (let i = 0; i < 12 * 24; i++) {
-      const { state, sgv } = simulatorUVA({
-        env,
+      const { state, sgv } = UVAsimulator({
+        patient,
         lastState,
         treatments: [],
         profiles: profile,
         pumpEnabled: true,
-        entries,
         user: { nsUrl },
-        defaultPatient,
       });
       yList.push(sgv);
       lastState = state;
@@ -154,15 +148,13 @@ describe('uva test default PATIENT', () => {
     const now = moment('2022-05-01T11:00:00');
     let sgvMax = 0;
     for (let i = 0; i < 36; i++) {
-      const { state, sgv } = simulatorUVA({
-        env,
+      const { state, sgv } = UVAsimulator({
+        patient,
         lastState,
         treatments,
         profiles: profile,
         pumpEnabled: true,
-        entries,
         user: { nsUrl },
-        defaultPatient,
       });
       yList.push(sgv);
       lastState = state;
@@ -231,15 +223,13 @@ describe('uva test default PATIENT', () => {
     const now = moment('2022-05-01T11:00:00');
     let sgvMax = 0;
     for (let i = 0; i < 36; i++) {
-      const { state, sgv } = simulatorUVA({
-        env,
+      const { state, sgv } = UVAsimulator({
+        patient,
         lastState,
         treatments,
         profiles: profile,
         pumpEnabled: true,
-        entries,
         user: { nsUrl },
-        defaultPatient,
       });
       yList.push(sgv);
       lastState = state;
@@ -300,15 +290,13 @@ describe('uva test default PATIENT', () => {
     const now = moment('2022-05-01T11:00:00');
     let sgvMax = 0;
     for (let i = 0; i < 36; i++) {
-      const { state, sgv } = simulatorUVA({
-        env,
+      const { state, sgv } = UVAsimulator({
+        patient,
         lastState,
         treatments,
         profiles: profile,
         pumpEnabled: true,
-        entries,
         user: { nsUrl },
-        defaultPatient,
       });
       yList.push(sgv);
       lastState = state;
@@ -353,15 +341,13 @@ describe('uva test default PATIENT', () => {
     const now = moment('2022-05-01T11:00:00');
     let sgvMax = 0;
     for (let i = 0; i < 36; i++) {
-      const { state, sgv } = simulatorUVA({
-        env,
+      const { state, sgv } = UVAsimulator({
+        patient,
         lastState,
         treatments,
         profiles: profile,
-        entries,
         pumpEnabled: true,
         user: { nsUrl },
-        defaultPatient,
       });
       yList.push(sgv);
       lastState = state;
@@ -428,16 +414,14 @@ describe('uva test default PATIENT', () => {
     const now = moment('2022-05-01T11:00:00');
     let sgvMax = 0;
     for (let i = 0; i < 36; i++) {
-      const { state, sgv } = simulatorUVA({
-        env,
+      const { state, sgv } = UVAsimulator({
+        patient,
         lastState,
         treatments: [],
         profiles: profile,
-        entries,
         activities,
         pumpEnabled: true,
         user: { nsUrl },
-        defaultPatient,
       });
       yList.push(sgv);
       lastState = state;
