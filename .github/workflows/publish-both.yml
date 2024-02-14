@@ -1,11 +1,11 @@
-name: Publish to npm
+name: Publish Package
 
 on:
   release:
     types: [published]
 
 jobs:
-  build:
+  publish-gpr:
     runs-on: ubuntu-latest
 
     steps:
@@ -23,8 +23,14 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
+      - name: Build and publish to GitHub Packages
+        run: |
+          npm run build
+          npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
   publish-npm:
-    needs: build
     runs-on: ubuntu-latest
 
     steps:
@@ -45,6 +51,6 @@ jobs:
       - name: Build and publish to npm
         run: |
           npm run build
-          run: npm publish --registry https://registry.npmjs.org/ --access public
+          npm publish --registry https://registry.npmjs.org/ --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN2}}
