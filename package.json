@@ -1,15 +1,10 @@
 {
   "name": "@lsandini/cgmsim-lib",
   "version": "0.4.0",
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
-  },
   "description": "cgmsim-lib",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "files": [
-    "/dist"
-  ],
+  "files": ["/dist"],
   "engines": {
     "node": ">=16.0.0"
   },
@@ -25,10 +20,7 @@
     "type": "git",
     "url": "git+https://github.com/lsandini/cgmsim-lib.git"
   },
-  "keywords": [
-    "cgmsim",
-    "lib"
-  ],
+  "keywords": ["cgmsim", "lib"],
   "author": "",
   "license": "ISC",
   "bugs": {
@@ -72,5 +64,13 @@
     "ts-dotenv": "^0.9.1",
     "tslib": "^2.6.2",
     "typescript": "^4.9.2"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "private": false,
+  "publishNpm": {
+    "registry": "https://registry.npmjs.org/",
+    "token": "${{secrets.NPM_TOKEN2}}"
   }
 }
