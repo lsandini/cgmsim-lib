@@ -23,9 +23,16 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
+      - name: Run tests
+        run: npm test
+
+
   publish-npm:
     needs: build
     runs-on: ubuntu-latest
+      permissions:
+        packages: write
+        contents: read
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
