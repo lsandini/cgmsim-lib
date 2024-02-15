@@ -46,6 +46,12 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
+      - name: Set npm registry to public registry
+        run: npm config set registry https://registry.npmjs.org/
+
+      - name: Log in to npm
+        run: npm login --registry=https://registry.npmjs.org/ --scope=@lsandini --always-auth
+
       - name: Build and publish to npm
         run: |
           npm run build &&
