@@ -44,7 +44,7 @@ jobs:
 
       - name: Build and publish to npm
         run: |
-          npm run build
-          run: npm publish --registry https://registry.npmjs.org/ --access public
+          npm run build &&
+          npm publish --registry https://registry.npmjs.org/ --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN2}}
