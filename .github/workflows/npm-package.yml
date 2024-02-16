@@ -27,36 +27,36 @@ jobs:
         run: npm test
 
 
-publish-npm:
-  needs: build
-  runs-on: ubuntu-latest
-  steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+  publish-npm:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '18.x'
-        registry-url: 'https://registry.npmjs.org/'
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+          registry-url: 'https://registry.npmjs.org/'
 
-    - name: Install dependencies
-      run: npm ci
-      env:
-        NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      - name: Install dependencies
+        run: npm ci
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
-    - name: Print local .npmrc
-      run: cat $HOME/.npmrc
+      - name: Print local .npmrc
+        run: cat $HOME/.npmrc
 
-    - name: Set npm registry to public registry
-      run: npm config set registry https://registry.npmjs.org/
+      - name: Set npm registry to public registry
+        run: npm config set registry https://registry.npmjs.org/
 
-    - name: Log in to npm
-      run: npm login --registry=https://registry.npmjs.org/ --scope=@lsandini --always-auth
+      - name: Log in to npm
+        run: npm login --registry=https://registry.npmjs.org/ --scope=@lsandini --always-auth
 
-    - name: Build and publish to npm
-      run: |
-        npm run build &&
-        npm publish --registry https://registry.npmjs.org/ --access public
-      env:
-        NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN2}}
+      - name: Build and publish to npm
+        run: |
+          npm run build &&
+          npm publish --registry https://registry.npmjs.org/ --access public
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN2}}
