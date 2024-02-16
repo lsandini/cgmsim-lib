@@ -1,6 +1,6 @@
 {
   "name": "@lsandini/cgmsim-lib",
-  "version": "0.4.7g",
+  "version": "0.4.7h",
   "description": "cgmsim-lib",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
