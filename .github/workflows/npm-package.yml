@@ -48,12 +48,9 @@ jobs:
       - name: Set npm registry to public registry
         run: npm config set registry https://registry.npmjs.org/
 
-   #   - name: Log in to npm
-    #    run: npm login --registry=https://registry.npmjs.org/ --scope=@lsandini --always-auth
-
       - name: Build and publish to npm
         run: |
           npm run build &&
-          npm publish --registry https://registry.npmjs.org/ --access public
+          npm publish --registry https://registry.npmjs.org/ --access public --scope=@lsandini --always-auth
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN2}}
