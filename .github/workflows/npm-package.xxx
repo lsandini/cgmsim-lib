@@ -2,7 +2,7 @@ name: Publish to npmjs registry
 
 on:
   release:
-    types: []
+    types: [published]
 
 jobs:
   build:
