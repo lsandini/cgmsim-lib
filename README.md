@@ -22,13 +22,6 @@ A TypeScript library for simulating diabetic patient data and scenarios. This li
 - 🍺 **Alcohol Consumption Simulation:** Model the effects of alcohol consumption on blood glucose levels.
 - 💊 **Corticosteroid Therapy Simulation:** Simulate the impact of cortisone therapy on glucose regulation.
 
-## Configure npm registry ⚙️
-
-Create a .npmrc file in the root of your project and add the following lines:
-
-```bash
-@lsandini:registry=https://npm.pkg.github.com
-```
 
 ## Installation 🚀
 
