@@ -1,5 +1,4 @@
 name: Publish Package to npmjs
-
 on:
   release:
       branches:    
@@ -12,7 +11,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Setup .npmrc file to publish to npm
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
@@ -44,15 +42,7 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN2}}
 
-  #    - name: Set npm registry to public registry
-  #       run: npm config set registry https://registry.npmjs.org/
-
-      - name: Check npm auth
-        run: npm whoami
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN2}}
-
-      - name : build the dist
+      - name : Build the dist
         run: npm run build
 
       - name: Publish to npmjs
