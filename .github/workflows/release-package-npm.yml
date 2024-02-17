@@ -1,12 +1,14 @@
 name: Publish Package to npmjs
 on:
   release:
-      branches:    
+    branches:
       - npmjs
-      types: [published]
+    types: [published]
+
 jobs:
-  build:
+  build-and-publish:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -22,25 +24,8 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN2}}
 
-      - run: npm test
-
-  publish-npm:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18.x'
-          registry-url: 'https://registry.npmjs.org'
-
-      - name: Install dependencies
-        run: npm ci
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN2}}
+      - name: Run tests
+        run: npm test
 
       - name : Build the dist
         run: npm run build

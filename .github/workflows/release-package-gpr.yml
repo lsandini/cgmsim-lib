@@ -1,5 +1,6 @@
 name: Node.js Package to GH registry
 
+# can be triggered manually, not automatic on release
 on:
   workflow_dispatch:
 
