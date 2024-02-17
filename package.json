@@ -1,6 +1,6 @@
 {
   "name": "@lsandini/cgmsim-lib",
-  "version": "0.4.7j",
+  "version": "0.4.7h",
   "description": "cgmsim-lib",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -65,11 +65,8 @@
     "tslib": "^2.6.2",
     "typescript": "^4.9.2"
   },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
-  },
   "private": false,
-  "publishNpm": {
+  "publishConfig": {
     "registry": "https://registry.npmjs.org/",
     "token": "${{secrets.NPM_TOKEN2}}",
     "name": "@cgmsim/lib"
