@@ -14,6 +14,8 @@
 
 A TypeScript library for simulating diabetic patient data and scenarios. This library provides functionalities to generate realistic continuous glucose monitoring (CGM) data, insulin dosages, and other relevant parameters for diabetic patient simulations.
 
+This library is used by the [CGMSIM v.3 cloud-based simulation](https://cgmsim.com), but can also be run locally using our [Runner application](https://github.com/lsandini/cgmsim-runner-ui) written with [Electron](https://www.electronjs.org/).
+
 ## Features🌟
 
 - 📊 **CGM Data Generation:** Simulate realistic continuous glucose monitoring data over time.
