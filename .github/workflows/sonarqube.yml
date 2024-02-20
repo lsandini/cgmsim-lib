@@ -31,7 +31,7 @@ jobs:
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
         with:
           args: >
-            -Dsonar.organization=cgmsim-lib-09876
+            -Dsonar.organization=lsandini_cgmsim-lib_dcb733af-979c-4bcd-88af-267d99139342
             -Dsonar.sources=./src
             -Dsonar.tests=./test
             -Dsonar.test.inclusions=**/test/**/*
