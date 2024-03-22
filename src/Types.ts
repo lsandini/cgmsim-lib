@@ -183,7 +183,8 @@ export const isMealBolusTreatment = (
 	treatment.eventType === 'Meal Bolus' ||
 	treatment.eventType === 'Bolus' ||
 	treatment.eventType === 'Bolus Wizard' ||
-	treatment.eventType === 'Correction Bolus';
+	treatment.eventType === 'Correction Bolus' ||
+  treatment.eventType === 'Carb Correction';
 
 export const isAnnouncementTreatment = (
 	treatment: NSTreatment,
