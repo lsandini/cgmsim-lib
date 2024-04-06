@@ -148,10 +148,12 @@ export type ProfileSwitchTreatment = {
 export type TempBasalTreatment = {
 	/** The type of event, set to 'Temp Basal'. */
 	eventType: 'Temp Basal';
-	/** The absolute insulin rate for the temporary basal. */
-	absolute: number;
+	/** The quantity insulin rate for the temporary basal. */
+	rate: number;
 	/** The duration of the temporary basal in minutes. */
 	duration: number;
+	/** The duration in milliseconds of the temporary basal in minutes. */
+	durationInMilliseconds: number;
 	/** The date of the treatment creation in ISO format. */
 	created_at: TypeDateISO;
 };
@@ -184,7 +186,7 @@ export const isMealBolusTreatment = (
 	treatment.eventType === 'Bolus' ||
 	treatment.eventType === 'Bolus Wizard' ||
 	treatment.eventType === 'Correction Bolus' ||
-  treatment.eventType === 'Carb Correction';
+	treatment.eventType === 'Carb Correction';
 
 export const isAnnouncementTreatment = (
 	treatment: NSTreatment,

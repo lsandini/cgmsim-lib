@@ -68,7 +68,8 @@ function getTempBasal(treatments: NSTreatment[], duration: number) {
 		.filter(
 			(e) =>
 				e.created_at &&
-				now.diff(moment(e.created_at), 'minutes') <= duration && // temps basals set in the last 3 hours
+				now.diff(moment(e.created_at), 'milliseconds') <=
+					duration * (60 * 1000) && // temps basals set in the last 3 hours
 				e.eventType === 'Temp Basal' &&
 				e.duration !== 0,
 		)
@@ -76,12 +77,15 @@ function getTempBasal(treatments: NSTreatment[], duration: number) {
 			return moment(f.created_at).diff(s.created_at);
 		})
 		.forEach((b) => {
-			if (b.eventType === 'Temp Basal' && b.absolute !== undefined) {
+			if (b.eventType === 'Temp Basal' && b.rate !== undefined) {
 				const start = moment(b.created_at).utc();
-				const end = moment(b.created_at).add(b.duration, 'minutes').utc();
+				const tmpEnd = moment(b.created_at)
+					.add(b.durationInMilliseconds, 'milliseconds')
+					.utc();
+				const end = tmpEnd.diff(now) < 0 ? tmpEnd : now;
 				computedTempBasal.push({
 					start,
-					insulin: b.absolute,
+					insulin: b.rate,
 					end,
 				});
 			} else {

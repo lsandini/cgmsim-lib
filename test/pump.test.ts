@@ -37,14 +37,16 @@ const profileSwitch: NSTreatment[] = [
 const tmpBasal: NSTreatment[] = [
   {
     eventType: 'Temp Basal',
-    absolute: 0,
+    rate: 0,
     duration: 60,
+    durationInMilliseconds: 60 * (60 * 1000),
     created_at: '2022-05-06T11:00:00.000Z',
   },
   {
     eventType: 'Temp Basal',
-    absolute: 1.2,
+    rate: 1.2,
     duration: 30,
+    durationInMilliseconds: 30 * (60 * 1000),
     created_at: '2022-05-06T16:00:00.000Z',
   },
 ];
@@ -97,8 +99,9 @@ describe('test pump', () => {
     const treatments: NSTreatment[] = [
       {
         eventType: 'Temp Basal',
-        absolute: 0,
+        rate: 0,
         duration: 600,
+        durationInMilliseconds: 600 * (60 * 1000),
         created_at: '2022-05-06T10:31:00.000Z',
       },
     ];
