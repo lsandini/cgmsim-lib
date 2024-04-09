@@ -130,7 +130,6 @@ const sgv_start = (
 			' minutes: %o',
 		bolusActivity * deltaMinutes * 18 * isfMMol,
 	);
-	logger.info('this is the simulator result: %o', dict);
 
 	return dict;
 };

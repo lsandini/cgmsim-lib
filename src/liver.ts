@@ -39,7 +39,7 @@ export default function (
 
 	const liver_sin = liver * sinus;
 	logger.debug('liver:  %o', liver);
-	logger.info('liver_sin:  %o', liver_sin);
+	logger.debug('liver_sin:  %o', liver_sin);
 
 	return liver_sin; //(mmol/l)/min
 }

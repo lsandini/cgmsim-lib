@@ -18,7 +18,7 @@ import { transformNoteTreatmentsDrug } from './drug';
  */
 const simulator = (params: MainParams): SimulationResult => {
 	const {
-		patient: env,
+		patient,
 		entries,
 		treatments,
 		profiles, //PUMP SIMULATION
@@ -26,7 +26,7 @@ const simulator = (params: MainParams): SimulationResult => {
 		activities, //7-DAYS
 		user,
 	} = params;
-	logger.info('Run Init CGMSim NSUrl:%o', user.nsUrl);
+	logger.info(user.nsUrl + ' Run Init CGMSim NSUrl:%o', user.nsUrl);
 
 	if (!treatments) {
 		throw new Error('treatments is ' + treatments);
@@ -35,9 +35,9 @@ const simulator = (params: MainParams): SimulationResult => {
 		throw new Error('profiles is ' + profiles);
 	}
 
-	const isfConstant = env.ISF;
-	const age = env.AGE;
-	const gender = env.GENDER;
+	const isfConstant = patient.ISF;
+	const age = patient.AGE;
+	const gender = patient.GENDER;
 
 	let isfActivityDependent = isfConstant;
 	let activityFactor = 1;
@@ -49,11 +49,11 @@ const simulator = (params: MainParams): SimulationResult => {
 		activityFactor = physicalLiver(activities, age, gender);
 	}
 
-	const weight = env.WEIGHT;
-	const dia = env.DIA;
-	const peak = env.TP;
-	const carbsAbs = env.CARBS_ABS_TIME;
-	const cr = env.CR;
+	const weight = patient.WEIGHT;
+	const dia = patient.DIA;
+	const peak = patient.TP;
+	const carbsAbs = patient.CARBS_ABS_TIME;
+	const cr = patient.CR;
 
 	//Find basal boluses
 	const drugs = transformNoteTreatmentsDrug(treatments);
@@ -95,15 +95,11 @@ const simulator = (params: MainParams): SimulationResult => {
 		isfActivityDependent,
 	);
 
-	logger.debug('this is the new sgv: %o', newSgvValue);
-	logger.info(
-		'this is the ISF multiplicator (or physicalISF): %o',
-		isfActivityDependent / isfConstant,
-	);
-	logger.info(
-		'this is the liver multiplicator (or physicalLiver): %o',
-		activityFactor,
-	);
+	logger.info(user.nsUrl + 'this is the simulator result: %o', {
+		...newSgvValue,
+		physicalISF: isfActivityDependent / isfConstant,
+		physicalLiver: activityFactor,
+	});
 
 	// const arrows = arrowsRun([newSgvValue, ...entries]);
 

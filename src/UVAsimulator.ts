@@ -57,7 +57,7 @@ import { defaultPatient } from './defaultPatient';
  */
 const UVAsimulator = (params: MainParamsUVA) => {
 	const {
-		patient: env,
+		patient,
 		treatments,
 		profiles,
 		lastState,
@@ -66,7 +66,7 @@ const UVAsimulator = (params: MainParamsUVA) => {
 		user,
 	} = params;
 
-	logger.info('Run Init UVA NSUrl:%o', user.nsUrl);
+	logger.debug('Run Init UVA NSUrl:%o', user.nsUrl);
 
 	if (!treatments) {
 		throw new Error('treatments is ' + treatments);
@@ -75,9 +75,9 @@ const UVAsimulator = (params: MainParamsUVA) => {
 		throw new Error('profiles is ' + profiles);
 	}
 
-	const weight = env.WEIGHT;
-	const age = env.AGE;
-	const gender = env.GENDER;
+	const weight = patient.WEIGHT;
+	const age = patient.AGE;
+	const gender = patient.GENDER;
 	const drugs = transformNoteTreatmentsDrug(treatments);
 
 	const activeDrugTreatments = drugs.filter(function (e) {
@@ -107,7 +107,7 @@ const UVAsimulator = (params: MainParamsUVA) => {
 
 	const basalProfileActivity = pumpEnabled ? basalProfile(profiles) : 0;
 
-	const patient = new PatientUva(defaultPatient);
+	const patientUva = new PatientUva(defaultPatient);
 	let partialMinutes = 0;
 	const fiveMinutes: UvaInterval = 5;
 	const oneMinute: UvaDelta = 1;
@@ -115,7 +115,7 @@ const UVAsimulator = (params: MainParamsUVA) => {
 	//get last state from mongo
 	let patientState: UvaPatientState = lastState
 		? lastState
-		: patient.getInitialState();
+		: patientUva.getInitialState();
 
 	logger.debug('basalProfileActivity:%o', basalProfileActivity * 60);
 	logger.debug('basalActivity:%o', basalActivity * 60);
@@ -129,14 +129,14 @@ const UVAsimulator = (params: MainParamsUVA) => {
 		intensity: 0,
 	};
 	//t0 result
-	let result: UvaOutput = patient.getOutputs(
+	let result: UvaOutput = patientUva.getOutputs(
 		partialMinutes,
 		patientState,
 		userParams,
 	);
 	const lastPatientState = { ...patientState };
 	// start simulation
-	logger.info('lastPatientState:%o', lastPatientState);
+	logger.debug(user.nsUrl + ' lastPatientState:%o', lastPatientState);
 
 	while (partialMinutes < fiveMinutes) {
 		// todo: sensor dynamics
@@ -165,13 +165,13 @@ const UVAsimulator = (params: MainParamsUVA) => {
 		// proceed one time step
 		patientState = RK4(
 			(time: number, state: UvaPatientState) =>
-				patient.getDerivatives(time, state, userParams),
+				patientUva.getDerivatives(time, state, userParams),
 			partialMinutes,
 			patientState,
 			oneMinute,
 		);
 		//t partialMinutes result
-		result = patient.getOutputs(partialMinutes, patientState, userParams);
+		result = patientUva.getOutputs(partialMinutes, patientState, userParams);
 		partialMinutes += oneMinute;
 	}
 	if (result.Gp > 400) {
@@ -181,7 +181,7 @@ const UVAsimulator = (params: MainParamsUVA) => {
 		return { state: lastPatientState, sgv: 40 };
 	}
 	const res = { state: patientState, sgv: result.Gp };
-	logger.info('uva output:%o', res);
+	logger.info(user.nsUrl + ' uva output:%o', res);
 	return res;
 };
 
