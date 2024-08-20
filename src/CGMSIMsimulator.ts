@@ -38,6 +38,7 @@ const simulator = (params: MainParams): SimulationResult => {
 	const isfConstant = patient.ISF;
 	const age = patient.AGE;
 	const gender = patient.GENDER;
+	const tz = patient?.TZ || 'UTC';
 
 	let isfActivityDependent = isfConstant;
 	let activityFactor = 1;
@@ -72,10 +73,16 @@ const simulator = (params: MainParams): SimulationResult => {
 	const carbsActivity = carbs(treatments, carbsAbs, isfActivityDependent, cr);
 
 	//activity calc carb
-	const liverActivity = liverRun(isfConstant, cr, {
-		physical: activityFactor,
-		alcohol: alcoholActivity,
-	});
+	const liverActivity = liverRun(
+		isfConstant,
+		cr,
+		{
+			physical: activityFactor,
+			alcohol: alcoholActivity,
+		},
+		weight,
+		tz,
+	);
 
 	const now = moment();
 	const orderedEntries = entries

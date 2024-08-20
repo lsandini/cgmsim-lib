@@ -68,10 +68,10 @@ describe('simulator test', () => {
       DIA: 6,
       ISF: 32,
       TP: 75,
-      WEIGHT: 80,
+      WEIGHT: 250 / 3,
       AGE: 51,
-
       GENDER: 'Male',
+      TZ: 'Europe/Rome',
     };
 
     const log = [];
@@ -156,10 +156,11 @@ describe('simulator test', () => {
       DIA: 6,
       ISF: 32,
       TP: 75,
-      WEIGHT: 80,
+      WEIGHT: 250 / 3,
       AGE: 51,
 
       GENDER: 'Male',
+      TZ: 'Europe/Helsinki',
     };
 
     const log = [];
@@ -291,9 +292,10 @@ describe('simulator test', () => {
       DIA: 6,
       ISF: 32,
       TP: 75,
-      WEIGHT: 80,
+      WEIGHT: 250 / 3,
       AGE: 51,
       GENDER: 'Male',
+      TZ: 'Europe/Helsinki',
     };
 
     const log = [];
@@ -433,9 +435,10 @@ describe('simulator test', () => {
       DIA: 6,
       ISF: 32,
       TP: 75,
-      WEIGHT: 80,
+      WEIGHT: 250 / 3,
       AGE: 51,
       GENDER: 'Male',
+      TZ: 'Europe/Rome',
     };
 
     const log = [];
@@ -527,9 +530,10 @@ describe('Simulator', () => {
       DIA: 6,
       ISF: 32,
       TP: 75,
-      WEIGHT: 80,
+      WEIGHT: 250 / 3,
       AGE: 51,
       GENDER: 'Male',
+      TZ: 'Europe/Helsinki',
     };
     // Arrange
     const paramsWithoutTreatments = {
@@ -590,9 +594,10 @@ describe('Simulator', () => {
       DIA: 6,
       ISF: 32,
       TP: 75,
-      WEIGHT: 80,
+      WEIGHT: 250 / 3,
       AGE: 51,
       GENDER: 'Male',
+      TZ: 'Europe/Helsinki',
     };
     // Arrange
     const paramsWithoutProfiles = {
@@ -642,9 +647,10 @@ describe('Simulator', () => {
       DIA: 6,
       ISF: 8,
       TP: 75,
-      WEIGHT: 80,
+      WEIGHT: 250 / 3,
       AGE: 51,
       GENDER: 'Male',
+      TZ: 'Europe/Helsinki',
     };
     const paramsWithLowIsf = {
       patient,

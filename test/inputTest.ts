@@ -270,9 +270,10 @@ export const testGenerator = (
     DIA: 6,
     ISF: 30,
     TP: 75,
-    WEIGHT: 80,
+    WEIGHT: 250 / 3,
     AGE: 51,
     GENDER: 'Male',
+    TZ: 'Europe/Helsinki',
   };
   const noiseActivities = [];
   const basalActivities = [];

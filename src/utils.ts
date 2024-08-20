@@ -44,14 +44,15 @@ const logger = pino({
 export default logger;
 
 export function isHttps(url: string | null | undefined): boolean {
-  if (!url) {
-    return false; // Return false for null or undefined input
-  }
+	if (!url) {
+		return false; // Return false for null or undefined input
+	}
 
-  // Rest of the function remains the same
-  const pattern = /^https:\/\//i;
-  return pattern.test(url);
+	// Rest of the function remains the same
+	const pattern = /^https:\/\//i;
+	return pattern.test(url);
 }
+//
 
 export function removeTrailingSlash(str) {
 	return str.endsWith('/') ? str.slice(0, -1) : str;

@@ -3,36 +3,25 @@ import logger from './utils';
 
 //const logger = pino();
 
-export default function (now: number) {
-	//timestamp in milliseconds;
-	logger.debug('timestamp in milliseconds %o', now);
+function getCurrentHourDecimalInTimezone(timezone) {
+	const now = Date.now();
+	const hours = new Date(now).toLocaleString('en-US', {
+		timeZone: timezone,
+		hour: 'numeric',
+		hour12: false,
+	});
+	const minutes = new Date(now).toLocaleString('en-US', {
+		timeZone: timezone,
+		minute: 'numeric',
+	});
+	return parseFloat(hours) + parseFloat(minutes) / 60;
+}
 
-	// timestamp in days;
-	logger.debug('timestamp in days %o', now / 86400000);
-
-	// timestamp in days rounded;
-	logger.debug('timestamp in days rounded %o', Math.floor(now / 86400000));
-
-	//timestamp in fraction of a day;
-	logger.debug(
-		'timestamp in fraction of a day %o',
-		now / 86400000 - Math.floor(now / 86400000),
-	);
-
-	//fraction of a day in hours;
-	logger.debug(
-		'fraction of a day in hours %o',
-		(now / 86400000 - Math.floor(now / 86400000)) * 24,
-	);
-
-	//fraction of a day in hours adding 2 for UTC+2;
-	logger.debug(
-		'fraction of a day in hours adding 2 for UTC+2 %o',
-		(now / 86400000 - Math.floor(now / 86400000)) * 24 + 2,
-	);
-
+export default function (timezone: string) {
 	// time of the day in hours - decimals, not minutes
-	const hours = (now / 86400000 - Math.floor(now / 86400000)) * 24 + 2;
+	const hours = getCurrentHourDecimalInTimezone(timezone);
+	const hours2 =
+		(Date.now() / 86400000 - Math.floor(Date.now() / 86400000)) * 24 + 2;
 	logger.debug(
 		'time of the day in hours - using decimals, not minutes:  %o',
 		hours.toFixed(2),

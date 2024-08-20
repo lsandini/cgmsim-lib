@@ -67,5 +67,9 @@
   "editor.formatOnSave": true,
   "editor.detectIndentation": false,
   "prettier.trailingComma": "all",
-  "prettier.printWidth": 140
+  "prettier.printWidth": 140,
+  "sonarlint.connectedMode.project": {
+    "connectionId": "https://sonar.beta.cgmsim.com",
+    "projectKey": "lsandini_cgmsim-lib_dcb733af-979c-4bcd-88af-267d99139342"
+  }
 }

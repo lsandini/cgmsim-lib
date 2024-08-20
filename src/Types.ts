@@ -239,6 +239,8 @@ type PatientInfoBase = {
 	AGE: number;
 	/** Gender of the simulated user ('Male' or 'Female'). */
 	GENDER: GenderType;
+	/** Timezone of the user. */
+	TZ: string;
 };
 
 /**
