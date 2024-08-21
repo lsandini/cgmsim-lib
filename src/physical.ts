@@ -5,22 +5,6 @@ type MinutesAgo = { minutesAgo: number };
 
 const MIN_HR = 10;
 
-// export function physicalIsf(activities: Activity[]): number {
-// 	if (hasHeartRate(activities)) {
-// 		return physicalHeartRateIsf(activities.map(a => ({ ...a, minutesAgo: getDeltaMinutes(a.created_at) })));
-// 	} else {
-// 		return physicalStepsIsf(activities.map(a => ({ ...a, minutesAgo: getDeltaMinutes(a.created_at) })));
-// 	}
-// }
-
-// export function physicalLiver(activities: Activity[]): number {
-// 	//TODO check activity with HR
-// 	if (hasHeartRate(activities)) {
-// 		return physicalHeartRateLiver(activities.map(a => ({ ...a, minutesAgo: getDeltaMinutes(a.created_at) })));
-// 	} else {
-// 		return physicalStepsLiver(activities.map(a => ({ ...a, minutesAgo: getDeltaMinutes(a.created_at) })));
-// 	}
-// }
 function getMaxHr(age: number, gender: GenderType) {
 	let MAX_HR = 170;
 	if (age > 0) {
@@ -74,26 +58,26 @@ export function physicalIsf(
 ): number {
 	let MAX_HR = getMaxHr(age, gender);
 
-	const aaa = physicalHeartRateIsf(
+	const hrIsf = physicalHeartRateIsf(
 		activities.map((a) => ({
 			...a,
 			minutesAgo: getDeltaMinutes(a.created_at),
 		})),
 		MAX_HR,
 	);
-	const bbb = physicalStepsIsf(
+	const stepIsf = physicalStepsIsf(
 		activities.map((a) => ({
 			...a,
 			minutesAgo: getDeltaMinutes(a.created_at),
 		})),
 	);
 
-	if (aaa > bbb) {
-		logger.info(`@@@ USING HeartRate for ISF:, %o`, aaa);
+	if (hrIsf > stepIsf) {
+		logger.info(`@@@ USING HeartRate for ISF:, %o`, hrIsf);
 	} else {
-		logger.info(`@@@ USING Steps for ISF:, %o`, bbb);
+		logger.info(`@@@ USING Steps for ISF:, %o`, stepIsf);
 	}
-	return Math.max(aaa, bbb);
+	return Math.max(hrIsf, stepIsf);
 }
 
 export function physicalLiver(
@@ -102,20 +86,20 @@ export function physicalLiver(
 	gender: GenderType,
 ): number {
 	let MAX_HR = getMaxHr(age, gender);
-	const aaa = physicalHeartRateLiver(
+	const hrLiver = physicalHeartRateLiver(
 		activities.map((a) => ({
 			...a,
 			minutesAgo: getDeltaMinutes(a.created_at),
 		})),
 		MAX_HR,
 	);
-	const bbb = physicalStepsLiver(
+	const stepsLiver = physicalStepsLiver(
 		activities.map((a) => ({
 			...a,
 			minutesAgo: getDeltaMinutes(a.created_at),
 		})),
 	);
-	return Math.max(aaa, bbb);
+	return Math.max(hrLiver, stepsLiver);
 }
 
 // HEARTRATE

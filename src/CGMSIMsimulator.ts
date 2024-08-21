@@ -41,13 +41,13 @@ const simulator = (params: MainParams): SimulationResult => {
 	const tz = patient?.TZ || 'UTC';
 
 	let isfActivityDependent = isfConstant;
-	let activityFactor = 1;
+	let liverActivityFactor = 1;
 	if (isfActivityDependent < 9) {
 		throw new Error('Isf must be greater than or equal to 9');
 	}
 	if (activities && activities.length > 0) {
 		isfActivityDependent = isfConstant * physicalIsf(activities, age, gender);
-		activityFactor = physicalLiver(activities, age, gender);
+		liverActivityFactor = physicalLiver(activities, age, gender);
 	}
 
 	const weight = patient.WEIGHT;
@@ -77,7 +77,7 @@ const simulator = (params: MainParams): SimulationResult => {
 		isfConstant,
 		cr,
 		{
-			physical: activityFactor,
+			physical: liverActivityFactor,
 			alcohol: alcoholActivity,
 		},
 		weight,
@@ -105,14 +105,14 @@ const simulator = (params: MainParams): SimulationResult => {
 	logger.info(user.nsUrl + 'this is the simulator result: %o', {
 		...newSgvValue,
 		physicalISF: isfActivityDependent / isfConstant,
-		physicalLiver: activityFactor,
+		physicalLiver: liverActivityFactor,
 	});
 
 	// const arrows = arrowsRun([newSgvValue, ...entries]);
 
 	return {
 		...newSgvValue,
-		activityFactor,
+		activityFactor: liverActivityFactor,
 		isf: { dynamic: isfActivityDependent, constant: isfConstant },
 	};
 };
