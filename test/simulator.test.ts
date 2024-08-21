@@ -71,7 +71,7 @@ describe('simulator test', () => {
       WEIGHT: 250 / 3,
       AGE: 51,
       GENDER: 'Male',
-      TZ: 'Europe/Rome',
+      TZ: 'UTC',
     };
 
     const log = [];
@@ -438,7 +438,7 @@ describe('simulator test', () => {
       WEIGHT: 250 / 3,
       AGE: 51,
       GENDER: 'Male',
-      TZ: 'Europe/Rome',
+      TZ: 'UTC',
     };
 
     const log = [];

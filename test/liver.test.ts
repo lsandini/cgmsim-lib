@@ -9,13 +9,7 @@ describe('Liver test', () => {
     jest.useRealTimers();
   });
   it.each([[[30, 10]], [[20, 8]], [[40, 14]]])('test liver %p', ([isf, cr]) => {
-    const r = liver(
-      isf,
-      cr,
-      { physical: 1, alcohol: 0 },
-      250 / 3,
-      'Europe/Helsinki',
-    );
+    const r = liver(isf, cr, { physical: 1, alcohol: 0 }, 250 / 3, 'UTC');
     expect(r).toMatchSnapshot();
   });
 });

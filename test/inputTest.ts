@@ -273,7 +273,7 @@ export const testGenerator = (
     WEIGHT: 250 / 3,
     AGE: 51,
     GENDER: 'Male',
-    TZ: 'Europe/Helsinki',
+    TZ: 'UTC',
   };
   const noiseActivities = [];
   const basalActivities = [];

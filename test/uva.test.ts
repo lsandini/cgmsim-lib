@@ -36,7 +36,7 @@ describe('uva test default PATIENT', () => {
     AGE: 40,
     GENDER: 'Male',
     WEIGHT: 250 / 3,
-    TZ: 'Europe/Rome',
+    TZ: 'UTC',
   };
 
   test('basal  with gla 30 should generate flat sgv', async () => {
