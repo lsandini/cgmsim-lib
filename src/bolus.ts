@@ -1,6 +1,6 @@
 import logger, {
 	getDeltaMinutes,
-	getBiexpTreatmentActivity,
+	getExpTreatmentActivity,
 	roundTo8Decimals,
 } from './utils';
 import { NSTreatment, isMealBolusTreatment } from './Types';
@@ -27,7 +27,7 @@ export default (
 
 	const insulinsBolusAct = insulin?.map((entry) => {
 		const units = entry.insulin;
-		return getBiexpTreatmentActivity({
+		return getExpTreatmentActivity({
 			peak,
 			duration,
 			minutesAgo: entry.minutesAgo,

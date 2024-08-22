@@ -1,11 +1,11 @@
 import { treatments } from './inputTest';
 import computeCortisone from '../src/cortisone';
-import { NSTreatment, TreatmentBiexpParam } from '../src/Types';
+import { NSTreatment, TreatmentExpParam } from '../src/Types';
 import moment = require('moment');
 import { diffOptions, getPngSnapshot } from './inputTest';
 import { drugs, transformNoteTreatmentsDrug } from '../src/drug';
 import cortisone from '../src/cortisone';
-import { getBiexpTreatmentActivity } from '../src/utils';
+import { getExpTreatmentActivity } from '../src/utils';
 const { toMatchImageSnapshot } = require('jest-image-snapshot');
 
 describe('test cortisone', () => {

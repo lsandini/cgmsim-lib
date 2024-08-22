@@ -1,7 +1,13 @@
 import { isHttps, removeTrailingSlash } from '../src/utils';
 import * as utils from '../src/utils';
 import fetch from 'node-fetch';
-import { loadBase, uploadBase, roundTo8Decimals, getBiexpTreatmentActivity, getDeltaMinutes } from '../src/utils';
+import {
+  loadBase,
+  uploadBase,
+  roundTo8Decimals,
+  getExpTreatmentActivity,
+  getDeltaMinutes,
+} from '../src/utils';
 import { Entry } from 'src/Types';
 
 jest.mock('node-fetch');
@@ -141,11 +147,11 @@ describe('uploadBase function', () => {
     const nsUrlApi = 'https://nightscout-api.com';
     const apiSecret = 'yourApiSecret';
     const testData: Entry = {
-      "sgv": 161,
-      "direction": "Flat",
-      "type": "sgv",
-      "dateString": "2024-01-17T17:05:07.424Z",
-      "date": 1705511107424,
+      sgv: 161,
+      direction: 'Flat',
+      type: 'sgv',
+      dateString: '2024-01-17T17:05:07.424Z',
+      date: 1705511107424,
     };
 
     // Mock the fetch function to resolve with a success response
@@ -194,9 +200,9 @@ describe('roundTo8Decimals function', () => {
   });
 });
 
-describe('getBiexpTreatmentActivity function', () => {
+describe('getExpTreatmentActivity function', () => {
   it('should return 0 when activity is less than or equal to 0', () => {
-    const result = getBiexpTreatmentActivity({
+    const result = getExpTreatmentActivity({
       peak: 10,
       duration: 30,
       minutesAgo: 20,
@@ -206,7 +212,7 @@ describe('getBiexpTreatmentActivity function', () => {
   });
 
   it('should return 0 when activity is less than or equal to 0', () => {
-    const result = getBiexpTreatmentActivity({
+    const result = getExpTreatmentActivity({
       peak: 55,
       duration: 180,
       minutesAgo: 200,
@@ -216,7 +222,7 @@ describe('getBiexpTreatmentActivity function', () => {
   });
 
   it('should adjust activity when minutesAgo is less than 15', () => {
-    const result = getBiexpTreatmentActivity({
+    const result = getExpTreatmentActivity({
       peak: 10,
       duration: 30,
       minutesAgo: 10,
@@ -227,18 +233,21 @@ describe('getBiexpTreatmentActivity function', () => {
   });
 
   it('should return normal activity when conditions are met', () => {
-    const result = getBiexpTreatmentActivity({
+    const result = getExpTreatmentActivity({
       peak: 10,
       duration: 30,
       minutesAgo: 20,
       units: 5,
     });
     const expectedActivity =
-      5 * (1 / Math.pow((10 * (1 - 10 / 30)) / (1 - (2 * 10) / 30), 2)) * 20 * (1 - 20 / 30) * Math.exp(-20 / ((10 * (1 - 10 / 30)) / (1 - (2 * 10) / 30)));
+      5 *
+      (1 / Math.pow((10 * (1 - 10 / 30)) / (1 - (2 * 10) / 30), 2)) *
+      20 *
+      (1 - 20 / 30) *
+      Math.exp(-20 / ((10 * (1 - 10 / 30)) / (1 - (2 * 10) / 30)));
     expect(result).toBe(0.16367332278955893);
   });
 });
-
 
 const moment = require('moment');
 

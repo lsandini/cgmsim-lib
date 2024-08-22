@@ -1,7 +1,7 @@
 import {
 	NSTreatment,
 	NSTreatmentParsed,
-	TreatmentBiexpParam,
+	TreatmentExpParam,
 	isAnnouncementTreatment,
 } from './Types';
 import logger, { getDeltaMinutes } from './utils';
@@ -74,11 +74,11 @@ export const drugs = {
 	},
 };
 
-export const getTreatmentBiexpParam = (
+export const getTreatmentExpParam = (
 	treatments: NSTreatmentParsed[],
 	weight: number,
 	drug: keyof typeof drugs,
-): TreatmentBiexpParam[] => {
+): TreatmentExpParam[] => {
 	const currentDrug = drugs[drug];
 	return treatments
 		.filter((e) => currentDrug.names.some((n) => n === e.drug))

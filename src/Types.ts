@@ -201,7 +201,7 @@ export type NSTreatmentParsed = {
 /**
  * Represents a treatment delta with additional minutes ago information.
  */
-export type TreatmentBiexpParam = {
+export type TreatmentExpParam = {
 	units: number;
 	minutesAgo: number;
 	duration: number;

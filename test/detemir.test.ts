@@ -7,8 +7,8 @@ describe('test detemir', () => {
   });
 
   // type MockTreatment = {
-  //   units: TreatmentBiexpParam['units'];
-  //   minutesAgo: TreatmentBiexpParam['minutesAgo'];
+  //   units: TreatmentExpParam['units'];
+  //   minutesAgo: TreatmentExpParam['minutesAgo'];
   // };
 
   // const detemir = (weight: number, treatments: MockTreatment[]): number => {

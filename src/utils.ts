@@ -7,7 +7,7 @@ import {
 	Entry,
 	Note,
 	SimulationResult,
-	TreatmentBiexpParam,
+	TreatmentExpParam,
 } from './Types';
 import { load } from 'ts-dotenv';
 import pinoPretty from 'pino-pretty';
@@ -58,12 +58,12 @@ export function removeTrailingSlash(str) {
 	return str.endsWith('/') ? str.slice(0, -1) : str;
 }
 
-export function getBiexpTreatmentActivity({
+export function getExpTreatmentActivity({
 	peak,
 	duration,
 	minutesAgo,
 	units,
-}: TreatmentBiexpParam) {
+}: TreatmentExpParam) {
 	const tau = (peak * (1 - peak / duration)) / (1 - (2 * peak) / duration);
 	const a = (2 * tau) / duration;
 	const S = 1 / (1 - a + (1 + a) * Math.exp(-duration / tau));

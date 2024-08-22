@@ -1,11 +1,11 @@
-import { TreatmentBiexpParam, NSTreatment, NSTreatmentParsed } from './Types';
-import { getTreatmentBiexpParam } from './drug';
-import logger, { getBiexpTreatmentActivity, roundTo8Decimals } from './utils';
+import { TreatmentExpParam, NSTreatment, NSTreatmentParsed } from './Types';
+import { getTreatmentExpParam } from './drug';
+import logger, { getExpTreatmentActivity, roundTo8Decimals } from './utils';
 
-const computeCortisoneActivity = (treatments: TreatmentBiexpParam[]) => {
+const computeCortisoneActivity = (treatments: TreatmentExpParam[]) => {
 	// expressed U/min !!!
 	return treatments
-		.map(getBiexpTreatmentActivity)
+		.map(getExpTreatmentActivity)
 		.reduce((tot, activity) => tot + activity, 0);
 };
 
@@ -14,7 +14,7 @@ export default function (
 	weight: number,
 ): number {
 	//Find Cortisone boluses
-	const lastCOR = getTreatmentBiexpParam(treatments, weight, 'COR');
+	const lastCOR = getTreatmentExpParam(treatments, weight, 'COR');
 	const activityCOR =
 		lastCOR.length > 0 ? computeCortisoneActivity(lastCOR) : 0;
 	logger.debug('these are the last COR: %o', { lastCOR, activityCOR });

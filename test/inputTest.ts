@@ -6,10 +6,10 @@ import {
   PatientInfoCgmsim,
   NSTreatment,
   Sgv,
-  TreatmentBiexpParam,
+  TreatmentExpParam,
 } from '../src/Types';
 import simulator from '../src/CGMSIMsimulator';
-import { getBiexpTreatmentActivity } from '../src/utils';
+import { getExpTreatmentActivity } from '../src/utils';
 import { TypeDateISO } from '../src/TypeDateISO';
 const { output, line } = require('../test/d3/d3Func');
 
@@ -381,10 +381,10 @@ export const testGenerator = (
 };
 
 export const computeBasalActivityForTest = (
-  treatments: TreatmentBiexpParam[],
+  treatments: TreatmentExpParam[],
 ) => {
   // expressed U/min !!!
   return treatments
-    .map(getBiexpTreatmentActivity)
+    .map(getExpTreatmentActivity)
     .reduce((tot, activity) => tot + activity, 0);
 };

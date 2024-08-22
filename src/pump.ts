@@ -1,4 +1,4 @@
-import logger, { getDeltaMinutes, getBiexpTreatmentActivity } from './utils';
+import logger, { getDeltaMinutes, getExpTreatmentActivity } from './utils';
 import * as moment from 'moment';
 import { NSProfile, NSTreatment } from './Types';
 import { TypeDateISO } from './TypeDateISO';
@@ -202,7 +202,7 @@ export default function (
 	const pumpBasalAct = basalAsBoluses.reduce(
 		(tot, entry) =>
 			tot +
-			getBiexpTreatmentActivity({
+			getExpTreatmentActivity({
 				peak,
 				duration,
 				minutesAgo: entry.minutesAgo,
