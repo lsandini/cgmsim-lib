@@ -7,7 +7,7 @@ function getProfileSwitch(treatments: NSTreatment[], duration: number) {
 	const computedProfilesSwitch: {
 		start: moment.Moment;
 		end: moment.Moment;
-		basal: { time: string; value: number }[] | number;
+		insulin: number;
 	}[] = [];
 	const now = moment().utc();
 	treatments
@@ -35,15 +35,17 @@ function getProfileSwitch(treatments: NSTreatment[], duration: number) {
 						time: pb.time,
 						value: pb.value * (tr.percentage / 100),
 					}));
+					const value = activeBasalByTime(basals, start);
+
 					computedProfilesSwitch.push({
 						start,
-						basal: basals,
+						insulin: value,
 						end,
 					});
 				} else {
 					computedProfilesSwitch.push({
 						start,
-						basal: profile.basal * (tr.percentage / 100),
+						insulin: profile.basal * (tr.percentage / 100),
 						end,
 					});
 				}
@@ -55,6 +57,50 @@ function getProfileSwitch(treatments: NSTreatment[], duration: number) {
 			}
 		});
 	return computedProfilesSwitch;
+}
+
+function getTemporaryOverride(
+	treatments: NSTreatment[],
+	duration: number,
+	orderedProfiles: NSProfile[],
+) {
+	const computedTemporaryOverride: {
+		start: moment.Moment;
+		end: moment.Moment;
+		insulin: number;
+	}[] = [];
+	const now = moment().utc();
+	treatments
+		.filter(
+			(e) =>
+				e.created_at &&
+				now.diff(moment(e.created_at), 'minutes') <= duration && // temps basals set in the last 3 hours
+				e.eventType === 'Temporary Override' &&
+				e.duration != 0,
+		)
+		.sort((f, s) => {
+			return moment(f.created_at).diff(s.created_at);
+		})
+		.forEach((tr) => {
+			if (tr.eventType === 'Temporary Override' && tr.insulinNeedsScaleFactor) {
+				const start = moment(tr.created_at).utc();
+				const end = moment(tr.created_at).add(tr.duration, 'minutes').utc();
+				const insulin = getBasalFromProfiles(orderedProfiles, start);
+				const value = insulin * tr.insulinNeedsScaleFactor;
+
+				computedTemporaryOverride.push({
+					start,
+					insulin: value,
+					end,
+				});
+			} else {
+				const currentIndex = computedTemporaryOverride.length - 1;
+				if (currentIndex >= 0) {
+					computedTemporaryOverride[currentIndex].end = moment(tr.created_at);
+				}
+			}
+		});
+	return computedTemporaryOverride;
 }
 
 function getTempBasal(treatments: NSTreatment[], duration: number) {
@@ -139,6 +185,8 @@ export default function (
 	dia: number,
 	peak: number,
 ) {
+	const minutesStep = 5;
+	const steps = 60 / minutesStep;
 	const basalAsBoluses: { minutesAgo: number; insulin: number }[] = [];
 	const endDiaAction = moment().utc();
 	const startDiaAction = moment()
@@ -158,12 +206,17 @@ export default function (
 
 	const computedTempBasal = getTempBasal(treatments, duration);
 	const computedProfileSwitch = getProfileSwitch(treatments, duration);
+	const computedTemporaryOverride = getTemporaryOverride(
+		treatments,
+		duration,
+		orderedProfiles,
+	);
 
 	// const basalsToUpdate = [];
 	for (
 		let currentAction = startDiaAction;
 		currentAction.diff(endDiaAction) <= 0;
-		currentAction.add(5, 'minutes')
+		currentAction.add(minutesStep, 'minutes')
 	) {
 		const tempBasalActives = computedTempBasal.filter(
 			(t) => t.start.diff(currentAction) <= 0 && t.end.diff(currentAction) > 0,
@@ -171,29 +224,35 @@ export default function (
 		const profilesStichActives = computedProfileSwitch.filter(
 			(t) => t.start.diff(currentAction) <= 0 && t.end.diff(currentAction) > 0,
 		);
+		const temporaryOverrideActives = computedTemporaryOverride.filter(
+			(t) => t.start.diff(currentAction) <= 0 && t.end.diff(currentAction) > 0,
+		);
 		let basalToUpdate: { minutesAgo: number; insulin: number };
 		//if there is a temp basal actives
 		if (tempBasalActives.length > 0) {
+			const insulin = tempBasalActives[0].insulin / steps;
 			basalToUpdate = {
 				minutesAgo: getDeltaMinutes(currentAction.toISOString() as TypeDateISO),
-				insulin: tempBasalActives[0].insulin / 12,
+				insulin,
 			};
 		} else if (profilesStichActives.length > 0) {
-			const basal = activeBasalByTime(
-				profilesStichActives[0].basal,
-				currentAction,
-			);
+			const insulin = profilesStichActives[0].insulin / steps;
 			basalToUpdate = {
 				minutesAgo: getDeltaMinutes(currentAction.toISOString() as TypeDateISO),
-				insulin: basal / 12,
+				insulin,
+			};
+		} else if (temporaryOverrideActives.length > 0) {
+			const insulin = temporaryOverrideActives[0].insulin / steps;
+			basalToUpdate = {
+				minutesAgo: getDeltaMinutes(currentAction.toISOString() as TypeDateISO),
+				insulin,
 			};
 		} else {
-			let currentBasal = {
-				value: getBasalFromProfiles(orderedProfiles, currentAction),
-			};
+			const insulin =
+				getBasalFromProfiles(orderedProfiles, currentAction) / steps;
 			basalToUpdate = {
 				minutesAgo: getDeltaMinutes(currentAction.toISOString() as TypeDateISO),
-				insulin: currentBasal.value / 12,
+				insulin,
 			};
 		}
 		basalAsBoluses.push(basalToUpdate);

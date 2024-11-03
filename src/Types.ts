@@ -143,6 +143,20 @@ export type ProfileSwitchTreatment = {
 };
 
 /**
+ * Represents the treatment information for a Profile Switch event.
+ */
+export type TemporaryOverrideTreatment = {
+	/** The type of event, set to 'Profile Switch'. */
+	eventType: 'Temporary Override';
+	/** The duration of the profile switch in minutes. */
+	duration: number;
+	/** The date of the treatment creation in ISO format. */
+	created_at: TypeDateISO;
+	/** The scale factor applied during the temporary override. */
+	insulinNeedsScaleFactor: number;
+};
+
+/**
  * Represents the treatment information for a Temporary Basal event.
  */
 export type TempBasalTreatment = {
@@ -177,7 +191,8 @@ export type NSTreatment =
 	| MealBolusTreatment
 	| ProfileSwitchTreatment
 	| TempBasalTreatment
-	| AnnouncementTreatment;
+	| AnnouncementTreatment
+	| TemporaryOverrideTreatment;
 
 export const isMealBolusTreatment = (
 	treatment: NSTreatment,

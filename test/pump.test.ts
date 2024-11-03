@@ -34,6 +34,14 @@ const profileSwitch: NSTreatment[] = [
     }),
   },
 ];
+const temporaryOverride: NSTreatment[] = [
+  {
+    eventType: 'Temporary Override',
+    insulinNeedsScaleFactor: 1.3,
+    duration: 30,
+    created_at: '2022-05-06T13:00:00.000Z',
+  },
+];
 const tmpBasal: NSTreatment[] = [
   {
     eventType: 'Temp Basal',
@@ -175,6 +183,29 @@ describe('test pump', () => {
     let _date = moment('2022-05-06T16:30:00.000Z');
     jest.setSystemTime(_date.toDate());
     const treatments = profileSwitch;
+    const result = pump(
+      treatments,
+      [
+        {
+          startDate: '2000-01-01T00:00:00.000Z',
+          defaultProfile: 'Default',
+          store: {
+            Default: {
+              basal: dynamicBasal,
+            },
+          },
+        },
+      ],
+      dia,
+      peak,
+    );
+
+    expect(result).toMatchSnapshot();
+  });
+  test('dynamic  basal in profile, no temp basal and temporary override', () => {
+    let _date = moment('2022-05-06T16:30:00.000Z');
+    jest.setSystemTime(_date.toDate());
+    const treatments = temporaryOverride;
     const result = pump(
       treatments,
       [
