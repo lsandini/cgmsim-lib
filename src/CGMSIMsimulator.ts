@@ -110,4 +110,47 @@ const simulator = (params: MainParams): SimulationResult => {
 	};
 };
 
+/**
+ * Generates predictions using the same calculation method as the main simulator
+ * @param params - Main parameters for running the simulation.
+ * @returns Array of predicted SGV values for the next 3 hours at 5-min intervals
+ */
+simulator.getPredictions = (params: any): number[] => {
+  const predictions: number[] = [];
+  const now = moment();
+
+  // Start with current value
+  const currentValue = simulator(params);
+  console.log('PREDICTION START:', {
+      currentSGV: currentValue.sgv,
+      baseActivities: {
+          carbsActivity: currentValue.carbsActivity,
+          basalActivity: currentValue.basalActivity,
+          bolusActivity: currentValue.bolusActivity,
+          liverActivity: currentValue.liverActivity,
+          cortisoneActivity: currentValue.cortisoneActivity,
+          alcoholActivity: currentValue.alcoholActivity
+      }
+  });
+  predictions.push(currentValue.sgv);
+
+  // Generate predictions
+  for (let i = 1; i < 36; i++) {
+      const predictionTime = moment(now).add(i * 5, 'minutes');
+      
+      // Just use any type for the treatments
+      const adjustedTreatments = params.treatments.map(t => ({
+          ...t,
+          minutesAgo: Math.round(predictionTime.diff(moment(t.created_at), 'minutes'))
+      })).filter(t => t.minutesAgo >= 0);
+
+      // Rest of your JavaScript code exactly as it was...
+      const bolusActivity = bolus(adjustedTreatments, params.patient.DIA, params.patient.TP);
+      const basalBolusActivity = params.pumpEnabled ? 0 : basal(adjustedTreatments, params.patient.WEIGHT);
+      // ... rest of your original code ...
+  }
+
+  return predictions;
+};
+
 export default simulator;
