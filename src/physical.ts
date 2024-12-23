@@ -93,13 +93,8 @@ export function physicalLiver(
 		})),
 		MAX_HR,
 	);
-	const stepsLiver = physicalStepsLiver(
-		activities.map((a) => ({
-			...a,
-			minutesAgo: getDeltaMinutes(a.created_at),
-		})),
-	);
-	return Math.max(hrLiver, stepsLiver);
+
+	return Math.max(hrLiver, 1);
 }
 
 // HEARTRATE
@@ -118,39 +113,40 @@ function physicalHeartRateIsf(
 	// this "activity" is a coefficient that will affect the ISF
 	// ====================================================================================
 
-	let timeSinceHRAct = last360min.map((entry) => {
-		const minutesAgo = entry.minutesAgo;
-		const heartRate = entry.heartRate;
-		const hrRatio = heartRate / MAX_HR;
-		if (minutesAgo >= 0 && hrRatio > 0.6) {
-			if (hrRatio <= 0.75) {
-				// in low intensity "fat burn" exercise, I suggest a steady low, linearly
-				// decreasing effect over 4 hours:
+	let resultHRAct = last360min
+		.map((entry) => {
+			const minutesAgo = entry.minutesAgo;
+			const heartRate = entry.heartRate;
+			const hrRatio = heartRate / MAX_HR;
+			if (minutesAgo >= 0 && hrRatio > 0.6) {
+				if (hrRatio <= 0.75) {
+					// in low intensity "fat burn" exercise, I suggest a steady low, linearly
+					// decreasing effect over 4 hours:
 
-				// after 10 minutes the effect is (240-10)/24000 = 23/2400 = 0.009583
-				// after 60 minutes the effect is (240-60)/24000 = 18/2400 = 0.0075
-				// after 120 minutes the effect is (240-120)/24000 = 12/2400 = 0.005
-				// after 180 minutes the effect is (240-180)/24000 = 6/2400 = 0.0025
+					// after 10 minutes the effect is (240-10)/24000 = 23/2400 = 0.009583
+					// after 60 minutes the effect is (240-60)/24000 = 18/2400 = 0.0075
+					// after 120 minutes the effect is (240-120)/24000 = 12/2400 = 0.005
+					// after 180 minutes the effect is (240-180)/24000 = 6/2400 = 0.0025
 
-				return (hrRatio * (240 - minutesAgo)) / 24000;
-			} else if (hrRatio > 0.75 && hrRatio <= 0.9) {
-				// in moderate intensity "cardio" exercise, I suggest a steady, linearly
-				// decreasing effect over 6 hours:
+					return (hrRatio * (240 - minutesAgo)) / 24000;
+				} else if (hrRatio > 0.75 && hrRatio <= 0.9) {
+					// in moderate intensity "cardio" exercise, I suggest a steady, linearly
+					// decreasing effect over 6 hours:
 
-				// after 10 minutes the effect is (360-10)/2*36000 = 35/7200 = 0.004861
-				// after 60 minutes the effect is (360-60)/2*36000 = 30/7200 = 0.004166
-				// after 120 minutes the effect is (360-120)/2*36000 = 24/7200 = 0.00333
-				// after 180 minutes the effect is (360-180)/2*36000 = 18/7200 = 0.00250
-				// after 240 minutes the effect is (360-240)/2*36000 = 12/7200 = 0.00166
-				return (hrRatio * (360 - minutesAgo)) / 72000;
-			} else if (hrRatio > 0.9) {
+					// after 10 minutes the effect is (360-10)/2*36000 = 35/7200 = 0.004861
+					// after 60 minutes the effect is (360-60)/2*36000 = 30/7200 = 0.004166
+					// after 120 minutes the effect is (360-120)/2*36000 = 24/7200 = 0.00333
+					// after 180 minutes the effect is (360-180)/2*36000 = 18/7200 = 0.00250
+					// after 240 minutes the effect is (360-240)/2*36000 = 12/7200 = 0.00166
+					return (hrRatio * (360 - minutesAgo)) / 72000;
+				} else if (hrRatio > 0.9) {
+					return 0;
+				}
+			} else {
 				return 0;
 			}
-		} else {
-			return 0;
-		}
-	});
-	const resultHRAct = 1 + timeSinceHRAct.reduce((tot, arr) => tot + arr, 0);
+		})
+		.reduce((tot, arr) => tot + arr, 1);
 
 	logger.debug(`@@@ PHYSICAL HEART RATE ISF: %o`, resultHRAct);
 	return resultHRAct;
@@ -170,7 +166,6 @@ function physicalHeartRateLiver(
 
 	let timeSinceHRAct = last360min.map((entry) => {
 		const minutesAgo = entry.minutesAgo;
-		const heartRate = entry.heartRate;
 		const hrRatio = entry.heartRate / MAX_HR;
 		if (minutesAgo >= 0 && hrRatio > 0.6) {
 			if (hrRatio > 0.6 && hrRatio <= 0.75) {
@@ -224,24 +219,20 @@ function physicalStepsIsf(activities: (Activity & MinutesAgo)[]): number {
 
 	// compute cumulative daily steps in the previous 7 days or 7 * 1440 min
 	// then divide by 16 hours for hourly steps and multiply by 4 for 4-hour periods
-	let last7daysSteps = activities.filter(
-		(e) => e.minutesAgo <= 10080 && e.steps > -1,
-	);
-	let cumulativeSteps = last7daysSteps.reduce(function (tot, arr) {
-		return tot + arr.steps;
-	}, 0);
-	logger.debug(`cumulativeSteps 7 days steps: %o`, cumulativeSteps);
+	let cumulativeSteps = activities
+		.filter((e) => e.minutesAgo <= 10080 && e.steps > -1)
+		.reduce((tot, arr) => tot + arr.steps, 0);
 	logger.debug(`means steps over 7 days: %o`, Math.round(cumulativeSteps / 7));
+
 	let mean4hourSteps = Math.max(Math.round(cumulativeSteps / (7 * 4)), 1500);
 	logger.debug(`mean4hourSteps, min 1500: %o`, mean4hourSteps);
 
 	// compute last 4 hours steps
-	let last4hoursActivities = activities.filter(
-		(e) => e.minutesAgo <= 240 && e.steps > -1,
-	);
-	let last4hourSteps = last4hoursActivities.reduce(function (tot, arr) {
-		return tot + arr.steps;
-	}, 0);
+	let last4hourSteps = activities
+		.filter((e) => e.minutesAgo <= 240 && e.steps > -1)
+		.reduce(function (tot, arr) {
+			return tot + arr.steps;
+		}, 0);
 	logger.debug(`last4hourSteps: %o`, last4hourSteps);
 
 	let stepRatio = last4hourSteps / mean4hourSteps;
@@ -253,22 +244,10 @@ function physicalStepsIsf(activities: (Activity & MinutesAgo)[]): number {
 		resultStepAct = 1;
 	} else if (stepRatio > 1) {
 		resultStepAct = 1 + stepRatio / 6;
-		// if stepRatio is 1.8, result is 1 + 1.8/6 = 1.30
-		// if stepRatio is 3, result is 1 + 3/6 = 1.5
 	}
-	logger.debug(`@@@ PHYSICAL STEPS ISF: %o`, resultStepAct);
+	logger.debug(`PHYSICAL STEPS ISF: %o`, resultStepAct);
 	return resultStepAct;
 }
-
-function physicalStepsLiver(activities: (Activity & MinutesAgo)[]): number {
-	// Here we compute the effect of steps on liver EGP
-	// We'll assume the number of steps doesn't affect the EGP
-	// or Endogenous Glucose Production by the liver
-	let resultStepAct = 1;
-	logger.debug(`@@@ PHYSICAL STEPS LIVER: %o`, resultStepAct);
-	return resultStepAct;
-}
-
 // Helper functions
 //=================
 

@@ -1,5 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Liver test test liver [1.1111111111111112, 8] 1`] = `0`;
+
+exports[`Liver test test liver [1.6666666666666667, 10] 1`] = `0`;
+
+exports[`Liver test test liver [2.2222222222222223, 14] 1`] = `0`;
+
 exports[`Liver test test liver [20, 8] 1`] = `0.025462962962962965`;
 
 exports[`Liver test test liver [30, 10] 1`] = `0.03055555555555556`;

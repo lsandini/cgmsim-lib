@@ -24,7 +24,7 @@ const sgv_start = (
 
 	logger.debug('deltaMinutes %o', deltaMinutes);
 
-	const isfMMol = isf / 18; //(mmol/l)/U
+	const isfMMol = isf; //(mmol/l)/U
 	//logger.debug('ISF= %o', ISF);
 
 	// ENABLE THIS FOR PUMP SIMULATION

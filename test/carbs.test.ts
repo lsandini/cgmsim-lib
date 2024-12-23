@@ -22,11 +22,13 @@ afterAll(() => {
   global.Math = math;
 });
 
+const isf = 30 / 18;
+
 const minutesAgo = (min) =>
   moment(now).add(-min, 'minutes').toISOString() as TypeDateISO;
 describe('Carbs test', () => {
   test('test carbs without treatments return 0', () => {
-    const r = carbs([], 360, 30, 10);
+    const r = carbs([], 360, isf, 10);
     expect(r).toBe(0);
   });
   test('test carbs with old treatments return 0', () => {
@@ -40,7 +42,7 @@ describe('Carbs test', () => {
         },
       ],
       360,
-      30,
+      isf,
       10,
     );
     expect(r).toBe(0);
@@ -57,7 +59,7 @@ describe('Carbs test', () => {
         },
       ],
       360,
-      30,
+      isf,
       10,
     );
     expect(r).toMatchSnapshot();
@@ -80,7 +82,7 @@ describe('Carbs test', () => {
         },
       ],
       360,
-      30,
+      isf,
       10,
     );
     expect(r).toMatchSnapshot();
@@ -97,7 +99,7 @@ describe('Carbs test', () => {
         },
       ],
       360,
-      30,
+      isf,
       10,
     );
     const r60 = carbs(
@@ -110,7 +112,7 @@ describe('Carbs test', () => {
         },
       ],
       360,
-      30,
+      isf,
       10,
     );
     expect(r40).toBeGreaterThan(r60);
@@ -127,7 +129,7 @@ describe('Carbs test', () => {
         },
       ],
       360,
-      30,
+      isf,
       10,
     );
     const r60 = carbs(
@@ -140,7 +142,7 @@ describe('Carbs test', () => {
         },
       ],
       360,
-      30,
+      isf,
       10,
     );
     expect(r5).toBeLessThan(r60);
@@ -163,7 +165,7 @@ describe('Carbs test', () => {
         },
       ],
       360,
-      30,
+      isf,
       10,
     );
     expect(r).toBeGreaterThan(0);
@@ -181,7 +183,7 @@ describe('Carbs test', () => {
       insulin: 0,
       created_at: minutesAgo(n),
     }));
-    const r = carbs(e, 360, 30, 10);
+    const r = carbs(e, 360, isf, 10);
     expect(r).toMatchSnapshot();
   });
 });
@@ -198,7 +200,7 @@ describe('Carbs test compare old', () => {
     let now = moment();
     const oldC: number[] = [];
     const newC: number[] = [];
-    const isf = 36;
+    const isf = 36 / 18;
     const cr = 10;
     //
     for (let i = 0; i < 360; i++) {
@@ -220,7 +222,7 @@ describe('Carbs test compare old', () => {
       oldC.push(old); // old raw value is not multiplied by CSF (isfMMol/CR)
       now = now.add(1, 'minutes');
     }
-    const newT = newC.reduce((acc, i) => i * (cr / (isf / 18)) + acc, 0);
+    const newT = newC.reduce((acc, i) => i * (cr / isf) + acc, 0);
     const oldT = oldC.reduce((acc, i) => i + acc, 0);
     expect(newT.toFixed(5)).toBe(oldT.toFixed(5));
     expect(newT.toFixed(5)).toBe(oldT.toFixed(5));
