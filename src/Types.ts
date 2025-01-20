@@ -117,7 +117,8 @@ export type MealBolusTreatment = {
 		| 'Bolus'
 		| 'Correction Bolus'
 		| 'Bolus Wizard'
-		| 'Carb Correction';
+		| 'Carb Correction'
+    | 'Surprise Meal';
 	/** The amount of insulin administered for the meal bolus. */
 	insulin?: number;
 	/** The number of carbohydrates consumed. */
@@ -201,6 +202,7 @@ export const isMealBolusTreatment = (
 	treatment.eventType === 'Bolus' ||
 	treatment.eventType === 'Bolus Wizard' ||
 	treatment.eventType === 'Correction Bolus' ||
+  treatment.eventType === 'Surprise Meal' ||
 	treatment.eventType === 'Carb Correction';
 
 export const isAnnouncementTreatment = (
