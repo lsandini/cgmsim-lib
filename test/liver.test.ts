@@ -12,7 +12,7 @@ describe('Liver test', () => {
     const r = liver(
       isf,
       cr,
-      { physical: 1, alcohol: 0 },
+      { physical: 1, alcohol: 1 },
       250 / 3,
       'Europe/Helsinki', //2001-01-01 UTC+2
     );
