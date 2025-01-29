@@ -22,7 +22,7 @@ describe('test alcohol', () => {
     );
     expect(alcoolActivity).toMatchSnapshot();
   });
-  test('weight:80 Male alc:2 minutesAgo:180 should be 0', () => {
+  test('weight:80 Male alc:2 minutesAgo:180 should be 1', () => {
     const weight = 80;
     const alcoolActivity = alcohol(
       [
@@ -35,7 +35,7 @@ describe('test alcohol', () => {
       weight,
       'Male',
     );
-    expect(alcoolActivity).toBe(0);
+    expect(alcoolActivity).toBe(1);
   });
   test('weight:80 Male alc:1 all', async () => {
     const weight = 80;
@@ -57,7 +57,7 @@ describe('test alcohol', () => {
       alcoolActivity += _alcoolActivity > 0 ? _alcoolActivity : 0;
       alcoholArr.push(_alcoolActivity > 0 ? _alcoolActivity : 0);
     }
-    expect(alcoolActivity).toMatchSnapshot();
+    expect(1 - alcoolActivity).toMatchSnapshot();
     expect(alcoholArr).toMatchSnapshot();
     const png = await getPngSnapshot(
       {

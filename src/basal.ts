@@ -2,38 +2,63 @@ import { TreatmentExpParam, NSTreatmentParsed } from './Types';
 import { getTreatmentExpParam } from './drug';
 import logger, { getExpTreatmentActivity, roundTo8Decimals } from './utils';
 
-const computeBasalActivity = (treatments: TreatmentExpParam[]) => {
-	// expressed U/min !!!
-	return treatments
-		.map(getExpTreatmentActivity)
-		.reduce((tot, activity) => tot + activity, 0);
+/**
+ * Calculates the basal insulin activity per minute for a given set of treatments
+ * @param treatments - Array of insulin treatments
+ * @returns Total basal activity in Units/minute
+ */
+const calculateBasalActivityPerMinute = (treatments: TreatmentExpParam[]): number => {
+	// Calculate total activity by summing up individual treatment activities
+	return treatments.map(getExpTreatmentActivity).reduce((total, activity) => total + activity, 0);
 };
 
-export default function (
-	treatments: NSTreatmentParsed[],
-	weight: number,
-): number {
-	const lastGLA = getTreatmentExpParam(treatments, weight, 'GLA');
-	const activityGLA = lastGLA.length ? computeBasalActivity(lastGLA) : 0;
-	logger.debug('these are the last GLA: %o', { lastGLA, activityGLA });
+/**
+ * Calculates the total basal insulin activity from all active insulin types
+ * @param treatments - Array of parsed insulin treatments
+ * @param weight - Patient's weight
+ * @returns Total basal activity in Units/minute, rounded to 8 decimal places
+ */
+export default function calculateTotalBasalActivity(treatments: NSTreatmentParsed[], weight: number): number {
+	// Calculate activity for Glargine insulin
+	const lastGlargine = getTreatmentExpParam(treatments, weight, 'GLA');
+	const glargineActivity = lastGlargine.length ? calculateBasalActivityPerMinute(lastGlargine) : 0;
+	logger.debug('Glargine insulin activity:', {
+		activeGlargineTreatments: lastGlargine,
+		totalGlargineActivity: glargineActivity,
+	});
 
-	const lastDET = getTreatmentExpParam(treatments, weight, 'DET');
-	const activityDET = lastDET.length ? computeBasalActivity(lastDET) : 0;
-	logger.debug('these are the last DET: %o', { lastDET, activityDET });
+	// Calculate activity for Detemir insulin
+	const lastDetemir = getTreatmentExpParam(treatments, weight, 'DET');
+	const detemirActivity = lastDetemir.length ? calculateBasalActivityPerMinute(lastDetemir) : 0;
+	logger.debug('Detemir insulin activity:', {
+		activeDetemirTreatments: lastDetemir,
+		totalDetemirActivity: detemirActivity,
+	});
 
-	const lastTOU = getTreatmentExpParam(treatments, weight, 'TOU');
-	const activityTOU = lastTOU.length ? computeBasalActivity(lastTOU) : 0;
-	logger.debug('these are the last TOU: %o', { lastTOU, activityTOU });
+	// Calculate activity for Toujeo insulin
+	const lastToujeo = getTreatmentExpParam(treatments, weight, 'TOU');
+	const toujeoActivity = lastToujeo.length ? calculateBasalActivityPerMinute(lastToujeo) : 0;
+	logger.debug('Toujeo insulin activity:', {
+		activeToujeoTreatments: lastToujeo,
+		totalToujeoActivity: toujeoActivity,
+	});
 
-	const lastDEG = getTreatmentExpParam(treatments, weight, 'DEG');
-	const activityDEG = lastDEG.length ? computeBasalActivity(lastDEG) : 0;
-	logger.debug('these are the last DEG: %o', { lastDEG, activityDEG });
+	// Calculate activity for Degludec insulin
+	const lastDegludec = getTreatmentExpParam(treatments, weight, 'DEG');
+	const degludecActivity = lastDegludec.length ? calculateBasalActivityPerMinute(lastDegludec) : 0;
+	logger.debug('Degludec insulin activity:', {
+		activeDegludecTreatments: lastDegludec,
+		totalDegludecActivity: degludecActivity,
+	});
 
+	// Calculate activity for NPH insulin
 	const lastNPH = getTreatmentExpParam(treatments, weight, 'NPH');
-	const activityNPH = lastNPH.length ? computeBasalActivity(lastNPH) : 0;
-	logger.debug('these are the last NPH: %o', { lastNPH, activityNPH });
+	const nphActivity = lastNPH.length ? calculateBasalActivityPerMinute(lastNPH) : 0;
+	logger.debug('NPH insulin activity:', {
+		activeNPHTreatments: lastNPH,
+		totalNPHActivity: nphActivity,
+	});
 
-	return roundTo8Decimals(
-		activityDEG + activityDET + activityGLA + activityTOU + activityNPH,
-	);
+	// Sum and round all insulin activities
+	return roundTo8Decimals(degludecActivity + detemirActivity + glargineActivity + toujeoActivity + nphActivity);
 }

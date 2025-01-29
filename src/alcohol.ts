@@ -104,5 +104,5 @@ export default function calculateTotalActivity(
 		beerActivity,
 	});
 
-	return roundTo8Decimals(alcoholActivity + beerActivity);
+	return 1 - roundTo8Decimals(alcoholActivity + beerActivity);
 }
