@@ -1,43 +1,54 @@
 import sinusRun from './sinus';
 import logger from './utils';
 
-export default function (
-	isfConstant: number,
+/**
+ * Calculates liver glucose production based on various factors
+ * @param isf - Insulin Sensitivity Factor constant
+ * @param cr - Carb Ratio (g/U)
+ * @param activities - Object containing physical activity and alcohol factors
+ * @param weight - Patient weight in kg
+ * @param timeZone - Timezone string for circadian rhythm calculation
+ * @returns Liver glucose production in (mmol/l)/min
+ */
+export default function calculateLiverGlucoseProduction(
+	isf: number,
 	cr: number,
 	activities: { physical: number; alcohol: number },
 	weight: number,
 	timeZone: string,
 ): number {
-	const _ISF = isfConstant / 18;
-	const _CR = cr;
-	logger.debug('ISF:', isfConstant, 'CR: %o', cr);
-	const activityFactor = activities?.physical;
-	let alcoholFactor = activities?.alcohol;
-	// the sinus and cosinus numbers vary around 1, from 0.5 to 1.5:
-	// sin starts at 1.0 at midnight, is max at 6AM, is again 1 at 12 AM, and minimums at 0.5 a 6 PM
-	// cosin starts at 1.5 at midnight, is 1 at 6AM, is minimus at 0.5 12 AM, and is 1 again at 6 PM
+	const isfMmol = isf / 18; // Convert ISF to (mmol/L)/U
+	logger.debug('Insulin Sensitivity Factor:', isf, 'Carb Ratio:', cr);
 
+	const physicalActivityFactor = activities?.physical;
+	const alcoholFactor = activities?.alcohol;
+
+	// Circadian rhythm factors:
+	// Sine wave varies between 0.5 and 1.5, centered at 1.0
+	// - At midnight: sine = 1.0, cosine = 1.5
+	// - At 6 AM: sine = 1.5, cosine = 1.0
+	// - At noon: sine = 1.0, cosine = 0.5
+	// - At 6 PM: sine = 0.5, cosine = 1.0
 	const { sinus, cosinus } = sinusRun(timeZone);
-	logger.debug('sinus:  %o', sinus);
-	logger.debug('cosinus:  %o', cosinus);
+	logger.debug('Sine factor: %o', sinus);
+	logger.debug('Cosine factor: %o', cosinus);
 
-	const CF = _ISF / _CR;
-	// let's simulate the carb impact of the liver, producing 10g of carbs / hour
-	// if the ISF is 2 mmol/l/U,
-	// and the CR is 10g/U,
-	// => the the CF (carb factor) is 0.2 mmol/l/ 1g
-	// so the BG increases 2 mmol/l/h, (every time 10g of carbs are delivered)
+	// Calculate Carb Factor (CF) = ISF/CR
+	// Example: If ISF = 2 mmol/l/U and CR = 10g/U
+	// Then CF = 0.2 mmol/l/g
+	const carbFactor = isfMmol / cr;
 
-	// 0.2 mmol/l/h *10g /12 periods => bgi every 5 minutes or 0,166666 mmol/l/5min
+	// Base glucose production rate per minute based on weight
+	const baseGlucosePerMinute = 0.002 * weight;
 
-	// by multiplying the liver_bgi by the sin function, the liver loog glucose production varies in a sinusoidal
-	// form, being maximal at 6 AM and minimal ad 6 PM
-	const glucosePerMinute = 0.002 * weight;
-	const liver = alcoholFactor * activityFactor * CF * glucosePerMinute; //(mmols/l)/min
+	// Calculate liver glucose production adjusted for alcohol and activity
+	const baseGlucoseProduction = alcoholFactor * physicalActivityFactor * carbFactor * baseGlucosePerMinute;
 
-	const liver_sin = liver * sinus;
-	logger.debug('liver:  %o', liver);
-	logger.debug('liver_sin:  %o', liver_sin);
+	// Apply circadian rhythm using sine wave
+	const circadianAdjustedProduction = baseGlucoseProduction * sinus;
 
-	return liver_sin; //(mmol/l)/min
+	logger.debug('Base glucose production: %o', baseGlucoseProduction);
+	logger.debug('Circadian adjusted production: %o', circadianAdjustedProduction);
+
+	return circadianAdjustedProduction;
 }
