@@ -6,8 +6,8 @@ const MIN_HR = 10;
 
 /**
  * Calculates maximum heart rate based on age and gender
- * @param age - User's age in years
- * @param gender - User's gender ('Male' or 'Female')
+ * @param age - Patient's age
+ * @param gender - Patient's gender
  * @returns number - Maximum heart rate in beats per minute
  */
 export function getMaxHr(age: number, gender: GenderType) {

@@ -38,8 +38,8 @@ function addTimeToActivities(activities: Activity[]): ActivityWithTime[] {
  * Calculates the current intensity of physical activity based on user parameters.
  * This function combines heart rate data to determine activity intensity level.
  * @param activities - Array of physical activity data containing heart rate and timestamp
- * @param age - User's age for max heart rate calculation
- * @param gender - User's gender for max heart rate calculation
+ * @param age - Patient's age
+ * @param gender - Patient's gender
  * @returns Current intensity of physical activity as a percentage (0-100)
  */
 export function currentIntensity(activities: Activity[], age: number, gender: GenderType): number {
@@ -58,8 +58,8 @@ export function currentIntensity(activities: Activity[], age: number, gender: Ge
  * Calculates insulin sensitivity factor based on physical activity.
  * Compares heart rate and steps data to determine the most significant impact.
  * @param activities - Array of physical activities with heart rate and steps
- * @param age - User's age for calculations
- * @param gender - User's gender for calculations
+ * @param age - Patient's age
+ * @param gender - Patient's gender
  * @returns The higher insulin sensitivity factor between heart rate and steps calculations
  */
 export function physicalIsf(activities: Activity[], age: number, gender: GenderType): number {
@@ -82,8 +82,8 @@ export function physicalIsf(activities: Activity[], age: number, gender: GenderT
  * Calculates liver glucose production factor based on physical activity.
  * Compares heart rate and steps data to determine the strongest impact on liver glucose production.
  * @param activities - Array of physical activities with heart rate and steps
- * @param age - User's age for calculations
- * @param gender - User's gender for calculations
+ * @param age - Patient's age
+ * @param gender - Patient's gender
  * @returns The higher liver glucose production factor between heart rate and steps calculations
  */
 export function physicalLiver(activities: Activity[], age: number, gender: GenderType): number {

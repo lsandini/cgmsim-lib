@@ -4,8 +4,8 @@ import logger, { getExpTreatmentActivity, roundTo8Decimals } from './utils';
 
 /**
  * Calculates the alcohol activity based on various parameters
- * @param gender - Gender of the patient ('Male' or 'Female')
- * @param weightKg - Weight in kilograms
+ * @param gender - Patient's gender
+ * @param weightKg - Patient's weight
  * @param peak - Peak value of alcohol concentration
  * @param duration - Duration of alcohol effect
  * @param minutesAgo - Time elapsed since consumption in minutes
@@ -78,27 +78,27 @@ const calculateTotalAlcoholActivity = (
 /**
  * Main function to calculate total alcohol activity from different sources (ALC and BEER)
  * @param treatments - Array of parsed treatments
- * @param weight - Patient's weight
+ * @param weightKg - Patient's weight
  * @param gender - Patient's gender
  * @returns Combined alcohol activity from all sources
  */
 export default function calculateTotalActivity(
 	treatments: NSTreatmentParsed[],
-	weight: number,
+	weightKg: number,
 	gender: GenderType,
 ): number {
 	// Calculate activity from alcohol treatments
-	const alcoholTreatments = getTreatmentExpParam(treatments, weight, 'ALC');
+	const alcoholTreatments = getTreatmentExpParam(treatments, weightKg, 'ALC');
 	const alcoholActivity =
-		alcoholTreatments.length > 0 ? calculateTotalAlcoholActivity(alcoholTreatments, weight, gender) : 0;
+		alcoholTreatments.length > 0 ? calculateTotalAlcoholActivity(alcoholTreatments, weightKg, gender) : 0;
 	logger.debug('Alcohol treatments and activity: %o', {
 		alcoholTreatments,
 		alcoholActivity,
 	});
 
 	// Calculate activity from beer treatments
-	const beerTreatments = getTreatmentExpParam(treatments, weight, 'BEER');
-	const beerActivity = beerTreatments.length > 0 ? calculateTotalAlcoholActivity(beerTreatments, weight, gender) : 0;
+	const beerTreatments = getTreatmentExpParam(treatments, weightKg, 'BEER');
+	const beerActivity = beerTreatments.length > 0 ? calculateTotalAlcoholActivity(beerTreatments, weightKg, gender) : 0;
 	logger.debug('Beer treatments and activity: %o', {
 		beerTreatments,
 		beerActivity,
