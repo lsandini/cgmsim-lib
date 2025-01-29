@@ -1,34 +1,32 @@
-import logger, { getDeltaMinutes, getExpTreatmentActivity } from './utils';
+import logger, { getDeltaMinutes, getBiexpTreatmentActivity } from './utils';
 import * as moment from 'moment';
 import { NSProfile, NSTreatment } from './Types';
 import { TypeDateISO } from './TypeDateISO';
 
-/**
- * Gets profile switches from treatments within specified duration
- * @param treatments - Array of treatments
- * @param duration - Duration in minutes to look back
- * @returns Array of computed profile switches with basal rates
- */
 function getProfileSwitch(treatments: NSTreatment[], duration: number) {
-	const computedProfileSwitches: {
+	const computedProfilesSwitch: {
 		start: moment.Moment;
 		end: moment.Moment;
-		basal: { time: string; value: number }[] | number;
+		insulin: number;
 	}[] = [];
 	const now = moment().utc();
 	treatments
 		.filter(
-			(tr) =>
-				tr.created_at &&
-				now.diff(moment(tr.created_at), 'minutes') <= duration && // temps basals set in the last 3 hours
-				tr.eventType === 'Profile Switch' &&
-				tr.duration != 0,
+			(e) =>
+				e.created_at &&
+				now.diff(moment(e.created_at), 'minutes') <= duration && // temps basals set in the last 3 hours
+				e.eventType === 'Profile Switch' &&
+				e.duration != 0,
 		)
 		.sort((f, s) => {
 			return moment(f.created_at).diff(s.created_at);
 		})
 		.forEach((tr) => {
-			if (tr.eventType === 'Profile Switch' && tr.profileJson && tr.percentage) {
+			if (
+				tr.eventType === 'Profile Switch' &&
+				tr.profileJson &&
+				tr.percentage
+			) {
 				const start = moment(tr.created_at).utc();
 				const end = moment(tr.created_at).add(tr.duration, 'minutes').utc();
 				const profile = JSON.parse(tr.profileJson);
@@ -37,36 +35,36 @@ function getProfileSwitch(treatments: NSTreatment[], duration: number) {
 						time: pb.time,
 						value: pb.value * (tr.percentage / 100),
 					}));
-					computedProfileSwitches.push({
+					const value = activeBasalByTime(basals, start);
+
+					computedProfilesSwitch.push({
 						start,
-						basal: basals,
+						insulin: value,
 						end,
 					});
 				} else {
-					computedProfileSwitches.push({
+					computedProfilesSwitch.push({
 						start,
-						basal: profile.basal * (tr.percentage / 100),
+						insulin: profile.basal * (tr.percentage / 100),
 						end,
 					});
 				}
 			} else {
-				const currentIndex = computedProfileSwitches.length - 1;
+				const currentIndex = computedProfilesSwitch.length - 1;
 				if (currentIndex >= 0) {
-					computedProfileSwitches[currentIndex].end = moment(tr.created_at);
+					computedProfilesSwitch[currentIndex].end = moment(tr.created_at);
 				}
 			}
 		});
-	return computedProfileSwitches;
+	return computedProfilesSwitch;
 }
 
-/**
- * Gets temporary basal rates from treatments within specified duration
- * @param treatments - Array of treatments
- * @param duration - Duration in minutes to look back
- * @returns Array of computed temporary basal rates
- */
-function getTempBasal(treatments: NSTreatment[], duration: number) {
-	const computedTempBasals: {
+function getTemporaryOverride(
+	treatments: NSTreatment[],
+	duration: number,
+	orderedProfiles: NSProfile[],
+) {
+	const computedTemporaryOverride: {
 		start: moment.Moment;
 		end: moment.Moment;
 		insulin: number;
@@ -74,90 +72,127 @@ function getTempBasal(treatments: NSTreatment[], duration: number) {
 	const now = moment().utc();
 	treatments
 		.filter(
-			(tr) =>
-				tr.created_at &&
-				now.diff(moment(tr.created_at), 'milliseconds') <= duration * (60 * 1000) && // temps basals set in the last 3 hours
-				tr.eventType === 'Temp Basal' &&
-				tr.duration !== 0,
+			(e) =>
+				e.created_at &&
+				now.diff(moment(e.created_at), 'minutes') <= duration && // temps basals set in the last 3 hours
+				e.eventType === 'Temporary Override' &&
+				e.duration != 0,
 		)
 		.sort((f, s) => {
 			return moment(f.created_at).diff(s.created_at);
 		})
 		.forEach((tr) => {
-			if (tr.eventType === 'Temp Basal' && tr.rate !== undefined) {
+			if (tr.eventType === 'Temporary Override' && tr.insulinNeedsScaleFactor) {
 				const start = moment(tr.created_at).utc();
-				const tmpEnd = moment(tr.created_at).add(tr.durationInMilliseconds, 'milliseconds').utc();
-				const end = tmpEnd.diff(now) < 0 ? tmpEnd : now;
-				computedTempBasals.push({
+				const end = moment(tr.created_at).add(tr.duration, 'minutes').utc();
+				const insulin = getBasalFromProfiles(orderedProfiles, start);
+				const value = insulin * tr.insulinNeedsScaleFactor;
+
+				computedTemporaryOverride.push({
 					start,
-					insulin: tr.rate,
+					insulin: value,
 					end,
 				});
 			} else {
-				const currentIndex = computedTempBasals.length - 1;
+				const currentIndex = computedTemporaryOverride.length - 1;
 				if (currentIndex >= 0) {
-					computedTempBasals[currentIndex].end = moment(tr.created_at);
+					computedTemporaryOverride[currentIndex].end = moment(tr.created_at);
 				}
 			}
 		});
-	return computedTempBasals;
+	return computedTemporaryOverride;
 }
 
-/**
- * Gets basal rate from profiles at a specific time
- * @param orderedProfiles - Array of profiles ordered by date
- * @param currentTime - Moment object representing the time to check
- * @returns Basal rate value
- */
-function getBasalFromProfiles(orderedProfiles: NSProfile[], currentTime: moment.Moment) {
-	const activeProfiles = orderedProfiles.filter((p) => moment(p.startDate).diff(currentTime) <= 0);
+function getTempBasal(treatments: NSTreatment[], duration: number) {
+	const computedTempBasal: {
+		start: moment.Moment;
+		end: moment.Moment;
+		insulin: number;
+	}[] = [];
+	const now = moment().utc();
+	treatments
+		.filter(
+			(e) =>
+				e.created_at &&
+				now.diff(moment(e.created_at), 'milliseconds') <=
+					duration * (60 * 1000) && // temps basals set in the last 3 hours
+				e.eventType === 'Temp Basal' &&
+				e.duration !== 0,
+		)
+		.sort((f, s) => {
+			return moment(f.created_at).diff(s.created_at);
+		})
+		.forEach((b) => {
+			if (b.eventType === 'Temp Basal' && b.rate !== undefined) {
+				const start = moment(b.created_at).utc();
+				const tmpEnd = moment(b.created_at)
+					.add(b.durationInMilliseconds, 'milliseconds')
+					.utc();
+				const end = tmpEnd.diff(now) < 0 ? tmpEnd : now;
+				computedTempBasal.push({
+					start,
+					insulin: b.rate,
+					end,
+				});
+			} else {
+				const currentIndex = computedTempBasal.length - 1;
+				if (currentIndex >= 0) {
+					computedTempBasal[currentIndex].end = moment(b.created_at);
+				}
+			}
+		});
+	return computedTempBasal;
+}
+
+function getBasalFromProfiles(
+	orderedProfiles: NSProfile[],
+	currentAction: moment.Moment,
+) {
+	//last basal before the end
+	const activeProfiles = orderedProfiles.filter(
+		(p) => moment(p.startDate).diff(currentAction) <= 0,
+	);
 	if (activeProfiles && activeProfiles.length > 0) {
 		const activeProfile = activeProfiles[0];
 		const activeProfileName = activeProfile.defaultProfile;
 		const activeProfileBasals = activeProfile.store[activeProfileName].basal;
-		return getActiveBasalByTime(activeProfileBasals, currentTime);
+		return activeBasalByTime(activeProfileBasals, currentAction);
 	}
 	return 0;
 }
 
-/**
- * Gets active basal rate for a specific time
- * @param profileBasals - Array of basal rates or single basal rate
- * @param currentTime - Moment object representing the time to check
- * @returns Active basal rate value
- */
-function getActiveBasalByTime(
-	profileBasals: { value: number; time: string; timeAsSecond?: number }[] | number,
-	currentTime: moment.Moment,
+function activeBasalByTime(
+	activeProfileBasals:
+		| { value: number; time: string; timeAsSecond?: number }[]
+		| number,
+	currentAction: moment.Moment,
 ) {
-	if (Array.isArray(profileBasals)) {
-		const compatibleBasalProfiles = profileBasals.filter((b) => {
-			return b.time.localeCompare(currentTime.format('HH:mm')) <= 0;
+	if (Array.isArray(activeProfileBasals)) {
+		const compatiblesBasalProfiles = activeProfileBasals.filter((b) => {
+			return b.time.localeCompare(currentAction.format('HH:mm')) <= 0;
 		});
-		const lastCompatibleBasal = compatibleBasalProfiles[compatibleBasalProfiles.length - 1];
-		return lastCompatibleBasal.value;
+		const index = compatiblesBasalProfiles.length - 1;
+		const currentBasal = compatiblesBasalProfiles[index];
+		return currentBasal.value;
 	} else {
-		return profileBasals;
+		return activeProfileBasals;
 	}
 }
 
-/**
- * Calculates pump insulin activity
- * @param treatments - Array of treatments
- * @param profiles - Array of profiles
- * @param dia - Duration of insulin action in hours
- * @param peak - Time to peak insulin activity in minutes
- * @returns Total pump basal activity
- */
-export default function calculatePumpActivity(
+export default function (
 	treatments: NSTreatment[],
 	profiles: NSProfile[],
 	dia: number,
 	peak: number,
 ) {
+	const minutesStep = 5;
+	const steps = 60 / minutesStep;
 	const basalAsBoluses: { minutesAgo: number; insulin: number }[] = [];
-	const endTime = moment().utc();
-	const startTime = moment().add(-dia, 'hour').set({ minute: 0, second: 0, millisecond: 0 }).utc();
+	const endDiaAction = moment().utc();
+	const startDiaAction = moment()
+		.add(-dia, 'hour')
+		.set({ minute: 0, second: 0, millisecond: 0 })
+		.utc();
 	const duration = dia * 60;
 
 	const orderedProfiles = profiles
@@ -165,44 +200,68 @@ export default function calculatePumpActivity(
 			const profileName = profile.defaultProfile;
 			return profile.store[profileName];
 		})
-		.sort((first, second) => moment(second.startDate).diff(moment(first.startDate)));
-
-	const tempBasals = getTempBasal(treatments, duration);
-	const profileSwitches = getProfileSwitch(treatments, duration);
-
-	for (let currentTime = startTime; currentTime.diff(endTime) <= 0; currentTime.add(5, 'minutes')) {
-		const activeTempBasals = tempBasals.filter((t) => t.start.diff(currentTime) <= 0 && t.end.diff(currentTime) > 0);
-		const activeProfileSwitches = profileSwitches.filter(
-			(t) => t.start.diff(currentTime) <= 0 && t.end.diff(currentTime) > 0,
+		.sort((first, second) =>
+			moment(second.startDate).diff(moment(first.startDate)),
 		);
-		let basalEntry: { minutesAgo: number; insulin: number };
-		if (activeTempBasals.length > 0) {
-			basalEntry = {
-				minutesAgo: getDeltaMinutes(currentTime.toISOString() as TypeDateISO),
-				insulin: activeTempBasals[0].insulin / 12,
+
+	const computedTempBasal = getTempBasal(treatments, duration);
+	const computedProfileSwitch = getProfileSwitch(treatments, duration);
+	const computedTemporaryOverride = getTemporaryOverride(
+		treatments,
+		duration,
+		orderedProfiles,
+	);
+
+	// const basalsToUpdate = [];
+	for (
+		let currentAction = startDiaAction;
+		currentAction.diff(endDiaAction) <= 0;
+		currentAction.add(minutesStep, 'minutes')
+	) {
+		const tempBasalActives = computedTempBasal.filter(
+			(t) => t.start.diff(currentAction) <= 0 && t.end.diff(currentAction) > 0,
+		);
+		const profilesStichActives = computedProfileSwitch.filter(
+			(t) => t.start.diff(currentAction) <= 0 && t.end.diff(currentAction) > 0,
+		);
+		const temporaryOverrideActives = computedTemporaryOverride.filter(
+			(t) => t.start.diff(currentAction) <= 0 && t.end.diff(currentAction) > 0,
+		);
+		let basalToUpdate: { minutesAgo: number; insulin: number };
+		//if there is a temp basal actives
+		if (tempBasalActives.length > 0) {
+			const insulin = tempBasalActives[0].insulin / steps;
+			basalToUpdate = {
+				minutesAgo: getDeltaMinutes(currentAction.toISOString() as TypeDateISO),
+				insulin,
 			};
-		} else if (activeProfileSwitches.length > 0) {
-			const basal = getActiveBasalByTime(activeProfileSwitches[0].basal, currentTime);
-			basalEntry = {
-				minutesAgo: getDeltaMinutes(currentTime.toISOString() as TypeDateISO),
-				insulin: basal / 12,
+		} else if (profilesStichActives.length > 0) {
+			const insulin = profilesStichActives[0].insulin / steps;
+			basalToUpdate = {
+				minutesAgo: getDeltaMinutes(currentAction.toISOString() as TypeDateISO),
+				insulin,
+			};
+		} else if (temporaryOverrideActives.length > 0) {
+			const insulin = temporaryOverrideActives[0].insulin / steps;
+			basalToUpdate = {
+				minutesAgo: getDeltaMinutes(currentAction.toISOString() as TypeDateISO),
+				insulin,
 			};
 		} else {
-			const currentBasal = {
-				value: getBasalFromProfiles(orderedProfiles, currentTime),
-			};
-			basalEntry = {
-				minutesAgo: getDeltaMinutes(currentTime.toISOString() as TypeDateISO),
-				insulin: currentBasal.value / 12,
+			const insulin =
+				getBasalFromProfiles(orderedProfiles, currentAction) / steps;
+			basalToUpdate = {
+				minutesAgo: getDeltaMinutes(currentAction.toISOString() as TypeDateISO),
+				insulin,
 			};
 		}
-		basalAsBoluses.push(basalEntry);
+		basalAsBoluses.push(basalToUpdate);
 	}
 
-	const pumpBasalActivity = basalAsBoluses.reduce(
-		(total, entry) =>
-			total +
-			getExpTreatmentActivity({
+	const pumpBasalAct = basalAsBoluses.reduce(
+		(tot, entry) =>
+			tot +
+			getBiexpTreatmentActivity({
 				peak,
 				duration,
 				minutesAgo: entry.minutesAgo,
@@ -210,6 +269,6 @@ export default function calculatePumpActivity(
 			}),
 		0,
 	);
-	logger.debug('Current pump basal activity: %o', pumpBasalActivity);
-	return pumpBasalActivity;
+	logger.debug("the pump's basal activity is: %o", pumpBasalAct);
+	return pumpBasalAct;
 }

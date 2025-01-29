@@ -117,7 +117,8 @@ export type MealBolusTreatment = {
 		| 'Bolus'
 		| 'Correction Bolus'
 		| 'Bolus Wizard'
-		| 'Carb Correction';
+		| 'Carb Correction'
+    | 'Surprise Meal';
 	/** The amount of insulin administered for the meal bolus. */
 	insulin?: number;
 	/** The number of carbohydrates consumed. */
@@ -140,6 +141,20 @@ export type ProfileSwitchTreatment = {
 	profileJson: string;
 	/** The percentage change applied during the profile switch. */
 	percentage: number;
+};
+
+/**
+ * Represents the treatment information for a Profile Switch event.
+ */
+export type TemporaryOverrideTreatment = {
+	/** The type of event, set to 'Profile Switch'. */
+	eventType: 'Temporary Override';
+	/** The duration of the profile switch in minutes. */
+	duration: number;
+	/** The date of the treatment creation in ISO format. */
+	created_at: TypeDateISO;
+	/** The scale factor applied during the temporary override. */
+	insulinNeedsScaleFactor: number;
 };
 
 /**
@@ -177,7 +192,8 @@ export type NSTreatment =
 	| MealBolusTreatment
 	| ProfileSwitchTreatment
 	| TempBasalTreatment
-	| AnnouncementTreatment;
+	| AnnouncementTreatment
+	| TemporaryOverrideTreatment;
 
 export const isMealBolusTreatment = (
 	treatment: NSTreatment,
@@ -186,6 +202,7 @@ export const isMealBolusTreatment = (
 	treatment.eventType === 'Bolus' ||
 	treatment.eventType === 'Bolus Wizard' ||
 	treatment.eventType === 'Correction Bolus' ||
+  treatment.eventType === 'Surprise Meal' ||
 	treatment.eventType === 'Carb Correction';
 
 export const isAnnouncementTreatment = (

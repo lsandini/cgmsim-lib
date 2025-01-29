@@ -4,6 +4,8 @@ exports[`test pump dynamic  basal in profile and no temp basal 1`] = `0.01559265
 
 exports[`test pump dynamic  basal in profile, no temp basal and profile switch 1`] = `0.01614147760949147`;
 
+exports[`test pump dynamic  basal in profile, no temp basal and temporary override 1`] = `0.01614147760949147`;
+
 exports[`test pump dynamic basal in profile and temp basal 1`] = `0.015201408758962516`;
 
 exports[`test pump static basal in profile and 2 different temp basal 1`] = `0.011547188344800504`;
