@@ -2,13 +2,7 @@ import fetch from 'node-fetch';
 import * as moment from 'moment';
 import pino, { LevelWithSilent, TransportTargetOptions } from 'pino';
 import setupParams from './setupParams';
-import {
-	Activity,
-	Entry,
-	Note,
-	SimulationResult,
-	TreatmentExpParam,
-} from './Types';
+import { Activity, Entry, Note, SimulationResult, TreatmentExpParam } from './Types';
 import { load } from 'ts-dotenv';
 import pinoPretty from 'pino-pretty';
 import { TypeDateISO } from './TypeDateISO';
@@ -43,91 +37,123 @@ const logger = pino({
 
 export default logger;
 
+/**
+ * Checks if a URL starts with HTTPS protocol
+ * @param url - URL to check
+ * @returns boolean indicating if the URL uses HTTPS
+ */
 export function isHttps(url: string | null | undefined): boolean {
 	if (!url) {
-		return false; // Return false for null or undefined input
+		return false;
 	}
-
-	// Rest of the function remains the same
-	const pattern = /^https:\/\//i;
-	return pattern.test(url);
-}
-//
-
-export function removeTrailingSlash(str) {
-	return str.endsWith('/') ? str.slice(0, -1) : str;
+	const httpsPattern = /^https:\/\//i;
+	return httpsPattern.test(url);
 }
 
-export function getExpTreatmentActivity({
-	peak,
-	duration,
-	minutesAgo,
-	units,
-}: TreatmentExpParam) {
+/**
+ * Removes trailing slash from a string if present
+ * @param inputString - String to process
+ * @returns String without trailing slash
+ */
+export function removeTrailingSlash(inputString: string): string {
+	return inputString.endsWith('/') ? inputString.slice(0, -1) : inputString;
+}
+
+/**
+ * Calculates exponential treatment activity based on given parameters
+ * @param params - Treatment parameters including peak, duration, minutesAgo, and units
+ * @returns Calculated activity value
+ */
+export function getExpTreatmentActivity({ peak, duration, minutesAgo, units }: TreatmentExpParam): number {
 	const tau = (peak * (1 - peak / duration)) / (1 - (2 * peak) / duration);
-	const a = (2 * tau) / duration;
-	const S = 1 / (1 - a + (1 + a) * Math.exp(-duration / tau));
-	const activity =
+	const scaleFactor = (2 * tau) / duration;
+	const normalizationFactor = 1 / (1 - scaleFactor + (1 + scaleFactor) * Math.exp(-duration / tau));
+
+	let activity =
 		units *
-		(S / Math.pow(tau, 2)) *
+		(normalizationFactor / Math.pow(tau, 2)) *
 		minutesAgo *
 		(1 - minutesAgo / duration) *
 		Math.exp(-minutesAgo / tau);
+
 	if (activity <= 0) {
 		return 0;
 	}
+
+	// Ramp up activity linearly in first 15 minutes
 	if (minutesAgo < 15) {
 		return activity * (minutesAgo / 15);
 	}
+
 	return activity;
 }
 
-export const getDeltaMinutes = (mills: number | TypeDateISO) =>
-	Math.round(moment().diff(moment(mills), 'seconds') / 60);
+/**
+ * Calculates time difference in minutes between now and given timestamp
+ * @param timestamp - Timestamp in milliseconds or ISO string
+ * @returns Number of minutes difference
+ */
+export const getDeltaMinutes = (timestamp: number | TypeDateISO): number =>
+	Math.round(moment().diff(moment(timestamp), 'seconds') / 60);
 
+/**
+ * Uploads data to Nightscout API
+ * @param data - Data to upload (Entry, Activity, Note, or SimulationResult)
+ * @param apiUrl - Nightscout API URL
+ * @param apiSecret - API secret key
+ * @returns Promise<void>
+ */
 export function uploadBase(
-	cgmsim: Entry | Activity | Note | SimulationResult,
-	nsUrlApi: string,
+	data: Entry | Activity | Note | SimulationResult,
+	apiUrl: string,
 	apiSecret: string,
 ): Promise<void> {
-	const _isHttps = isHttps(nsUrlApi);
+	const isSecure = isHttps(apiUrl);
+	const { postParams } = setupParams(apiSecret, isSecure);
+	const jsonData = JSON.stringify(data);
 
-	const { postParams } = setupParams(apiSecret, _isHttps);
-	const body_json = JSON.stringify(cgmsim);
-
-	return fetch(nsUrlApi, {
+	return fetch(apiUrl, {
 		...postParams,
-		body: body_json,
+		body: jsonData,
 	})
 		.then(() => {
-			logger.debug('NIGHTSCOUT Updated');
+			logger.debug('Successfully updated Nightscout');
 		})
-		.catch((err) => {
-			logger.debug(err);
-			throw new Error(err);
+		.catch((error) => {
+			logger.debug(error);
+			throw new Error(error);
 		});
 }
 
-export function loadBase(
-	nsUrlApi: string,
-	apiSecret: string,
-): Promise<(Entry | Activity | Note)[]> {
-	const _isHttps = isHttps(nsUrlApi);
-	const { getParams } = setupParams(apiSecret, _isHttps);
-	return fetch(nsUrlApi, {
+/**
+ * Loads data from Nightscout API
+ * @param apiUrl - Nightscout API URL
+ * @param apiSecret - API secret key
+ * @returns Promise with array of entries
+ */
+export function loadBase(apiUrl: string, apiSecret: string): Promise<(Entry | Activity | Note)[]> {
+	const isSecure = isHttps(apiUrl);
+	const { getParams } = setupParams(apiSecret, isSecure);
+
+	return fetch(apiUrl, {
 		...getParams,
 	})
-		.then((result) => {
-			logger.debug('NIGHTSCOUT Load');
-			return result.json();
+		.then((response) => {
+			logger.debug('Successfully loaded from Nightscout');
+			return response.json();
 		})
-		.catch((err) => {
-			logger.debug(err);
-			throw new Error(err);
+		.catch((error) => {
+			logger.debug(error);
+			throw new Error(error);
 		});
 }
-export function roundTo8Decimals(number: number) {
-	let multiplier = Math.pow(10, 8);
-	let roundedNumber = Math.round(number * multiplier) / multiplier;
-	return roundedNumber;
+
+/**
+ * Rounds a number to 8 decimal places
+ * @param value - Number to round
+ * @returns Rounded number
+ */
+export function roundTo8Decimals(value: number): number {
+	const multiplier = Math.pow(10, 8);
+	return Math.round(value * multiplier) / multiplier;
 }

@@ -2,74 +2,107 @@ import { TreatmentExpParam, NSTreatmentParsed, GenderType } from './Types';
 import { getTreatmentExpParam } from './drug';
 import logger, { getExpTreatmentActivity, roundTo8Decimals } from './utils';
 
-function getAlcoholActivity(
+/**
+ * Calculates the alcohol activity based on various parameters
+ * @param gender - Gender of the patient ('Male' or 'Female')
+ * @param weightKg - Weight in kilograms
+ * @param peak - Peak value of alcohol concentration
+ * @param duration - Duration of alcohol effect
+ * @param minutesAgo - Time elapsed since consumption in minutes
+ * @param units - Number of alcohol units consumed
+ * @returns Calculated alcohol activity
+ */
+function calculateAlcoholActivity(
 	gender: 'Male' | 'Female',
 	weightKg: number,
 	peak: number,
 	duration: number,
-	minutesAgo: number, //minutesAgo
+	minutesAgo: number,
 	units: number,
 ): number {
-	const peakAlcoholAmountMin = 60; //min
-	const r = gender === 'Male' ? 0.68 : 0.55;
-	const eliminationRate = gender === 'Male' ? 0.016 / 60 : 0.018 / 60; //g/100ml/min
-	const peakAmount = (units / (weightKg * 1000 * r)) * 100; //g/100ml
-	const washoutDuration = peakAlcoholAmountMin + peakAmount / eliminationRate; //min
-	const unitsWeighted = units * (80 / weightKg);
+	// Constants for alcohol metabolism
+	const peakAlcoholMinutes = 60; // Time to reach peak alcohol concentration in minutes
+	const genderConstant = gender === 'Male' ? 0.68 : 0.55; // Widmark formula constant
+	const eliminationRate = gender === 'Male' ? 0.016 / 60 : 0.018 / 60; // Alcohol elimination rate in g/100ml/min
+
+	// Calculate peak alcohol concentration using Widmark formula
+	const peakConcentration = (units / (weightKg * 1000 * genderConstant)) * 100; // g/100ml
+
+	// Calculate total washout duration
+	const washoutDuration = peakAlcoholMinutes + peakConcentration / eliminationRate; // minutes
+
+	// Weight-adjusted units for standardization
+	const weightAdjustedUnits = units * (80 / weightKg);
+
 	if (washoutDuration < minutesAgo) {
 		return (
 			getExpTreatmentActivity({
 				peak,
 				duration,
 				minutesAgo: minutesAgo - washoutDuration,
-				units: unitsWeighted,
+				units: weightAdjustedUnits,
 			}) / 0.35
 		);
 	}
 	return 0;
 }
 
-const computeAlcoholActivity = (
+/**
+ * Computes the total alcohol activity for multiple treatments
+ * @param treatments - Array of treatment parameters
+ * @param weightKg - Patient's weight
+ * @param gender - Patient's gender
+ * @returns Total alcohol activity
+ */
+const calculateTotalAlcoholActivity = (
 	treatments: TreatmentExpParam[],
-	weight: number,
+	weightKg: number,
 	gender: GenderType,
-) => {
-	const treatmentsActivity = treatments.map((e) => {
-		const minutesAgo = e.minutesAgo;
-		const units = e.units;
-		const activity = getAlcoholActivity(
+): number => {
+	const treatmentActivities = treatments.map((treatment) => {
+		return calculateAlcoholActivity(
 			gender,
-			weight,
-			e.peak,
-			e.duration,
-			minutesAgo,
-			units,
+			weightKg,
+			treatment.peak,
+			treatment.duration,
+			treatment.minutesAgo,
+			treatment.units,
 		);
-		return activity;
 	});
-	logger.debug('these are the last Alcohol: %o', treatmentsActivity);
-	const resultAct = treatmentsActivity.reduce((tot, activity) => {
-		return tot + activity;
-	}, 0);
-	return resultAct;
+
+	logger.debug('Individual alcohol activities: %o', treatmentActivities);
+
+	return treatmentActivities.reduce((total, activity) => total + activity, 0);
 };
 
-export default function (
+/**
+ * Main function to calculate total alcohol activity from different sources (ALC and BEER)
+ * @param treatments - Array of parsed treatments
+ * @param weight - Patient's weight
+ * @param gender - Patient's gender
+ * @returns Combined alcohol activity from all sources
+ */
+export default function calculateTotalActivity(
 	treatments: NSTreatmentParsed[],
 	weight: number,
 	gender: GenderType,
 ): number {
-	//Find Alcohol in treatments
-	const lastALC = getTreatmentExpParam(treatments, weight, 'ALC');
-	const activityALC =
-		lastALC.length > 0 ? computeAlcoholActivity(lastALC, weight, gender) : 0;
-	logger.debug('these are the last ALC: %o', { lastALC, activityALC });
+	// Calculate activity from alcohol treatments
+	const alcoholTreatments = getTreatmentExpParam(treatments, weight, 'ALC');
+	const alcoholActivity =
+		alcoholTreatments.length > 0 ? calculateTotalAlcoholActivity(alcoholTreatments, weight, gender) : 0;
+	logger.debug('Alcohol treatments and activity: %o', {
+		alcoholTreatments,
+		alcoholActivity,
+	});
 
-	//Find Beer in treatments
-	const lastBEER = getTreatmentExpParam(treatments, weight, 'BEER');
-	const activityBEER =
-		lastBEER.length > 0 ? computeAlcoholActivity(lastBEER, weight, gender) : 0;
-	logger.debug('these are the last BEER: %o', { lastBEER, activityBEER });
+	// Calculate activity from beer treatments
+	const beerTreatments = getTreatmentExpParam(treatments, weight, 'BEER');
+	const beerActivity = beerTreatments.length > 0 ? calculateTotalAlcoholActivity(beerTreatments, weight, gender) : 0;
+	logger.debug('Beer treatments and activity: %o', {
+		beerTreatments,
+		beerActivity,
+	});
 
-	return roundTo8Decimals(activityALC + activityBEER);
+	return roundTo8Decimals(alcoholActivity + beerActivity);
 }
