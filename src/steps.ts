@@ -3,50 +3,53 @@ import logger from './utils';
 type MinutesAgo = { minutesAgo: number };
 
 export function physicalStepsIsf(activities: (Activity & MinutesAgo)[]): number {
-	// Here we compute the effect of steps on ISF
-	// the total steps of the last 4 hours should be compared to
-	// the mean number of steps/4hours counted the previous week
-	// or to a default of 1500 steps/4h (6000 steps/16 hours)
+	// Calculate ISF (Insulin Sensitivity Factor) adjustment based on physical activity
+	// Compare steps from last 4 hours against:
+	// 1. Average steps/4hours from previous week
+	// 2. Default baseline of 1500 steps/4h (assuming 6000 steps/16 active hours)
 
-	// compute cumulative daily steps in the previous 7 days or 7 * 1440 min
-	// then divide by 16 hours for hourly steps and multiply by 4 for 4-hour periods
-	let last7daysSteps = activities.filter((e) => e.minutesAgo <= 10080 && e.steps > -1);
-	let cumulativeSteps = last7daysSteps.reduce(function (tot, arr) {
-		return tot + arr.steps;
-	}, 0);
-	logger.debug(`cumulativeSteps 7 days steps: %o`, cumulativeSteps);
-	logger.debug(`means steps over 7 days: %o`, Math.round(cumulativeSteps / 7));
-	let mean4hourSteps = Math.max(Math.round(cumulativeSteps / (7 * 4)), 1500);
-	logger.debug(`mean4hourSteps, min 1500: %o`, mean4hourSteps);
+	// Calculate average daily steps from previous 7 days (7 * 1440 minutes)
+	const WEEK_IN_MINUTES = 10080;
+	const previousWeekSteps = activities.filter((e) => e.minutesAgo <= WEEK_IN_MINUTES && e.steps > -1);
+	const totalWeeklySteps = previousWeekSteps.reduce((total, curr) => total + curr.steps, 0);
 
-	// compute last 4 hours steps
-	let last4hoursActivities = activities.filter((e) => e.minutesAgo <= 240 && e.steps > -1);
-	let last4hourSteps = last4hoursActivities.reduce(function (tot, arr) {
-		return tot + arr.steps;
-	}, 0);
-	logger.debug(`last4hourSteps: %o`, last4hourSteps);
+	logger.debug('Weekly step metrics:', {
+		totalSteps: totalWeeklySteps,
+		dailyAverage: Math.round(totalWeeklySteps / 7),
+	});
 
-	let stepRatio = last4hourSteps / mean4hourSteps;
+	// Calculate 4-hour average, with minimum threshold of 1500 steps
+	const MIN_FOUR_HOUR_STEPS = 1500;
+	const avgFourHourSteps = Math.max(Math.round(totalWeeklySteps / (7 * 4)), MIN_FOUR_HOUR_STEPS);
+	logger.debug('4-hour average steps:', { avgFourHourSteps });
 
-	let resultStepAct = 1;
+	// Calculate steps from last 4 hours
+	const FOUR_HOURS_IN_MINUTES = 240;
+	const recentActivities = activities.filter((e) => e.minutesAgo <= FOUR_HOURS_IN_MINUTES && e.steps > -1);
+	const recentSteps = recentActivities.reduce((total, curr) => total + curr.steps, 0);
+	logger.debug('Recent 4-hour steps:', { recentSteps });
 
-	// if the stepcount in the last 4 hours is <= to the mean 4hours steps, no effect on ISF
-	if (stepRatio <= 1) {
-		resultStepAct = 1;
-	} else if (stepRatio > 1) {
-		resultStepAct = 1 + stepRatio / 6;
-		// if stepRatio is 1.8, result is 1 + 1.8/6 = 1.30
-		// if stepRatio is 3, result is 1 + 3/6 = 1.5
+	const stepRatio = recentSteps / avgFourHourSteps;
+	let isfAdjustment = 0;
+
+	// Calculate ISF adjustment:
+	// - No effect if current steps are below or equal to average
+	// - Linear increase based on ratio if above average
+	if (stepRatio > 1) {
+		isfAdjustment = stepRatio / 6;
+		// Examples:
+		// stepRatio 1.8 → adjustment = 0.30 (30% increase)
+		// stepRatio 3.0 → adjustment = 0.50 (50% increase)
 	}
-	logger.debug(`@@@ PHYSICAL STEPS ISF: %o`, resultStepAct);
-	return resultStepAct;
+
+	logger.debug('Steps effect on ISF:', { stepRatio, isfAdjustment });
+	return isfAdjustment;
 }
 
 export function physicalStepsLiver(activities: (Activity & MinutesAgo)[]): number {
-	// Here we compute the effect of steps on liver EGP
-	// We'll assume the number of steps doesn't affect the EGP
-	// or Endogenous Glucose Production by the liver
-	let resultStepAct = 1;
-	logger.debug(`@@@ PHYSICAL STEPS LIVER: %o`, resultStepAct);
-	return resultStepAct;
+	// Calculate liver EGP (Endogenous Glucose Production) adjustment
+	// Currently assuming steps have no effect on liver glucose production
+	const liverAdjustment = 0;
+	logger.debug('Steps effect on liver EGP:', { liverAdjustment });
+	return liverAdjustment;
 }

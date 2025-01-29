@@ -1,3 +1,10 @@
+/**
+ * @fileoverview Physical activity calculations and analysis module
+ * Handles heart rate and steps data to determine activity intensity,
+ * insulin sensitivity, and liver glucose production factors.
+ */
+
+// Import necessary functions and types
 import { getMaxHr, physicalHeartIntensity, physicalHeartRateIsf, physicalHeartRateLiver } from './heartRate';
 import { physicalStepsIsf, physicalStepsLiver } from './steps';
 import { Activity, GenderType } from './Types';
@@ -10,15 +17,15 @@ const ACTIVITY_CONSTANTS = {
 	MIN_ACTIVITY_THRESHOLD: 0,
 } as const;
 
-// Type definitions
+// Type definitions for activities with time information
 interface ActivityWithTime extends Activity {
 	minutesAgo: number;
 }
 
 /**
- * Enhances activity data with time information
- * @param activities - Raw activity data
- * @returns Activities with added time information
+ * Adds time information to each activity
+ * @param activities - Array of raw activity data
+ * @returns Array of activities with added time information
  */
 function addTimeToActivities(activities: Activity[]): ActivityWithTime[] {
 	return activities.map((activity) => ({
@@ -30,7 +37,7 @@ function addTimeToActivities(activities: Activity[]): ActivityWithTime[] {
 /**
  * Calculates the current intensity of physical activity based on user parameters.
  * This function combines heart rate data to determine activity intensity level.
- * @param activities - Physical activity data array containing heart rate and timestamp
+ * @param activities - Array of physical activity data containing heart rate and timestamp
  * @param age - User's age for max heart rate calculation
  * @param gender - User's gender for max heart rate calculation
  * @returns Current intensity of physical activity as a percentage (0-100)
@@ -40,10 +47,10 @@ export function currentIntensity(activities: Activity[], age: number, gender: Ge
 		return ACTIVITY_CONSTANTS.DEFAULT_INTENSITY;
 	}
 
-	const maxHr = getMaxHr(age, gender);
+	const maxHeartRate = getMaxHr(age, gender);
 	const activitiesWithTime = addTimeToActivities(activities);
 
-	const intensity = physicalHeartIntensity(activitiesWithTime, maxHr);
+	const intensity = physicalHeartIntensity(activitiesWithTime, maxHeartRate);
 	return intensity ?? ACTIVITY_CONSTANTS.DEFAULT_INTENSITY;
 }
 
@@ -56,21 +63,19 @@ export function currentIntensity(activities: Activity[], age: number, gender: Ge
  * @returns The higher insulin sensitivity factor between heart rate and steps calculations
  */
 export function physicalIsf(activities: Activity[], age: number, gender: GenderType): number {
-	const maxHr = getMaxHr(age, gender);
+	const maxHeartRate = getMaxHr(age, gender);
 	const activitiesWithTime = addTimeToActivities(activities);
 
-	// Calculate ISF using both methods
-	const hrIsf = physicalHeartRateIsf(activitiesWithTime, maxHr);
-	const stepIsf = physicalStepsIsf(activitiesWithTime);
+	const heartRateIsf = physicalHeartRateIsf(activitiesWithTime, maxHeartRate);
+	const stepsIsf = physicalStepsIsf(activitiesWithTime);
 
-	// Determine which method provided higher ISF
-	if (hrIsf > stepIsf) {
-		logger.info(`@@@ USING HeartRate for ISF:, %o`, hrIsf);
+	if (heartRateIsf > stepsIsf) {
+		logger.info('[Physical Activity] Heart rate ISF calculation used: %d', heartRateIsf);
 	} else {
-		logger.info(`@@@ USING Steps for ISF:, %o`, stepIsf);
+		logger.info('[Physical Activity] Steps ISF calculation used: %d', stepsIsf);
 	}
 
-	return Math.max(hrIsf, stepIsf);
+	return 1 + Math.max(heartRateIsf, stepsIsf);
 }
 
 /**
@@ -82,8 +87,8 @@ export function physicalIsf(activities: Activity[], age: number, gender: GenderT
  * @returns The higher liver glucose production factor between heart rate and steps calculations
  */
 export function physicalLiver(activities: Activity[], age: number, gender: GenderType): number {
-	const maxHr = getMaxHr(age, gender);
+	const maxHeartRate = getMaxHr(age, gender);
 	const activitiesWithTime = addTimeToActivities(activities);
 
-	return Math.max(physicalHeartRateLiver(activitiesWithTime, maxHr), physicalStepsLiver(activitiesWithTime));
+	return 1 + Math.max(physicalHeartRateLiver(activitiesWithTime, maxHeartRate), physicalStepsLiver(activitiesWithTime));
 }
