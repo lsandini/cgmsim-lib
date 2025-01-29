@@ -1,49 +1,45 @@
-import logger, {
-	getDeltaMinutes,
-	getExpTreatmentActivity,
-	roundTo8Decimals,
-} from './utils';
+import logger, { getDeltaMinutes, getExpTreatmentActivity, roundTo8Decimals } from './utils';
 import { NSTreatment, isMealBolusTreatment } from './Types';
 
-export default (
-	treatments: NSTreatment[] = [],
-	dia: number,
-	peak: number,
-): number => {
-	const insulin = treatments
+/**
+ * Calculates the total active bolus insulin
+ * @param treatments - Array of insulin treatments
+ * @param dia - Duration of Insulin Action in hours
+ * @param peak - Time to peak insulin activity in minutes
+ * @returns Total active bolus insulin in Units
+ */
+export default (treatments: NSTreatment[] = [], dia: number, peak: number): number => {
+	// Filter for active meal boluses in the last 5 hours
+	const activeBolusInsulin = treatments
 		?.filter(isMealBolusTreatment)
-		.filter((e) => e?.insulin > 0)
-		.map((e) => ({
-			minutesAgo: getDeltaMinutes(e.created_at),
-			insulin: e.insulin,
+		.filter((treatment) => treatment?.insulin > 0)
+		.map((treatment) => ({
+			minutesAgo: getDeltaMinutes(treatment.created_at),
+			insulin: treatment.insulin,
 		}))
-		.filter((e) => e.minutesAgo <= 300 && e.minutesAgo >= 0);
+		.filter((bolus) => bolus.minutesAgo <= 300 && bolus.minutesAgo >= 0);
 
-	logger.debug('this is the filtered treatments (insulin): %o', insulin);
-	logger.debug('length %o', insulin.length); // returns the number of boluses or length of the array
+	logger.debug('Active bolus treatments:', activeBolusInsulin);
+	logger.debug('Number of active boluses:', activeBolusInsulin.length);
 
-	// dia is the duration of insulin action in hours
-	const duration = dia * 60;
+	// Convert DIA from hours to minutes
+	const durationInMinutes = dia * 60;
 
-	const insulinsBolusAct = insulin?.map((entry) => {
-		const units = entry.insulin;
+	// Calculate activity for each active bolus
+	const bolusActivities = activeBolusInsulin?.map((bolus) => {
 		return getExpTreatmentActivity({
 			peak,
-			duration,
-			minutesAgo: entry.minutesAgo,
-			units,
+			duration: durationInMinutes,
+			minutesAgo: bolus.minutesAgo,
+			units: bolus.insulin,
 		});
 	});
 
-	logger.debug(
-		'these are the last insulins and activities: %o',
-		insulinsBolusAct,
-	);
+	logger.debug('Individual bolus activities:', bolusActivities);
 
-	const bolusAct = insulinsBolusAct.reduce(
-		(tot, activity) => tot + activity,
-		0,
-	);
-	logger.debug('these are the insulins bolus activity: %o', bolusAct);
-	return roundTo8Decimals(bolusAct);
+	// Sum all bolus activities
+	const totalBolusActivity = bolusActivities.reduce((total, activity) => total + activity, 0);
+
+	logger.debug('Total bolus insulin activity:', totalBolusActivity);
+	return roundTo8Decimals(totalBolusActivity);
 };

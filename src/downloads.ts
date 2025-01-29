@@ -3,59 +3,79 @@ import setupParams from './setupParams';
 import { NSProfile, Sgv, NSTreatment } from './Types';
 import fetch, { Response } from 'node-fetch';
 
-async function fetchCast<T>(fetchData: Promise<Response>): Promise<T[]> {
+/**
+ * Fetches and parses JSON data from a Nightscout API endpoint
+ * @param fetchData - Promise containing the fetch request
+ * @returns Promise resolving to an array of parsed data
+ * @throws Error if the request fails
+ */
+async function fetchAndParseData<T>(fetchData: Promise<Response>): Promise<T[]> {
 	const response = await fetchData;
 	if (response.status === 200) {
 		const data: T[] = await response.json();
 		return data;
 	} else {
-		throw new Error('Request error');
+		throw new Error('API request failed');
 	}
 }
 
 /**
- * Downloads data from the Nightscout API, including treatments, profiles, and entries.
- * @param nsUrl - Nightscout URL.
- * @param apiSecret - Nightscout API secret.
- * @returns A promise that resolves with downloaded data.
+ * Downloads data from the Nightscout API, including treatments, profiles, and glucose entries
+ * @param nsUrl - Nightscout base URL
+ * @param apiSecret - Nightscout API secret token
+ * @returns Promise resolving to an object containing treatments, profiles, and glucose entries
  * @example
- * // Download data from Nightscout API
  * const apiUrl = "https://nightscout.example.com";
- * const apiSecret = "apiSecret123";
+ * const apiSecret = "your-secret-token";
  *
- * downloads(apiUrl, apiSecret)
- *   .then((downloadedData) => {
- *     console.log("Downloaded data:", downloadedData);
+ * downloadNightscoutData(apiUrl, apiSecret)
+ *   .then(data => {
+ *     console.log("Downloaded data:", data);
  *   })
- *   .catch((error) => {
- *     console.error("Error downloading data:", error);
+ *   .catch(error => {
+ *     console.error("Download failed:", error);
  *   });
  */
-const downloads = async (nsUrl: string, apiSecret: string) => {
-	const _nsUrl = removeTrailingSlash(nsUrl);
-	const _isHttps = isHttps(nsUrl);
+const downloadNightscoutData = async (nsUrl: string, apiSecret: string) => {
+	const baseUrl = removeTrailingSlash(nsUrl);
+	const useHttps = isHttps(nsUrl);
 
-	const { getParams } = setupParams(apiSecret, _isHttps);
-	const api_url = _nsUrl + '/api/v1/treatments?count=600';
-	const api_profile = _nsUrl + '/api/v1/profile.json';
-	const api_sgv = _nsUrl + '/api/v1/entries/sgv.json';
+	const { getParams } = setupParams(apiSecret, useHttps);
 
-	const treatments = fetchCast<NSTreatment>(fetch(api_url, getParams));
-	const profiles = fetchCast<NSProfile>(fetch(api_profile, getParams));
-	const entries = fetchCast<Sgv>(fetch(api_sgv, getParams));
+	// Define API endpoints
+	const treatmentsEndpoint = `${baseUrl}/api/v1/treatments?count=600`;
+	const profileEndpoint = `${baseUrl}/api/v1/profile.json`;
+	const glucoseEndpoint = `${baseUrl}/api/v1/entries/sgv.json`;
 
-	return Promise.all([treatments, profiles, entries])
-		.then(([treatments, profiles, entries]) => {
-			return {
-				treatments,
-				profiles,
-				entries,
-			};
-		})
-		.catch((err) => {
-			logger.error(err);
-			throw new Error(err);
+	logger.debug('Fetching data from endpoints:', {
+		treatments: treatmentsEndpoint,
+		profile: profileEndpoint,
+		glucose: glucoseEndpoint,
+	});
+
+	// Fetch data from all endpoints concurrently
+	const treatmentsPromise = fetchAndParseData<NSTreatment>(fetch(treatmentsEndpoint, getParams));
+	const profilesPromise = fetchAndParseData<NSProfile>(fetch(profileEndpoint, getParams));
+	const entriesPromise = fetchAndParseData<Sgv>(fetch(glucoseEndpoint, getParams));
+
+	try {
+		const [treatments, profiles, entries] = await Promise.all([treatmentsPromise, profilesPromise, entriesPromise]);
+
+		logger.debug('Successfully downloaded data', {
+			treatmentsCount: treatments.length,
+			profilesCount: profiles.length,
+			entriesCount: entries.length,
 		});
+
+		return {
+			treatments,
+			profiles,
+			entries,
+		};
+	} catch (error) {
+		logger.error('Failed to download Nightscout data:', error);
+		throw new Error(`Download failed: ${error.message}`);
+	}
 };
 
-export default downloads;
+export default downloadNightscoutData;
