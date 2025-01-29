@@ -33,7 +33,7 @@ const simulator = (params: MainParams): SimulationResult => {
 		activities, //7-DAYS
 		user,
 	} = params;
-	logger.info(user.nsUrl + ' Run Init CGMSim NSUrl:%o', user.nsUrl);
+	logger.info('[simulator] Run Init CGMSim NSUrl:%o', user.nsUrl);
 
 	if (!treatments) {
 		throw new Error('treatments is ' + treatments);
@@ -108,7 +108,7 @@ const simulator = (params: MainParams): SimulationResult => {
 		dynamicIsf,
 	);
 
-	logger.info(`${user.nsUrl} Simulation result:`, {
+	logger.info('[simulator] Simulation result:', {
 		...newSgvValue,
 		physicalISF: dynamicIsf / baseIsf,
 		physicalLiver: physicalActivityLiverFactor,

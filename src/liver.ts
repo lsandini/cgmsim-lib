@@ -18,7 +18,7 @@ export default function calculateLiverGlucoseProduction(
 	timeZone: string,
 ): number {
 	const isfMmol = isf / 18; // Convert ISF to (mmol/L)/U
-	logger.debug('Insulin Sensitivity Factor:', isf, 'Carb Ratio:', cr);
+	logger.debug('[liver] Insulin Sensitivity Factor:', isf, 'Carb Ratio:', cr);
 
 	const physicalActivityFactor = activities?.physical;
 	const alcoholFactor = activities?.alcohol;
@@ -30,8 +30,8 @@ export default function calculateLiverGlucoseProduction(
 	// - At noon: sine = 1.0, cosine = 0.5
 	// - At 6 PM: sine = 0.5, cosine = 1.0
 	const { sinus, cosinus } = sinusRun(timeZone);
-	logger.debug('Sine factor: %o', sinus);
-	logger.debug('Cosine factor: %o', cosinus);
+	logger.debug('[liver] Sine factor: %o', sinus);
+	logger.debug('[liver] Cosine factor: %o', cosinus);
 
 	// Calculate Carb Factor (CF) = ISF/CR
 	// Example: If ISF = 2 mmol/l/U and CR = 10g/U
@@ -47,8 +47,8 @@ export default function calculateLiverGlucoseProduction(
 	// Apply circadian rhythm using sine wave
 	const circadianAdjustedProduction = baseGlucoseProduction * sinus;
 
-	logger.debug('Base glucose production: %o', baseGlucoseProduction);
-	logger.debug('Circadian adjusted production: %o', circadianAdjustedProduction);
+	logger.debug('[liver] Base glucose production: %o', baseGlucoseProduction);
+	logger.debug('[liver] Circadian adjusted production: %o', circadianAdjustedProduction);
 
 	return circadianAdjustedProduction;
 }

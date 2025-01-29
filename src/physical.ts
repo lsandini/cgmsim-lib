@@ -69,11 +69,8 @@ export function physicalIsf(activities: Activity[], age: number, gender: GenderT
 	const heartRateIsf = physicalHeartRateIsf(activitiesWithTime, maxHeartRate);
 	const stepsIsf = physicalStepsIsf(activitiesWithTime);
 
-	if (heartRateIsf > stepsIsf) {
-		logger.info('[Physical Activity] Heart rate ISF calculation used: %d', heartRateIsf);
-	} else {
-		logger.info('[Physical Activity] Steps ISF calculation used: %d', stepsIsf);
-	}
+	logger.info('[physical] Heart rate ISF calculation used: %d', heartRateIsf);
+	logger.info('[physical] Steps ISF calculation used: %d', stepsIsf);
 
 	return 1 + Math.max(heartRateIsf, stepsIsf);
 }

@@ -70,7 +70,7 @@ const calculateTotalAlcoholActivity = (
 		);
 	});
 
-	logger.debug('Individual alcohol activities: %o', treatmentActivities);
+	logger.debug('[alcohol] Individual alcohol activities: %o', treatmentActivities);
 
 	return treatmentActivities.reduce((total, activity) => total + activity, 0);
 };
@@ -91,7 +91,7 @@ export default function calculateTotalActivity(
 	const alcoholTreatments = getTreatmentExpParam(treatments, weightKg, 'ALC');
 	const alcoholActivity =
 		alcoholTreatments.length > 0 ? calculateTotalAlcoholActivity(alcoholTreatments, weightKg, gender) : 0;
-	logger.debug('Alcohol treatments and activity: %o', {
+	logger.debug('[alcohol] Alcohol treatments and activity: %o', {
 		alcoholTreatments,
 		alcoholActivity,
 	});
@@ -99,7 +99,7 @@ export default function calculateTotalActivity(
 	// Calculate activity from beer treatments
 	const beerTreatments = getTreatmentExpParam(treatments, weightKg, 'BEER');
 	const beerActivity = beerTreatments.length > 0 ? calculateTotalAlcoholActivity(beerTreatments, weightKg, gender) : 0;
-	logger.debug('Beer treatments and activity: %o', {
+	logger.debug('[alcohol] Beer treatments and activity: %o', {
 		beerTreatments,
 		beerActivity,
 	});

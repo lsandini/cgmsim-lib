@@ -52,7 +52,7 @@ export function physicalHeartRateIsf(activities: (Activity & MinutesAgo)[], MAX_
 	});
 
 	const resultHRAct = timeSinceHRAct.reduce((tot, curr) => tot + curr, 0);
-	logger.debug('HR effect on ISF:', { resultHRAct });
+	logger.debug('[heartRate] HR effect on ISF:', { resultHRAct });
 	return resultHRAct;
 }
 
@@ -86,7 +86,7 @@ export function physicalHeartRateLiver(activities: (Activity & MinutesAgo)[], MA
 	});
 
 	const resultHRAct = timeSinceHRAct.reduce((tot, curr) => tot + curr, 0);
-	logger.debug('HR effect on liver:', { resultHRAct });
+	logger.debug('[heartRate] HR effect on liver:', { resultHRAct });
 	return resultHRAct;
 }
 

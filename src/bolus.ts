@@ -19,8 +19,8 @@ export default (treatments: NSTreatment[] = [], dia: number, peak: number): numb
 		}))
 		.filter((bolus) => bolus.minutesAgo <= 300 && bolus.minutesAgo >= 0);
 
-	logger.debug('Active bolus treatments:', activeBolusInsulin);
-	logger.debug('Number of active boluses:', activeBolusInsulin.length);
+	logger.debug('[bolus] Active bolus treatments:', activeBolusInsulin);
+	logger.debug('[bolus] Number of active boluses:', activeBolusInsulin.length);
 
 	// Convert DIA from hours to minutes
 	const durationInMinutes = dia * 60;
@@ -35,11 +35,11 @@ export default (treatments: NSTreatment[] = [], dia: number, peak: number): numb
 		});
 	});
 
-	logger.debug('Individual bolus activities:', bolusActivities);
+	logger.debug('[bolus] Individual bolus activities:', bolusActivities);
 
 	// Sum all bolus activities
 	const totalBolusActivity = bolusActivities.reduce((total, activity) => total + activity, 0);
 
-	logger.debug('Total bolus insulin activity:', totalBolusActivity);
+	logger.debug('[bolus] Total bolus insulin activity:', totalBolusActivity);
 	return roundTo8Decimals(totalBolusActivity);
 };

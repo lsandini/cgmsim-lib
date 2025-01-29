@@ -25,7 +25,7 @@ export default function calculateFinalCortisoneActivity(treatments: NSTreatmentP
 	const recentCortisoneTreatments = getTreatmentExpParam(treatments, weightKg, 'COR');
 	const cortisoneActivity =
 		recentCortisoneTreatments.length > 0 ? calculateCortisoneActivity(recentCortisoneTreatments) : 0;
-	logger.debug('Recent cortisone treatments:', {
+	logger.debug('[cortisone] Recent cortisone treatments:', {
 		treatments: recentCortisoneTreatments,
 		activity: cortisoneActivity,
 	});

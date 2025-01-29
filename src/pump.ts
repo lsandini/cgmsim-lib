@@ -255,6 +255,6 @@ export default function (treatments: NSTreatment[], profiles: NSProfile[], dia: 
 			}),
 		0,
 	);
-	logger.debug("the pump's basal activity is: %o", pumpBasalAct);
+	logger.debug('[pump] the pump\'s basal activity is: %o', pumpBasalAct);
 	return pumpBasalAct;
 }

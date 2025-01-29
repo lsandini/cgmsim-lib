@@ -29,7 +29,7 @@ const calculateNextGlucose = (
 	const previousGlucose = entries?.[0]?.sgv ?? 90;
 	const deltaMinutes = entries?.[0] ? getDeltaMinutes(entries[0].mills) : 1;
 
-	logger.debug('Time since last reading: %o minutes', deltaMinutes);
+	logger.debug(`[sgv] Time since last reading: %o minutes`, deltaMinutes);
 
 	// Convert ISF to mmol/L
 	const isfMmol = isf / 18; // (mmol/L)/U
@@ -109,22 +109,15 @@ function logGlucoseComponents(
 	bolusImpact: number,
 	isfMmol: number,
 ): void {
-	logger.debug('-------------------------------------------');
-	logger.debug(`Previous glucose (${deltaMinutes} minutes ago): ${previousGlucose} mg/dL`);
-	logger.debug('-------------------------------------------');
-	logger.debug(`Total insulin impact for ${deltaMinutes} minutes: ${insulinGlucoseImpact * 18} mg/dL`);
-	logger.debug('-------------------------------------------');
-	logger.debug(`Total liver impact for ${deltaMinutes} minutes: +${liverImpact * 18} mg/dL`);
-	logger.debug('-------------------------------------------');
-	logger.debug(`Total cortisone impact for ${deltaMinutes} minutes: +${cortisoneImpact * 18} mg/dL`);
-	logger.debug('-------------------------------------------');
-	logger.debug(`Total carbs impact for ${deltaMinutes} minutes: +${carbsImpact * 18} mg/dL`);
-	logger.debug('-------------------------------------------');
-	logger.debug(
-		`Combined impact for ${deltaMinutes} minutes: ${insulinGlucoseImpact + liverImpact * 18 + carbsImpact * 18} mg/dL`,
-	);
-	logger.debug(`Basal insulin impact for ${deltaMinutes} minutes: ${basalImpact * 18 * isfMmol} mg/dL`);
-	logger.debug(`Bolus insulin impact for ${deltaMinutes} minutes: ${bolusImpact * 18 * isfMmol} mg/dL`);
+
+	logger.debug(`[sgv] Previous glucose (${deltaMinutes} minutes ago): ${previousGlucose} mg/dL`);
+	logger.debug(`[sgv] Total insulin impact for ${deltaMinutes} minutes: ${insulinGlucoseImpact * 18} mg/dL`);
+	logger.debug(`[sgv] Total liver impact for ${deltaMinutes} minutes: +${liverImpact * 18} mg/dL`);
+	logger.debug(`[sgv] Total cortisone impact for ${deltaMinutes} minutes: +${cortisoneImpact * 18} mg/dL`);
+	logger.debug(`[sgv] Total carbs impact for ${deltaMinutes} minutes: +${carbsImpact * 18} mg/dL`);
+	logger.debug(`[sgv] Combined impact for ${deltaMinutes} minutes: ${insulinGlucoseImpact + liverImpact * 18 + carbsImpact * 18} mg/dL`);
+	logger.debug(`[sgv] Basal insulin impact for ${deltaMinutes} minutes: ${basalImpact * 18 * isfMmol} mg/dL`);
+	logger.debug(`[sgv] Bolus insulin impact for ${deltaMinutes} minutes: ${bolusImpact * 18 * isfMmol} mg/dL`);
 }
 
 export default calculateNextGlucose;

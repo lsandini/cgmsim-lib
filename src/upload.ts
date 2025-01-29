@@ -25,7 +25,13 @@ export function uploadNotes(notes: string, nsUrl: string, apiSecret: string) {
 	const _nsUrl = removeTrailingSlash(nsUrl);
 	const api_url = _nsUrl + '/api/v1/treatments/';
 	const noteTreatment: Note = { type: 'Note', notes };
-	return uploadBase(noteTreatment, api_url, apiSecret);
+	return uploadBase(noteTreatment, api_url, apiSecret)
+		.then(() => {
+			logger.debug('[upload] Note uploaded successfully');
+		})
+		.catch((error) => {
+			logger.error('[upload] Upload failed:', error);
+		});
 }
 /**
  * Uploads logs to the Nightscout API.
@@ -62,7 +68,13 @@ export function uploadLogs(
 		dateString: now.toISOString(),
 		date: now.toDate().getTime(),
 	};
-	return uploadBase(sim, api_url, apiSecret);
+	return uploadBase(sim, api_url, apiSecret)
+		.then(() => {
+			logger.debug('[upload] Logs uploaded successfully');
+		})
+		.catch((error) => {
+			logger.error('[upload] Upload failed:', error);
+		});
 }
 /**
  * Uploads entries (e.g., blood glucose readings) to the Nightscout API.
@@ -98,7 +110,13 @@ export function uploadEntries(
 		dateString: now.toISOString(),
 		date: now.toDate().getTime(),
 	};
-	return uploadBase(entry, api_url, apiSecret);
+	return uploadBase(entry, api_url, apiSecret)
+		.then(() => {
+			logger.debug('[upload] Blood glucose entry uploaded successfully');
+		})
+		.catch((error) => {
+			logger.error('[upload] Upload failed:', error);
+		});
 }
 
 /**
@@ -126,9 +144,15 @@ export function uploadActivity(
 	nsUrl: string,
 	apiSecret: string,
 ) {
-	logger.debug('log something %o', activity);
+	logger.debug('[upload] log something %o', activity);
 
 	const _nsUrl = removeTrailingSlash(nsUrl);
 	const api_url = _nsUrl + '/api/v1/activity/';
-	return uploadBase(activity, api_url, apiSecret);
+	return uploadBase(activity, api_url, apiSecret)
+		.then(() => {
+			logger.debug('[upload] Activity data uploaded successfully');
+		})
+		.catch((error) => {
+			logger.error('[upload] Upload failed:', error);
+		});
 }

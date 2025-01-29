@@ -22,7 +22,7 @@ export default function calculateTotalBasalActivity(treatments: NSTreatmentParse
 	// Calculate activity for Glargine insulin
 	const lastGlargine = getTreatmentExpParam(treatments, weight, 'GLA');
 	const glargineActivity = lastGlargine.length ? calculateBasalActivityPerMinute(lastGlargine) : 0;
-	logger.debug('Glargine insulin activity:', {
+	logger.debug('[basal] Glargine insulin activity:', {
 		activeGlargineTreatments: lastGlargine,
 		totalGlargineActivity: glargineActivity,
 	});
@@ -30,7 +30,7 @@ export default function calculateTotalBasalActivity(treatments: NSTreatmentParse
 	// Calculate activity for Detemir insulin
 	const lastDetemir = getTreatmentExpParam(treatments, weight, 'DET');
 	const detemirActivity = lastDetemir.length ? calculateBasalActivityPerMinute(lastDetemir) : 0;
-	logger.debug('Detemir insulin activity:', {
+	logger.debug('[basal] Detemir insulin activity:', {
 		activeDetemirTreatments: lastDetemir,
 		totalDetemirActivity: detemirActivity,
 	});
@@ -38,7 +38,7 @@ export default function calculateTotalBasalActivity(treatments: NSTreatmentParse
 	// Calculate activity for Toujeo insulin
 	const lastToujeo = getTreatmentExpParam(treatments, weight, 'TOU');
 	const toujeoActivity = lastToujeo.length ? calculateBasalActivityPerMinute(lastToujeo) : 0;
-	logger.debug('Toujeo insulin activity:', {
+	logger.debug('[basal] Toujeo insulin activity:', {
 		activeToujeoTreatments: lastToujeo,
 		totalToujeoActivity: toujeoActivity,
 	});
@@ -46,7 +46,7 @@ export default function calculateTotalBasalActivity(treatments: NSTreatmentParse
 	// Calculate activity for Degludec insulin
 	const lastDegludec = getTreatmentExpParam(treatments, weight, 'DEG');
 	const degludecActivity = lastDegludec.length ? calculateBasalActivityPerMinute(lastDegludec) : 0;
-	logger.debug('Degludec insulin activity:', {
+	logger.debug('[basal] Degludec insulin activity:', {
 		activeDegludecTreatments: lastDegludec,
 		totalDegludecActivity: degludecActivity,
 	});
@@ -54,7 +54,7 @@ export default function calculateTotalBasalActivity(treatments: NSTreatmentParse
 	// Calculate activity for NPH insulin
 	const lastNPH = getTreatmentExpParam(treatments, weight, 'NPH');
 	const nphActivity = lastNPH.length ? calculateBasalActivityPerMinute(lastNPH) : 0;
-	logger.debug('NPH insulin activity:', {
+	logger.debug('[basal] NPH insulin activity:', {
 		activeNPHTreatments: lastNPH,
 		totalNPHActivity: nphActivity,
 	});

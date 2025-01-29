@@ -113,7 +113,7 @@ export function transformNoteTreatmentsDrug(treatments: NSTreatment[]): NSTreatm
 				.filter((treatment) => treatment.notes)
 				.map((treatment) => {
 					const lastSpaceIndex = treatment.notes.lastIndexOf(' ');
-					logger.debug('Processing treatment units: %o', parseFloat(treatment.notes.slice(lastSpaceIndex)));
+					logger.debug('[drug] Processing treatment units: %o', parseFloat(treatment.notes.slice(lastSpaceIndex)));
 					return {
 						minutesAgo: getDeltaMinutes(treatment.created_at),
 						drug: treatment.notes.slice(0, 3),

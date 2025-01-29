@@ -18,7 +18,7 @@ export function physicalStepsIsf(activities: (Activity & MinutesAgo)[]): number 
 	const previousWeekSteps = activities.filter((e) => e.minutesAgo <= WEEK_IN_MINUTES && e.steps > -1);
 	const totalWeeklySteps = previousWeekSteps.reduce((total, curr) => total + curr.steps, 0);
 
-	logger.debug('Weekly step metrics:', {
+	logger.debug('[steps] Weekly step metrics:', {
 		totalSteps: totalWeeklySteps,
 		dailyAverage: Math.round(totalWeeklySteps / 7),
 	});
@@ -26,13 +26,13 @@ export function physicalStepsIsf(activities: (Activity & MinutesAgo)[]): number 
 	// Calculate 4-hour average, with minimum threshold of 1500 steps
 	const MIN_FOUR_HOUR_STEPS = 1500;
 	const avgFourHourSteps = Math.max(Math.round(totalWeeklySteps / (7 * 4)), MIN_FOUR_HOUR_STEPS);
-	logger.debug('4-hour average steps:', { avgFourHourSteps });
+	logger.debug('[steps] 4-hour average steps:', { avgFourHourSteps });
 
 	// Calculate steps from last 4 hours
 	const FOUR_HOURS_IN_MINUTES = 240;
 	const recentActivities = activities.filter((e) => e.minutesAgo <= FOUR_HOURS_IN_MINUTES && e.steps > -1);
 	const recentSteps = recentActivities.reduce((total, curr) => total + curr.steps, 0);
-	logger.debug('Recent 4-hour steps:', { recentSteps });
+	logger.debug('[steps] Recent 4-hour steps:', { recentSteps });
 
 	const stepRatio = recentSteps / avgFourHourSteps;
 	let isfAdjustment = 0;
@@ -47,7 +47,7 @@ export function physicalStepsIsf(activities: (Activity & MinutesAgo)[]): number 
 		// stepRatio 3.0 → adjustment = 0.50 (50% increase)
 	}
 
-	logger.debug('Steps effect on ISF:', { stepRatio, isfAdjustment });
+	logger.debug('[steps] Steps effect on ISF:', { stepRatio, isfAdjustment });
 	return isfAdjustment;
 }
 

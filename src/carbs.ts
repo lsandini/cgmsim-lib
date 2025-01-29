@@ -29,7 +29,7 @@ export default function calculateCarbEffect(
 		}))
 		.filter((meal) => meal.minutesAgo >= 0);
 
-	logger.debug('Active meals in absorption window:', activeMeals);
+	logger.debug('[carbs] Active meals in absorption window:', activeMeals);
 
 	// Define absorption times for different carb types
 	const fastAbsorptionTime = carbAbsorptionTime / 6; // 60 min for default
@@ -48,7 +48,7 @@ export default function calculateCarbEffect(
 		const fastCarbs = fastCarbsPortion + fastAbsorptionRatio * remainingCarbs;
 		const slowCarbs = (1 - fastAbsorptionRatio) * remainingCarbs;
 
-		logger.debug('Carb absorption split:', {
+		logger.debug('[carbs] Carb absorption split:', {
 			totalCarbs,
 			fastCarbsPortion,
 			remainingCarbs,
@@ -64,7 +64,7 @@ export default function calculateCarbEffect(
 		} else if (minutesAgo < fastAbsorptionTime) {
 			fastCarbRate = ((fastCarbs * 4) / fastAbsorptionTime) * (1 - minutesAgo / fastAbsorptionTime);
 		}
-		logger.debug('Fast carb absorption rate:', fastCarbRate);
+		logger.debug('[carbs] Fast carb absorption rate:', fastCarbRate);
 
 		// Calculate absorption rates for slow carbs
 		let slowCarbRate = 0;
@@ -74,7 +74,7 @@ export default function calculateCarbEffect(
 		} else if (minutesAgo < slowAbsorptionTime) {
 			slowCarbRate = ((slowCarbs * 4) / slowAbsorptionTime) * (1 - minutesAgo / slowAbsorptionTime);
 		}
-		logger.debug('Slow carb absorption rate:', slowCarbRate);
+		logger.debug('[carbs] Slow carb absorption rate:', slowCarbRate);
 
 		return fastCarbRate + slowCarbRate;
 	});
@@ -83,8 +83,8 @@ export default function calculateCarbEffect(
 
 	const bloodGlucoseImpact = (isfMmol / cr) * totalCarbRate;
 
-	logger.debug('Total carb absorption rate:', totalCarbRate);
-	logger.debug('Predicted blood glucose impact per minute:', bloodGlucoseImpact);
+	logger.debug('[carbs] Total carb absorption rate:', totalCarbRate);
+	logger.debug('[carbs] Predicted blood glucose impact per minute:', bloodGlucoseImpact);
 
 	return bloodGlucoseImpact;
 }

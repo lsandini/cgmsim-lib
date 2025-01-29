@@ -47,7 +47,7 @@ const downloadNightscoutData = async (nsUrl: string, apiSecret: string) => {
 	const profileEndpoint = `${baseUrl}/api/v1/profile.json`;
 	const glucoseEndpoint = `${baseUrl}/api/v1/entries/sgv.json`;
 
-	logger.debug('Fetching data from endpoints:', {
+	logger.debug('[downloads] Fetching data from endpoints:', {
 		treatments: treatmentsEndpoint,
 		profile: profileEndpoint,
 		glucose: glucoseEndpoint,
@@ -61,7 +61,7 @@ const downloadNightscoutData = async (nsUrl: string, apiSecret: string) => {
 	try {
 		const [treatments, profiles, entries] = await Promise.all([treatmentsPromise, profilesPromise, entriesPromise]);
 
-		logger.debug('Successfully downloaded data', {
+		logger.debug('[downloads] Successfully downloaded data', {
 			treatmentsCount: treatments.length,
 			profilesCount: profiles.length,
 			entriesCount: entries.length,
@@ -73,7 +73,7 @@ const downloadNightscoutData = async (nsUrl: string, apiSecret: string) => {
 			entries,
 		};
 	} catch (error) {
-		logger.error('Failed to download Nightscout data:', error);
+		logger.error('[downloads] Failed to download Nightscout data:', error);
 		throw new Error(`Download failed: ${error.message}`);
 	}
 };

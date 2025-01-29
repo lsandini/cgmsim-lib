@@ -117,10 +117,10 @@ export function uploadBase(
 		body: jsonData,
 	})
 		.then(() => {
-			logger.debug('Successfully updated Nightscout');
+			logger.debug('[utils] Successfully updated Nightscout');
 		})
 		.catch((error) => {
-			logger.debug(error);
+			logger.debug('[utils] %o', error);
 			throw new Error(error);
 		});
 }
@@ -139,11 +139,11 @@ export function loadBase(apiUrl: string, apiSecret: string): Promise<(Entry | Ac
 		...getParams,
 	})
 		.then((response) => {
-			logger.debug('Successfully loaded from Nightscout');
+			logger.debug('[utils] Successfully loaded from Nightscout');
 			return response.json();
 		})
 		.catch((error) => {
-			logger.debug(error);
+			logger.debug('[utils] %o', error);
 			throw new Error(error);
 		});
 }
