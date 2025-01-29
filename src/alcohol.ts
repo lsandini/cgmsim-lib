@@ -23,7 +23,7 @@ function getAlcoholActivity(
 				duration,
 				minutesAgo: minutesAgo - washoutDuration,
 				units: unitsWeighted,
-			}) * 3
+			}) / 0.35
 		);
 	}
 	return 0;
