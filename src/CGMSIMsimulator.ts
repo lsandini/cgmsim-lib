@@ -13,8 +13,15 @@ import { physicalIsf, physicalLiver } from './physical';
 import { transformNoteTreatmentsDrug } from './drug';
 /**
  * Simulation module for blood glucose data calculation.
- * @param params - Main parameters for running the simulation.
- * @returns Simulation result containing blood glucose data and other parameters.
+ * @param params - Configuration parameters for the simulation
+ * @param params.patient - Patient specific parameters (ISF, age, gender, weight, etc.)
+ * @param params.entries - Array of previous glucose entries
+ * @param params.treatments - Array of treatments (insulin, carbs, etc.)
+ * @param params.profiles - Pump profiles configuration
+ * @param params.pumpEnabled - Flag indicating if insulin pump is enabled
+ * @param params.activities - Physical activity data for the last 7 days
+ * @param params.user - User configuration including Nightscout URL
+ * @returns SimulationResult containing calculated blood glucose value and related parameters
  */
 const simulator = (params: MainParams): SimulationResult => {
 	const {
@@ -35,19 +42,20 @@ const simulator = (params: MainParams): SimulationResult => {
 		throw new Error('profiles is ' + profiles);
 	}
 
-	const isfConstant = patient.ISF;
+	const baseIsf = patient.ISF;
 	const age = patient.AGE;
 	const gender = patient.GENDER;
 	const tz = patient?.TZ || 'UTC';
 
-	let isfActivityDependent = isfConstant;
-	let liverActivityFactor = 1;
-	if (isfActivityDependent < 9) {
+	// Calculate ISF and liver factors based on physical activity
+	let dynamicIsf = baseIsf;
+	let physicalActivityLiverFactor = 1;
+	if (dynamicIsf < 9) {
 		throw new Error('Isf must be greater than or equal to 9');
 	}
 	if (activities && activities.length > 0) {
-		isfActivityDependent = isfConstant * physicalIsf(activities, age, gender);
-		liverActivityFactor = physicalLiver(activities, age, gender);
+		dynamicIsf = baseIsf * physicalIsf(activities, age, gender);
+		physicalActivityLiverFactor = physicalLiver(activities, age, gender);
 	}
 
 	const weight = patient.WEIGHT;
@@ -59,61 +67,59 @@ const simulator = (params: MainParams): SimulationResult => {
 	//Find basal boluses
 	const drugs = transformNoteTreatmentsDrug(treatments);
 
-	const activeDrugTreatments = drugs.filter(function (e) {
-		return e.minutesAgo <= 45 * 60; // keep only the basals from the last 45 hours
+	// Filter recent drug treatments (last 45 hours)
+	const recentDrugTreatments = drugs.filter((treatment) => {
+		return treatment.minutesAgo <= 45 * 60;
 	});
 
-	const bolusActivity = bolus(treatments, dia, peak);
-	const basalBolusActivity = basal(activeDrugTreatments, weight);
-	const cortisoneActivity = cortisone(activeDrugTreatments, weight);
-	const alcoholActivity = alcohol(activeDrugTreatments, weight, gender);
-	const basalPumpActivity = pumpEnabled
-		? pump(treatments, profiles, dia, peak)
-		: 0;
-	const carbsActivity = carbs(treatments, carbsAbs, isfActivityDependent, cr);
+	// Calculate various treatment effects
+	const bolusEffect = bolus(treatments, dia, peak);
+	const basalBolusEffect = basal(recentDrugTreatments, weight);
+	const cortisoneEffect = cortisone(recentDrugTreatments, weight);
+	const alcoholEffect = alcohol(recentDrugTreatments, weight, gender);
+	const pumpBasalEffect = pumpEnabled ? pump(treatments, profiles, dia, peak) : 0;
+	const carbsEffect = carbs(treatments, carbsAbs, dynamicIsf, cr);
 
-	//activity calc carb
-	const liverActivity = liverRun(
-		isfConstant,
+	// Calculate liver glucose production
+	const liverEffect = liverRun(
+		baseIsf,
 		cr,
 		{
-			physical: liverActivityFactor,
-			alcohol: alcoholActivity,
+			physical: physicalActivityLiverFactor,
+			alcohol: alcoholEffect,
 		},
 		weight,
 		tz,
 	);
 
 	const now = moment();
-	const orderedEntries = entries
-		.filter((e) => e.mills <= now.toDate().getTime())
-		.sort((a, b) => b.mills - a.mills);
+	const orderedEntries = entries.filter((e) => e.mills <= now.toDate().getTime()).sort((a, b) => b.mills - a.mills);
 
 	const newSgvValue = sgv(
 		orderedEntries,
 		{
-			basalActivity: basalBolusActivity + basalPumpActivity,
-			liverActivity,
-			carbsActivity,
-			bolusActivity,
-			cortisoneActivity,
-			alcoholActivity,
+			basalActivity: basalBolusEffect + pumpBasalEffect,
+			liverActivity: liverEffect,
+			carbsActivity: carbsEffect,
+			bolusActivity: bolusEffect,
+			cortisoneActivity: cortisoneEffect,
+			alcoholActivity: alcoholEffect,
 		},
-		isfActivityDependent,
+		dynamicIsf,
 	);
 
-	logger.info(user.nsUrl + 'this is the simulator result: %o', {
+	logger.info(`${user.nsUrl} Simulation result:`, {
 		...newSgvValue,
-		physicalISF: isfActivityDependent / isfConstant,
-		physicalLiver: liverActivityFactor,
+		physicalISF: dynamicIsf / baseIsf,
+		physicalLiver: physicalActivityLiverFactor,
 	});
 
 	// const arrows = arrowsRun([newSgvValue, ...entries]);
 
 	return {
 		...newSgvValue,
-		activityFactor: liverActivityFactor,
-		isf: { dynamic: isfActivityDependent, constant: isfConstant },
+		activityFactor: physicalActivityLiverFactor,
+		isf: { dynamic: dynamicIsf, constant: baseIsf },
 	};
 };
 
