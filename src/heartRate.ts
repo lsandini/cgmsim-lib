@@ -4,6 +4,12 @@ type MinutesAgo = { minutesAgo: number };
 
 const MIN_HR = 10;
 
+/**
+ * Calculates maximum heart rate based on age and gender
+ * @param age - User's age in years
+ * @param gender - User's gender ('Male' or 'Female')
+ * @returns number - Maximum heart rate in beats per minute
+ */
 export function getMaxHr(age: number, gender: GenderType) {
 	let MAX_HR = 170;
 	if (age > 0) {
@@ -16,6 +22,12 @@ export function getMaxHr(age: number, gender: GenderType) {
 	return MAX_HR;
 }
 
+/**
+ * Calculates ISF adjustment based on heart rate activity
+ * @param activities - Array of activities containing heart rate data and time information
+ * @param MAX_HR - Maximum heart rate calculated for the user
+ * @returns number - ISF adjustment factor (1 = no effect, >1 = increased sensitivity)
+ */
 export function physicalHeartRateIsf(activities: (Activity & MinutesAgo)[], MAX_HR: number): number {
 	// Filter activities from last 6 hours
 	const last360min = activities.filter((e) => e.minutesAgo <= 360 && e.minutesAgo >= 0);
@@ -44,6 +56,12 @@ export function physicalHeartRateIsf(activities: (Activity & MinutesAgo)[], MAX_
 	return resultHRAct;
 }
 
+/**
+ * Calculates liver glucose production adjustment based on heart rate
+ * @param activities - Array of activities containing heart rate data and time information
+ * @param MAX_HR - Maximum heart rate calculated for the user
+ * @returns number - Liver adjustment factor (1 = no effect, >1 = increased production)
+ */
 export function physicalHeartRateLiver(activities: (Activity & MinutesAgo)[], MAX_HR: number): number {
 	const last360min = activities.filter((e) => e.minutesAgo <= 360);
 
@@ -72,10 +90,21 @@ export function physicalHeartRateLiver(activities: (Activity & MinutesAgo)[], MA
 	return resultHRAct;
 }
 
+/**
+ * Checks if any valid heart rate readings exist in activities
+ * @param activities - Array of activities containing heart rate data
+ * @returns boolean - True if valid heart rate readings exist
+ */
 export function hasHeartRate(activities: Activity[]): boolean {
 	return activities.some((a) => a.heartRate > MIN_HR);
 }
 
+/**
+ * Calculates current physical intensity based on recent heart rate
+ * @param activities - Array of activities containing heart rate data and time information
+ * @param MAX_HR - Maximum heart rate calculated for the user
+ * @returns number - Intensity ratio (0-0.8, where 0 = rest, 0.8 = high intensity)
+ */
 export function physicalHeartIntensity(activities: (Activity & MinutesAgo)[], MAX_HR: number) {
 	let last5min = activities?.filter((e) => e.minutesAgo <= 5);
 

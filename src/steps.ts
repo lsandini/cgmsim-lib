@@ -2,6 +2,11 @@ import { Activity, GenderType } from './Types';
 import logger from './utils';
 type MinutesAgo = { minutesAgo: number };
 
+/**
+ * Calculates ISF adjustment based on physical activity (steps)
+ * @param activities - Array of activities containing steps data and time information
+ * @returns number - ISF adjustment factor (0 = no effect, 0.5 = 50% increase)
+ */
 export function physicalStepsIsf(activities: (Activity & MinutesAgo)[]): number {
 	// Calculate ISF (Insulin Sensitivity Factor) adjustment based on physical activity
 	// Compare steps from last 4 hours against:
@@ -46,6 +51,11 @@ export function physicalStepsIsf(activities: (Activity & MinutesAgo)[]): number 
 	return isfAdjustment;
 }
 
+/**
+ * Calculates liver glucose production adjustment based on steps
+ * @param activities - Array of activities containing steps data and time information
+ * @returns number - Liver adjustment factor (currently always returns 0)
+ */
 export function physicalStepsLiver(activities: (Activity & MinutesAgo)[]): number {
 	// Calculate liver EGP (Endogenous Glucose Production) adjustment
 	// Currently assuming steps have no effect on liver glucose production
