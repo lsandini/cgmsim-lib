@@ -1,4 +1,4 @@
-import { Activity, GenderType } from './Types';
+import { Activity } from './Types';
 import logger from './utils';
 type MinutesAgo = { minutesAgo: number };
 

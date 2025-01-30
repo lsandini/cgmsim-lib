@@ -8,16 +8,17 @@ import { NSTreatment, isMealBolusTreatment } from './Types';
  * @param peak - Time to peak insulin activity in minutes
  * @returns Total active bolus insulin in Units
  */
-export default (treatments: NSTreatment[] = [], dia: number, peak: number): number => {
+export default (treatments: NSTreatment[], dia: number, peak: number): number => {
 	// Filter for active meal boluses in the last 5 hours
-	const activeBolusInsulin = treatments
-		?.filter(isMealBolusTreatment)
-		.filter((treatment) => treatment?.insulin > 0)
-		.map((treatment) => ({
-			minutesAgo: getDeltaMinutes(treatment.created_at),
-			insulin: treatment.insulin,
-		}))
-		.filter((bolus) => bolus.minutesAgo <= 300 && bolus.minutesAgo >= 0);
+	const activeBolusInsulin =
+		treatments
+			?.filter(isMealBolusTreatment)
+			.filter((treatment) => treatment?.insulin > 0)
+			.map((treatment) => ({
+				minutesAgo: getDeltaMinutes(treatment.created_at),
+				insulin: treatment.insulin,
+			}))
+			.filter((bolus) => bolus.minutesAgo <= 300 && bolus.minutesAgo >= 0) || [];
 
 	logger.debug('[bolus] Active bolus treatments:', activeBolusInsulin);
 	logger.debug('[bolus] Number of active boluses:', activeBolusInsulin.length);
