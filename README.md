@@ -1,7 +1,7 @@
 # cgmsim-lib
 
 ![example workflow](https://github.com/lsandini/cgmsim-lib/actions/workflows/update-dist.yml/badge.svg)
-[![Quality Gate Status](https://sonar.beta.cgmsim.com/api/project_badges/measure?project=lsandini_cgmsim-lib_dcb733af-979c-4bcd-88af-267d99139342&metric=alert_status&token=sqb_8348c08b04628f1043d15c2e83294a75d2a28e33)](https://sonar.beta.cgmsim.com/dashboard?id=lsandini_cgmsim-lib_dcb733af-979c-4bcd-88af-267d99139342)
+[![Quality Gate Status](https://sonar.cgmsim.com/api/project_badges/measure?project=lsandini_cgmsim-lib_dcb733af-979c-4bcd-88af-267d99139342&metric=alert_status&token=sqb_8348c08b04628f1043d15c2e83294a75d2a28e33)](https://sonar.beta.cgmsim.com/dashboard?id=lsandini_cgmsim-lib_dcb733af-979c-4bcd-88af-267d99139342)
 
 ![Branches](./badges/coverage-branches.svg)
 ![Functions](./badges/coverage-functions.svg)
