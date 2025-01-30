@@ -28,7 +28,7 @@ jobs:
       - uses: sonarsource/sonarqube-scan-action@master
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+          SONAR_HOST_URL: https://sonar.cgmsim.com
         with:
           args: >
             -Dsonar.organization=lsandini_cgmsim-lib_dcb733af-979c-4bcd-88af-267d99139342
