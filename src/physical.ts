@@ -1,9 +1,3 @@
-/**
- * @fileoverview Physical activity calculations and analysis module
- * Handles heart rate and steps data to determine activity intensity,
- * insulin sensitivity, and liver glucose production factors.
- */
-
 // Import necessary functions and types
 import { getMaxHr, physicalHeartIntensity, physicalHeartRateIsf, physicalHeartRateLiver } from './heartRate';
 import { physicalStepsIsf, physicalStepsLiver } from './steps';
