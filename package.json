@@ -1,10 +1,12 @@
 {
   "name": "@lsandini/cgmsim-lib",
-  "version": "0.5.4",
+  "version": "0.5.4.1",
   "description": "cgmsim-lib",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "files": ["/dist"],
+  "files": [
+    "/dist"
+  ],
   "engines": {
     "node": ">=16.0.0"
   },
@@ -20,7 +22,10 @@
     "type": "git",
     "url": "git+https://github.com/lsandini/cgmsim-lib.git"
   },
-  "keywords": ["cgmsim", "lib"],
+  "keywords": [
+    "cgmsim",
+    "lib"
+  ],
   "author": "",
   "license": "ISC",
   "bugs": {
