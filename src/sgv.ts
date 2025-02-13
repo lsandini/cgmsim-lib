@@ -18,6 +18,16 @@ const sgv_start = (
 	}: CGMSimParams,
 	isf: number,
 ) => {
+	let lastSgv;
+	if (entries && entries[0]) {
+		lastSgv = entries[0].sgv;
+	} else if (entries && entries.length === 0) {
+		lastSgv = 90;
+		logger.warn('Empty entries, using 90 as last sgv');
+	} else {
+		logger.error('No entries found');
+		return null;
+	}
 	const oldSgv = entries && entries[0] ? entries[0].sgv : 90;
 	const deltaMinutes =
 		entries && entries[0] ? getDeltaMinutes(entries[0].mills) : 1;
