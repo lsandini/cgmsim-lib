@@ -28,7 +28,7 @@ describe('pid test', () => {
     global.Math = math;
   });
 
-  test('start from 100 @13:00Z with deg23 + bolus 5u @14.30 + meal 50g @15.30', async () => {
+  test('start from 180 @13:00Z', async () => {
     let now = moment('2022-06-04T13:00:00.000Z');
     jest.setSystemTime(now.toDate());
     const startSgv = 180;
@@ -36,27 +36,15 @@ describe('pid test', () => {
       {
         mills: now.add(-5, 'minutes').toDate().getTime(),
         sgv: startSgv,
-      },
-      {
-        mills: now.add(-5, 'minutes').toDate().getTime(),
-        sgv: startSgv,
-      },
-      {
-        mills: now.add(-5, 'minutes').toDate().getTime(),
-        sgv: startSgv,
-      },
-      {
-        mills: now.add(-5, 'minutes').toDate().getTime(),
-        sgv: startSgv,
-      },
+      }
     ];
     now = moment('2022-06-04T13:00:00.000Z');
     const patient: PatientInfoCgmsim = {
       CARBS_ABS_TIME: 360,
       CR: 10,
-      DIA: 6,
-      ISF: 32,
-      TP: 75,
+      DIA: 3,
+      ISF: 36,
+      TP: 55,
       WEIGHT: 250 / 3,
       AGE: 51,
       GENDER: 'Male',
@@ -93,7 +81,7 @@ describe('pid test', () => {
       });
       let resultPID;
       if (entries.length > 36) {
-        resultPID = calculatePID(entries, { KP: 0.5, KI: 0.01, KD: 0.1, TDI: 60 });
+        resultPID = calculatePID(entries, { KP: 2.5, KI: 0.5, KD: 0.7, TDI: 60 });
         TempBasalTreatment.push({
           eventType: 'Temp Basal',
           rate: resultPID.rate,
