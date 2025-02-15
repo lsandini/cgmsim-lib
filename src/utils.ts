@@ -116,9 +116,9 @@ export function getExpTreatmentOnBody({ peak, duration, minutesAgo, units }: Tre
 	return activity;
 }
 const DEFAULT_SETTINGS = {
-	KP: 0.5,
-	KI: 0.01,
-	KD: 0.1,
+	KP: 2.5,
+	KI: 0.5,
+	KD: 1.1,
 	TDI: 60,
 	TARGET: 90, // mg/dL (6.0 mmol/L)
 };
