@@ -116,11 +116,11 @@ export function getExpTreatmentOnBody({ peak, duration, minutesAgo, units }: Tre
 	return activity;
 }
 const DEFAULT_SETTINGS = {
-	KP: 2.5,
-	KI: 0.5,
-	KD: 1.1,
+	KP: 3.0,
+	KI: 0.3,
+	KD: 1.8,
 	TDI: 60,
-	TARGET: 90, // mg/dL (6.0 mmol/L)
+	TARGET: 72, // mg/dL (6.0 mmol/L)
 };
 
 export const calculatePID = (

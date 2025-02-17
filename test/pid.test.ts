@@ -42,7 +42,7 @@ describe('pid test', () => {
    const patient: PatientInfoCgmsim = {
      CARBS_ABS_TIME: 360,
      CR: 10,
-     DIA: 3,
+     DIA: 4,
      ISF: 36,
      TP: 55,
      WEIGHT: 250 / 3,
@@ -84,7 +84,7 @@ describe('pid test', () => {
      
      let resultPID;
      if (entries.length > 36) {
-       resultPID = calculatePID(entries, { KP: 2.5, KI: 0.5, KD: 0.7, TDI: 60 });
+       resultPID = calculatePID(entries, { KP: 2.5, KI: 0.3, KD: 1.8, TDI: 60 });
        TempBasalTreatment.push({
          eventType: 'Temp Basal',
          rate: resultPID.rate,
