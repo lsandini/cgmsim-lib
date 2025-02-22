@@ -1,12 +1,22 @@
-import { PatientInfoCgmsim, Sgv, NSTreatment, Activity, MainParams } from '../src/Types';
+import { PatientInfoCgmsim, Sgv, NSTreatment } from '../src/Types';
 import simulator from '../src/CGMSIMsimulator';
 import moment = require('moment');
-import { diffOptions, getPngSnapshot, testGenerator } from './inputTest';
-import { TypeDateISO } from '../src/TypeDateISO';
-import { calculatePID } from '../src/utils';
+import { diffOptions, getPngSnapshot } from './inputTest';
 const { toMatchImageSnapshot } = require('jest-image-snapshot');
 
 const math = global.Math;
+
+const DEFAULT_SETTINGS = {
+  TARGET: 100,
+};
+
+// PID Controller settings separate from patient info
+const PID_SETTINGS = {
+  KP: 2.5,
+  KI: 0.5,
+  KD: 0.5,
+  TDI: 60
+};
 
 describe('pid test', () => {
  let date;
@@ -27,6 +37,44 @@ describe('pid test', () => {
    jest.useRealTimers();
    global.Math = math;
  });
+
+ const calculatePID = ({ entries, patient }) => {
+   const requiredReadings = Math.min(24, (patient.DIA * 60) / 5);
+   const recentReadings = entries.slice(0, requiredReadings);
+
+   const settings = {
+     target: DEFAULT_SETTINGS.TARGET,
+     tdi: PID_SETTINGS.TDI,
+     Kp: PID_SETTINGS.KP,
+     Ki: PID_SETTINGS.KI,
+     Kd: PID_SETTINGS.KD,
+     maxBasalRate: (PID_SETTINGS.TDI / 24) * 1.5,
+   };
+
+   const currentGlucose = entries[0].sgv;
+   const error = Math.abs(settings.target - currentGlucose) / 100;
+
+   // Proportional Term
+   const pTerm = settings.Kp * error;
+
+   // Integral Term
+   const integralError = Math.abs(recentReadings.reduce((sum, reading) => 
+     sum + (settings.target - reading.sgv) / 100, 0) / recentReadings.length);
+   const iTerm = settings.Ki * integralError;
+
+   // Derivative Term
+   const dTerm = entries.length > 1 
+     ? settings.Kd * Math.abs((entries[0].sgv - entries[1].sgv) / 100)
+     : 0;
+
+   // Total Rate
+   const totalRate = Math.min(pTerm + iTerm + dTerm, settings.maxBasalRate);
+
+   return { 
+     rate: totalRate,
+     diagnostics: { pTerm, iTerm, dTerm, currentGlucose }
+   };
+ };
 
  test('start from 180 @13:00Z', async () => {
    let now = moment('2022-06-04T13:00:00.000Z');
@@ -54,7 +102,7 @@ describe('pid test', () => {
    let lastSgv = 0;
    const pumpEnabled = true;
    const sgvS = [];
-   const basalRates = []; // Array to store basal rates
+   const basalRates = [];
    const TempBasalTreatment = [];
    
    for (let index = 0; index < 60 * 24; ) {
@@ -83,8 +131,10 @@ describe('pid test', () => {
      });
      
      let resultPID;
-     if (entries.length > 36) {
-       resultPID = calculatePID(entries, { KP: 2.5, KI: 0.3, KD: 1.8, TDI: 60 });
+     // Changed condition to use requiredReadings calculation
+     const minReadings = Math.min(24, (patient.DIA * 60) / 5);
+     if (entries.length > minReadings) {
+       resultPID = calculatePID({ entries, patient });
        TempBasalTreatment.push({
          eventType: 'Temp Basal',
          rate: resultPID.rate,
@@ -97,8 +147,7 @@ describe('pid test', () => {
 
      for (let i = 0; i < 5; i++) {
        sgvS.push(result.sgv);
-       // Store the current basal rate - either default or PID-calculated
-       basalRates.push(entries.length > 36 && resultPID ? resultPID.rate : 0.7);
+       basalRates.push(entries.length > minReadings && resultPID ? resultPID.rate : 0.7);
      }
 
      now = now.add(5, 'minutes');

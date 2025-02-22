@@ -87,6 +87,40 @@ export function getExpTreatmentActivity({ peak, duration, minutesAgo, units }: T
 
 	return activity;
 }
+
+/**
+ * Calculates remaining insulin on board (IOB) using the exponential model
+ * 
+ * @param params - Treatment parameters including peak, duration, minutesAgo, and units
+ * @returns Remaining insulin on board in units
+ */
+export function getExpTreatmentIOB({ peak, duration, minutesAgo, units }: TreatmentExpParam): number {
+  if (minutesAgo >= duration) {
+      return 0;
+  }
+
+  // Calculate model parameters
+  const tau = (peak * (1 - peak / duration)) / (1 - (2 * peak) / duration);
+  const a = 2 * tau / duration;
+  const S = 1 / (1 - a + (1 + a) * Math.exp(-duration / tau));
+
+  // Calculate IOB fraction using the formula
+  let iobFraction = 1 - S * (1 - a) * (
+      (Math.pow(minutesAgo, 2) / (tau * duration * (1 - a)) - 
+      minutesAgo / tau - 
+      1) * Math.exp(-minutesAgo / tau) + 
+      1
+  );
+
+  // Handle ramp-up period in first 15 minutes
+  if (minutesAgo < 15) {
+      iobFraction = 1 - (minutesAgo / 15) * (1 - iobFraction);
+  }
+
+  // Scale by units and ensure non-negative
+  return Math.max(0, units * iobFraction);
+}
+
 /**
  * Calculates exponential treatment activity based on given parameters
  * @param params - Treatment parameters including peak, duration, minutesAgo, and units
@@ -115,6 +149,7 @@ export function getExpTreatmentOnBody({ peak, duration, minutesAgo, units }: Tre
 
 	return activity;
 }
+
 const DEFAULT_SETTINGS = {
 	KP: 3.0,
 	KI: 0.3,
