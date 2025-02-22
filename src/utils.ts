@@ -250,6 +250,111 @@ export const calculatePID = (
 	}
 };
 
+interface PatientSettings {
+  KP: number;
+  KI: number;
+  KD: number;
+  TDI: number;
+  BASE_BASAL: number;
+}
+
+const PID4_SETTINGS = {
+  TARGET: 72,           // mg/dL
+  BASE_BASAL: 1.0,     // U/h
+};
+
+/**
+* Alternative PID calculation (version 4)
+* @param entries - Array of glucose readings
+* @param patient - Patient-specific settings
+* @returns Calculated basal rate and diagnostic information
+*/
+export const calculatePID4 = (
+  entries: Sgv[],
+  patient: PatientSettings
+): { rate: number; diagnostics: any } => {
+  if (!entries?.length) {
+      throw new Error('Missing required parameters for PID calculation');
+  }
+
+  const currentGlucose = entries[0].sgv;
+  
+  // Error in mg/dL
+  const error = PID4_SETTINGS.TARGET - currentGlucose;
+  
+  // Calculate integral term (using last 24 readings = 2 hours)
+  const recentReadings = entries.slice(0, 24);
+  const integralError = recentReadings.reduce((sum, reading) => 
+      sum + (PID4_SETTINGS.TARGET - reading.sgv), 0) / recentReadings.length;
+  
+  // Calculate derivative (rate of change) in mg/dL/hour
+  const derivative = entries.length > 1 
+      ? ((entries[0].sgv - entries[1].sgv) * 12) // Convert 5-min change to per hour
+      : 0;
+
+  // Calculate terms in U/h (dividing by 100 as gains are per 100 mg/dL)
+  const pTerm = -(patient.KP / 100) * error;
+  const iTerm = -(patient.KI / 100) * integralError;
+  const dTerm = (patient.KD / 100) * derivative;
+
+  // Total adjustment to basal
+  const adjustment = pTerm + iTerm + dTerm;
+
+  // Final rate is base basal plus adjustment
+  const finalRate = patient.BASE_BASAL + adjustment;
+
+  logger.debug('[pid4] PID calculation:', {
+      currentGlucose,
+      error,
+      integralError,
+      derivative,
+      pTerm,
+      iTerm,
+      dTerm,
+      adjustment,
+      finalRate
+  });
+
+  return {
+      rate: finalRate,
+      diagnostics: {
+          pTerm,
+          iTerm,
+          dTerm,
+          currentGlucose,
+          baseBasal: patient.BASE_BASAL
+      }
+  };
+};
+
+/**
+* Applies safety limits to calculated basal rate
+* @param rate - Calculated basal rate
+* @param patient - Patient settings containing TDI
+* @returns Limited and rounded basal rate
+*/
+export const finalizeBasalRate = (
+  rate: number,
+  patient: PatientSettings
+): number => {
+  if (!patient?.TDI) {
+      throw new Error('Missing required patient parameters for basal rate limits');
+  }
+
+  // Apply safety limits
+  const maxBasalRate = patient.TDI / 24 * 1.5; // 150% of average hourly rate
+  const limitedRate = Math.max(0, Math.min(rate, maxBasalRate));
+
+  // Round to nearest 0.05 U/h
+  return Math.round(limitedRate * 20) / 20;
+};
+
+
+
+
+
+
+
 /**
  * Calculates time difference in minutes between now and given timestamp
  * @param timestamp - Timestamp in milliseconds or ISO string
