@@ -1,12 +1,12 @@
 import logger from './utils';
-import bolus from './bolus';
-import basal from './basal';
+import bolus, { calculateBolusIOB } from './bolus';
+import basal, { calculateTotalBasalIOB } from './basal';
 import cortisone from './cortisone';
 import alcohol from './alcohol';
-import carbs from './carbs';
+import carbs, { calculateCarbsCOB } from './carbs';
 import liverRun from './liver';
 import sgv from './sgv';
-import pump from './pump';
+import pump, { calculatePumpIOB } from './pump';
 import { MainParams, SimulationResult } from './Types';
 import moment = require('moment');
 import { physicalIsf, physicalLiver } from './physical';
@@ -79,7 +79,20 @@ const simulator = (params: MainParams): SimulationResult => {
 	const alcoholEffect = alcohol(recentDrugTreatments, weight, gender);
 	const pumpBasalEffect = pumpEnabled ? pump(treatments, profiles, dia, peak) : 0;
 	const carbsEffect = carbs(treatments, carbsAbs, dynamicIsf, cr);
+	const carbsOnBoard = calculateCarbsCOB(treatments, carbsAbs);
+  const bolusIOB = calculateBolusIOB(treatments, dia, peak);
+  const pumpBasalIOB = pumpEnabled ? calculatePumpIOB(treatments, profiles, dia, peak) : 0;
+  const basalIOB = calculateTotalBasalIOB(recentDrugTreatments, weight);
 
+  logger.debug('[simulator] Insulin calculations:', {
+    bolusEffect,
+    bolusIOB,
+    basalBolusEffect,
+    pumpBasalEffect,
+    pumpBasalIOB,
+    basalIOB
+});
+  
 	// Calculate liver glucose production
 	const liverEffect = liverRun(
 		baseIsf,
@@ -120,7 +133,12 @@ const simulator = (params: MainParams): SimulationResult => {
 		...newSgvValue,
 		activityFactor: physicalActivityLiverFactor,
 		isf: { dynamic: dynamicIsf, constant: baseIsf },
+		cob: carbsOnBoard,
+    bolusIOB: bolusIOB,
+    pumpBasalIOB: pumpBasalIOB,
+    basalIOB: basalIOB  
 	};
 };
 
 export default simulator;
+
