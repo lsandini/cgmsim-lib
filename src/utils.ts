@@ -424,3 +424,204 @@ export function roundTo8Decimals(value: number): number {
 	const multiplier = Math.pow(10, 8);
 	return Math.round(value * multiplier) / multiplier;
 }
+
+// Add these functions to your utils.ts - avoid additional imports
+// Just add the functions directly with types from your existing Types import
+
+/**
+ * Constants for PID with Insulin Feedback (PID-IFB) controller
+ * These match the CONTROLLER_SETTINGS in pid6.js
+ */
+export const PID_IFB_SETTINGS = {
+  TARGET: 108,              // mg/dL
+  LOW_GLUCOSE_THRESHOLD: 80,  // mg/dL
+  SUSPEND_THRESHOLD: 70,      // mg/dL
+  MAX_BASAL_MULTIPLIER: 2.0,  // Max basal = 200% of average hourly rate
+  MAX_RATE_CHANGE: 0.2,       // Max change in U/h per 5 minutes
+  MIN_BASAL_RATE: 0           // Minimum allowable basal rate
+};
+
+// Use existing interfaces from your Types.ts or define them inline
+// but don't redeclare them if they already exist
+interface PatientSettingsIFB {
+  KP: number;
+  KI: number;
+  KD: number;
+  TDI: number;
+  BASE_BASAL: number;
+  INSULIN_FEEDBACK_GAIN: number;
+  DIA: number;
+  TP: number;
+  ISF: number;
+}
+
+interface IOBData {
+  totalIOB: number;
+  bolusIOB: number;
+  basalIOB: number;
+  totalActivity: number;
+  bolusActivity: number;
+  basalActivity: number;
+  basalAsBoluses?: any[];
+}
+
+/**
+ * Alternative PID calculation with Insulin Feedback (PID-IFB)
+ * Based on Medtronic's algorithm that accounts for active insulin
+ * This function matches the calculatePID_IFB function in pid6.js
+ * 
+ * @param entries - Array of glucose readings
+ * @param patient - Patient-specific settings
+ * @param iobData - Current insulin on board data
+ * @returns Calculated basal rate and diagnostic information
+ */
+export const calculatePID_IFB = (
+  entries: any[],  // Use 'any[]' to avoid Sgv redeclaration
+  patient: PatientSettingsIFB,
+  iobData: IOBData
+): { rate: number; diagnostics: any } => {
+  if (!entries?.length) {
+    throw new Error('Missing required parameters for PID-IFB calculation');
+  }
+
+  const currentGlucose = entries[0].sgv;
+  
+  // Error in mg/dL - using Current - Target (positive when high)
+  const error = currentGlucose - PID_IFB_SETTINGS.TARGET;
+  
+  // Calculate derivative (rate of change) in mg/dL/min and convert to hourly
+  const derivativePerMin = entries.length > 1 
+    ? ((entries[0].sgv - entries[1].sgv) / 5) // Rate per minute (5 min between readings)
+    : 0;
+  const derivative = derivativePerMin * 60; // Convert to per hour for calculations
+  
+  // Calculate integral term (using last 24 readings = 2 hours)
+  const recentReadings = entries.slice(0, 24);
+  const integralError = recentReadings.reduce((sum, reading) => 
+    sum + (reading.sgv - PID_IFB_SETTINGS.TARGET), 0) / recentReadings.length;
+  
+  // Calculate PID terms - directly using the small gains as in pid6.js
+  const pTerm = patient.KP * error;
+  const iTerm = patient.KI * integralError;
+  const dTerm = patient.KD * derivativePerMin; // Note: Using per-minute derivative for D term
+  
+  // Insulin Feedback term - multiplying IOB by the feedback gain
+  const insulinFeedbackTerm = patient.INSULIN_FEEDBACK_GAIN * iobData.totalIOB;
+  
+  // Check for low glucose or suspend conditions
+  const isLowGlucose = currentGlucose <= PID_IFB_SETTINGS.LOW_GLUCOSE_THRESHOLD;
+  const isSuspendRequired = currentGlucose <= PID_IFB_SETTINGS.SUSPEND_THRESHOLD;
+  
+  // Immediately return zero rate for suspend condition - this matches pid6.js logic
+  if (isSuspendRequired) {
+    return {
+      rate: 0,
+      diagnostics: {
+        pTerm,
+        iTerm,
+        dTerm,
+        insulinFeedbackTerm: 0,
+        iob: iobData.totalIOB,
+        currentGlucose,
+        baseBasal: patient.BASE_BASAL,
+        suspendedForSafety: true
+      }
+    };
+  }
+  
+  // Calculate the insulin delivery rate (before limits)
+  const pidOutput = pTerm + iTerm + dTerm;
+  
+  // Final rate is base basal plus adjustment minus insulin feedback
+  const adjustedRate = patient.BASE_BASAL + pidOutput - (patient.INSULIN_FEEDBACK_GAIN * iobData.totalIOB);
+  
+  // Use your existing logger if available, or console.log as fallback
+  if (typeof logger !== 'undefined') {
+    logger.debug('[pid_ifb] PID-IFB calculation:', {
+      currentGlucose,
+      error,
+      integralError,
+      derivative,
+      pTerm,
+      iTerm,
+      dTerm,
+      iob: iobData.totalIOB,
+      insulinFeedbackTerm,
+      pidOutput,
+      adjustedRate
+    });
+  } else {
+    console.log('[pid_ifb] PID-IFB calculation:', {
+      currentGlucose, error, integralError, derivative,
+      pTerm, iTerm, dTerm, iob: iobData.totalIOB,
+      insulinFeedbackTerm, pidOutput, adjustedRate
+    });
+  }
+
+  return {
+    rate: adjustedRate,
+    diagnostics: {
+      pTerm,
+      iTerm,
+      dTerm,
+      insulinFeedbackTerm,
+      iob: iobData.totalIOB,
+      currentGlucose,
+      baseBasal: patient.BASE_BASAL,
+      isLowGlucose,
+      isSuspendRequired
+    }
+  };
+};
+
+/**
+ * Applies safety limits to calculated basal rate with enhanced safety features
+ * This function exactly matches the finalizeBasalRate function in pid6.js
+ * 
+ * @param rate - Calculated basal rate
+ * @param patient - Patient settings containing TDI
+ * @param previousRate - Previous basal rate (for rate limiting)
+ * @param isLowGlucose - Flag indicating low glucose condition
+ * @param isSuspendRequired - Flag indicating zero basal required
+ * @returns Limited and rounded basal rate
+ */
+export const finalizeBasalRate6 = (
+  rate: number,
+  patient: any,  // Use 'any' to avoid PatientSettings redeclaration
+  previousRate?: number,
+  isLowGlucose: boolean = false,
+  isSuspendRequired: boolean = false
+): number => {
+  if (!patient?.TDI) {
+    throw new Error('Missing required patient parameters for basal rate limits');
+  }
+
+  // Force zero basal for very low glucose (suspend threshold)
+  if (isSuspendRequired) {
+    return 0;
+  }
+
+  // Apply safety limits - max rate is based on TDI
+  const maxBasalRate = patient.TDI / 24 * PID_IFB_SETTINGS.MAX_BASAL_MULTIPLIER;
+  const minBasalRate = PID_IFB_SETTINGS.MIN_BASAL_RATE;
+  
+  // First limit within absolute min/max range
+  let limitedRate = Math.max(minBasalRate, Math.min(rate, maxBasalRate));
+  
+  // Apply rate of change limiting, but with special handling for low glucose
+  if (previousRate !== undefined) {
+    const maxChange = PID_IFB_SETTINGS.MAX_RATE_CHANGE;
+    
+    // For low glucose, bypass rate limiting for downward adjustments
+    if (isLowGlucose && limitedRate < previousRate) {
+      // Allow immediate reduction when glucose is low - no code needed here
+    }
+    else if (Math.abs(limitedRate - previousRate) > maxChange) {
+      // Normal rate limiting for other situations
+      limitedRate = previousRate + Math.sign(limitedRate - previousRate) * maxChange;
+    }
+  }
+
+  // Round to nearest 0.05 U/h for pump compatibility - exactly as in pid6.js
+  return Math.round(limitedRate * 20) / 20;
+};
