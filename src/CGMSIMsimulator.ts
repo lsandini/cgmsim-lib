@@ -115,12 +115,15 @@ const simulator = (params: MainParams): SimulationResult => {
 	});
 
 	// const arrows = arrowsRun([newSgvValue, ...entries]);
-
-	return {
-		...newSgvValue,
-		activityFactor: physicalActivityLiverFactor,
-		isf: { dynamic: dynamicIsf, constant: baseIsf },
-	};
+	if (newSgvValue) {
+		return {
+			...newSgvValue,
+			activityFactor,
+			isf: { dynamic: isfActivityDependent, constant: isfConstant },
+		};
+	} else {
+		logger.error('No entries found');
+	}
 };
 
 export default simulator;
