@@ -2,7 +2,7 @@ import fetch from 'node-fetch';
 import * as moment from 'moment';
 import pino, { LevelWithSilent, TransportTargetOptions } from 'pino';
 import setupParams from './setupParams';
-import { Activity, Entry, Note, SimulationResult, TreatmentExpParam } from './Types';
+import { Activity, DeviceStatus, Entry, Note, SimulationResult, TreatmentExpParam } from './Types';
 import { load } from 'ts-dotenv';
 import pinoPretty from 'pino-pretty';
 import { TypeDateISO } from './TypeDateISO';
@@ -90,38 +90,35 @@ export function getExpTreatmentActivity({ peak, duration, minutesAgo, units }: T
 
 /**
  * Calculates remaining insulin on board (IOB) using the exponential model
- * 
+ *
  * @param params - Treatment parameters including peak, duration, minutesAgo, and units
  * @returns Remaining insulin on board in units
  */
 export function getExpTreatmentIOB({ peak, duration, minutesAgo, units }: TreatmentExpParam): number {
-  if (minutesAgo >= duration) {
-      return 0;
-  }
+	if (minutesAgo >= duration) {
+		return 0;
+	}
 
-  // Calculate model parameters
-  const tau = (peak * (1 - peak / duration)) / (1 - (2 * peak) / duration);
-  const a = 2 * tau / duration;
-  const S = 1 / (1 - a + (1 + a) * Math.exp(-duration / tau));
+	// Calculate model parameters
+	const tau = (peak * (1 - peak / duration)) / (1 - (2 * peak) / duration);
+	const a = (2 * tau) / duration;
+	const S = 1 / (1 - a + (1 + a) * Math.exp(-duration / tau));
 
-  // Calculate IOB fraction using the formula
-  let iobFraction = 1 - S * (1 - a) * (
-      (Math.pow(minutesAgo, 2) / (tau * duration * (1 - a)) - 
-      minutesAgo / tau - 
-      1) * Math.exp(-minutesAgo / tau) + 
-      1
-  );
+	// Calculate IOB fraction using the formula
+	let iobFraction =
+		1 -
+		S *
+			(1 - a) *
+			((Math.pow(minutesAgo, 2) / (tau * duration * (1 - a)) - minutesAgo / tau - 1) * Math.exp(-minutesAgo / tau) + 1);
 
-  // Handle ramp-up period in first 15 minutes
-  if (minutesAgo < 15) {
-      iobFraction = 1 - (minutesAgo / 15) * (1 - iobFraction);
-  }
+	// Handle ramp-up period in first 15 minutes
+	if (minutesAgo < 15) {
+		iobFraction = 1 - (minutesAgo / 15) * (1 - iobFraction);
+	}
 
-  // Scale by units and ensure non-negative
-  return Math.max(0, units * iobFraction);
+	// Scale by units and ensure non-negative
+	return Math.max(0, units * iobFraction);
 }
-
-
 
 /**
  * Calculates time difference in minutes between now and given timestamp
@@ -139,7 +136,7 @@ export const getDeltaMinutes = (timestamp: number | TypeDateISO): number =>
  * @returns Promise<void>
  */
 export function uploadBase(
-	data: Entry | Activity | Note | SimulationResult,
+	data: Entry | Activity | Note | SimulationResult | DeviceStatus,
 	apiUrl: string,
 	apiSecret: string,
 ): Promise<void> {
@@ -166,7 +163,7 @@ export function uploadBase(
  * @param apiSecret - API secret key
  * @returns Promise with array of entries
  */
-export function loadBase(apiUrl: string, apiSecret: string): Promise<(Entry | Activity | Note)[]> {
+export function loadBase(apiUrl: string, apiSecret: string): Promise<(Entry | Activity | Note | DeviceStatus)[]> {
 	const isSecure = isHttps(apiUrl);
 	const { getParams } = setupParams(apiSecret, isSecure);
 

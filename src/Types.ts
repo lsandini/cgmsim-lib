@@ -38,6 +38,21 @@ export type Note = {
 	/** The content of the note. */
 	notes: string;
 };
+/**
+ * Represents DeviceStatus.
+ */
+export type DeviceStatus = {
+	created_at: string;
+	openaps: {
+		openaps: {
+			iob: number;
+			time: string;
+			basaliob: number;
+			bolusiob: number;
+		};
+		suggested: { COB: number; timestamp: string };
+	};
+};
 
 /**
  * Represents data related to physical activity.
@@ -112,13 +127,7 @@ export type NSProfile = {
  */
 export type MealBolusTreatment = {
 	/** The type of event, set to 'Meal Bolus'. */
-	eventType:
-		| 'Meal Bolus'
-		| 'Bolus'
-		| 'Correction Bolus'
-		| 'Bolus Wizard'
-		| 'Carb Correction'
-    | 'Surprise Meal';
+	eventType: 'Meal Bolus' | 'Bolus' | 'Correction Bolus' | 'Bolus Wizard' | 'Carb Correction' | 'Surprise Meal';
 	/** The amount of insulin administered for the meal bolus. */
 	insulin?: number;
 	/** The number of carbohydrates consumed. */
@@ -195,19 +204,16 @@ export type NSTreatment =
 	| AnnouncementTreatment
 	| TemporaryOverrideTreatment;
 
-export const isMealBolusTreatment = (
-	treatment: NSTreatment,
-): treatment is MealBolusTreatment =>
+export const isMealBolusTreatment = (treatment: NSTreatment): treatment is MealBolusTreatment =>
 	treatment.eventType === 'Meal Bolus' ||
 	treatment.eventType === 'Bolus' ||
 	treatment.eventType === 'Bolus Wizard' ||
 	treatment.eventType === 'Correction Bolus' ||
-  treatment.eventType === 'Surprise Meal' ||
+	treatment.eventType === 'Surprise Meal' ||
 	treatment.eventType === 'Carb Correction';
 
-export const isAnnouncementTreatment = (
-	treatment: NSTreatment,
-): treatment is AnnouncementTreatment => treatment.eventType === 'Announcement';
+export const isAnnouncementTreatment = (treatment: NSTreatment): treatment is AnnouncementTreatment =>
+	treatment.eventType === 'Announcement';
 
 export type NSTreatmentParsed = {
 	drug: string;
@@ -319,10 +325,10 @@ export type SimulationResult = {
 	activityFactor: number;
 	alcoholActivity: number;
 	isf: { dynamic: number; constant: number };
-  cob: number;
-  bolusIOB: number; 
-  pumpBasalIOB: number;
-  basalIOB: number;
+	cob: number;
+	bolusIOB: number;
+	pumpBasalIOB: number;
+	basalIOB: number;
 };
 
 /**

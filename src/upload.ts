@@ -1,8 +1,8 @@
-import { removeTrailingSlash, uploadBase } from './utils';
+import { removeTrailingSlash, uploadBase, loadBase } from './utils';
 import { Entry, EntryValueType } from './Types';
 import moment = require('moment');
 import logger from './utils';
-import { Activity } from './Types';
+import { Activity, DeviceStatus } from './Types';
 import { SimulationResult } from './Types';
 import { Note } from './Types';
 /**
@@ -54,11 +54,7 @@ export function uploadNotes(notes: string, nsUrl: string, apiSecret: string) {
  *     console.error("Error uploading logs:", error);
  *   });
  */
-export function uploadLogs(
-	simResult: SimulationResult & { notes: string },
-	nsUrl: string,
-	apiSecret: string,
-) {
+export function uploadLogs(simResult: SimulationResult & { notes: string }, nsUrl: string, apiSecret: string) {
 	const _nsUrl = removeTrailingSlash(nsUrl);
 	const api_url = _nsUrl + '/api/v1/treatments/';
 	const now = moment();
@@ -96,11 +92,7 @@ export function uploadLogs(
  *     console.error("Error uploading blood glucose entry:", error);
  *   });
  */
-export function uploadEntries(
-	cgmsim: EntryValueType,
-	nsUrl: string,
-	apiSecret: string,
-) {
+export function uploadEntries(cgmsim: EntryValueType, nsUrl: string, apiSecret: string) {
 	const _nsUrl = removeTrailingSlash(nsUrl);
 	const api_url = _nsUrl + '/api/v1/entries/';
 	const now = moment();
@@ -139,16 +131,74 @@ export function uploadEntries(
  *     console.error("Error uploading activity data:", error);
  *   });
  */
-export function uploadActivity(
-	activity: Activity,
-	nsUrl: string,
-	apiSecret: string,
-) {
+export function uploadActivity(activity: Activity, nsUrl: string, apiSecret: string) {
 	logger.debug('[upload] log something %o', activity);
 
 	const _nsUrl = removeTrailingSlash(nsUrl);
 	const api_url = _nsUrl + '/api/v1/activity/';
 	return uploadBase(activity, api_url, apiSecret)
+		.then(() => {
+			logger.debug('[upload] Activity data uploaded successfully');
+		})
+		.catch((error) => {
+			logger.error('[upload] Upload failed:', error);
+		});
+}
+
+/**
+ * Uploads device status to the Nightscout API.
+ * @param cob - Carbs on board.
+ * @param iob - Insulin on board.
+ * @param basalIob - Basal insulin on board.
+ * @param bolusIob - Bolus insulin on board.
+ * @param nsUrl - Nightscout URL.
+ * @param apiSecret - Nightscout API secret.
+ * @returns A promise that resolves when the upload is complete.
+ * @example
+ * // Upload device status to Nightscout
+ * uploadDeviceStatus(30, 5, 2, 3, "https://nightscout.example.com", "apiSecret123")
+ *   .then(() => {
+ *     console.log("Device status uploaded successfully.");
+ *   })
+ *   .catch((error) => {
+ *     console.error("Error uploading device status:", error);
+ *   });
+ */
+export async function uploadDeviceStatus(
+	cob: number,
+	iob: number,
+	basalIob: number,
+	bolusIob: number,
+	nsUrl: string,
+	apiSecret: string,
+) {
+	logger.debug('[upload] device status %o', { iob, cob });
+
+	const _nsUrl = removeTrailingSlash(nsUrl);
+	const api_url = _nsUrl + '/api/v1/devicestatus/';
+	const deviceStatus = (await loadBase(api_url, apiSecret)) as DeviceStatus[];
+	let latestDeviceStatus = {};
+	if (deviceStatus.length > 0) {
+		latestDeviceStatus = deviceStatus.sort((a, b) => moment(b.created_at).diff(moment(a.created_at)))[0];
+	}
+	const now = new Date().toISOString();
+	return uploadBase(
+		{
+			...latestDeviceStatus,
+			created_at: now,
+			openaps: {
+				openaps: {
+					iob: iob,
+					time: now,
+					basaliob: basalIob,
+					bolusiob: bolusIob,
+				},
+				suggested: { COB: cob, timestamp: now },
+			},
+		},
+		api_url,
+		apiSecret,
+	)
 		.then(() => {
 			logger.debug('[upload] Activity data uploaded successfully');
 		})
