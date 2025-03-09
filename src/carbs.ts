@@ -88,3 +88,86 @@ export default function calculateCarbEffect(
 
 	return bloodGlucoseImpact;
 }
+
+/**
+ * Calculates remaining unabsorbed carbohydrates (Carbs On Board)
+ * @param treatments - Array of treatments containing carb intake
+ * @param carbAbsorptionTime - Time in minutes for complete carb absorption (default 360 min / 6 hours)
+ * @returns Total remaining unabsorbed carbs in grams
+ */
+export function calculateCarbsCOB(treatments: NSTreatment[] = [], carbAbsorptionTime: number): number {
+	// Get active meals within absorption time window
+	const activeMeals = treatments
+		?.filter(isMealBolusTreatment)
+		.filter((meal) => meal?.carbs > 0 && getDeltaMinutes(meal.created_at) <= carbAbsorptionTime)
+		.map((meal) => ({
+			...meal,
+			minutesAgo: getDeltaMinutes(meal.created_at),
+		}))
+		.filter((meal) => meal.minutesAgo >= 0);
+
+	logger.debug('[carbs] Active meals in absorption window:', activeMeals);
+
+	// Define absorption times for different carb types
+	const fastAbsorptionTime = carbAbsorptionTime / 6; // 60 min for default
+	const slowAbsorptionTime = carbAbsorptionTime / 1.5; // 240 min for default
+
+	// Calculate remaining carbs for each meal
+	const remainingCarbs = activeMeals.map((meal) => {
+		const minutesAgo = meal.minutesAgo;
+		const totalCarbs = meal.carbs;
+
+		// Split between fast and slow carbs (using same ratios as original)
+		const fastCarbsPortion = Math.min(Math.random() * totalCarbs, 40);
+		const remainingCarbs = totalCarbs - fastCarbsPortion;
+		const fastAbsorptionRatio = Math.random() * (0.4 - 0.1) + 0.1;
+
+		const fastCarbs = fastCarbsPortion + fastAbsorptionRatio * remainingCarbs;
+		const slowCarbs = (1 - fastAbsorptionRatio) * remainingCarbs;
+
+		logger.debug('[carbs] Carb split:', {
+			totalCarbs,
+			fastCarbs,
+			slowCarbs,
+		});
+
+		// Calculate remaining fast carbs
+		let remainingFastCarbs = 0;
+		if (minutesAgo < fastAbsorptionTime) {
+			if (minutesAgo < fastAbsorptionTime / 2) {
+				// First half formula
+				remainingFastCarbs = fastCarbs - ((2 * fastCarbs) / Math.pow(fastAbsorptionTime, 2)) * Math.pow(minutesAgo, 2);
+			} else {
+				// Second half formula
+				remainingFastCarbs =
+					2 * fastCarbs -
+					((4 * fastCarbs) / fastAbsorptionTime) * (minutesAgo - Math.pow(minutesAgo, 2) / (2 * fastAbsorptionTime));
+			}
+		}
+		remainingFastCarbs = Math.max(0, remainingFastCarbs);
+		logger.debug('[carbs] Remaining fast carbs:', remainingFastCarbs);
+
+		// Calculate remaining slow carbs
+		let remainingSlowCarbs = 0;
+		if (minutesAgo < slowAbsorptionTime) {
+			if (minutesAgo < slowAbsorptionTime / 2) {
+				// First half formula
+				remainingSlowCarbs = slowCarbs - ((2 * slowCarbs) / Math.pow(slowAbsorptionTime, 2)) * Math.pow(minutesAgo, 2);
+			} else {
+				// Second half formula
+				remainingSlowCarbs =
+					2 * slowCarbs -
+					((4 * slowCarbs) / slowAbsorptionTime) * (minutesAgo - Math.pow(minutesAgo, 2) / (2 * slowAbsorptionTime));
+			}
+		}
+		remainingSlowCarbs = Math.max(0, remainingSlowCarbs);
+		logger.debug('[carbs] Remaining slow carbs:', remainingSlowCarbs);
+
+		return remainingFastCarbs + remainingSlowCarbs;
+	});
+
+	const totalCOB = remainingCarbs.reduce((total, cob) => total + cob, 0);
+	logger.debug('[carbs] Total Carbs On Board:', totalCOB);
+
+	return totalCOB;
+}
