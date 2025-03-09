@@ -79,7 +79,7 @@ const simulator = (params: MainParams): SimulationResult => {
 	const alcoholEffect = alcohol(recentDrugTreatments, weight, gender);
 	const pumpBasalEffect = pumpEnabled ? pump(treatments, profiles, dia, peak) : 0;
 	const carbsEffect = carbs(treatments, carbsAbs, dynamicIsf, cr);
-	const carbsOnBoard = calculateCarbsCOB(treatments, carbsAbs);
+	const carbsOnBoard = calculateCarbsCOB(carbsAbs, treatments);
 	const bolusIOB = calculateBolusIOB(treatments, dia, peak);
 	const pumpBasalIOB = pumpEnabled ? calculatePumpIOB(treatments, profiles, dia, peak) : 0;
 	const basalIOB = calculateTotalBasalIOB(recentDrugTreatments, weight);

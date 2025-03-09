@@ -255,18 +255,17 @@ export default function (treatments: NSTreatment[], profiles: NSProfile[], dia: 
 			}),
 		0,
 	);
-	logger.debug('[pump] the pump\'s basal activity is: %o', pumpBasalAct);
+	logger.debug("[pump] the pump's basal activity is: %o", pumpBasalAct);
 	return pumpBasalAct;
 }
 
-
 export function calculatePumpIOB(treatments: NSTreatment[], profiles: NSProfile[], dia: number, peak: number): number {
-  const minutesStep = 5;
-  const steps = 60 / minutesStep;
-  const basalAsBoluses: { minutesAgo: number; insulin: number }[] = [];
-  const endDiaAction = moment().utc();
-  const startDiaAction = moment().add(-dia, 'hour').set({ minute: 0, second: 0, millisecond: 0 }).utc();
-  const duration = dia * 60;
+	const minutesStep = 5;
+	const steps = 60 / minutesStep;
+	const basalAsBoluses: { minutesAgo: number; insulin: number }[] = [];
+	const endDiaAction = moment().utc();
+	const startDiaAction = moment().add(-dia, 'hour').set({ minute: 0, second: 0, millisecond: 0 }).utc();
+	const duration = dia * 60;
 
 	const orderedProfiles = profiles
 		.filter((profile) => {
@@ -279,7 +278,6 @@ export function calculatePumpIOB(treatments: NSTreatment[], profiles: NSProfile[
 	const computedProfileSwitch = getProfileSwitch(treatments, duration);
 	const computedTemporaryOverride = getTemporaryOverride(treatments, duration, orderedProfiles);
 
-	// const basalsToUpdate = [];
 	for (
 		let currentAction = startDiaAction;
 		currentAction.diff(endDiaAction) <= 0;
@@ -324,18 +322,18 @@ export function calculatePumpIOB(treatments: NSTreatment[], profiles: NSProfile[
 		basalAsBoluses.push(basalToUpdate);
 	}
 
-  const pumpBasalIOB = basalAsBoluses.reduce(
-      (tot, entry) =>
-          tot +
-          getExpTreatmentIOB({
-              peak,
-              duration,
-              minutesAgo: entry.minutesAgo,
-              units: entry.insulin,
-          }),
-      0,
-  );
+	const pumpBasalIOB = basalAsBoluses.reduce(
+		(tot, entry) =>
+			tot +
+			getExpTreatmentIOB({
+				peak,
+				duration,
+				minutesAgo: entry.minutesAgo,
+				units: entry.insulin,
+			}),
+		0,
+	);
 
-  logger.debug('[pump] the pump\'s basal IOB is: %o', pumpBasalIOB);
-  return pumpBasalIOB;
+	logger.debug("[pump] the pump's basal IOB is: %o", pumpBasalIOB);
+	return pumpBasalIOB;
 }

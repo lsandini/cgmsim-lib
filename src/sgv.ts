@@ -28,10 +28,10 @@ const calculateNextGlucose = (
 	// Get previous glucose value or use default
 	let deltaMinutes = 1;
 	let lastSgv;
-	if (entries && entries[0]) {
+	if (entries?.length > 0) {
 		lastSgv = entries[0].sgv;
 		deltaMinutes = getDeltaMinutes(entries[0].mills);
-	} else if (entries && entries.length === 0) {
+	} else if (entries?.length === 0) {
 		lastSgv = 90;
 		logger.warn('Empty entries, using 90 as last sgv');
 	} else {

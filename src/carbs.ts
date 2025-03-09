@@ -95,7 +95,7 @@ export default function calculateCarbEffect(
  * @param carbAbsorptionTime - Time in minutes for complete carb absorption (default 360 min / 6 hours)
  * @returns Total remaining unabsorbed carbs in grams
  */
-export function calculateCarbsCOB(treatments: NSTreatment[] = [], carbAbsorptionTime: number): number {
+export function calculateCarbsCOB(carbAbsorptionTime: number, treatments: NSTreatment[] = []): number {
 	// Get active meals within absorption time window
 	const activeMeals = treatments
 		?.filter(isMealBolusTreatment)

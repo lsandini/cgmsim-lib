@@ -1,5 +1,5 @@
 import moment = require('moment');
-import pump from '../src/pump';
+import pump, { calculatePumpIOB } from '../src/pump';
 import { NSTreatment } from '../src/Types';
 
 const dia = 6;
@@ -75,31 +75,31 @@ describe('test pump', () => {
     jest.setSystemTime(_date.toDate());
 
     const result = pump([], [], dia, peak);
+    const iob = calculatePumpIOB([], [], dia, peak);
 
     expect(result).toBe(0);
+    expect(iob).toBe(0);
   });
   test('static basal in profile and no treatments', () => {
     let _date = moment('2022-05-06T16:30:00.000Z');
     jest.setSystemTime(_date.toDate());
 
-    const result = pump(
-      [],
-      [
-        {
-          startDate: '2000-01-01T00:00:00.000Z',
-          defaultProfile: 'Default',
-          store: {
-            Default: {
-              basal: 0.7,
-            },
+    const profiles = [
+      {
+        startDate: '2000-01-01T00:00:00.000Z',
+        defaultProfile: 'Default',
+        store: {
+          Default: {
+            basal: 0.7,
           },
         },
-      ],
-      dia,
-      peak,
-    );
+      },
+    ];
+    const result = pump([], profiles, dia, peak);
+    const iob = calculatePumpIOB([], profiles, dia, peak);
 
     expect(result).toMatchSnapshot();
+    expect(iob).toMatchSnapshot();
   });
   test('static basal in profile and temp basal 0', () => {
     let _date = moment('2022-05-06T16:30:00.000Z');
@@ -113,94 +113,87 @@ describe('test pump', () => {
         created_at: '2022-05-06T10:31:00.000Z',
       },
     ];
-    const result = pump(
-      treatments,
-      [
-        {
-          startDate: '2000-01-01T00:00:00.000Z',
-          defaultProfile: 'Default',
-          store: {
-            Default: {
-              basal: 0.7,
-            },
+    const profiles = [
+      {
+        startDate: '2000-01-01T00:00:00.000Z',
+        defaultProfile: 'Default',
+        store: {
+          Default: {
+            basal: 0.7,
           },
         },
-      ],
-      dia,
-      peak,
-    );
+      },
+    ];
+    const result = pump(treatments, profiles, dia, peak);
+    const iob = calculatePumpIOB(treatments, profiles, dia, peak);
 
     expect(result).toBe(0);
+    expect(iob).toMatchSnapshot();
   });
 
   test('static basal in profile and 2 different temp basal', () => {
     let _date = moment('2022-05-06T16:30:00.000Z');
     jest.setSystemTime(_date.toDate());
     const treatments = tmpBasal;
-    const result = pump(
-      treatments,
-      [
-        {
-          startDate: '2000-01-01T00:00:00.000Z',
-          defaultProfile: 'Default',
-          store: {
-            Default: {
-              basal: 0.7,
-            },
+    const profiles = [
+      {
+        startDate: '2000-01-01T00:00:00.000Z',
+        defaultProfile: 'Default',
+        store: {
+          Default: {
+            basal: 0.7,
           },
         },
-      ],
-      dia,
-      peak,
-    );
+      },
+    ];
+    const result = pump(treatments, profiles, dia, peak);
+    const iob = calculatePumpIOB(treatments, profiles, dia, peak);
 
     expect(result).toMatchSnapshot();
+    expect(iob).toMatchSnapshot();
   });
+
   test('dynamic  basal in profile and no temp basal', () => {
     let _date = moment('2022-05-06T16:30:00.000Z');
     jest.setSystemTime(_date.toDate());
     const treatments = [];
-    const result = pump(
-      treatments,
-      [
-        {
-          startDate: '2000-01-01T00:00:00.000Z',
-          defaultProfile: 'Default',
-          store: {
-            Default: {
-              basal: dynamicBasal,
-            },
+    const profiles = [
+      {
+        startDate: '2000-01-01T00:00:00.000Z',
+        defaultProfile: 'Default',
+        store: {
+          Default: {
+            basal: dynamicBasal,
           },
         },
-      ],
-      dia,
-      peak,
-    );
+      },
+    ];
+    const result = pump(treatments, profiles, dia, peak);
+    const iob = calculatePumpIOB(treatments, profiles, dia, peak);
 
     expect(result).toMatchSnapshot();
+    expect(iob).toMatchSnapshot();
   });
   test('dynamic  basal in profile, no temp basal and profile switch', () => {
     let _date = moment('2022-05-06T16:30:00.000Z');
     jest.setSystemTime(_date.toDate());
     const treatments = profileSwitch;
-    const result = pump(
-      treatments,
-      [
-        {
-          startDate: '2000-01-01T00:00:00.000Z',
-          defaultProfile: 'Default',
-          store: {
-            Default: {
-              basal: dynamicBasal,
-            },
+    const profiles = [
+      {
+        startDate: '2000-01-01T00:00:00.000Z',
+        defaultProfile: 'Default',
+        store: {
+          Default: {
+            basal: dynamicBasal,
           },
         },
-      ],
-      dia,
-      peak,
-    );
+      },
+    ];
+    const result = pump(treatments, profiles, dia, peak);
+    const iob = calculatePumpIOB(treatments, profiles, dia, peak);
 
     expect(result).toMatchSnapshot();
+    expect(iob).toMatchSnapshot();
   });
   test('dynamic  basal in profile, no temp basal and temporary override', () => {
     let _date = moment('2022-05-06T16:30:00.000Z');
@@ -230,23 +223,21 @@ describe('test pump', () => {
     jest.setSystemTime(_date.toDate());
     const treatments = tmpBasal;
 
-    const result = pump(
-      treatments,
-      [
-        {
-          startDate: '2000-01-01T00:00:00.000Z',
-          defaultProfile: 'Default',
-          store: {
-            Default: {
-              basal: dynamicBasal,
-            },
+    const profiles = [
+      {
+        startDate: '2000-01-01T00:00:00.000Z',
+        defaultProfile: 'Default',
+        store: {
+          Default: {
+            basal: dynamicBasal,
           },
         },
-      ],
-      dia,
-      peak,
-    );
+      },
+    ];
+    const result = pump(treatments, profiles, dia, peak);
+    const iob = calculatePumpIOB(treatments, profiles, dia, peak);
 
     expect(result).toMatchSnapshot();
+    expect(iob).toMatchSnapshot();
   });
 });

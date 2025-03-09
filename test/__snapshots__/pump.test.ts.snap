@@ -2,12 +2,24 @@
 
 exports[`test pump dynamic  basal in profile and no temp basal 1`] = `0.01559265706624232`;
 
+exports[`test pump dynamic  basal in profile and no temp basal 2`] = `1.9746647139805609`;
+
 exports[`test pump dynamic  basal in profile, no temp basal and profile switch 1`] = `0.01614147760949147`;
+
+exports[`test pump dynamic  basal in profile, no temp basal and profile switch 2`] = `2.0127770804188705`;
 
 exports[`test pump dynamic  basal in profile, no temp basal and temporary override 1`] = `0.01614147760949147`;
 
 exports[`test pump dynamic basal in profile and temp basal 1`] = `0.015201408758962516`;
 
+exports[`test pump dynamic basal in profile and temp basal 2`] = `2.147446054284844`;
+
 exports[`test pump static basal in profile and 2 different temp basal 1`] = `0.011547188344800504`;
 
+exports[`test pump static basal in profile and 2 different temp basal 2`] = `1.8241386646000024`;
+
 exports[`test pump static basal in profile and no treatments 1`] = `0.011609624381664367`;
+
+exports[`test pump static basal in profile and no treatments 2`] = `1.5957438070343075`;
+
+exports[`test pump static basal in profile and temp basal 0 1`] = `0.05833333333333333`;
