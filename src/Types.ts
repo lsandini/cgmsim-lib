@@ -319,6 +319,10 @@ export type SimulationResult = {
 	activityFactor: number;
 	alcoholActivity: number;
 	isf: { dynamic: number; constant: number };
+  cob: number;
+  bolusIOB: number; 
+  pumpBasalIOB: number;
+  basalIOB: number;
 };
 
 /**

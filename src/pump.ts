@@ -1,4 +1,4 @@
-import logger, { getDeltaMinutes, getExpTreatmentActivity } from './utils';
+import logger, { getDeltaMinutes, getExpTreatmentActivity, getExpTreatmentIOB } from './utils';
 import * as moment from 'moment';
 import { NSProfile, NSTreatment } from './Types';
 import { TypeDateISO } from './TypeDateISO';
@@ -257,4 +257,85 @@ export default function (treatments: NSTreatment[], profiles: NSProfile[], dia: 
 	);
 	logger.debug('[pump] the pump\'s basal activity is: %o', pumpBasalAct);
 	return pumpBasalAct;
+}
+
+
+export function calculatePumpIOB(treatments: NSTreatment[], profiles: NSProfile[], dia: number, peak: number): number {
+  const minutesStep = 5;
+  const steps = 60 / minutesStep;
+  const basalAsBoluses: { minutesAgo: number; insulin: number }[] = [];
+  const endDiaAction = moment().utc();
+  const startDiaAction = moment().add(-dia, 'hour').set({ minute: 0, second: 0, millisecond: 0 }).utc();
+  const duration = dia * 60;
+
+	const orderedProfiles = profiles
+		.filter((profile) => {
+			const profileName = profile.defaultProfile;
+			return profile.store[profileName];
+		})
+		.sort((first, second) => moment(second.startDate).diff(moment(first.startDate)));
+
+	const computedTempBasal = getTempBasal(treatments, duration);
+	const computedProfileSwitch = getProfileSwitch(treatments, duration);
+	const computedTemporaryOverride = getTemporaryOverride(treatments, duration, orderedProfiles);
+
+	// const basalsToUpdate = [];
+	for (
+		let currentAction = startDiaAction;
+		currentAction.diff(endDiaAction) <= 0;
+		currentAction.add(minutesStep, 'minutes')
+	) {
+		const tempBasalActives = computedTempBasal.filter(
+			(t) => t.start.diff(currentAction) <= 0 && t.end.diff(currentAction) > 0,
+		);
+		const profilesStichActives = computedProfileSwitch.filter(
+			(t) => t.start.diff(currentAction) <= 0 && t.end.diff(currentAction) > 0,
+		);
+		const temporaryOverrideActives = computedTemporaryOverride.filter(
+			(t) => t.start.diff(currentAction) <= 0 && t.end.diff(currentAction) > 0,
+		);
+		let basalToUpdate: { minutesAgo: number; insulin: number };
+		//if there is a temp basal actives
+		if (tempBasalActives.length > 0) {
+			const insulin = tempBasalActives[0].insulin / steps;
+			basalToUpdate = {
+				minutesAgo: getDeltaMinutes(currentAction.toISOString() as TypeDateISO),
+				insulin,
+			};
+		} else if (profilesStichActives.length > 0) {
+			const insulin = profilesStichActives[0].insulin / steps;
+			basalToUpdate = {
+				minutesAgo: getDeltaMinutes(currentAction.toISOString() as TypeDateISO),
+				insulin,
+			};
+		} else if (temporaryOverrideActives.length > 0) {
+			const insulin = temporaryOverrideActives[0].insulin / steps;
+			basalToUpdate = {
+				minutesAgo: getDeltaMinutes(currentAction.toISOString() as TypeDateISO),
+				insulin,
+			};
+		} else {
+			const insulin = getBasalFromProfiles(orderedProfiles, currentAction) / steps;
+			basalToUpdate = {
+				minutesAgo: getDeltaMinutes(currentAction.toISOString() as TypeDateISO),
+				insulin,
+			};
+		}
+		basalAsBoluses.push(basalToUpdate);
+	}
+
+  const pumpBasalIOB = basalAsBoluses.reduce(
+      (tot, entry) =>
+          tot +
+          getExpTreatmentIOB({
+              peak,
+              duration,
+              minutesAgo: entry.minutesAgo,
+              units: entry.insulin,
+          }),
+      0,
+  );
+
+  logger.debug('[pump] the pump\'s basal IOB is: %o', pumpBasalIOB);
+  return pumpBasalIOB;
 }

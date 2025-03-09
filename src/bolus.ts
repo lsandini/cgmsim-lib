@@ -1,4 +1,4 @@
-import logger, { getDeltaMinutes, getExpTreatmentActivity, roundTo8Decimals } from './utils';
+import logger, { getDeltaMinutes, getExpTreatmentActivity, getExpTreatmentIOB, roundTo8Decimals } from './utils';
 import { NSTreatment, isMealBolusTreatment } from './Types';
 
 /**
@@ -44,3 +44,36 @@ export default (treatments: NSTreatment[], dia: number, peak: number): number =>
 	logger.debug('[bolus] Total bolus insulin activity:', totalBolusActivity);
 	return roundTo8Decimals(totalBolusActivity);
 };
+
+// New function for IOB calculation
+export function calculateBolusIOB(treatments: NSTreatment[], dia: number, peak: number): number {
+  const activeBolusInsulin =
+      treatments
+          ?.filter(isMealBolusTreatment)
+          .filter((treatment) => treatment?.insulin > 0)
+          .map((treatment) => ({
+              minutesAgo: getDeltaMinutes(treatment.created_at),
+              insulin: treatment.insulin,
+          }))
+          .filter((bolus) => bolus.minutesAgo <= 300 && bolus.minutesAgo >= 0) || [];
+
+  logger.debug('[bolus] Active bolus treatments for IOB:', activeBolusInsulin);
+
+  const durationInMinutes = dia * 60;
+
+  const bolusIOBs = activeBolusInsulin?.map((bolus) => {
+      return getExpTreatmentIOB({
+          peak,
+          duration: durationInMinutes,
+          minutesAgo: bolus.minutesAgo,
+          units: bolus.insulin,
+      });
+  });
+
+  logger.debug('[bolus] Individual bolus IOBs:', bolusIOBs);
+
+  const totalBolusIOB = bolusIOBs.reduce((total, iob) => total + iob, 0);
+
+  logger.debug('[bolus] Total bolus insulin IOB:', totalBolusIOB);
+  return roundTo8Decimals(totalBolusIOB);
+}
