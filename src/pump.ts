@@ -180,8 +180,7 @@ function activeBasalByTime(
 	}
 }
 
-export default function (treatments: NSTreatment[], profiles: NSProfile[], dia: number, peak: number) {
-	const minutesStep = 5;
+function calculateBasalAsBoluses(treatments: NSTreatment[], profiles: NSProfile[], dia: number, minutesStep: number) {
 	const steps = 60 / minutesStep;
 	const basalAsBoluses: { minutesAgo: number; insulin: number }[] = [];
 	const endDiaAction = moment().utc();
@@ -189,67 +188,42 @@ export default function (treatments: NSTreatment[], profiles: NSProfile[], dia: 
 	const duration = dia * 60;
 
 	const orderedProfiles = profiles
-		.filter((profile) => {
-			const profileName = profile.defaultProfile;
-			return profile.store[profileName];
-		})
+		.filter((profile) => profile.store[profile.defaultProfile])
 		.sort((first, second) => moment(second.startDate).diff(moment(first.startDate)));
 
 	const computedTempBasal = getTempBasal(treatments, duration);
 	const computedProfileSwitch = getProfileSwitch(treatments, duration);
 	const computedTemporaryOverride = getTemporaryOverride(treatments, duration, orderedProfiles);
 
-	// const basalsToUpdate = [];
 	for (
 		let currentAction = startDiaAction;
 		currentAction.diff(endDiaAction) <= 0;
 		currentAction.add(minutesStep, 'minutes')
 	) {
-		const tempBasalActives = computedTempBasal.filter(
+		const activeBasal = [...computedTempBasal, ...computedProfileSwitch, ...computedTemporaryOverride].find(
 			(t) => t.start.diff(currentAction) <= 0 && t.end.diff(currentAction) > 0,
 		);
-		const profilesStichActives = computedProfileSwitch.filter(
-			(t) => t.start.diff(currentAction) <= 0 && t.end.diff(currentAction) > 0,
-		);
-		const temporaryOverrideActives = computedTemporaryOverride.filter(
-			(t) => t.start.diff(currentAction) <= 0 && t.end.diff(currentAction) > 0,
-		);
-		let basalToUpdate: { minutesAgo: number; insulin: number };
-		//if there is a temp basal actives
-		if (tempBasalActives.length > 0) {
-			const insulin = tempBasalActives[0].insulin / steps;
-			basalToUpdate = {
-				minutesAgo: getDeltaMinutes(currentAction.toISOString() as TypeDateISO),
-				insulin,
-			};
-		} else if (profilesStichActives.length > 0) {
-			const insulin = profilesStichActives[0].insulin / steps;
-			basalToUpdate = {
-				minutesAgo: getDeltaMinutes(currentAction.toISOString() as TypeDateISO),
-				insulin,
-			};
-		} else if (temporaryOverrideActives.length > 0) {
-			const insulin = temporaryOverrideActives[0].insulin / steps;
-			basalToUpdate = {
-				minutesAgo: getDeltaMinutes(currentAction.toISOString() as TypeDateISO),
-				insulin,
-			};
-		} else {
-			const insulin = getBasalFromProfiles(orderedProfiles, currentAction) / steps;
-			basalToUpdate = {
-				minutesAgo: getDeltaMinutes(currentAction.toISOString() as TypeDateISO),
-				insulin,
-			};
-		}
-		basalAsBoluses.push(basalToUpdate);
+
+		const insulin = (activeBasal ? activeBasal.insulin : getBasalFromProfiles(orderedProfiles, currentAction)) / steps;
+		basalAsBoluses.push({
+			minutesAgo: getDeltaMinutes(currentAction.toISOString() as TypeDateISO),
+			insulin,
+		});
 	}
+
+	return basalAsBoluses;
+}
+
+export default function (treatments: NSTreatment[], profiles: NSProfile[], dia: number, peak: number) {
+	const minutesStep = 5;
+	const basalAsBoluses = calculateBasalAsBoluses(treatments, profiles, dia, minutesStep);
 
 	const pumpBasalAct = basalAsBoluses.reduce(
 		(tot, entry) =>
 			tot +
 			getExpTreatmentActivity({
 				peak,
-				duration,
+				duration: dia * 60,
 				minutesAgo: entry.minutesAgo,
 				units: entry.insulin,
 			}),
@@ -261,73 +235,14 @@ export default function (treatments: NSTreatment[], profiles: NSProfile[], dia: 
 
 export function calculatePumpIOB(treatments: NSTreatment[], profiles: NSProfile[], dia: number, peak: number): number {
 	const minutesStep = 5;
-	const steps = 60 / minutesStep;
-	const basalAsBoluses: { minutesAgo: number; insulin: number }[] = [];
-	const endDiaAction = moment().utc();
-	const startDiaAction = moment().add(-dia, 'hour').set({ minute: 0, second: 0, millisecond: 0 }).utc();
-	const duration = dia * 60;
-
-	const orderedProfiles = profiles
-		.filter((profile) => {
-			const profileName = profile.defaultProfile;
-			return profile.store[profileName];
-		})
-		.sort((first, second) => moment(second.startDate).diff(moment(first.startDate)));
-
-	const computedTempBasal = getTempBasal(treatments, duration);
-	const computedProfileSwitch = getProfileSwitch(treatments, duration);
-	const computedTemporaryOverride = getTemporaryOverride(treatments, duration, orderedProfiles);
-
-	for (
-		let currentAction = startDiaAction;
-		currentAction.diff(endDiaAction) <= 0;
-		currentAction.add(minutesStep, 'minutes')
-	) {
-		const tempBasalActives = computedTempBasal.filter(
-			(t) => t.start.diff(currentAction) <= 0 && t.end.diff(currentAction) > 0,
-		);
-		const profilesStichActives = computedProfileSwitch.filter(
-			(t) => t.start.diff(currentAction) <= 0 && t.end.diff(currentAction) > 0,
-		);
-		const temporaryOverrideActives = computedTemporaryOverride.filter(
-			(t) => t.start.diff(currentAction) <= 0 && t.end.diff(currentAction) > 0,
-		);
-		let basalToUpdate: { minutesAgo: number; insulin: number };
-		//if there is a temp basal actives
-		if (tempBasalActives.length > 0) {
-			const insulin = tempBasalActives[0].insulin / steps;
-			basalToUpdate = {
-				minutesAgo: getDeltaMinutes(currentAction.toISOString() as TypeDateISO),
-				insulin,
-			};
-		} else if (profilesStichActives.length > 0) {
-			const insulin = profilesStichActives[0].insulin / steps;
-			basalToUpdate = {
-				minutesAgo: getDeltaMinutes(currentAction.toISOString() as TypeDateISO),
-				insulin,
-			};
-		} else if (temporaryOverrideActives.length > 0) {
-			const insulin = temporaryOverrideActives[0].insulin / steps;
-			basalToUpdate = {
-				minutesAgo: getDeltaMinutes(currentAction.toISOString() as TypeDateISO),
-				insulin,
-			};
-		} else {
-			const insulin = getBasalFromProfiles(orderedProfiles, currentAction) / steps;
-			basalToUpdate = {
-				minutesAgo: getDeltaMinutes(currentAction.toISOString() as TypeDateISO),
-				insulin,
-			};
-		}
-		basalAsBoluses.push(basalToUpdate);
-	}
+	const basalAsBoluses = calculateBasalAsBoluses(treatments, profiles, dia, minutesStep);
 
 	const pumpBasalIOB = basalAsBoluses.reduce(
 		(tot, entry) =>
 			tot +
 			getExpTreatmentIOB({
 				peak,
-				duration,
+				duration: dia * 60,
 				minutesAgo: entry.minutesAgo,
 				units: entry.insulin,
 			}),
