@@ -25,9 +25,12 @@ const calculateNextGlucose = (
 	{ basalActivity, liverActivity, carbsActivity, bolusActivity, cortisoneActivity, alcoholActivity }: CGMSimParams,
 	isf: number,
 ): GlucoseResult => {
+	// Get previous glucose value or use default
+	let deltaMinutes = 1;
 	let lastSgv;
 	if (entries && entries[0]) {
 		lastSgv = entries[0].sgv;
+		deltaMinutes = getDeltaMinutes(entries[0].mills);
 	} else if (entries && entries.length === 0) {
 		lastSgv = 90;
 		logger.warn('Empty entries, using 90 as last sgv');
@@ -54,7 +57,7 @@ const calculateNextGlucose = (
 
 	// Calculate new glucose value (converting all to mg/dL)
 	const newGlucose = Math.floor(
-		previousGlucose + insulinGlucoseImpact * 18 + carbsImpact * 18 + cortisoneImpact * 18 + liverImpact * 18,
+		lastSgv + insulinGlucoseImpact * 18 + carbsImpact * 18 + cortisoneImpact * 18 + liverImpact * 18,
 	);
 
 	// Limit glucose to valid range
@@ -74,7 +77,7 @@ const calculateNextGlucose = (
 
 	// Log detailed breakdown of glucose changes
 	logGlucoseComponents({
-		previousGlucose,
+		previousGlucose: lastSgv,
 		deltaMinutes,
 		insulinGlucoseImpact,
 		liverImpact,

@@ -80,19 +80,19 @@ const simulator = (params: MainParams): SimulationResult => {
 	const pumpBasalEffect = pumpEnabled ? pump(treatments, profiles, dia, peak) : 0;
 	const carbsEffect = carbs(treatments, carbsAbs, dynamicIsf, cr);
 	const carbsOnBoard = calculateCarbsCOB(treatments, carbsAbs);
-  const bolusIOB = calculateBolusIOB(treatments, dia, peak);
-  const pumpBasalIOB = pumpEnabled ? calculatePumpIOB(treatments, profiles, dia, peak) : 0;
-  const basalIOB = calculateTotalBasalIOB(recentDrugTreatments, weight);
+	const bolusIOB = calculateBolusIOB(treatments, dia, peak);
+	const pumpBasalIOB = pumpEnabled ? calculatePumpIOB(treatments, profiles, dia, peak) : 0;
+	const basalIOB = calculateTotalBasalIOB(recentDrugTreatments, weight);
 
-  logger.debug('[simulator] Insulin calculations:', {
-    bolusEffect,
-    bolusIOB,
-    basalBolusEffect,
-    pumpBasalEffect,
-    pumpBasalIOB,
-    basalIOB
-});
-  
+	logger.debug('[simulator] Insulin calculations:', {
+		bolusEffect,
+		bolusIOB,
+		basalBolusEffect,
+		pumpBasalEffect,
+		pumpBasalIOB,
+		basalIOB,
+	});
+
 	// Calculate liver glucose production
 	const liverEffect = liverRun(
 		baseIsf,
@@ -131,12 +131,12 @@ const simulator = (params: MainParams): SimulationResult => {
 	if (newSgvValue) {
 		return {
 			...newSgvValue,
-			activityFactor,
-			isf: { dynamic: isfActivityDependent, constant: isfConstant },
-		cob: carbsOnBoard,
-    bolusIOB: bolusIOB,
-    pumpBasalIOB: pumpBasalIOB,
-    basalIOB: basalIOB  
+			activityFactor: physicalActivityLiverFactor,
+			isf: { dynamic: dynamicIsf, constant: baseIsf },
+			cob: carbsOnBoard,
+			bolusIOB: bolusIOB,
+			pumpBasalIOB: pumpBasalIOB,
+			basalIOB: basalIOB,
 		};
 	} else {
 		logger.error('No entries found');
@@ -144,4 +144,3 @@ const simulator = (params: MainParams): SimulationResult => {
 };
 
 export default simulator;
-
