@@ -145,11 +145,33 @@ export function uploadActivity(activity: Activity, nsUrl: string, apiSecret: str
 		});
 }
 
+/**
+ * Uploads device status to the Nightscout API.
+ * @param deviceStatus - The device status data to upload.
+ * @param nsUrl - Nightscout URL.
+ * @param apiSecret - Nightscout API secret.
+ * @returns A promise that resolves when the upload is complete.
+ * @throws Error if the upload fails.
+ * @example
+ * // Upload device status to Nightscout
+ * const deviceStatus = {
+ *   // ... device status data ...
+ * };
+ *
+ * uploadDeviceStatus(deviceStatus, "https://nightscout.example.com", "apiSecret123")
+ *   .then(() => {
+ *     console.log("Device status uploaded successfully.");
+ *   })
+ *   .catch((error) => {
+ *     console.error("Error uploading device status:", error);
+ *   });
+ */
 export async function uploadDeviceStatus(deviceStatus: DeviceStatus, nsUrl: string, apiSecret: string) {
 	logger.debug('[upload] device status %o', deviceStatus);
 
 	const _nsUrl = removeTrailingSlash(nsUrl);
 	const api_url = _nsUrl + '/api/v1/devicestatus/';
+
 	return uploadBase(deviceStatus, api_url, apiSecret)
 		.then(() => {
 			logger.debug('[upload] DeviceStatus data uploaded successfully');
