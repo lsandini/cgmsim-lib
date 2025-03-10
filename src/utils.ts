@@ -179,9 +179,9 @@ export function deleteBase(days: number, apiUrl: string, apiSecret: string): Pro
 	const { deleteParams } = setupParams(apiSecret, isSecure);
 	const date = new Date();
 	date.setDate(date.getDate() - days);
-	const isoDate = date.toISOString();
+	const isoDate = date.toISOString().split('T')[0];
 
-	return fetch(apiUrl + '?find[dateString][$lte]=' + isoDate, {
+	return fetch(apiUrl + '?find[created_at][$lte]=' + isoDate, {
 		...deleteParams,
 	})
 		.then(() => {
