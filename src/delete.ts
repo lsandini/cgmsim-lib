@@ -1,10 +1,4 @@
-import { deleteBase, removeTrailingSlash, uploadBase } from './utils';
-import { Entry, EntryValueType } from './Types';
-import moment = require('moment');
-import logger from './utils';
-import { Activity, DeviceStatus } from './Types';
-import { SimulationResult } from './Types';
-import { Note } from './Types';
+import logger, { deleteBase, removeTrailingSlash } from './utils';
 
 /**
  * Uploads device status to the Nightscout API.
