@@ -20,20 +20,19 @@ async function fetchAndParseData<T>(fetchData: Promise<Response>): Promise<T[]> 
 }
 
 /**
- * Downloads data from the Nightscout API, including treatments, profiles, and glucose entries
- * @param nsUrl - Nightscout base URL
- * @param apiSecret - Nightscout API secret token
- * @returns Promise resolving to an object containing treatments, profiles, and glucose entries
+ * Downloads data from the Nightscout API.
+ * @param nsUrl - Nightscout URL.
+ * @param apiSecret - Nightscout API secret.
+ * @returns A promise that resolves with the downloaded data.
+ * @throws Error if the download fails.
  * @example
- * const apiUrl = "https://nightscout.example.com";
- * const apiSecret = "your-secret-token";
- *
- * downloadNightscoutData(apiUrl, apiSecret)
- *   .then(data => {
- *     console.log("Downloaded data:", data);
+ * // Download data from Nightscout
+ * downloadNightscoutData("https://nightscout.example.com", "apiSecret123")
+ *   .then((data) => {
+ *     console.log("Data downloaded successfully:", data);
  *   })
- *   .catch(error => {
- *     console.error("Download failed:", error);
+ *   .catch((error) => {
+ *     console.error("Error downloading data:", error);
  *   });
  */
 const downloadNightscoutData = async (nsUrl: string, apiSecret: string) => {
@@ -46,31 +45,41 @@ const downloadNightscoutData = async (nsUrl: string, apiSecret: string) => {
 	const treatmentsEndpoint = `${baseUrl}/api/v1/treatments?count=600`;
 	const profileEndpoint = `${baseUrl}/api/v1/profile.json`;
 	const glucoseEndpoint = `${baseUrl}/api/v1/entries/sgv.json`;
+	const deviceStatusEndpoint = `${baseUrl}/api/v1/devicestatus.json`;
 
 	logger.debug('[downloads] Fetching data from endpoints:', {
 		treatments: treatmentsEndpoint,
 		profile: profileEndpoint,
 		glucose: glucoseEndpoint,
+		deviceStatus: deviceStatusEndpoint,
 	});
 
 	// Fetch data from all endpoints concurrently
 	const treatmentsPromise = fetchAndParseData<NSTreatment>(fetch(treatmentsEndpoint, getParams));
 	const profilesPromise = fetchAndParseData<NSProfile>(fetch(profileEndpoint, getParams));
 	const entriesPromise = fetchAndParseData<Sgv>(fetch(glucoseEndpoint, getParams));
+	const deviceStatusPromise = fetchAndParseData<Sgv>(fetch(deviceStatusEndpoint, getParams));
 
 	try {
-		const [treatments, profiles, entries] = await Promise.all([treatmentsPromise, profilesPromise, entriesPromise]);
+		const [treatments, profiles, entries, deviceStatus] = await Promise.all([
+			treatmentsPromise,
+			profilesPromise,
+			entriesPromise,
+			deviceStatusPromise,
+		]);
 
 		logger.debug('[downloads] Successfully downloaded data', {
 			treatmentsCount: treatments.length,
 			profilesCount: profiles.length,
 			entriesCount: entries.length,
+			deviceStatusCount: deviceStatus.length,
 		});
 
 		return {
 			treatments,
 			profiles,
 			entries,
+			deviceStatus,
 		};
 	} catch (error) {
 		logger.error('[downloads] Failed to download Nightscout data:', error);

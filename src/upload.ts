@@ -145,62 +145,20 @@ export function uploadActivity(activity: Activity, nsUrl: string, apiSecret: str
 		});
 }
 
-/**
- * Uploads device status to the Nightscout API.
- * @param cob - Carbs on board.
- * @param iob - Insulin on board.
- * @param basalIob - Basal insulin on board.
- * @param bolusIob - Bolus insulin on board.
- * @param nsUrl - Nightscout URL.
- * @param apiSecret - Nightscout API secret.
- * @returns A promise that resolves when the upload is complete.
- * @example
- * // Upload device status to Nightscout
- * uploadDeviceStatus(30, 5, 2, 3, "https://nightscout.example.com", "apiSecret123")
- *   .then(() => {
- *     console.log("Device status uploaded successfully.");
- *   })
- *   .catch((error) => {
- *     console.error("Error uploading device status:", error);
- *   });
- */
-export async function uploadDeviceStatus(
-	cob: number,
-	iob: number,
-	basalIob: number,
-	bolusIob: number,
-	nsUrl: string,
-	apiSecret: string,
-) {
-	logger.debug('[upload] device status %o', { iob, cob });
+export async function uploadDeviceStatus(deviceStatus: DeviceStatus, nsUrl: string, apiSecret: string) {
+	logger.debug('[upload] device status %o', deviceStatus);
 
 	const _nsUrl = removeTrailingSlash(nsUrl);
 	const api_url = _nsUrl + '/api/v1/devicestatus/';
-	const deviceStatus = (await loadBase(api_url, apiSecret)) as DeviceStatus[];
-	let latestDeviceStatus = {};
-	if (deviceStatus.length > 0) {
-		latestDeviceStatus = deviceStatus.sort((a, b) => moment(b.created_at).diff(moment(a.created_at)))[0];
-	}
+	// const deviceStatus = (await loadBase(api_url, apiSecret)) as DeviceStatus[];
+	// let latestDeviceStatus = {};
+	// if (deviceStatus.length > 0) {
+	// 	latestDeviceStatus = deviceStatus.sort((a, b) => moment(b.created_at).diff(moment(a.created_at)))[0];
+	// }
 	const now = new Date().toISOString();
-	return uploadBase(
-		{
-			...latestDeviceStatus,
-			created_at: now,
-			openaps: {
-				openaps: {
-					iob: iob,
-					time: now,
-					basaliob: basalIob,
-					bolusiob: bolusIob,
-				},
-				suggested: { COB: cob, timestamp: now },
-			},
-		},
-		api_url,
-		apiSecret,
-	)
+	return uploadBase(deviceStatus, api_url, apiSecret)
 		.then(() => {
-			logger.debug('[upload] Activity data uploaded successfully');
+			logger.debug('[upload] DeviceStatus data uploaded successfully');
 		})
 		.catch((error) => {
 			logger.error('[upload] Upload failed:', error);
