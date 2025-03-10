@@ -1,4 +1,4 @@
-import { removeTrailingSlash, uploadBase, loadBase } from './utils';
+import { removeTrailingSlash, uploadBase } from './utils';
 import { Entry, EntryValueType } from './Types';
 import moment = require('moment');
 import logger from './utils';
@@ -150,12 +150,6 @@ export async function uploadDeviceStatus(deviceStatus: DeviceStatus, nsUrl: stri
 
 	const _nsUrl = removeTrailingSlash(nsUrl);
 	const api_url = _nsUrl + '/api/v1/devicestatus/';
-	// const deviceStatus = (await loadBase(api_url, apiSecret)) as DeviceStatus[];
-	// let latestDeviceStatus = {};
-	// if (deviceStatus.length > 0) {
-	// 	latestDeviceStatus = deviceStatus.sort((a, b) => moment(b.created_at).diff(moment(a.created_at)))[0];
-	// }
-	const now = new Date().toISOString();
 	return uploadBase(deviceStatus, api_url, apiSecret)
 		.then(() => {
 			logger.debug('[upload] DeviceStatus data uploaded successfully');
