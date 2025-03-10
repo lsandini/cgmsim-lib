@@ -1,13 +1,7 @@
-import { isHttps, removeTrailingSlash } from '../src/utils';
+import { deleteBase, isHttps, removeTrailingSlash } from '../src/utils';
 import * as utils from '../src/utils';
 import fetch from 'node-fetch';
-import {
-  loadBase,
-  uploadBase,
-  roundTo8Decimals,
-  getExpTreatmentActivity,
-  getDeltaMinutes,
-} from '../src/utils';
+import { loadBase, uploadBase, roundTo8Decimals, getExpTreatmentActivity, getDeltaMinutes } from '../src/utils';
 import { Entry } from 'src/Types';
 
 jest.mock('node-fetch');
@@ -170,6 +164,32 @@ describe('uploadBase function', () => {
           method: 'POST',
           headers: expect.any(Object),
           body: JSON.stringify(testData),
+        }),
+      );
+
+      // Optionally, you can add more assertions based on the expected behavior
+    } catch (error) {
+      // Handle any unexpected errors
+      fail(error);
+    }
+  });
+});
+
+describe('deleteBase function', () => {
+  it('should upload data to the Nightscout API using POST', async () => {
+    const nsUrlApi = 'https://nightscout-api.com';
+    const apiSecret = 'yourApiSecret';
+
+    // Use your uploadBase function, which will now use the mocked response
+    try {
+      await deleteBase(2, nsUrlApi, apiSecret);
+
+      // Verify that the fetch function was called with the correct parameters for a POST request
+      expect(fetch).toHaveBeenCalledWith(
+        expect.any(String), // Match any URL
+        expect.objectContaining({
+          method: 'DELETE',
+          headers: expect.any(Object),
         }),
       );
 

@@ -1,7 +1,7 @@
 const { createHash } = require('crypto');
 import * as https from 'https';
 
-export default function (apiSecret: string, isHttps?: boolean): { getParams: any; postParams: any } {
+export default function (apiSecret: string, isHttps?: boolean): { getParams: any; postParams: any; deleteParams: any } {
 	const agent: https.Agent | null = isHttps ? new https.Agent({ rejectUnauthorized: false }) : null;
 	const hash = createHash('sha1');
 	hash.update(apiSecret);
@@ -21,6 +21,11 @@ export default function (apiSecret: string, isHttps?: boolean): { getParams: any
 		},
 		postParams: {
 			method: 'POST',
+			headers,
+			agent,
+		},
+		deleteParams: {
+			method: 'DELETE',
 			headers,
 			agent,
 		},

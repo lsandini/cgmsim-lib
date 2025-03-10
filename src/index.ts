@@ -4,6 +4,7 @@ import downloads from './downloads';
 import loadActivity from './load-activity';
 import arrows from './arrows';
 import { uploadNotes, uploadActivity, uploadEntries, uploadLogs, uploadDeviceStatus } from './upload';
+import { deleteDeviceStatus } from './delete';
 
 export {
 	arrows,
@@ -16,4 +17,5 @@ export {
 	uploadNotes,
 	uploadLogs,
 	uploadDeviceStatus,
+	deleteDeviceStatus,
 };

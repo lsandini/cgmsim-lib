@@ -158,6 +158,42 @@ export function uploadBase(
 }
 
 /**
+ * Deletes data from the Nightscout API that is older than a specified number of days.
+ * @param days - Number of days to retain data. Data older than this will be deleted.
+ * @param apiUrl - Nightscout API URL.
+ * @param apiSecret - Nightscout API secret.
+ * @returns A promise that resolves when the deletion is complete.
+ * @throws Error if the deletion fails.
+ * @example
+ * // Delete data older than 30 days from Nightscout
+ * deleteBase(30, "https://nightscout.example.com/api/v1/treatments", "apiSecret123")
+ *   .then(() => {
+ *     console.log("Old data deleted successfully.");
+ *   })
+ *   .catch((error) => {
+ *     console.error("Error deleting old data:", error);
+ *   });
+ */
+export function deleteBase(days: number, apiUrl: string, apiSecret: string): Promise<void> {
+	const isSecure = isHttps(apiUrl);
+	const { deleteParams } = setupParams(apiSecret, isSecure);
+	const date = new Date();
+	date.setDate(date.getDate() - days);
+	const isoDate = date.toISOString();
+
+	return fetch(apiUrl + '?find[dateString][$lte]=' + isoDate, {
+		...deleteParams,
+	})
+		.then(() => {
+			logger.debug('[utils] Successfully deleted old data from Nightscout');
+		})
+		.catch((error) => {
+			logger.debug('[utils] %o', error);
+			throw new Error(error);
+		});
+}
+
+/**
  * Loads data from Nightscout API
  * @param apiUrl - Nightscout API URL
  * @param apiSecret - API secret key
