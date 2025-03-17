@@ -135,7 +135,8 @@ function getTempBasal(treatments: NSTreatment[], duration: number) {
 		.forEach((b) => {
 			if (b.eventType === 'Temp Basal' && b.rate !== undefined) {
 				const start = moment(b.created_at).utc();
-				const tmpEnd = moment(b.created_at).add(b.durationInMilliseconds, 'milliseconds').utc();
+				const durationInMilliseconds = b.durationInMilliseconds ?? b.duration * 60 * 1000;
+				const tmpEnd = moment(b.created_at).add(durationInMilliseconds, 'milliseconds').utc();
 				const end = tmpEnd.diff(now) < 0 ? tmpEnd : now;
 				computedTempBasal.push({
 					start,
