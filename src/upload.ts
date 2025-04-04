@@ -186,8 +186,6 @@ export function uploadTreatments(
   treatment: TempBasalTreatment | MealBolusTreatment, 
   nsUrl: string, 
   apiSecret: string,
-  enteredBy: string = 'cgmsim-node',
-  notes?: string
 ): Promise<void> {
   const _nsUrl = removeTrailingSlash(nsUrl);
   const api_url = _nsUrl + '/api/v1/treatments/';
@@ -199,18 +197,10 @@ export function uploadTreatments(
   // Prepare the complete treatment object with additional fields
   const completeTreatment = {
     ...treatment,
-    enteredBy,
     mills,
-    utcOffset: 0,
-    // Add notes if provided, otherwise don't include the field
-    ...(notes ? { notes } : {})
+    utcOffset: 0
   };
-  
-  // For temp basal treatments, add absolute field if not present
-//   if (!isMealBolusTreatment(treatment) && 'rate' in treatment) {
-//     (completeTreatment as any).absolute = treatment.rate;
-//   }
-  
+    
   // Set null for missing carbs or insulin fields based on treatment type
   if (isMealBolusTreatment(treatment)) {
     if (!('carbs' in treatment) || treatment.carbs === undefined) {
