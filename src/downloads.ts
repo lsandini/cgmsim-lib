@@ -45,7 +45,30 @@ async function fetchAndParseData<T>(fetchData: Promise<Response>): Promise<T[]> 
  *     console.error("Error downloading data:", error);
  *   });
  */
-const downloadNightscoutData = async (nsUrl: string, apiSecret: string, glucoseCount?: number) => {
+/**
+ * Downloads data from the Nightscout API.
+ * @param nsUrl - Nightscout URL.
+ * @param apiSecret - Nightscout API secret.
+ * @param glucoseCount - Optional number of glucose entries to retrieve.
+ * @param dataTypes - Optional array of data types to fetch ['treatments', 'profiles', 'entries', 'deviceStatus'].
+ * @returns A promise that resolves with the downloaded data.
+ * @throws Error if the download fails.
+ * @example
+ * // Download only entries data from Nightscout
+ * downloadNightscoutData("https://nightscout.example.com", "apiSecret123", 20, ['entries'])
+ *   .then((data) => {
+ *     console.log("Entries downloaded successfully:", data.entries);
+ *   })
+ *   .catch((error) => {
+ *     console.error("Error downloading data:", error);
+ *   });
+ */
+const downloadNightscoutData = async (
+  nsUrl: string, 
+  apiSecret: string, 
+  glucoseCount?: number,
+  dataTypes: string[] = ['treatments', 'profiles', 'entries', 'deviceStatus']
+) => {
 	const baseUrl = removeTrailingSlash(nsUrl);
 	const useHttps = isHttps(nsUrl);
 
@@ -59,18 +82,34 @@ const downloadNightscoutData = async (nsUrl: string, apiSecret: string, glucoseC
 		: `${baseUrl}/api/v1/entries/sgv.json`;
 	const deviceStatusEndpoint = `${baseUrl}/api/v1/devicestatus.json`;
 
-	logger.debug('[downloads] Fetching data from endpoints:', {
-		treatments: treatmentsEndpoint,
-		profile: profileEndpoint,
-		glucose: glucoseEndpoint,
-		deviceStatus: deviceStatusEndpoint,
-	});
+	// Only log endpoints we're actually fetching
+	const endpointsToFetch = {};
+	if (dataTypes.includes('treatments')) endpointsToFetch['treatments'] = treatmentsEndpoint;
+	if (dataTypes.includes('profiles')) endpointsToFetch['profile'] = profileEndpoint;
+	if (dataTypes.includes('entries')) endpointsToFetch['glucose'] = glucoseEndpoint;
+	if (dataTypes.includes('deviceStatus')) endpointsToFetch['deviceStatus'] = deviceStatusEndpoint;
 
-	// Fetch data from all endpoints concurrently
-	const treatmentsPromise = fetchAndParseData<NSTreatment>(fetch(treatmentsEndpoint, getParams));
-	const profilesPromise = fetchAndParseData<NSProfile>(fetch(profileEndpoint, getParams));
-	const entriesPromise = fetchAndParseData<Sgv>(fetch(glucoseEndpoint, getParams));
-	const deviceStatusPromise = fetchAndParseData<Sgv>(fetch(deviceStatusEndpoint, getParams));
+	logger.debug('[downloads] Fetching data from endpoints:', endpointsToFetch);
+
+	// Initialize promises
+	let treatmentsPromise = Promise.resolve([]);
+	let profilesPromise = Promise.resolve([]);
+	let entriesPromise = Promise.resolve([]);
+	let deviceStatusPromise = Promise.resolve([]);
+
+	// Only fetch the data types requested
+	if (dataTypes.includes('treatments')) {
+		treatmentsPromise = fetchAndParseData<NSTreatment>(fetch(treatmentsEndpoint, getParams));
+	}
+	if (dataTypes.includes('profiles')) {
+		profilesPromise = fetchAndParseData<NSProfile>(fetch(profileEndpoint, getParams));
+	}
+	if (dataTypes.includes('entries')) {
+		entriesPromise = fetchAndParseData<Sgv>(fetch(glucoseEndpoint, getParams));
+	}
+	if (dataTypes.includes('deviceStatus')) {
+		deviceStatusPromise = fetchAndParseData<Sgv>(fetch(deviceStatusEndpoint, getParams));
+	}
 
 	try {
 		const [treatments, profiles, entries, deviceStatus] = await Promise.all([
