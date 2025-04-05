@@ -23,10 +23,11 @@ async function fetchAndParseData<T>(fetchData: Promise<Response>): Promise<T[]> 
  * Downloads data from the Nightscout API.
  * @param nsUrl - Nightscout URL.
  * @param apiSecret - Nightscout API secret.
+ * @param glucoseCount - Optional number of glucose entries to retrieve.
  * @returns A promise that resolves with the downloaded data.
  * @throws Error if the download fails.
  * @example
- * // Download data from Nightscout
+ * // Download data from Nightscout with default glucose count
  * downloadNightscoutData("https://nightscout.example.com", "apiSecret123")
  *   .then((data) => {
  *     console.log("Data downloaded successfully:", data);
@@ -34,8 +35,17 @@ async function fetchAndParseData<T>(fetchData: Promise<Response>): Promise<T[]> 
  *   .catch((error) => {
  *     console.error("Error downloading data:", error);
  *   });
+ * 
+ * // Download data from Nightscout with custom glucose count
+ * downloadNightscoutData("https://nightscout.example.com", "apiSecret123", 20)
+ *   .then((data) => {
+ *     console.log("Data downloaded successfully:", data);
+ *   })
+ *   .catch((error) => {
+ *     console.error("Error downloading data:", error);
+ *   });
  */
-const downloadNightscoutData = async (nsUrl: string, apiSecret: string) => {
+const downloadNightscoutData = async (nsUrl: string, apiSecret: string, glucoseCount?: number) => {
 	const baseUrl = removeTrailingSlash(nsUrl);
 	const useHttps = isHttps(nsUrl);
 
@@ -44,7 +54,9 @@ const downloadNightscoutData = async (nsUrl: string, apiSecret: string) => {
 	// Define API endpoints
 	const treatmentsEndpoint = `${baseUrl}/api/v1/treatments?count=600`;
 	const profileEndpoint = `${baseUrl}/api/v1/profile.json`;
-	const glucoseEndpoint = `${baseUrl}/api/v1/entries/sgv.json`;
+	const glucoseEndpoint = glucoseCount 
+		? `${baseUrl}/api/v1/entries/sgv.json?count=${glucoseCount}`
+		: `${baseUrl}/api/v1/entries/sgv.json`;
 	const deviceStatusEndpoint = `${baseUrl}/api/v1/devicestatus.json`;
 
 	logger.debug('[downloads] Fetching data from endpoints:', {
