@@ -35,17 +35,19 @@ async function fetchAndParseData<T>(fetchData: Promise<Response>): Promise<T[]> 
  *     console.error("Error downloading data:", error);
  *   });
  */
-const downloadNightscoutData = async (nsUrl: string, apiSecret: string) => {
+const downloadNightscoutData = async (nsUrl: string, apiSecret: string, maxCount?: number) => {
 	const baseUrl = removeTrailingSlash(nsUrl);
 	const useHttps = isHttps(nsUrl);
 
 	const { getParams } = setupParams(apiSecret, useHttps);
+	const _maxCountTreatments = maxCount && maxCount < 3000 ? `count=${maxCount}` : `count=600`;
+	const _maxCount = maxCount && maxCount < 3000 ? `count=${maxCount}` : '';
 
 	// Define API endpoints
-	const treatmentsEndpoint = `${baseUrl}/api/v1/treatments?count=600`;
-	const profileEndpoint = `${baseUrl}/api/v1/profile.json`;
-	const glucoseEndpoint = `${baseUrl}/api/v1/entries/sgv.json`;
-	const deviceStatusEndpoint = `${baseUrl}/api/v1/devicestatus.json`;
+	const treatmentsEndpoint = `${baseUrl}/api/v1/treatments?count=${_maxCountTreatments}`;
+	const profileEndpoint = `${baseUrl}/api/v1/profile.json?${_maxCount}`;
+	const glucoseEndpoint = `${baseUrl}/api/v1/entries/sgv.json?${_maxCount}`;
+	const deviceStatusEndpoint = `${baseUrl}/api/v1/devicestatus.json?${_maxCount}`;
 
 	logger.debug('[downloads] Fetching data from endpoints:', {
 		treatments: treatmentsEndpoint,
