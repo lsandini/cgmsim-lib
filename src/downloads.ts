@@ -129,14 +129,13 @@ export async function downloadNightscoutDeviceStatus(
  * @returns A promise that resolves with the downloaded data.
  * @throws Error if the download fails.
  */
-export const downloadNightscoutData = async (nsUrl: string, apiSecret: string, maxCount?: number) => {
+const downloadNightscoutData = async (nsUrl: string, apiSecret: string, maxCount?: number) => {
 	validateMaxCount(maxCount);
 
-	const baseUrl = removeTrailingSlash(nsUrl);
-	const treatmentsPromise = downloadNightscoutTreatments(baseUrl, apiSecret, maxCount);
-	const profilesPromise = downloadNightscoutProfiles(baseUrl, apiSecret, maxCount);
-	const entriesPromise = downloadNightscoutEntries(baseUrl, apiSecret, maxCount);
-	const deviceStatusPromise = downloadNightscoutDeviceStatus(baseUrl, apiSecret, maxCount);
+	const treatmentsPromise = downloadNightscoutTreatments(nsUrl, apiSecret, maxCount);
+	const profilesPromise = downloadNightscoutProfiles(nsUrl, apiSecret, maxCount);
+	const entriesPromise = downloadNightscoutEntries(nsUrl, apiSecret, maxCount);
+	const deviceStatusPromise = downloadNightscoutDeviceStatus(nsUrl, apiSecret, maxCount);
 
 	try {
 		const [treatments, profiles, entries, deviceStatus] = await Promise.all([
