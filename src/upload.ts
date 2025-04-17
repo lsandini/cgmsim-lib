@@ -179,10 +179,51 @@ export async function uploadDeviceStatus(deviceStatus: DeviceStatus, nsUrl: stri
 		})
 		.catch((error) => {
 			logger.error('[upload] Upload failed:', error);
+			throw error;
 		});
 }
 
-export function uploadTreatments(
+/**
+ * Uploads treatments (e.g., meal bolus or temporary basal) to the Nightscout API.
+ * @param treatment - The treatment data to upload (either a meal bolus or a temporary basal).
+ * @param nsUrl - Nightscout URL.
+ * @param apiSecret - Nightscout API secret.
+ * @returns A promise that resolves when the upload is complete.
+ * @throws Error if the upload fails.
+ * @example
+ * // Upload a meal bolus treatment to Nightscout
+ * const mealBolusTreatment = {
+ *   created_at: "2025-04-17T12:00:00Z",
+ *   insulin: 5,
+ *   carbs: 50,
+ *   eventType: "Meal Bolus",
+ * };
+ *
+ * uploadTreatments(mealBolusTreatment, "https://nightscout.example.com", "apiSecret123")
+ *   .then(() => {
+ *     console.log("Meal bolus treatment uploaded successfully.");
+ *   })
+ *   .catch((error) => {
+ *     console.error("Error uploading treatment:", error);
+ *   });
+ *
+ * // Upload a temporary basal treatment to Nightscout
+ * const tempBasalTreatment = {
+ *   created_at: "2025-04-17T12:00:00Z",
+ *   duration: 30,
+ *   rate: 1.5,
+ *   eventType: "Temp Basal",
+ * };
+ *
+ * uploadTreatments(tempBasalTreatment, "https://nightscout.example.com", "apiSecret123")
+ *   .then(() => {
+ *     console.log("Temporary basal treatment uploaded successfully.");
+ *   })
+ *   .catch((error) => {
+ *     console.error("Error uploading treatment:", error);
+ *   });
+ */
+export async function uploadTreatments(
 	treatment: TempBasalTreatment | MealBolusTreatment,
 	nsUrl: string,
 	apiSecret: string,
@@ -215,12 +256,13 @@ export function uploadTreatments(
 	return uploadBase(completeTreatment, api_url, apiSecret)
 		.then(() => {
 			if (isMealBolusTreatment(treatment)) {
-				logger.debug('[upload] Bolus treatment uploaded successfully');
+				logger.debug('[upload] Meal bolus treatment uploaded successfully');
 			} else {
 				logger.debug('[upload] Temporary basal treatment uploaded successfully');
 			}
 		})
 		.catch((error) => {
 			logger.error('[upload] Treatment upload failed:', error);
+			throw error;
 		});
 }
