@@ -5,6 +5,7 @@ import logger from './utils';
 import { Activity, DeviceStatus } from './Types';
 import { SimulationResult } from './Types';
 import { Note } from './Types';
+import { isMealBolusTreatment, TempBasalTreatment, MealBolusTreatment } from './Types';
 /**
  * Uploads notes to the Nightscout API.
  * @param notes - The notes to upload.
@@ -178,5 +179,48 @@ export async function uploadDeviceStatus(deviceStatus: DeviceStatus, nsUrl: stri
 		})
 		.catch((error) => {
 			logger.error('[upload] Upload failed:', error);
+		});
+}
+
+export function uploadTreatments(
+	treatment: TempBasalTreatment | MealBolusTreatment,
+	nsUrl: string,
+	apiSecret: string,
+): Promise<void> {
+	const _nsUrl = removeTrailingSlash(nsUrl);
+	const api_url = _nsUrl + '/api/v1/treatments/';
+
+	// Create a timestamp in milliseconds for the 'mills' field
+	const now = new Date(treatment.created_at);
+	const mills = now.getTime();
+
+	// Prepare the complete treatment object with additional fields
+	const completeTreatment = {
+		...treatment,
+		mills,
+		utcOffset: 0,
+	};
+
+	// Set null for missing carbs or insulin fields based on treatment type
+	if (isMealBolusTreatment(treatment)) {
+		if (!('carbs' in treatment) || treatment.carbs === undefined) {
+			(completeTreatment as any).carbs = null;
+		}
+	} else {
+		// For temp basal, ensure carbs and insulin are null if not specified
+		(completeTreatment as any).carbs = null;
+		(completeTreatment as any).insulin = null;
+	}
+
+	return uploadBase(completeTreatment, api_url, apiSecret)
+		.then(() => {
+			if (isMealBolusTreatment(treatment)) {
+				logger.debug('[upload] Bolus treatment uploaded successfully');
+			} else {
+				logger.debug('[upload] Temporary basal treatment uploaded successfully');
+			}
+		})
+		.catch((error) => {
+			logger.error('[upload] Treatment upload failed:', error);
 		});
 }
