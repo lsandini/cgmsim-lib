@@ -39,7 +39,7 @@ const calculateNextGlucose = (
 		return null;
 	}
 
-	logger.debug(`[sgv] Time since last reading: %o minutes`, deltaMinutes);
+	logger.debug('[sgv] Time since last reading: %o minutes', deltaMinutes);
 
 	// Convert ISF to mmol/L
 	const isfMmol = isf / 18; // (mmol/L)/U

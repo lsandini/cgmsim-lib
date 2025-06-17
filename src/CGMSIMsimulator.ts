@@ -121,7 +121,7 @@ const simulator = (params: MainParams): SimulationResult => {
 		dynamicIsf,
 	);
 
-	logger.info('[simulator] Simulation result:', {
+	logger.info('[simulator] Simulation result: %o', {
 		...newSgvValue,
 		physicalISF: dynamicIsf / baseIsf,
 		physicalLiver: physicalActivityLiverFactor,

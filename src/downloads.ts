@@ -145,7 +145,7 @@ const downloadNightscoutData = async (nsUrl: string, apiSecret: string, maxCount
 			deviceStatusPromise,
 		]);
 
-		logger.debug('[downloads] Successfully downloaded data', {
+		logger.debug('[downloads] Successfully downloaded data: %o', {
 			treatmentsCount: treatments.length,
 			profilesCount: profiles.length,
 			entriesCount: entries.length,
@@ -159,7 +159,7 @@ const downloadNightscoutData = async (nsUrl: string, apiSecret: string, maxCount
 			deviceStatus,
 		};
 	} catch (error) {
-		logger.error('[downloads] Failed to download Nightscout data:', error);
+		logger.error('[downloads] Failed to download Nightscout data: %o', error);
 		throw new Error(`Download failed: ${error.message}`);
 	}
 };

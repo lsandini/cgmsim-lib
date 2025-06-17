@@ -152,7 +152,7 @@ export function uploadBase(
 			logger.debug('[utils] Successfully updated Nightscout');
 		})
 		.catch((error) => {
-			logger.debug('[utils] %o', error);
+			logger.error('[utils] Error: %o', error);
 			throw new Error(error);
 		});
 }
