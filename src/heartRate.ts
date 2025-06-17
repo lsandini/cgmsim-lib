@@ -70,7 +70,9 @@ export function physicalHeartRateLiver(activities: (Activity & MinutesAgo)[], MA
 		const hrRatio = heartRate / MAX_HR;
 
 		// Ignore activities with low HR or negative time
-		if (minutesAgo < 0 || hrRatio <= 0.6) return 0;
+		if (minutesAgo < 0 || hrRatio <= 0.6 || !hrRatio) {
+			return 0;
+		}
 
 		if (hrRatio <= 0.75) {
 			return 0; // Low intensity - no effect
