@@ -328,6 +328,7 @@ export type SimulationResult = {
 	cob: number;
 	bolusIOB: number;
 	pumpBasalIOB: number;
+	profileBasalIOB: number;
 	basalIOB: number;
 };
 

@@ -253,3 +253,22 @@ export function calculatePumpIOB(treatments: NSTreatment[], profiles: NSProfile[
 	logger.debug("[pump] the pump's basal IOB is: %o", pumpBasalIOB);
 	return pumpBasalIOB;
 }
+export function calculateProfileIOB(profiles: NSProfile[], dia: number, peak: number): number {
+	const minutesStep = 5;
+	const basalAsBoluses = calculateBasalAsBoluses([], profiles, dia, minutesStep);
+
+	const profileBasalIOB = basalAsBoluses.reduce(
+		(tot, entry) =>
+			tot +
+			getExpTreatmentIOB({
+				peak,
+				duration: dia * 60,
+				minutesAgo: entry.minutesAgo,
+				units: entry.insulin,
+			}),
+		0,
+	);
+
+	logger.debug("[pump] the profile's basal IOB is: %o", profileBasalIOB);
+	return profileBasalIOB;
+}

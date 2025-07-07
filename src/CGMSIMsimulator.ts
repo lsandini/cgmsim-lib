@@ -6,7 +6,7 @@ import alcohol from './alcohol';
 import carbs, { calculateCarbsCOB } from './carbs';
 import liverRun from './liver';
 import sgv from './sgv';
-import pump, { calculatePumpIOB } from './pump';
+import pump, { calculateProfileIOB, calculatePumpIOB } from './pump';
 import { MainParams, SimulationResult } from './Types';
 import moment = require('moment');
 import { physicalIsf, physicalLiver } from './physical';
@@ -82,6 +82,7 @@ const simulator = (params: MainParams): SimulationResult => {
 	const carbsOnBoard = calculateCarbsCOB(carbsAbs, treatments);
 	const bolusIOB = calculateBolusIOB(treatments, dia, peak);
 	const pumpBasalIOB = pumpEnabled ? calculatePumpIOB(treatments, profiles, dia, peak) : 0;
+	const profileBasalIOB = pumpEnabled ? calculateProfileIOB(profiles, dia, peak) : 0;
 	const basalIOB = calculateTotalBasalIOB(recentDrugTreatments, weight);
 
 	logger.debug('[simulator] Insulin calculations:', {
@@ -90,6 +91,7 @@ const simulator = (params: MainParams): SimulationResult => {
 		basalBolusEffect,
 		pumpBasalEffect,
 		pumpBasalIOB,
+		profileBasalIOB,
 		basalIOB,
 	});
 
@@ -136,6 +138,7 @@ const simulator = (params: MainParams): SimulationResult => {
 			cob: carbsOnBoard,
 			bolusIOB: bolusIOB,
 			pumpBasalIOB: pumpBasalIOB,
+			profileBasalIOB: profileBasalIOB,
 			basalIOB: basalIOB,
 		};
 	} else {
