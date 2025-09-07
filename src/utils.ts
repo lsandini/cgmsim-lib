@@ -27,7 +27,7 @@ if (host) {
 if (token) {
 	targets.push({
 		target: '@logtail/pino',
-		options: { sourceToken: token },
+		options: { sourceToken: token, options },
 
 		level,
 	});
