@@ -11,37 +11,37 @@ import logger, { getDeltaMinutes } from './utils';
  */
 export const drugs = {
 	GLA: {
-		names: ['gla', 'Gla', 'lan', 'Lan'],
+		names: ['gla', 'lan'],
 		peak: (duration: number) => duration / 2.5,
 		units: (units: number) => units,
 		duration: (units: number, weight: number) => (22 + (12 * units) / weight) * 60,
 	},
 	DET: {
-		names: ['det', 'Det', 'lev', 'Lev'],
+		names: ['det', 'lev'],
 		peak: (duration: number) => duration / 3,
 		units: (units: number) => units,
 		duration: (units: number, weight: number) => (14 + (24 * units) / weight) * 60,
 	},
 	TOU: {
-		names: ['Tou', 'tou'],
+		names: ['tou'],
 		peak: (duration: number) => duration / 2.5,
 		units: (units: number) => units,
 		duration: (units: number, weight: number) => (24 + (14 * units) / weight) * 60,
 	},
 	DEG: {
-		names: ['deg', 'Deg', 'tre', 'Tre'],
+		names: ['deg', 'tre'],
 		units: (units: number) => units,
 		peak: (duration: number) => duration / 3,
 		duration: () => 42 * 60,
 	},
 	NPH: {
-		names: ['pro', 'Pro', 'nph', 'Nph'],
+		names: ['pro', 'nph'],
 		peak: (duration: number) => duration / 3.5,
 		units: (units: number) => units,
 		duration: (units: number, weight: number) => (12 + (20 * units) / weight) * 60,
 	},
 	COR: {
-		names: ['pre', 'Pre', 'cor', 'Cor'],
+		names: ['pre', 'cor'],
 		peak: (duration: number) => duration / 3,
 		units: (insulin: number) => insulin,
 		duration: (insulin: number, weight: number) => (16 + (12 * insulin) / weight) * 60,
@@ -52,7 +52,7 @@ export const drugs = {
 	// 	duration: () => 240,
 	// },
 	ALC: {
-		names: ['alc', 'Alc'],
+		names: ['alc'],
 		peak: (duration: number) => duration / 2.5,
 		units: (drinks: number) => drinks * 12,
 		duration: (drinks: number, weight: number) => {
@@ -61,7 +61,7 @@ export const drugs = {
 		},
 	},
 	BEER: {
-		names: ['bee', 'Bee'],
+		names: ['bee'],
 		peak: (duration: number) => duration / 2.5,
 		units: (dL: number) => (dL * 12) / 3.3,
 		duration: (dL: number, weight: number) => {
@@ -86,7 +86,7 @@ export const getTreatmentExpParam = (
 ): TreatmentExpParam[] => {
 	const selectedDrug = drugs[drug];
 	return treatments
-		.filter((treatment) => selectedDrug.names.some((name) => name === treatment.drug))
+		.filter((treatment) => selectedDrug.names.some((name) => name?.toLowerCase() === treatment.drug?.toLowerCase()))
 		.map((treatment) => {
 			const duration = selectedDrug.duration(treatment.units, weight);
 			const peak = selectedDrug.peak(duration);

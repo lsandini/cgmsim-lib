@@ -29,7 +29,7 @@ describe('test alcohol', () => {
         {
           units: 2,
           minutesAgo: 180,
-          drug: 'Alc',
+          drug: 'ALC',
         },
       ],
       weight,
