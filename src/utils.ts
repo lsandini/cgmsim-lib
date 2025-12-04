@@ -131,8 +131,13 @@ export function getExpTreatmentIOB({ peak, duration, minutesAgo, units }: Treatm
  * @param timestamp - Timestamp in milliseconds or ISO string
  * @returns Number of minutes difference
  */
-export const getDeltaMinutes = (timestamp: number | TypeDateISO): number =>
-	Math.round(moment().diff(moment(timestamp), 'seconds') / 60);
+export const getDeltaMinutes = (timestamp: number | TypeDateISO, now?: number | TypeDateISO): number => {
+	let start = moment();
+	if (now) {
+		start = moment(now);
+	}
+	return Math.round(moment().diff(moment(timestamp), 'seconds') / 60);
+};
 
 /**
  * Uploads data to Nightscout API

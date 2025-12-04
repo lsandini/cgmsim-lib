@@ -1,22 +1,17 @@
 import logger, { getDeltaMinutes } from './utils';
 
-import basal from './basal';
-import basalProfile from './basalProfile';
-import {
-	MainParamsUVA,
-	UvaPatientState,
-	UvaDelta,
-	UvaInterval,
-	UvaOutput,
-	UvaUserParams,
-	isMealBolusTreatment,
-} from './Types';
-import { PatientUva } from './uva';
-import RK4 from './SolverRK';
-import { currentIntensity } from './physical';
+import { MainParamsUVA, UvaUserParams, isMealBolusTreatment } from './Types';
+// import { PatientUva } from './uva';
 import { transformNoteTreatmentsDrug } from './drug';
-import { defaultPatient } from './defaultPatient';
-
+import * as moduleContents from './lt1/core/models/UvaPadova_T1DMS';
+import Patient, { PatientOutput, PatientState } from './lt1/types/Patient';
+import ParametricModule from './lt1/types/ParametricModule';
+import SolverRK1_2 from './lt1/core/solvers/SolverRK1_2';
+import Solver from './lt1/types/Solver';
+import basalProfile from './basalProfile';
+import ODEPatient from './lt1/types//ODEPatientModel';
+import basal from './basal';
+import SolverRK4 from './lt1/core/solvers/SolverRK4';
 /**
  * Simulates blood glucose levels in response to various parameters and inputs.
  * @param params - Main parameters for running the simulation.
@@ -55,18 +50,21 @@ import { defaultPatient } from './defaultPatient';
  * const simulationResult = simulator(simulationParams);
  * console.log("Blood glucose simulation result:", simulationResult);
  */
-const UVAsimulator = (params: MainParamsUVA) => {
+const UVASimulator = (params: MainParamsUVA) => {
 	const {
-		patient,
+		patient: cgmsimPatient,
 		treatments,
 		profiles,
 		lastState,
 		pumpEnabled,
 		activities,
 		user,
+		entries,
+		defaultPatient,
 	} = params;
 
 	logger.debug('Run Init UVA NSUrl:%o', user.nsUrl);
+	const now = new Date();
 
 	if (!treatments) {
 		throw new Error('treatments is ' + treatments);
@@ -75,114 +73,110 @@ const UVAsimulator = (params: MainParamsUVA) => {
 		throw new Error('profiles is ' + profiles);
 	}
 
-	const weight = patient.WEIGHT;
-	const age = patient.AGE;
-	const gender = patient.GENDER;
+	const weight = cgmsimPatient.WEIGHT;
+
 	const drugs = transformNoteTreatmentsDrug(treatments);
+	let lastSgvMills: number;
+	let lastSgvDeltaMinutes: number;
+	if (entries?.length > 0) {
+		const sortedEntries = entries.sort((a, b) => b.mills - a.mills);
+		lastSgvMills = sortedEntries[0].mills;
+		lastSgvDeltaMinutes = getDeltaMinutes(lastSgvMills);
+	} else {
+		lastSgvMills = now.getTime() - 5 * 60 * 1000;
+		lastSgvDeltaMinutes = getDeltaMinutes(lastSgvMills);
+	}
+
+	const solver = new SolverRK1_2();
+
+	const module = <ParametricModule>new moduleContents.default(defaultPatient);
 
 	const activeDrugTreatments = drugs.filter(function (e) {
 		return e.minutesAgo <= 45 * 60; // keep only the basals from the last 45 hours
 	});
-
-	const basalActivity = basal(activeDrugTreatments, weight);
-
-	const last5MinuteTreatments = treatments.filter(
-		(t) =>
-			getDeltaMinutes(t.created_at) < 5 && getDeltaMinutes(t.created_at) >= 0,
-	);
-
-	const bolusActivity = last5MinuteTreatments
+	const basalProfileActivity = pumpEnabled ? basalProfile(profiles) : 0;
+	const lastTreatments = treatments
+		.filter(
+			(t) => getDeltaMinutes(t.created_at, now.getTime()) <= 5 && getDeltaMinutes(t.created_at, now.getTime()) >= 0,
+		)
 		.filter(isMealBolusTreatment)
 		.filter((i) => i?.insulin > 0)
-		.map((i) => i.insulin)
-		.reduce((tot, activity) => tot + activity, 0);
-
-	const carbsActivity = last5MinuteTreatments
+		.map((i) => ({ insulin: i.insulin, minutesAgo: getDeltaMinutes(i.created_at, now.getTime()) }));
+	const lastCarbsTreatments = treatments
+		.filter(
+			(t) =>
+				getDeltaMinutes(t.created_at, now.getTime()) < lastSgvDeltaMinutes + 15 &&
+				getDeltaMinutes(t.created_at, now.getTime()) >= 0,
+		)
 		.filter(isMealBolusTreatment)
 		.filter((i) => i?.carbs > 0)
-		.map((i) => i.carbs)
-		.reduce((tot, activity) => tot + activity, 0);
-
-	const intensity = currentIntensity(activities, age, gender) * 100;
-
-	const basalProfileActivity = pumpEnabled ? basalProfile(profiles) : 0;
-
-	const patientUva = new PatientUva(defaultPatient);
-	let partialMinutes = 0;
-	const fiveMinutes: UvaInterval = 5;
-	const oneMinute: UvaDelta = 1;
-
-	//get last state from mongo
-	let patientState: UvaPatientState = lastState
-		? lastState
-		: patientUva.getInitialState();
-
-	logger.debug('basalProfileActivity:%o', basalProfileActivity * 60);
-	logger.debug('basalActivity:%o', basalActivity * 60);
-
-	let iir = basalProfileActivity * 60 + basalActivity * 60;
+		.map((i) => ({ carbs: i.carbs, minutesAgo: getDeltaMinutes(i.created_at, now.getTime()) }));
 
 	let userParams: UvaUserParams = {
-		iir,
-		ibolus: 0,
+		iir: 0,
 		carbs: 0,
+		ibolus: 0,
 		intensity: 0,
 	};
-	//t0 result
-	let result: UvaOutput = patientUva.getOutputs(
-		partialMinutes,
-		patientState,
-		userParams,
-	);
-	const lastPatientState = { ...patientState };
-	// start simulation
-	logger.debug(user.nsUrl + ' lastPatientState:%o', lastPatientState);
 
-	while (partialMinutes < fiveMinutes) {
-		// todo: sensor dynamics
-		result.G = result.Gp;
+	let patient = module as Patient;
+	const patientODE = <ODEPatient<{}>>(<unknown>patient);
 
-		// validity check
-		if (isNaN(result.G)) {
-			throw new Error('Error');
-		}
-
-		// compute controller output
-		// let iir = basalActivity * 60;
-		logger.debug('patientState:%o', patientState);
-
-		// let iir = basalProfileActivity * 60 + basalActivity * 60;
-		let ibolus = partialMinutes == 0 ? bolusActivity : 0;
-		if (iir < 0) iir = 0;
-		if (ibolus < 0) ibolus = 0;
-		const carbs = carbsActivity / 5;
-		// const intensity = 0;//get exercise intensity
-
-		const userParams: UvaUserParams = { iir, ibolus, carbs, intensity };
-
-		// this.simulationResults.push({ t, x, u, y, logData })
-
-		// proceed one time step
-		patientState = RK4(
-			(time: number, state: UvaPatientState) =>
-				patientUva.getDerivatives(time, state, userParams),
-			partialMinutes,
-			patientState,
-			oneMinute,
-		);
-		//t partialMinutes result
-		result = patientUva.getOutputs(partialMinutes, patientState, userParams);
-		partialMinutes += oneMinute;
+	let tCurrent = lastSgvMills;
+	if (lastState) {
+		patient.setInitialState(lastState);
 	}
+
+	patient.reset(new Date(lastSgvMills), 1, solver);
+
+	// initialize simulation variables
+	/** internal state of virtual patient compartments */
+	let x: PatientState;
+	/** visible physiological outputs of virtual patient */
+	let y: PatientOutput;
+
+	// start simulation
+	while (tCurrent < now.getTime()) {
+		patient.update(new Date(tCurrent), (t: Date) => {
+			const tDeltaMinutes = getDeltaMinutes(t.getTime(), now.getTime());
+			const basalActivity = basal(
+				activeDrugTreatments.filter((t) => {
+					return t.minutesAgo > tDeltaMinutes;
+				}),
+				weight,
+			);
+			let iir = basalProfileActivity * 60 + basalActivity * 60;
+
+			const meal = lastCarbsTreatments
+				.filter((t) => t.minutesAgo === tDeltaMinutes)
+				.map((t) => t.carbs)
+				.reduce((tot, activity) => tot + activity, 0);
+			const carbs = lastCarbsTreatments
+				.filter((t) => t.minutesAgo - tDeltaMinutes < 15 && t.minutesAgo >= tDeltaMinutes)
+				.map((t) => t.carbs)
+				.reduce((tot, activity) => tot + activity / 15, 0);
+			const bolus = lastTreatments
+				.filter((t) => t.minutesAgo === tDeltaMinutes)
+				.map((t) => t.insulin)
+				.reduce((tot, activity) => tot + activity * 60, 0);
+
+			return { ...userParams, meal, carbs, iir: iir + bolus };
+		});
+		tCurrent += 60 * 1000;
+	}
+
+	const lastPatientState = patient.getState();
+	const result = patient.getOutput();
+
 	if (result.Gp > 400) {
 		return { state: lastPatientState, sgv: 400 };
 	}
 	if (result.Gp < 40) {
 		return { state: lastPatientState, sgv: 40 };
 	}
-	const res = { state: patientState, sgv: result.Gp };
+	const res = { state: lastPatientState, sgv: result.Gp };
 	logger.info(user.nsUrl + ' uva output:%o', res);
 	return res;
 };
 
-export default UVAsimulator;
+export default UVASimulator;

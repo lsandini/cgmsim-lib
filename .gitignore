@@ -106,3 +106,5 @@ typings/
 
 dist/
 files/
+test/defaultPatientUva.ts
+test/uva.test.ts

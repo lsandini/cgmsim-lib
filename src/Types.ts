@@ -1,5 +1,7 @@
 import { TypeDateISO } from './TypeDateISO';
 import { drugs } from './drug';
+import { State } from './lt1/core/models/UvaPadova_T1DMS';
+import { PatientState } from './lt1/types/Patient';
 
 /**
  * Represents the direction of blood glucose change.
@@ -300,7 +302,9 @@ type MainParamsBase = {
  * Represents main parameters for a UVA simulation.
  */
 export type MainParamsUVA = MainParamsBase & {
-	lastState: UvaPatientState;
+	lastState: PatientState;
+	defaultPatient: PatientState;
+	entries: Sgv[];
 };
 
 /**
