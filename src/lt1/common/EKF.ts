@@ -35,11 +35,6 @@ export default class EKF {
 	private x: Vector;
 	/** Covariance matrix */
 	private P: Matrix;
-	/** Continuous process model */
-	private f: (t: Date, x: Vector, u: PatientInput) => Vector;
-	/** Measurement model */
-	private g: (t: Date, x: Vector) => number[];
-
 	/**
 	 * Creates and initializes new instance of CDEKF.
 	 *
@@ -48,9 +43,12 @@ export default class EKF {
 	 * @param {Vector} x Initial state vector
 	 * @param {Matrix} P Initial covariance matrix
 	 */
-	constructor(f: typeof this.f, g: typeof this.g, x: Vector, P: Matrix) {
-		this.f = f;
-		this.g = g;
+	constructor(
+		readonly f: (t: Date, x: Vector, u: PatientInput) => Vector,
+		readonly g: (t: Date, x: Vector) => number[],
+		x: Vector,
+		P: Matrix,
+	) {
 		this.x = x;
 		this.P = P;
 	}
