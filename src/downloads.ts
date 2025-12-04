@@ -1,7 +1,7 @@
 import logger, { isHttps, removeTrailingSlash } from './utils';
 import setupParams from './setupParams';
 import { NSProfile, Sgv, NSTreatment } from './Types';
-import fetch, { Response } from 'node-fetch';
+import fetch from 'node-fetch';
 
 /**
  * Fetches and parses JSON data from a Nightscout API endpoint

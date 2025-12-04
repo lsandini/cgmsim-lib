@@ -1,10 +1,16 @@
-import { removeTrailingSlash, uploadBase } from './utils';
-import { Entry, EntryValueType } from './Types';
+import logger, { removeTrailingSlash, uploadBase } from './utils';
 import moment = require('moment');
-import logger from './utils';
-import { Activity, DeviceStatus, SimulationResult } from './Types';
-import { Note } from './Types';
-import { isMealBolusTreatment, TempBasalTreatment, MealBolusTreatment } from './Types';
+import {
+	isMealBolusTreatment,
+	TempBasalTreatment,
+	MealBolusTreatment,
+	Note,
+	SimulationResult,
+	EntryValueType,
+	Entry,
+	Activity,
+	DeviceStatus,
+} from './Types';
 /**
  * Uploads notes to the Nightscout API.
  * @param notes - The notes to upload.

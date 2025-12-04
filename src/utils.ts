@@ -136,7 +136,7 @@ export const getDeltaMinutes = (timestamp: number | TypeDateISO, now?: number | 
 	if (now) {
 		start = moment(now);
 	}
-	return Math.round(moment().diff(moment(timestamp), 'seconds') / 60);
+	return Math.round(start.diff(moment(timestamp), 'seconds') / 60);
 };
 
 /**

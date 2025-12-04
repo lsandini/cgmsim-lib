@@ -3,6 +3,10 @@ import * as utils from '../src/utils';
 import fetch from 'node-fetch';
 import { loadBase, uploadBase, roundTo8Decimals, getExpTreatmentActivity, getDeltaMinutes } from '../src/utils';
 import { Entry } from 'src/Types';
+import * as moment from 'moment';
+import { TypeDateISO } from '../src/TypeDateISO';
+
+// Mock definition for TypeDateISO if it's not exported
 
 jest.mock('node-fetch');
 
@@ -25,6 +29,87 @@ jest.mock('../src/utils', () => {
 });
 
 describe('test utils', () => {
+  // Preserve the original Math.round function
+  const originalMathRound = Math.round;
+
+  beforeAll(() => {
+    // Mock Math.round to ensure consistent behavior, especially for .5 rounding
+    Math.round = jest.fn((input: number) => {
+      return Math.floor(input + 0.5);
+    });
+  });
+
+  afterAll(() => {
+    // Restore the original function after all tests are done
+    Math.round = originalMathRound;
+  });
+
+  // --- Test 1: Basic Positive Difference ---
+  test('should calculate a positive difference in minutes when timestamp is in the past', () => {
+    // Fixed "now" time: 10:00:00
+    const nowTime = moment('2025-01-01T10:00:00Z');
+    // Past timestamp: 09:50:00 (10 minutes before)
+    const pastTimestamp = moment('2025-01-01T09:50:00Z').valueOf();
+
+    // Expected result: 10 minutes (positive)
+    expect(getDeltaMinutes(pastTimestamp, nowTime.valueOf())).toBe(10);
+  });
+
+  // --- Test 2: Negative Difference ---
+  test('should calculate a negative difference in minutes when timestamp is in the future', () => {
+    // Fixed "now" time: 10:00:00
+    const nowTime = moment('2025-01-01T10:00:00Z');
+    // Future timestamp: 10:15:00 (15 minutes after)
+    const futureTimestamp = moment('2025-01-01T10:15:00Z').valueOf();
+
+    // Expected result: -15 minutes (negative)
+    expect(getDeltaMinutes(futureTimestamp, nowTime.valueOf())).toBe(-15);
+  });
+
+  // --- Test 3: Using ISO 8601 Strings ---
+  test('should handle ISO 8601 strings for both arguments', () => {
+    const nowISO: TypeDateISO = '2025-01-01T12:00:00Z' as TypeDateISO;
+    const pastISO: TypeDateISO = '2025-01-01T11:59:00Z' as TypeDateISO; // 1 minute before
+
+    expect(getDeltaMinutes(pastISO, nowISO)).toBe(1);
+  });
+
+  // --- Test 4: Using system current time ('now' is undefined) ---
+  test('should calculate difference against the current moment if "now" is undefined', () => {
+    // Define a point in time 1 minute ago
+    const past = moment().subtract(1, 'minutes');
+
+    // When 'now' is not passed, moment() is called internally
+    // The difference should be approximately 1
+    const result = getDeltaMinutes(past.valueOf());
+
+    // We check that the result is 1 or very close (accounting for execution time in ms)
+    expect(result).toBeGreaterThanOrEqual(0);
+    expect(result).toBeLessThanOrEqual(1);
+  });
+
+  // --- Test 5: Rounding (30 seconds) ---
+  test('should round correctly when difference is exactly 30 seconds', () => {
+    // Fixed "now" time: 10:00:30
+    const nowTime = moment('2025-01-01T10:00:30Z');
+    // Past timestamp: 10:00:00 (30 seconds before)
+    const pastTimestamp = moment('2025-01-01T10:00:00Z').valueOf();
+
+    // 30 seconds = 0.5 minutes. Math.round(0.5) should be 1.
+    expect(getDeltaMinutes(pastTimestamp, nowTime.valueOf())).toBe(1);
+  });
+
+  // --- Test 6: Rounding Down (29 seconds) ---
+  test('should round down when difference is 29 seconds', () => {
+    // Fixed "now" time: 10:00:29
+    const nowTime = moment('2025-01-01T10:00:29Z');
+    // Past timestamp: 10:00:00 (29 seconds before)
+    const pastTimestamp = moment('2025-01-01T10:00:00Z').valueOf();
+
+    // 29 seconds < 0.5 minutes. Math.round(0.4833...) should be 0.
+    expect(getDeltaMinutes(pastTimestamp, nowTime.valueOf())).toBe(0);
+  });
+
   describe('isHttps function', () => {
     test('should return true for valid https URLs', () => {
       const httpsUrl = 'https://test.cgmsim.com';
@@ -268,8 +353,6 @@ describe('getExpTreatmentActivity function', () => {
     expect(result).toBe(0.16367332278955893);
   });
 });
-
-const moment = require('moment');
 
 describe('getDeltaMinutes', () => {
   it('should return the difference in minutes from now to the given time', () => {

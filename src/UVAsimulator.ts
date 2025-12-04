@@ -76,8 +76,8 @@ const UVASimulator = (params: MainParamsUVA) => {
 	let lastSgvMills: number;
 	let lastSgvDeltaMinutes: number;
 	if (entries?.length > 0) {
-		const sortedEntries = entries.sort((a, b) => b.mills - a.mills);
-		lastSgvMills = sortedEntries[0].mills;
+		entries.sort((a, b) => b.mills - a.mills);
+		lastSgvMills = entries[0].mills;
 		lastSgvDeltaMinutes = getDeltaMinutes(lastSgvMills);
 	} else {
 		lastSgvMills = now.getTime() - 5 * 60 * 1000;
