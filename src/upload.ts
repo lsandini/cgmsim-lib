@@ -2,8 +2,7 @@ import { removeTrailingSlash, uploadBase } from './utils';
 import { Entry, EntryValueType } from './Types';
 import moment = require('moment');
 import logger from './utils';
-import { Activity, DeviceStatus } from './Types';
-import { SimulationResult } from './Types';
+import { Activity, DeviceStatus, SimulationResult } from './Types';
 import { Note } from './Types';
 import { isMealBolusTreatment, TempBasalTreatment, MealBolusTreatment } from './Types';
 /**

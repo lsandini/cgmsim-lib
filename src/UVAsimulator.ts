@@ -1,17 +1,14 @@
 import logger, { getDeltaMinutes } from './utils';
 
 import { MainParamsUVA, UvaUserParams, isMealBolusTreatment } from './Types';
-// import { PatientUva } from './uva';
 import { transformNoteTreatmentsDrug } from './drug';
 import * as moduleContents from './lt1/core/models/UvaPadova_T1DMS';
 import Patient, { PatientOutput, PatientState } from './lt1/types/Patient';
 import ParametricModule from './lt1/types/ParametricModule';
 import SolverRK1_2 from './lt1/core/solvers/SolverRK1_2';
-import Solver from './lt1/types/Solver';
 import basalProfile from './basalProfile';
-import ODEPatient from './lt1/types//ODEPatientModel';
 import basal from './basal';
-import SolverRK4 from './lt1/core/solvers/SolverRK4';
+
 /**
  * Simulates blood glucose levels in response to various parameters and inputs.
  * @param params - Main parameters for running the simulation.
@@ -120,7 +117,6 @@ const UVASimulator = (params: MainParamsUVA) => {
 	};
 
 	let patient = module as Patient;
-	const patientODE = <ODEPatient<{}>>(<unknown>patient);
 
 	let tCurrent = lastSgvMills;
 	if (lastState) {
