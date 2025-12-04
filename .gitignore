@@ -108,3 +108,4 @@ dist/
 files/
 test/defaultPatientUva.ts
 test/uva.test.ts
+test/__snapshots__/uva.test.ts.snap
