@@ -181,7 +181,12 @@ function activeBasalByTime(
 	}
 }
 
-function calculateBasalAsBoluses(treatments: NSTreatment[], profiles: NSProfile[], dia: number, minutesStep: number) {
+export function calculateBasalAsBoluses(
+	treatments: NSTreatment[],
+	profiles: NSProfile[],
+	dia: number,
+	minutesStep: number,
+) {
 	const steps = 60 / minutesStep;
 	const basalAsBoluses: { minutesAgo: number; insulin: number }[] = [];
 	const endDiaAction = moment().utc();

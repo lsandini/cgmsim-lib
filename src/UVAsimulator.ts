@@ -8,6 +8,7 @@ import ParametricModule from './lt1/types/ParametricModule';
 import SolverRK1_2 from './lt1/core/solvers/SolverRK1_2';
 import basalProfile from './basalProfile';
 import basal from './basal';
+import { calculateBasalAsBoluses } from './pump';
 
 /**
  * Simulates blood glucose levels in response to various parameters and inputs.
@@ -91,7 +92,7 @@ const UVASimulator = (params: MainParamsUVA) => {
 	const activeDrugTreatments = drugs.filter(function (e) {
 		return e.minutesAgo <= 45 * 60; // keep only the basals from the last 45 hours
 	});
-	const basalProfileActivity = pumpEnabled ? basalProfile(profiles) : 0;
+	// const basalProfileActivity = pumpEnabled ? basalProfile(profiles) : 0;
 	const lastTreatments = treatments
 		.filter(
 			(t) => getDeltaMinutes(t.created_at, now.getTime()) <= 5 && getDeltaMinutes(t.created_at, now.getTime()) >= 0,
@@ -108,6 +109,7 @@ const UVASimulator = (params: MainParamsUVA) => {
 		.filter(isMealBolusTreatment)
 		.filter((i) => i?.carbs > 0)
 		.map((i) => ({ carbs: i.carbs, minutesAgo: getDeltaMinutes(i.created_at, now.getTime()) }));
+	const pumpBasalTreatment = pumpEnabled ? calculateBasalAsBoluses(treatments, profiles, 1, 1) : [];
 
 	let userParams: UvaUserParams = {
 		iir: 0,
@@ -141,7 +143,6 @@ const UVASimulator = (params: MainParamsUVA) => {
 				}),
 				weight,
 			);
-			let iir = basalProfileActivity * 60 + basalActivity * 60;
 
 			const meal = lastCarbsTreatments
 				.filter((t) => t.minutesAgo === tDeltaMinutes)
@@ -155,6 +156,12 @@ const UVASimulator = (params: MainParamsUVA) => {
 				.filter((t) => t.minutesAgo === tDeltaMinutes)
 				.map((t) => t.insulin)
 				.reduce((tot, activity) => tot + activity * 60, 0);
+			const pumpBasal = pumpBasalTreatment
+				.filter((t) => t.minutesAgo === tDeltaMinutes)
+				.map((t) => t.insulin)
+				.reduce((tot, activity) => tot + activity, 0);
+
+			let iir = pumpBasal * 60 + basalActivity * 60;
 
 			return { ...userParams, meal, carbs, iir: iir + bolus };
 		});
