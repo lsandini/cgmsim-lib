@@ -1,14 +1,16 @@
 import logger, { getDeltaMinutes } from './utils';
 
-import { MainParamsUVA, UvaUserParams, isMealBolusTreatment } from './Types';
+import { MainParamsUVA, UvaUserParams, UvaSimulationResult, isMealBolusTreatment } from './Types';
 import { transformNoteTreatmentsDrug } from './drug';
 import * as moduleContents from './lt1/core/models/UvaPadova_T1DMS';
 import Patient, { PatientOutput, PatientState } from './lt1/types/Patient';
 import ParametricModule from './lt1/types/ParametricModule';
 import SolverRK1_2 from './lt1/core/solvers/SolverRK1_2';
 import basalProfile from './basalProfile';
-import basal from './basal';
-import { calculateBasalAsBoluses } from './pump';
+import basal, { calculateTotalBasalIOB } from './basal';
+import { calculateBasalAsBoluses, calculatePumpIOB, calculateProfileIOB } from './pump';
+import { calculateBolusIOB } from './bolus';
+import { calculateCarbsCOB } from './carbs';
 
 /**
  * Simulates blood glucose levels in response to various parameters and inputs.
@@ -48,7 +50,7 @@ import { calculateBasalAsBoluses } from './pump';
  * const simulationResult = simulator(simulationParams);
  * console.log("Blood glucose simulation result:", simulationResult);
  */
-const UVASimulator = (params: MainParamsUVA) => {
+const UVASimulator = (params: MainParamsUVA): UvaSimulationResult => {
 	const {
 		patient: cgmsimPatient,
 		treatments,
@@ -72,6 +74,9 @@ const UVASimulator = (params: MainParamsUVA) => {
 	}
 
 	const weight = cgmsimPatient.WEIGHT;
+	const dia = cgmsimPatient.DIA;
+	const peak = cgmsimPatient.TP;
+	const carbsAbs = cgmsimPatient.CARBS_ABS_TIME;
 
 	const drugs = transformNoteTreatmentsDrug(treatments);
 	let lastSgvMills: number;
@@ -171,13 +176,32 @@ const UVASimulator = (params: MainParamsUVA) => {
 	const lastPatientState = patient.getState();
 	const result = patient.getOutput();
 
-	if (result.Gp > 400) {
-		return { state: lastPatientState, sgv: 400 };
+	// Calculate IOB and COB using the same functions as CGMSIM
+	const cob = calculateCarbsCOB(carbsAbs, treatments);
+	const bolusIOB = calculateBolusIOB(treatments, dia, peak);
+	const pumpBasalIOB = pumpEnabled ? calculatePumpIOB(treatments, profiles, dia, peak) : 0;
+	const profileBasalIOB = pumpEnabled ? calculateProfileIOB(profiles, dia, peak) : 0;
+	const basalIOB = calculateTotalBasalIOB(activeDrugTreatments, weight);
+
+	// Clamp glucose value
+	let sgv = result.Gp;
+	if (sgv > 400) {
+		sgv = 400;
 	}
-	if (result.Gp < 40) {
-		return { state: lastPatientState, sgv: 40 };
+	if (sgv < 40) {
+		sgv = 40;
 	}
-	const res = { state: lastPatientState, sgv: result.Gp };
+
+	const res: UvaSimulationResult = {
+		state: lastPatientState,
+		sgv,
+		cob,
+		bolusIOB,
+		pumpBasalIOB,
+		profileBasalIOB,
+		basalIOB,
+	};
+
 	logger.info(user.nsUrl + ' uva output:%o', res);
 	return res;
 };

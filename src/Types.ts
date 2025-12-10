@@ -267,9 +267,21 @@ type PatientInfoBase = {
 };
 
 /**
- * Represents patient parameters for a cgmsim simulation.
+ * Represents patient parameters for a UVA simulation.
+ * Now includes pharmacokinetic parameters for IOB/COB calculation compatibility with controllers.
  */
-export type PatientInfoUva = PatientInfoBase;
+export type PatientInfoUva = PatientInfoBase & {
+	/** Carbohydrate Ratio (CR) for insulin calculation. */
+	CR: number;
+	/** Insulin Sensitivity Factor (ISF) for insulin calculation. */
+	ISF: number;
+	/** Time taken for carbohydrates to be absorbed (in minutes default 360). */
+	CARBS_ABS_TIME: number;
+	/** Time period for insulin activity (Time Peak) (in minutes default 75). */
+	TP: number;
+	/** Duration of Insulin Action (DIA) (in hours default: 6). */
+	DIA: number;
+};
 
 /**
  * Represents patient parameters for a cgmsim simulation.
@@ -300,6 +312,7 @@ type MainParamsBase = {
  * Represents main parameters for a UVA simulation.
  */
 export type MainParamsUVA = MainParamsBase & {
+	patient: PatientInfoUva;
 	lastState: PatientState;
 	defaultPatient: PatientState;
 	entries: Sgv[];
@@ -327,6 +340,19 @@ export type SimulationResult = {
 	activityFactor: number;
 	alcoholActivity: number;
 	isf: { dynamic: number; constant: number };
+	cob: number;
+	bolusIOB: number;
+	pumpBasalIOB: number;
+	profileBasalIOB: number;
+	basalIOB: number;
+};
+
+/**
+ * Represents the result of a UVA simulation.
+ */
+export type UvaSimulationResult = {
+	sgv: number;
+	state: PatientState;
 	cob: number;
 	bolusIOB: number;
 	pumpBasalIOB: number;
