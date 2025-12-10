@@ -128,7 +128,7 @@ export const line = ({
     .tickPadding(_tickPadding)
     .tickFormat((dom, index) => {
       return dom.toString();
-    });
+    }); //
 
   const lineChart = d3
     .line<ValueDataSource>()
@@ -147,6 +147,7 @@ export const line = ({
 
   const yGrid = d3
     .axisLeft(yScale)
+    //   .tickValues(d3.range(0, 400, 10))
     .tickSize(-width)
     .tickFormat(() => '');
 
