@@ -28,14 +28,24 @@ if (token) {
 	targets.push({
 		target: '@logtail/pino',
 		options: { sourceToken: token, options },
-
+		level,
+	});
+} else if (process.env.NODE_ENV === 'development') {
+	targets.push({
+		target: 'pino-pretty',
+		options: { colorize: true, translateTime: 'SYS:HH:MM:ss.l', ignore: 'pid,hostname' },
+		level,
+	});
+} else {
+	targets.push({
+		target: 'pino/file',
+		options: { destination: 1 },
 		level,
 	});
 }
 
 const logger = pino({
 	level,
-	prettifier: process.env.NODE_ENV === 'development' ? pinoPretty : null,
 	transport: {
 		targets,
 	},

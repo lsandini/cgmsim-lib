@@ -3,6 +3,53 @@ import logger, { getDeltaMinutes } from './utils';
 
 //const logger = pino();
 
+const FAST_THRESHOLD = 30;
+const EXTRA_FAST_MIN = 0.2;
+const EXTRA_FAST_MAX = 0.7;
+
+type SplittableMeal = { created_at: string; carbs?: number };
+
+export type CarbSplit = {
+	fastCarbs: number;
+	slowCarbs: number;
+	extraFastRatio: number;
+};
+
+function fnv1a(input: string): number {
+	let hash = 0x811c9dc5;
+	for (let i = 0; i < input.length; i++) {
+		hash ^= input.charCodeAt(i);
+		hash = Math.imul(hash, 0x01000193);
+	}
+	return hash >>> 0;
+}
+
+function mulberry32(seed: number): () => number {
+	let state = seed >>> 0;
+	return () => {
+		state = (state + 0x6d2b79f5) >>> 0;
+		let t = state;
+		t = Math.imul(t ^ (t >>> 15), t | 1);
+		t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+		return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+	};
+}
+
+export function splitMealCarbs(meal: SplittableMeal): CarbSplit {
+	const carbs = meal.carbs ?? 0;
+	const rng = mulberry32(fnv1a(`${meal.created_at}|${carbs}`));
+	const extraFastRatio = EXTRA_FAST_MIN + rng() * (EXTRA_FAST_MAX - EXTRA_FAST_MIN);
+
+	if (carbs <= FAST_THRESHOLD) {
+		return { fastCarbs: carbs, slowCarbs: 0, extraFastRatio };
+	}
+
+	const excess = carbs - FAST_THRESHOLD;
+	const fastCarbs = FAST_THRESHOLD + extraFastRatio * excess;
+	const slowCarbs = (1 - extraFastRatio) * excess;
+	return { fastCarbs, slowCarbs, extraFastRatio };
+}
+
 /**
  * Calculates blood glucose impact from active carbohydrates
  * @param treatments - Array of treatments containing carb intake
@@ -31,6 +78,20 @@ export default function calculateCarbEffect(
 
 	logger.debug('[carbs] Active meals in absorption window:', activeMeals);
 
+	if (activeMeals.length > 0) {
+		const latestMeal = activeMeals.reduce((a, b) => (a.minutesAgo <= b.minutesAgo ? a : b));
+		const split = splitMealCarbs(latestMeal);
+		logger.debug(
+			'[carbs] Latest meal split: %dg carbs at %s (%dm ago) → fast %sg / slow %sg (extraFastRatio %s)',
+			latestMeal.carbs,
+			latestMeal.created_at,
+			latestMeal.minutesAgo,
+			split.fastCarbs.toFixed(2),
+			split.slowCarbs.toFixed(2),
+			split.extraFastRatio.toFixed(3),
+		);
+	}
+
 	// Define absorption times for different carb types
 	const fastAbsorptionTime = carbAbsorptionTime / 6; // 60 min for default
 	const slowAbsorptionTime = carbAbsorptionTime / 1.5; // 240 min for default
@@ -40,18 +101,10 @@ export default function calculateCarbEffect(
 		const minutesAgo = meal.minutesAgo;
 		const totalCarbs = meal.carbs;
 
-		// Random split between fast and slow carbs
-		const fastCarbsPortion = Math.min(Math.random() * totalCarbs, 40);
-		const remainingCarbs = totalCarbs - fastCarbsPortion;
-		const fastAbsorptionRatio = Math.random() * (0.4 - 0.1) + 0.1;
-
-		const fastCarbs = fastCarbsPortion + fastAbsorptionRatio * remainingCarbs;
-		const slowCarbs = (1 - fastAbsorptionRatio) * remainingCarbs;
+		const { fastCarbs, slowCarbs } = splitMealCarbs(meal);
 
 		logger.debug('[carbs] Carb absorption split:', {
 			totalCarbs,
-			fastCarbsPortion,
-			remainingCarbs,
 			fastCarbs,
 			slowCarbs,
 		});
@@ -117,13 +170,7 @@ export function calculateCarbsCOB(carbAbsorptionTime: number, treatments: NSTrea
 		const minutesAgo = meal.minutesAgo;
 		const totalCarbs = meal.carbs;
 
-		// Split between fast and slow carbs (using same ratios as original)
-		const fastCarbsPortion = Math.min(Math.random() * totalCarbs, 40);
-		const remainingCarbs = totalCarbs - fastCarbsPortion;
-		const fastAbsorptionRatio = Math.random() * (0.4 - 0.1) + 0.1;
-
-		const fastCarbs = fastCarbsPortion + fastAbsorptionRatio * remainingCarbs;
-		const slowCarbs = (1 - fastAbsorptionRatio) * remainingCarbs;
+		const { fastCarbs, slowCarbs } = splitMealCarbs(meal);
 
 		logger.debug('[carbs] Carb split:', {
 			totalCarbs,
