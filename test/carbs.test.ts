@@ -5,7 +5,7 @@ import { diffOptions, getPngSnapshot } from './inputTest';
 import { NSTreatment } from '../src/Types';
 import { TypeDateISO } from '../src/TypeDateISO';
 
-const now = '2001-01-01T07:00:00';
+const now = '2001-01-01T07:00:00Z';
 const { toMatchImageSnapshot } = require('jest-image-snapshot');
 const math = global.Math;
 
