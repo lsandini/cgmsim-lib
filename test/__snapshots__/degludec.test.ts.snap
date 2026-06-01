@@ -5,7 +5,7 @@ exports[`test degludec ins:30 minutesAgo:300 1`] = `0.0125452`;
 exports[`test degludec weight:80 ins:30 all 1`] = `28.182071069999964`;
 
 exports[`test degludec weight:80 ins:30 all 2`] = `
-Array [
+[
   0,
   0.00000378,
   0.0000151,

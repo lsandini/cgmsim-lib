@@ -1,10 +1,7 @@
-import fetch from 'node-fetch';
 import * as moment from 'moment';
 import pino, { LevelWithSilent, TransportTargetOptions } from 'pino';
-import setupParams from './setupParams';
-import { Activity, DeviceStatus, Entry, Note, SimulationResult, TreatmentExpParam } from './Types';
+import { TreatmentExpParam } from './Types';
 import { load } from 'ts-dotenv';
-import pinoPretty from 'pino-pretty';
 import { TypeDateISO } from './TypeDateISO';
 
 const env = load({
@@ -148,94 +145,6 @@ export const getDeltaMinutes = (timestamp: number | TypeDateISO, now?: number | 
 	}
 	return Math.round(start.diff(moment(timestamp), 'seconds') / 60);
 };
-
-/**
- * Uploads data to Nightscout API
- * @param data - Data to upload (Entry, Activity, Note, or SimulationResult)
- * @param apiUrl - Nightscout API URL
- * @param apiSecret - API secret key
- * @returns Promise<void>
- */
-export function uploadBase(
-	data: Entry | Activity | Note | SimulationResult | DeviceStatus,
-	apiUrl: string,
-	apiSecret: string,
-): Promise<void> {
-	const isSecure = isHttps(apiUrl);
-	const { postParams } = setupParams(apiSecret, isSecure);
-	const jsonData = JSON.stringify(data);
-
-	return fetch(apiUrl, {
-		...postParams,
-		body: jsonData,
-	})
-		.then(() => {
-			logger.debug('[utils] Successfully updated Nightscout');
-		})
-		.catch((error) => {
-			logger.error('[utils] Error: %o', error);
-			throw new Error(error);
-		});
-}
-
-/**
- * Deletes data from the Nightscout API that is older than a specified number of days.
- * @param days - Number of days to retain data. Data older than this will be deleted.
- * @param apiUrl - Nightscout API URL.
- * @param apiSecret - Nightscout API secret.
- * @returns A promise that resolves when the deletion is complete.
- * @throws Error if the deletion fails.
- * @example
- * // Delete data older than 30 days from Nightscout
- * deleteBase(30, "https://nightscout.example.com/api/v1/treatments", "apiSecret123")
- *   .then(() => {
- *     console.log("Old data deleted successfully.");
- *   })
- *   .catch((error) => {
- *     console.error("Error deleting old data:", error);
- *   });
- */
-export function deleteBase(days: number, apiUrl: string, apiSecret: string): Promise<void> {
-	const isSecure = isHttps(apiUrl);
-	const { deleteParams } = setupParams(apiSecret, isSecure);
-	const date = new Date();
-	date.setDate(date.getDate() - days);
-	const isoDate = date.toISOString().split('T')[0];
-
-	return fetch(apiUrl + '?find[created_at][$lte]=' + isoDate, {
-		...deleteParams,
-	})
-		.then(() => {
-			logger.debug('[utils] Successfully deleted old data from Nightscout');
-		})
-		.catch((error) => {
-			logger.debug('[utils] %o', error);
-			throw new Error(error);
-		});
-}
-
-/**
- * Loads data from Nightscout API
- * @param apiUrl - Nightscout API URL
- * @param apiSecret - API secret key
- * @returns Promise with array of entries
- */
-export function loadBase(apiUrl: string, apiSecret: string): Promise<(Entry | Activity | Note | DeviceStatus)[]> {
-	const isSecure = isHttps(apiUrl);
-	const { getParams } = setupParams(apiSecret, isSecure);
-
-	return fetch(apiUrl, {
-		...getParams,
-	})
-		.then((response) => {
-			logger.debug('[utils] Successfully loaded from Nightscout');
-			return response.json();
-		})
-		.catch((error) => {
-			logger.debug('[utils] %o', error);
-			throw new Error(error);
-		});
-}
 
 /**
  * Rounds a number to 8 decimal places

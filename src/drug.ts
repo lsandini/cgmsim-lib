@@ -72,6 +72,47 @@ export const drugs = {
 	},
 };
 
+export type DrugKey = keyof typeof drugs;
+export type TreatmentExpParamGroups = Record<DrugKey, TreatmentExpParam[]>;
+
+const drugKeys = Object.keys(drugs) as DrugKey[];
+
+function createEmptyTreatmentExpParamGroups(): TreatmentExpParamGroups {
+	return drugKeys.reduce((groups, drug) => {
+		groups[drug] = [];
+		return groups;
+	}, {} as TreatmentExpParamGroups);
+}
+
+function toTreatmentExpParam(treatment: NSTreatmentParsed, weight: number, drug: DrugKey): TreatmentExpParam {
+	const selectedDrug = drugs[drug];
+	const duration = selectedDrug.duration(treatment.units, weight);
+	const peak = selectedDrug.peak(duration);
+	const units = selectedDrug.units(treatment.units);
+	const minutesAgo = treatment.minutesAgo;
+	return {
+		minutesAgo,
+		units,
+		duration,
+		peak,
+	};
+}
+
+export const groupTreatmentExpParams = (treatments: NSTreatmentParsed[], weight: number): TreatmentExpParamGroups => {
+	const groups = createEmptyTreatmentExpParamGroups();
+
+	treatments.forEach((treatment) => {
+		const treatmentDrug = treatment.drug?.toLowerCase();
+		const drug = drugKeys.find((key) => drugs[key].names.some((name) => name?.toLowerCase() === treatmentDrug));
+
+		if (drug) {
+			groups[drug].push(toTreatmentExpParam(treatment, weight, drug));
+		}
+	});
+
+	return groups;
+};
+
 /**
  * Calculates treatment exponential parameters for a specific drug
  * @param treatments - Array of parsed treatments
@@ -82,23 +123,9 @@ export const drugs = {
 export const getTreatmentExpParam = (
 	treatments: NSTreatmentParsed[],
 	weight: number,
-	drug: keyof typeof drugs,
+	drug: DrugKey,
 ): TreatmentExpParam[] => {
-	const selectedDrug = drugs[drug];
-	return treatments
-		.filter((treatment) => selectedDrug.names.some((name) => name?.toLowerCase() === treatment.drug?.toLowerCase()))
-		.map((treatment) => {
-			const duration = selectedDrug.duration(treatment.units, weight);
-			const peak = selectedDrug.peak(duration);
-			const units = selectedDrug.units(treatment.units);
-			const minutesAgo = treatment.minutesAgo;
-			return {
-				minutesAgo,
-				units,
-				duration,
-				peak,
-			};
-		});
+	return groupTreatmentExpParams(treatments, weight)[drug];
 };
 
 /**

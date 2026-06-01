@@ -1,5 +1,5 @@
 import { TreatmentExpParam, NSTreatmentParsed } from './Types';
-import { getTreatmentExpParam } from './drug';
+import { TreatmentExpParamGroups, groupTreatmentExpParams } from './drug';
 import logger, { getExpTreatmentActivity, roundTo8Decimals } from './utils';
 
 /**
@@ -21,8 +21,11 @@ const calculateCortisoneActivity = (treatments: TreatmentExpParam[]): number => 
  * @returns Final cortisone activity (halved and rounded to 8 decimal places)
  */
 export default function calculateFinalCortisoneActivity(treatments: NSTreatmentParsed[], weightKg: number): number {
-	// Get cortisone treatments and calculate their activity
-	const recentCortisoneTreatments = getTreatmentExpParam(treatments, weightKg, 'COR');
+	return calculateFinalCortisoneActivityFromParams(groupTreatmentExpParams(treatments, weightKg));
+}
+
+export function calculateFinalCortisoneActivityFromParams(drugParams: TreatmentExpParamGroups): number {
+	const recentCortisoneTreatments = drugParams.COR;
 	const cortisoneActivity =
 		recentCortisoneTreatments.length > 0 ? calculateCortisoneActivity(recentCortisoneTreatments) : 0;
 	logger.debug('[cortisone] Recent cortisone treatments:', {

@@ -3,6 +3,8 @@ import * as moment from 'moment';
 import { NSProfile, NSTreatment } from './Types';
 import { TypeDateISO } from './TypeDateISO';
 
+export type BasalAsBolus = { minutesAgo: number; insulin: number };
+
 /**
  * Gets profile switches from treatments within specified duration
  * @param treatments - Array of treatments
@@ -188,7 +190,7 @@ export function calculateBasalAsBoluses(
 	minutesStep: number,
 ) {
 	const steps = 60 / minutesStep;
-	const basalAsBoluses: { minutesAgo: number; insulin: number }[] = [];
+	const basalAsBoluses: BasalAsBolus[] = [];
 	const endDiaAction = moment().utc();
 	const startDiaAction = moment().add(-dia, 'hour').set({ minute: 0, second: 0, millisecond: 0 }).utc();
 	const duration = dia * 60;
@@ -200,15 +202,14 @@ export function calculateBasalAsBoluses(
 	const computedTempBasal = getTempBasal(treatments, duration);
 	const computedProfileSwitch = getProfileSwitch(treatments, duration);
 	const computedTemporaryOverride = getTemporaryOverride(treatments, duration, orderedProfiles);
+	const computedBasals = [...computedTempBasal, ...computedProfileSwitch, ...computedTemporaryOverride];
 
 	for (
 		let currentAction = startDiaAction;
 		currentAction.diff(endDiaAction) <= 0;
 		currentAction.add(minutesStep, 'minutes')
 	) {
-		const activeBasal = [...computedTempBasal, ...computedProfileSwitch, ...computedTemporaryOverride].find(
-			(t) => t.start.diff(currentAction) <= 0 && t.end.diff(currentAction) > 0,
-		);
+		const activeBasal = computedBasals.find((t) => t.start.diff(currentAction) <= 0 && t.end.diff(currentAction) > 0);
 
 		const insulin = (activeBasal ? activeBasal.insulin : getBasalFromProfiles(orderedProfiles, currentAction)) / steps;
 		basalAsBoluses.push({
@@ -220,11 +221,8 @@ export function calculateBasalAsBoluses(
 	return basalAsBoluses;
 }
 
-export default function (treatments: NSTreatment[], profiles: NSProfile[], dia: number, peak: number) {
-	const minutesStep = 5;
-	const basalAsBoluses = calculateBasalAsBoluses(treatments, profiles, dia, minutesStep);
-
-	const pumpBasalAct = basalAsBoluses.reduce(
+export function calculatePumpActivityFromBoluses(basalAsBoluses: BasalAsBolus[], dia: number, peak: number): number {
+	return basalAsBoluses.reduce(
 		(tot, entry) =>
 			tot +
 			getExpTreatmentActivity({
@@ -235,6 +233,26 @@ export default function (treatments: NSTreatment[], profiles: NSProfile[], dia: 
 			}),
 		0,
 	);
+}
+
+export function calculatePumpIOBFromBoluses(basalAsBoluses: BasalAsBolus[], dia: number, peak: number): number {
+	return basalAsBoluses.reduce(
+		(tot, entry) =>
+			tot +
+			getExpTreatmentIOB({
+				peak,
+				duration: dia * 60,
+				minutesAgo: entry.minutesAgo,
+				units: entry.insulin,
+			}),
+		0,
+	);
+}
+
+export default function (treatments: NSTreatment[], profiles: NSProfile[], dia: number, peak: number) {
+	const minutesStep = 5;
+	const basalAsBoluses = calculateBasalAsBoluses(treatments, profiles, dia, minutesStep);
+	const pumpBasalAct = calculatePumpActivityFromBoluses(basalAsBoluses, dia, peak);
 	logger.debug("[pump] the pump's basal activity is: %o", pumpBasalAct);
 	return pumpBasalAct;
 }
@@ -242,18 +260,7 @@ export default function (treatments: NSTreatment[], profiles: NSProfile[], dia: 
 export function calculatePumpIOB(treatments: NSTreatment[], profiles: NSProfile[], dia: number, peak: number): number {
 	const minutesStep = 5;
 	const basalAsBoluses = calculateBasalAsBoluses(treatments, profiles, dia, minutesStep);
-
-	const pumpBasalIOB = basalAsBoluses.reduce(
-		(tot, entry) =>
-			tot +
-			getExpTreatmentIOB({
-				peak,
-				duration: dia * 60,
-				minutesAgo: entry.minutesAgo,
-				units: entry.insulin,
-			}),
-		0,
-	);
+	const pumpBasalIOB = calculatePumpIOBFromBoluses(basalAsBoluses, dia, peak);
 
 	logger.debug("[pump] the pump's basal IOB is: %o", pumpBasalIOB);
 	return pumpBasalIOB;
@@ -261,18 +268,7 @@ export function calculatePumpIOB(treatments: NSTreatment[], profiles: NSProfile[
 export function calculateProfileIOB(profiles: NSProfile[], dia: number, peak: number): number {
 	const minutesStep = 5;
 	const basalAsBoluses = calculateBasalAsBoluses([], profiles, dia, minutesStep);
-
-	const profileBasalIOB = basalAsBoluses.reduce(
-		(tot, entry) =>
-			tot +
-			getExpTreatmentIOB({
-				peak,
-				duration: dia * 60,
-				minutesAgo: entry.minutesAgo,
-				units: entry.insulin,
-			}),
-		0,
-	);
+	const profileBasalIOB = calculatePumpIOBFromBoluses(basalAsBoluses, dia, peak);
 
 	logger.debug("[pump] the profile's basal IOB is: %o", profileBasalIOB);
 	return profileBasalIOB;

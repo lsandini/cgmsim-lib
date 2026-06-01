@@ -1,18 +1,26 @@
 import { NSTreatment, isMealBolusTreatment } from './Types';
 import logger, { getDeltaMinutes } from './utils';
 
-//const logger = pino();
-
 const FAST_THRESHOLD = 30;
 const EXTRA_FAST_MIN = 0.2;
 const EXTRA_FAST_MAX = 0.7;
 
 type SplittableMeal = { created_at: string; carbs?: number };
 
+type ActiveMeal = NSTreatment & {
+	minutesAgo: number;
+	carbs: number;
+};
+
 export type CarbSplit = {
 	fastCarbs: number;
 	slowCarbs: number;
 	extraFastRatio: number;
+};
+
+export type CarbCalculation = {
+	effect: number;
+	cob: number;
 };
 
 function fnv1a(input: string): number {
@@ -50,6 +58,144 @@ export function splitMealCarbs(meal: SplittableMeal): CarbSplit {
 	return { fastCarbs, slowCarbs, extraFastRatio };
 }
 
+function getActiveMeals(treatments: NSTreatment[] = [], carbAbsorptionTime: number): ActiveMeal[] {
+	return treatments
+		.filter(isMealBolusTreatment)
+		.filter((meal) => meal?.carbs > 0 && getDeltaMinutes(meal.created_at) <= carbAbsorptionTime)
+		.map((meal) => ({
+			...meal,
+			carbs: meal.carbs ?? 0,
+			minutesAgo: getDeltaMinutes(meal.created_at),
+		}))
+		.filter((meal) => meal.minutesAgo >= 0);
+}
+
+function calculateMealAbsorptionRate(meal: ActiveMeal, fastAbsorptionTime: number, slowAbsorptionTime: number): number {
+	const minutesAgo = meal.minutesAgo;
+	const { fastCarbs, slowCarbs } = splitMealCarbs(meal);
+
+	logger.debug('[carbs] Carb absorption split:', {
+		totalCarbs: meal.carbs,
+		fastCarbs,
+		slowCarbs,
+	});
+
+	let fastCarbRate = 0;
+	if (minutesAgo < fastAbsorptionTime / 2) {
+		const timeSquared = Math.pow(fastAbsorptionTime, 2);
+		fastCarbRate = (fastCarbs * 4 * minutesAgo) / timeSquared;
+	} else if (minutesAgo < fastAbsorptionTime) {
+		fastCarbRate = ((fastCarbs * 4) / fastAbsorptionTime) * (1 - minutesAgo / fastAbsorptionTime);
+	}
+	logger.debug('[carbs] Fast carb absorption rate:', fastCarbRate);
+
+	let slowCarbRate = 0;
+	if (minutesAgo < slowAbsorptionTime / 2) {
+		const timeSquared = Math.pow(slowAbsorptionTime, 2);
+		slowCarbRate = (slowCarbs * 4 * minutesAgo) / timeSquared;
+	} else if (minutesAgo < slowAbsorptionTime) {
+		slowCarbRate = ((slowCarbs * 4) / slowAbsorptionTime) * (1 - minutesAgo / slowAbsorptionTime);
+	}
+	logger.debug('[carbs] Slow carb absorption rate:', slowCarbRate);
+
+	return fastCarbRate + slowCarbRate;
+}
+
+function calculateMealCOB(meal: ActiveMeal, fastAbsorptionTime: number, slowAbsorptionTime: number): number {
+	const minutesAgo = meal.minutesAgo;
+	const { fastCarbs, slowCarbs } = splitMealCarbs(meal);
+
+	logger.debug('[carbs] Carb split:', {
+		totalCarbs: meal.carbs,
+		fastCarbs,
+		slowCarbs,
+	});
+
+	let remainingFastCarbs = 0;
+	if (minutesAgo < fastAbsorptionTime) {
+		if (minutesAgo < fastAbsorptionTime / 2) {
+			remainingFastCarbs = fastCarbs - ((2 * fastCarbs) / Math.pow(fastAbsorptionTime, 2)) * Math.pow(minutesAgo, 2);
+		} else {
+			remainingFastCarbs =
+				2 * fastCarbs -
+				((4 * fastCarbs) / fastAbsorptionTime) * (minutesAgo - Math.pow(minutesAgo, 2) / (2 * fastAbsorptionTime));
+		}
+	}
+	remainingFastCarbs = Math.max(0, remainingFastCarbs);
+	logger.debug('[carbs] Remaining fast carbs:', remainingFastCarbs);
+
+	let remainingSlowCarbs = 0;
+	if (minutesAgo < slowAbsorptionTime) {
+		if (minutesAgo < slowAbsorptionTime / 2) {
+			remainingSlowCarbs = slowCarbs - ((2 * slowCarbs) / Math.pow(slowAbsorptionTime, 2)) * Math.pow(minutesAgo, 2);
+		} else {
+			remainingSlowCarbs =
+				2 * slowCarbs -
+				((4 * slowCarbs) / slowAbsorptionTime) * (minutesAgo - Math.pow(minutesAgo, 2) / (2 * slowAbsorptionTime));
+		}
+	}
+	remainingSlowCarbs = Math.max(0, remainingSlowCarbs);
+	logger.debug('[carbs] Remaining slow carbs:', remainingSlowCarbs);
+
+	return remainingFastCarbs + remainingSlowCarbs;
+}
+
+function getAbsorptionTimes(carbAbsorptionTime: number) {
+	return {
+		fastAbsorptionTime: carbAbsorptionTime / 6,
+		slowAbsorptionTime: carbAbsorptionTime / 1.5,
+	};
+}
+
+function calculateMealTotals(activeMeals: ActiveMeal[], carbAbsorptionTime: number) {
+	const { fastAbsorptionTime, slowAbsorptionTime } = getAbsorptionTimes(carbAbsorptionTime);
+
+	return activeMeals.reduce(
+		(total, meal) => ({
+			totalCarbRate: total.totalCarbRate + calculateMealAbsorptionRate(meal, fastAbsorptionTime, slowAbsorptionTime),
+			cob: total.cob + calculateMealCOB(meal, fastAbsorptionTime, slowAbsorptionTime),
+		}),
+		{ totalCarbRate: 0, cob: 0 },
+	);
+}
+
+export function calculateCarbEffectAndCOB(
+	treatments: NSTreatment[] = [],
+	carbAbsorptionTime: number,
+	isf: number,
+	cr: number,
+): CarbCalculation {
+	const activeMeals = getActiveMeals(treatments, carbAbsorptionTime);
+
+	logger.debug('[carbs] Active meals in absorption window:', activeMeals);
+
+	if (activeMeals.length > 0) {
+		const latestMeal = activeMeals.reduce((a, b) => (a.minutesAgo <= b.minutesAgo ? a : b));
+		const split = splitMealCarbs(latestMeal);
+		logger.debug(
+			'[carbs] Latest meal split: %dg carbs at %s (%dm ago) -> fast %sg / slow %sg (extraFastRatio %s)',
+			latestMeal.carbs,
+			latestMeal.created_at,
+			latestMeal.minutesAgo,
+			split.fastCarbs.toFixed(2),
+			split.slowCarbs.toFixed(2),
+			split.extraFastRatio.toFixed(3),
+		);
+	}
+
+	const totals = calculateMealTotals(activeMeals, carbAbsorptionTime);
+	const bloodGlucoseImpact = (isf / 18 / cr) * totals.totalCarbRate;
+
+	logger.debug('[carbs] Total carb absorption rate:', totals.totalCarbRate);
+	logger.debug('[carbs] Predicted blood glucose impact per minute:', bloodGlucoseImpact);
+	logger.debug('[carbs] Total Carbs On Board:', totals.cob);
+
+	return {
+		effect: bloodGlucoseImpact,
+		cob: totals.cob,
+	};
+}
+
 /**
  * Calculates blood glucose impact from active carbohydrates
  * @param treatments - Array of treatments containing carb intake
@@ -64,77 +210,13 @@ export default function calculateCarbEffect(
 	isf: number,
 	cr: number,
 ): number {
-	const isfMmol = isf / 18; // Convert ISF to (mmol/L)/U
-
-	// Get active meals within absorption time window
-	const activeMeals = treatments
-		?.filter(isMealBolusTreatment)
-		.filter((meal) => meal?.carbs > 0 && getDeltaMinutes(meal.created_at) <= carbAbsorptionTime)
-		.map((meal) => ({
-			...meal,
-			minutesAgo: getDeltaMinutes(meal.created_at),
-		}))
-		.filter((meal) => meal.minutesAgo >= 0);
-
-	logger.debug('[carbs] Active meals in absorption window:', activeMeals);
-
-	if (activeMeals.length > 0) {
-		const latestMeal = activeMeals.reduce((a, b) => (a.minutesAgo <= b.minutesAgo ? a : b));
-		const split = splitMealCarbs(latestMeal);
-		logger.debug(
-			'[carbs] Latest meal split: %dg carbs at %s (%dm ago) → fast %sg / slow %sg (extraFastRatio %s)',
-			latestMeal.carbs,
-			latestMeal.created_at,
-			latestMeal.minutesAgo,
-			split.fastCarbs.toFixed(2),
-			split.slowCarbs.toFixed(2),
-			split.extraFastRatio.toFixed(3),
-		);
-	}
-
-	// Define absorption times for different carb types
-	const fastAbsorptionTime = carbAbsorptionTime / 6; // 60 min for default
-	const slowAbsorptionTime = carbAbsorptionTime / 1.5; // 240 min for default
-
-	// Calculate absorption rates for each meal
-	const mealAbsorptionRates = activeMeals.map((meal) => {
-		const minutesAgo = meal.minutesAgo;
-		const totalCarbs = meal.carbs;
-
-		const { fastCarbs, slowCarbs } = splitMealCarbs(meal);
-
-		logger.debug('[carbs] Carb absorption split:', {
-			totalCarbs,
-			fastCarbs,
-			slowCarbs,
-		});
-
-		// Calculate absorption rates for fast carbs
-		let fastCarbRate = 0;
-		if (minutesAgo < fastAbsorptionTime / 2) {
-			const timeSquared = Math.pow(fastAbsorptionTime, 2);
-			fastCarbRate = (fastCarbs * 4 * minutesAgo) / timeSquared;
-		} else if (minutesAgo < fastAbsorptionTime) {
-			fastCarbRate = ((fastCarbs * 4) / fastAbsorptionTime) * (1 - minutesAgo / fastAbsorptionTime);
-		}
-		logger.debug('[carbs] Fast carb absorption rate:', fastCarbRate);
-
-		// Calculate absorption rates for slow carbs
-		let slowCarbRate = 0;
-		if (minutesAgo < slowAbsorptionTime / 2) {
-			const timeSquared = Math.pow(slowAbsorptionTime, 2);
-			slowCarbRate = (slowCarbs * 4 * minutesAgo) / timeSquared;
-		} else if (minutesAgo < slowAbsorptionTime) {
-			slowCarbRate = ((slowCarbs * 4) / slowAbsorptionTime) * (1 - minutesAgo / slowAbsorptionTime);
-		}
-		logger.debug('[carbs] Slow carb absorption rate:', slowCarbRate);
-
-		return fastCarbRate + slowCarbRate;
-	});
-
-	const totalCarbRate = mealAbsorptionRates.reduce((total, rate) => total + rate, 0);
-
-	const bloodGlucoseImpact = (isfMmol / cr) * totalCarbRate;
+	const activeMeals = getActiveMeals(treatments, carbAbsorptionTime);
+	const { fastAbsorptionTime, slowAbsorptionTime } = getAbsorptionTimes(carbAbsorptionTime);
+	const totalCarbRate = activeMeals.reduce(
+		(total, meal) => total + calculateMealAbsorptionRate(meal, fastAbsorptionTime, slowAbsorptionTime),
+		0,
+	);
+	const bloodGlucoseImpact = (isf / 18 / cr) * totalCarbRate;
 
 	logger.debug('[carbs] Total carb absorption rate:', totalCarbRate);
 	logger.debug('[carbs] Predicted blood glucose impact per minute:', bloodGlucoseImpact);
@@ -149,72 +231,13 @@ export default function calculateCarbEffect(
  * @returns Total remaining unabsorbed carbs in grams
  */
 export function calculateCarbsCOB(carbAbsorptionTime: number, treatments: NSTreatment[] = []): number {
-	// Get active meals within absorption time window
-	const activeMeals = treatments
-		?.filter(isMealBolusTreatment)
-		.filter((meal) => meal?.carbs > 0 && getDeltaMinutes(meal.created_at) <= carbAbsorptionTime)
-		.map((meal) => ({
-			...meal,
-			minutesAgo: getDeltaMinutes(meal.created_at),
-		}))
-		.filter((meal) => meal.minutesAgo >= 0);
+	const activeMeals = getActiveMeals(treatments, carbAbsorptionTime);
+	const { fastAbsorptionTime, slowAbsorptionTime } = getAbsorptionTimes(carbAbsorptionTime);
+	const cob = activeMeals.reduce(
+		(total, meal) => total + calculateMealCOB(meal, fastAbsorptionTime, slowAbsorptionTime),
+		0,
+	);
 
-	logger.debug('[carbs] Active meals in absorption window:', activeMeals);
-
-	// Define absorption times for different carb types
-	const fastAbsorptionTime = carbAbsorptionTime / 6; // 60 min for default
-	const slowAbsorptionTime = carbAbsorptionTime / 1.5; // 240 min for default
-
-	// Calculate remaining carbs for each meal
-	const remainingCarbs = activeMeals.map((meal) => {
-		const minutesAgo = meal.minutesAgo;
-		const totalCarbs = meal.carbs;
-
-		const { fastCarbs, slowCarbs } = splitMealCarbs(meal);
-
-		logger.debug('[carbs] Carb split:', {
-			totalCarbs,
-			fastCarbs,
-			slowCarbs,
-		});
-
-		// Calculate remaining fast carbs
-		let remainingFastCarbs = 0;
-		if (minutesAgo < fastAbsorptionTime) {
-			if (minutesAgo < fastAbsorptionTime / 2) {
-				// First half formula
-				remainingFastCarbs = fastCarbs - ((2 * fastCarbs) / Math.pow(fastAbsorptionTime, 2)) * Math.pow(minutesAgo, 2);
-			} else {
-				// Second half formula
-				remainingFastCarbs =
-					2 * fastCarbs -
-					((4 * fastCarbs) / fastAbsorptionTime) * (minutesAgo - Math.pow(minutesAgo, 2) / (2 * fastAbsorptionTime));
-			}
-		}
-		remainingFastCarbs = Math.max(0, remainingFastCarbs);
-		logger.debug('[carbs] Remaining fast carbs:', remainingFastCarbs);
-
-		// Calculate remaining slow carbs
-		let remainingSlowCarbs = 0;
-		if (minutesAgo < slowAbsorptionTime) {
-			if (minutesAgo < slowAbsorptionTime / 2) {
-				// First half formula
-				remainingSlowCarbs = slowCarbs - ((2 * slowCarbs) / Math.pow(slowAbsorptionTime, 2)) * Math.pow(minutesAgo, 2);
-			} else {
-				// Second half formula
-				remainingSlowCarbs =
-					2 * slowCarbs -
-					((4 * slowCarbs) / slowAbsorptionTime) * (minutesAgo - Math.pow(minutesAgo, 2) / (2 * slowAbsorptionTime));
-			}
-		}
-		remainingSlowCarbs = Math.max(0, remainingSlowCarbs);
-		logger.debug('[carbs] Remaining slow carbs:', remainingSlowCarbs);
-
-		return remainingFastCarbs + remainingSlowCarbs;
-	});
-
-	const totalCOB = remainingCarbs.reduce((total, cob) => total + cob, 0);
-	logger.debug('[carbs] Total Carbs On Board:', totalCOB);
-
-	return totalCOB;
+	logger.debug('[carbs] Total Carbs On Board:', cob);
+	return cob;
 }

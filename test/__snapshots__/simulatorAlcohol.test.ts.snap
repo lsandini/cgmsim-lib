@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`simulatorAlcohol test start from 100 @12:00Z with deg22(-6h) + alc 1U(+1h) + alc 4U(+2h) 1`] = `
-Array [
+[
   180,
   180,
   180,
@@ -294,7 +294,7 @@ Array [
 `;
 
 exports[`simulatorAlcohol test start from 100 @12:00Z with deg22(-6h) + alc 1U(+1h) + alc 4U(+2h) 2`] = `
-Array [
+[
   1,
   1,
   1,
@@ -587,7 +587,7 @@ Array [
 `;
 
 exports[`simulatorAlcohol test start from 100 @12:00Z with deg23(-4h) + alc 2U(+1h) 1`] = `
-Array [
+[
   101,
   102,
   102,
@@ -880,7 +880,7 @@ Array [
 `;
 
 exports[`simulatorAlcohol test start from 100 @12:00Z with deg23(-4h) + alc 2U(+1h) 2`] = `
-Array [
+[
   1,
   1,
   1,

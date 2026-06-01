@@ -3,7 +3,6 @@
   "entryPoints": ["./src/index.ts"],
   "plugin": ["typedoc-plugin-markdown", "typedoc-plugin-missing-exports"],
   "theme": "default",
-  "internalModule": "types",
   "readme": "none",
   "includeVersion": true,
   "out": "doc"

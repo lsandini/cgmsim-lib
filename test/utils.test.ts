@@ -1,14 +1,9 @@
-import { deleteBase, isHttps, removeTrailingSlash } from '../src/utils';
+import { isHttps, removeTrailingSlash } from '../src/utils';
 import * as utils from '../src/utils';
-import fetch from 'node-fetch';
-import { loadBase, uploadBase, roundTo8Decimals, getExpTreatmentActivity, getDeltaMinutes } from '../src/utils';
+import { roundTo8Decimals, getExpTreatmentActivity, getDeltaMinutes } from '../src/utils';
 import { Entry } from 'src/Types';
 import * as moment from 'moment';
 import { TypeDateISO } from '../src/TypeDateISO';
-
-// Mock definition for TypeDateISO if it's not exported
-
-jest.mock('node-fetch');
 
 // testing pino stuff
 // ======================
@@ -192,97 +187,6 @@ describe('test utils', () => {
         },
       ]);
     });
-  });
-
-  // testing loadBase function mocking the rest API call with MSW from mswjs.io
-
-  // Write your test
-  describe('loadBase function', () => {
-    it('should load data from the Nightscout API', async () => {
-      const nsUrlApi = 'https://nightscout-api.com';
-      const apiSecret = 'yourApiSecret';
-      const data = { key: 'mocked' };
-      (fetch as unknown as jest.Mock).mockResolvedValue({
-        json: async () => data,
-      });
-      // Use your loadBase function, which will now use the mocked response
-      try {
-        const result = await loadBase(nsUrlApi, apiSecret);
-
-        // Perform assertions based on the expected behavior
-        expect(result).toEqual(data);
-      } catch (error) {
-        // Handle any unexpected errors
-        fail(error);
-      }
-    });
-  });
-});
-
-jest.mock('node-fetch');
-
-describe('uploadBase function', () => {
-  it('should upload data to the Nightscout API using POST', async () => {
-    const nsUrlApi = 'https://nightscout-api.com';
-    const apiSecret = 'yourApiSecret';
-    const testData: Entry = {
-      sgv: 161,
-      direction: 'Flat',
-      type: 'sgv',
-      dateString: '2024-01-17T17:05:07.424Z',
-      date: 1705511107424,
-    };
-
-    // Mock the fetch function to resolve with a success response
-    (fetch as unknown as jest.Mock).mockResolvedValue({
-      json: async () => testData,
-    });
-
-    // Use your uploadBase function, which will now use the mocked response
-    try {
-      await uploadBase(testData, nsUrlApi, apiSecret);
-
-      // Verify that the fetch function was called with the correct parameters for a POST request
-      expect(fetch).toHaveBeenCalledWith(
-        expect.any(String), // Match any URL
-        expect.objectContaining({
-          method: 'POST',
-          headers: expect.any(Object),
-          body: JSON.stringify(testData),
-        }),
-      );
-
-      // Optionally, you can add more assertions based on the expected behavior
-    } catch (error) {
-      // Handle any unexpected errors
-      fail(error);
-    }
-  });
-});
-
-describe('deleteBase function', () => {
-  it('should upload data to the Nightscout API using POST', async () => {
-    const nsUrlApi = 'https://nightscout-api.com';
-    const apiSecret = 'yourApiSecret';
-
-    // Use your uploadBase function, which will now use the mocked response
-    try {
-      await deleteBase(2, nsUrlApi, apiSecret);
-
-      // Verify that the fetch function was called with the correct parameters for a POST request
-      expect(fetch).toHaveBeenCalledWith(
-        expect.any(String), // Match any URL
-        expect.objectContaining({
-          method: 'DELETE',
-          headers: expect.any(Object),
-        }),
-      );
-
-      // Optionally, you can add more assertions based on the expected behavior
-    } catch (error) {
-      // Handle any unexpected errors
-      fail(error);
-    }
   });
 });
 

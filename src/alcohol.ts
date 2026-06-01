@@ -1,5 +1,5 @@
 import { TreatmentExpParam, NSTreatmentParsed, GenderType } from './Types';
-import { getTreatmentExpParam } from './drug';
+import { TreatmentExpParamGroups, groupTreatmentExpParams } from './drug';
 import logger, { getExpTreatmentActivity, roundTo8Decimals } from './utils';
 
 /**
@@ -87,8 +87,16 @@ export default function calculateTotalActivity(
 	weightKg: number,
 	gender: GenderType,
 ): number {
+	return calculateTotalActivityFromParams(groupTreatmentExpParams(treatments, weightKg), weightKg, gender);
+}
+
+export function calculateTotalActivityFromParams(
+	drugParams: TreatmentExpParamGroups,
+	weightKg: number,
+	gender: GenderType,
+): number {
 	// Calculate activity from alcohol treatments
-	const alcoholTreatments = getTreatmentExpParam(treatments, weightKg, 'ALC');
+	const alcoholTreatments = drugParams.ALC;
 	const alcoholActivity =
 		alcoholTreatments.length > 0 ? calculateTotalAlcoholActivity(alcoholTreatments, weightKg, gender) : 0;
 	logger.debug('[alcohol] Alcohol treatments and activity: %o', {
@@ -97,7 +105,7 @@ export default function calculateTotalActivity(
 	});
 
 	// Calculate activity from beer treatments
-	const beerTreatments = getTreatmentExpParam(treatments, weightKg, 'BEER');
+	const beerTreatments = drugParams.BEER;
 	const beerActivity = beerTreatments.length > 0 ? calculateTotalAlcoholActivity(beerTreatments, weightKg, gender) : 0;
 	logger.debug('[alcohol] Beer treatments and activity: %o', {
 		beerTreatments,
