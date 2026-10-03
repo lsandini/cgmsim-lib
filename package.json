@@ -7,11 +7,27 @@
   "files": [
     "/dist"
   ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./core": {
+      "types": "./dist/core/index.d.ts",
+      "default": "./dist/core/index.js"
+    },
+    "./ns": {
+      "types": "./dist/ns/index.d.ts",
+      "default": "./dist/ns/index.js"
+    }
+  },
   "engines": {
     "node": ">=16.0.0"
   },
   "scripts": {
     "build": "tsc -p tsconfig-build.json",
+    "test:core": "jest test/core",
+    "test:ns": "jest test/ns",
     "doc": "typedoc",
     "lint": "eslint",
     "test": "jest --coverage --coverageReporters json-summary",

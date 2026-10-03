@@ -100,29 +100,25 @@ export declare type TypedParameterValues<
 	Parameters extends ParameterDescriptions,
 	CommonParameters extends ParameterDescriptions,
 > = {
-	[id in keyof Parameters]: // if instead of a default value we have another configuration...
-	Parameters[id]['default'] extends ParameterDescriptions
+	[id in keyof Parameters]: Parameters[id]['default'] extends ParameterDescriptions // if instead of a default value we have another configuration...
 		? {
 				// ... this parameter is an object -> find out types of its entries
 				[key in keyof Parameters[id]['default']]: Parameters[id]['default'][key]['default'];
-		  }
+			}
 		: // otherwise, this parameter is scalar -> use type of its default value
-		  Parameters[id]['default'];
+			Parameters[id]['default'];
 } & {
-	[id in keyof CommonParameters]: // if instead of a default value we have another configuration...
-	CommonParameters[id]['default'];
+	[id in keyof CommonParameters]: CommonParameters[id]['default']; // if instead of a default value we have another configuration...
 };
 
 export declare type EvaluatedParameterValues<
 	Parameters extends ParameterDescriptions,
 	CommonParameters extends ParameterDescriptions,
 > = {
-	[id in keyof Parameters]: // if instead of a default value we have another configuration...
-	Parameters[id]['default'] extends DailyProfile
+	[id in keyof Parameters]: Parameters[id]['default'] extends DailyProfile // if instead of a default value we have another configuration...
 		? number
 		: // otherwise, this parameter is scalar -> use type of its default value
-		  Parameters[id]['default'];
+			Parameters[id]['default'];
 } & {
-	[id in keyof CommonParameters]: // if instead of a default value we have another configuration...
-	CommonParameters[id]['default'];
+	[id in keyof CommonParameters]: CommonParameters[id]['default']; // if instead of a default value we have another configuration...
 };

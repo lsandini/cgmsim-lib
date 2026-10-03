@@ -24,23 +24,11 @@ export function RK4(
 	dt: number,
 ) {
 	const k1 = timesScalar(derivatives(t, x), dt);
-	const k2 = timesScalar(
-		derivatives(t + dt / 2, vectorSum([x, timesScalar(k1, 1 / 2)])),
-		dt,
-	);
-	const k3 = timesScalar(
-		derivatives(t + dt / 2, vectorSum([x, timesScalar(k2, 1 / 2)])),
-		dt,
-	);
+	const k2 = timesScalar(derivatives(t + dt / 2, vectorSum([x, timesScalar(k1, 1 / 2)])), dt);
+	const k3 = timesScalar(derivatives(t + dt / 2, vectorSum([x, timesScalar(k2, 1 / 2)])), dt);
 	const k4 = timesScalar(derivatives(t + dt, vectorSum([x, k3])), dt);
 
-	return vectorSum([
-		x,
-		timesScalar(k1, 1 / 6),
-		timesScalar(k2, 1 / 3),
-		timesScalar(k3, 1 / 3),
-		timesScalar(k4, 1 / 6),
-	]);
+	return vectorSum([x, timesScalar(k1, 1 / 6), timesScalar(k2, 1 / 3), timesScalar(k3, 1 / 3), timesScalar(k4, 1 / 6)]);
 }
 
 // compute sum of n vectors

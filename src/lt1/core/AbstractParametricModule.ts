@@ -16,8 +16,7 @@ import ParametricModule, {
 export default abstract class AbstractParametricModule<
 	Parameters extends ParameterDescriptions,
 	CommonParameters extends ParameterDescriptions = {},
-> implements ParametricModule
-{
+> implements ParametricModule {
 	/** module parameter values according to description */
 	_parameters = {} as TypedParameterValues<Parameters, CommonParameters>;
 

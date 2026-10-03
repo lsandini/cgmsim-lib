@@ -1,4 +1,4 @@
-/** 
+/**
  * This file is part of LoopInsighT1, an open source tool to
  * simulate closed-loop glycemic control in type 1 diabetes.
  * Distributed under the MIT software license.
@@ -9,12 +9,12 @@
  * An exercise unit.
  */
 declare type Exercise = {
-    /** Time the exercise unit starts */
-    start: Date
-    /** Duration of exercise unit in minutes */
-    duration: number
-    /** Intensity of exercise unit in % */
-    intensity: number
-}
+	/** Time the exercise unit starts */
+	start: Date;
+	/** Duration of exercise unit in minutes */
+	duration: number;
+	/** Intensity of exercise unit in % */
+	intensity: number;
+};
 
-export default Exercise
+export default Exercise;

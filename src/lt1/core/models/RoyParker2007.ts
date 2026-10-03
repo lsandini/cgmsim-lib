@@ -174,13 +174,13 @@ export class RoyParker2007
 			Ggly:
 				u3 === 0
 					? // after exercise, decay at time constant T1
-					  -x.Ggly / params.T1
+						-x.Ggly / params.T1
 					: // during exercise, check if A is above threshold
-					  x.A >= ATH
-					  ? // if so, increase at rate k
-					    params.k
-					  : // otherwise, do not increase further
-					    0,
+						x.A >= ATH
+						? // if so, increase at rate k
+							params.k
+						: // otherwise, do not increase further
+							0,
 
 			CurrentMealCarbs: 0,
 			CurrentMealStart: 0,

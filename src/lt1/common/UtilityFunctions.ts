@@ -1,10 +1,9 @@
-/** 
+/**
  * This file is part of LoopInsighT1, an open source tool to
  * simulate closed-loop glycemic control in type 1 diabetes.
  * Distributed under the MIT software license.
  * See https://lt1.org for further information.
  */
-
 
 /**
  * generate a (uniformly distributed) random integer within given interval
@@ -13,7 +12,7 @@
  * @returns {number} random integer
  */
 export function generateRandomInt(min: number, max: number): number {
-    return Math.floor(Math.random() * (max - min) + min)
+	return Math.floor(Math.random() * (max - min) + min);
 }
 
 /**
@@ -23,17 +22,14 @@ export function generateRandomInt(min: number, max: number): number {
  * @param {number} max - upper boundary
  * @returns {number} input within boundaries
  */
-export function limit(input: number, 
-    min: number = -Infinity, 
-    max: number = +Infinity): number {
-
-    if (input > max) {
-        return max
-    }
-    if (input < min) {
-        return min
-    }
-    return input
+export function limit(input: number, min: number = -Infinity, max: number = +Infinity): number {
+	if (input > max) {
+		return max;
+	}
+	if (input < min) {
+		return min;
+	}
+	return input;
 }
 
 /**
@@ -43,7 +39,7 @@ export function limit(input: number,
  * @returns {number} quantized input value
  */
 export function quantize(input: number, increment: number): number {
-    return increment > 0 ? increment * Math.round(input / increment) : input
+	return increment > 0 ? increment * Math.round(input / increment) : input;
 }
 
 /**
@@ -53,6 +49,5 @@ export function quantize(input: number, increment: number): number {
  * @returns {number} quantized input value
  */
 export function quantizeFloor(input: number, increment: number): number {
-    return increment > 0 ? increment * Math.floor(input / increment) : input
+	return increment > 0 ? increment * Math.floor(input / increment) : input;
 }
-
