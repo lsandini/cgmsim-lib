@@ -40,19 +40,26 @@ export const drugs = {
 		names: ['pre', 'cor'],
 		peak: (duration: number) => duration / 3,
 		units: (units: number) => units,
-		duration: (units: number, weight: number) => (12 + (16 * units) / weight) * 60,
+		duration: (units: number, weight: number) => (16 + (12 * units) / weight) * 60,
 	},
 	ALC: {
 		names: ['alc'],
-		peak: () => 180,
-		units: (units: number) => units,
-		duration: () => 360,
+		peak: (duration: number) => duration / 2.5,
+		units: (drinks: number) => drinks * 12,
+		duration: (drinks: number, weight: number) => {
+			const _duration = ((40 * drinks) / weight) * 100;
+			return _duration > 240 ? _duration : 240;
+		},
 	},
 	BEER: {
 		names: ['bee', 'bir'],
-		peak: () => 180,
-		units: (units: number) => units,
-		duration: () => 360,
+		peak: (duration: number) => duration / 2.5,
+		units: (dL: number) => (dL * 12) / 3.3,
+		duration: (dL: number, weight: number) => {
+			const drinks = dL / 3.3;
+			const _duration = ((40 * drinks) / weight) * 100;
+			return _duration > 240 ? _duration : 240;
+		},
 	},
 };
 
@@ -77,8 +84,8 @@ export const transformNoteTreatmentsDrug = (treatments: NSTreatment[]): NSTreatm
 			if (!matchedDrug) return null;
 
 			const [drugKey] = matchedDrug;
-			const unitsMatch = notes.match(/\d+(\.\d+)?/);
-			const units = unitsMatch ? parseFloat(unitsMatch[0]) : 0;
+			const lastSpaceIndex = notes.lastIndexOf(' ');
+			const units = parseFloat(treatment.notes.slice(lastSpaceIndex)) || 0;
 
 			return {
 				drug: drugKey,

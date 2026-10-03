@@ -14,7 +14,7 @@ describe('test toujeo', () => {
         {
           units: 30,
           minutesAgo: 300,
-          drug: 'Tou',
+          drug: 'TOU',
         },
       ],
       weight,
@@ -33,7 +33,7 @@ describe('test toujeo', () => {
           {
             units: 30,
             minutesAgo: i,
-            drug: 'Tou',
+            drug: 'TOU',
           },
         ],
         weight,
@@ -66,7 +66,7 @@ describe('test toujeo', () => {
         {
           units,
           minutesAgo: 5,
-          drug: 'Tou',
+          drug: 'TOU',
         },
       ],
       weight,
@@ -76,7 +76,7 @@ describe('test toujeo', () => {
         {
           units,
           minutesAgo: 40,
-          drug: 'Tou',
+          drug: 'TOU',
         },
       ],
       weight,
@@ -94,7 +94,7 @@ describe('test toujeo', () => {
         {
           units,
           minutesAgo: toujeoPeakHours * 60 + 10,
-          drug: 'Tou',
+          drug: 'TOU',
         },
       ],
       weight,
@@ -104,7 +104,7 @@ describe('test toujeo', () => {
         {
           units,
           minutesAgo: toujeoPeakHours * 60,
-          drug: 'Tou',
+          drug: 'TOU',
         },
       ],
       weight,
@@ -114,7 +114,7 @@ describe('test toujeo', () => {
         {
           units,
           minutesAgo: toujeoPeakHours * 60 - 10,
-          drug: 'Tou',
+          drug: 'TOU',
         },
       ],
       weight,
@@ -131,7 +131,7 @@ describe('test toujeo', () => {
         {
           units,
           minutesAgo: 60 * 6,
-          drug: 'Tou',
+          drug: 'TOU',
         },
       ],
       weight,
@@ -141,7 +141,7 @@ describe('test toujeo', () => {
         {
           units,
           minutesAgo: 60 * 6,
-          drug: 'Tou',
+          drug: 'TOU',
         },
       ],
       weight,
@@ -151,7 +151,7 @@ describe('test toujeo', () => {
         {
           units,
           minutesAgo: 60 * 7,
-          drug: 'Tou',
+          drug: 'TOU',
         },
       ],
       weight,

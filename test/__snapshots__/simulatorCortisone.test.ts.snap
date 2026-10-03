@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`simulatorCortisone test start from 150 @12:00Z with deg22(-4h) + cor 40mg(+1h) + bolus 3u(+3h) 1`] = `
-Array [
+[
   151,
   152,
   153,

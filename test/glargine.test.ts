@@ -14,7 +14,7 @@ describe('test glargine', () => {
         {
           units: 30,
           minutesAgo: 300,
-          drug: 'Gla',
+          drug: 'GLA',
         },
       ],
       weight,
@@ -32,7 +32,7 @@ describe('test glargine', () => {
           {
             units: 30,
             minutesAgo: i,
-            drug: 'Gla',
+            drug: 'GLA',
           },
         ],
         weight,
@@ -65,7 +65,7 @@ describe('test glargine', () => {
         {
           units,
           minutesAgo: 5,
-          drug: 'Gla',
+          drug: 'GLA',
         },
       ],
       weight,
@@ -75,7 +75,7 @@ describe('test glargine', () => {
         {
           units,
           minutesAgo: 40,
-          drug: 'Gla',
+          drug: 'GLA',
         },
       ],
       weight,
@@ -93,7 +93,7 @@ describe('test glargine', () => {
         {
           units,
           minutesAgo: glarginePeakHours * 60 + 10,
-          drug: 'Gla',
+          drug: 'GLA',
         },
       ],
       weight,
@@ -103,7 +103,7 @@ describe('test glargine', () => {
         {
           units,
           minutesAgo: glarginePeakHours * 60,
-          drug: 'Gla',
+          drug: 'GLA',
         },
       ],
       weight,
@@ -113,7 +113,7 @@ describe('test glargine', () => {
         {
           units,
           minutesAgo: glarginePeakHours * 60 - 10,
-          drug: 'Gla',
+          drug: 'GLA',
         },
       ],
       weight,

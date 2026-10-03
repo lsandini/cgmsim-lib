@@ -31,7 +31,7 @@ describe('test detemir', () => {
         {
           units: 30,
           minutesAgo: 300,
-          drug: 'Det',
+          drug: 'DET',
         },
       ],
       weight,
@@ -50,7 +50,7 @@ describe('test detemir', () => {
           {
             units: 30,
             minutesAgo: i,
-            drug: 'Det',
+            drug: 'DET',
           },
         ],
         weight,
@@ -83,7 +83,7 @@ describe('test detemir', () => {
         {
           units,
           minutesAgo: 5,
-          drug: 'Det',
+          drug: 'DET',
         },
       ],
       weight,
@@ -93,7 +93,7 @@ describe('test detemir', () => {
         {
           units,
           minutesAgo: 40,
-          drug: 'Det',
+          drug: 'DET',
         },
       ],
       weight,
@@ -110,7 +110,7 @@ describe('test detemir', () => {
         {
           units,
           minutesAgo: detemirPeakHours * 60 + 10,
-          drug: 'Det',
+          drug: 'DET',
         },
       ],
       weight,
@@ -120,7 +120,7 @@ describe('test detemir', () => {
         {
           units,
           minutesAgo: detemirPeakHours * 60,
-          drug: 'Det',
+          drug: 'DET',
         },
       ],
       weight,
@@ -130,7 +130,7 @@ describe('test detemir', () => {
         {
           units,
           minutesAgo: detemirPeakHours * 60 - 10,
-          drug: 'Det',
+          drug: 'DET',
         },
       ],
       weight,

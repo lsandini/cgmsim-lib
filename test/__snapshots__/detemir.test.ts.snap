@@ -3,7 +3,7 @@
 exports[`test detemir weight:80 ins:30 all 1`] = `29.99301130999999`;
 
 exports[`test detemir weight:80 ins:30 all 2`] = `
-Array [
+[
   0,
   0.00001259,
   0.00005028,

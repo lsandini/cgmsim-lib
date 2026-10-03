@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`simulator test start from 100 @13:00Z with deg23 + cor 40mg @14:00 + bolus 5u @14.30 1`] = `
-Array [
+[
   114,
   114,
   114,
@@ -1448,7 +1448,7 @@ Array [
 exports[`simulator test start from 100 @13:00Z with deg23 + cor 40mg @14:00 + bolus 5u @14.30 2`] = `0`;
 
 exports[`simulator test start from 250 13:00Z and tou 14u + bolus 8U @14:00 1`] = `
-Array [
+[
   250,
   250,
   250,
@@ -1503,7 +1503,7 @@ Array [
 exports[`simulator test start from 250 13:00Z and tou 14u + bolus 8U @14:00 2`] = `96`;
 
 exports[`simulator test start from 274 22:10 + 14u tou + 1`] = `
-Array [
+[
   "Tou 14U  2022-05-29T22:10:00.000Z",
   "Result 276 2022-05-29T22:10:00.000Z",
   "Result 278 2022-05-29T22:15:00.000Z",

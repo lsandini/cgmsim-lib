@@ -20,7 +20,7 @@ describe('test cortisone', () => {
         {
           units: 10,
           minutesAgo: 300,
-          drug: 'Cor',
+          drug: 'COR',
         },
       ],
       weight,
@@ -43,7 +43,7 @@ describe('test cortisone', () => {
           {
             units: units40,
             minutesAgo: i,
-            drug: 'Cor',
+            drug: 'COR',
           },
         ],
         weight,
@@ -53,7 +53,7 @@ describe('test cortisone', () => {
           {
             units: units200,
             minutesAgo: i,
-            drug: 'Cor',
+            drug: 'COR',
           },
         ],
         weight,
@@ -95,7 +95,7 @@ describe('test cortisone', () => {
         {
           units,
           minutesAgo: 60 * 6,
-          drug: 'Cor',
+          drug: 'COR',
         },
       ],
       weight,
@@ -105,7 +105,7 @@ describe('test cortisone', () => {
         {
           units,
           minutesAgo: 60 * 6,
-          drug: 'Cor',
+          drug: 'COR',
         },
       ],
       weight,
@@ -115,7 +115,7 @@ describe('test cortisone', () => {
         {
           units,
           minutesAgo: 60 * 7,
-          drug: 'Cor',
+          drug: 'COR',
         },
       ],
       weight,

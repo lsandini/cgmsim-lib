@@ -9,7 +9,7 @@ exports[`test toujeo 20g activity after 5h 6h 7h should be >0.1  3`] = `0.016641
 exports[`test toujeo weight:80 ins:30 all 1`] = `29.996762219999994`;
 
 exports[`test toujeo weight:80 ins:30 all 2`] = `
-Array [
+[
   0,
   0.0000058,
   0.00002319,

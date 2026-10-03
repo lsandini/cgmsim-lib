@@ -13,7 +13,7 @@ describe('test degludec', () => {
         {
           units: 30,
           minutesAgo: 300,
-          drug: 'Deg',
+          drug: 'DEG',
         },
       ],
       weight,
@@ -27,7 +27,7 @@ describe('test degludec', () => {
         {
           units: 30,
           minutesAgo: 44 * 60,
-          drug: 'Deg',
+          drug: 'DEG',
         },
       ],
       weight,
@@ -46,7 +46,7 @@ describe('test degludec', () => {
           {
             units: 30,
             minutesAgo: i,
-            drug: 'Deg',
+            drug: 'DEG',
           },
         ],
         weight,
@@ -77,7 +77,7 @@ describe('test degludec', () => {
         {
           units,
           minutesAgo: 5,
-          drug: 'Deg',
+          drug: 'DEG',
         },
       ],
       weight,
@@ -88,7 +88,7 @@ describe('test degludec', () => {
         {
           units,
           minutesAgo: 40,
-          drug: 'Deg',
+          drug: 'DEG',
         },
       ],
       weight,
@@ -104,7 +104,7 @@ describe('test degludec', () => {
         {
           units,
           minutesAgo: degludecPeakHours * 60 + 10,
-          drug: 'Deg',
+          drug: 'DEG',
         },
       ],
       weight,
@@ -115,7 +115,7 @@ describe('test degludec', () => {
         {
           units,
           minutesAgo: degludecPeakHours * 60,
-          drug: 'Deg',
+          drug: 'DEG',
         },
       ],
       weight,
@@ -126,7 +126,7 @@ describe('test degludec', () => {
         {
           units,
           minutesAgo: degludecPeakHours * 60 - 10,
-          drug: 'Deg',
+          drug: 'DEG',
         },
       ],
       weight,
