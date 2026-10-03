@@ -6,6 +6,7 @@
     "target": "es6",
     "module": "commonjs",
     "moduleResolution": "node",
+    "skipLibCheck": true,
     "allowSyntheticDefaultImports": false,
     "allowJs": true,
     "checkJs": true,
