@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
-const Environment = require('jest-environment-node'); // or jest-environment-jsdom
+const NodeEnvironment = require('jest-environment-node');
+const Environment = NodeEnvironment.default || NodeEnvironment;
 const path = require('path');
 
 let dirBase;
