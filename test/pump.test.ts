@@ -62,7 +62,7 @@ describe('test pump', () => {
   const date = new Date('2022-05-07T11:20:00Z');
 
   beforeEach(() => {
-    jest.useFakeTimers('modern');
+    jest.useFakeTimers();
     jest.setSystemTime(date);
   });
 

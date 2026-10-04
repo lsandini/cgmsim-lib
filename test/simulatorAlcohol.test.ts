@@ -11,7 +11,7 @@ describe('simulatorAlcohol test', () => {
     date = new Date('2022-05-29T22:10:00Z');
     expect.extend({ toMatchImageSnapshot });
 
-    jest.useFakeTimers('modern');
+    jest.useFakeTimers();
     jest.setSystemTime(date);
     const mockMath = Object.create(global.Math);
     mockMath.random = () => 0.5;

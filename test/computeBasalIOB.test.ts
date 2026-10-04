@@ -10,7 +10,7 @@ import { transformNoteTreatmentsDrug } from '../src/drug';
 describe('test computeBasalIOB', () => {
   const date = new Date('2022-05-07T11:20:00Z');
   beforeEach(() => {
-    jest.useFakeTimers('modern');
+    jest.useFakeTimers();
     jest.setSystemTime(date);
   });
 
@@ -32,7 +32,7 @@ describe('check insert value string', () => {
   const date = new Date('2022-05-07T11:20:00Z');
 
   beforeEach(() => {
-    jest.useFakeTimers('modern');
+    jest.useFakeTimers();
     jest.setSystemTime(date);
   });
 
@@ -114,7 +114,7 @@ describe('test computeBasalIOB comparing old cgmsim', () => {
   const date = new Date('2022-05-07T11:20:00Z');
 
   beforeEach(() => {
-    jest.useFakeTimers('modern');
+    jest.useFakeTimers();
     jest.setSystemTime(date);
   });
 

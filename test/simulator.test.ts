@@ -21,7 +21,7 @@ describe('simulator test', () => {
     date = new Date('2022-05-29T22:10:00Z');
     expect.extend({ toMatchImageSnapshot });
 
-    jest.useFakeTimers('modern');
+    jest.useFakeTimers();
     jest.setSystemTime(date);
     const mockMath = Object.create(global.Math);
     mockMath.random = () => 0.5;
@@ -513,7 +513,7 @@ describe('simulator test', () => {
 
 describe('Simulator', () => {
   beforeEach(() => {
-    jest.useFakeTimers('modern'); // Use modern fake timers
+    jest.useFakeTimers();
   });
 
   afterEach(() => {
@@ -576,7 +576,7 @@ describe('Simulator', () => {
 
 describe('Simulator', () => {
   beforeEach(() => {
-    jest.useFakeTimers('modern'); // Use modern fake timers
+    jest.useFakeTimers();
   });
 
   afterEach(() => {

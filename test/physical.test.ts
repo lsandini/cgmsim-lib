@@ -21,7 +21,7 @@ describe('Physical test', () => {
 
   describe('ISF: physicalISF with 6h0.5 + 2h0.91 + 6h0.5', () => {
     beforeAll(() => {
-      jest.useFakeTimers('modern');
+      jest.useFakeTimers();
       jest.setSystemTime(new Date('2001-01-01'));
       expect.extend({ toMatchImageSnapshot });
     });
@@ -76,7 +76,7 @@ describe('Physical test', () => {
 
   describe('Liver: physicalLiver with 6h0.5 + 2h0.91 + 6h0.5', () => {
     beforeAll(() => {
-      jest.useFakeTimers('modern');
+      jest.useFakeTimers();
       jest.setSystemTime(new Date('2001-01-01'));
       expect.extend({ toMatchImageSnapshot });
     });

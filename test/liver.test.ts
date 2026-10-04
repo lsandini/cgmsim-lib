@@ -1,7 +1,7 @@
 import liver from '../src/liver';
 describe('Liver test', () => {
   beforeAll(() => {
-    jest.useFakeTimers('modern');
+    jest.useFakeTimers();
     jest.setSystemTime(new Date('2001-01-01'));
   });
 

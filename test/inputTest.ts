@@ -262,7 +262,7 @@ export const testGenerator = (
     boluses: TestBolus[];
   },
 ): TestResult => {
-  jest.useFakeTimers('modern');
+  jest.useFakeTimers();
 
   const env: PatientInfoCgmsim = {
     CARBS_ABS_TIME: 360,

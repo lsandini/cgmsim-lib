@@ -10,7 +10,7 @@ const { toMatchImageSnapshot } = require('jest-image-snapshot');
 const math = global.Math;
 
 beforeEach(() => {
-  jest.useFakeTimers('modern');
+  jest.useFakeTimers();
   jest.setSystemTime(new Date(now));
   expect.extend({ toMatchImageSnapshot });
   const mockMath = Object.create(global.Math);
@@ -188,7 +188,7 @@ describe('Carbs test', () => {
 
 describe('Carbs test compare old', () => {
   beforeEach(() => {
-    jest.useFakeTimers('modern');
+    jest.useFakeTimers();
     jest.setSystemTime(new Date(now));
   });
   afterAll(() => {
