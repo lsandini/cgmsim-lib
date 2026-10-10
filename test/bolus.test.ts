@@ -65,4 +65,16 @@ describe('test bolus', () => {
     );
     expect(png).toMatchImageSnapshot(diffOptions);
   });
+
+  test('detection of SMB bolus', () => {
+    const smbTreatment: NSTreatment = {
+      eventType: 'SMB',
+      insulin: 0.4,
+      created_at: '2022-05-07T11:15:00Z',
+    };
+
+    const active = bolus([smbTreatment], dia, peak);
+    expect(active).toBeGreaterThan(0);
+    expect(isMealBolusTreatment(smbTreatment)).toBe(true);
+  });
 });

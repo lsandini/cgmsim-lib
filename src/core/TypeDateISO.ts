@@ -14,9 +14,7 @@ type TDateISODate = `${TYear}-${TMonth}-${TDay}`;
 /**
  * Represent a string like `14:42:34.678` or `14:42:34`
  */
-type TDateISOTime =
-	| `${THours}:${TMinutes}:${TSeconds}.${TMilliseconds}`
-	| `${THours}:${TMinutes}:${TSeconds}`;
+type TDateISOTime = `${THours}:${TMinutes}:${TSeconds}.${TMilliseconds}` | `${THours}:${TMinutes}:${TSeconds}`;
 
 /**
  * Represent a string like `2021-01-08T14:42:34.678Z` or `2021-01-08T14:42:34Z` (format: ISO 8601).

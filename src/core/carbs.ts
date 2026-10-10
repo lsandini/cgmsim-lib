@@ -67,7 +67,7 @@ function normalizeActiveMeals(
 		})
 		.map((meal) => {
 			const time = 'created_at' in meal ? meal.created_at : meal.timestamp;
-			const carbs = 'carbs' in meal ? (meal.carbs ?? 0) : 0;
+			const carbs = 'carbs' in meal ? meal.carbs ?? 0 : 0;
 			const minutesAgo = getDeltaMinutes(time);
 			return {
 				...meal,

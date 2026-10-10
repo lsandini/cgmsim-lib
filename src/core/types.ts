@@ -145,7 +145,7 @@ export type NSProfile = {
 };
 
 export type MealBolusTreatment = {
-	eventType: 'Meal Bolus' | 'Bolus' | 'Correction Bolus' | 'Bolus Wizard' | 'Carb Correction' | 'Surprise Meal';
+	eventType: 'Meal Bolus' | 'Bolus' | 'Correction Bolus' | 'Bolus Wizard' | 'Carb Correction' | 'Surprise Meal' | 'SMB';
 	insulin?: number;
 	carbs?: number;
 	created_at: TypeDateISO;
@@ -193,7 +193,8 @@ export const isMealBolusTreatment = (treatment: NSTreatment): treatment is MealB
 	treatment.eventType === 'Bolus Wizard' ||
 	treatment.eventType === 'Correction Bolus' ||
 	treatment.eventType === 'Surprise Meal' ||
-	treatment.eventType === 'Carb Correction';
+	treatment.eventType === 'Carb Correction' ||
+	treatment.eventType === 'SMB';
 
 export const isAnnouncementTreatment = (treatment: NSTreatment): treatment is AnnouncementTreatment =>
 	treatment.eventType === 'Announcement';

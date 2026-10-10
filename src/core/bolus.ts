@@ -21,8 +21,7 @@ function getActiveBolusTreatments(
 		})
 		.map((treatment) => {
 			const time = 'created_at' in treatment ? treatment.created_at : treatment.timestamp;
-			const insulin =
-				'insulin' in treatment ? (treatment.insulin ?? 0) : 'units' in treatment ? (treatment.units ?? 0) : 0;
+			const insulin = 'insulin' in treatment ? treatment.insulin ?? 0 : 'units' in treatment ? treatment.units ?? 0 : 0;
 			return {
 				minutesAgo: getDeltaMinutes(time),
 				insulin,

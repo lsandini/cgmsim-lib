@@ -213,7 +213,7 @@ export function simulateGlucose(params: CoreSimulationParams): CoreSimulationRes
 						},
 					},
 				},
-			]
+		  ]
 		: [];
 
 	const result = simulator({

@@ -97,4 +97,23 @@ describe('Nightscout Adapters (@lsandini/cgmsim-lib/ns)', () => {
 		expect(basalArr[1]).toEqual({ hour: 6, rate: 0.9 });
 		expect(basalArr[2]).toEqual({ hour: 12, rate: 0.8 });
 	});
+
+	test('toCoreTreatment converts SMB MealBolusTreatment correctly', () => {
+		const smbTreatment = {
+			_id: '6aca268b19974d2bc470ab1f',
+			created_at: '2026-10-10T11:50:35.170Z',
+			insulin: 0.4,
+			eventType: 'SMB' as const,
+			enteredBy: 'Trio',
+			id: '9E38E62F-79F8-44CD-9558-0C6AF165C824',
+			utcOffset: 0,
+			mills: 1791633035170,
+			carbs: null,
+		};
+
+		const coreTreatment = toCoreTreatment(smbTreatment as any);
+		expect(coreTreatment.type).toBe('bolus');
+		expect(coreTreatment.units).toBe(0.4);
+		expect(new Date(coreTreatment.timestamp).toISOString()).toBe('2026-10-10T11:50:35.170Z');
+	});
 });
