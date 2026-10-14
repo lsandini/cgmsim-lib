@@ -109,3 +109,158 @@ export function roundTo8Decimals(value: number): number {
 	const multiplier = Math.pow(10, 8);
 	return Math.round(value * multiplier) / multiplier;
 }
+
+/**
+ * Fowler–Noll–Vo hash function (FNV-1a) returning an unsigned 32-bit integer.
+ * @param input - The input string to hash
+ * @returns 32-bit unsigned integer hash
+ */
+export function fnv1a(input: string): number {
+	let hash = 0x811c9dc5;
+	for (let i = 0; i < input.length; i++) {
+		hash ^= input.charCodeAt(i);
+		hash = Math.imul(hash, 0x01000193);
+	}
+	return hash >>> 0;
+}
+
+/**
+ * Mulberry32 32-bit pseudo-random number generator (PRNG).
+ * Produces a deterministic sequence of floating point numbers in [0, 1) from a 32-bit seed.
+ * @param seed - 32-bit integer seed
+ * @returns A zero-argument function returning a pseudo-random number in [0, 1)
+ */
+export function mulberry32(seed: number): () => number {
+	let state = seed >>> 0;
+	return () => {
+		state = (state + 0x6d2b79f5) >>> 0;
+		let t = state;
+		t = Math.imul(t ^ (t >>> 15), t | 1);
+		t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+		return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+	};
+}
+
+/**
+ * Deterministic pseudo-random number utility combining FNV-1a hashing and Mulberry32 PRNG.
+ * If called with a seed only, returns a generator function `() => number` producing floats in [0, 1).
+ *
+ * @param seed - Seed string or number
+ * @returns A pseudo-random generator function producing values in [0, 1)
+ */
+export function rnd(seed: string | number): () => number;
+/**
+ * Directly generates a deterministic pseudo-random number in [min, max) using the given seed.
+ *
+ * @param seed - Seed string or number
+ * @param min - Minimum value (inclusive)
+ * @param max - Maximum value (exclusive)
+ * @returns A pseudo-random float in [min, max)
+ */
+export function rnd(seed: string | number, min: number, max: number): number;
+export function rnd(seed: string | number, min?: number, max?: number): (() => number) | number {
+	const numericSeed = typeof seed === 'number' ? seed : fnv1a(String(seed));
+	const generator = mulberry32(numericSeed);
+	if (min !== undefined && max !== undefined) {
+		return min + generator() * (max - min);
+	}
+	return generator;
+}
+
+/**
+ * Converts blood glucose from mg/dL to mmol/L.
+ * @param mgdl - Blood glucose value in mg/dL
+ * @returns Blood glucose value in mmol/L
+ */
+export function mgdlToMmol(mgdl: number): number {
+	return mgdl / 18;
+}
+
+/**
+ * Converts blood glucose from mmol/L to mg/dL.
+ * @param mmol - Blood glucose value in mmol/L
+ * @returns Blood glucose value in mg/dL
+ */
+export function mmolToMgdl(mmol: number): number {
+	return mmol * 18;
+}
+
+/**
+ * Calculates carb absorption rate at a given time using a triangular absorption model.
+ * @param carbs - Total carbs in grams
+ * @param minutesAgo - Elapsed minutes since meal
+ * @param absorptionTime - Total absorption duration in minutes
+ * @returns Absorption rate in g/min
+ */
+export function triangularAbsorptionRate(carbs: number, minutesAgo: number, absorptionTime: number): number {
+	if (minutesAgo <= 0 || minutesAgo >= absorptionTime || absorptionTime <= 0) {
+		return 0;
+	}
+	const halfTime = absorptionTime / 2;
+	if (minutesAgo < halfTime) {
+		return (carbs * 4 * minutesAgo) / Math.pow(absorptionTime, 2);
+	}
+	return ((carbs * 4) / absorptionTime) * (1 - minutesAgo / absorptionTime);
+}
+
+/**
+ * Calculates remaining unabsorbed carbs at a given time using a triangular absorption model.
+ * @param carbs - Total carbs in grams
+ * @param minutesAgo - Elapsed minutes since meal
+ * @param absorptionTime - Total absorption duration in minutes
+ * @returns Remaining unabsorbed carbs in grams
+ */
+export function triangularAbsorptionRemaining(carbs: number, minutesAgo: number, absorptionTime: number): number {
+	if (minutesAgo >= absorptionTime || absorptionTime <= 0) {
+		return 0;
+	}
+	if (minutesAgo <= 0) {
+		return carbs;
+	}
+	const halfTime = absorptionTime / 2;
+	let remaining: number;
+	if (minutesAgo < halfTime) {
+		remaining = carbs - ((2 * carbs) / Math.pow(absorptionTime, 2)) * Math.pow(minutesAgo, 2);
+	} else {
+		remaining =
+			2 * carbs - ((4 * carbs) / absorptionTime) * (minutesAgo - Math.pow(minutesAgo, 2) / (2 * absorptionTime));
+	}
+	return Math.max(0, remaining);
+}
+
+/**
+ * Time components decomposed in hours, minutes, and decimal hours.
+ */
+export interface TimeComponents {
+	decimalHours: number;
+	hours: number;
+	minutes: number;
+}
+
+/**
+ * Extracts time components (decimal hours, hours, minutes) in a given timezone.
+ * @param timezone - IANA timezone identifier (e.g. 'UTC', 'Europe/Rome')
+ * @param referenceTime - Optional reference time (timestamp or Date, defaults to Date.now())
+ * @returns TimeComponents object
+ */
+export function getTimeComponentsInTimezone(
+	timezone: string,
+	referenceTime: number | Date = Date.now(),
+): TimeComponents {
+	const currentTime = typeof referenceTime === 'number' ? referenceTime : referenceTime.getTime();
+	const hoursString = new Date(currentTime).toLocaleString('en-US', {
+		timeZone: timezone,
+		hour: 'numeric',
+		hour12: false,
+	});
+	const minutesString = new Date(currentTime).toLocaleString('en-US', {
+		timeZone: timezone,
+		minute: 'numeric',
+	});
+
+	const hours = parseInt(hoursString, 10);
+	const minutes = parseInt(minutesString, 10);
+	const decimalHours = hours + minutes / 60;
+
+	return { decimalHours, hours, minutes };
+}

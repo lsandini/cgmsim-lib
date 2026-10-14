@@ -1,7 +1,21 @@
 import { deleteBase, isHttps, removeTrailingSlash } from '../src/utils';
 import * as utils from '../src/utils';
 import fetch from 'node-fetch';
-import { loadBase, uploadBase, roundTo8Decimals, getExpTreatmentActivity, getDeltaMinutes } from '../src/utils';
+import {
+  loadBase,
+  uploadBase,
+  roundTo8Decimals,
+  getExpTreatmentActivity,
+  getDeltaMinutes,
+  fnv1a,
+  mulberry32,
+  rnd,
+  mgdlToMmol,
+  mmolToMgdl,
+  triangularAbsorptionRate,
+  triangularAbsorptionRemaining,
+  getTimeComponentsInTimezone,
+} from '../src/utils';
 import { Entry } from 'src/Types';
 import * as moment from 'moment';
 import { TypeDateISO } from '../src/TypeDateISO';
@@ -365,5 +379,150 @@ describe('getDeltaMinutes', () => {
     const deltaMinutes = getDeltaMinutes(fiveMinutesAgoMillis);
 
     expect(deltaMinutes).toBeCloseTo(5, 0);
+  });
+});
+
+describe('fnv1a', () => {
+  it('should return 0x811c9dc5 (2166136261) for empty string', () => {
+    expect(fnv1a('')).toBe(2166136261);
+  });
+
+  it('should return a deterministic 32-bit unsigned integer for the same input', () => {
+    const hash1 = fnv1a('meal-key-12345|50');
+    const hash2 = fnv1a('meal-key-12345|50');
+    expect(hash1).toBe(hash2);
+    expect(hash1).toBeGreaterThanOrEqual(0);
+    expect(hash1).toBeLessThanOrEqual(0xffffffff);
+  });
+
+  it('should return different hashes for different inputs', () => {
+    const hash1 = fnv1a('meal-key-12345|50');
+    const hash2 = fnv1a('meal-key-12345|51');
+    expect(hash1).not.toBe(hash2);
+  });
+});
+
+describe('mulberry32', () => {
+  it('should produce deterministic sequence of numbers in [0, 1)', () => {
+    const rng1 = mulberry32(123456);
+    const rng2 = mulberry32(123456);
+
+    const values1 = [rng1(), rng1(), rng1()];
+    const values2 = [rng2(), rng2(), rng2()];
+
+    expect(values1).toEqual(values2);
+    for (const val of values1) {
+      expect(val).toBeGreaterThanOrEqual(0);
+      expect(val).toBeLessThan(1);
+    }
+  });
+
+  it('should produce different sequences for different seeds', () => {
+    const rngA = mulberry32(1);
+    const rngB = mulberry32(2);
+
+    expect(rngA()).not.toBe(rngB());
+  });
+});
+
+describe('rnd', () => {
+  it('should create a deterministic generator from a string seed using fnv1a and mulberry32', () => {
+    const rng1 = rnd('treatment-1234|35');
+    const rng2 = rnd('treatment-1234|35');
+
+    expect(rng1()).toBe(rng2());
+    expect(rng1()).toBe(rng2());
+  });
+
+  it('should create a deterministic generator from a number seed', () => {
+    const rng1 = rnd(42);
+    const rng2 = rnd(42);
+
+    expect(rng1()).toBe(rng2());
+  });
+
+  it('should return a number in [min, max) directly when min and max are specified', () => {
+    const val = rnd('treatment-1234|35', 10, 20);
+
+    expect(typeof val).toBe('number');
+    expect(val).toBeGreaterThanOrEqual(10);
+    expect(val).toBeLessThan(20);
+
+    // Deterministic check
+    const val2 = rnd('treatment-1234|35', 10, 20);
+    expect(val).toBe(val2);
+  });
+});
+
+describe('glucose unit conversions', () => {
+  it('should convert mg/dL to mmol/L correctly', () => {
+    expect(mgdlToMmol(180)).toBe(10);
+    expect(mgdlToMmol(90)).toBe(5);
+  });
+
+  it('should convert mmol/L to mg/dL correctly', () => {
+    expect(mmolToMgdl(10)).toBe(180);
+    expect(mmolToMgdl(5)).toBe(90);
+  });
+});
+
+describe('triangular carb absorption models', () => {
+  const carbs = 60;
+  const absorptionTime = 60;
+
+  it('triangularAbsorptionRate should return 0 outside absorption window', () => {
+    expect(triangularAbsorptionRate(carbs, 0, absorptionTime)).toBe(0);
+    expect(triangularAbsorptionRate(carbs, -5, absorptionTime)).toBe(0);
+    expect(triangularAbsorptionRate(carbs, 60, absorptionTime)).toBe(0);
+    expect(triangularAbsorptionRate(carbs, 70, absorptionTime)).toBe(0);
+  });
+
+  it('triangularAbsorptionRate should follow ascending and descending phases', () => {
+    const rate15 = triangularAbsorptionRate(carbs, 15, absorptionTime);
+    const rate30 = triangularAbsorptionRate(carbs, 30, absorptionTime);
+    const rate45 = triangularAbsorptionRate(carbs, 45, absorptionTime);
+
+    expect(rate15).toBeGreaterThan(0);
+    expect(rate30).toBeGreaterThan(rate15);
+    expect(rate45).toBeLessThan(rate30);
+    expect(rate45).toBeCloseTo(rate15, 5);
+  });
+
+  it('triangularAbsorptionRemaining should decrease from total carbs to 0', () => {
+    expect(triangularAbsorptionRemaining(carbs, 0, absorptionTime)).toBe(carbs);
+    expect(triangularAbsorptionRemaining(carbs, -10, absorptionTime)).toBe(carbs);
+    expect(triangularAbsorptionRemaining(carbs, 60, absorptionTime)).toBe(0);
+    expect(triangularAbsorptionRemaining(carbs, 100, absorptionTime)).toBe(0);
+
+    const rem15 = triangularAbsorptionRemaining(carbs, 15, absorptionTime);
+    const rem30 = triangularAbsorptionRemaining(carbs, 30, absorptionTime);
+    const rem45 = triangularAbsorptionRemaining(carbs, 45, absorptionTime);
+
+    expect(rem15).toBeLessThan(carbs);
+    expect(rem30).toBeLessThan(rem15);
+    expect(rem45).toBeLessThan(rem30);
+    expect(rem45).toBeGreaterThan(0);
+  });
+});
+
+describe('getTimeComponentsInTimezone', () => {
+  it('should extract correct hours, minutes, and decimal hours for a fixed UTC time', () => {
+    // 2026-10-14 14:30:00 UTC
+    const fixedTime = new Date('2026-10-14T14:30:00Z');
+    const components = getTimeComponentsInTimezone('UTC', fixedTime);
+
+    expect(components.hours).toBe(14);
+    expect(components.minutes).toBe(30);
+    expect(components.decimalHours).toBe(14.5);
+  });
+
+  it('should adjust components based on timezone offset', () => {
+    const fixedTime = new Date('2026-01-01T12:00:00Z');
+    const utcComp = getTimeComponentsInTimezone('UTC', fixedTime);
+    const romeComp = getTimeComponentsInTimezone('Europe/Rome', fixedTime);
+
+    // Europe/Rome is UTC+1 in January (CET)
+    expect(utcComp.hours).toBe(12);
+    expect(romeComp.hours).toBe(13);
   });
 });

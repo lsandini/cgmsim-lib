@@ -1,6 +1,12 @@
 import { CoreTreatment, NSTreatment, isMealBolusTreatment } from './types';
 import logger from './logger';
-import { getDeltaMinutes } from './utils';
+import {
+	getDeltaMinutes,
+	mgdlToMmol,
+	rnd,
+	triangularAbsorptionRate,
+	triangularAbsorptionRemaining,
+} from './utils';
 
 const FAST_THRESHOLD = 30;
 const EXTRA_FAST_MIN = 0.2;
@@ -14,30 +20,10 @@ export type CarbSplit = {
 	extraFastRatio: number;
 };
 
-function fnv1a(input: string): number {
-	let hash = 0x811c9dc5;
-	for (let i = 0; i < input.length; i++) {
-		hash ^= input.charCodeAt(i);
-		hash = Math.imul(hash, 0x01000193);
-	}
-	return hash >>> 0;
-}
-
-function mulberry32(seed: number): () => number {
-	let state = seed >>> 0;
-	return () => {
-		state = (state + 0x6d2b79f5) >>> 0;
-		let t = state;
-		t = Math.imul(t ^ (t >>> 15), t | 1);
-		t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
-		return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-	};
-}
-
 export function splitMealCarbs(meal: SplittableMeal): CarbSplit {
 	const carbs = meal.carbs ?? 0;
 	const timeKey = meal.created_at || (meal.timestamp ? String(meal.timestamp) : '');
-	const rng = mulberry32(fnv1a(`${timeKey}|${carbs}`));
+	const rng = rnd(`${timeKey}|${carbs}`);
 	const extraFastRatio = EXTRA_FAST_MIN + rng() * (EXTRA_FAST_MAX - EXTRA_FAST_MIN);
 
 	if (carbs <= FAST_THRESHOLD) {
@@ -92,7 +78,7 @@ export default function calculateCarbEffect(
 	isf: number,
 	cr: number,
 ): number {
-	const isfMmol = isf / 18; // Convert ISF to (mmol/L)/U
+	const isfMmol = mgdlToMmol(isf); // Convert ISF to (mmol/L)/U
 
 	const activeMeals = normalizeActiveMeals(treatments, carbAbsorptionTime);
 
@@ -127,22 +113,10 @@ export default function calculateCarbEffect(
 			slowCarbs,
 		});
 
-		let fastCarbRate = 0;
-		if (minutesAgo < fastAbsorptionTime / 2) {
-			const timeSquared = Math.pow(fastAbsorptionTime, 2);
-			fastCarbRate = (fastCarbs * 4 * minutesAgo) / timeSquared;
-		} else if (minutesAgo < fastAbsorptionTime) {
-			fastCarbRate = ((fastCarbs * 4) / fastAbsorptionTime) * (1 - minutesAgo / fastAbsorptionTime);
-		}
+		const fastCarbRate = triangularAbsorptionRate(fastCarbs, minutesAgo, fastAbsorptionTime);
 		logger.debug('[carbs] Fast carb absorption rate:', fastCarbRate);
 
-		let slowCarbRate = 0;
-		if (minutesAgo < slowAbsorptionTime / 2) {
-			const timeSquared = Math.pow(slowAbsorptionTime, 2);
-			slowCarbRate = (slowCarbs * 4 * minutesAgo) / timeSquared;
-		} else if (minutesAgo < slowAbsorptionTime) {
-			slowCarbRate = ((slowCarbs * 4) / slowAbsorptionTime) * (1 - minutesAgo / slowAbsorptionTime);
-		}
+		const slowCarbRate = triangularAbsorptionRate(slowCarbs, minutesAgo, slowAbsorptionTime);
 		logger.debug('[carbs] Slow carb absorption rate:', slowCarbRate);
 
 		return fastCarbRate + slowCarbRate;
@@ -186,30 +160,10 @@ export function calculateCarbsCOB(
 			slowCarbs,
 		});
 
-		let remainingFastCarbs = 0;
-		if (minutesAgo < fastAbsorptionTime) {
-			if (minutesAgo < fastAbsorptionTime / 2) {
-				remainingFastCarbs = fastCarbs - ((2 * fastCarbs) / Math.pow(fastAbsorptionTime, 2)) * Math.pow(minutesAgo, 2);
-			} else {
-				remainingFastCarbs =
-					2 * fastCarbs -
-					((4 * fastCarbs) / fastAbsorptionTime) * (minutesAgo - Math.pow(minutesAgo, 2) / (2 * fastAbsorptionTime));
-			}
-		}
-		remainingFastCarbs = Math.max(0, remainingFastCarbs);
+		const remainingFastCarbs = triangularAbsorptionRemaining(fastCarbs, minutesAgo, fastAbsorptionTime);
 		logger.debug('[carbs] Remaining fast carbs:', remainingFastCarbs);
 
-		let remainingSlowCarbs = 0;
-		if (minutesAgo < slowAbsorptionTime) {
-			if (minutesAgo < slowAbsorptionTime / 2) {
-				remainingSlowCarbs = slowCarbs - ((2 * slowCarbs) / Math.pow(slowAbsorptionTime, 2)) * Math.pow(minutesAgo, 2);
-			} else {
-				remainingSlowCarbs =
-					2 * slowCarbs -
-					((4 * slowCarbs) / slowAbsorptionTime) * (minutesAgo - Math.pow(minutesAgo, 2) / (2 * slowAbsorptionTime));
-			}
-		}
-		remainingSlowCarbs = Math.max(0, remainingSlowCarbs);
+		const remainingSlowCarbs = triangularAbsorptionRemaining(slowCarbs, minutesAgo, slowAbsorptionTime);
 		logger.debug('[carbs] Remaining slow carbs:', remainingSlowCarbs);
 
 		return remainingFastCarbs + remainingSlowCarbs;

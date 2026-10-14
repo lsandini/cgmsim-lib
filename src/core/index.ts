@@ -30,6 +30,15 @@ export {
 	roundTo8Decimals,
 	isHttps,
 	removeTrailingSlash,
+	fnv1a,
+	mulberry32,
+	rnd,
+	mgdlToMmol,
+	mmolToMgdl,
+	triangularAbsorptionRate,
+	triangularAbsorptionRemaining,
+	getTimeComponentsInTimezone,
+	TimeComponents,
 } from './utils';
 
 // Types

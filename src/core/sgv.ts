@@ -1,6 +1,6 @@
 import logger from './logger';
 import { CGMSimParams, Sgv } from './types';
-import { getDeltaMinutes } from './utils';
+import { getDeltaMinutes, mgdlToMmol, mmolToMgdl } from './utils';
 
 const BG_LIMITS = {
 	MAX: 400,
@@ -40,17 +40,17 @@ function logGlucoseComponents({
 	isfMmol: number;
 }): void {
 	logger.debug(`[sgv] Previous glucose (${deltaMinutes} minutes ago): ${previousGlucose} mg/dL`);
-	logger.debug(`[sgv] Total insulin impact for ${deltaMinutes} minutes: ${insulinGlucoseImpact * 18} mg/dL`);
-	logger.debug(`[sgv] Total liver impact for ${deltaMinutes} minutes: +${liverImpact * 18} mg/dL`);
-	logger.debug(`[sgv] Total cortisone impact for ${deltaMinutes} minutes: +${cortisoneImpact * 18} mg/dL`);
-	logger.debug(`[sgv] Total carbs impact for ${deltaMinutes} minutes: +${carbsImpact * 18} mg/dL`);
+	logger.debug(`[sgv] Total insulin impact for ${deltaMinutes} minutes: ${mmolToMgdl(insulinGlucoseImpact)} mg/dL`);
+	logger.debug(`[sgv] Total liver impact for ${deltaMinutes} minutes: +${mmolToMgdl(liverImpact)} mg/dL`);
+	logger.debug(`[sgv] Total cortisone impact for ${deltaMinutes} minutes: +${mmolToMgdl(cortisoneImpact)} mg/dL`);
+	logger.debug(`[sgv] Total carbs impact for ${deltaMinutes} minutes: +${mmolToMgdl(carbsImpact)} mg/dL`);
 	logger.debug(
 		`[sgv] Combined impact for ${deltaMinutes} minutes: ${
-			insulinGlucoseImpact + liverImpact * 18 + carbsImpact * 18
+			insulinGlucoseImpact + mmolToMgdl(liverImpact) + mmolToMgdl(carbsImpact)
 		} mg/dL`,
 	);
-	logger.debug(`[sgv] Basal insulin impact for ${deltaMinutes} minutes: ${basalImpact * 18 * isfMmol} mg/dL`);
-	logger.debug(`[sgv] Bolus insulin impact for ${deltaMinutes} minutes: ${bolusImpact * 18 * isfMmol} mg/dL`);
+	logger.debug(`[sgv] Basal insulin impact for ${deltaMinutes} minutes: ${mmolToMgdl(basalImpact * isfMmol)} mg/dL`);
+	logger.debug(`[sgv] Bolus insulin impact for ${deltaMinutes} minutes: ${mmolToMgdl(bolusImpact * isfMmol)} mg/dL`);
 }
 
 export const calculateNextGlucose = (
@@ -74,7 +74,7 @@ export const calculateNextGlucose = (
 
 	logger.debug('[sgv] Time since last reading: %o minutes', deltaMinutes);
 
-	const isfMmol = isf / 18;
+	const isfMmol = mgdlToMmol(isf);
 
 	const basalImpact = basalActivity * deltaMinutes;
 	const cortisoneImpact = cortisoneActivity ? cortisoneActivity * deltaMinutes : 0;
@@ -86,7 +86,11 @@ export const calculateNextGlucose = (
 	const insulinGlucoseImpact = totalInsulinActivity * isfMmol * -1;
 
 	const newGlucose = Math.floor(
-		lastSgv + insulinGlucoseImpact * 18 + carbsImpact * 18 + cortisoneImpact * 18 + liverImpact * 18,
+		lastSgv +
+			mmolToMgdl(insulinGlucoseImpact) +
+			mmolToMgdl(carbsImpact) +
+			mmolToMgdl(cortisoneImpact) +
+			mmolToMgdl(liverImpact),
 	);
 
 	const limitedGlucose = Math.min(Math.max(newGlucose, BG_LIMITS.MIN), BG_LIMITS.MAX);
@@ -94,11 +98,11 @@ export const calculateNextGlucose = (
 	const result: GlucoseResult = {
 		sgv: limitedGlucose,
 		deltaMinutes,
-		carbsActivity: carbsImpact * 18,
-		basalActivity: basalImpact * isfMmol * 18,
-		cortisoneActivity: cortisoneImpact * isfMmol * 18,
-		bolusActivity: bolusImpact * isfMmol * 18,
-		liverActivity: liverImpact * 18,
+		carbsActivity: mmolToMgdl(carbsImpact),
+		basalActivity: mmolToMgdl(basalImpact * isfMmol),
+		cortisoneActivity: mmolToMgdl(cortisoneImpact * isfMmol),
+		bolusActivity: mmolToMgdl(bolusImpact * isfMmol),
+		liverActivity: mmolToMgdl(liverImpact),
 		alcoholActivity,
 	};
 
