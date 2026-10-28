@@ -1,12 +1,6 @@
 import { CoreTreatment, NSTreatment, isMealBolusTreatment } from './types';
 import logger from './logger';
-import {
-	getDeltaMinutes,
-	mgdlToMmol,
-	rnd,
-	triangularAbsorptionRate,
-	triangularAbsorptionRemaining,
-} from './utils';
+import { getDeltaMinutes, mgdlToMmol, rnd, triangularAbsorptionRate, triangularAbsorptionRemaining } from './utils';
 
 const FAST_THRESHOLD = 30;
 const EXTRA_FAST_MIN = 0.2;
@@ -36,10 +30,19 @@ export function splitMealCarbs(meal: SplittableMeal): CarbSplit {
 	return { fastCarbs, slowCarbs, extraFastRatio };
 }
 
+type ActiveMeal = {
+	carbs: number;
+	minutesAgo: number;
+	created_at?: string;
+	timestamp?: string | Date | number;
+	absorptionDuration?: number;
+};
+
 function normalizeActiveMeals(
 	treatments: (NSTreatment | CoreTreatment)[] = [],
 	carbAbsorptionTime: number,
-): Array<{ carbs: number; minutesAgo: number; created_at?: string; timestamp?: string | Date | number }> {
+	referenceTime?: number | Date,
+): ActiveMeal[] {
 	if (!treatments || !Array.isArray(treatments)) {
 		return [];
 	}
@@ -54,14 +57,22 @@ function normalizeActiveMeals(
 		.map((meal) => {
 			const time = 'created_at' in meal ? meal.created_at : meal.timestamp;
 			const carbs = 'carbs' in meal ? meal.carbs ?? 0 : 0;
-			const minutesAgo = getDeltaMinutes(time);
+			const absorptionDuration =
+				'absorptionDuration' in meal && typeof meal.absorptionDuration === 'number'
+					? meal.absorptionDuration
+					: undefined;
+			const minutesAgo = getDeltaMinutes(time, referenceTime);
 			return {
 				...meal,
 				carbs,
 				minutesAgo,
+				absorptionDuration,
 			};
 		})
-		.filter((meal) => meal.minutesAgo <= carbAbsorptionTime && meal.minutesAgo >= 0);
+		.filter((meal) => {
+			const maxDuration = meal.absorptionDuration ?? carbAbsorptionTime;
+			return meal.minutesAgo <= maxDuration && meal.minutesAgo >= 0;
+		});
 }
 
 /**
@@ -77,10 +88,11 @@ export default function calculateCarbEffect(
 	carbAbsorptionTime: number,
 	isf: number,
 	cr: number,
+	referenceTime?: number | Date,
 ): number {
 	const isfMmol = mgdlToMmol(isf); // Convert ISF to (mmol/L)/U
 
-	const activeMeals = normalizeActiveMeals(treatments, carbAbsorptionTime);
+	const activeMeals = normalizeActiveMeals(treatments, carbAbsorptionTime, referenceTime);
 
 	logger.debug('[carbs] Active meals in absorption window:', activeMeals);
 
@@ -98,12 +110,12 @@ export default function calculateCarbEffect(
 		);
 	}
 
-	const fastAbsorptionTime = carbAbsorptionTime / 6; // 60 min for default
-	const slowAbsorptionTime = carbAbsorptionTime / 1.5; // 240 min for default
-
 	const mealAbsorptionRates = activeMeals.map((meal) => {
 		const minutesAgo = meal.minutesAgo;
 		const totalCarbs = meal.carbs;
+		const duration = meal.absorptionDuration;
+		const fastAbsorptionTime = duration ? Math.max(60, duration / 3) : carbAbsorptionTime / 6;
+		const slowAbsorptionTime = duration ? duration : carbAbsorptionTime / 1.5;
 
 		const { fastCarbs, slowCarbs } = splitMealCarbs(meal);
 
@@ -140,17 +152,17 @@ export default function calculateCarbEffect(
 export function calculateCarbsCOB(
 	carbAbsorptionTime: number,
 	treatments: (NSTreatment | CoreTreatment)[] = [],
+	referenceTime?: number | Date,
 ): number {
-	const activeMeals = normalizeActiveMeals(treatments, carbAbsorptionTime);
-
+	const activeMeals = normalizeActiveMeals(treatments, carbAbsorptionTime, referenceTime);
 	logger.debug('[carbs] Active meals in absorption window:', activeMeals);
-
-	const fastAbsorptionTime = carbAbsorptionTime / 6;
-	const slowAbsorptionTime = carbAbsorptionTime / 1.5;
 
 	const remainingCarbs = activeMeals.map((meal) => {
 		const minutesAgo = meal.minutesAgo;
 		const totalCarbs = meal.carbs;
+		const duration = meal.absorptionDuration;
+		const fastAbsorptionTime = duration ? Math.max(60, duration / 3) : carbAbsorptionTime / 6;
+		const slowAbsorptionTime = duration ? duration : carbAbsorptionTime / 1.5;
 
 		const { fastCarbs, slowCarbs } = splitMealCarbs(meal);
 

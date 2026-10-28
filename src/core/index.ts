@@ -17,6 +17,7 @@ export { default as calculatePumpBasal, calculatePumpIOB, calculateProfileIOB, c
 export { default as calculateBasalProfile } from './basalProfile';
 export { physicalIsf, physicalLiver, currentIntensity } from './physical';
 export { default as generateSurpriseMeal } from './surprise';
+export { drugs, transformNoteTreatmentsDrug, getTreatmentExpParam } from './drug';
 export { RK4 } from './SolverRK';
 
 // Pluggable Logger

@@ -174,6 +174,7 @@ export function simulateGlucose(params: CoreSimulationParams): CoreSimulationRes
 				insulin: t.units ?? 0,
 				carbs: t.carbs ?? 0,
 				created_at: isoDate,
+				absorptionDuration: t.absorptionDuration,
 			};
 		}
 		if (t.type === 'cortisone' || t.type === 'alcohol' || t.type === 'basal' || t.type === 'note') {
@@ -189,6 +190,7 @@ export function simulateGlucose(params: CoreSimulationParams): CoreSimulationRes
 			insulin: t.units ?? 0,
 			carbs: t.carbs ?? 0,
 			created_at: isoDate,
+			absorptionDuration: t.absorptionDuration,
 		};
 	});
 

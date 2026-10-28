@@ -26,6 +26,7 @@ export function toCoreTreatment(treatment: NSTreatment): CoreTreatment {
 			type: isCarb ? 'carb' : isBolus ? 'bolus' : 'bolus',
 			units: treatment.insulin,
 			carbs: treatment.carbs,
+			absorptionDuration: treatment.absorptionDuration,
 		};
 	}
 

@@ -38,6 +38,7 @@ export interface CoreTreatment {
 	units?: number; // Insulin units
 	carbs?: number; // Grams of carbs
 	durationMinutes?: number; // For temp basal or extended bolus
+	absorptionDuration?: number; // Meal carb absorption duration in minutes
 	drug?: string;
 	notes?: string;
 }
@@ -149,6 +150,7 @@ export type MealBolusTreatment = {
 	insulin?: number;
 	carbs?: number;
 	created_at: TypeDateISO;
+	absorptionDuration?: number;
 };
 
 export type ProfileSwitchTreatment = {
