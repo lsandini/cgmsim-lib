@@ -2,9 +2,9 @@ import { CoreTreatment, NSTreatment, isMealBolusTreatment } from './types';
 import logger from './logger';
 import { getDeltaMinutes, mgdlToMmol, rnd, triangularAbsorptionRate, triangularAbsorptionRemaining } from './utils';
 
-const FAST_THRESHOLD = 30;
-const EXTRA_FAST_MIN = 0.2;
-const EXTRA_FAST_MAX = 0.7;
+const FAST_THRESHOLD = 15;
+const EXTRA_FAST_MIN = 0.0;
+const EXTRA_FAST_MAX = 0.5;
 
 type SplittableMeal = { created_at?: string; timestamp?: string | Date | number; carbs?: number };
 
