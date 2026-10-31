@@ -25,39 +25,39 @@ describe('splitMealCarbs', () => {
 		});
 	});
 
-	describe('carbs <= 30g', () => {
+	describe('carbs <= 15g', () => {
 		test('returns 100% fast, 0% slow', () => {
-			const meal = { ...baseMeal, carbs: 20 };
+			const meal = { ...baseMeal, carbs: 10 };
 			const { fastCarbs, slowCarbs } = splitMealCarbs(meal);
-			expect(fastCarbs).toBe(20);
+			expect(fastCarbs).toBe(10);
 			expect(slowCarbs).toBe(0);
 		});
 
-		test('exactly 30g is all-fast', () => {
-			const meal = { ...baseMeal, carbs: 30 };
+		test('exactly 15g is all-fast', () => {
+			const meal = { ...baseMeal, carbs: 15 };
 			const { fastCarbs, slowCarbs } = splitMealCarbs(meal);
-			expect(fastCarbs).toBe(30);
+			expect(fastCarbs).toBe(15);
 			expect(slowCarbs).toBe(0);
 		});
 	});
 
-	describe('carbs > 30g', () => {
-		test('fastCarbs >= 30 (the guaranteed fast portion)', () => {
+	describe('carbs > 15g', () => {
+		test('fastCarbs >= 15 (the guaranteed fast portion)', () => {
 			const meal = { ...baseMeal, carbs: 100 };
 			const { fastCarbs } = splitMealCarbs(meal);
-			expect(fastCarbs).toBeGreaterThanOrEqual(30);
+			expect(fastCarbs).toBeGreaterThanOrEqual(15);
 		});
 
-		test('split applies extraFastRatio to (carbs - 30)', () => {
+		test('split applies extraFastRatio to (carbs - 15)', () => {
 			const meal = { ...baseMeal, carbs: 80 };
 			const { fastCarbs, slowCarbs, extraFastRatio } = splitMealCarbs(meal);
-			expect(fastCarbs).toBeCloseTo(30 + extraFastRatio * 50, 10);
-			expect(slowCarbs).toBeCloseTo((1 - extraFastRatio) * 50, 10);
+			expect(fastCarbs).toBeCloseTo(15 + extraFastRatio * 65, 10);
+			expect(slowCarbs).toBeCloseTo((1 - extraFastRatio) * 65, 10);
 		});
 	});
 
 	describe('extraFastRatio range', () => {
-		test('stays within [0.2, 0.7] across many seeds', () => {
+		test('stays within [0.0, 0.5] across many seeds', () => {
 			for (let i = 0; i < 1000; i++) {
 				const minute = String(i % 60).padStart(2, '0');
 				const hour = String(Math.floor(i / 60) % 24).padStart(2, '0');
@@ -67,8 +67,8 @@ describe('splitMealCarbs', () => {
 					carbs: 80,
 				};
 				const { extraFastRatio } = splitMealCarbs(meal);
-				expect(extraFastRatio).toBeGreaterThanOrEqual(0.2);
-				expect(extraFastRatio).toBeLessThanOrEqual(0.7);
+				expect(extraFastRatio).toBeGreaterThanOrEqual(0.0);
+				expect(extraFastRatio).toBeLessThanOrEqual(0.5);
 			}
 		});
 
