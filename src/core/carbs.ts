@@ -5,6 +5,8 @@ import { getDeltaMinutes, mgdlToMmol, rnd, triangularAbsorptionRate, triangularA
 const FAST_THRESHOLD = 15;
 const EXTRA_FAST_MIN = 0.0;
 const EXTRA_FAST_MAX = 0.5;
+const MAX_FAST_ABSORPTION_TIME = 150; // 2.5 hours in minutes
+const MIN_FAST_ABSORPTION_TIME = 90; // 1.5 hours in minutes
 
 type SplittableMeal = { created_at?: string; timestamp?: string | Date | number; carbs?: number };
 
@@ -114,7 +116,10 @@ export default function calculateCarbEffect(
 		const minutesAgo = meal.minutesAgo;
 		const totalCarbs = meal.carbs;
 		const duration = meal.absorptionDuration;
-		const fastAbsorptionTime = duration ? Math.max(60, duration / 3) : carbAbsorptionTime / 6;
+		const fastAbsorptionTime = Math.max(
+			MIN_FAST_ABSORPTION_TIME,
+			Math.min(MAX_FAST_ABSORPTION_TIME, duration ? duration / 2 : carbAbsorptionTime / 4),
+		);
 		const slowAbsorptionTime = duration ? duration : carbAbsorptionTime / 1.5;
 
 		const { fastCarbs, slowCarbs } = splitMealCarbs(meal);
@@ -161,7 +166,10 @@ export function calculateCarbsCOB(
 		const minutesAgo = meal.minutesAgo;
 		const totalCarbs = meal.carbs;
 		const duration = meal.absorptionDuration;
-		const fastAbsorptionTime = duration ? Math.max(60, duration / 3) : carbAbsorptionTime / 6;
+		const fastAbsorptionTime = Math.min(
+			MAX_FAST_ABSORPTION_TIME,
+			duration ? Math.max(60, duration / 2) : carbAbsorptionTime / 4,
+		);
 		const slowAbsorptionTime = duration ? duration : carbAbsorptionTime / 1.5;
 
 		const { fastCarbs, slowCarbs } = splitMealCarbs(meal);
@@ -191,3 +199,4 @@ export function calculateCarbsCOB(
  * Standard alias for calculateCarbsCOB
  */
 export const calculateCOB = calculateCarbsCOB;
+
