@@ -67,14 +67,61 @@ export async function downloadNightscoutTreatments(
 	return fetchAndParseData<NSTreatment>({ endpoint, apiSecret });
 }
 
-export default async function downloads(nsUrl: string, apiSecret: string, maxCount?: number) {
-	const entries = await downloadNightscoutEntries(nsUrl, apiSecret, maxCount);
-	const treatments = await downloadNightscoutTreatments(nsUrl, apiSecret, maxCount);
-	const profiles = await downloadNightscoutProfiles(nsUrl, apiSecret, maxCount);
+/**
+ * Downloads the most recent device status from the Nightscout API.
+ *
+ * Only the latest item is ever requested (`count=1`; Nightscout sorts devicestatus newest-first).
+ * The result is still an array, for backward compatibility with cgmsim-lib <= 0.10.3, whose callers use
+ * `deviceStatus.length`, `deviceStatus[0]` and `deviceStatus.sort(...)`.
+ *
+ * @param nsUrl - Nightscout URL
+ * @param apiSecret - Nightscout API secret
+ * @param maxCount - Accepted for signature compatibility with 0.10.3 and validated (<= 3000), but ignored:
+ *   at most one device status is returned.
+ * @returns An array containing the latest device status, or an empty array if none exists.
+ */
+export async function downloadNightscoutDeviceStatus(
+	nsUrl: string,
+	apiSecret: string,
+	maxCount?: number,
+): Promise<any[]> {
+	validateMaxCount(maxCount);
 
-	return {
-		entries,
-		treatments,
-		profiles,
-	};
+	const baseUrl = removeTrailingSlash(nsUrl);
+	const endpoint = `${baseUrl}/api/v1/devicestatus.json?count=1`;
+
+	logger.debug('[downloads] Fetching latest device status from:', endpoint);
+
+	const result = await fetchAndParseData<any>({ endpoint, apiSecret });
+	return Array.isArray(result) ? result.slice(0, 1) : [];
+}
+
+export default async function downloads(nsUrl: string, apiSecret: string, maxCount?: number) {
+	validateMaxCount(maxCount);
+
+	try {
+		const [entries, treatments, profiles, deviceStatus] = await Promise.all([
+			downloadNightscoutEntries(nsUrl, apiSecret, maxCount),
+			downloadNightscoutTreatments(nsUrl, apiSecret, maxCount),
+			downloadNightscoutProfiles(nsUrl, apiSecret, maxCount),
+			downloadNightscoutDeviceStatus(nsUrl, apiSecret),
+		]);
+
+		logger.debug('[downloads] Successfully downloaded data: %o', {
+			entriesCount: entries.length,
+			treatmentsCount: treatments.length,
+			profilesCount: profiles.length,
+			deviceStatusCount: deviceStatus.length,
+		});
+
+		return {
+			entries,
+			treatments,
+			profiles,
+			deviceStatus,
+		};
+	} catch (error) {
+		logger.error('[downloads] Failed to download Nightscout data: %o', error);
+		throw new Error(`Download failed: ${error instanceof Error ? error.message : String(error)}`);
+	}
 }
